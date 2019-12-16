@@ -1,0 +1,12 @@
+Silver
+Gold
+Iron
+Copper
+Cobalt
+Nickle
+Steel
+Bronze
+Tin
+Bismouth
+Mercury
+

@@ -1,0 +1,2 @@
+ABILITY_CANCEL_VOTE
+The paperwork is lost! The letters mislayed! The dates agreed upon are all different! Some force has disrupted the voting, and the session must be cancelled.

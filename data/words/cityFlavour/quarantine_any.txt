@@ -1,0 +1,2 @@
+req|quarantine_any
+This settlement is implementing quarantine, as the citizens themselves have been identified as a threat to the realm. The diseased and the parahuman alike are cordened off, restricted in their movements, and shunned by the still-whole inhabitants, that their corruption might not be passed to others.

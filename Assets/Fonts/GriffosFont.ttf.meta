@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2cab3a1d89882844f9eba82ea784d1d1
+timeCreated: 1503967857
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: GriffosFont
+  fontNames:
+  - GriffosFont
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
