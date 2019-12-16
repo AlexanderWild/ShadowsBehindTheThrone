@@ -22,7 +22,7 @@ namespace Assets.Code
                 foreach (VoteOption opt in issue.options)
                 {
                     line = "     " + opt.fixedLenInfo();
-                    line += " U " + Eleven.toFixedLen(issue.computeUtility(this, opt, new List<ReasonMsg>()),12);
+                    line += " U " + Eleven.toFixedLen(issue.computeUtility(this, opt, new List<ReasonMsg>()), 12);
                     log.takeLine(line);
                 }
             }
@@ -90,8 +90,8 @@ namespace Assets.Code
                     {
                         //if (map.turn - loc.turnLastAssigned  < Params.society_minTimeBetweenLocReassignments) { continue; }
                         issue = new VoteIssue_AssignLandedTitle(society, this, loc.settlement.title);
-                       // if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
-                                                                                                                   //Everyone is eligible
+                        // if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+                        //Everyone is eligible
                         foreach (Person p in society.people)
                         {
                             if (p.title_land != null) { continue; }//Again, to prevent constant shuffling
@@ -203,8 +203,8 @@ namespace Assets.Code
                     }
                     logVote(issue);
 
-                      //Check to see if you want to alter defensive military targetting
-                        issue = new VoteIssue_SetDefensiveTarget(society, this);
+                    //Check to see if you want to alter defensive military targetting
+                    issue = new VoteIssue_SetDefensiveTarget(society, this);
                     foreach (ThreatItem item in threatEvaluations)
                     {
                         if (item.group == null) { continue; }
@@ -226,8 +226,8 @@ namespace Assets.Code
                     }
                     logVote(issue);
 
-                      //Change military posture, to either improve defence, fix internal problems, or attack an enemy
-                        issue = new VoteIssue_MilitaryStance(society, this);
+                    //Change military posture, to either improve defence, fix internal problems, or attack an enemy
+                    issue = new VoteIssue_MilitaryStance(society, this);
                     for (int i = 0; i < 3; i++)
                     {
                         VoteOption opt = new VoteOption();
@@ -248,39 +248,33 @@ namespace Assets.Code
                     }
                     logVote(issue);
 
-                    //if (map.turn < 100)
-                    if (true)
-                    { //ANWSAVE
-                      //Check to see if you want to declare war
-                      //You need to be in offensive posture to be allowed to do so
-                        if (society.offensiveTarget != null && society.posture == Society.militaryPosture.offensive && society.getRel(society.offensiveTarget).state != DipRel.dipState.war)
+                    //Check to see if you want to declare war
+                    //You need to be in offensive posture to be allowed to do so
+                    if (society.offensiveTarget != null && society.posture == Society.militaryPosture.offensive && society.getRel(society.offensiveTarget).state != DipRel.dipState.war)
+                    {
+                        issue = new VoteIssue_DeclareWar(society, society.offensiveTarget, this);
+                        VoteOption option_0 = new VoteOption();
+                        option_0.index = 0;
+                        issue.options.Add(option_0);
+
+                        VoteOption option_1 = new VoteOption();
+                        option_1.index = 1;
+                        issue.options.Add(option_1);
+
+                        //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+                        //Random factor to prevent them all rushing a singular voting choice
+                        double localU = issue.computeUtility(this, option_1, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                        if (localU > bestU)
                         {
-                            issue = new VoteIssue_DeclareWar(society, society.offensiveTarget, this);
-                            VoteOption option_0 = new VoteOption();
-                            option_0.index = 0;
-                            issue.options.Add(option_0);
-
-                            VoteOption option_1 = new VoteOption();
-                            option_1.index = 1;
-                            issue.options.Add(option_1);
-
-                            //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
-                            //Random factor to prevent them all rushing a singular voting choice
-                            double localU = issue.computeUtility(this, option_1, new List<ReasonMsg>()) * Eleven.random.NextDouble();
-                            if (localU > bestU)
-                            {
-                                bestU = localU;
-                                bestIssue = issue;
-                            }
-                            logVote(issue);
+                            bestU = localU;
+                            bestIssue = issue;
                         }
+                        logVote(issue);
                     }
 
-                    if (true) { //ANWSAVE
-
-                        //Check to see if you want to defensively vassalise yourself
-                        //You need to be in defensive posture to be allowed to do so
-                        if (society.offensiveTarget != null && society.posture == Society.militaryPosture.defensive && (society.isAtWar() == false))
+                    //Check to see if you want to defensively vassalise yourself
+                    //You need to be in defensive posture to be allowed to do so
+                    if (society.offensiveTarget != null && society.posture == Society.militaryPosture.defensive && (society.isAtWar() == false))
                     {
                         foreach (SocialGroup sg in society.getNeighbours())
                         {
@@ -338,7 +332,7 @@ namespace Assets.Code
                         }
                     }
                 }
-                }
+
             }
 
             if (bestIssue != null)

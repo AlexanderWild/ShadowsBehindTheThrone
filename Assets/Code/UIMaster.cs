@@ -47,15 +47,15 @@ namespace Assets.Code
                 if (state == uiState.WORLD)
                 {
                     GraphicalMap.tick();
-                    if (GraphicalMap.selectedHex == null)
-                    {
-                        //uiCity.gameObject.SetActive(false);
-                        uiScrollables.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                       uiScrollables.gameObject.SetActive(true);
-                    }
+                    //if (GraphicalMap.selectedHex == null)
+                    //{
+                    //    //uiCity.gameObject.SetActive(false);
+                    //    uiScrollables.gameObject.SetActive(true);
+                    //}
+                    //else
+                    //{
+                    //   uiScrollables.gameObject.SetActive(true);
+                    //}
                 }
                 else if (state == uiState.SOCIETY)
                 {
@@ -268,8 +268,6 @@ namespace Assets.Code
 
         public void setToBackground()
         {
-            return;
-
             state = uiState.BACKGROUND;
 
             uiMainMenu.gameObject.SetActive(false);
@@ -288,11 +286,11 @@ namespace Assets.Code
 
             uiMainMenu.gameObject.SetActive(false);
             uiLeftPrimary.gameObject.SetActive(true);
-            //uiScrollables.gameObject.SetActive(true);
-            //uiMidTop.gameObject.SetActive(true);
+            uiScrollables.gameObject.SetActive(true);
+            uiMidTop.gameObject.SetActive(true);
             hexSelector.SetActive(true);
 
-            //uiScrollables.viewSocButtonText.text = "View Society";
+            uiScrollables.viewSocButtonText.text = "View Society";
 
             GraphicalSociety.purge();
         }

@@ -12,6 +12,8 @@ namespace Assets.Code
         public UIMaster master;
         public Text title;
         public Text socTitle;
+        public Text socEcon;
+        public Text socThreat;
         public Text locText;
         public Text body;
         public Text personTitle;
@@ -255,10 +257,13 @@ namespace Assets.Code
                                 {
                                     bodyText += "\nVoting on: " + locSoc.voteSession.issue.ToString();
                                 }
+
+                                string econEffects = "";
                                 foreach (EconEffect effect in locSoc.econEffects)
                                 {
-                                    bodyText += "\nEcon from " + effect.from.name + " to " + effect.to.name;
+                                    econEffects += "\nEcon from " + effect.from.name + " to " + effect.to.name;
                                 }
+                                socEcon.text = econEffects;
 
                                 foreach (Person p in locSoc.people)
                                 {
@@ -292,13 +297,15 @@ namespace Assets.Code
 
                             }
 
+                            string strThreat = "";
                             List<ReasonMsg> msgs = new List<ReasonMsg>();
                             double threat = hex.location.soc.getThreat(msgs);
-                            bodyText += "\nThreat: " + (int)threat;
+                            strThreat += "Threat: " + (int)threat;
                             foreach (ReasonMsg msg in msgs)
                             {
-                                bodyText += "\n   " + msg.msg + " " + (int)msg.value;
+                                strThreat += "\n   " + msg.msg + " " + (int)msg.value;
                             }
+                            socThreat.text = strThreat;
                         }
 
                         foreach (Property p in hex.location.properties)
