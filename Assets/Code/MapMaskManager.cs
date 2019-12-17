@@ -85,7 +85,7 @@ namespace Assets.Code
                     RelObj rel = me.getRelation(them);
                     words += "\nAmount: " + ((int)rel.getLiking());
 
-                    double sus = rel.getDislikingFromSuspicion(me);
+                    double sus = rel.getDislikingFromSuspicion();
                     if (sus != 0)
                     {
                         words += "\nFROM SUSPICION: " + sus;
@@ -124,7 +124,7 @@ namespace Assets.Code
                     RelObj rel = me.getRelation(them);
                     words += "\nAmount: " + ((int)rel.getLiking());
 
-                    double sus = rel.getDislikingFromSuspicion(me);
+                    double sus = rel.getDislikingFromSuspicion();
                     if (sus != 0)
                     {
                         words += "\nFROM SUSPICION: " + (int)sus;

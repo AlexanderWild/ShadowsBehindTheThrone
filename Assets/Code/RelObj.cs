@@ -13,17 +13,17 @@ namespace Assets.Code
         public double suspicion;
         public LinkedList<RelEvent> events = new LinkedList<RelEvent>();
         public bool isSelf = false;
+        public Person me;
+        public Person them;
 
         public RelObj(Person me,Person them)
         {
             isSelf = me == them;
-        }
-        public double getLiking()
-        {
-            return 0;
+            this.me = me;
+            this.them = them;
         }
 
-        public double getLiking(Person me,Person them)
+        public double getLiking()
         {
             double liking = me.getRelBaseline(them);
             foreach (RelEvent r in events)
@@ -31,14 +31,14 @@ namespace Assets.Code
                 liking += r.amount;
             }
 
-            liking += getDislikingFromSuspicion(me);
+            liking += getDislikingFromSuspicion();
 
             if (liking > 100) { liking = 100; }
             if (liking < -100) { liking = -100; }
             return liking;
         }
 
-        public double getDislikingFromSuspicion(Person me)
+        public double getDislikingFromSuspicion()
         {
             double evMult = (1 - me.shadow);//You care less about shadow the more enshadowed you are
             evMult = Math.Min(evMult, 1);

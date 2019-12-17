@@ -147,7 +147,7 @@ namespace Assets.Code
                 if (multFromPrestige > 1) { multFromPrestige = 1; }
                 */
 
-                double likingMult = Math.Max(0, this.getRelation(p).getLiking(this,p))/100;
+                double likingMult = Math.Max(0, this.getRelation(p).getLiking())/100;
 
                 double shadowDelta = p.shadow * likingMult * map.param.person_shadowContagionMult;//You get enshadowed by people you like/trust
                 this.shadow = Math.Min(p.shadow, shadow + shadowDelta);//Don't exceed your donor's shadow
@@ -343,11 +343,11 @@ namespace Assets.Code
             if (other == null) { throw new NullReferenceException(); }
 
             RelObj rel = new RelObj(this, other);
-                if (relations.keys.Contains(other))
-                {
-                    return relations.lookup(other);
-                }
-                relations.add(other, rel);
+            if (relations.keys.Contains(other))
+            {
+                return relations.lookup(other);
+            }
+            relations.add(other, rel);
             
             return rel;
         }
