@@ -350,6 +350,7 @@ namespace Assets.Code
                 string serializedState = File.ReadAllText(filename);
                 fsSerializer _serializer = new fsSerializer();
                 fsData data = fsJsonParser.Parse(serializedState);
+                World.Log("Data parsed");
                 object deserialized = null;
                 _serializer.TryDeserialize(data, typeof(Map), ref deserialized).AssertSuccessWithoutWarnings();
                 World.saveLog.takeLine("Finished deserial");
