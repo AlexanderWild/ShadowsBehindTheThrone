@@ -17,8 +17,8 @@ namespace Assets.Code
         public Image background;
 
         // FIXME
-        public Sprite personFrame;
-        public Sprite personHead;
+        //public Sprite personFrame;
+        //public Sprite personHead;
         public Sprite votesIcon;
 
         public void SetInfo(Person p)

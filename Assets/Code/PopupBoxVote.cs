@@ -40,7 +40,7 @@ namespace Assets.Code
             }
             this.option = option;
             this.sess = session;
-            this.sess.assignVoters();
+            //this.sess.assignVoters();
         }
 
         public float ySize()

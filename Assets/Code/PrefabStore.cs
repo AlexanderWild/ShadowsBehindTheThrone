@@ -50,7 +50,7 @@ namespace Assets.Code
         public GameObject mapMsg;
         public GameObject prefabVictoryBox;
         public GameObject popTutorial;
-
+        public GameObject prefabPersonPortrait;
 
         public PopupNameTag getNameTag(string name, Color color)
         {
@@ -297,6 +297,7 @@ namespace Assets.Code
         {
             PopupScrollSet specific = getInnerScrollSet();
 
+            sess.assignVoters();
             foreach (VoteOption b in votes)
             {
                 PopupBoxVote box = getVoteBox(sess,b);

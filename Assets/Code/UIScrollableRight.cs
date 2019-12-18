@@ -17,8 +17,8 @@ namespace Assets.Code
 
         public Society activeSociety;
 
-        public GameObject portraitPrefab;
-        public GameObject testButtonObj;
+        //public GameObject portraitPrefab;
+        //public GameObject testButtonObj;
         public RectTransform listContent;
 
         public Toggle bPeople;
@@ -62,7 +62,7 @@ namespace Assets.Code
                     {
                         foreach (Person p in activeSociety.people)
                         {
-                            GameObject pp = Instantiate(portraitPrefab, listContent);
+                            GameObject pp = Instantiate(master.world.prefabStore.prefabPersonPortrait, listContent);
                             pp.GetComponent<Portrait>().SetInfo(p);
                         }
 
@@ -72,7 +72,7 @@ namespace Assets.Code
                     {
                         foreach (Settlement s in getSettlements(activeSociety))
                         {
-                            GameObject sp = Instantiate(portraitPrefab, listContent);
+                            GameObject sp = Instantiate(master.world.prefabStore.prefabPersonPortrait, listContent);
                             sp.GetComponent<Portrait>().SetInfo(s);
                         }
 
@@ -95,7 +95,7 @@ namespace Assets.Code
                             activeSociety.voteSession.assignVoters();
                             foreach (VoteOption v in activeSociety.voteSession.issue.options)
                             {
-                                GameObject vp = Instantiate(portraitPrefab, listContent);
+                                GameObject vp = Instantiate(master.world.prefabStore.prefabPersonPortrait, listContent);
                                 vp.GetComponent<Portrait>().SetInfo(activeSociety.voteSession.issue, v, p);
                             }
                         }
