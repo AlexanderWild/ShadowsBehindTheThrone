@@ -73,19 +73,24 @@ namespace Assets.Code
             float s2 = 32f / map.sizeY;
             scale = Math.Min(s1, s2);
 
+
             float ox = 10;
-            float oy = 4.7f;
-            float stepx = 0.35f*scale;
-            float stepy = 0.3f*scale;
+            float oy = 4f;
 
             if (s2 > s1)
             {
                 oy *= s1 / s2;
             }
+
+            scale *= 0.9f;
+            float stepx = 0.35f * scale;
+            float stepy = 0.3f * scale;
             ox = (map.sizeX / 2) * stepx;
             
+
+
             PopupBaseHex hidden = world.prefabStore.getBaseHex();
-            hidden.sprite.color = new Color(0, 0, 0, 0);
+            hidden.sprite.color = new Color(255, 0, 0, 0);
             midpoint = hidden.gameObject;
 
             hexes = new PopupBaseHex[map.sizeX, map.sizeY];

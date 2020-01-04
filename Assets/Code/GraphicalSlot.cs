@@ -11,11 +11,11 @@ namespace Assets.Code
     {
         public World world;
         public Person inner;
-        public SpriteRenderer border;
-        public SpriteRenderer layerBack;
-        public SpriteRenderer layerMid;
-        public SpriteRenderer layerFore;
-        public SpriteRenderer selectable;
+        public Image border;
+        public Image layerBack;
+        public Image layerMid;
+        public Image layerFore;
+        public Image selectable;
         public Text title;
         public Text subtitle;
         public Text upperRightText;

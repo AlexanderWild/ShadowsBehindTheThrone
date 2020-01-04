@@ -375,6 +375,8 @@ namespace Assets.Code
             GameObject obj = Instantiate(graphicalProperty) as GameObject;
             GraphicalProperty property = obj.GetComponent<GraphicalProperty>();
             property.setTo(p,world);
+            property.borderLayer1.enabled = false;
+            property.borderLayer2.enabled = false;
             return property;
         }
 

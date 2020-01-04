@@ -279,8 +279,8 @@ namespace Assets.Code
         {
             World world = this;
            // world.ui.setToMainMenu();
-            //GraphicalMap.purge();
-            //GraphicalSociety.purge();
+            GraphicalMap.purge();
+            GraphicalSociety.purge();
             world.map.world = null;
 
 
