@@ -25,6 +25,8 @@ namespace Assets.Code
         public double shadow;
         public int imgIndBack = -1;
         public int imgIndFore = -1;
+        public int maxSanity = 10;
+        public double sanity = 0;
 
         public ThreatItem threat_enshadowedNobles;
 
@@ -35,10 +37,16 @@ namespace Assets.Code
         public bool isDead;
         public Society rebellingFrom;
 
+        public Insanity madness;
+
         public Person(Society soc)
         {
             this.society = soc;
             firstName = TextStore.getName(isMale);
+            madness = soc.map.globalist.madness_sane;
+
+            maxSanity = Eleven.random.Next(3);
+            sanity = maxSanity;
 
             if (World.logging)
             {
@@ -92,6 +100,32 @@ namespace Assets.Code
 
             computeSuspicionGain();
             processThreats();
+            processSanity();
+        }
+
+        public void processSanity()
+        {
+            if (madness == map.globalist.madness_sane) {
+                if (sanity <= 0)
+                {
+                    goInsane();
+                }
+                else
+                {
+                    sanity += map.param.insanity_sanityRegen;
+                    if (sanity > maxSanity)
+                    {
+                        sanity = maxSanity;
+                    }
+                }
+            }
+            madness.process(this);
+        }
+        public void goInsane()
+        {
+            int q = Eleven.random.Next(map.globalist.allInsanities.Count);
+            madness = map.globalist.allInsanities[q];
+            map.addMessage(this.getFullName() + " has gone insane, and is now " + madness.name,MsgEvent.LEVEL_DARK_GREEN2,true);
         }
 
         private void computeSuspicionGain()
@@ -319,7 +353,7 @@ namespace Assets.Code
 
         public double getRelBaseline(Person other)
         {
-            if (other == this) { return 100; }
+            if (other == this) { return madness.selfLove; }
             return map.param.relObj_defaultLiking;
         }
 
@@ -395,7 +429,6 @@ namespace Assets.Code
 
         public void die(string v)
         {
-            World.log(v);
             double priority = 0;
             bool benefit = true;
             if (state == Person.personState.enthralled)
@@ -414,6 +447,12 @@ namespace Assets.Code
                 priority = MsgEvent.LEVEL_DARK_GREEN;
             }
             map.turnMessages.Add(new MsgEvent(this.getFullName() + " dies! " + v, priority, benefit));
+
+            removeFromGame(v);
+        }
+
+        public void removeFromGame(string v) { 
+            World.log(v);
 
             society.people.Remove(this);
             if (this.title_land != null)

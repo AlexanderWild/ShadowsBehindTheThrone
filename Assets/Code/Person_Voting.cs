@@ -8,8 +8,6 @@ namespace Assets.Code
 {
     public partial class Person
     {
-
-
         public VoteSession forcedVoteSession;
         public VoteOption forcedVoteOption;
 
@@ -30,10 +28,9 @@ namespace Assets.Code
 
         public VoteIssue proposeVotingIssue()
         {
-            //Note we start at 1 utility. This means no guaranteed negative/near-zero utility options will be proposed
-            double bestU = 1;
+            double bestU = -1000;
             VoteIssue bestIssue = null;
-
+            bool forcedBest = false;
             bool existFreeTitles = false;
 
             if (World.logging) { log.takeLine("Proposing vote on turn " + map.turn); }
@@ -72,6 +69,7 @@ namespace Assets.Code
                     {
                         bestU = localU;
                         bestIssue = issue;
+                        forcedBest = true;
                     }
                 }
                 logVote(issue);
@@ -108,13 +106,39 @@ namespace Assets.Code
                             {
                                 bestU = localU;
                                 bestIssue = issue;
+                                forcedBest = true;
                             }
                         }
                         logVote(issue);
                     }
                 }
 
-                if (!existFreeTitles)
+                if (society.needsToDecreasePopulation)
+                {
+                    issue = new VoteIssue_DismissFromCourt(society, this);
+                    foreach (Person p in society.people)
+                    {
+                        if (p.title_land == null)
+                        {
+                            VoteOption opt = new VoteOption();
+                            opt.person = p;
+                            issue.options.Add(opt);
+                        }
+                    }
+                    foreach (VoteOption opt in issue.options)
+                    {
+                        //Random factor to prevent them all rushing a singular voting choice
+                        double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                        if (localU > bestU)
+                        {
+                            bestU = localU;
+                            bestIssue = issue;
+                            forcedBest = true;
+                        }
+                    }
+                }
+
+                if (!forcedBest)
                 {
                     //Check to see if you want to economically rebalance the economy
                     if (this.title_land != null)

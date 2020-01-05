@@ -109,6 +109,7 @@ namespace Assets.Code
                 {
                     World.log(society.getName() + " VASSALISES UNDER " + target.getName());
                     society.map.turnMessages.Add(new MsgEvent(society.getName() + " vassalises under " + target.getName() + ", transferring all lands and nobles.",MsgEvent.LEVEL_RED,true));
+                    
                     foreach (Location loc in trans)
                     {
                         receiever.map.takeLocationFromOther(receiever, society, loc);

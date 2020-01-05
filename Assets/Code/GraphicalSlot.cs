@@ -46,7 +46,7 @@ namespace Assets.Code
             title.text = p.getFullName();
             subtitle.text = (p.title_land == null) ? "" : p.title_land.getName();
             // FIXME
-            upperRightText.text = lowerRightText.text = riseBox.text = fallBox.text = "";
+            //upperRightText.text = lowerRightText.text = riseBox.text = fallBox.text = "";
 
             targetColor = neutralColor;
         }

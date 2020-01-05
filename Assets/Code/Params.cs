@@ -55,6 +55,7 @@ namespace Assets.Code
         public double utility_wouldBeOutvotedMult = 0.25;
         public double utility_landedTitleAssignBaseline = 100;
         public double utility_prestigeMultForTitle = 1.5;
+        public double utility_dismissFromCourt = 2;
 
         public double person_maxLikingGainFromVoteAccordance = 30;
         public double person_maxLikingLossFromVoteDiscord = -50;
@@ -123,7 +124,8 @@ namespace Assets.Code
         public double society_pExpandIntoEmpty = 0.1;
         public double temporaryThreatConversion = 0.01;
         public int ability_fleshScreamThreatAdd = 10;
-        public int ability_fleshScreamCost = 5;
+        public int ability_fleshScreamCost = 7;
+        public int ability_fleshScreamSanity = 4;
         public double threat_temporaryDreadDecay = 0.97;
         public int ability_informationBlackoutCost = 4;
         public int ability_informationBlackoutDuration = 15;
@@ -140,6 +142,10 @@ namespace Assets.Code
         public double ability_darkEmpireThreatMultGain = 0.5;
         public int ability_sharedGloryLikingGain = 8;
         public int ability_sharedGloryAmount = 5;
+
+        public double insanity_sanityRegen = 0.5;
+        internal int insanity_nParanoiaTargets = 3;
+        internal double insanity_lashOutProbability;
 
         public void loadFromFile()
         {

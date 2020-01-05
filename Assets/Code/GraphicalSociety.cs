@@ -40,6 +40,7 @@ namespace Assets.Code
 
                     s.subtitle.text = "";
                     s.lowerRightText.text = "";
+                    s.upperRightText.text = "";
                 }
                 else
                 {
@@ -57,8 +58,6 @@ namespace Assets.Code
 
                     RelObj rel = focus.getRelation(s.inner);
                     float liking = (float)rel.getLiking() / 100;
-                    if (i == 0)
-                        Debug.Log(rel.suspicion.ToString());
 
                     float radius = (1.75f * ring + 3.0f);
                     float x = Mathf.Cos(6.28f / n * i + ring * 0.1f) * radius;
@@ -73,10 +72,10 @@ namespace Assets.Code
                     //s.targetColor.a = 0.1f + ((float)rel.suspicion / 100);
 
                     s.subtitle.text = "Relationship with " + focus.firstName;
-                    s.lowerRightText.text  = "Liked by: " + focus.getRelation(s.inner).getLiking().ToString("N0") + "%";
-                    s.lowerRightText.text += ", Likes: " + s.inner.getRelation(focus).getLiking().ToString("N0") + "%";
-                    s.lowerRightText.text += "\nSuspected by: " + focus.getRelation(s.inner).suspicion.ToString("N0") + "%";
-                    s.lowerRightText.text += ", Suspects: " + s.inner.getRelation(focus).suspicion.ToString("N0") + "%";
+                    s.upperRightText.text = "Liked by: " + focus.getRelation(s.inner).getLiking().ToString("N0") + "%";
+                    s.upperRightText.text += "\nLikes: " + s.inner.getRelation(focus).getLiking().ToString("N0") + "%";
+                    s.lowerRightText.text = "Suspected by: " + focus.getRelation(s.inner).suspicion.ToString("N0") + "%";
+                    s.lowerRightText.text += "\nSuspects: " + s.inner.getRelation(focus).suspicion.ToString("N0") + "%";
 
                     i += 1;
                 }

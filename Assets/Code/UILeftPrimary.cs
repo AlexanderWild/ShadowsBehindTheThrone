@@ -27,6 +27,9 @@ namespace Assets.Code
         public Image bodyTextDarkener;
         public GameObject screenPerson;
         public GameObject screenSociety;
+        public GameObject insanityDescBox;
+        public Text insanityText;
+        public Text insanityDescText;
 
         public Button powerButton;
         public Text powerButtonText;
@@ -121,6 +124,33 @@ namespace Assets.Code
             }
 
             personBody.text = bodyText;
+
+
+            insanityText.text = "Sanity state: " + p.madness.name;
+            insanityText.text += "\nSanity: " + ((int)p.sanity) + " Maximum: " + p.maxSanity;
+
+            insanityDescText.text = p.madness.desc + "\n\n" +
+                "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
+                   + "\nYou can cause reduce sanity using certain abilities.";
+        }
+
+        public void setToEmpty()
+        {
+            profileBack.enabled = false;
+            profileMid.enabled = false;
+            profileFore.enabled = false;
+            personTitle.text = "No Person Selected";
+            locText.text = "";
+            personBody.text = "";
+            insanityText.text = "";
+            insanityDescText.text = "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
+                   + "\nYou can cause reduce sanity using certain abilities.";
+
+        }
+
+        public void bInsanityDescClick()
+        {
+            insanityDescBox.SetActive(!insanityDescBox.activeInHierarchy);
         }
 
         public void checkData()
@@ -188,12 +218,7 @@ namespace Assets.Code
                 }
                 else
                 {
-                    profileBack.enabled = false;
-                    profileMid.enabled = false;
-                    profileFore.enabled = false;
-                    personTitle.text = "No Person Selected";
-                    locText.text = "";
-                    personBody.text = "";
+                    setToEmpty();
                 }
             }
             else if (state == tabState.SOCIETY)

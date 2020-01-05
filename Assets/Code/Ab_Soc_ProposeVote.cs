@@ -35,6 +35,27 @@ namespace Assets.Code
                 potentialIssues.AddRange(econIssues(map, proposer, soc));
             }
 
+            //Remove unlanded nobles
+            List<Person> removables = new List<Person>();
+            foreach (Person p in soc.people)
+            {
+                if (p.title_land == null)
+                {
+                    removables.Add(p);
+                }
+            }
+            if (removables.Count != 0)
+            {
+                issue = new VoteIssue_DismissFromCourt(soc, proposer);
+                foreach (Person p in removables)
+                {
+                    VoteOption option = new VoteOption();
+                    option.person = p;
+                    issue.options.Add(option);
+                }
+                potentialIssues.Add(issue);
+            }
+
             issue = new VoteIssue_MilitaryStance(soc, proposer);
             potentialIssues.Add(issue);
             for (int i = 0; i < 3; i++)

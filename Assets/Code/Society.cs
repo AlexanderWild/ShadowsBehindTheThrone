@@ -31,6 +31,7 @@ namespace Assets.Code
         public int turnsNotInOffensiveStance;
         public int turnSovreignAssigned = -1;
 
+        public bool needsToDecreasePopulation = false;
         public bool isDarkEmpire = false;
 
         public LogBox logbox;
@@ -648,7 +649,10 @@ namespace Assets.Code
                 log(p.getFullName() + " has risen to note in the society of " + this.getName());
                 people.Add(p);
             }
-            
+
+            needsToDecreasePopulation = nUntitled > map.param.soc_untitledPeople;
+
+            /*
             if (nUntitled > map.param.soc_untitledPeople)
             {
                 Person lastUntitled = null;
@@ -674,6 +678,7 @@ namespace Assets.Code
                     }
                 }
             }
+            */
         }
 
         public Person getSovreign()

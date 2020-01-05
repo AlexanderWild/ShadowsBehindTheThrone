@@ -24,6 +24,7 @@ namespace Assets.Code
         public Overmind overmind;
         public List<MsgEvent> turnMessages = new List<MsgEvent>();
         public double data_avrgEnshadowment;
+        public int data_nSocietyLocations;
 
         public Map(Params param)
         {
@@ -298,6 +299,41 @@ namespace Assets.Code
             taken.soc = att;
             att.takeLocationFromOther(def, taken);
 
+            bool hasRemainingTerritory = false;
+            foreach (Location loc in locations)
+            {
+                if (loc.soc == def)
+                {
+                    hasRemainingTerritory = true;
+                    break;
+                }
+            }
+            if (!hasRemainingTerritory)
+            {
+                World.log("Last territory taken");
+                addMessage(def.getName() + " has lost its last holdings to " + att.getName());
+
+                /*
+                if (att is Society && def is Society)
+                {
+                    Society sAtt = (Society)att;
+                    Society sDef = (Society)def;
+                    List<Person> toMove = new List<Person>();
+                    foreach (Person p in sDef.people)
+                    {
+                        if (p.title_land == null)
+                        {
+                            toMove.Add(p);
+                        }
+                    }
+                    foreach (Person p in toMove)
+                    {
+                        movePerson(p, sAtt);
+                        addMessage(p.getFullName() + " is now part of the court of " + att.getName(), MsgEvent.LEVEL_GRAY, false);
+                    }
+                }
+                */
+            }
         }
 
         public void movePerson(Person lord,Society receiving)

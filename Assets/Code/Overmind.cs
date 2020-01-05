@@ -58,12 +58,19 @@ namespace Assets.Code
             power += map.param.overmind_powerRegen;
             power = Math.Min(power, map.param.overmind_maxPower);
 
+
+
             processEnthralled();
             int count = 0;
             double sum = 0;
+            int nHumanSettlements = 0;
             foreach (Location loc in map.locations)
             {
                 if (loc.person() != null) { sum += loc.person().shadow;count += 1; }
+                if (loc.soc != null && loc.settlement != null && loc.soc is Society)
+                {
+                    nHumanSettlements += 1;
+                }
             }
             if (count == 0) { map.data_avrgEnshadowment = 0; }
             else { map.data_avrgEnshadowment = sum / count; }
@@ -71,6 +78,11 @@ namespace Assets.Code
             {
                 victory();
             }
+            if (nHumanSettlements == 0)
+            {
+                victory();
+            }
+            map.data_nSocietyLocations = nHumanSettlements;
         }
         public void victory()
         {

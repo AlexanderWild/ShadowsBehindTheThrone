@@ -10,9 +10,28 @@ namespace Assets.Code
             base.cast(map, hex);
             hex.location.soc.temporaryThreat += World.staticMap.param.ability_fleshScreamThreatAdd;
 
-            map.world.prefabStore.popImgMsg(
-                "Your fields of unholy flesh start screaming, adding " +  World.staticMap.param.ability_fleshScreamThreatAdd + " temporary threat.",
+            int nHit = 0;
+            string nobleMsg = "";
+            foreach (Location loc in hex.location.getNeighbours())
+            {
+                if (loc.person() != null)
+                {
+                    if (nHit > 0) { nobleMsg += ";"; }
+                    nHit += 1;
+                    loc.person().sanity -= map.param.ability_fleshScreamSanity;
+                    if (loc.person().sanity < 0) { loc.person().sanity = 0; }
+                    nobleMsg += loc.person().getFullName() + " (now " + loc.person().sanity + ") ";
+                }
+            }
+
+            string msg = "Your fields of unholy flesh start screaming, adding " + World.staticMap.param.ability_fleshScreamThreatAdd + " temporary threat.";
+            if (nHit > 0)
+            {
+                msg += "\nNobles hit by sanity drain: " + nobleMsg;
+            }
+            map.world.prefabStore.popImgMsg(msg        ,
                 map.world.wordStore.lookup("UNHOLY_FLESH_SCREAM"));
+
         }
 
         public override bool castable(Map map, Hex hex)
@@ -31,7 +50,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Causes flesh to start violently screaming, causing fear and panic in the locals. Adds " + World.staticMap.param.ability_fleshScreamThreatAdd + " Temporary Threat"
+            return "The flesh screams maddeningly. Adds " + World.staticMap.param.ability_fleshScreamThreatAdd + " Temporary Threat. Reduces all neighbour nobles sanity by " + World.staticMap.param.ability_fleshScreamSanity
                  + "\n[Requires an unholy flesh location]";
         }
 

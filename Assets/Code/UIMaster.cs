@@ -21,6 +21,8 @@ namespace Assets.Code
         public GameObject blocker;
         public GameObject hexSelector;
         public InputField cheatField;
+        public GameObject viewSocietyButton;
+        public Text bViewSocietyText;
         //public ViewSelector_Person viewSelector;
 
         //public List<Alert> alertQueue = new List<Alert>();
@@ -128,10 +130,18 @@ namespace Assets.Code
             {
                 //GraphicalSociety.checkData();
                 //uiSociety.setTo(GraphicalSociety.focal);
+                bViewSocietyText.text = "View World";
+                viewSocietyButton.SetActive(true);
             }
             else if (state == uiState.WORLD)
             {
                 GraphicalMap.checkData();
+                bViewSocietyText.text = "View Society";
+                viewSocietyButton.SetActive(GraphicalMap.selectedHex != null && GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.soc is Society);
+            }
+            else
+            {
+                viewSocietyButton.SetActive(false);
             }
 
             if (state == uiState.BACKGROUND) { return; }
@@ -140,6 +150,7 @@ namespace Assets.Code
             uiLeftPrimary.checkData();
             uiMidTop.checkData();
             uiScrollables.checkData();
+
 
         }
 
@@ -213,27 +224,28 @@ namespace Assets.Code
                 addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, GraphicalSociety.focus).gameObject);
             }
         }
-        /*
+
         public void bViewSociety()
         {
-            if (GraphicalMap.selectedHex == null) { return; }
-            if (GraphicalMap.selectedHex.owner == null) { return; }
-            if (GraphicalMap.selectedHex.owner is Society == false) { return; }
-            if (GraphicalMap.selectedHex.settlement != null)
+            if (state == uiState.SOCIETY)
             {
-                if (GraphicalMap.selectedHex.settlement is Set_City)
+                setToWorld();
+            }
+            else if (state == uiState.WORLD)
+            {
+                if (GraphicalMap.selectedHex == null) { return; }
+                if (GraphicalMap.selectedHex.owner == null) { return; }
+                if (GraphicalMap.selectedHex.owner is Society == false) { return; }
+                setToSociety((Society)GraphicalMap.selectedHex.owner);
+                if (GraphicalMap.selectedHex.settlement != null)
                 {
-                    Set_City city = (Set_City)GraphicalMap.selectedHex.settlement;
-                    if (city.lordSlot != null)
+                    if (GraphicalMap.selectedHex.location.person() != null)
                     {
-                        setToSociety(city.lordSlot.society, city.lordSlot);
-                        return;
+                        GraphicalSociety.refresh(GraphicalMap.selectedHex.location.person());
                     }
                 }
             }
-            setToSociety((Society)GraphicalMap.selectedHex.owner);
         }
-        */
 
         /*
         public void setToSociety(Society soc)

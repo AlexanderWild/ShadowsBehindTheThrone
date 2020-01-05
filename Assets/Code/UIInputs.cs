@@ -244,39 +244,50 @@ namespace Assets.Code
         {
             if (world.ui.blocker != null) { return; }//Blocker on screen takes precedence
 
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                return;
-            }
-
             if (Input.GetMouseButtonDown(0) && !leftClickDown) { leftClick(); }
             else if (Input.GetMouseButtonDown(1) && !rightClickDown) { rightClick(); }
             leftClickDown = Input.GetMouseButtonDown(0);
             rightClickDown = Input.GetMouseButtonDown(1);
-            world.ui.checkData();
         }
 
         public void leftClick()
         {
             if (world.ui.state == UIMaster.uiState.WORLD)
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
                 clickOnHex();
             }
-            else
+            if (world.ui.state == UIMaster.uiState.SOCIETY)
             {
-                //if (GraphicalSociety.personOver != null)
-                //{
-                //    if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
-                //    {
-                //        GraphicalSociety.slotClickedNation(GraphicalSociety.personOver);
-                //        world.soundSource.select();
-                //        return;
-                //    }
-                //    GraphicalSociety.slotClicked(GraphicalSociety.personOver);
-                //    world.soundSource.select();
-                //}
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
+                clickOnSociety();
             }
             world.ui.checkData();
+        }
+
+        public void clickOnSociety()
+        {
+            Vector3 pos = Input.mousePosition;
+            double dist = 0;
+            GraphicalSlot best = null;
+            foreach (GraphicalSlot slot in GraphicalSociety.loadedSlots)
+            {
+                Vector3 slotLoc = world.outerCamera.WorldToScreenPoint(slot.transform.position);
+                double d = (slotLoc - pos).sqrMagnitude;
+                if (best == null || d < dist)
+                {
+                    dist = d;
+                    best = slot;
+                }
+            }
+            //GraphicalSociety.focus = best.inner;
+            GraphicalSociety.refresh(best.inner);
         }
 
         public void rightClick()

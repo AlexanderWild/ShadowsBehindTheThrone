@@ -38,7 +38,7 @@ namespace Assets.Code
         public void checkData()
         {
             title.text = "";
-
+            
             // FIXME: check if this needs to be done?
             foreach (Transform t in listContent)
             {
