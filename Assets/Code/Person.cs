@@ -45,7 +45,7 @@ namespace Assets.Code
             firstName = TextStore.getName(isMale);
             madness = soc.map.globalist.madness_sane;
 
-            maxSanity = Eleven.random.Next(3);
+            maxSanity = Eleven.random.Next(map.param.insanity_maxSanity);
             sanity = maxSanity;
 
             if (World.logging)
@@ -366,6 +366,10 @@ namespace Assets.Code
                 return "Dark " + getTitles() + " " + firstName;
             }
             if (state == personState.broken)
+            {
+                return "Broken " + getTitles() + " " + firstName;
+            }
+            if (madness is Insanity_Sane == false)
             {
                 return "Mad " + getTitles() + " " + firstName;
             }

@@ -20,7 +20,7 @@ namespace Assets.Code
     public class World : MonoBehaviour
     {
         public static bool logging   = false;
-        public static bool developer = true;
+        public static bool developer = false;
 
         public UIMaster ui;
         public TextureStore textureStore;
@@ -43,13 +43,18 @@ namespace Assets.Code
         {
             Screen.SetResolution(1920, 1080, true);
 
-            Eleven.random = new System.Random(2);
-            startup();
-            ui.setToBackground();
 
-            //ui.setToMainMenu();
-            //startup();
-            ui.setToWorld();
+            specificStartup();
+            if (developer)
+            {
+                Eleven.random = new System.Random(2);
+                startup();
+                ui.setToWorld();
+            }
+            else
+            {
+                ui.setToMainMenu();
+            }
         }
 
         public float lastFrame;
@@ -134,7 +139,6 @@ namespace Assets.Code
         public void startup()
         {
             Log("Called startup");
-            specificStartup();
             Params param = new Params();
             param.loadFromFile();
             map = new Map(param);
@@ -148,10 +152,6 @@ namespace Assets.Code
             map.gen();
 
             staticMap = map;
-                //for (int i = 0; i < param.mapGen_burnInSteps; i++)
-                //{
-                //    map.turnTick();
-                //}
 
             //ui.setToWorld();
             displayMessages = true;
@@ -169,9 +169,15 @@ namespace Assets.Code
         {
             ui.addBlocker(prefabStore.getPlayback(this, map).gameObject);
         }
-        public void bStartGame()
+        public void bStartGameSeeded()
         {
+            Eleven.random = new System.Random(42069);
             startup();
+            for (int i = 0; i < map.param.mapGen_burnInSteps; i++)
+            {
+                map.turnTick();
+            }
+            ui.setToWorld();
         }
 
         public void bContinue()
@@ -181,8 +187,12 @@ namespace Assets.Code
 
         public void bStartSeedlessGame()
         {
-            Eleven.random = new System.Random(42069);
             startup();
+            for (int i = 0; i < map.param.mapGen_burnInSteps; i++)
+            {
+                map.turnTick();
+            }
+            ui.setToWorld();
         }
 
         public void bEndTurn()
@@ -278,48 +288,57 @@ namespace Assets.Code
 
         public void save(string filename)
         {
-            World world = this;
-           // world.ui.setToMainMenu();
-            GraphicalMap.purge();
-            GraphicalSociety.purge();
-            world.map.world = null;
-
-
-            //foreach (SocialGroup sg in map.socialGroups)
-            //{
-            //    if (sg is Society)
-            //    {
-            //        Society soc = (Society)sg;
-            //        soc.voteSession = null;
-            //    }
-            //}
-
-            fsSerializer _serializer = new fsSerializer();
-            fsData data;
-            _serializer.TrySerialize(typeof(Map), map, out data).AssertSuccessWithoutWarnings();
-            
-            // emit the data via JSON
-            string saveString = fsJsonPrinter.CompressedJson(data);
-            World.Log("Save exit point");
-
-            if (File.Exists(filename))
+            try
             {
-                World.Log("Overwriting old save: " + filename);
-                File.Delete(filename);
+                World world = this;
+                // world.ui.setToMainMenu();
+                GraphicalMap.purge();
+                GraphicalSociety.purge();
+                world.map.world = null;
+
+
+                //foreach (SocialGroup sg in map.socialGroups)
+                //{
+                //    if (sg is Society)
+                //    {
+                //        Society soc = (Society)sg;
+                //        soc.voteSession = null;
+                //    }
+                //}
+
+                fsSerializer _serializer = new fsSerializer();
+                fsData data;
+                _serializer.TrySerialize(typeof(Map), map, out data).AssertSuccessWithoutWarnings();
+
+                // emit the data via JSON
+                string saveString = fsJsonPrinter.CompressedJson(data);
+                World.Log("Save exit point");
+
+                if (File.Exists(filename))
+                {
+                    World.Log("Overwriting old save: " + filename);
+                    File.Delete(filename);
+                }
+                File.WriteAllLines(filename, new string[] { saveString });
+
+                world.map.world = world;
+                staticMap = map;
+
+                world.prefabStore.popMsg("Game saved as: " + filename);
+
+                //// step 1: parse the JSON data
+                //fsData data = fsJsonParser.Parse(serializedState);
+
+                //// step 2: deserialize the data
+                //object deserialized = null;
+                //_serializer.TryDeserialize(data, type, ref deserialized).AssertSuccessWithoutWarnings();
+            }catch(Exception e)
+            {
+                World.log(e.Message);
+                World.log(e.StackTrace);
+                prefabStore.popMsg("Failure to save");
+                prefabStore.popMsg("Exception: " + e.StackTrace);
             }
-            File.WriteAllLines(filename, new string[] { saveString });
-
-            world.map.world = world;
-            staticMap = map;
-            
-            //world.prefabStore.popMsg("Game saved as: " + filename);
-
-            //// step 1: parse the JSON data
-            //fsData data = fsJsonParser.Parse(serializedState);
-
-            //// step 2: deserialize the data
-            //object deserialized = null;
-            //_serializer.TryDeserialize(data, type, ref deserialized).AssertSuccessWithoutWarnings();
         }
 
         public void bQuicksave()
@@ -363,16 +382,21 @@ namespace Assets.Code
                 //GraphicalMap.checkLoaded();
                 //GraphicalMap.checkData();
                 //graphicalMap.loadArea(0, 0);
+                prefabStore.popMsg("Loaded file: " + filename);
                 World.Log("reached end of loading code");
-               // prefabStore.popMsg("Load may well have succeeded.");
+                // prefabStore.popMsg("Load may well have succeeded.");
             }
             catch (FileLoadException e)
             {
                 Debug.Log(e);
+                World.log(e.StackTrace);
+                prefabStore.popMsg("Exception: " + e.StackTrace);
             }
             catch (Exception e2)
             {
                 Debug.Log(e2);
+                World.log(e2.StackTrace);
+                prefabStore.popMsg("Exception: " + e2.StackTrace);
             }
         }
     }

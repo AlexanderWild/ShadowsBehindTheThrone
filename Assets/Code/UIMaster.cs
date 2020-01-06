@@ -305,6 +305,8 @@ namespace Assets.Code
             uiScrollables.viewSocButtonText.text = "View Society";
 
             GraphicalSociety.purge();
+
+            checkData();
         }
 
         public void setToSociety(Society soc)
@@ -319,8 +321,10 @@ namespace Assets.Code
 
             uiScrollables.viewSocButtonText.text = "View World";
 
+            GraphicalSociety.purge();
             GraphicalMap.purge();
             GraphicalSociety.setup(soc);
+            checkData();
         }
 
         public void setToMainMenu()
@@ -333,6 +337,7 @@ namespace Assets.Code
             uiScrollables.gameObject.SetActive(false);
             uiMidTop.gameObject.SetActive(false);
             hexSelector.SetActive(false);
+            
 
             if (World.staticMap != null)
             {

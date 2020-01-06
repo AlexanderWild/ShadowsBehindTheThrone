@@ -77,6 +77,18 @@ namespace Assets.Code
                         p.getRelation(map.overmind.enthralled).addLiking(100, "Cheat love", map.turn);
                     }
                 }
+                if (command == "insanity")
+                {
+                    GraphicalMap.selectedHex.location.person().goInsane();
+                }
+                if (command == "min sanity")
+                {
+                    GraphicalMap.selectedHex.location.person().sanity = 0.01;
+                }
+                if (command == "die")
+                {
+                    GraphicalMap.selectedHex.location.person().die("Killed by console");
+                }
                 if (command == "evidence")
                 {
                     GraphicalMap.selectedHex.location.person().evidence = 1;

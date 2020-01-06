@@ -145,7 +145,8 @@ namespace Assets.Code
 
         public double insanity_sanityRegen = 0.5;
         internal int insanity_nParanoiaTargets = 3;
-        internal double insanity_lashOutProbability;
+        internal double insanity_lashOutProbability = 0.1;
+        internal int insanity_maxSanity = 17;
 
         public void loadFromFile()
         {
