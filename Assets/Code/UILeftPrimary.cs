@@ -28,6 +28,10 @@ namespace Assets.Code
         public GameObject screenPerson;
         public GameObject screenSociety;
         public GameObject insanityDescBox;
+        public GameObject[] traits;
+        public GameObject[] traitDescBoxes;
+        public Text[] traitNames;
+        public Text[] traitDescs;
         public Text insanityText;
         public Text insanityDescText;
 
@@ -132,6 +136,18 @@ namespace Assets.Code
             insanityDescText.text = p.madness.desc + "\n\n" +
                 "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
                    + "\nYou can cause reduce sanity using certain abilities.";
+
+            for (int i = 0; i < traits.Length; i++)
+            {
+                traits[i].SetActive(false);
+                traitDescBoxes[i].SetActive(false);
+            }
+            for (int i = 0; i < p.traits.Count; i++)
+            {
+                traits[i].SetActive(true);
+                traitNames[i].text = p.traits[i].name;
+                traitDescs[i].text = p.traits[i].desc;
+            }
         }
 
         public void setToEmpty()
@@ -145,12 +161,24 @@ namespace Assets.Code
             insanityText.text = "";
             insanityDescText.text = "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
                    + "\nYou can cause reduce sanity using certain abilities.";
-
+            for (int i = 0; i < traits.Length; i++)
+            {
+                traits[i].SetActive(false);
+                traitDescBoxes[i].SetActive(false);
+            }
         }
 
         public void bInsanityDescClick()
         {
             insanityDescBox.SetActive(!insanityDescBox.activeInHierarchy);
+        }
+        public void bTraitDesc1()
+        {
+            traitDescBoxes[0].SetActive(!traitDescBoxes[0].activeInHierarchy);
+        }
+        public void bTraitDesc2()
+        {
+            traitDescBoxes[1].SetActive(!traitDescBoxes[1].activeInHierarchy);
         }
 
         public void checkData()

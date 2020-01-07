@@ -90,13 +90,21 @@ namespace Assets.Code
                     {
                         words += "\nFROM SUSPICION: " + sus;
                     }
+
+                    List<ReasonMsg> msgs = new List<ReasonMsg>();
+                    RelObj.getLikingModifiers(me, them, msgs);
+                    foreach (ReasonMsg msg in msgs)
+                    {
+                        words += "\n\n  -" + msg.msg + " " + ((int)msg.value);
+                    }
+
                     List<RelEvent> sortedEvents = new List<RelEvent>();
                     sortedEvents.AddRange(rel.events);
                     sortedEvents.Sort();
                     int nPrinted = 0;
                     foreach (RelEvent ev in sortedEvents)
                     {
-                        words += "\n  -" + ev.reason + " : " + ((int)ev.amount);
+                        words += "\n\n  -" + ev.reason + " : " + ((int)ev.amount);
                         nPrinted += 1;
                         if (nPrinted > 6) { break; }
                     }

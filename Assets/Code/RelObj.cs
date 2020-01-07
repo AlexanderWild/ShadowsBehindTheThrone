@@ -26,6 +26,7 @@ namespace Assets.Code
         public double getLiking()
         {
             double liking = me.getRelBaseline(them);
+            liking += getLikingModifiers(me,them,null);
             foreach (RelEvent r in events)
             {
                 liking += r.amount;
@@ -36,6 +37,26 @@ namespace Assets.Code
             if (liking > 100) { liking = 100; }
             if (liking < -100) { liking = -100; }
             return liking;
+        }
+
+        public static double getLikingModifiers(Person me,Person them,List<ReasonMsg> reasons)
+        {
+            double u = 0;
+
+            if (them.madness is Insanity_Sane == false)
+            {
+                u += me.map.param.insanity_relHit;
+                if (reasons != null)
+                {
+                    reasons.Add(new ReasonMsg("Obviously insane", me.map.param.insanity_relHit));
+                }
+            }
+            foreach (Trait t in them.traits)
+            {
+
+            }
+
+            return 0;
         }
 
         public double getDislikingFromSuspicion()

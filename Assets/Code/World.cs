@@ -147,11 +147,11 @@ namespace Assets.Code
 
             Property_Prototype.loadProperties(map);
             EconTrait.loadTraits(map);
-            map.globalist.buildBasicElements();
+            staticMap = map;
             map.world = this;
+            map.globalist.buildBasicElements();
             map.gen();
 
-            staticMap = map;
 
             //ui.setToWorld();
             displayMessages = true;

@@ -108,7 +108,7 @@ namespace Assets.Code
                 if (canVassalise)
                 {
                     World.log(society.getName() + " VASSALISES UNDER " + target.getName());
-                    society.map.turnMessages.Add(new MsgEvent(society.getName() + " vassalises under " + target.getName() + ", transferring all lands and nobles.",MsgEvent.LEVEL_RED,true));
+                    society.map.turnMessages.Add(new MsgEvent(society.getName() + " vassalises under " + target.getName() + ", transferring all lands and landed nobles.",MsgEvent.LEVEL_RED,true));
                     
                     foreach (Location loc in trans)
                     {

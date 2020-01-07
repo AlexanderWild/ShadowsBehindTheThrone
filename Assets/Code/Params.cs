@@ -144,9 +144,15 @@ namespace Assets.Code
         public int ability_sharedGloryAmount = 5;
 
         public double insanity_sanityRegen = 0.5;
-        internal int insanity_nParanoiaTargets = 3;
-        internal double insanity_lashOutProbability = 0.1;
+        internal int insanity_nParanoiaTargets = 4;
+        internal int insanity_relHit = -10;
+        internal double insanity_lashOutProbability = 0.07;
         internal int insanity_maxSanity = 17;
+
+        public double trait_incautious = 0.5;
+        public double trait_aware = 2;
+        public double trait_charismatic = 15;
+        public double trait_unlikable = -15;
 
         public void loadFromFile()
         {

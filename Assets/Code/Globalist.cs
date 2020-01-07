@@ -31,6 +31,34 @@ namespace Assets.Code
             allInsanities.Add(new Insanity_Paranoid());
             allInsanities.Add(new Insanity_Envious());
             allInsanities.Add(new Insanity_SelfDestructive());
+
+            allTraits.Add(new Trait_Charismatic());
+            allTraits.Add(new Trait_Unlikable());
+            allTraits.Add(new Trait_Incautious());
+            allTraits.Add(new Trait_Aware());
+        }
+
+        public Trait getTrait(Person person)
+        {
+            int c = 0;
+            Trait response = null;
+            foreach (Trait t in allTraits)
+            {
+                bool allowed = true;
+                foreach (Trait t2 in person.traits)
+                {
+                    if (t2.groupCode == t.groupCode) { allowed = false;break; }
+                }
+                if (allowed)
+                {
+                    c += 1;
+                    if (Eleven.random.Next(c) == 0)
+                    {
+                        response = t;
+                    }
+                }
+            }
+            return response;
         }
     }
 }

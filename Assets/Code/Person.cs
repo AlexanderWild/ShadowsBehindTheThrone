@@ -27,6 +27,7 @@ namespace Assets.Code
         public int imgIndFore = -1;
         public int maxSanity = 10;
         public double sanity = 0;
+        public List<Trait> traits = new List<Trait>();
 
         public ThreatItem threat_enshadowedNobles;
 
@@ -62,6 +63,16 @@ namespace Assets.Code
             threat_enshadowedNobles.form = ThreatItem.formTypes.ENSHADOWED_NOBLES;
             threat_enshadowedNobles.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
             threatEvaluations.Add(threat_enshadowedNobles);
+
+            
+            for (int i = 0; i < 3; i++)
+            {
+                if (Eleven.random.Next(2) == 0) { break; }//50% chance to add another trait
+
+                Trait add = map.globalist.getTrait(this);
+                if (add == null) { break; }
+                traits.Add(add);
+            }
         }
 
         public void turnTick()
@@ -140,7 +151,9 @@ namespace Assets.Code
                     double infoAvail = map.getInformationAvailability(this.getLocation(), sg);
                     RelObj rel = getRelation(p);
                     double evidenceMult = Math.Pow(p.evidence, map.param.person_evidenceExponent);//Make low evidence a bit slower to cause suspicion
-                    rel.suspicion += infoAvail * evidenceMult * map.param.person_suspicionPerEvidence;
+                    double fromTraits = 1;
+                    foreach (Trait t in traits) { fromTraits *= t.suspicionMult; }
+                    rel.suspicion += infoAvail * evidenceMult * map.param.person_suspicionPerEvidence * fromTraits;
                 }
             }
         }
@@ -183,6 +196,7 @@ namespace Assets.Code
 
                 double likingMult = Math.Max(0, this.getRelation(p).getLiking())/100;
 
+                
                 double shadowDelta = p.shadow * likingMult * map.param.person_shadowContagionMult;//You get enshadowed by people you like/trust
                 this.shadow = Math.Min(p.shadow, shadow + shadowDelta);//Don't exceed your donor's shadow
                 if (this.shadow > 1) { this.shadow = 1; }
