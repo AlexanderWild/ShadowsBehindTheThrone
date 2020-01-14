@@ -56,7 +56,7 @@ namespace Assets.Code
 
             }
 
-            return 0;
+            return u;
         }
 
         public double getDislikingFromSuspicion()

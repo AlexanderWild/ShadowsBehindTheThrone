@@ -63,6 +63,7 @@ namespace Assets.Code
         public Sprite icon_shield;
         public Sprite icon_fishman;
         public Sprite icon_eyes;
+        public Sprite icon_moon;
 
         public Sprite icon_combat;
 

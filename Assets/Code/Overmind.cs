@@ -26,6 +26,7 @@ namespace Assets.Code
             powers.Add(new Ab_Fishman_CultOfTheDeep());
             //powers.Add(new Ab_Fishman_Call());
             powers.Add(new Ab_Fishman_Attack());
+            powers.Add(new Ab_Fishman_HauntingSong());
             powers.Add(new Ab_Enth_MiliaryAid());
             powers.Add(new Ab_Enth_TrustingFool());
             powers.Add(new Ab_Enth_Enshadow());
@@ -39,6 +40,7 @@ namespace Assets.Code
             powers.Add(new Ab_Over_InformationBlackout());
             powers.Add(new Ab_Over_SowDissent());
             powers.Add(new Ab_Over_UncannyGlamour());
+            powers.Add(new Ab_Over_AuraOfLunacy());
 
             abilities.Add(new Ab_Soc_Vote());
             abilities.Add(new Ab_Soc_ProposeVote());

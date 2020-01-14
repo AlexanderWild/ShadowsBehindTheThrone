@@ -44,7 +44,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
-            return world.textureStore.unit_lookingGlass;
+            return world.textureStore.unit_fishmen;
         }
 
         internal override string getDescription()

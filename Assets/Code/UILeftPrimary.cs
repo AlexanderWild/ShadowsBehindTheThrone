@@ -134,7 +134,8 @@ namespace Assets.Code
             insanityText.text += "\nSanity: " + ((int)p.sanity) + " Maximum: " + p.maxSanity;
 
             insanityDescText.text = p.madness.desc + "\n\n" +
-                "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
+                "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner. "
+                + "Characters will dislike insane characters to a moderate degree, and insane characters will occasionally lash out, further reducing their relationships."
                    + "\nYou can cause reduce sanity using certain abilities.";
 
             for (int i = 0; i < traits.Length; i++)
@@ -221,11 +222,13 @@ namespace Assets.Code
                 socTitle.text = GraphicalMap.selectedProperty.proto.name;
                 if (GraphicalMap.selectedProperty.proto.decaysOverTime)
                 {
-                    title.text = "Turns Remaining: " + GraphicalMap.selectedProperty.charge;
+                    title.text = GraphicalMap.selectedProperty.proto.name;
+                    locText.text = "Turns Remaining: " + GraphicalMap.selectedProperty.charge;
                 }
                 else
                 {
-                    title.text = "Indefinite Effect";
+                    title.text = GraphicalMap.selectedProperty.proto.name;
+                    locText.text = "Indefinite Effect";
                 }
                 string bodyText = GraphicalMap.selectedProperty.proto.getDescription();
                 body.text = bodyText;

@@ -54,7 +54,7 @@ namespace Assets.Code
                 log = new LogBox(this);
             }
 
-            politics_militarism = Math.Pow(Eleven.random.NextDouble(), 0.75);//Bias towards 0
+            politics_militarism = Math.Pow(Eleven.random.NextDouble(), 0.5);//Bias towards 0
             politics_militarism = 1 - politics_militarism;//0 to 1, bias towards 1
             politics_militarism = (2*politics_militarism)-1;//1 to -1, bias towards 1
 

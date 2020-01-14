@@ -17,7 +17,7 @@ namespace Assets.Code
         public float mapGen_minHabitabilityForHumans = 0.15f;
         public int mapGen_stepsPerIsland = 12;
         public int mapGen_maxBrushSize = 5;
-        public int mapGen_burnInSteps = 50;
+        public int mapGen_burnInSteps = 100;
 
         public int overmind_maxPower = 24;
         public float overmind_powerRegen = 1f;
@@ -40,9 +40,9 @@ namespace Assets.Code
 
         public double utility_econEffect = 0.5;
         public double utility_econEffectOther = 0.20;
-        public double utility_militaryTargetRelStrengthOffensive = 250;
-        public double utility_militaryTargetRelStrengthDefensive = 300;
-        public double utility_vassaliseReluctance = -100;
+        public double utility_militaryTargetRelStrengthOffensive = 300;
+        public double utility_militaryTargetRelStrengthDefensive = 250;
+        public double utility_vassaliseReluctance = -90;
         public double utility_vassaliseMilMult = 80;
         public double utility_vassaliseThreatMult = 0.75;
         public double utility_introversionFromInstability = 50;
@@ -142,17 +142,23 @@ namespace Assets.Code
         public double ability_darkEmpireThreatMultGain = 0.5;
         public int ability_sharedGloryLikingGain = 8;
         public int ability_sharedGloryAmount = 5;
+        public int ability_auraOfLunacyEvidence = 14;
+        public int ability_auraOfLunacyHit = 7;
+        public int ability_auraOfLunacyCost = 7;
+        public int ability_fishmanHauntingSongCost = 4;
+        public int ability_fishmanHauntingSongHit = 7;
 
         public double insanity_sanityRegen = 0.5;
-        internal int insanity_nParanoiaTargets = 4;
-        internal int insanity_relHit = -10;
-        internal double insanity_lashOutProbability = 0.07;
-        internal int insanity_maxSanity = 17;
+        public int insanity_nParanoiaTargets = 4;
+        public int insanity_relHit = -10;
+        public double insanity_lashOutProbability = 0.07;
+        public int insanity_maxSanity = 17;
 
         public double trait_incautious = 0.5;
         public double trait_aware = 2;
         public double trait_charismatic = 15;
         public double trait_unlikable = -15;
+        internal double trait_hateful = -15;
 
         public void loadFromFile()
         {

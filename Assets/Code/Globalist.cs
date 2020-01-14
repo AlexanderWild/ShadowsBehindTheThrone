@@ -36,6 +36,7 @@ namespace Assets.Code
             allTraits.Add(new Trait_Unlikable());
             allTraits.Add(new Trait_Incautious());
             allTraits.Add(new Trait_Aware());
+            allTraits.Add(new Trait_Hateful());
         }
 
         public Trait getTrait(Person person)
