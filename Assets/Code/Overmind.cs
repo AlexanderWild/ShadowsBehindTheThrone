@@ -52,6 +52,7 @@ namespace Assets.Code
             abilities.Add(new Ab_Soc_Fearmonger());
             abilities.Add(new Ab_Soc_DenounceOther());
             abilities.Add(new Ab_Soc_SwitchVote());
+            abilities.Add(new Ab_Soc_ShareTruth());
         }
 
         public void turnTick()

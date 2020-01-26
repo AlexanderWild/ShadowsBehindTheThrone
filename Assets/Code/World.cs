@@ -136,6 +136,35 @@ namespace Assets.Code
                 }
             }
         }
+        public void startup(PopupGameOptions opts)
+        {
+            Log("Called startup");
+            Params param = new Params();
+            param.loadFromFile();
+
+            //Apply the choices the user made in the choice screen
+            param.overmind_powerRegen *= opts.powerGainPercent / 100f;
+            param.person_suspicionPerEvidence *= opts.susGainPercent / 100f;
+
+            map = new Map(param);
+            GraphicalMap.map = map;
+            GraphicalMap.world = this;
+
+            Property_Prototype.loadProperties(map);
+            EconTrait.loadTraits(map);
+            staticMap = map;
+            map.world = this;
+            map.globalist.buildBasicElements();
+            map.gen();
+
+
+            //ui.setToWorld();
+            displayMessages = true;
+            Log("Got to end of initial startup");
+            ui.checkData();
+
+            //bQuicksave();
+        }
         public void startup()
         {
             Log("Called startup");
@@ -161,6 +190,11 @@ namespace Assets.Code
             //bQuicksave();
         }
 
+        public void bStartGameOptions()
+        {
+            prefabStore.getGameOptionsPopup();
+        }
+
         public void bQuit()
         {
             Application.Quit();
@@ -173,6 +207,16 @@ namespace Assets.Code
         {
             Eleven.random = new System.Random(42069);
             startup();
+            for (int i = 0; i < map.param.mapGen_burnInSteps; i++)
+            {
+                map.turnTick();
+            }
+            ui.setToWorld();
+        }
+        public void bStartGameSeeded(int seed, PopupGameOptions opts)
+        {
+            Eleven.random = new System.Random(seed);
+            startup(opts);
             for (int i = 0; i < map.param.mapGen_burnInSteps; i++)
             {
                 map.turnTick();

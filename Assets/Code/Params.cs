@@ -102,6 +102,7 @@ namespace Assets.Code
         public int ability_sowDissentCost = 12;
         public int ability_sowDissentLikingChange = -25;
 
+        public int ability_shareTruthCooldown = 10;
         public double ability_darkEmpireShadowPerTurn = 0.05;
         public int ability_denounceOtherCooldown = 32;
         public int ability_proposeVoteCooldown = 7;

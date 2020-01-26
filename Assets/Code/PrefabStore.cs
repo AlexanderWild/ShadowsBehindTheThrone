@@ -51,6 +51,7 @@ namespace Assets.Code
         public GameObject prefabVictoryBox;
         public GameObject popTutorial;
         public GameObject prefabPersonPortrait;
+        public GameObject prefabGameOptions;
 
         public PopupNameTag getNameTag(string name, Color color)
         {
@@ -345,6 +346,24 @@ namespace Assets.Code
             specific.setTo(a, person);
 
             return specific;
+        }
+        public void getGameOptionsPopup()
+        {
+            GameObject obj = Instantiate(prefabGameOptions) as GameObject;
+            PopupGameOptions specific = obj.GetComponent<PopupGameOptions>();
+            specific.ui = ui;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.seedField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.suspicionGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.powerGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+
+            specific.bEasy.onClick.AddListener(delegate { specific.setEasy(); });
+            specific.bMedium.onClick.AddListener(delegate { specific.setMedium(); });
+            specific.bHard.onClick.AddListener(delegate { specific.setHard(); });
+
+            specific.currentSeed = Eleven.random.Next();
+            specific.setTextFieldsToCurrentValues();
+            ui.addBlocker(specific.gameObject);
         }
         public void popMsg(string words)
         {
