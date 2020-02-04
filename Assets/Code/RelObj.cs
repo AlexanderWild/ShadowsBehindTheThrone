@@ -54,7 +54,25 @@ namespace Assets.Code
             }
             foreach (Trait t in them.traits)
             {
-
+                if (t.receivedLikingDelta() != 0)
+                {
+                    u += t.receivedLikingDelta();
+                    if (reasons != null)
+                    {
+                        reasons.Add(new ReasonMsg(them.getFullName() + " is " + t.name, t.receivedLikingDelta()));
+                    }
+                }
+            }
+            foreach (Trait t in me.traits)
+            {
+                if (t.likingChange() != 0)
+                {
+                    u += t.likingChange();
+                    if (reasons != null)
+                    {
+                        reasons.Add(new ReasonMsg(me.getFullName() + " is " + t.name, t.likingChange()));
+                    }
+                }
             }
 
             return u;

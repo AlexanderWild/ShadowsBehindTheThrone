@@ -552,6 +552,25 @@ namespace Assets.Code
                     voteSession.issue = issue;
                     voteSession.timeRemaining = map.param.society_votingDuration;
                     if (World.logging && logbox != null) { logbox.takeLine("Starting voting on " + voteSession.issue.ToString()); }
+
+                    if (this.hasEnthralled())
+                    {
+                        voteSession.assignVoters();
+                        VoteOption optionChoice = null;
+                        foreach (VoteOption opt in voteSession.issue.options)
+                        {
+                            if (opt.votesFor.Contains(proposer))
+                            {
+                                optionChoice = opt;
+                                break;
+                            }
+                        }
+                        string str = proposer.getFullName() + " has proposed a measure to be voted on by the nobles of "
+                            + this.getName() + ".\nThey are voting " +
+                            optionChoice.info(issue);
+
+                        map.world.prefabStore.popImgMsg(str, "Voting issue: " + issue.getLargeDesc());
+                    }
                 }
             }
             else
@@ -581,6 +600,20 @@ namespace Assets.Code
 
                 if (World.logging && logbox != null) { logbox.takeLine("End voting on " + voteSession.issue.ToString()); }
                 if (World.logging && logbox != null) { logbox.takeLine("    Winning option: " + winner.info()); }
+
+                if (this.hasEnthralled())
+                {
+                    string str = "Chosen outcome: " + winner.info(voteSession.issue);
+                    str += "\nVotes for: ";
+                    foreach (Person p in winner.votesFor)
+                    {
+                        str += p.getFullName() + ", ";
+                    }
+                    str = str.Substring(0, str.Length - 2);
+
+                    map.world.prefabStore.popImgMsg(str, "Voting concluded. Issue: " + voteSession.issue.getLargeDesc());
+                }
+
                 voteSession.issue.implement(winner);
                 voteSession = null;
             }

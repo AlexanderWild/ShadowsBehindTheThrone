@@ -24,8 +24,9 @@ namespace Assets.Code
         }
         public override bool castable(Map map, Person person)
         {
+            if (map.overmind.enthralled != null) { return false; }
             if (person.state == Person.personState.broken) { return true; }
-            
+
             Society soc = person.society;
             double minPrestige = 1000000;
             foreach (Person p in soc.people)

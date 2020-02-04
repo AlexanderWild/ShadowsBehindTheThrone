@@ -10,10 +10,13 @@ namespace Assets.Code
         public Trait_Charismatic()
         {
             name = "Charismatic";
-            receivedLikingDelta = World.staticMap.param.trait_charismatic;
             desc = "This character has a talent for convincing others to side with them, others will like them more than usual.";
             groupCode = Trait.CODE_LIKABILITY;
         }
-        
+
+        public override double receivedLikingDelta()
+        {
+            return World.staticMap.param.trait_charismatic;
+        }
     }
 }

@@ -10,10 +10,14 @@ namespace Assets.Code
         public Trait_Unlikable()
         {
             name = "Unlikable";
-            receivedLikingDelta = World.staticMap.param.trait_unlikable;
-            desc = "This character is unpleasant to talk to, unpleasant to associate with, and suffers relationship penalties with other characters.";
+            desc = "This character is unpleasant to talk to, unpleasant to associate with, and suffers " +
+                "relationship penalties with other characters.";
             groupCode = Trait.CODE_LIKABILITY;
         }
-        
+
+        public override double receivedLikingDelta()
+        {
+            return World.staticMap.param.trait_unlikable;
+        }
     }
 }

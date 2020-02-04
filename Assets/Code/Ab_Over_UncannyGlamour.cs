@@ -11,10 +11,11 @@ namespace Assets.Code
             base.cast(map, hex);
 
             Person other = hex.location.person();
+            castInner(map, other);
         }
+
         public override void castInner(Map map, Person other)
         {
-
             other.evidence += (map.param.ability_uncannyGlamourEvidence / 100.0);
             other.prestige += map.param.ability_uncannyGlamourGain;
             if (other.evidence > 1) { other.evidence = 1; }

@@ -10,11 +10,16 @@ namespace Assets.Code
         public Trait_Incautious()
         {
             name = "Incautious";
-            suspicionMult = World.staticMap.param.trait_incautious;
+            suspicionMult();
 
-            desc = "This character does not pay enough attention to the evidence of darkness around others, and will gain suspicion from evidence at a rate of " + ((int)(100*suspicionMult)) +  "%.";
+            desc = "This character does not pay enough attention to the evidence of darkness around others," +
+                " and will become suspicion from seeing evidence at a slower rate.";
             groupCode = Trait.CODE_SUSPICION;
         }
-        
+        public override double suspicionMult()
+        {
+            return World.staticMap.param.trait_incautious;
+        }
+
     }
 }

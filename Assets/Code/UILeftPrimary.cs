@@ -181,6 +181,10 @@ namespace Assets.Code
         {
             traitDescBoxes[1].SetActive(!traitDescBoxes[1].activeInHierarchy);
         }
+        public void bTraitDesc3()
+        {
+            traitDescBoxes[2].SetActive(!traitDescBoxes[2].activeInHierarchy);
+        }
 
         public void checkData()
         {
@@ -214,6 +218,7 @@ namespace Assets.Code
 
 
             maskTitle.text = GraphicalMap.map.masker.getTitleText();
+            locText.text = "";
 
             if (GraphicalMap.selectedProperty != null)
             {
@@ -261,10 +266,12 @@ namespace Assets.Code
                     title.text = "";
                     body.text = "";
                     socTitle.text = "";
+                    locText.text = "";
                 }
                 else
                 {
                     title.text = GraphicalMap.selectedHex.getName();
+                    locText.text = "";
                     if (GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.soc != null)
                     {
                         socTitle.text = GraphicalMap.selectedHex.location.soc.getName();

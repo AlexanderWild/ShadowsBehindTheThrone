@@ -152,7 +152,7 @@ namespace Assets.Code
                     RelObj rel = getRelation(p);
                     double evidenceMult = Math.Pow(p.evidence, map.param.person_evidenceExponent);//Make low evidence a bit slower to cause suspicion
                     double fromTraits = 1;
-                    foreach (Trait t in traits) { fromTraits *= t.suspicionMult; }
+                    foreach (Trait t in traits) { fromTraits *= t.suspicionMult(); }
                     rel.suspicion += infoAvail * evidenceMult * map.param.person_suspicionPerEvidence * fromTraits;
                 }
             }

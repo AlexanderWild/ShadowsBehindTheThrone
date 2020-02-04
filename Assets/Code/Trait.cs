@@ -13,9 +13,9 @@ namespace Assets.Code
 
         public string name;
         public string desc = "DEFAULT DESCRIPTION";
-        public double receivedLikingDelta = 0;
-        public double suspicionMult = 1;
-        public double likingChange = 0;
+        public virtual double receivedLikingDelta() { return 0; }
+        public virtual double suspicionMult() { return 1; }
+        public virtual double likingChange() { return 0; }
         public int groupCode;
     }
 }

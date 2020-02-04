@@ -10,11 +10,14 @@ namespace Assets.Code
         public Trait_Hateful()
         {
             name = "Hateful";
-            this.likingChange = World.staticMap.param.trait_hateful;
 
-            desc = "This character is filled with dislike for others, reducing relationships by " + ((int)(likingChange)) +  ".";
+            desc = "This character is filled with dislike for others, reducing relationships.";
             groupCode = Trait.CODE_LIKING;
         }
-        
+
+        public override double receivedLikingDelta()
+        {
+            return World.staticMap.param.trait_hateful;
+        }
     }
 }

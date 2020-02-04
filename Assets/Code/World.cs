@@ -391,6 +391,7 @@ namespace Assets.Code
         }
         public void bQuickload()
         {
+            World.Log("load clicked");
             load("quicksave.sv");
         }
         public void bDumpData()
