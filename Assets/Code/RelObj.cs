@@ -15,6 +15,7 @@ namespace Assets.Code
         public bool isSelf = false;
         public Person me;
         public Person them;
+        public List<RelEvent> rems = new List<RelEvent>();
 
         public RelObj(Person me,Person them)
         {
@@ -75,7 +76,6 @@ namespace Assets.Code
         }
         */
 
-        private List<RelEvent> rems = new List<RelEvent>();
         public void turnTick(Person me,Person them)
         {
             //if (them == me) { liking = 100; }//Be at least loyal to yourself (till traits override this)
