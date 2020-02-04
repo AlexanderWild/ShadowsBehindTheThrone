@@ -92,12 +92,12 @@ namespace Assets.Code
             try
             {
                 sizeX = int.Parse(sizeXField.text);
-                if (sizeX < 16) { sizeX = 16; }
+                if (sizeX < 8) { sizeX = 8; }
             } catch (Exception e) { }
             try
             {
                 sizeY = int.Parse(sizeYField.text);
-                if (sizeY < 16) { sizeY = 16; }
+                if (sizeY < 8) { sizeY = 8; }
             }
             catch (Exception e) { }
             try
