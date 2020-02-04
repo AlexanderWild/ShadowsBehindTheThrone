@@ -11,7 +11,7 @@ namespace Assets.Code
         {
             name = "Aware";
 
-            desc = "This character is aware of the darkness, and will seek to find evidence of it in others. This character gains suspicion at a rate of " + ((int)(100*suspicionMult())) +  "%.";
+            desc = "This character is aware of the darkness, and will seek to find evidence of it in others. This character gains suspicion faster.";
             groupCode = Trait.CODE_SUSPICION;
         }
 

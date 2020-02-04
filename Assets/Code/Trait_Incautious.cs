@@ -10,7 +10,6 @@ namespace Assets.Code
         public Trait_Incautious()
         {
             name = "Incautious";
-            suspicionMult();
 
             desc = "This character does not pay enough attention to the evidence of darkness around others," +
                 " and will become suspicion from seeing evidence at a slower rate.";
