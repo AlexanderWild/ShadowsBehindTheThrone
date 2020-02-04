@@ -145,6 +145,9 @@ namespace Assets.Code
             //Apply the choices the user made in the choice screen
             param.overmind_powerRegen *= opts.powerGainPercent / 100f;
             param.person_suspicionPerEvidence *= opts.susGainPercent / 100f;
+            param.mapGen_sizeX = opts.sizeX;
+            param.mapGen_sizeY = opts.sizeY;
+            param.mapGen_burnInSteps = opts.burnIn;
 
             map = new Map(param);
             GraphicalMap.map = map;

@@ -12,6 +12,9 @@ namespace Assets.Code
         public InputField suspicionGain;
         public InputField powerGain;
         public InputField seedField;
+        public InputField sizeXField;
+        public InputField sizeYField;
+        public InputField historicalField;
         public Button bDismiss;
         public UIMaster ui;
 
@@ -22,6 +25,9 @@ namespace Assets.Code
         public int susGainPercent = 100;
         public int powerGainPercent = 100;
         public int currentSeed;
+        public int sizeX = 32;
+        public int sizeY = 24;
+        public int burnIn = 100;
 
         public void dismiss()
         {
@@ -54,6 +60,9 @@ namespace Assets.Code
             suspicionGain.text = "" + susGainPercent;
             powerGain.text = "" + powerGainPercent;
             seedField.text = "" + currentSeed;
+            sizeXField.text = "" + sizeX;
+            sizeYField.text = "" + sizeY;
+            historicalField.text = "" + burnIn;
         }
         public void onEditEnd()
         {
@@ -78,6 +87,23 @@ namespace Assets.Code
             {
                 int val = int.Parse(seedField.text);
                     currentSeed = val;
+            }
+            catch (Exception e) { }
+            try
+            {
+                sizeX = int.Parse(sizeXField.text);
+                if (sizeX < 16) { sizeX = 16; }
+            } catch (Exception e) { }
+            try
+            {
+                sizeY = int.Parse(sizeYField.text);
+                if (sizeY < 16) { sizeY = 16; }
+            }
+            catch (Exception e) { }
+            try
+            {
+                burnIn = int.Parse(historicalField.text);
+                if (burnIn < 1) { burnIn = 1; }
             }
             catch (Exception e) { }
 

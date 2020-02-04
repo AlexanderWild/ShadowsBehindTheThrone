@@ -356,6 +356,9 @@ namespace Assets.Code
             specific.seedField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.suspicionGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.powerGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.sizeXField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.sizeYField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.historicalField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
 
             specific.bEasy.onClick.AddListener(delegate { specific.setEasy(); });
             specific.bMedium.onClick.AddListener(delegate { specific.setMedium(); });
