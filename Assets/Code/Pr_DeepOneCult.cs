@@ -27,6 +27,8 @@ namespace Assets.Code
                 }
             }
 
+            if (target == null) { return; }
+
             target.currentMilitary += location.map.param.ability_fishmanCultMilRegen;
             target.temporaryThreat += location.map.param.ability_fishmanCultTempThreat;
 

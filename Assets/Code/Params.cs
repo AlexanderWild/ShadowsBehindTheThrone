@@ -14,13 +14,13 @@ namespace Assets.Code
         public int mapGen_sizeX = 32;
         public int mapGen_sizeY = 24;
         public double mapGen_proportionOfMapForHumans = 0.65;
-        public float mapGen_minHabitabilityForHumans = 0.15f;
+        public double mapGen_minHabitabilityForHumans = 0.15;
         public int mapGen_stepsPerIsland = 12;
         public int mapGen_maxBrushSize = 5;
         public int mapGen_burnInSteps = 100;
 
         public int overmind_maxPower = 24;
-        public float overmind_powerRegen = 1f;
+        public double overmind_powerRegen = 1.0;
         public bool overmind_singleAbilityPerTurn = true;
 
         public double econ_multFromBuff = 0.75;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
@@ -36,7 +36,7 @@ namespace Assets.Code
         public double combat_defensivePostureDmgMult = 0.666;
 
         public int war_defaultLength = 10;
-        public float minInformationAvailability = 0.2f;
+        public double minInformationAvailability = 0.2;
 
         public double utility_econEffect = 0.5;
         public double utility_econEffectOther = 0.20;
@@ -159,7 +159,7 @@ namespace Assets.Code
         public double trait_aware = 2;
         public double trait_charismatic = 15;
         public double trait_unlikable = -15;
-        internal double trait_hateful = -15;
+        public double trait_hateful = -15;
 
         public void loadFromFile()
         {

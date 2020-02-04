@@ -7,7 +7,7 @@ namespace Assets.Code
 {
     public class Overmind
     {
-        public float power;
+        public double power;
         public bool hasTakenAction;
 
         public List<Ability> abilities = new List<Ability>();
