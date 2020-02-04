@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Assets.Code
@@ -161,9 +163,55 @@ namespace Assets.Code
         public double trait_unlikable = -15;
         public double trait_hateful = -15;
 
+        public void saveToFile()
+        {
+            StreamWriter writer = new StreamWriter("params.txt");
+
+            FieldInfo[] fields = this.GetType().GetFields();
+            for (int i = 0; i != fields.Length; ++i)
+            {
+                writer.Write(fields[i].Name);
+                writer.Write(": ");
+                writer.WriteLine(fields[i].GetValue(this));
+            }
+
+            writer.Close();
+        }
+
         public void loadFromFile()
         {
-            //Placeholder
+            string[] fields = System.IO.File.ReadAllLines("params.txt");
+            for (int i = 0; i != fields.Length; ++i)
+            {
+                string[] parts = fields[i].Split(':');
+                if (parts.Length != 2) { continue; }
+
+                FieldInfo field = this.GetType().GetField(parts[0].Trim());
+                if (field == null) { continue; }
+
+                try
+                {
+                    if (field.FieldType == typeof(int))
+                    {
+                        int value = int.Parse(parts[1].Trim());
+                        field.SetValue(this, value);
+                    }
+                    if (field.FieldType == typeof(bool))
+                    {
+                        bool value = bool.Parse(parts[1].Trim());
+                        field.SetValue(this, value);
+                    }
+                    if (field.FieldType == typeof(double))
+                    {
+                        double value = double.Parse(parts[1].Trim());
+                        field.SetValue(this, value);
+                    }
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+            }
         }
     }
 }
