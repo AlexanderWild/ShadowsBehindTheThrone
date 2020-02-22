@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Assets.Code
 {
-    public class Ab_Soc_ProposeVote : Ability
+    public class Ab_Soc_ProposeVote: Ability
     {
         public override void cast(Map map, Hex hex)
         {

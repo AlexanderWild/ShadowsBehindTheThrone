@@ -37,6 +37,8 @@ namespace Assets.Code
         public static string separator = "";
         public bool isWindows = false;
 
+        public List<God> potentialGods = new List<God>();
+
         public static LogBox saveLog = new LogBox("saveLog.log");
 
         public void Start()
@@ -55,9 +57,14 @@ namespace Assets.Code
             {
                 ui.setToMainMenu();
             }
+
+            potentialGods.Add(new God_WintersScythe());
+            potentialGods.Add(new God_Omni());
         }
 
         public float lastFrame;
+        public God chosenGod;
+
         public void Update()
         {
             if (lastFrame == -1) {
@@ -195,7 +202,7 @@ namespace Assets.Code
 
         public void bStartGameOptions()
         {
-            prefabStore.getGameOptionsPopup();
+            ui.addBlocker(ui.world.prefabStore.getScrollSetGods(ui.world.potentialGods).gameObject);
         }
 
         public void bQuit()
@@ -206,16 +213,6 @@ namespace Assets.Code
         {
             ui.addBlocker(prefabStore.getPlayback(this, map).gameObject);
         }
-        public void bStartGameSeeded()
-        {
-            Eleven.random = new System.Random(42069);
-            startup();
-            for (int i = 0; i < map.param.mapGen_burnInSteps; i++)
-            {
-                map.turnTick();
-            }
-            ui.setToWorld();
-        }
         public void bStartGameSeeded(int seed, PopupGameOptions opts)
         {
             Eleven.random = new System.Random(seed);
@@ -224,21 +221,14 @@ namespace Assets.Code
             {
                 map.turnTick();
             }
+            map.overmind.god = chosenGod;
+            chosenGod.onStart(map);
+            chosenGod = null;//Just in case this fucks with something
             ui.setToWorld();
         }
 
         public void bContinue()
         {
-            ui.setToWorld();
-        }
-
-        public void bStartSeedlessGame()
-        {
-            startup();
-            for (int i = 0; i < map.param.mapGen_burnInSteps; i++)
-            {
-                map.turnTick();
-            }
             ui.setToWorld();
         }
 

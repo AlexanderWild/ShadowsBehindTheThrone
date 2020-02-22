@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_Fishman_Attack : Ability
+    public class Ab_Fishman_Attack: Ability
     {
         public override void cast(Map map, Hex hex)
         {

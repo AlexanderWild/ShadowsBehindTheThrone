@@ -61,6 +61,7 @@ namespace Assets.Code
         }
         public void bCancel()
         {
+            scrollables[index].onClick();
             ui.removeBlocker(this.gameObject);
         }
 

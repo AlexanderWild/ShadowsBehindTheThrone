@@ -210,6 +210,11 @@ namespace Assets.Code
                         takeLocationFromOther(sg, defender,attackTo);
                         attackTo.lastTaken = turn;
                     }
+
+                    if (sg is Society && defender is Society)
+                    {
+                        Property.addProperty(this, attackTo, "Recent Human Battle");
+                    }
                 }
             }
 

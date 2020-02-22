@@ -64,6 +64,7 @@ namespace Assets.Code
         public Sprite icon_fishman;
         public Sprite icon_eyes;
         public Sprite icon_moon;
+        public Sprite icon_fog;
 
         public Sprite icon_combat;
 
@@ -79,6 +80,7 @@ namespace Assets.Code
         public Sprite unit_fishmen;
         public Sprite unit_deadFishmen;
         public Sprite unit_army;
+        public Sprite unit_battleIcon;
         public Sprite unit_supply;
         public Sprite unit_enthralled;
         public Sprite unit_trader;

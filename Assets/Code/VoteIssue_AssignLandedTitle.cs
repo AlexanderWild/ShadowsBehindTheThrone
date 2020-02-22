@@ -109,7 +109,7 @@ namespace Assets.Code
             option.person.title_land = title;
             if (title.settlement != null)
             {
-                title.settlement.location.turnLastAssigned = title.settlement.location.map.turn;
+                title.settlement.lastAssigned = title.settlement.location.map.turn;
             }
         }
         public override bool stillValid(Map map)

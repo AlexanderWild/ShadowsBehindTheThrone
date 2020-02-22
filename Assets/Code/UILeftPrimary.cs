@@ -15,6 +15,8 @@ namespace Assets.Code
         public Text socEcon;
         public Text socThreat;
         public Text locText;
+        public Text locInfoTitle;
+        public Text locInfoBody;
         public Text body;
         public Text personTitle;
         public Text personBody;
@@ -27,6 +29,7 @@ namespace Assets.Code
         public Image bodyTextDarkener;
         public GameObject screenPerson;
         public GameObject screenSociety;
+        public GameObject screenLocation;
         public GameObject insanityDescBox;
         public GameObject[] traits;
         public GameObject[] traitDescBoxes;
@@ -40,7 +43,7 @@ namespace Assets.Code
         public Button abilityButton;
         public Text abilityButtonText;
 
-        public enum tabState { PERSON,SOCIETY};
+        public enum tabState { PERSON,SOCIETY, LOCATION};
         public tabState state = tabState.SOCIETY;
 
         public void Start()
@@ -66,6 +69,12 @@ namespace Assets.Code
         public void bSetStateSociety()
         {
             state = tabState.SOCIETY;
+            checkData();
+        }
+
+        public void bSetStateLocation()
+        {
+            state = tabState.LOCATION;
             checkData();
         }
 
@@ -151,6 +160,30 @@ namespace Assets.Code
             }
         }
 
+        public void showLocationInfo()
+        {
+            if (GraphicalMap.selectedHex == null || GraphicalMap.selectedHex.location == null)
+            {
+                locInfoTitle.text = "No location selected";
+                locInfoBody.text = "No location selected";
+            }
+            else {
+                Map map = World.staticMap;
+                Location loc = GraphicalMap.selectedHex.location;
+                locInfoTitle.text = loc.getName();
+                string bodyText = "";
+                double hab = loc.hex.getHabilitability() - map.param.mapGen_minHabitabilityForHumans;
+                hab *= 1d / (1 - map.param.mapGen_minHabitabilityForHumans);
+                bodyText += "Temperature " + (int)(loc.hex.getTemperature()*100) + "%";
+                bodyText += "\nHabilitability " + (int)(hab * 100) + "%";
+                if (loc.settlement != null && loc.settlement is Set_City)
+                {
+                    bodyText += "\n" + ((Set_City)loc.settlement).getStatsDesc();
+                }
+                locInfoBody.text = bodyText;
+            }
+        }
+
         public void setToEmpty()
         {
             profileBack.enabled = false;
@@ -224,6 +257,7 @@ namespace Assets.Code
             {
                 screenSociety.SetActive(true);
                 screenPerson.SetActive(false);
+                screenLocation.SetActive(false);
                 socTitle.text = GraphicalMap.selectedProperty.proto.name;
                 if (GraphicalMap.selectedProperty.proto.decaysOverTime)
                 {
@@ -242,6 +276,7 @@ namespace Assets.Code
             {
                 screenPerson.SetActive(true);
                 screenSociety.SetActive(false);
+                screenLocation.SetActive(false);
                 if (master.state == UIMaster.uiState.SOCIETY && GraphicalSociety.focus != null)
                 {
                     Person p = GraphicalSociety.focus;
@@ -257,9 +292,17 @@ namespace Assets.Code
                     setToEmpty();
                 }
             }
+            else if (state == tabState.LOCATION)
+            {
+                screenPerson.SetActive(false);
+                screenLocation.SetActive(true);
+                screenSociety.SetActive(false);
+                showLocationInfo();
+            }
             else if (state == tabState.SOCIETY)
             {
                 screenPerson.SetActive(false);
+                screenLocation.SetActive(false);
                 screenSociety.SetActive(true);
                 if (hex == null)
                 {

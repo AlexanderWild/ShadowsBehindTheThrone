@@ -81,6 +81,32 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().goInsane();
                 }
+                if (command == "hot")
+                {
+                    for (int i = 0; i < map.tempMap.Length; i++)
+                    {
+                        for (int j = 0; j < map.tempMap[0].Length; j++)
+                        {
+                            map.tempMap[i][j] += 0.1f;
+                            if (map.tempMap[i][j] > 1) { map.tempMap[i][j] = 1; }
+                        }
+                    }
+                    map.assignTerrainFromClimate();
+                    map.world.ui.checkData();
+                }
+                if (command == "cold")
+                {
+                    for (int i = 0; i < map.tempMap.Length; i++)
+                    {
+                        for (int j = 0; j < map.tempMap[0].Length; j++)
+                        {
+                            map.tempMap[i][j] -= 0.1f;
+                            if (map.tempMap[i][j] < 0) { map.tempMap[i][j] = 0; }
+                        }
+                    }
+                    map.assignTerrainFromClimate();
+                    map.world.ui.checkData();
+                }
                 if (command == "min sanity")
                 {
                     GraphicalMap.selectedHex.location.person().sanity = 0.01;

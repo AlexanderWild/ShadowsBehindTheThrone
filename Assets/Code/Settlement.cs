@@ -19,7 +19,7 @@ namespace Assets.Code
         public double defensiveStrengthCurrent = 0;
         public double defensiveStrengthMax;
         public bool isHuman = false;//Mainly used to determine whether it can be maintained by a human society
-
+        public int lastAssigned = -1;
 
         public Settlement(Location loc)
         {
@@ -96,6 +96,22 @@ namespace Assets.Code
         public virtual Sprite getSprite()
         {
             return location.map.world.textureStore.loc_green;
+        }
+
+        public virtual void fallIntoRuin()
+        {
+            //We're abandonning this location due to inhospitability
+            if (title.heldBy != null && title.heldBy.title_land == title)
+            {
+                location.map.addMessage(title.heldBy.getFullName() + " is losing their title, as " + this.name + " is being abandoned.",
+                    title.heldBy.state == Person.personState.enthralled ? MsgEvent.LEVEL_RED : MsgEvent.LEVEL_ORANGE,
+                    title.heldBy.state == Person.personState.enthralled ? false : true);
+                title.heldBy.title_land = null;
+            }
+            location.map.addMessage(this.name + " is no longer able to sustain human life, and is falling into ruin.");
+            Set_Ruins ruins = new Set_Ruins(location);
+            location.settlement = ruins;
+            location.settlement.name = "Ruins of " + location.shortName;
         }
     }
 }

@@ -63,6 +63,8 @@ namespace Assets.Code
         public List<float[]> terrainPositions = new List<float[]>();
         public List<Hex.terrainType> terrainTypes = new List<Hex.terrainType>();
 
+        public float globalTemporaryTempDelta = 0;
+
 
         public void loadGenerators()
         {
@@ -979,19 +981,11 @@ namespace Assets.Code
         public void assignTerrain(int x, int y)
         {
             if (!landmass[x][y]) { grid[x][y].terrain = Hex.terrainType.SEA; return; }
-
-            ////Temporary, for now
-            //if (cityPlacementMap[x,y] > 0.9) { grid[x, y].terrain = Hex.terrainType.MOUNTAIN;return; }
-
+            
             //Humidity and temp form a 2D grid with a centre at (0.5,0.5)
-            float temp = tempMap[x][y];
+            float temp = grid[x][y].getTemperature();
             float wet = humidityMap[x][y];
-
-            ////Don't delete forests without good reason, they're no-regenerable
-            //if (grid[x][ y].terrain == Hex.terrainType.FOREST && grid[x][ y].settlement == null)
-            //{
-            //    if (temp > 0.05 && temp < 0.8 && wet > 0.2 && wet < 0.8) { return; }
-            //}
+            
 
             float minDist = -1;
             for (int i = 0; i < terrainPositions.Count; i++)

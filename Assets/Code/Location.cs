@@ -30,7 +30,7 @@ namespace Assets.Code
         public int lastTaken;
         public SavableMap_SG_Double information = new SavableMap_SG_Double();
         public int debugVal;
-        public int turnLastAssigned;
+        //public int turnLastAssigned;
         public Province province;
 
         public Location(Map map, Hex hex,bool isMajor)

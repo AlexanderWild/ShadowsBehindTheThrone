@@ -11,5 +11,6 @@ namespace Assets.Code
         string getTitle();
         string getBody();
         void setTargetX(float y);
+        void onClick();
     }
 }

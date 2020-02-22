@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_UnholyFlesh_Screetching : Ability
+    public class Ab_UnholyFlesh_Screetching: Ability
     {
         public override void cast(Map map, Hex hex)
         {

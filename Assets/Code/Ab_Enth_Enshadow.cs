@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_Enth_Enshadow : Ability
+    public class Ab_Enth_Enshadow: Ability
     {
         public override void cast(Map map, Hex hex)
         {

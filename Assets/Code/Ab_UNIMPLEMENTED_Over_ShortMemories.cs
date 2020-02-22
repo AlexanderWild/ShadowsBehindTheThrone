@@ -2,7 +2,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_UNIMPLEMENTED_Over_ShortMemories : Ability
+    public class Ab_UNIMPLEMENTED_Over_ShortMemories: Ability
     {
         public override void cast(Map map, Hex hex)
         {

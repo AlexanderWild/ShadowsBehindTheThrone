@@ -41,6 +41,8 @@ namespace Assets.Code
         public GameObject xBoxDate;
         public GameObject xBoxThreat;
         public GameObject xScrollSet;
+        public GameObject xScrollSetGods;
+        public GameObject xBoxGodSelect;
         public GameObject boxInvite;
         public GameObject activityBox;
         public GameObject actChain1;
@@ -110,6 +112,17 @@ namespace Assets.Code
             return Instantiate(prefabHexEdge2Sprite) as GameObject;
         }
 
+        private PopupXScroll getInnerXScrollSetGods()
+        {
+            GameObject obj = Instantiate(xScrollSetGods) as GameObject;
+            PopupXScroll specific = obj.GetComponent<PopupXScroll>();
+            if (specific == null) { World.log("Unable to find scrip subobject"); }
+            specific.ui = world.ui;
+            specific.next.onClick.AddListener(delegate { specific.bNext(); });
+            specific.prev.onClick.AddListener(delegate { specific.bPrev(); });
+            specific.cancel.onClick.AddListener(delegate { specific.bCancel(); });
+            return specific;
+        }
         private PopupXScroll getInnerXScrollSet()
         {
             GameObject obj = Instantiate(xScrollSet) as GameObject;
@@ -165,6 +178,20 @@ namespace Assets.Code
             return specific;
         }
 
+        public PopupXScroll getScrollSetGods(List<God> gods)
+        {
+            PopupXScroll specific = getInnerXScrollSetGods();
+
+            foreach (God item in gods)
+            {
+                PopupXBoxGodSelectMsg box = getGodBox(item);
+                box.gameObject.transform.SetParent(specific.gameObject.transform);
+                box.ui = world.ui;
+                specific.scrollables.Add(box);
+            }
+
+            return specific;
+        }
         public PopupXScroll getScrollSetVotes(Person p, VoteIssue vi)
         {
             PopupXScroll specific = getInnerXScrollSet();
@@ -179,6 +206,14 @@ namespace Assets.Code
             return specific;
         }
 
+        public PopupXBoxGodSelectMsg getGodBox(God item)
+        {
+            GameObject obj = Instantiate(xBoxGodSelect) as GameObject;
+            PopupXBoxGodSelectMsg specific = obj.GetComponent<PopupXBoxGodSelectMsg>();
+            specific.setTo(item);
+
+            return specific;
+        }
         public PopupXBoxThreat getThreatBox(ThreatItem item)
         {
             GameObject obj = Instantiate(xBoxThreat) as GameObject;

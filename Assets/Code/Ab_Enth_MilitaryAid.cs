@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_Enth_MiliaryAid : Ability
+    public class Ab_Enth_MiliaryAid: Ability
     {
         public override void cast(Map map, Hex hex)
         {

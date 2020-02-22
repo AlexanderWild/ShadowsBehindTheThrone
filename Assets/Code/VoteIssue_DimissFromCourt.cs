@@ -43,7 +43,7 @@ namespace Assets.Code
             society.map.turnMessages.Add(new MsgEvent(society.getName() + " has voted to dismiss " + target.getFullName() + " from court.", MsgEvent.LEVEL_RED, isGood));
 
             World.log("Dismiss from court");
-            World.staticMap.world.prefabStore.popMsg("Dismiss from court " + option.person.getFullName());
+            //World.staticMap.world.prefabStore.popMsg("Dismiss from court " + option.person.getFullName());
             option.person.removeFromGame("Dismissed from court");
         }
         public override bool stillValid(Map map)

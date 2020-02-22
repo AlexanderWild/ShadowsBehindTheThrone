@@ -20,6 +20,7 @@ namespace Assets.Code
         public int mapGen_stepsPerIsland = 12;
         public int mapGen_maxBrushSize = 5;
         public int mapGen_burnInSteps = 100;
+        public float map_tempTemperatureReversion = 0.002f;
 
         public int overmind_maxPower = 24;
         public double overmind_powerRegen = 1.0;
@@ -34,10 +35,10 @@ namespace Assets.Code
         public double combat_thresholdAttackStrength = 0.25;
         public double combat_lethality = 0.5;//How much of an army is destroyed in a battle at maximum roll against an equivalent force
         public double combat_takeLandThreshold = 1.25;//How much over their strength do you have to be to take some land
-        public double combat_maxMilitaryCapExponent = 0.75;//Used to reduce the power of larger nations
+        public double combat_maxMilitaryCapExponent = 0.82;//Used to reduce the power of larger nations
         public double combat_defensivePostureDmgMult = 0.666;
 
-        public int war_defaultLength = 10;
+        public int war_defaultLength = 16;
         public double minInformationAvailability = 0.2;
 
         public double utility_econEffect = 0.5;
@@ -150,6 +151,9 @@ namespace Assets.Code
         public int ability_auraOfLunacyCost = 7;
         public int ability_fishmanHauntingSongCost = 4;
         public int ability_fishmanHauntingSongHit = 7;
+        public double ability_provincialSentimentLikingChangePositive = 10;
+        public double ability_provincialSentimentLikingChangeNegative = -20;
+        public int ability_provincialSentimentLikingChangeCooldown = 20;
 
         public double insanity_sanityRegen = 0.5;
         public int insanity_nParanoiaTargets = 4;
@@ -162,6 +166,22 @@ namespace Assets.Code
         public double trait_charismatic = 15;
         public double trait_unlikable = -15;
         public double trait_hateful = -15;
+
+        public double city_popMaxPerHabilitability = 100;
+        public double city_popDmg = 5;
+        public double city_infraDmg = 5;
+
+        public int city_level_metropole = 90;
+        public int city_level_city = 60;
+        public int city_level_town = 40;
+        public int city_level_village = 20;
+        public int society_billsBetweenLandAssignments = 3;
+
+        public int war_battleDeadDur = 4;
+        public double ability_coldAsDeathTempChange = -0.15;
+        public double ability_deathOfTheSunTempChange = -0.003;
+        public int ability_coldAsDeathCost = 10;
+        public int ability_deathOfTheSunCost = 10;
 
         public void saveToFile()
         {

@@ -15,6 +15,8 @@ namespace Assets.Code
         public float targetX;
         public string body = "";
 
+        public void onClick() { }
+
         public void Update()
         {
             Vector3 loc = new Vector3(targetX,mover.transform.position.y,  mover.transform.position.z);

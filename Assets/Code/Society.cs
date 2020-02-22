@@ -25,6 +25,7 @@ namespace Assets.Code
         public List<Zeit> zeits = new List<Zeit>();
         public Location capital;
 
+        public int billsSinceLastSettlementAssignment;
         public int instabilityTurns;
         public double data_loyalLordsCap;
         public double data_rebelLordsCap;
@@ -421,7 +422,10 @@ namespace Assets.Code
                         {
                             if (loc.settlement != null)
                             {
-                                loc.settlement = null;
+                                if (loc.settlement.isHuman)
+                                {
+                                    loc.settlement.fallIntoRuin();
+                                }
                             }
                             loc.soc = null;
                         }
@@ -615,6 +619,14 @@ namespace Assets.Code
                 }
 
                 voteSession.issue.implement(winner);
+                if (voteSession.issue is VoteIssue_AssignLandedTitle == false)
+                {
+                    billsSinceLastSettlementAssignment += 1;
+                }
+                else
+                {
+                    billsSinceLastSettlementAssignment = 0;
+                }
                 voteSession = null;
             }
         }

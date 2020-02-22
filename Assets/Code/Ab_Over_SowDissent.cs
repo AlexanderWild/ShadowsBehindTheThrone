@@ -4,7 +4,7 @@ using System;
 
 namespace Assets.Code
 {
-    public class Ab_Over_SowDissent : Ability
+    public class Ab_Over_SowDissent: Ability
     {
         public override void cast(Map map, Hex hex)
         {

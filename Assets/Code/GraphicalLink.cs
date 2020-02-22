@@ -28,8 +28,8 @@ namespace Assets.Code
             lineRenderer.SetPositions(points);
 
 
-            lineRenderer.startColor = Color.white;
-            lineRenderer.endColor = Color.white;
+            lineRenderer.startColor = Color.gray;
+            lineRenderer.endColor = Color.gray;
             combatIcon.sprite = null;
             if (link.a.soc != null && link.b.soc != null)
             {

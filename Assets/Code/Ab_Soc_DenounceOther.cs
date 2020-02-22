@@ -4,7 +4,7 @@ using System;
 
 namespace Assets.Code
 {
-    public class Ab_Soc_DenounceOther : Ability
+    public class Ab_Soc_DenounceOther: Ability
     {
         public override void cast(Map map, Hex hex)
         {

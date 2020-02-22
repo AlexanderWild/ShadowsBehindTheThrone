@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_UnholyFlesh_Defend : Ability
+    public class Ab_UnholyFlesh_Defend: Ability
     {
         public override void cast(Map map, Hex hex)
         {

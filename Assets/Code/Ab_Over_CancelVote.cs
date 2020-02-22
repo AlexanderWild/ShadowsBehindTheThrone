@@ -4,7 +4,7 @@ using System;
 
 namespace Assets.Code
 {
-    public class Ab_Over_CancelVote : Ability
+    public class Ab_Over_CancelVote: Ability
     {
         public override void cast(Map map, Hex hex)
         {

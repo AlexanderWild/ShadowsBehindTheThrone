@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_Enth_TrustingFool : Ability
+    public class Ab_Enth_TrustingFool: Ability
     {
         public override void cast(Map map, Hex hex)
         {

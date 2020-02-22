@@ -77,6 +77,22 @@ namespace Assets.Code
 
             if (society.getSovreign() != null)
             {
+                int oldestAssignment = 100000000;
+                Location bestAssignable = null;
+                if (society.billsSinceLastSettlementAssignment > map.param.society_billsBetweenLandAssignments)
+                {
+                    foreach (Location loc in map.locations)
+                    {
+                        if (loc.soc == this.society && loc.settlement != null && loc.settlement.title != null)
+                        {
+                            if (loc.settlement.lastAssigned < oldestAssignment)
+                            {
+                                oldestAssignment = loc.settlement.lastAssigned;
+                                bestAssignable = loc;
+                            }
+                        }
+                    }
+                }
                 foreach (Location loc in map.locations)
                 {
                     //If there are unhanded out titles, only consider those. Else, check all.
@@ -84,7 +100,8 @@ namespace Assets.Code
                     //if (loc.soc == society && loc.settlement != null && loc.settlement.title != null && ((!existFreeTitles) || (loc.settlement.title.heldBy == null)))
 
                     //We're now stopping them suggesting this on places with existing nobles, as that lead to undue amounts of swapping
-                    if (loc.soc == society && loc.settlement != null && loc.settlement.title != null && (loc.settlement.title.heldBy == null))
+                    //  *now ammended to allow a single swap every N bills, AND it must be the last swapped one
+                    if (loc.soc == society && loc.settlement != null && loc.settlement.title != null && (loc.settlement.title.heldBy == null || loc == bestAssignable))
                     {
                         //if (map.turn - loc.turnLastAssigned  < Params.society_minTimeBetweenLocReassignments) { continue; }
                         issue = new VoteIssue_AssignLandedTitle(society, this, loc.settlement.title);

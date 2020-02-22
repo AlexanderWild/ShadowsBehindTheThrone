@@ -12,6 +12,7 @@ namespace Assets.Code
 
         public List<Ability> abilities = new List<Ability>();
         public List<Ability> powers = new List<Ability>();
+        public God god;
         public Map map;
         public Person enthralled;
         public bool victoryAchieved = false;
@@ -19,23 +20,15 @@ namespace Assets.Code
         public Overmind(Map map)
         {
             this.map = map;
+
             powers.Add(new Ab_Enth_Enthrall());
             powers.Add(new Ab_Enth_DarkEmpire());
             //abilities.Add(new Ab_TestAddShadow());
-            powers.Add(new Ab_Fishman_Lair());
-            powers.Add(new Ab_Fishman_CultOfTheDeep());
-            //powers.Add(new Ab_Fishman_Call());
-            powers.Add(new Ab_Fishman_Attack());
-            powers.Add(new Ab_Fishman_HauntingSong());
+
             powers.Add(new Ab_Enth_MiliaryAid());
             powers.Add(new Ab_Enth_TrustingFool());
             powers.Add(new Ab_Enth_Enshadow());
             powers.Add(new Ab_Enth_Apoptosis());
-            powers.Add(new Ab_UnholyFlesh_Seed());
-            powers.Add(new Ab_UnholyFlesh_Screetching());
-            powers.Add(new Ab_UnholyFlesh_Attack());
-            powers.Add(new Ab_UnholyFlesh_Defend());
-            powers.Add(new Ab_UnholyFlesh_Grow());
             powers.Add(new Ab_Over_CancelVote());
             powers.Add(new Ab_Over_InformationBlackout());
             powers.Add(new Ab_Over_SowDissent());
@@ -51,6 +44,7 @@ namespace Assets.Code
             abilities.Add(new Ab_Soc_BoycottVote());
             abilities.Add(new Ab_Soc_Fearmonger());
             abilities.Add(new Ab_Soc_DenounceOther());
+            abilities.Add(new Ab_Soc_ProvincialSentiments());
             abilities.Add(new Ab_Soc_SwitchVote());
             abilities.Add(new Ab_Soc_ShareTruth());
         }

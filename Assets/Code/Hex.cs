@@ -25,10 +25,8 @@ namespace Assets.Code
         public float civilianDead;
         public int lastCombatDeath = -1;
         public float purity = 1;
-        public double traffic;
 
-        public float param_deadDecay = 0.96f;
-        public double param_trafficDecay = 0.995;
+        public float temporaryTempDelta = 0;
 
         public float tX;
         public float tY;
@@ -82,11 +80,21 @@ namespace Assets.Code
             return reply;
         }
 
+        public float getTemperature()
+        {
+            float temp = map.tempMap[x][y];
+
+            temp += temporaryTempDelta;
+            temp += map.globalTemporaryTempDelta;
+            if (temp < 0) { temp = 0; }
+            if (temp > 1) { temp = 1; }
+            return temp;
+        }
         public float getHabilitability()
         {
             if (terrain == terrainType.MOUNTAIN) { return 0; }
 
-            float basic = map.tempMap[x][ y] - 0.5f;//Now 0.5f to -0.5f
+            float basic = getTemperature() - 0.5f;//Now 0.5f to -0.5f
             basic *= 2;//-1 to 1
             float dist = Math.Abs(basic);//1 to 1
             dist /= 0.8f;
@@ -117,6 +125,17 @@ namespace Assets.Code
                 }
                 newPurity /= neighbours.Count;
                 purity = (purity + newPurity) / 2;
+            }
+            if (Math.Abs(temporaryTempDelta) < map.param.map_tempTemperatureReversion)
+            {
+                temporaryTempDelta = 0;
+            }else if (temporaryTempDelta > 0)
+            {
+                temporaryTempDelta -= map.param.map_tempTemperatureReversion;
+            }
+            else
+            {
+                temporaryTempDelta += map.param.map_tempTemperatureReversion;
             }
         }
 
