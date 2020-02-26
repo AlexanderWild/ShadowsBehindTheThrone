@@ -12,6 +12,7 @@ namespace Assets.Code
         public Text textTitle;
         public Text textBody;
         public Text textFlavour;
+        public Text textAbilities;
         public Image img;
         public UIMaster ui;
         public God god;
@@ -62,6 +63,18 @@ namespace Assets.Code
             textTitle.text = item.getName();
             textFlavour.text = item.getDescFlavour();
             textBody.text = item.getDescMechanics();
+
+            if (item is God_Omni)
+            {
+                textAbilities.text = "This dark god has access to all abilities.";
+            }
+            else
+            {
+                foreach (Ability a in item.getUniquePowers())
+                {
+                    textAbilities.text += "-" + a.getName() + "\n";
+                }
+            }
         }
     }
 }

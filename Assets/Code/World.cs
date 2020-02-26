@@ -59,6 +59,7 @@ namespace Assets.Code
             }
 
             potentialGods.Add(new God_WintersScythe());
+            potentialGods.Add(new God_Creatures());
             potentialGods.Add(new God_Omni());
         }
 

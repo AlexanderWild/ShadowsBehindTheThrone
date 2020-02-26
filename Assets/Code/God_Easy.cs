@@ -5,8 +5,16 @@ using System.Text;
 
 namespace Assets.Code
 {
-    public class God_Omni : God
+    public class God_Easy : God
     {
+        public List<Ability> powers = new List<Ability>();
+
+        public God_Easy()
+        {
+            powers.Add(new Ab_Fishman_Lair());
+        }
+
+
         public override string getDescFlavour()
         {
             return "Flavour here";
@@ -14,25 +22,17 @@ namespace Assets.Code
 
         public override string getDescMechanics()
         {
-            return "mechanics here";
+            return "God designed to be a simpler playstyle.";
         }
 
         public override string getName()
         {
-            return "Omnipresent Darkness";
+            return "TMP Easy";
         }
 
         public override List<Ability> getUniquePowers()
         {
-            return new List<Ability>();
-        }
-
-        public override void onStart(Map map)
-        {
-            foreach (God g in map.world.potentialGods)
-            {
-                map.overmind.powers.AddRange(g.getUniquePowers());
-            }
+            return powers;
         }
     }
 }

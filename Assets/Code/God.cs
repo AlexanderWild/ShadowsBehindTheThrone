@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Assets.Code
@@ -8,6 +9,11 @@ namespace Assets.Code
         public abstract string getName();
         public abstract string getDescMechanics();
         public abstract string getDescFlavour();
-        public abstract void onStart(Map map);
+        public abstract List<Ability> getUniquePowers();
+
+        public virtual void onStart(Map map)
+        {
+            map.overmind.powers.AddRange(this.getUniquePowers());
+        }
     }
 }

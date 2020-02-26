@@ -7,6 +7,15 @@ namespace Assets.Code
 {
     public class God_WintersScythe : God
     {
+        public List<Ability> powers = new List<Ability>();
+
+        public God_WintersScythe()
+        {
+            powers.Add(new Ab_Ice_DeathOfTheSun());
+            powers.Add(new Ab_Ice_ColdAsDeath());
+        }
+
+
         public override string getDescFlavour()
         {
             return "Flavour here";
@@ -25,10 +34,9 @@ namespace Assets.Code
             return "Winter's Scythe";
         }
 
-        public override void onStart(Map map)
+        public override List<Ability> getUniquePowers()
         {
-            map.overmind.powers.Add(new Ab_Ice_DeathOfTheSun());
-            map.overmind.powers.Add(new Ab_Ice_ColdAsDeath());
+            return powers;
         }
     }
 }
