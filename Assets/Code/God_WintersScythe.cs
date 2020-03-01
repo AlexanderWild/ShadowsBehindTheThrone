@@ -24,7 +24,7 @@ namespace Assets.Code
 
         public override string getDescMechanics()
         {
-            return "This Dark God revolves around the provocation of constant war to destroy the world's climate. Each battle between human forces can be exploited to slightly reduce the world's temperature," +
+            return "This Dark Name revolves around the provocation of constant war to destroy the world's climate. Each battle between human forces can be exploited to slightly reduce the world's temperature," +
                 " either in a region or worldwide. Slowly the farmlands in the north will become uninhabitable, and the people forced south, into the ever-dwindling habitable regions, until those too are overrun with the snows."
                 + "\nYour strategy should be to cause wars regardless of purpose. Inducing civil wars in kingdoms across the map gives death to use, declaring war of conquest on your neighbours can lead to the entire world suffering, " +
                 "and even uprisings against you will fuel your victory.";

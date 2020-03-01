@@ -114,6 +114,7 @@ namespace Assets.Code
         public int ability_switchVoteLikingCost = 20;
         public double ability_shareEvidencePercentage = 0.75;
         public int ability_enshadowCost = 4;
+        public int ability_reduceEvidenceCost = 10;
         public int ability_militaryAidDur = 20;
         public int ability_militaryAidAmount = 5;
         public int ability_militaryAidCost = 2;
@@ -147,6 +148,7 @@ namespace Assets.Code
         public int ability_sharedGloryLikingGain = 8;
         public int ability_addLikingAmount = 20;
         public int ability_addLikingCost = 5;
+        public int ability_reduceSuspicionCost = 5;
         public int ability_sharedGloryAmount = 5;
         public int ability_auraOfLunacyEvidence = 14;
         public int ability_auraOfLunacyHit = 7;
