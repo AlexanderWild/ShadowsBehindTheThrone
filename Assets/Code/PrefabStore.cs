@@ -210,7 +210,7 @@ namespace Assets.Code
         {
             GameObject obj = Instantiate(xBoxGodSelect) as GameObject;
             PopupXBoxGodSelectMsg specific = obj.GetComponent<PopupXBoxGodSelectMsg>();
-            specific.setTo(item);
+            specific.setTo(ui.world,item);
 
             return specific;
         }

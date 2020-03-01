@@ -13,6 +13,7 @@ namespace Assets.Code
         public Text textBody;
         public Text textFlavour;
         public Text textAbilities;
+        public Text textCredits;
         public Image img;
         public UIMaster ui;
         public God god;
@@ -57,12 +58,14 @@ namespace Assets.Code
             return 1366;
         }
 
-        internal void setTo(God item)
+        internal void setTo(World world,God item)
         {
             god = item;
             textTitle.text = item.getName();
             textFlavour.text = item.getDescFlavour();
             textBody.text = item.getDescMechanics();
+            img.sprite = item.getGodBackground(world);
+            textCredits.text = item.getCredits();
 
             if (item is God_Omni)
             {

@@ -11,7 +11,8 @@ namespace Assets.Code
 
         public God_Easy()
         {
-            powers.Add(new Ab_Fishman_Lair());
+            powers.Add(new Ab_Easy_AddLiking());
+            powers.Add(new Ab_Easy_ShortMemories());
         }
 
 

@@ -124,7 +124,7 @@ namespace Assets.Code
         public int ability_fishmanCultOfTheDeep = 7;
         public int ability_boycottVoteCost = 15;
         public int ability_cancelVoteCost = 10;
-        public int ability_shortMemories = 5;
+        public int ability_shortMemoriesCost = 5;
         public double society_pExpandIntoEmpty = 0.1;
         public double temporaryThreatConversion = 0.01;
         public int ability_fleshScreamThreatAdd = 10;
@@ -145,6 +145,8 @@ namespace Assets.Code
         public int ability_darkEmpireCost = 12;
         public double ability_darkEmpireThreatMultGain = 0.5;
         public int ability_sharedGloryLikingGain = 8;
+        public int ability_addLikingAmount = 20;
+        public int ability_addLikingCost = 5;
         public int ability_sharedGloryAmount = 5;
         public int ability_auraOfLunacyEvidence = 14;
         public int ability_auraOfLunacyHit = 7;

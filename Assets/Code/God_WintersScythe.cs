@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Code
 {
@@ -37,6 +38,14 @@ namespace Assets.Code
         public override List<Ability> getUniquePowers()
         {
             return powers;
+        }
+        public override Sprite getGodBackground(World world)
+        {
+            return world.textureStore.painting_monasteryRuins;
+        }
+        public override string getCredits()
+        {
+            return "Ruins of the Oybin Monastery in Winter, by Karl Heinrich Beichling, 1830";
         }
     }
 }

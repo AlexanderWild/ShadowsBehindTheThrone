@@ -58,6 +58,7 @@ namespace Assets.Code
                 ui.setToMainMenu();
             }
 
+            potentialGods.Add(new God_Easy());
             potentialGods.Add(new God_WintersScythe());
             potentialGods.Add(new God_Creatures());
             potentialGods.Add(new God_Omni());

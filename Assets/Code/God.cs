@@ -15,5 +15,14 @@ namespace Assets.Code
         {
             map.overmind.powers.AddRange(this.getUniquePowers());
         }
+
+        public virtual Sprite getGodBackground(World world)
+        {
+            return world.textureStore.painting_nightMoon;
+        }
+        public virtual string getCredits()
+        {
+            return "Moonlit Landscape with a View of the New Amstel River and Castle Kostverloren, Aert van der Neer, 1647";
+        }
     }
 }

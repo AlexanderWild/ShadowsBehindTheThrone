@@ -2,7 +2,7 @@
 
 namespace Assets.Code
 {
-    public class Ab_UNIMPLEMENTED_Over_ShortMemories: Ability
+    public class Ab_Easy_ShortMemories: Ability
     {
         public override void cast(Map map, Hex hex)
         {
@@ -27,7 +27,7 @@ namespace Assets.Code
         
         public override int getCost()
         {
-            return World.staticMap.param.ability_cancelVoteCost;
+            return World.staticMap.param.ability_shortMemoriesCost;
         }
 
         public override string getDesc()

@@ -103,6 +103,10 @@ namespace Assets.Code
 
         public Sprite cloud_plague;
 
+        public Sprite painting_nightMoon;
+        public Sprite painting_monasteryRuins;
+
+
         public Dictionary<string, Sprite> sprites;
         public Dictionary<string, Sprite> images;
         public List<Sprite> layerFore = new List<Sprite>();
