@@ -13,7 +13,22 @@ namespace Assets.Code
 
         public virtual void onStart(Map map)
         {
-            map.overmind.powers.AddRange(this.getUniquePowers());
+            List<Ability> powers = new List<Ability>();
+            List<Ability> powersPostfix = new List<Ability>();
+            foreach (Ability a in map.overmind.powers)
+            {
+                if (a is Ab_Enth_Enthrall)
+                {
+                    powers.Add(a);
+                }
+                else
+                {
+                    powersPostfix.Add(a);
+                }
+            }
+            powers.AddRange(this.getUniquePowers());
+            powers.AddRange(powersPostfix);
+            map.overmind.powers = powers;
         }
 
         public virtual Sprite getGodBackground(World world)
