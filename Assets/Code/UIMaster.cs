@@ -337,7 +337,7 @@ namespace Assets.Code
             uiScrollables.gameObject.SetActive(false);
             uiMidTop.gameObject.SetActive(false);
             hexSelector.SetActive(false);
-            
+
 
             if (World.staticMap != null)
             {

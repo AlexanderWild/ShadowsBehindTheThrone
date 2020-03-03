@@ -406,7 +406,7 @@ namespace Assets.Code
                     map.world = null;
                     map = null;
                 }
-                
+
                 string serializedState = File.ReadAllText(filename);
                 fsSerializer _serializer = new fsSerializer();
                 fsData data = fsJsonParser.Parse(serializedState);
