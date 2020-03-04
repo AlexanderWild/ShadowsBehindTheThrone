@@ -5,16 +5,12 @@ using System.Text;
 
 namespace Assets.Code
 {
-    public class God_Creatures : God
+    public class God_Flesh : God
     {
         public List<Ability> powers = new List<Ability>();
 
-        public God_Creatures()
+        public God_Flesh()
         {
-            powers.Add(new Ab_Fishman_Lair());
-            powers.Add(new Ab_Fishman_CultOfTheDeep());
-            powers.Add(new Ab_Fishman_Attack());
-            powers.Add(new Ab_Fishman_HauntingSong());
             powers.Add(new Ab_UnholyFlesh_Seed());
             powers.Add(new Ab_UnholyFlesh_Screetching());
             powers.Add(new Ab_UnholyFlesh_Attack());
@@ -35,7 +31,7 @@ namespace Assets.Code
 
         public override string getName()
         {
-            return "TMP Creatures";
+            return "Fleshgod";
         }
 
         public override List<Ability> getUniquePowers()

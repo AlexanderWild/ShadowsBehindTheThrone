@@ -19,7 +19,9 @@ namespace Assets.Code
 
         public override string getDescFlavour()
         {
-            return "Flavour here";
+            return "It was always humanity's violence which would doom it. Human history is the history of warfare, waged pointlessly between leaders who sent tens of thousands to die for a cause they would never profit from," +
+                "and had no connection to. The peasants die for the games of the nobles."
+                + "\n\nEach senseless death kills not just the soldiers, but the world itself, slowly sapping the life out of the world, as the battles rage. The world grows colder with every sword blow struck, as Winter's Scythe reaps the misery, sorrow and fear.";
         }
 
         public override string getDescMechanics()
