@@ -42,6 +42,7 @@ namespace Assets.Code
         public Sprite loc_green;
         public Sprite loc_city_roman;
         public Sprite loc_city_light;
+        public Sprite loc_city_metropole;
         public Sprite loc_minor_green;
         public Sprite loc_minor_emptyGrass;
         public Sprite loc_minor_emptySnow;

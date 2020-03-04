@@ -159,7 +159,11 @@ namespace Assets.Code
 
         public override Sprite getSprite()
         {
-            if (getLevel() >= LEVEL_CITY)
+            if (getLevel() >= LEVEL_METROPOLE)
+            {
+                return location.map.world.textureStore.loc_city_metropole;
+            }
+            else if (getLevel() >= LEVEL_CITY)
             {
                 return location.map.world.textureStore.loc_city_roman;
             }
