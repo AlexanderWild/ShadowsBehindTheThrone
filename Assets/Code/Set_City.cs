@@ -181,12 +181,24 @@ namespace Assets.Code
         internal string getStatsDesc()
         {
             string reply = "";
-            reply += "Population Level:  " + Eleven.toFixedLen(population,12);
-            reply += "\nPopulation Maximum:" + Eleven.toFixedLen(getMaxPopulation(), 6);
-            reply += "\nInfrastructure:    " + Eleven.toFixedLen(infrastructure,16);
-            reply += "\nDevelopment Level: " + Eleven.toFixedLen(getLevel(), 9);
+            reply += "Population Level:";
+            reply += "\nPopulation Maximum:";
+            reply += "\nInfrastructure:";
+            //reply += "\nDevelopment Level: " + Eleven.toFixedLen(getLevel(), 9);
 
             return reply;
+        }
+
+        public string getStatsValues()
+        {
+            string reply = "";
+            reply += population;
+            reply += "\n" + getMaxPopulation();
+            reply += "\n" + infrastructure;
+            //reply += "\nDevelopment Level: " + Eleven.toFixedLen(getLevel(), 9);
+
+            return reply;
+
         }
     }
 }

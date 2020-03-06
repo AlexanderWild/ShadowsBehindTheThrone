@@ -17,6 +17,8 @@ namespace Assets.Code
         public Text locText;
         public Text locInfoTitle;
         public Text locInfoBody;
+        public Text locNumsBody;
+        public Text locNumsNumbers;
         public Text body;
         public Text personTitle;
         public Text personBody;
@@ -166,20 +168,61 @@ namespace Assets.Code
             {
                 locInfoTitle.text = "No location selected";
                 locInfoBody.text = "No location selected";
+                locNumsBody.text = "";
+                locNumsNumbers.text = "";
             }
-            else {
+            else
+            {
                 Map map = World.staticMap;
                 Location loc = GraphicalMap.selectedHex.location;
                 locInfoTitle.text = loc.getName();
                 string bodyText = "";
                 double hab = loc.hex.getHabilitability() - map.param.mapGen_minHabitabilityForHumans;
                 hab *= 1d / (1 - map.param.mapGen_minHabitabilityForHumans);
-                bodyText += "Temperature " + (int)(loc.hex.getTemperature()*100) + "%";
-                bodyText += "\nHabilitability " + (int)(hab * 100) + "%";
+
+
+                string valuesBody = "Temperature ";
+                string valuesNumbers = (int)(loc.hex.getTemperature() * 100) + "%";
+                valuesBody += "\nHabilitability ";
+                valuesNumbers += "\n" + (int)(hab * 100) + "%";
+
                 if (loc.settlement != null && loc.settlement is Set_City)
                 {
-                    bodyText += "\n" + ((Set_City)loc.settlement).getStatsDesc();
+                    valuesBody += "\n" + ((Set_City)loc.settlement).getStatsDesc();
+                    valuesNumbers += "\n" + ((Set_City)loc.settlement).getStatsValues();
                 }
+
+                Hex hex = loc.hex;
+                bodyText += "\nProvince: " + hex.province.name;
+                foreach (EconTrait t in hex.province.econTraits)
+                {
+                    bodyText += "\nIndustry: " + t.name;
+                }
+
+                if (hex.location != null)
+                {
+                    if (hex.location.settlement != null)
+                    {
+                        if (hex.location.settlement.title != null)
+                        {
+                            if (hex.location.settlement.title.heldBy != null)
+                            {
+                                bodyText += "\nTitle held by: " + hex.location.settlement.title.heldBy.getFullName();
+                            }
+                            else
+                            {
+                                bodyText += "\nTitle currently unheld";
+
+                            }
+                        }
+                        valuesBody += "\nMilitary Cap Add:";
+                        valuesNumbers += "\n" + hex.location.settlement.getMilitaryCap();
+                        valuesBody += "\nMilitary Regen";
+                        valuesNumbers += "\n" + hex.location.settlement.militaryRegenAdd;
+                    }
+                }
+                locNumsBody.text = valuesBody;
+                locNumsNumbers.text = valuesNumbers;
                 locInfoBody.text = bodyText;
             }
         }
@@ -326,31 +369,6 @@ namespace Assets.Code
                     string bodyText = "";
                     //bodyText += "Body text for hex " + GraphicalMap.selectedHex.getName();
                     //bodyText += "\nAttachedTo " + GraphicalMap.selectedHex.territoryOf.hex.getName();
-                    bodyText += "\nProvince: " + hex.province.name;
-                    foreach (EconTrait t in hex.province.econTraits)
-                    {
-                        bodyText += "\n  Industry: " + t.name;
-                    }
-
-                    if (hex.location != null)
-                    {
-                        if (hex.location.settlement != null)
-                        {
-                            if (hex.location.settlement.title != null)
-                            {
-                                if (hex.location.settlement.title.heldBy != null)
-                                {
-                                    bodyText += "\nTitle held by: " + hex.location.settlement.title.heldBy.getFullName();
-                                }
-                                else
-                                {
-                                    bodyText += "\nTitle currently unheld";
-
-                                }
-                            }
-                            bodyText += "\nMilitary Cap Add: " + hex.location.settlement.getMilitaryCap();
-                            bodyText += "\nMilitary Regen: " + hex.location.settlement.militaryRegenAdd;
-                        }
 
                         if (hex.location.soc != null)
                         {
@@ -418,7 +436,6 @@ namespace Assets.Code
                         {
                             bodyText += "\nProperty " + p.proto.name;
                         }
-                    }
                     body.text = bodyText;
                 }
             }
