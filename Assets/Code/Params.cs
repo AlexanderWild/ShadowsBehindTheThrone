@@ -186,6 +186,8 @@ namespace Assets.Code
         public double ability_deathOfTheSunTempChange = -0.003;
         public int ability_coldAsDeathCost = 10;
         public int ability_deathOfTheSunCost = 10;
+        internal int combat_popDamageMax = 10;
+        internal int combat_infraDamageMax = 10;
 
         public void saveToFile()
         {

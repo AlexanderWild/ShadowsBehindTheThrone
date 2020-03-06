@@ -204,6 +204,10 @@ namespace Assets.Code
                     addMessage(sg.getName() + " attacks " + defender.getName() + ". Inflicts " + (int)(theirLosses) + " dmg, takes " + (int)(myLosses),
                         MsgEvent.LEVEL_YELLOW, false);
 
+                    if (attackTo.settlement != null)
+                    {
+                        attackTo.settlement.takeAssault(sg, defender, theirLosses);
+                    }
                     //Can only take land if there are no defenses in place
                     if (myStr > theirStr * param.combat_takeLandThreshold && (attackTo.getMilitaryDefence() <= 0.01))
                     {

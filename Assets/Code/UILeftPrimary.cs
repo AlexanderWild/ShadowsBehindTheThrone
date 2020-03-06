@@ -212,7 +212,6 @@ namespace Assets.Code
                             else
                             {
                                 bodyText += "\nTitle currently unheld";
-
                             }
                         }
                         valuesBody += "\nMilitary Cap Add:";
@@ -370,7 +369,25 @@ namespace Assets.Code
                     //bodyText += "Body text for hex " + GraphicalMap.selectedHex.getName();
                     //bodyText += "\nAttachedTo " + GraphicalMap.selectedHex.territoryOf.hex.getName();
 
-                        if (hex.location.soc != null)
+                    if (hex.location != null)
+                    {
+                        if (hex.location.settlement != null)
+                        {
+                            if (hex.location.settlement.title != null)
+                            {
+                                if (hex.location.settlement.title.heldBy != null)
+                                {
+                                    bodyText += "\nTitle held by: " + hex.location.settlement.title.heldBy.getFullName();
+                                }
+                                else
+                                {
+                                    bodyText += "\nTitle currently unheld";
+                                }
+                            }
+                        }
+                    }
+
+                    if (hex.location.soc != null)
                         {
                             bodyText += "\nSocial group: " + hex.location.soc.getName();
                             if (hex.location.soc is Society)

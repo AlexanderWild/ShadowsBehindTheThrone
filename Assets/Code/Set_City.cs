@@ -178,6 +178,16 @@ namespace Assets.Code
             if (infrastructure == 0) { infrastructure = 0; }
         }
 
+        internal override void takeAssault(SocialGroup sg, SocialGroup defender, double theirLosses)
+        {
+            int deltaP = Eleven.random.Next(location.map.param.combat_popDamageMax + 1);
+            int deltaI = Eleven.random.Next(location.map.param.combat_infraDamageMax + 1);
+            World.log("Damage received " + deltaP + " " + deltaI);
+            population = Math.Max(1,population-deltaP);
+            infrastructure = Math.Max(1, infrastructure - deltaI);
+
+        }
+
         internal string getStatsDesc()
         {
             string reply = "";

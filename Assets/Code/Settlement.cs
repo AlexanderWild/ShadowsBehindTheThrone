@@ -113,5 +113,9 @@ namespace Assets.Code
             location.settlement = ruins;
             location.settlement.name = "Ruins of " + location.shortName;
         }
+
+        internal virtual void takeAssault(SocialGroup sg, SocialGroup defender, double theirLosses)
+        {
+        }
     }
 }

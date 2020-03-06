@@ -21,17 +21,19 @@ namespace Assets.Code
 
         public override string getDescFlavour()
         {
-            return "Flavour here";
+            return "The Darkness does not come to end all life, but merely to grow a new way to live. Life springs up in great masses, emerging from the ground and reaching into the world to take its first breaths." +
+                "\n\nThis new life is terrible, blasphemous and utterly hostile to all human life. The world of men will be replaced by an abomination of flesh and tooth, serrated claw and twitching eyes.";
         }
 
         public override string getDescMechanics()
         {
-            return "God what has the creatures.";
+            return "This Name works by creating a hostile mass of flesh stretching across continents." +
+                " While the vast creature cannot prevail against strong foes, it can chip away at weakened empires, if you can provoke civil wars or international conflicts.";
         }
 
         public override string getName()
         {
-            return "Fleshgod";
+            return "New Life";
         }
 
         public override List<Ability> getUniquePowers()
