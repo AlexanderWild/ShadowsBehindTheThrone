@@ -1,0 +1,12 @@
+High criticality:
+
+
+
+Medium criticality:
+
+
+Low criticality:
+
+
+-----------------------RESOLVED-----------------------
+-Make it more obvious who society leader is (variable borders)

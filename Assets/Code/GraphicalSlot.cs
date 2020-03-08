@@ -45,6 +45,18 @@ namespace Assets.Code
 
             title.text = p.getFullName();
             subtitle.text = (p.title_land == null) ? "" : p.title_land.getName();
+
+            if (p.society.getSovreign() == p)
+            {
+                border.sprite = p.map.world.textureStore.slotKing;
+            }else if (p.title_land != null)
+            {
+                border.sprite = p.map.world.textureStore.slotCount;
+            }
+            else
+            {
+                border.sprite = p.map.world.textureStore.slotBasic;
+            }
             // FIXME
             //upperRightText.text = lowerRightText.text = riseBox.text = fallBox.text = "";
 

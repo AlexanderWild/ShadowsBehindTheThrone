@@ -27,6 +27,7 @@ namespace Assets.Code
         public Image profileBack;
         public Image profileMid;
         public Image profileFore;
+        public Image profileBorder;
         public Image titleTextDarkener;
         public Image bodyTextDarkener;
         public GameObject screenPerson;
@@ -85,13 +86,18 @@ namespace Assets.Code
             profileBack.enabled = true;
             profileMid.enabled = true;
             profileFore.enabled = true;
+            profileBorder.enabled = true;
             //Done to unfuck the distortion of images which periodically occurs
             profileBack.sprite = null;
             profileMid.sprite = null;
             profileFore.sprite = null;
+            profileBorder.sprite = null;
             profileBack.sprite = p.getImageBack();
             profileMid.sprite = p.getImageMid();
             profileFore.sprite = p.getImageFore();
+            if (p.society.getSovreign() == p) { profileBorder.sprite = p.map.world.textureStore.slotKing; }
+            else { profileBorder.sprite = p.map.world.textureStore.slotCount; }
+
             personTitle.text = p.getFullName();
             TitleLanded title = p.title_land;
             if (title == null)
