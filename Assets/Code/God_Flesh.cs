@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Code
 {
@@ -33,7 +34,17 @@ namespace Assets.Code
 
         public override string getName()
         {
-            return "New Life";
+            return "The Wretched Birth";
+        }
+
+
+        public override Sprite getGodBackground(World world)
+        {
+            return world.textureStore.painting_deathAndConflagaration;
+        }
+        public override string getCredits()
+        {
+            return "The Death and conflagration, Albert Chmielowski, 1870s";
         }
 
         public override List<Ability> getUniquePowers()

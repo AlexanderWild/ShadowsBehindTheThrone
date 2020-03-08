@@ -38,6 +38,8 @@ namespace Assets.Code
         public bool isWindows = false;
 
         public List<God> potentialGods = new List<God>();
+        public List<God> chosenGods = new List<God>();
+        public float lastFrame;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
 
@@ -65,8 +67,6 @@ namespace Assets.Code
             potentialGods.Add(new God_Omni());
         }
 
-        public float lastFrame;
-        public God chosenGod;
 
         public void Update()
         {
@@ -224,9 +224,11 @@ namespace Assets.Code
             {
                 map.turnTick();
             }
-            map.overmind.god = chosenGod;
-            chosenGod.onStart(map);
-            chosenGod = null;//Just in case this fucks with something
+            map.overmind.namesChosen.AddRange(chosenGods);
+            foreach (God chosenGod in chosenGods){
+                chosenGod.onStart(map);
+            }
+            chosenGods = null;//Just in case this fucks with something
             ui.setToWorld();
         }
 

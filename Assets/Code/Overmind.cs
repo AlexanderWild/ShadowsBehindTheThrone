@@ -12,7 +12,7 @@ namespace Assets.Code
 
         public List<Ability> abilities = new List<Ability>();
         public List<Ability> powers = new List<Ability>();
-        public God god;
+        public List<God> namesChosen = new List<God>();
         public Map map;
         public Person enthralled;
         public bool victoryAchieved = false;
@@ -47,6 +47,7 @@ namespace Assets.Code
             abilities.Add(new Ab_Soc_ProvincialSentiments());
             abilities.Add(new Ab_Soc_SwitchVote());
             abilities.Add(new Ab_Soc_ShareTruth());
+            abilities.Add(new Ab_Soc_BoostMilitarism());
         }
 
         public void turnTick()

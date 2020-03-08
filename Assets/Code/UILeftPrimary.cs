@@ -385,9 +385,7 @@ namespace Assets.Code
                                 }
                             }
                         }
-                    }
-
-                    if (hex.location.soc != null)
+                        if (hex.location.soc != null)
                         {
                             bodyText += "\nSocial group: " + hex.location.soc.getName();
                             if (hex.location.soc is Society)
@@ -453,6 +451,8 @@ namespace Assets.Code
                         {
                             bodyText += "\nProperty " + p.proto.name;
                         }
+                    }
+
                     body.text = bodyText;
                 }
             }

@@ -111,7 +111,8 @@ namespace Assets.Code
         public int ability_proposeVoteCooldown = 7;
         public double ability_growFleshThreatAdd = 5;
         public int ability_shareEvidenceLikingCost = 20;
-        public int ability_switchVoteLikingCost = 20;
+        public int ability_switchVoteLikingCost = 15;
+        public int ability_changePoliticsLikingCost = 15;
         public double ability_shareEvidencePercentage = 0.75;
         public int ability_enshadowCost = 4;
         public int ability_reduceEvidenceCost = 10;

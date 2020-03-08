@@ -22,10 +22,35 @@ namespace Assets.Code
 
         public void onClick()
         {
-            ui.world.prefabStore.getGameOptionsPopup();
-            ui.world.chosenGod = god;
-            ui.removeBlocker(this.gameObject);
+            ui.world.chosenGods.Add(god);
+
+            if (god is God_Omni)
+            {
+                ui.world.prefabStore.getGameOptionsPopup();
+                ui.removeBlocker(this.gameObject);
+                return;
+            }
+
+
+            if (ui.world.chosenGods.Count < 2)
+            {
+                List<God> available = new List<God>();
+                foreach (God g2 in ui.world.potentialGods)
+                {
+                    if (g2 is God_Omni) { continue; }//No double use
+                    if (g2 == god) { continue; }
+                    available.Add(g2);
+                }
+                ui.addBlockerDontHide(ui.world.prefabStore.getScrollSetGods(available).gameObject);
+                ui.removeBlocker(this.gameObject);
+            }
+            else
+            {
+                ui.world.prefabStore.getGameOptionsPopup();
+                ui.removeBlocker(this.gameObject);
+            }
         }
+        
 
         public void Update()
         {
