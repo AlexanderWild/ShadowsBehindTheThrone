@@ -34,6 +34,18 @@ namespace Assets.Code
             return reply;
         }
 
+        public static string toMaxLen(double d, int len)
+        {
+            if (Math.Abs(d) < 0.0001) { d = 0; }
+
+            string s = "" + d;
+            if (s.Length > len)
+            {
+                s = s.Substring(0, len);
+            }
+            
+            return s;
+        }
         public static string toFixedLen(double d, int len)
         {
             if (Math.Abs(d) < 0.0001) { d = 0; }

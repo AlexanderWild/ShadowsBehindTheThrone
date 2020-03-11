@@ -187,16 +187,8 @@ namespace Assets.Code
                 hab *= 1d / (1 - map.param.mapGen_minHabitabilityForHumans);
 
 
-                string valuesBody = "Temperature ";
-                string valuesNumbers = (int)(loc.hex.getTemperature() * 100) + "%";
-                valuesBody += "\nHabilitability ";
-                valuesNumbers += "\n" + (int)(hab * 100) + "%";
-
-                if (loc.settlement != null && loc.settlement is Set_City)
-                {
-                    valuesBody += "\n" + ((Set_City)loc.settlement).getStatsDesc();
-                    valuesNumbers += "\n" + ((Set_City)loc.settlement).getStatsValues();
-                }
+                string valuesBody = ""; 
+                string valuesNumbers = "";
 
                 Hex hex = loc.hex;
                 bodyText += "\nProvince: " + hex.province.name;
@@ -220,12 +212,28 @@ namespace Assets.Code
                                 bodyText += "\nTitle currently unheld";
                             }
                         }
+                        valuesBody += "\nPrestige:";
+                        valuesNumbers += "\n" + Eleven.toMaxLen(hex.location.settlement.getPrestige(),4);
+                        valuesBody += "\nBase Prestige:";
+                        valuesNumbers += "\n" + Eleven.toMaxLen(hex.location.settlement.basePrestige, 4);
                         valuesBody += "\nMilitary Cap Add:";
                         valuesNumbers += "\n" + hex.location.settlement.getMilitaryCap();
                         valuesBody += "\nMilitary Regen";
                         valuesNumbers += "\n" + hex.location.settlement.militaryRegenAdd;
                     }
                 }
+
+                if (loc.settlement != null && loc.settlement is Set_City)
+                {
+                    valuesBody += "\n" + ((Set_City)loc.settlement).getStatsDesc();
+                    valuesNumbers += "\n" + ((Set_City)loc.settlement).getStatsValues();
+                }
+
+                valuesBody += "\nTemperature ";
+                valuesNumbers += "\n" + (int)(loc.hex.getTemperature() * 100) + "%";
+                valuesBody += "\nHabilitability ";
+                valuesNumbers += "\n" + (int)(hab * 100) + "%";
+
                 locNumsBody.text = valuesBody;
                 locNumsNumbers.text = valuesNumbers;
                 locInfoBody.text = bodyText;

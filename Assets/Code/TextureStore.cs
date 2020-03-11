@@ -53,6 +53,7 @@ namespace Assets.Code
         public Sprite loc_minor_church;
         public Sprite loc_minor_ruins;
         public Sprite loc_minor_farm;
+        public Sprite loc_town;
         public Sprite loc_worm_nest;
         public Sprite loc_flesh;
 

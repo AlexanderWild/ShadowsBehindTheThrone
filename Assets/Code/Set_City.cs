@@ -167,6 +167,11 @@ namespace Assets.Code
             {
                 return location.map.world.textureStore.loc_city_roman;
             }
+
+            else if (getLevel() >= LEVEL_TOWN)
+            {
+                return location.map.world.textureStore.loc_town;
+            }
             return location.map.world.textureStore.loc_minor_farm;
         }
 
