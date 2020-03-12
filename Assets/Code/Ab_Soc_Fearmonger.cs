@@ -46,6 +46,7 @@ namespace Assets.Code
             if (hex.location == null) { return false; }
             if (hex.location.person() == null) { return false; }
             if (map.overmind.enthralled == null) { return false; }
+            if (hex.location.person() == map.overmind.enthralled) { return false; }
             if (hex.location.soc != map.overmind.enthralled.society) { return false; }
             return true;
         }
