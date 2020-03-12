@@ -21,7 +21,7 @@ namespace Assets.Code
 
 		void playEffect(AudioClip c)
 		{
-			source.PlayOneShot(c, effectVolume);
+			//source.PlayOneShot(c, effectVolume);
 		}
 
 		public void playBack() { playEffect(back); }
