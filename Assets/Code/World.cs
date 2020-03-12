@@ -208,6 +208,12 @@ namespace Assets.Code
             ui.addBlocker(ui.world.prefabStore.getScrollSetGods(ui.world.potentialGods).gameObject);
         }
 
+        public void bFlashEnthrallables()
+        {
+            map.param.flashEnthrallables = !map.param.flashEnthrallables;
+            GraphicalMap.checkData();
+        }
+
         public void bQuit()
         {
             Application.Quit();

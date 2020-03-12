@@ -25,21 +25,8 @@ namespace Assets.Code
         public override bool castable(Map map, Person person)
         {
             if (map.overmind.enthralled != null) { return false; }
-            if (person.state == Person.personState.broken) { return true; }
 
-            Society soc = person.society;
-            double minPrestige = 1000000;
-            foreach (Person p in soc.people)
-            {
-                if (p.title_land == null) { continue; }
-                if (p.prestige < minPrestige)
-                {
-                    minPrestige = p.prestige;
-                }
-            }
-
-            //return soc.getEnthrallables().Contains(hex.location.settlement.title.heldBy);
-            return person.prestige < (1 + minPrestige);
+            return person.enthrallable();
         }
 
         public override bool castable(Map map, Hex hex)

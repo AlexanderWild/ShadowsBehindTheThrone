@@ -22,6 +22,7 @@ namespace Assets.Code
         public int mapGen_burnInSteps = 100;
         public float map_tempTemperatureReversion = 0.002f;
 
+        public bool flashEnthrallables = true;
         public int overmind_maxPower = 24;
         public double overmind_powerRegen = 1.0;
         public bool overmind_singleAbilityPerTurn = true;

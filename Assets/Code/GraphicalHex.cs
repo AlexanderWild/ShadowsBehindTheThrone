@@ -76,6 +76,18 @@ namespace Assets.Code
             {
                 this.societyNameTag.gameObject.SetActive((GraphicalMap.scale != GraphicalMap.minScale) == Input.GetKey(KeyCode.LeftControl));
             }
+
+            if (map.param.flashEnthrallables && map.overmind.enthralled == null && map.overmind.hasEnthrallAbilities)
+            {
+                if (hex.location != null && hex.location.person() != null)
+                {
+                    if (hex.location.person().enthrallable())
+                    {
+                        float c = Mathf.Sin(Time.fixedTime*4);
+                        terrainLayer.color = new Color(1, c, 1);
+                    }
+                }
+            }
         }
 
         public void checkData()

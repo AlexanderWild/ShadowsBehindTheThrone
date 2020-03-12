@@ -217,6 +217,24 @@ namespace Assets.Code
             }
         }
 
+        public bool enthrallable()
+        {
+            if (state == personState.broken) { return true; }
+
+            Society soc = society;
+            double minPrestige = 1000000;
+            foreach (Person p in soc.people)
+            {
+                if (p.title_land == null) { continue; }
+                if (p.prestige < minPrestige)
+                {
+                    minPrestige = p.prestige;
+                }
+            }
+
+            //return soc.getEnthrallables().Contains(hex.location.settlement.title.heldBy);
+            return prestige < (1 + minPrestige);
+        }
         public void computeThreats()
         {
             //Actually do the evaluations here

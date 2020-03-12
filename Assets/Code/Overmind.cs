@@ -16,11 +16,13 @@ namespace Assets.Code
         public Map map;
         public Person enthralled;
         public bool victoryAchieved = false;
+        public bool hasEnthrallAbilities = false;
 
         public Overmind(Map map)
         {
             this.map = map;
 
+            hasEnthrallAbilities = true;
             powers.Add(new Ab_Enth_Enthrall());
             powers.Add(new Ab_Enth_DarkEmpire());
             //abilities.Add(new Ab_TestAddShadow());
