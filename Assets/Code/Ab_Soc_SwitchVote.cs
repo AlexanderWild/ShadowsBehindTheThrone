@@ -51,6 +51,7 @@ namespace Assets.Code
         public override bool castable(Map map, Person person)
         {
             if (map.overmind.enthralled == null) { return false; }
+            if (person == map.overmind.enthralled) { return false; }
             if (person.getRelation(map.overmind.enthralled).getLiking() < World.staticMap.param.ability_switchVoteLikingCost) { return false; }
 
             if (map.overmind.enthralled.society == null) { throw new Exception("Enthralled didn't have a society?"); }

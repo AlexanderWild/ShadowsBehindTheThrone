@@ -20,6 +20,7 @@ namespace Assets.Code
         {
             if (scale > 1f)
             {
+                Destroy(this.gameObject);
                 return;
             }
             if (GraphicalMap.lastMapChange != lastCheck)
@@ -36,6 +37,7 @@ namespace Assets.Code
             float c = 1 - (scale * scale);
             if (c < 0) { c = 0; }
             sRend.color = new Color(1, 1, 1, c);
+            gameObject.transform.localScale = new Vector3(0.5f+scale, 0.5f+scale, 1);
 
             if (scale > 1f)
             {

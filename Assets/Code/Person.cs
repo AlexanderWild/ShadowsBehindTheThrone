@@ -203,10 +203,10 @@ namespace Assets.Code
             }
             if (society.isDarkEmpire)
             {
-                if (society.getSovreign() != null && society.getSovreign().shadow > shadow)
-                {
-                    shadow += map.param.ability_darkEmpireShadowPerTurn;
-                }
+                //if (society.getSovreign() != null && society.getSovreign().shadow > shadow)
+                //{
+                    shadow += Eleven.random.NextDouble()*map.param.ability_avrgDarkEmpireShadowPerTurn;
+                //}
                 if (shadow > 1) { shadow = 1; }
             }
 
@@ -465,6 +465,10 @@ namespace Assets.Code
             }
             map.turnMessages.Add(new MsgEvent(this.getFullName() + " dies! " + v, priority, benefit));
 
+            if (state == personState.enthralled)
+            {
+                map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "\n\nTheir death is not the end, you may enthrall a new noble, and continue your work through a new vessel.");
+            }
             removeFromGame(v);
         }
 

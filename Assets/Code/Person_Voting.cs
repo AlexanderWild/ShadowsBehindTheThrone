@@ -109,7 +109,7 @@ namespace Assets.Code
                         //Everyone is eligible
                         foreach (Person p in society.people)
                         {
-                            if (p.title_land != null) { continue; }//Again, to prevent constant shuffling
+                            if (p.title_land != loc.settlement.title && p.title_land != null) { continue; }//Again, to prevent constant shuffling
                             VoteOption opt = new VoteOption();
                             opt.person = p;
                             issue.options.Add(opt);

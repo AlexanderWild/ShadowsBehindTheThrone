@@ -54,7 +54,18 @@ namespace Assets.Code
         public GameObject popTutorial;
         public GameObject prefabPersonPortrait;
         public GameObject prefabGameOptions;
+        public GameObject prefabCombatParticle;
 
+        public void particleCombat(Hex a,Hex b)
+        {
+            if (a.outer == null || b.outer == null) { return; }//No need to make invisible particles
+
+            GameObject obj = Instantiate(prefabCombatParticle) as GameObject;
+            ParticleCombat part = obj.GetComponent<ParticleCombat>();
+            part.map = world.map;
+            part.a = a;
+            part.b = b;
+        }
         public PopupNameTag getNameTag(string name, Color color)
         {
             GameObject obj = Instantiate(prefabNameTag) as GameObject;

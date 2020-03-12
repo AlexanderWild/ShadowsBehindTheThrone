@@ -47,7 +47,7 @@ namespace Assets.Code
                 }
             }
 
-            map.world.prefabStore.popImgMsg("The world cools, as the dead sap the life from the sun. " + count + " recent battles have been drawn upon.",
+            map.world.prefabStore.popImgMsg("The entire world cools, as the dead sap the life from the sun, leaving every location on the planet colder. " + count + " recent battles have been drawn upon.",
                 map.world.wordStore.lookup("ABILITY_DEATH_OF_THE_SUN"));
 
             foreach (Location loc in map.locations)
@@ -84,6 +84,11 @@ namespace Assets.Code
         public override int getCost()
         {
             return World.staticMap.param.ability_deathOfTheSunCost;
+        }
+
+        public override int getCooldown()
+        {
+            return World.staticMap.param.ability_deathOfTheSunCooldown;
         }
 
         public override string getDesc()

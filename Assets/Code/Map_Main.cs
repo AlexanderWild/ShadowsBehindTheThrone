@@ -219,6 +219,8 @@ namespace Assets.Code
                     {
                         Property.addProperty(this, attackTo, "Recent Human Battle");
                     }
+
+                    world.prefabStore.particleCombat(attackFrom.hex, attackTo.hex);
                 }
             }
 

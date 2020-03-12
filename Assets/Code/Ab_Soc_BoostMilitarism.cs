@@ -15,8 +15,6 @@ namespace Assets.Code
         }
         public override void castInner(Map map, Person other)
         {
-
-
             other.getRelation(map.overmind.enthralled).addLiking(-World.staticMap.param.ability_changePoliticsLikingCost, "Argued about militarism", map.turn);
 
             double prev = other.politics_militarism;
@@ -33,6 +31,7 @@ namespace Assets.Code
             if (map.overmind.enthralled == null) { return false; }
             if (person.getRelation(map.overmind.enthralled).getLiking() < World.staticMap.param.ability_changePoliticsLikingCost) { return false; }
             if (person.politics_militarism >= 1) { return false; }
+            if (person.state == Person.personState.enthralled) { return false; }
 
             return true;
         }

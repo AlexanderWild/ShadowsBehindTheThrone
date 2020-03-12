@@ -57,8 +57,8 @@ namespace Assets.Code
             {
                 border.sprite = p.map.world.textureStore.slotBasic;
             }
-            // FIXME
-            //upperRightText.text = lowerRightText.text = riseBox.text = fallBox.text = "";
+           // float c = 1 - (float)(p.shadow);
+            //border.color = new Color(c, c, c);
 
             targetColor = neutralColor;
         }

@@ -106,7 +106,7 @@ namespace Assets.Code
         public int ability_sowDissentLikingChange = -25;
 
         public int ability_shareTruthCooldown = 10;
-        public double ability_darkEmpireShadowPerTurn = 0.05;
+        public double ability_avrgDarkEmpireShadowPerTurn = 0.075;
         public int ability_denounceOtherCooldown = 32;
         public int ability_proposeVoteCooldown = 7;
         public double ability_growFleshThreatAdd = 5;
@@ -185,8 +185,10 @@ namespace Assets.Code
         public int war_battleDeadDur = 4;
         public double ability_coldAsDeathTempChange = -0.15;
         public double ability_deathOfTheSunTempChange = -0.003;
-        public int ability_coldAsDeathCost = 10;
-        public int ability_deathOfTheSunCost = 10;
+        public int ability_coldAsDeathCost = 5;
+        public int ability_coldAsDeathCooldown = 10;
+        public int ability_deathOfTheSunCost = 0;
+        public int ability_deathOfTheSunCooldown = 10;
         internal int combat_popDamageMax = 10;
         internal int combat_infraDamageMax = 10;
 

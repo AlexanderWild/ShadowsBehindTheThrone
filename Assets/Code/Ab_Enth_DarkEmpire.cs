@@ -15,7 +15,7 @@ namespace Assets.Code
 
             map.overmind.enthralled.society.isDarkEmpire = true;
             map.overmind.enthralled.society.threat_mult += map.param.ability_darkEmpireThreatMultGain;
-
+            map.overmind.enthralled.evidence = 1;
         }
 
         public override bool castable(Map map, Hex hex)
@@ -29,7 +29,7 @@ namespace Assets.Code
 
         public override int getCost()
         {
-            return World.staticMap.param.ability_apoptosisCost;
+            return World.staticMap.param.ability_darkEmpireCost;
         }
 
         public override string getDesc()

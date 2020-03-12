@@ -66,6 +66,11 @@ namespace Assets.Code
             return World.staticMap.param.ability_coldAsDeathCost;
         }
 
+        public override int getCooldown()
+        {
+            return World.staticMap.param.ability_coldAsDeathCooldown;
+        }
+
         public override string getDesc()
         {
             return "Causes the dead of a recent battle to drain warmth from the land, potentially rendering it uninhabitable to human life, if the temperature drops low enough."

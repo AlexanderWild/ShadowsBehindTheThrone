@@ -18,6 +18,11 @@ namespace Assets.Code
         public override void castInner(Map map, Person person)
         {
             base.castInner(map, person);
+
+            map.world.prefabStore.popImgMsg(
+                "You discard your worthless vessel, " + map.overmind.enthralled.getFullName() + ".",
+                map.world.wordStore.lookup("ABILITY_APOPTOSIS"));
+            person.die("Walked into the night and never returned");
         }
 
         public override bool castable(Map map, Person person)

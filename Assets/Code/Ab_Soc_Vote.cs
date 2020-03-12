@@ -18,6 +18,18 @@ namespace Assets.Code
                 map.overmind.hasTakenAction = false;
             }
         }
+        public override void castInner(Map map, Person person)
+        {
+            cast(map, person.getLocation().hex);
+        }
+
+        public override bool castable(Map map, Person person)
+        {
+            if (map.overmind.enthralled == null) { return false; }
+            if (map.overmind.enthralled.society.voteSession == null) { return false; }
+
+            return true;
+        }
 
         public override bool castable(Map map, Hex hex)
         {

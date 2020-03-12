@@ -37,6 +37,7 @@ namespace Assets.Code
         public override bool castable(Map map, Person person)
         {
             if (map.overmind.enthralled == null) { return false; }
+            if (person.state == Person.personState.enthralled) { return false; }
             return person.society != map.overmind.enthralled.society;
         }
 

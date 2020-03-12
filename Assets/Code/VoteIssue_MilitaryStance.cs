@@ -92,18 +92,36 @@ namespace Assets.Code
             {
                 u += defUtility;
                 msgs.Add(new ReasonMsg("Our relative strength against defensive target", defUtility));
+                if (voter.society.isDarkEmpire)
+                {
+                    int value = (int)(-100 * voter.shadow);
+                    u += value;
+                    msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                }
             }
             if (option.index == 1 && society.posture != Society.militaryPosture.offensive)
             {
                 u += offUtility;
                 msgs.Add(new ReasonMsg("Our relative strength against offensive target", offUtilityStr));
                 msgs.Add(new ReasonMsg("Militarism personality", offUtilityPersonality));
+                if (voter.society.isDarkEmpire)
+                {
+                    int value = (int)(100 * voter.shadow);
+                    u += value;
+                    msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                }
             }
             if (option.index == 2 && society.posture != Society.militaryPosture.introverted)
             {
                 u += introUtility;
                 msgs.Add(new ReasonMsg("Instability internally",introUtilityStability));
                 msgs.Add(new ReasonMsg("Suspicion of nobles' darkness", introFromInnerThreat));
+                if (voter.society.isDarkEmpire)
+                {
+                    int value = (int)(-100 * voter.shadow);
+                    u += value;
+                    msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                }
             }
 
 
