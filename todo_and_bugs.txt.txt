@@ -1,12 +1,22 @@
 High criticality:
 
 
+-Power costs are zero? (For all abilities, or is some dumbass ability not calling base:cast(map,hex))?
+
 
 Medium criticality:
 
+-Dark Unity power (or make them hate light people)
+
+-Make temperature changes permanent for world-wide power
+
+-Nobles should spawn enshadowed
 
 Low criticality:
 
 
 -----------------------RESOLVED-----------------------
 -Make it more obvious who society leader is (variable borders)
+
+
+-Econ effects are inverted

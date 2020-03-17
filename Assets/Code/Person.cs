@@ -289,7 +289,7 @@ namespace Assets.Code
 
                     double militaryStrengthMult = 50 / ((society.currentMilitary + (society.maxMilitary / 2)) + 1);
                     if (militaryStrengthMult < 0.5) { militaryStrengthMult = 0.5; }
-                    item.reasons.Add(new ReasonMsg("Military Strength Comparison (% multiplier)", (int)(100 * militaryStrengthMult)));
+                    item.reasons.Add(new ReasonMsg("Relative strengths of social-group's militaries (% multiplier)", (int)(100 * militaryStrengthMult)));
                     value *= militaryStrengthMult;
 
                     item.threat = value;

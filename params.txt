@@ -10,7 +10,7 @@ flashEnthrallables: True
 overmind_maxPower: 24
 overmind_powerRegen: 1
 overmind_singleAbilityPerTurn: True
-econ_multFromBuff: 0.75
+econ_multFromBuff: 1.33
 relObj_defaultLiking: 5
 relObj_decayRate: 0.98
 combat_prestigeLossFromConquest: 0.333

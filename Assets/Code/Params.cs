@@ -27,7 +27,7 @@ namespace Assets.Code
         public double overmind_powerRegen = 1.0;
         public bool overmind_singleAbilityPerTurn = true;
 
-        public double econ_multFromBuff = 0.75;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
+        public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
         
         public double relObj_defaultLiking = 5;
         public double relObj_decayRate = 0.98;
