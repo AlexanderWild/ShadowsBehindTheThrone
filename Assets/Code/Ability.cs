@@ -16,6 +16,7 @@ namespace Assets.Code
         public virtual bool castable(Map map,Person person) { return false; }
         public void cast(Map map,Person person)
         {
+            map.overmind.power -= getCost();
             if (map.param.overmind_singleAbilityPerTurn) { map.overmind.hasTakenAction = true; }
             World.log("Cast " + this.ToString() + " " + this.getName());
             turnLastCast = map.turn;

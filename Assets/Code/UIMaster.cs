@@ -247,37 +247,6 @@ namespace Assets.Code
             }
         }
 
-        /*
-        public void setToSociety(Society soc)
-        {
-            state = uiState.SOCIETY;
-            uiWorldRight.gameObject.SetActive(false);
-            uiHex.gameObject.SetActive(false);
-            uiMainMenu.gameObject.SetActive(false);
-            uiSociety.gameObject.SetActive(true);
-            uiCommon.gameObject.SetActive(true);
-            uiCity.gameObject.SetActive(false);
-            GraphicalMap.purge();
-
-            GraphicalSociety.centreOn(soc.command.top);
-            uiSociety.setTo(soc.command.top.person);
-        }
-        public void setToSociety(Society soc, Slot slot)
-        {
-            state = uiState.SOCIETY;
-            uiWorldRight.gameObject.SetActive(false);
-            uiHex.gameObject.SetActive(false);
-            uiMainMenu.gameObject.SetActive(false);
-            uiSociety.gameObject.SetActive(true);
-            uiCommon.gameObject.SetActive(true);
-            uiCity.gameObject.SetActive(false);
-            GraphicalMap.purge();
-
-            GraphicalSociety.centreOn(slot);
-            uiSociety.setTo(slot.person);
-        }
-        */
-
         public void setToBackground()
         {
             state = uiState.BACKGROUND;
@@ -316,7 +285,7 @@ namespace Assets.Code
             uiMainMenu.gameObject.SetActive(false);
             uiLeftPrimary.gameObject.SetActive(true);
             uiScrollables.gameObject.SetActive(true);
-            uiMidTop.gameObject.SetActive(false);
+            uiMidTop.gameObject.SetActive(true);
             hexSelector.SetActive(false);
 
             uiScrollables.viewSocButtonText.text = "View World";

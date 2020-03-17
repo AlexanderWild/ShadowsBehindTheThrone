@@ -1,10 +1,10 @@
 High criticality:
 
 
--Power costs are zero? (For all abilities, or is some dumbass ability not calling base:cast(map,hex))?
 
 
 Medium criticality:
+
 
 -Dark Unity power (or make them hate light people)
 
@@ -16,7 +16,11 @@ Low criticality:
 
 
 -----------------------RESOLVED-----------------------
+
+-Cities die slowly after habilitability drops below 0
+
 -Make it more obvious who society leader is (variable borders)
 
+-Power costs are zero? (For all abilities, or is some dumbass ability not calling base:cast(map,hex))?
 
 -Econ effects are inverted

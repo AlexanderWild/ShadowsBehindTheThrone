@@ -412,24 +412,31 @@ namespace Assets.Code
                     break;
                 }
             }
-            if (!hasWar)
+            //Falling into ruin can occur at any time, not just war
+            foreach (Location loc in map.locations)
+            {
+                if (loc.soc == this)
+                {
+                    if (loc.isForSocieties == false || loc.hex.getHabilitability() < map.param.mapGen_minHabitabilityForHumans)
+                    {
+                        if (loc.settlement != null)
+                        {
+                            if (loc.settlement.isHuman)
+                            {
+                                loc.settlement.fallIntoRuin();
+                            }
+                        }
+                        loc.soc = null;
+                    }
+                }
+            }
+            //Expansion can only happen at peace time
+             if (!hasWar)
             {
                 foreach (Location loc in map.locations)
                 {
                     if (loc.soc == this)
                     {
-                        if (loc.isForSocieties == false || loc.hex.getHabilitability() < map.param.mapGen_minHabitabilityForHumans)
-                        {
-                            if (loc.settlement != null)
-                            {
-                                if (loc.settlement.isHuman)
-                                {
-                                    loc.settlement.fallIntoRuin();
-                                }
-                            }
-                            loc.soc = null;
-                        }
-
                         if (loc.isForSocieties && loc.settlement == null && loc.isForSocieties && loc.hex.getHabilitability() >= map.param.mapGen_minHabitabilityForHumans)
                         {
                             if (loc.isMajor)
