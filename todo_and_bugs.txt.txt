@@ -6,11 +6,9 @@ High criticality:
 Medium criticality:
 
 
--Dark Unity power (or make them hate light people)
 
 -Make temperature changes permanent for world-wide power
 
--Nobles should spawn enshadowed
 
 Low criticality:
 
@@ -24,3 +22,7 @@ Low criticality:
 -Power costs are zero? (For all abilities, or is some dumbass ability not calling base:cast(map,hex))?
 
 -Econ effects are inverted
+
+-Nobles should spawn enshadowed
+
+-Dark Unity power (or make them hate light people)

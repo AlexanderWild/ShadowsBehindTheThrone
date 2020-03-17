@@ -697,9 +697,20 @@ namespace Assets.Code
             //Insta-add enough to make up the numbers
             for (int i=0;i<nNeeded;i++)
             {
-                Person p = new Person(this);
-                log(p.getFullName() + " has risen to note in the society of " + this.getName());
-                people.Add(p);
+                if (people.Count > 0)
+                {
+                    Person sponsor = people[Eleven.random.Next(people.Count)];
+                    Person p = new Person(this);
+                    log(p.getFullName() + " has risen to note in the society of " + this.getName() + ", invited by " + sponsor.getFullName());
+                    people.Add(p);
+                    p.shadow = sponsor.shadow;
+                }
+                else
+                {
+                    Person p = new Person(this);
+                    log(p.getFullName() + " has risen to note in the society of " + this.getName());
+                    people.Add(p);
+                }
             }
 
             needsToDecreasePopulation = nUntitled > map.param.soc_untitledPeople;

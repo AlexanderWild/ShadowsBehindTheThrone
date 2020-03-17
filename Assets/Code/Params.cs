@@ -104,6 +104,8 @@ namespace Assets.Code
         public int ability_uncannyGlamourCost = 10;
         public int ability_uncannyGlamourCooldown = 15;
         public int ability_sowDissentCost = 12;
+        public int ability_hateTheLightCost = 8;
+        public int ability_hateTheLightMult = 20;
         public int ability_sowDissentLikingChange = -25;
 
         public int ability_shareTruthCooldown = 10;

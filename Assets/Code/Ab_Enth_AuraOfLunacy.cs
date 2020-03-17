@@ -4,7 +4,7 @@ using System;
 
 namespace Assets.Code
 {
-    public class Ab_Over_AuraOfLunacy: Ability
+    public class Ab_Enth_AuraOfLunacy: Ability
     {
         public override void cast(Map map, Hex hex)
         {
@@ -16,8 +16,6 @@ namespace Assets.Code
 
         public override void castInner(Map map, Person other)
         {
-            other.getRelation(other.society.getSovreign()).addLiking(map.param.ability_sowDissentLikingChange, "Dissent sown", map.turn);
-
             int nHit = 0;
             string strHit = "(";
             foreach (Location loc in map.overmind.enthralled.getLocation().getNeighbours()){

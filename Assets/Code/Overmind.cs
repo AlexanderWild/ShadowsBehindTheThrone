@@ -25,6 +25,7 @@ namespace Assets.Code
             hasEnthrallAbilities = true;
             powers.Add(new Ab_Enth_Enthrall());
             powers.Add(new Ab_Enth_DarkEmpire());
+            powers.Add(new Ab_Over_HateTheLight());
             //abilities.Add(new Ab_TestAddShadow());
 
             powers.Add(new Ab_Enth_MiliaryAid());
@@ -35,7 +36,7 @@ namespace Assets.Code
             powers.Add(new Ab_Over_InformationBlackout());
             powers.Add(new Ab_Over_SowDissent());
             powers.Add(new Ab_Over_UncannyGlamour());
-            powers.Add(new Ab_Over_AuraOfLunacy());
+            powers.Add(new Ab_Enth_AuraOfLunacy());
 
             abilities.Add(new Ab_Soc_Vote());
             abilities.Add(new Ab_Soc_ProposeVote());

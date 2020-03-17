@@ -77,6 +77,8 @@ ability_uncannyGlamourGain: 15
 ability_uncannyGlamourCost: 10
 ability_uncannyGlamourCooldown: 15
 ability_sowDissentCost: 12
+ability_hateTheLightCost: 8
+ability_hateTheLightMult: 20
 ability_sowDissentLikingChange: -25
 ability_shareTruthCooldown: 10
 ability_avrgDarkEmpireShadowPerTurn: 0.075
