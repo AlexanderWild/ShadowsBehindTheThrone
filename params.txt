@@ -4,7 +4,7 @@ mapGen_proportionOfMapForHumans: 0.65
 mapGen_minHabitabilityForHumans: 0.15
 mapGen_stepsPerIsland: 12
 mapGen_maxBrushSize: 5
-mapGen_burnInSteps: 100
+mapGen_burnInSteps: 150
 map_tempTemperatureReversion: 0.002
 flashEnthrallables: True
 overmind_maxPower: 24

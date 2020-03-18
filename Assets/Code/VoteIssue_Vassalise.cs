@@ -22,7 +22,7 @@ namespace Assets.Code
 
         public override string getLargeDesc()
         {
-            string reply = "Vote to vassalise under another society for protection.";
+            string reply = "Vote to vassalise under " + target.getName() + " for protection.";
             reply += "\nIf passed, this motion will cause this society to be absorbed by another which shares a common defensive target.";
             reply += "\nA last resort measure against a feared threat.";
             return reply;

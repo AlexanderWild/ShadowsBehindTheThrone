@@ -96,6 +96,7 @@ namespace Assets.Code
             profileMid.sprite = p.getImageMid();
             profileFore.sprite = p.getImageFore();
             if (p.society.getSovreign() == p) { profileBorder.sprite = p.map.world.textureStore.slotKing; }
+            else if (p.titles.Count > 0) { profileBorder.sprite = p.map.world.textureStore.slotDuke; }
             else { profileBorder.sprite = p.map.world.textureStore.slotCount; }
 
             personTitle.text = p.getFullName();

@@ -21,7 +21,9 @@ namespace Assets.Code
 
         public override string getLargeDesc()
         {
-            string reply = "Vote to execute a suspect for the crime of association with dark forces. This primarily happens if nobles have high suspicion. This will cause the society to kill the target noble on sight, if they are found guilty.";
+            string reply = "Vote to execute " + target.getFullName() + " for the crime of association with dark forces." +
+                "\n\nThis accusation primarily happens if nobles have high suspicion (but can instead be political motivated)." +
+                "This will cause the society to kill the target noble on sight, if they are found guilty.";
             return reply;
         }
 

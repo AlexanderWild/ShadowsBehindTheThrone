@@ -17,6 +17,7 @@ namespace Assets.Code
         public float cr = (float)Eleven.random.NextDouble();
         public float cg = (float)Eleven.random.NextDouble();
         public float cb = (float)Eleven.random.NextDouble();
+        public int index;
 
         public Province(Hex hex)
         {

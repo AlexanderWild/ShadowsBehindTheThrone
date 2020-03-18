@@ -207,6 +207,7 @@ namespace Assets.Code
                     if (canGet(x, y))
                     {
                         Province p = new Province(grid[x][y]);
+                        p.index = provinces.Count;
                         provinces.Add(p);
                     }
                 }

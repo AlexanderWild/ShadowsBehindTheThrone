@@ -54,13 +54,46 @@ namespace Assets.Code
                 if (t.heldBy != null && (map.turn - t.turnLastAssigned < map.param.society_minTimeBetweenTitleReassignments)) { continue; }
                 issue = new VoteIssue_AssignTitle(society, this, t);
 
-                //Everyone is eligible
-                foreach (Person p in society.people)
+                if (t is Title_Sovreign)
                 {
-                    VoteOption opt = new VoteOption();
-                    opt.person = p;
-                    issue.options.Add(opt);
+                    if (society.titles.Count == 1)
+                    {
+                        //Everyone is eligible
+                        foreach (Person p in society.people)
+                        {
+                            VoteOption opt = new VoteOption();
+                            opt.person = p;
+                            issue.options.Add(opt);
+                        }
+                    }
+                    else
+                    {
+                        //Only provincial rulers are elligible
+                        foreach (Person p in society.people)
+                        {
+                            if (p.titles.Count > 0)
+                            {
+                                VoteOption opt = new VoteOption();
+                                opt.person = p;
+                                issue.options.Add(opt);
+                            }
+                        }
+                    }
+                }else if (t is Title_ProvinceRuler)
+                {
+                    Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
+                    //Nobles holding land in region are eligible
+                    foreach (Person p in society.people)
+                    {
+                        if (p.title_land != null && p.title_land.settlement.location.province == t2.province)
+                        {
+                            VoteOption opt = new VoteOption();
+                            opt.person = p;
+                            issue.options.Add(opt);
+                        }
+                    }
                 }
+                if (issue.options.Count == 0) { continue; }
                 foreach (VoteOption opt in issue.options)
                 {
                     //Random factor to prevent them all rushing a singular voting choice

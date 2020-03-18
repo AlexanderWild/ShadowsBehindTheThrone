@@ -30,7 +30,7 @@ namespace Assets.Code
 
         public override string getLargeDesc()
         {
-            string reply =  "The nobles of " + society.getName() + " are voting on which noble should be assigned hold over " + this.title.settlement.location.getName() + ".";
+            string reply =  "Assign hold over " + this.title.settlement.location.getName() + ".";
             reply += "\nLand allows for greater prestige (so greater voting capability), levies of men-at-arms and industrial interests.";
             return reply;
         }

@@ -190,6 +190,8 @@ namespace Assets.Code
                     World.log(sg.getName() + " attacking into " + attackTo.getName());
                     double myStr = sg.currentMilitary * Eleven.random.NextDouble();
                     double theirStr =  defender.currentMilitary * Eleven.random.NextDouble();
+                    if (myStr < 1) { myStr = Math.Min(1, sg.currentMilitary); }
+                    if (theirStr < 1) { theirStr = Math.Min(1, defender.currentMilitary); }
 
                     //Note the defensive fortifications only reduce losses, not increase chance of taking territory
                     double myLosses = theirStr * param.combat_lethality;

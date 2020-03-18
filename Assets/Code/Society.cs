@@ -37,6 +37,7 @@ namespace Assets.Code
 
         public LogBox logbox;
         public double data_societalStability;
+        public int data_nProvinceRulers;
 
         public Society(Map map) : base(map)
         {
@@ -343,6 +344,10 @@ namespace Assets.Code
                 {
                     return "Queendom of " + basic;
                 }
+            }
+            else if (this.titles.Count > 1)
+            {
+                return "Grand Duchey of " + basic;
             }
             else
             {
@@ -660,6 +665,8 @@ namespace Assets.Code
                     }
                 }
             }
+
+            int[] provCounts = new int[map.provinces.Count];
             foreach (Location loc in map.locations)
             {
                 if (loc.soc == this)
@@ -668,13 +675,58 @@ namespace Assets.Code
                     {
                         unclaimedTitles.Add(loc.settlement.title);
                     }
+                    provCounts[loc.province.index] += 1;
+                }
+            }
+            //Compute provincial titles. First we need to see how many we actually retain since last time
+            bool[] present = new bool[map.provinces.Count];
+            List<Title_ProvinceRuler> rems = new List<Title_ProvinceRuler>();
+            foreach (Title t in titles)
+            {
+                if (t is Title_ProvinceRuler)
+                {
+                    Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
+                    if (provCounts[t2.province.index] < 2 || (this.getCapital() != null && t2.province == this.getCapital().province))
+                    {
+                        rems.Add(t2);
+                    }
+                    else
+                    {
+                        present[t2.province.index] = true;
+                    }
+                }
+            }
+            foreach (Title_ProvinceRuler t in rems)
+            {
+                if (t.heldBy != null)
+                {
+                    if (map.overmind.enthralled != null && t.heldBy.society == map.overmind.enthralled.society)
+                    {
+                        map.addMessage(t.heldBy.getFullName() + " loses rule over " + t.province.name + " due to loss of territory.",MsgEvent.LEVEL_RED,false);
+                    }
+                    t.heldBy.titles.Remove(t);
+                    t.heldBy = null;
+                    titles.Remove(t);
+                }
+            }
+            for (int i = 0; i < provCounts.Length; i++)
+            {
+                if (provCounts[i] > 1  && this.getCapital() != null && (this.getCapital().province.index != i) && (!present[i]))
+                {
+                    Title_ProvinceRuler title = new Title_ProvinceRuler(this, map.provinces[i]);
+                    titles.Add(title);
                 }
             }
 
 
+            data_nProvinceRulers = 0;
             foreach (Title t in titles)
             {
                 t.turnTick();
+                if (t is Title_ProvinceRuler)
+                {
+                    data_nProvinceRulers += 1;
+                }
             }
         }
 

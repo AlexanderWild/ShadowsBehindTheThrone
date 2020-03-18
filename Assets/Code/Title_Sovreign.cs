@@ -26,8 +26,8 @@ namespace Assets.Code{
             }
             else
             {
-                nameM = "Duke";
-                nameF = "Duchess";
+                nameM = "ArchDuke";
+                nameF = "ArchDuchess";
             }
         }
         public override string getName()

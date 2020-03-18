@@ -49,7 +49,12 @@ namespace Assets.Code
             if (p.society.getSovreign() == p)
             {
                 border.sprite = p.map.world.textureStore.slotKing;
-            }else if (p.title_land != null)
+            }
+            else if (p.titles.Count > 0)
+            {
+                border.sprite = p.map.world.textureStore.slotDuke;
+            }
+            else if (p.title_land != null)
             {
                 border.sprite = p.map.world.textureStore.slotCount;
             }

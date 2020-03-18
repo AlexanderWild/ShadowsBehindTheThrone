@@ -19,7 +19,7 @@ namespace Assets.Code
         public double mapGen_minHabitabilityForHumans = 0.15;
         public int mapGen_stepsPerIsland = 12;
         public int mapGen_maxBrushSize = 5;
-        public int mapGen_burnInSteps = 100;
+        public int mapGen_burnInSteps = 150;
         public float map_tempTemperatureReversion = 0.002f;
 
         public bool flashEnthrallables = true;
