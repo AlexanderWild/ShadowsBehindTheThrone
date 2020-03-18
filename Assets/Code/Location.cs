@@ -80,7 +80,7 @@ namespace Assets.Code
          */
         public double getMaxMilitaryDefence()
         {
-            if (settlement != null) { return settlement.defensiveStrengthMax; }
+            if (settlement != null) { return settlement.getDefensiveMax(); }
             return 0;
         }
         /**

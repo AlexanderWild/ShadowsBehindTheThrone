@@ -10,12 +10,19 @@ namespace Assets.Code
         public static int CODE_LIKABILITY = 1;
         public static int CODE_SUSPICION = 2;
         public static int CODE_LIKING = 3;
+        public static int CODE_MILCAP = 4;
+        public static int CODE_MILDEF= 5;
+        public static int CODE_SABOTAGE = 6;
 
         public string name;
         public string desc = "DEFAULT DESCRIPTION";
         public virtual double receivedLikingDelta() { return 0; }
         public virtual double suspicionMult() { return 1; }
         public virtual double likingChange() { return 0; }
+        public virtual double milCapChange() { return 0; }
+        public virtual double defChange() { return 0; }
         public int groupCode;
+
+        public virtual void turnTick(Person p) { }
     }
 }

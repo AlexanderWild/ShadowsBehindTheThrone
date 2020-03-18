@@ -68,11 +68,11 @@ namespace Assets.Code
             
             for (int i = 0; i < 3; i++)
             {
-                if (Eleven.random.Next(2) == 0) { break; }//50% chance to add another trait
-
                 Trait add = map.globalist.getTrait(this);
                 if (add == null) { break; }
                 traits.Add(add);
+
+                if (Eleven.random.Next(2) == 0) { break; }//50% chance to add another trait
             }
         }
 
@@ -108,6 +108,11 @@ namespace Assets.Code
                 }
             }
             foreach (Title t in rems) { titles.Remove(t); }
+
+            foreach (Trait t in traits)
+            {
+                t.turnTick(this);
+            }
 
             computeSuspicionGain();
             processThreats();
@@ -217,6 +222,20 @@ namespace Assets.Code
             }
         }
 
+        public Person getSuperiorIfAny()
+        {
+            if (this == society.getSovreign()) { return null; }
+            if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovreign(); }
+            foreach (Title t in society.titles)
+            {
+                if (t is Title_ProvinceRuler)
+                {
+                    Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
+                    if (t2.province == this.getLocation().province) { return t2.heldBy; }
+                }
+            }
+            return null;
+        }
         public bool enthrallable()
         {
             if (state == personState.broken) { return true; }

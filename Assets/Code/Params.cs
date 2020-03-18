@@ -174,6 +174,13 @@ namespace Assets.Code
         public double trait_charismatic = 15;
         public double trait_unlikable = -15;
         public double trait_hateful = -15;
+        public double trait_warmaster = 10;
+        public double trait_defender = 10;
+        public double trait_badCommander = -10;
+        public double trait_incompetent_probability = 0.09;
+        public double trait_incompetent_mult = 0.8;
+        public double trait_incompetent_dislike = -30;
+        public double trait_incompetent_loss = 10;
 
         public double city_popMaxPerHabilitability = 100;
         public double city_popDmg = 5;

@@ -133,14 +133,19 @@ namespace Assets.Code
             permanentThreat += temporaryThreat * map.param.temporaryThreatConversion;
             computeMilitaryCap();
             processMilitaryRegen();
-
-            
         }
 
         public virtual double getThreat(List<ReasonMsg> reasons)
         {
             ReasonMsg msg;
-            double threat = (currentMilitary + (maxMilitary/2));
+            double threat = 5;
+            if (reasons != null)
+            {
+                msg = new ReasonMsg("Base", 5);
+                reasons.Add(msg);
+            }
+
+            threat += (currentMilitary + (maxMilitary/2));
             if (reasons != null)
             {
                 msg = new ReasonMsg("Current Military", currentMilitary);

@@ -33,6 +33,14 @@ namespace Assets.Code
             {
                 cap += p.proto.milCapAdd;
             }
+            if (title != null && title.heldBy != null)
+            {
+                foreach (Trait trait in title.heldBy.traits)
+                {
+                    cap += trait.milCapChange();
+                }
+            }
+            if (cap < 0) { cap = 0; }
             return cap;
         }
         public double getEconEffectMult()
@@ -65,12 +73,26 @@ namespace Assets.Code
             return location.hex.province.econTraits;
         }
 
+        public virtual double getDefensiveMax()
+        {
+            double d = defensiveStrengthMax;
+
+            if (title != null && title.heldBy != null)
+            {
+                foreach (Trait trait in title.heldBy.traits)
+                {
+                    d += trait.defChange();
+                }
+            }
+            if (d < 0) { d = 0; }
+            return d;
+        }
         public virtual void turnTick()
         {
             checkTitles();
 
             defensiveStrengthCurrent += defensiveStrengthRegen;
-            if (defensiveStrengthCurrent > defensiveStrengthMax) { defensiveStrengthCurrent = defensiveStrengthMax; }
+            if (defensiveStrengthCurrent > getDefensiveMax()) { defensiveStrengthCurrent = getDefensiveMax(); }
 
             if (title != null && title.heldBy != null)
             {
