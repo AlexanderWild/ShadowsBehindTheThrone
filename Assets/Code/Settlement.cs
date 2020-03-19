@@ -33,6 +33,7 @@ namespace Assets.Code
             {
                 cap += p.proto.milCapAdd;
             }
+            bool wasNonZero = cap > 0;
             if (title != null && title.heldBy != null)
             {
                 foreach (Trait trait in title.heldBy.traits)
@@ -40,7 +41,14 @@ namespace Assets.Code
                     cap += trait.milCapChange();
                 }
             }
-            if (cap < 0) { cap = 0; }
+            if (wasNonZero)
+            {
+                if (cap < 1) { cap = 1; }
+            }
+            else
+            {
+                if (cap < 0) { cap = 0; }
+            }
             return cap;
         }
         public double getEconEffectMult()

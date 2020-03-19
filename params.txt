@@ -21,9 +21,10 @@ combat_maxMilitaryCapExponent: 0.82
 combat_defensivePostureDmgMult: 0.666
 war_defaultLength: 16
 minInformationAvailability: 0.2
-utility_econEffect: 0.5
+utility_econEffect: 0.65
 utility_econEffectOther: 0.2
 utility_militaryTargetRelStrengthOffensive: 300
+utility_militaryTargetCompleteProvince: 50
 utility_militaryTargetRelStrengthDefensive: 250
 utility_vassaliseReluctance: -90
 utility_vassaliseMilMult: 80
@@ -62,10 +63,11 @@ society_zeitDuration: 3
 society_sovreignPrestige: 10
 society_threatMultFromOffensivePosture: 0.5
 society_minTimeBetweenLocReassignments: 40
-society_minTimeBetweenTitleReassignments: 30
+society_minTimeBetweenTitleReassignments: 40
 society_nPeopleForEmpire: 21
 society_nPeopleForKingdom: 12
 society_introversionStabilityGain: 1.2
+society_votingEconHiddenBiasMult: 1.5
 temporaryThreatDecay: 0.95
 threat_takeLocation: 5
 victory_targetEnshadowmentAvrg: 0.75
@@ -144,6 +146,15 @@ trait_aware: 2
 trait_charismatic: 15
 trait_unlikable: -15
 trait_hateful: -15
+trait_warmaster: 10
+trait_defender: 10
+trait_badCommander: -10
+trait_incompetent_loss: 7
+trait_competent_gain: 7
+trait_incompetent_desirability: -75
+trait_competent_desirability: 75
+trait_basic_desirability: 30
+trait_basic_undesirability: -30
 city_popMaxPerHabilitability: 100
 city_popDmg: 5
 city_infraDmg: 5
@@ -159,3 +170,5 @@ ability_coldAsDeathCost: 5
 ability_coldAsDeathCooldown: 10
 ability_deathOfTheSunCost: 0
 ability_deathOfTheSunCooldown: 10
+combat_popDamageMax: 10
+combat_infraDamageMax: 10

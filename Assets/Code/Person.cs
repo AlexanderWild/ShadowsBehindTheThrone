@@ -82,12 +82,7 @@ namespace Assets.Code
 
             processEnshadowment();
 
-            this.targetPrestige = map.param.person_defaultPrestige;
-            if (title_land != null)
-            {
-                targetPrestige += title_land.settlement.getPrestige();
-            }
-            foreach (Title t in titles) { targetPrestige += t.getPrestige(); }
+            this.targetPrestige = getTargetPrestige();
             if (Math.Abs(prestige-targetPrestige) < map.param.person_prestigeDeltaPerTurn)
             {
                 prestige = targetPrestige;
@@ -117,6 +112,81 @@ namespace Assets.Code
             computeSuspicionGain();
             processThreats();
             processSanity();
+        }
+
+        public double getTargetPrestige()
+        {
+            double prestige =  map.param.person_defaultPrestige;
+
+            if (title_land != null)
+            {
+                prestige += title_land.settlement.getPrestige();
+            }
+            foreach (Title t in titles) { prestige += t.getPrestige(); }
+
+            foreach (Person p in this.getDirectSubordinates())
+            {
+                foreach (Trait t in p.traits)
+                {
+                    prestige -= t.superiorPrestigeChange();
+                }
+            }
+            if (prestige < 0) { prestige = 0; }
+            return prestige;
+        }
+
+        public Person getSuperiorIfAny()
+        {
+            foreach (Title t in titles)
+            {
+                if (t is Title_ProvinceRuler)
+                {
+                    return this.society.getSovreign();
+                }
+            }
+            //Am not a duke
+            foreach (Title t in society.titles)
+            {
+                if (t is Title_Sovreign)
+                {
+                    return null;
+                }
+                if (t is Title_ProvinceRuler)
+                {
+                    if (((Title_ProvinceRuler)t).province == this.getLocation().province)
+                    {
+                        return t.heldBy;
+                    }
+                }
+            }
+            //Am neither duke nor sovreign, nor do I live in a duke's province
+            return society.getSovreign();
+        }
+        public Person getDirectSuperiorIfAny()
+        {
+            if (this == society.getSovreign()) { return null; }
+            if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovreign(); }
+            foreach (Title t in society.titles)
+            {
+                if (t is Title_ProvinceRuler)
+                {
+                    Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
+                    if (t2.province == this.getLocation().province) { return t2.heldBy; }
+                }
+            }
+            return null;
+        }
+        public List<Person> getDirectSubordinates()
+        {
+            List<Person> subs = new List<Person>();
+            foreach (Person p in society.people)
+            {
+                if (p.getDirectSuperiorIfAny() == this)
+                {
+                    subs.Add(p);
+                }
+            }
+            return subs;
         }
 
         public void processSanity()
@@ -222,20 +292,6 @@ namespace Assets.Code
             }
         }
 
-        public Person getSuperiorIfAny()
-        {
-            if (this == society.getSovreign()) { return null; }
-            if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovreign(); }
-            foreach (Title t in society.titles)
-            {
-                if (t is Title_ProvinceRuler)
-                {
-                    Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
-                    if (t2.province == this.getLocation().province) { return t2.heldBy; }
-                }
-            }
-            return null;
-        }
         public bool enthrallable()
         {
             if (state == personState.broken) { return true; }

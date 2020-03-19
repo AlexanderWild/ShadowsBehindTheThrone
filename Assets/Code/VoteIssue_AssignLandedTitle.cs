@@ -64,13 +64,45 @@ namespace Assets.Code
                 u += localU;
             }
 
+            Person wouldBeSuperior = title.settlement.location.getSuperiorInSociety(voter.society);
+            Person currentSuperior = option.person.getDirectSuperiorIfAny();
+            if (currentSuperior == voter && wouldBeSuperior != voter) {
+                //Follower would be leaving
+                double desirabilityAsFollower = 0;
+                foreach (Trait t in option.person.traits)
+                {
+                    desirabilityAsFollower += t.desirabilityAsFollower();
+                }
+                if (wouldBeSuperior == voter)
+                {
+                    localU = -desirabilityAsFollower;
+                    msgs.Add(new ReasonMsg("Desirability as follower", localU));
+                    u += localU;
+                }
+            }
+            else if (currentSuperior != voter && wouldBeSuperior == voter)
+            {
+                //Follower would be arriving
+                double desirabilityAsFollower = 0;
+                foreach (Trait t in option.person.traits)
+                {
+                    desirabilityAsFollower += t.desirabilityAsFollower();
+                }
+                if (wouldBeSuperior == voter)
+                {
+                    localU = desirabilityAsFollower;
+                    msgs.Add(new ReasonMsg("Desirability as follower", localU));
+                    u += localU;
+                }
+            }
+
             //We need to know if someone's going to lose out here
             //(Note this is irrelevant if they're the person who's being voted on)
             if (title.heldBy != null && title.heldBy != p)
             {
                 double damageToOther = title.settlement.getPrestige();
                 localU = -damageToOther * voter.getRelation(title.heldBy).getLiking() * voter.map.param.utility_landedTitleMult;
-                msgs.Add(new ReasonMsg("Harm to " + title.heldBy.getFullName(), localU));
+                msgs.Add(new ReasonMsg(title.heldBy.getFullName() + " would lose title", localU));
                 u += localU;
             }
             

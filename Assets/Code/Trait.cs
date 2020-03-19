@@ -21,6 +21,8 @@ namespace Assets.Code
         public virtual double likingChange() { return 0; }
         public virtual double milCapChange() { return 0; }
         public virtual double defChange() { return 0; }
+        public virtual double superiorPrestigeChange() { return 0; }
+        public virtual double desirabilityAsFollower() { return 0; }
         public int groupCode;
 
         public virtual void turnTick(Person p) { }

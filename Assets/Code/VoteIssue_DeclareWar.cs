@@ -76,6 +76,24 @@ namespace Assets.Code
             msgs.Add(new ReasonMsg("Relative strength of current militaries", relMilU));
             u += relMilU;
 
+
+            //We want to expand into territory we already partially own
+            bool hasOurTerritory = false;
+            foreach (Location loc in target.lastTurnLocs)
+            {
+                if (loc.province == voter.getLocation().province)
+                {
+                    hasOurTerritory = true;
+                    break;
+                }
+            }
+            if (hasOurTerritory)
+            {
+                localU = society.map.param.utility_militaryTargetCompleteProvince;
+                msgs.Add(new ReasonMsg("Has territory from my province", localU));
+                u += localU;
+            }
+
             /*
             if (relMilU > 0 && target is Society)
             {

@@ -104,6 +104,20 @@ namespace Assets.Code
             return amount;
         }
 
+        public Person getSuperiorInSociety(Society society)
+        {
+            if (society.getCapital() != null && society.getCapital().province == this.province) { return society.getSovreign(); }
+            foreach (Title t in society.titles)
+            {
+                if (t is Title_ProvinceRuler)
+                {
+                    Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
+                    if (t2.province == this.province) { return t2.heldBy; }
+                }
+            }
+            return null;
+        }
+
         public List<Location> getNeighbours()
         {
             List<Location> reply = new List<Location>();

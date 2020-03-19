@@ -42,9 +42,10 @@ namespace Assets.Code
         public int war_defaultLength = 16;
         public double minInformationAvailability = 0.2;
 
-        public double utility_econEffect = 0.5;
+        public double utility_econEffect = 0.65;
         public double utility_econEffectOther = 0.20;
         public double utility_militaryTargetRelStrengthOffensive = 300;
+        public double utility_militaryTargetCompleteProvince = 50;
         public double utility_militaryTargetRelStrengthDefensive = 250;
         public double utility_vassaliseReluctance = -90;
         public double utility_vassaliseMilMult = 80;
@@ -86,10 +87,11 @@ namespace Assets.Code
         public double society_sovreignPrestige = 10;
         public double society_threatMultFromOffensivePosture = 0.5;
         public int society_minTimeBetweenLocReassignments = 40;
-        public int society_minTimeBetweenTitleReassignments = 30;
+        public int society_minTimeBetweenTitleReassignments = 40;
         public int society_nPeopleForEmpire = 21;
         public int society_nPeopleForKingdom = 12;
         public double society_introversionStabilityGain = 1.2;
+        public double society_votingEconHiddenBiasMult = 1.5;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 5;
@@ -177,10 +179,12 @@ namespace Assets.Code
         public double trait_warmaster = 10;
         public double trait_defender = 10;
         public double trait_badCommander = -10;
-        public double trait_incompetent_probability = 0.09;
-        public double trait_incompetent_mult = 0.8;
-        public double trait_incompetent_dislike = -30;
-        public double trait_incompetent_loss = 10;
+        public double trait_incompetent_loss = 7;
+        public double trait_competent_gain = 7;
+        public double trait_incompetent_desirability = -75;
+        public double trait_competent_desirability = 75;
+        public double trait_basic_desirability = 30;
+        public double trait_basic_undesirability = -30;
 
         public double city_popMaxPerHabilitability = 100;
         public double city_popDmg = 5;
@@ -199,8 +203,8 @@ namespace Assets.Code
         public int ability_coldAsDeathCooldown = 10;
         public int ability_deathOfTheSunCost = 0;
         public int ability_deathOfTheSunCooldown = 10;
-        internal int combat_popDamageMax = 10;
-        internal int combat_infraDamageMax = 10;
+        public int combat_popDamageMax = 10;
+        public int combat_infraDamageMax = 10;
 
         public void saveToFile()
         {

@@ -55,6 +55,23 @@ namespace Assets.Code
                 u += localU;
             }
 
+            //We want to expand into territory we already partially own
+            bool hasOurTerritory = false;
+            foreach (Location loc in option.group.lastTurnLocs)
+            {
+                if (loc.province == voter.getLocation().province)
+                {
+                    hasOurTerritory = true;
+                    break;
+                }
+            }
+            if (hasOurTerritory)
+            {
+                localU = society.map.param.utility_militaryTargetCompleteProvince;
+                msgs.Add(new ReasonMsg("Has territory from my province", localU));
+                u += localU;
+            }
+
 
             foreach (ThreatItem threat in voter.threatEvaluations)
             {

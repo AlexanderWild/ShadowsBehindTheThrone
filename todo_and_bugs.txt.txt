@@ -5,9 +5,8 @@ High criticality:
 
 Medium criticality:
 
+-A way to view how votes will affect people's liking of you
 
-
--Make temperature changes permanent for world-wide power
 
 
 Low criticality:
@@ -26,3 +25,5 @@ Low criticality:
 -Nobles should spawn enshadowed
 
 -Dark Unity power (or make them hate light people)
+
+-DENIED Make temperature changes permanent for world-wide power

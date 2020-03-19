@@ -40,7 +40,8 @@ namespace Assets.Code
             allTraits.Add(new Trait_Warmaster());
             allTraits.Add(new Trait_BadCommander());
             allTraits.Add(new Trait_Defender());
-            //allTraits.Add(new Trait_IncompetentFollower()); Too dumb and bad to live, but funny as fuck
+            allTraits.Add(new Trait_IncompetentFollower());
+            allTraits.Add(new Trait_CompetentFollower());
         }
 
         public Trait getTrait(Person person)

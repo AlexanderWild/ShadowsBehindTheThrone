@@ -242,7 +242,7 @@ namespace Assets.Code
                                 foreach (VoteOption opt in issue.options)
                                 {
                                     //Random factor to prevent them all rushing a singular voting choice
-                                    double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                                    double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble() * map.param.society_votingEconHiddenBiasMult;
                                     if (localU > bestU)
                                     {
                                         bestU = localU;

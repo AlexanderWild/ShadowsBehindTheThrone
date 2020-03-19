@@ -15,7 +15,7 @@ namespace Assets.Code
             groupCode = Trait.CODE_LIKING;
         }
 
-        public override double receivedLikingDelta()
+        public override double likingChange()
         {
             return World.staticMap.param.trait_hateful;
         }

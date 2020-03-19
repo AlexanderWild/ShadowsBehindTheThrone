@@ -19,5 +19,9 @@ namespace Assets.Code
         {
             return World.staticMap.param.trait_warmaster;
         }
+        public override double desirabilityAsFollower()
+        {
+            return World.staticMap.param.trait_basic_desirability;
+        }
     }
 }

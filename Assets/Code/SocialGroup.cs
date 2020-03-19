@@ -15,6 +15,7 @@ namespace Assets.Code
 
         public SavableMap_SG_DipRel relations = new SavableMap_SG_DipRel();
         public DipRel selfRel;
+        public List<Location> lastTurnLocs = new List<Location>();
 
         public double threat_mult = 0;
         public double maxMilitary;
@@ -133,6 +134,15 @@ namespace Assets.Code
             permanentThreat += temporaryThreat * map.param.temporaryThreatConversion;
             computeMilitaryCap();
             processMilitaryRegen();
+
+            lastTurnLocs.Clear();
+            foreach (Location loc in map.locations)
+            {
+                if (loc.soc == this)
+                {
+                    lastTurnLocs.Add(loc);
+                }
+            }
         }
 
         public virtual double getThreat(List<ReasonMsg> reasons)

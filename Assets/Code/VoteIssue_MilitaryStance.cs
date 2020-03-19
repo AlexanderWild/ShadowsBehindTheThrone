@@ -53,13 +53,31 @@ namespace Assets.Code
             double offUtility = 0;
             double offUtilityStr = 0;
             double offUtilityPersonality = 0;
+            double offUtilityTerritory = 0;
             if (voter.society.offensiveTarget != null)
             {
                 //Negative if the offensive target is stronger
                 offUtilityStr += (ourStr - offStr) / (ourStr + offStr) * voter.map.param.utility_militaryTargetRelStrengthOffensive;
                 offUtilityPersonality += voter.politics_militarism * voter.map.param.utility_militarism;
+                
+                //We want to expand into territory we already partially own
+                bool hasOurTerritory = false;
+                foreach (Location loc in voter.society.offensiveTarget.lastTurnLocs)
+                {
+                    if (loc.province == voter.getLocation().province)
+                    {
+                        hasOurTerritory = true;
+                        break;
+                    }
+                }
+                if (hasOurTerritory)
+                {
+                    offUtilityTerritory += society.map.param.utility_militaryTargetCompleteProvince;
+                }
+
                 offUtility += offUtilityStr;
                 offUtility += offUtilityPersonality;
+                offUtility += offUtilityTerritory;
             }
             double introUtility = 0;
             double introUtilityStability = -(society.data_societalStability - 1);//0 if stability is 1, increasing to 1 if civil war is imminent, to 2 if every single person is a traitor
@@ -104,6 +122,7 @@ namespace Assets.Code
                 u += offUtility;
                 msgs.Add(new ReasonMsg("Our relative strength against offensive target", offUtilityStr));
                 msgs.Add(new ReasonMsg("Militarism personality", offUtilityPersonality));
+                msgs.Add(new ReasonMsg("Desire for territory", offUtilityTerritory));
                 if (voter.society.isDarkEmpire)
                 {
                     int value = (int)(100 * voter.shadow);

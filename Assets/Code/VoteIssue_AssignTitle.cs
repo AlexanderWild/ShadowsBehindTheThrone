@@ -58,7 +58,7 @@ namespace Assets.Code
             {
                 foreach (Person p2 in voter.society.people)
                 {
-                    if (p2.prestige > p.prestige*1.5)
+                    if (p2.prestige > p.prestige*2)
                     {
                         wouldBeOutvoted = true;
                     }
@@ -102,25 +102,40 @@ namespace Assets.Code
         {
             if (society.people.Contains(option.person) == false) { World.log("Invalid option. Person cannot hold title."); return; }
             base.implement(option);
+
+            society.turnSovreignAssigned = society.map.turn;
+            title.turnLastAssigned = society.map.turn;
+
             if (title.heldBy == option.person)
             {
                 World.log("Title: " + title.getName() + " remains held by " + option.person.getFullName());
             }
-            
-            //Title already has a person
-            if (title.heldBy != null)
-            {
-                World.log(title.heldBy.getFullName() + " is losing title " + title.getName());
-                title.heldBy.titles.Remove(title);
-                title.heldBy = null;
+            else {
+                //Title already has a person
+                if (title.heldBy != null)
+                {
+                    World.log(title.heldBy.getFullName() + " is losing title " + title.getName());
+                    title.heldBy.titles.Remove(title);
+                    title.heldBy = null;
+                }
             }
 
+            //Clear all titles, assign this new one
+            foreach (Title t in option.person.titles)
+            {
+                if (t != title)
+                {
+                    t.heldBy = null;
+                    if (t.society.hasEnthralled())
+                    {
+                        t.society.map.addMessage("Title: " + t.getName() + " is now unassigned");
+                    }
+                }
+            }
+            option.person.titles.Clear();
             World.log(option.person.getFullName() + " has been granted the title of " + title.getName());
             title.heldBy = option.person;
             option.person.titles.Add(title);
-
-            society.turnSovreignAssigned = society.map.turn;
-            title.turnLastAssigned = society.map.turn;
         }
         public override bool stillValid(Map map)
         {

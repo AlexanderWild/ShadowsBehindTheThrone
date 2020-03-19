@@ -15,11 +15,10 @@ namespace Assets.Code{
         public override void turnTick()
         {
             base.turnTick();
-            
         }
         public override string getName()
         {
-            return "Dukedom of " + province.name + " province";
+            return "Dukedom of " + province.name;
         }
         public override double getPrestige()
         {

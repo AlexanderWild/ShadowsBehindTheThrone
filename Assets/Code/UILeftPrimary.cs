@@ -109,7 +109,15 @@ namespace Assets.Code
             {
                 locText.text = "of " + title.settlement.name;
             }
-            string bodyText = "Prestige: " + (int)(p.prestige);
+            string bodyText = "";
+            if (p.getDirectSuperiorIfAny() != null)
+            {
+                bodyText += "\nDirect Superior: " + p.getDirectSuperiorIfAny().getFullName();
+            }
+            else {
+                bodyText += "\nDirect Superior: None";
+            }
+            bodyText += "\nPrestige: " + (int)(p.prestige);
             bodyText += "\nPrestige Moving towards: " + (int)(p.targetPrestige);
             bodyText += "\nShadow: " + (int)(p.shadow*100) + "%";
             bodyText += "\nEvidence: " + (int)(p.evidence*100) + "%";
