@@ -9,7 +9,7 @@ namespace Assets.Code
     //[Serializable,HideInInspector]
     public class MapMaskManager
     {
-        public enum maskType { NONE, NATION, PROVINCE, INFORMATION,THREAT,LIKING_ME,LIKING_THEM, EVIDENCE,SUSPICION, SUSPICION_FROM,TESTING };
+        public enum maskType { NONE, NATION, PROVINCE, INFORMATION,VOTE_EFFECT,THREAT,LIKING_ME,LIKING_THEM, EVIDENCE,SUSPICION, SUSPICION_FROM,TESTING };
         public maskType mask = maskType.NONE;
         public Map map;
         [NonSerialized]
@@ -40,6 +40,10 @@ namespace Assets.Code
             else if (mask == maskType.INFORMATION)
             {
                 return "Mask: Information Availability";
+            }
+            else if (mask == maskType.VOTE_EFFECT)
+            {
+                return "Mask: Vote Effect";
             }
             else if (mask == maskType.THREAT)
             {
@@ -137,7 +141,7 @@ namespace Assets.Code
                     {
                         words += "\nFROM SUSPICION: " + (int)sus;
                     }
-                    
+
                     List<ReasonMsg> msgs = new List<ReasonMsg>();
                     RelObj.getLikingModifiers(me, them, msgs);
                     foreach (ReasonMsg msg in msgs)
@@ -160,6 +164,26 @@ namespace Assets.Code
                 catch (Exception e)
                 {
                     return "";
+                }
+            }
+            else if (mask == maskType.VOTE_EFFECT)
+            {
+                if (GraphicalMap.selectedHex != null && GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.person() != null)
+                {
+                    Person voter = GraphicalMap.selectedHex.location.person();
+                            Society soc = (Society)voter.society;
+                            if (soc.voteSession == null) { return "No voting currently happening in " + voter.getFullName() + "'s society"; }
+                            VoteOption opt = soc.voteSession.issue.options[0];
+                            foreach (VoteOption o2 in soc.voteSession.issue.options)
+                            {
+                                if (o2.votesFor.Contains(voter))
+                                {
+                                    opt = o2;
+                                    break;
+                                }
+                            }
+                    return "The change in liking towards " + voter.getFullName() + " if they vote for their currently preferred option (" + opt.info(soc.voteSession.issue) + ").";
+                        
                 }
             }
             return "";
@@ -211,6 +235,62 @@ namespace Assets.Code
                 {
                     return new Color(0f, 0f, 0f, 0.75f);
                 }
+            }
+            else if (mask == maskType.VOTE_EFFECT)
+            {
+                if (GraphicalMap.selectedHex != null && GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.person() != null && hex.location != null && hex.location.soc != null)
+                {
+                    if (GraphicalMap.selectedHex == hex)
+                    {
+                        return new Color(1f, 1f, 1f, 0.5f);
+                    }
+                    Person voter = GraphicalMap.selectedHex.location.person();
+                    if (hex.location.soc == voter.society) {
+                        if (hex.location.person() != null && hex.location.soc is Society)
+                        {
+                            Society soc = (Society)hex.location.soc;
+                            if (soc.voteSession == null) { return new Color(0f, 0f, 0f, 0.75f); }
+                            VoteOption opt = null;
+                            foreach (VoteOption o2 in soc.voteSession.issue.options)
+                            {
+                                if (o2.votesFor.Contains(voter))
+                                {
+                                    opt = o2;
+                                    break;
+                                }
+                            }
+                            if (opt == null)
+                            {
+                                soc.voteSession.assignVoters();
+                            }
+                            foreach (VoteOption o2 in soc.voteSession.issue.options)
+                            {
+                                if (o2.votesFor.Contains(voter))
+                                {
+                                    opt = o2;
+                                    break;
+                                }
+                            }
+                            if (soc.voteSession != null)
+                            {
+                                float delta = (float)soc.voteSession.issue.getLikingDelta(hex.location.person(), opt);
+                                delta /= 25;
+                                if (delta > 1) { delta = 1f; }
+                                if (delta < -1) { delta = -1f; }
+                                if (delta >= 0)
+                                {
+                                    return new Color(0f,delta, 0f, 0.75f);
+                                }
+                                else
+                                {
+                                    return new Color(-delta, 0f, 0f, 0.75f);
+
+                                }
+                            }
+                        }
+                    }
+                }
+                return new Color(0f, 0f, 0f, 0.75f);
             }
             else if (mask == maskType.THREAT)
             {

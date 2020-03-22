@@ -82,13 +82,13 @@ namespace Assets.Code
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha3))
                 {
-                    if (world.map.masker.mask == MapMaskManager.maskType.INFORMATION)
+                    if (world.map.masker.mask == MapMaskManager.maskType.VOTE_EFFECT)
                     {
                         world.map.masker.mask = MapMaskManager.maskType.NONE;
                     }
                     else
                     {
-                        world.map.masker.mask = MapMaskManager.maskType.INFORMATION;
+                        world.map.masker.mask = MapMaskManager.maskType.VOTE_EFFECT;
                     }
                     GraphicalMap.checkData();
                 }

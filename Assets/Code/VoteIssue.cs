@@ -35,30 +35,36 @@ namespace Assets.Code
             //depending on how much they care and how much they were affected
             foreach (Person p in society.people)
             {
-                double utility = computeUtility(p, option, new List<ReasonMsg>());
-
-                double deltaRel = utility;
-                if (deltaRel > 0)
-                {
-                    deltaRel *= p.map.param.society_votingRelChangePerUtilityPositive;
-                }
-                else
-                {
-                    deltaRel *= p.map.param.society_votingRelChangePerUtilityNegative;
-                }
-                if (deltaRel > p.map.param.person_maxLikingGainFromVoteAccordance)
-                {
-                    deltaRel = p.map.param.person_maxLikingGainFromVoteAccordance;
-                }
-                if (deltaRel < p.map.param.person_maxLikingLossFromVoteDiscord)
-                {
-                    deltaRel = p.map.param.person_maxLikingLossFromVoteDiscord;
-                }
+                double deltaRel = getLikingDelta(p, option);
                 foreach (Person voter in option.votesFor)
                 {
                     p.getRelation(voter).addLiking(deltaRel,"Vote on issue " + this.ToString(),society.map.turn);
                 }
             }
+        }
+
+        public double getLikingDelta(Person p,VoteOption option)
+        {
+            double utility = computeUtility(p, option, new List<ReasonMsg>());
+
+            double deltaRel = utility;
+            if (deltaRel > 0)
+            {
+                deltaRel *= p.map.param.society_votingRelChangePerUtilityPositive;
+            }
+            else
+            {
+                deltaRel *= p.map.param.society_votingRelChangePerUtilityNegative;
+            }
+            if (deltaRel > p.map.param.person_maxLikingGainFromVoteAccordance)
+            {
+                deltaRel = p.map.param.person_maxLikingGainFromVoteAccordance;
+            }
+            if (deltaRel < p.map.param.person_maxLikingLossFromVoteDiscord)
+            {
+                deltaRel = p.map.param.person_maxLikingLossFromVoteDiscord;
+            }
+            return deltaRel;
         }
 
         public virtual string getLargeDesc()
