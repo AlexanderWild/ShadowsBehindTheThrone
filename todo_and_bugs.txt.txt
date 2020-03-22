@@ -7,10 +7,17 @@ Medium criticality:
 
 -A way to view how votes will affect people's liking of you
 
+-Prestige breakdown
 
+-Re-arrange UI on left hand panel
 
 Low criticality:
 
+-Ongoing wars added to right hand scrollables
+
+-Wordwrap on power info looks ugly
+
+-Turn counter up there too
 
 -----------------------RESOLVED-----------------------
 

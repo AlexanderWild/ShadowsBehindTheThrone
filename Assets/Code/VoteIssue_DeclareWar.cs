@@ -89,7 +89,7 @@ namespace Assets.Code
             }
             if (hasOurTerritory)
             {
-                localU = society.map.param.utility_militaryTargetCompleteProvince;
+                localU = society.map.param.utility_militaryTargetCompleteProvince * parityMult;
                 msgs.Add(new ReasonMsg("Has territory from my province", localU));
                 u += localU;
             }

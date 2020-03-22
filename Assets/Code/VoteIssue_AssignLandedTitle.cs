@@ -64,35 +64,39 @@ namespace Assets.Code
                 u += localU;
             }
 
-            Person wouldBeSuperior = title.settlement.location.getSuperiorInSociety(voter.society);
-            Person currentSuperior = option.person.getDirectSuperiorIfAny();
-            if (currentSuperior == voter && wouldBeSuperior != voter) {
-                //Follower would be leaving
-                double desirabilityAsFollower = 0;
-                foreach (Trait t in option.person.traits)
-                {
-                    desirabilityAsFollower += t.desirabilityAsFollower();
-                }
-                if (wouldBeSuperior == voter)
-                {
-                    localU = -desirabilityAsFollower;
-                    msgs.Add(new ReasonMsg("Desirability as follower", localU));
-                    u += localU;
-                }
-            }
-            else if (currentSuperior != voter && wouldBeSuperior == voter)
+            if (option.person != voter.society.getSovreign())
             {
-                //Follower would be arriving
-                double desirabilityAsFollower = 0;
-                foreach (Trait t in option.person.traits)
+                Person wouldBeSuperior = title.settlement.location.getSuperiorInSociety(voter.society);
+                Person currentSuperior = option.person.getDirectSuperiorIfAny();
+                if (currentSuperior == voter && wouldBeSuperior != voter)
                 {
-                    desirabilityAsFollower += t.desirabilityAsFollower();
+                    //Follower would be leaving
+                    double desirabilityAsFollower = 0;
+                    foreach (Trait t in option.person.traits)
+                    {
+                        desirabilityAsFollower += t.desirabilityAsFollower();
+                    }
+                    if (wouldBeSuperior == voter)
+                    {
+                        localU = -desirabilityAsFollower;
+                        msgs.Add(new ReasonMsg("Desirability as follower", localU));
+                        u += localU;
+                    }
                 }
-                if (wouldBeSuperior == voter)
+                else if (currentSuperior != voter && wouldBeSuperior == voter)
                 {
-                    localU = desirabilityAsFollower;
-                    msgs.Add(new ReasonMsg("Desirability as follower", localU));
-                    u += localU;
+                    //Follower would be arriving
+                    double desirabilityAsFollower = 0;
+                    foreach (Trait t in option.person.traits)
+                    {
+                        desirabilityAsFollower += t.desirabilityAsFollower();
+                    }
+                    if (wouldBeSuperior == voter)
+                    {
+                        localU = desirabilityAsFollower;
+                        msgs.Add(new ReasonMsg("Desirability as follower", localU));
+                        u += localU;
+                    }
                 }
             }
 

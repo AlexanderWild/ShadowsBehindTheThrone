@@ -229,6 +229,16 @@ namespace Assets.Code
         {
             if (state == uiState.SOCIETY)
             {
+                if (GraphicalSociety.focus != null)
+                {
+                    Location loc = GraphicalSociety.focus.getLocation();
+                    if (loc != null)
+                    {
+                        Hex hex = loc.hex;
+                        GraphicalMap.panTo(hex.x, hex.y);
+                        GraphicalMap.selectedHex = hex;
+                    }
+                }
                 setToWorld();
             }
             else if (state == uiState.WORLD)

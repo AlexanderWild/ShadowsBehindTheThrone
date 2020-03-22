@@ -28,8 +28,8 @@ namespace Assets.Code
         }
         public override string getLargeDesc()
         {
-            string reply = "A society sets an offensive target as a prelude to war. War may usually only be declared against the offensive target, and only when the society is in the Offensive military stance.";
-            reply += "\n\nNobles will prefer to set offensive targets which they regard as high-threat but low military strength.";
+            string reply = "Vote to set offensive target. A society sets an offensive target as a prelude to war. War may usually only be declared against the offensive target, and only when the society is in the Offensive military stance.";
+            reply += "\n\nNobles will prefer to set offensive targets which they regard as high-threat but low military strength or adds to a province they are in.";
             return reply;
         }
 
@@ -103,6 +103,22 @@ namespace Assets.Code
                         localU -= threat.threat;
                         break;
                     }
+                }
+
+
+                //We want to expand into territory we already partially own
+                hasOurTerritory = false;
+                foreach (Location loc in society.offensiveTarget.lastTurnLocs)
+                {
+                    if (loc.province == voter.getLocation().province)
+                    {
+                        hasOurTerritory = true;
+                        break;
+                    }
+                }
+                if (hasOurTerritory)
+                {
+                    localU -= society.map.param.utility_militaryTargetCompleteProvince;
                 }
 
                 localU -= society.map.param.utility_militaryTargetRelStrengthOffensive * relativeStrength;

@@ -42,8 +42,8 @@ namespace Assets.Code
         public int war_defaultLength = 16;
         public double minInformationAvailability = 0.2;
 
-        public double utility_econEffect = 0.65;
-        public double utility_econEffectOther = 0.20;
+        public double utility_econEffect = 0.5;
+        public double utility_econEffectOther = 0.10;
         public double utility_militaryTargetRelStrengthOffensive = 300;
         public double utility_militaryTargetCompleteProvince = 50;
         public double utility_militaryTargetRelStrengthDefensive = 250;
@@ -90,8 +90,11 @@ namespace Assets.Code
         public int society_minTimeBetweenTitleReassignments = 40;
         public int society_nPeopleForEmpire = 21;
         public int society_nPeopleForKingdom = 12;
+        public int society_maxDukes = 4;
         public double society_introversionStabilityGain = 1.2;
         public double society_votingEconHiddenBiasMult = 1.5;
+        public int society_billsBetweenLandAssignments = 3;
+        public double society_pExpandIntoEmpty = 0.1;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 5;
@@ -132,8 +135,6 @@ namespace Assets.Code
         public int ability_boycottVoteCost = 15;
         public int ability_cancelVoteCost = 10;
         public int ability_shortMemoriesCost = 5;
-        public double society_pExpandIntoEmpty = 0.1;
-        public double temporaryThreatConversion = 0.01;
         public int ability_fleshScreamThreatAdd = 10;
         public int ability_fleshScreamCost = 7;
         public int ability_fleshScreamSanity = 4;
@@ -164,18 +165,24 @@ namespace Assets.Code
         public double ability_provincialSentimentLikingChangePositive = 10;
         public double ability_provincialSentimentLikingChangeNegative = -20;
         public int ability_provincialSentimentLikingChangeCooldown = 20;
+        public double ability_coldAsDeathTempChange = -0.15;
+        public double ability_deathOfTheSunTempChange = -0.003;
+        public int ability_coldAsDeathCost = 5;
+        public int ability_coldAsDeathCooldown = 10;
+        public int ability_deathOfTheSunCost = 0;
+        public int ability_deathOfTheSunCooldown = 10;
 
         public double insanity_sanityRegen = 0.5;
         public int insanity_nParanoiaTargets = 4;
         public int insanity_relHit = -10;
         public double insanity_lashOutProbability = 0.07;
-        public int insanity_maxSanity = 17;
+        public int insanity_maxSanity = 14;
 
         public double trait_incautious = 0.5;
         public double trait_aware = 2;
         public double trait_charismatic = 15;
         public double trait_unlikable = -15;
-        public double trait_hateful = -15;
+        public double trait_hateful = -25;
         public double trait_warmaster = 10;
         public double trait_defender = 10;
         public double trait_badCommander = -10;
@@ -194,15 +201,8 @@ namespace Assets.Code
         public int city_level_city = 60;
         public int city_level_town = 40;
         public int city_level_village = 20;
-        public int society_billsBetweenLandAssignments = 3;
-
+        public double temporaryThreatConversion = 0.01;
         public int war_battleDeadDur = 4;
-        public double ability_coldAsDeathTempChange = -0.15;
-        public double ability_deathOfTheSunTempChange = -0.003;
-        public int ability_coldAsDeathCost = 5;
-        public int ability_coldAsDeathCooldown = 10;
-        public int ability_deathOfTheSunCost = 0;
-        public int ability_deathOfTheSunCooldown = 10;
         public int combat_popDamageMax = 10;
         public int combat_infraDamageMax = 10;
 

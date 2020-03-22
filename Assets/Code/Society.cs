@@ -709,12 +709,15 @@ namespace Assets.Code
                     titles.Remove(t);
                 }
             }
-            for (int i = 0; i < provCounts.Length; i++)
+            if (titles.Count <= World.staticMap.param.society_maxDukes)
             {
-                if (provCounts[i] > 1  && this.getCapital() != null && (this.getCapital().province.index != i) && (!present[i]))
+                for (int i = 0; i < provCounts.Length; i++)
                 {
-                    Title_ProvinceRuler title = new Title_ProvinceRuler(this, map.provinces[i]);
-                    titles.Add(title);
+                    if (provCounts[i] > 1 && this.getCapital() != null && (this.getCapital().province.index != i) && (!present[i]))
+                    {
+                        Title_ProvinceRuler title = new Title_ProvinceRuler(this, map.provinces[i]);
+                        titles.Add(title);
+                    }
                 }
             }
 

@@ -85,6 +85,7 @@ namespace Assets.Code
                     //Nobles holding land in region are eligible
                     foreach (Person p in society.people)
                     {
+                        if (p == society.getSovreign()) { continue; }
                         if (p.title_land != null && p.title_land.settlement.location.province == t2.province)
                         {
                             VoteOption opt = new VoteOption();

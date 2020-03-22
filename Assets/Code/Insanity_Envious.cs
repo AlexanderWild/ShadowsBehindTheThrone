@@ -23,7 +23,7 @@ namespace Assets.Code
                 RelObj rel = p.getRelation(p2);
                 if (p2.prestige > p.prestige)
                 {
-                    if (rel.getLiking() > 100)
+                    if (rel.getLiking() > -100)
                     {
                         rel.addLiking(-100, "Grew envious due to higher prestige", p.map.turn);
                     }
