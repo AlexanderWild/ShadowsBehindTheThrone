@@ -84,6 +84,20 @@ namespace Assets.Code
                     uiLeftPrimary.maskTitle.text = "";
                     uiLeftPrimary.maskBody.text = "";
                 }
+
+                uiLeftPrimary.unlandedViewButton.gameObject.SetActive(false);
+                uiLeftPrimary.neighborViewButton.gameObject.SetActive(false);
+                uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(false);
+            }
+            else if (state == uiState.SOCIETY)
+            {
+                uiLeftPrimary.maskBody.text = "";
+                uiLeftPrimary.titleTextDarkener.enabled = true;
+                uiLeftPrimary.bodyTextDarkener.enabled = false;
+
+                uiLeftPrimary.unlandedViewButton.gameObject.SetActive(true);
+                uiLeftPrimary.neighborViewButton.gameObject.SetActive(true);
+                uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(true);
             }
             else
             {
@@ -91,7 +105,12 @@ namespace Assets.Code
                 uiLeftPrimary.maskBody.text = "";
                 uiLeftPrimary.titleTextDarkener.enabled = false;
                 uiLeftPrimary.bodyTextDarkener.enabled = false;
+
+                uiLeftPrimary.unlandedViewButton.gameObject.SetActive(false);
+                uiLeftPrimary.neighborViewButton.gameObject.SetActive(false);
+                uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(false);
             }
+            
             if (state == uiState.MAIN_MENU)
             {
                 uiMainMenu.continueButton.gameObject.SetActive(World.staticMap != null);
@@ -302,7 +321,10 @@ namespace Assets.Code
 
             GraphicalSociety.purge();
             GraphicalMap.purge();
+
             GraphicalSociety.setup(soc);
+            uiLeftPrimary.bShowHierarchy();
+
             checkData();
         }
 

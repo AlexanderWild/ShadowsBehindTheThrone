@@ -65,7 +65,6 @@ namespace Assets.Code
             threat_enshadowedNobles.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
             threatEvaluations.Add(threat_enshadowedNobles);
 
-            
             for (int i = 0; i < 3; i++)
             {
                 Trait add = map.globalist.getTrait(this);
@@ -171,7 +170,13 @@ namespace Assets.Code
                 if (t is Title_ProvinceRuler)
                 {
                     Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
-                    if (t2.province == this.getLocation().province) { return t2.heldBy; }
+                    if (t2.province == this.getLocation().province)
+                    {
+                        if (t2.heldBy == this)
+                            return society.getSovreign();
+                        else
+                            return t2.heldBy;
+                    }
                 }
             }
             return null;
