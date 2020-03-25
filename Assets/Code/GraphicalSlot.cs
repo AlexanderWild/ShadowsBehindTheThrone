@@ -28,6 +28,7 @@ namespace Assets.Code
         public Color neutralColor;
         public Color badColor;
 
+        public GraphicalSlot connection = null;
         public Vector3 targetPosition = Vector3.zero;
         public Color targetColor;
 
@@ -38,6 +39,7 @@ namespace Assets.Code
         public void setTo(Person p)
         {
             inner = p;
+            p.outer = this;
 
             layerBack.sprite = p.getImageBack();
             layerMid.sprite  = p.getImageMid();
@@ -66,6 +68,12 @@ namespace Assets.Code
             //border.color = new Color(c, c, c);
 
             targetColor = neutralColor;
+        }
+
+        public void recenter()
+        {
+            transform.position = new Vector3(0.0f, 0.0f, 0.1f);
+            line.SetPosition(0, transform.position);
         }
 
         public void OnMouseDown()
@@ -97,8 +105,10 @@ namespace Assets.Code
             // }
 
             transform.position = Vector3.Lerp(transform.position, targetPosition, 0.1f);
-            line.SetPosition(0, new Vector3(transform.position.x, transform.position.y, 0.1f));
-            line.SetPosition(1, new Vector3(0.0f, 0.0f, 0.1f));
+            line.SetPosition(0, transform.position);
+
+            Vector3 origin = (connection == null) ? Vector3.zero : connection.gameObject.transform.position;
+            line.SetPosition(1, new Vector3(origin.x, origin.y, 0.1f));
 
             line.startColor = Color.Lerp(line.startColor, targetColor, 0.1f);
             line.endColor   = line.startColor;

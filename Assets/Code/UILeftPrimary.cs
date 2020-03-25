@@ -46,6 +46,10 @@ namespace Assets.Code
         public Button abilityButton;
         public Text abilityButtonText;
 
+        public Button unlandedViewButton;
+        public Button neighborViewButton;
+        public Button hierarchyViewButton;
+
         public enum tabState { PERSON,SOCIETY, LOCATION};
         public tabState state = tabState.SOCIETY;
 
@@ -79,6 +83,36 @@ namespace Assets.Code
         {
             state = tabState.LOCATION;
             checkData();
+        }
+
+        public void bShowUnlanded()
+        {
+            maskTitle.text = "Unlanded Liking View";
+            Person p = null;
+
+            Hex hex = GraphicalMap.selectedHex;
+            if (hex != null && hex.settlement != null && hex.settlement.title != null)
+                p = hex.settlement.title.heldBy;
+
+            GraphicalSociety.refreshUnlanded(p);
+        }
+
+        public void bShowNeighbor()
+        {
+            maskTitle.text = "Neighbor Liking View";
+            Person p = null;
+
+            Hex hex = GraphicalMap.selectedHex;
+            if (hex != null && hex.settlement != null && hex.settlement.title != null)
+                p = hex.settlement.title.heldBy;
+
+            GraphicalSociety.refreshNeighbor(p);
+        }
+
+        public void bShowHierarchy()
+        {
+            maskTitle.text = "Country Hierarchy View";
+            GraphicalSociety.refreshHierarchy();
         }
 
         public void showPersonInfo(Person p)
@@ -315,7 +349,8 @@ namespace Assets.Code
             }
 
 
-            maskTitle.text = GraphicalMap.map.masker.getTitleText();
+            if (master.state == UIMaster.uiState.WORLD)
+                maskTitle.text = GraphicalMap.map.masker.getTitleText();
             locText.text = "";
 
             if (GraphicalMap.selectedProperty != null)
