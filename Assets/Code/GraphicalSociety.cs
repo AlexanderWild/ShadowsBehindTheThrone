@@ -44,7 +44,7 @@ namespace Assets.Code
             }
         }
 
-        public static void refreshHierarchy()
+        public static void refreshHierarchy(Person nfocus)
         {
             clear();
 
@@ -52,7 +52,7 @@ namespace Assets.Code
             if (ss == null)
                 return;
 
-            focus = ss;
+            focus = (state == viewState.HIERARCHY && nfocus != null) ? nfocus : ss;
 
             var tree = new Dictionary<Person, List<Person>>();
             foreach (Person p in activeSociety.people)
@@ -61,19 +61,19 @@ namespace Assets.Code
                 if (sp != null)
                 {
                     // FIXME
-                    if (sp == focus)
+                    if (sp == ss)
                         continue;
 
                     if (!tree.ContainsKey(sp))
                         tree.Add(sp, new List<Person>());
 
-                    if (sp != focus || p.getDirectSubordinates().Count == 0)
+                    if (sp != ss || p.getDirectSubordinates().Count == 0)
                         tree[sp].Add(p);
                 }
             }
 
-            focus.outer.gameObject.SetActive(true);
-            focus.outer.targetPosition = Vector3.zero;
+            ss.outer.gameObject.SetActive(true);
+            ss.outer.targetPosition = Vector3.zero;
 
             int n = tree.Count, i = 0;
             foreach (var pair in tree)
@@ -87,7 +87,7 @@ namespace Assets.Code
                 float y = Mathf.Sin(angle) * radius;
 
                 ds.gameObject.SetActive(true);
-                ds.connection = focus.outer;
+                ds.connection = ss.outer;
 
                 ds.targetPosition = new Vector3(x, y, 0.0f);
                 ds.targetColor = ds.neutralColor;
@@ -218,6 +218,7 @@ namespace Assets.Code
         {
             switch (state)
             {
+                case viewState.HIERARCHY: refreshHierarchy(pf); break;
                 case viewState.UNLANDED: refreshUnlanded(pf); break;
                 case viewState.NEIGHBOR: refreshNeighbor(pf); break;
             }

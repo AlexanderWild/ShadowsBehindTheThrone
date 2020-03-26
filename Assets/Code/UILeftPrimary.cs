@@ -88,31 +88,19 @@ namespace Assets.Code
         public void bShowUnlanded()
         {
             maskTitle.text = "Unlanded Liking View";
-            Person p = null;
-
-            Hex hex = GraphicalMap.selectedHex;
-            if (hex != null && hex.settlement != null && hex.settlement.title != null)
-                p = hex.settlement.title.heldBy;
-
-            GraphicalSociety.refreshUnlanded(p);
+            GraphicalSociety.refreshUnlanded(GraphicalSociety.focus);
         }
 
         public void bShowNeighbor()
         {
             maskTitle.text = "Neighbor Liking View";
-            Person p = null;
-
-            Hex hex = GraphicalMap.selectedHex;
-            if (hex != null && hex.settlement != null && hex.settlement.title != null)
-                p = hex.settlement.title.heldBy;
-
-            GraphicalSociety.refreshNeighbor(p);
+            GraphicalSociety.refreshNeighbor(GraphicalSociety.focus);
         }
 
         public void bShowHierarchy()
         {
             maskTitle.text = "Country Hierarchy View";
-            GraphicalSociety.refreshHierarchy();
+            GraphicalSociety.refreshHierarchy(null);
         }
 
         public void showPersonInfo(Person p)
