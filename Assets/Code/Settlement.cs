@@ -81,6 +81,8 @@ namespace Assets.Code
             return location.hex.province.econTraits;
         }
 
+        public virtual string getFlavour() { return ""; }
+
         public virtual double getDefensiveMax()
         {
             double d = defensiveStrengthMax;

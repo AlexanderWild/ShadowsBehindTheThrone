@@ -139,6 +139,21 @@ namespace Assets.Code
             return Math.Min(population, infrastructure);
         }
 
+        public override string getFlavour()
+        {
+            if (this.getLevel() >= LEVEL_CITY)
+            {
+                if (this.location.hex.purity > 0.9)
+                {
+                    return location.map.world.wordStore.lookup("SET_CITY_PURE");
+                }
+            }
+            else
+            {
+
+            }
+            return "";
+        }
         public override void fallIntoRuin()
         {
             //We're abandonning this location due to inhospitability

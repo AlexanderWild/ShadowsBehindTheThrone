@@ -446,7 +446,7 @@ namespace Assets.Code
                                 string econEffects = "";
                                 foreach (EconEffect effect in locSoc.econEffects)
                                 {
-                                    econEffects += "\nEcon from " + effect.from.name + " to " + effect.to.name;
+                                    econEffects += "Econ from " + effect.from.name + " to " + effect.to.name + "\n";
                                 }
                                 socEcon.text = econEffects;
 
