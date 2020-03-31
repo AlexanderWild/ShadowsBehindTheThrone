@@ -114,6 +114,17 @@ namespace Assets.Code
             return specific;
         }
 
+        public GraphicalSlot getGraphicalSlotPlaceholder(string title)
+        {
+            GameObject obj = Instantiate(prefabSlot) as GameObject;
+            GraphicalSlot specific = obj.GetComponent<GraphicalSlot>();
+
+            specific.world = world;
+
+            specific.setToPlaceholder(title);
+            return specific;
+        }
+
         public GameObject getHexEdgeSprite()
         {
             return Instantiate(prefabHexEdgeSprite) as GameObject;

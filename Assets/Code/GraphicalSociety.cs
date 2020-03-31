@@ -13,25 +13,57 @@ namespace Assets.Code
         public static Person focus;
         public static Person originalFocus;
         public static List<GraphicalSlot> loadedSlots = new List<GraphicalSlot>();
+        public static Dictionary<Province, GraphicalSlot> loadedPlaceholders = new Dictionary<Province, GraphicalSlot>();
 
         public enum viewState { UNLANDED, NEIGHBOR, HIERARCHY };
         public static viewState state = viewState.HIERARCHY;
 
+        private static Vector3 originalScale;
+
         public static void setup(Society soc)
         {
             activeSociety = soc;
+            Person ss = activeSociety.getSovreign();
+
             foreach (Person p in activeSociety.people)
+            {
                 world.prefabStore.getGraphicalSlot(p);
+                if (p.getLocation() == null)
+                    continue;
+                
+                Province pp = p.getLocation().province;
+                if (!loadedPlaceholders.ContainsKey(pp))
+                {
+                    GraphicalSlot ds = world.prefabStore.getGraphicalSlotPlaceholder(pp.name);
+                    originalScale = ds.gameObject.transform.localScale;
+
+                    if (ss != null && ss.getLocation().province.name == pp.name)
+                    {
+                        ds.layerBack.enabled = false;
+                        ds.border.enabled = false;
+                    }
+
+                    loadedPlaceholders.Add(pp, ds);
+                }
+            }
         }
 
         public static void clear()
         {
             foreach (GraphicalSlot s in loadedSlots)
             {
+                s.gameObject.transform.localScale = originalScale;
                 s.gameObject.SetActive(false);
+
+                s.connection = null;
 
                 s.upperRightText.text = "";
                 s.lowerRightText.text = "";
+                
+            }
+            foreach (var pair in loadedPlaceholders)
+            {
+                pair.Value.gameObject.SetActive(false);
             }
         }
 
@@ -41,6 +73,11 @@ namespace Assets.Code
             {
                 if (!s.gameObject.active)
                     s.recenter();
+            }
+            foreach (var pair in loadedPlaceholders)
+            {
+                if (!pair.Value.gameObject.active)
+                    pair.Value.recenter();
             }
         }
 
@@ -54,22 +91,38 @@ namespace Assets.Code
 
             focus = (state == viewState.HIERARCHY && nfocus != null) ? nfocus : ss;
 
-            var tree = new Dictionary<Person, List<Person>>();
+            var tree = new Dictionary<GraphicalSlot, List<GraphicalSlot>>();
             foreach (Person p in activeSociety.people)
             {
+                GraphicalSlot ds = null;
+                if (p == ss || p.title_land == null)
+                    continue;
+
                 Person sp = p.getDirectSuperiorIfAny();
                 if (sp != null)
                 {
-                    // FIXME
                     if (sp == ss)
-                        continue;
-
-                    if (!tree.ContainsKey(sp))
-                        tree.Add(sp, new List<Person>());
-
-                    if (sp != ss || p.getDirectSubordinates().Count == 0)
-                        tree[sp].Add(p);
+                    {
+                        if (!p.getIsProvinceRuler())
+                            ds = loadedPlaceholders[p.getLocation().province];
+                    }
+                    else
+                    {
+                        ds = sp.outer;
+                    }
                 }
+                else
+                {
+                    ds = loadedPlaceholders[p.getLocation().province];
+                }
+
+                if (ds == null)
+                    continue;
+
+                if (!tree.ContainsKey(ds))
+                    tree.Add(ds, new List<GraphicalSlot>());
+
+                tree[ds].Add(p.outer);
             }
 
             ss.outer.gameObject.SetActive(true);
@@ -78,7 +131,7 @@ namespace Assets.Code
             int n = tree.Count, i = 0;
             foreach (var pair in tree)
             {
-                GraphicalSlot ds = pair.Key.outer;
+                GraphicalSlot ds = pair.Key;
 
                 float radius = 2.0f;
                 float angle  = 6.28f / n * i;
@@ -90,27 +143,26 @@ namespace Assets.Code
                 ds.connection = ss.outer;
 
                 ds.targetPosition = new Vector3(x, y, 0.0f);
-                ds.targetColor = ds.neutralColor;
-                ds.targetColor.a = 0.5f;
+                ds.targetStartColor = ds.targetEndColor = ds.neutralColor;
+                ds.targetStartColor.a = ds.targetEndColor.a = 0.5f;
 
                 float n2 = pair.Value.Count, j = 0;
-                foreach (Person pp in pair.Value)
+                foreach (GraphicalSlot ds2 in pair.Value)
                 {
-                    GraphicalSlot ds2 = pp.outer;
-
-                    float radius2 = 2.0f;
+                    float radius2 = 1.5f;
                     float spread  = (n2 > 4) ? 3.5f : 2.5f;
-                    float angle2  = (angle - 1.0f) + spread / n2 * j;
+                    float angle2  = (angle - spread / 2) + spread / n2 * (j + 0.5f);
 
                     float x2 = Mathf.Cos(angle2) * radius2 + x;
                     float y2 = Mathf.Sin(angle2) * radius2 + y;
 
                     ds2.gameObject.SetActive(true);
+                    ds2.gameObject.transform.localScale = originalScale * 0.75f;
                     ds2.connection = ds;
 
                     ds2.targetPosition = new Vector3(x2, y2, 0.0f);
-                    ds2.targetColor = ds2.neutralColor;
-                    ds2.targetColor.a = 0.25f;
+                    ds2.targetStartColor = ds2.targetEndColor = ds2.neutralColor;
+                    ds2.targetStartColor.a = ds2.targetEndColor.a = 0.25f;
 
                     j += 1;
                 }
@@ -157,9 +209,27 @@ namespace Assets.Code
                 ds.gameObject.SetActive(true);
                 ds.connection = focus.outer;
 
+                RelObj rto   = focus.getRelation(p);
+                RelObj rfrom = p.getRelation(focus);
+
+                float to   = (float)rto.getLiking();
+                float from = (float)rfrom.getLiking();
+
                 ds.targetPosition = new Vector3(x, y, 0.0f);
-                ds.targetColor = ds.neutralColor;
-                ds.targetColor.a = 0.5f;
+                if (from < 0)
+                    ds.targetStartColor = Color.Lerp(ds.neutralColor, ds.badColor, -from / 100);
+                else
+                    ds.targetStartColor = Color.Lerp(ds.neutralColor, ds.goodColor, from / 100);
+                if (to < 0)
+                    ds.targetEndColor = Color.Lerp(ds.neutralColor, ds.badColor, -to / 100);
+                else
+                    ds.targetEndColor = Color.Lerp(ds.neutralColor, ds.goodColor, to / 100);
+                ds.targetStartColor.a = ds.targetEndColor.a = 0.5f;
+
+                ds.upperRightText.text  = "lkd. by: " + to.ToString("N0") + "%";
+                ds.upperRightText.text += "\nlikes: " + from.ToString("N0") + "%";
+                ds.lowerRightText.text  = "susp. by: " + rto.suspicion.ToString("N0") + "%";
+                ds.lowerRightText.text += "\n suspects: " + rfrom.suspicion.ToString("N0") + "%";
 
                 i += 1;
             }
@@ -168,6 +238,7 @@ namespace Assets.Code
             resetHidden();
         }
 
+        // FIXME: could be combined easily with refreshNeighbor
         public static void refreshUnlanded(Person nfocus)
         {
             clear();
@@ -203,9 +274,27 @@ namespace Assets.Code
                 ds.gameObject.SetActive(true);
                 ds.connection = focus.outer;
 
+                RelObj rto   = focus.getRelation(p);
+                RelObj rfrom = p.getRelation(focus);
+
+                float to   = (float)rto.getLiking();
+                float from = (float)rfrom.getLiking();
+
                 ds.targetPosition = new Vector3(x, y, 0.0f);
-                ds.targetColor = ds.neutralColor;
-                ds.targetColor.a = 0.5f;
+                if (from < 0)
+                    ds.targetStartColor = Color.Lerp(ds.neutralColor, ds.badColor, -from / 100);
+                else
+                    ds.targetStartColor = Color.Lerp(ds.neutralColor, ds.goodColor, from / 100);
+                if (to < 0)
+                    ds.targetEndColor = Color.Lerp(ds.neutralColor, ds.badColor, -to / 100);
+                else
+                    ds.targetEndColor = Color.Lerp(ds.neutralColor, ds.goodColor, to / 100);
+                ds.targetStartColor.a = ds.targetEndColor.a = 0.5f;
+
+                ds.upperRightText.text  = "lkd. by: " + to.ToString("N0") + "%";
+                ds.upperRightText.text += "\nlikes: " + from.ToString("N0") + "%";
+                ds.lowerRightText.text  = "susp. by: " + rto.suspicion.ToString("N0") + "%";
+                ds.lowerRightText.text += "\n suspects: " + rfrom.suspicion.ToString("N0") + "%";
 
                 i += 1;
             }
@@ -231,6 +320,7 @@ namespace Assets.Code
 
         public static void purge()
         {
+            // FIXME: is this still needed?
             foreach (SocialGroup sg in World.staticMap.socialGroups)
             {
                 if (sg is Society)
@@ -241,11 +331,14 @@ namespace Assets.Code
                     }
                 }
             }
+
             foreach (GraphicalSlot sl in loadedSlots)
             {
                 sl.inner.outer = null;
             }
+            
             loadedSlots.Clear();
+            loadedPlaceholders.Clear();
         }
     }
 }

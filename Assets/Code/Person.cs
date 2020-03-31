@@ -134,6 +134,17 @@ namespace Assets.Code
             return prestige;
         }
 
+        public bool getIsProvinceRuler()
+        {
+            foreach (Title t in titles)
+            {
+                if (t is Title_ProvinceRuler)
+                    return true;
+            }
+
+            return false;
+        }
+
         public Person getSuperiorIfAny()
         {
             foreach (Title t in titles)

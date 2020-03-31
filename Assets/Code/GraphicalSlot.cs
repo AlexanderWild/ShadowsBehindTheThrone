@@ -30,11 +30,30 @@ namespace Assets.Code
 
         public GraphicalSlot connection = null;
         public Vector3 targetPosition = Vector3.zero;
-        public Color targetColor;
+        public Color targetStartColor;
+        public Color targetEndColor;
 
         public bool apoptose;
         public int param_apoptosisTime = 30;
         public int apoptosisCount = 0;
+
+        public void setToPlaceholder(string t)
+        {
+            inner = null;
+            int ind = Eleven.random.Next(world.textureStore.layerBack.Count);
+
+            layerBack.sprite = world.textureStore.layerBack[ind];
+            layerMid.enabled = false;
+            layerFore.enabled = false;
+
+            title.text = "";
+            subtitle.text = t;
+
+            lowerRightText.text = "";
+            upperRightText.text = "";
+
+            border.sprite = world.textureStore.slotBasic;
+        }
 
         public void setTo(Person p)
         {
@@ -64,10 +83,6 @@ namespace Assets.Code
             {
                 border.sprite = p.map.world.textureStore.slotBasic;
             }
-           // float c = 1 - (float)(p.shadow);
-            //border.color = new Color(c, c, c);
-
-            targetColor = neutralColor;
         }
 
         public void recenter()
@@ -78,6 +93,9 @@ namespace Assets.Code
 
         public void OnMouseDown()
         {
+            if (inner == null)
+                return;
+
             GraphicalSociety.refresh(inner);
             World.staticMap.world.ui.checkData();
         }
@@ -110,10 +128,14 @@ namespace Assets.Code
             Vector3 origin = (connection == null) ? Vector3.zero : connection.gameObject.transform.position;
             line.SetPosition(1, new Vector3(origin.x, origin.y, 0.1f));
 
-            line.startColor = Color.Lerp(line.startColor, targetColor, 0.1f);
-            line.endColor   = line.startColor;
+            line.startColor = Color.Lerp(line.startColor, targetStartColor, 0.1f);
+            line.endColor   = Color.Lerp(line.endColor, targetEndColor, 0.1f);
 
-            if (GraphicalSociety.loadedSlots.Contains(this) == false)
+            if (inner != null && GraphicalSociety.loadedSlots.Contains(this) == false)
+            {
+                apoptose = true;
+            }
+            if (inner == null && GraphicalSociety.loadedPlaceholders.Count == 0)
             {
                 apoptose = true;
             }
