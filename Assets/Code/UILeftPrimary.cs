@@ -34,12 +34,15 @@ namespace Assets.Code
         public GameObject screenSociety;
         public GameObject screenLocation;
         public GameObject insanityDescBox;
+        public GameObject socTypeBox;
         public GameObject[] traits;
         public GameObject[] traitDescBoxes;
         public Text[] traitNames;
         public Text[] traitDescs;
         public Text insanityText;
         public Text insanityDescText;
+        public Text socTypeTitle;
+        public Text socTypeDesc;
 
         public Button powerButton;
         public Text powerButtonText;
@@ -50,7 +53,7 @@ namespace Assets.Code
         public Button neighborViewButton;
         public Button hierarchyViewButton;
 
-        public enum tabState { PERSON,SOCIETY, LOCATION};
+        public enum tabState { PERSON, SOCIETY, LOCATION };
         public tabState state = tabState.SOCIETY;
 
         public void Start()
@@ -136,14 +139,15 @@ namespace Assets.Code
             {
                 bodyText += "\nDirect Superior: " + p.getDirectSuperiorIfAny().getFullName();
             }
-            else {
+            else
+            {
                 bodyText += "\nDirect Superior: None";
             }
             bodyText += "\nPrestige: " + (int)(p.prestige);
             bodyText += "\nPrestige Moving towards: " + (int)(p.targetPrestige);
-            bodyText += "\nShadow: " + (int)(p.shadow*100) + "%";
-            bodyText += "\nEvidence: " + (int)(p.evidence*100) + "%";
-            bodyText += "\nMilitarism: " + (int)(p.politics_militarism*100) + "%";
+            bodyText += "\nShadow: " + (int)(p.shadow * 100) + "%";
+            bodyText += "\nEvidence: " + (int)(p.evidence * 100) + "%";
+            bodyText += "\nMilitarism: " + (int)(p.politics_militarism * 100) + "%";
             bodyText += " (" + p.getMilitarismInfo() + ")";
 
             bodyText += "\n";
@@ -218,7 +222,7 @@ namespace Assets.Code
                 hab *= 1d / (1 - map.param.mapGen_minHabitabilityForHumans);
 
 
-                string valuesBody = ""; 
+                string valuesBody = "";
                 string valuesNumbers = "";
 
                 Hex hex = loc.hex;
@@ -244,7 +248,7 @@ namespace Assets.Code
                             }
                         }
                         valuesBody += "\nPrestige:";
-                        valuesNumbers += "\n" + Eleven.toMaxLen(hex.location.settlement.getPrestige(),4);
+                        valuesNumbers += "\n" + Eleven.toMaxLen(hex.location.settlement.getPrestige(), 4);
                         valuesBody += "\nBase Prestige:";
                         valuesNumbers += "\n" + Eleven.toMaxLen(hex.location.settlement.basePrestige, 4);
                         valuesBody += "\nMilitary Cap Add:";
@@ -280,6 +284,13 @@ namespace Assets.Code
             locText.text = "";
             personBody.text = "";
             insanityText.text = "";
+            socTypeTitle.text = "";
+            socTypeDesc.text = "";
+            socThreat.text = "";
+            socEcon.text = "";
+            body.text = "";
+            title.text = "";
+            socTypeBox.SetActive(false);
             insanityDescText.text = "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
                    + "\nYou can cause reduce sanity using certain abilities.";
             for (int i = 0; i < traits.Length; i++)
@@ -292,6 +303,10 @@ namespace Assets.Code
         public void bInsanityDescClick()
         {
             insanityDescBox.SetActive(!insanityDescBox.activeInHierarchy);
+        }
+        public void bTypeDesc()
+        {
+            socTypeBox.SetActive(!socTypeBox.activeInHierarchy);
         }
         public void bTraitDesc1()
         {
@@ -346,16 +361,21 @@ namespace Assets.Code
                 screenSociety.SetActive(true);
                 screenPerson.SetActive(false);
                 screenLocation.SetActive(false);
+                setToEmpty();
+                
                 socTitle.text = GraphicalMap.selectedProperty.proto.name;
+                socTypeDesc.text = "Effects remain bound to locations, regardless of societal and political change, until they expire or are dispelled by another means." +
+                    " \n(Rapidly select a location without selecting properties by holding CTRL while clicking on it)";
                 if (GraphicalMap.selectedProperty.proto.decaysOverTime)
                 {
                     title.text = GraphicalMap.selectedProperty.proto.name;
-                    locText.text = "Turns Remaining: " + GraphicalMap.selectedProperty.charge;
+                    socTypeTitle.text = "Turns Remaining: " + GraphicalMap.selectedProperty.charge;
                 }
                 else
                 {
                     title.text = GraphicalMap.selectedProperty.proto.name;
-                    locText.text = "Indefinite Effect";
+                    socTypeTitle.text = "Indefinite Effect";
+                    socTypeDesc.text = "Effects remain bound to locations, regardless of societal and political change. This one decays over time.";
                 }
                 string bodyText = GraphicalMap.selectedProperty.proto.getDescription();
                 body.text = bodyText;
@@ -392,14 +412,7 @@ namespace Assets.Code
                 screenPerson.SetActive(false);
                 screenLocation.SetActive(false);
                 screenSociety.SetActive(true);
-                if (hex == null)
-                {
-                    title.text = "";
-                    body.text = "";
-                    socTitle.text = "";
-                    locText.text = "";
-                }
-                else
+                if (hex != null && hex.location != null && hex.location.soc != null)
                 {
                     title.text = GraphicalMap.selectedHex.getName();
                     locText.text = "";
@@ -415,91 +428,89 @@ namespace Assets.Code
                     //bodyText += "Body text for hex " + GraphicalMap.selectedHex.getName();
                     //bodyText += "\nAttachedTo " + GraphicalMap.selectedHex.territoryOf.hex.getName();
 
-                    if (hex.location != null)
+                    if (hex.location.settlement != null && hex.location.settlement.title != null)
                     {
-                        if (hex.location.settlement != null)
+                        if (hex.location.settlement.title.heldBy != null)
                         {
-                            if (hex.location.settlement.title != null)
-                            {
-                                if (hex.location.settlement.title.heldBy != null)
-                                {
-                                    bodyText += "\nTitle held by: " + hex.location.settlement.title.heldBy.getFullName();
-                                }
-                                else
-                                {
-                                    bodyText += "\nTitle currently unheld";
-                                }
-                            }
+                            bodyText += "\nTitle held by: " + hex.location.settlement.title.heldBy.getFullName();
                         }
-                        if (hex.location.soc != null)
+                        else
                         {
-                            bodyText += "\nSocial group: " + hex.location.soc.getName();
-                            if (hex.location.soc is Society)
-                            {
-                                Society locSoc = (Society)hex.location.soc;
-
-                                if (locSoc.voteSession != null)
-                                {
-                                    bodyText += "\nVoting on: " + locSoc.voteSession.issue.ToString();
-                                }
-
-                                string econEffects = "";
-                                foreach (EconEffect effect in locSoc.econEffects)
-                                {
-                                    econEffects += "Econ from " + effect.from.name + " to " + effect.to.name + "\n";
-                                }
-                                socEcon.text = econEffects;
-
-                                foreach (Person p in locSoc.people)
-                                {
-                                    //bodyText += "\n   -" + p.getFullName();
-                                }
-
-                                bodyText += "\nMILITARY POSTURE: " + locSoc.posture;
-                                if (locSoc.offensiveTarget != null)
-                                {
-                                    bodyText += "\nOffensive: " + locSoc.offensiveTarget.getName();
-                                }
-                                else
-                                {
-                                    bodyText += "\nOffensive: None";
-                                }
-                                if (locSoc.defensiveTarget != null)
-                                {
-                                    bodyText += "\nDefensive: " + locSoc.defensiveTarget.getName();
-                                }
-                                else
-                                {
-                                    bodyText += "\nDefensive: None";
-                                }
-                                bodyText += "\nRebel cap " + locSoc.data_rebelLordsCap;
-                                bodyText += "\nLoyal cap " + locSoc.data_loyalLordsCap;
-                                bodyText += "\nStability: " + (int)(locSoc.data_societalStability * 100) + "%";
-                                if (locSoc.instabilityTurns > 0)
-                                {
-                                    bodyText += "\nTURNS TILL CIVIL WAR: " + (locSoc.map.param.society_instablityTillRebellion - locSoc.instabilityTurns);
-                                }
-
-                            }
-
-                            string strThreat = "";
-                            List<ReasonMsg> msgs = new List<ReasonMsg>();
-                            double threat = hex.location.soc.getThreat(msgs);
-                            strThreat += "Threat: " + (int)threat;
-                            foreach (ReasonMsg msg in msgs)
-                            {
-                                strThreat += "\n   " + msg.msg + " " + (int)msg.value;
-                            }
-                            socThreat.text = strThreat;
-                        }
-
-                        foreach (Property p in hex.location.properties)
-                        {
-                            bodyText += "\nProperty " + p.proto.name;
+                            bodyText += "\nTitle currently unheld";
                         }
                     }
+                    bodyText += "\nSocial group: " + hex.location.soc.getName();
+                    socTypeTitle.text = hex.location.soc.getTypeName();
+                    socTypeDesc.text = hex.location.soc.getTypeDesc();
+                    if (hex.location.soc is Society)
+                    {
+                        Society locSoc = (Society)hex.location.soc;
 
+                        if (locSoc.voteSession != null)
+                        {
+                            bodyText += "\nVoting on: " + locSoc.voteSession.issue.ToString();
+                        }
+
+                        string econEffects = "";
+                        foreach (EconEffect effect in locSoc.econEffects)
+                        {
+                            econEffects += "Econ from " + effect.from.name + " to " + effect.to.name + "\n";
+                        }
+                        socEcon.text = econEffects;
+
+                        foreach (Person p in locSoc.people)
+                        {
+                            //bodyText += "\n   -" + p.getFullName();
+                        }
+
+                        bodyText += "\nMILITARY POSTURE: " + locSoc.posture;
+                        if (locSoc.offensiveTarget != null)
+                        {
+                            bodyText += "\nOffensive: " + locSoc.offensiveTarget.getName();
+                        }
+                        else
+                        {
+                            bodyText += "\nOffensive: None";
+                        }
+                        if (locSoc.defensiveTarget != null)
+                        {
+                            bodyText += "\nDefensive: " + locSoc.defensiveTarget.getName();
+                        }
+                        else
+                        {
+                            bodyText += "\nDefensive: None";
+                        }
+                        bodyText += "\nRebel cap " + locSoc.data_rebelLordsCap;
+                        bodyText += "\nLoyal cap " + locSoc.data_loyalLordsCap;
+                        bodyText += "\nStability: " + (int)(locSoc.data_societalStability * 100) + "%";
+                        if (locSoc.instabilityTurns > 0)
+                        {
+                            bodyText += "\nTURNS TILL CIVIL WAR: " + (locSoc.map.param.society_instablityTillRebellion - locSoc.instabilityTurns);
+                        }
+
+                    }
+
+                    string strThreat = "";
+                    List<ReasonMsg> msgs = new List<ReasonMsg>();
+                    double threat = hex.location.soc.getThreat(msgs);
+                    strThreat += "Threat: " + (int)threat;
+                    foreach (ReasonMsg msg in msgs)
+                    {
+                        strThreat += "\n   " + msg.msg + " " + (int)msg.value;
+                    }
+                    socThreat.text = strThreat;
+
+
+                    foreach (Property p in hex.location.properties)
+                    {
+                        bodyText += "\nProperty " + p.proto.name;
+                    }
                     body.text = bodyText;
+                }
+                else
+                {
+
+                    this.setToEmpty();
                 }
             }
         }

@@ -92,7 +92,7 @@ namespace Assets.Code
                     double sus = rel.getDislikingFromSuspicion();
                     if (sus != 0)
                     {
-                        words += "\nFROM SUSPICION: " + sus;
+                        words += "\nFROM SUSPICION: " + (int)sus;
                     }
 
                     List<ReasonMsg> msgs = new List<ReasonMsg>();

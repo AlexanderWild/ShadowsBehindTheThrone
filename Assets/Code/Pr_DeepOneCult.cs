@@ -13,7 +13,7 @@ namespace Assets.Code
             this.stackStyle = stackStyleEnum.ADD_CHARGE;
         }
 
-        public override void turnTick(Location location)
+        public override void turnTick(Property p,Location location)
         {
             if (location.settlement == null) { return; }
             if (location.soc == null || (location.soc is Society == false)) { return; }

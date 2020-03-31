@@ -17,10 +17,6 @@ namespace Assets.Code
             this.stackStyle = stackStyleEnum.TO_MAX_CHARGE;
         }
 
-        public override void turnTick(Location location)
-        {
-        }
-
         public override Sprite getSprite(World world)
         {
             return world.textureStore.unit_battleIcon;

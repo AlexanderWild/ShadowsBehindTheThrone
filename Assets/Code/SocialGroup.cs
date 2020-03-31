@@ -45,6 +45,9 @@ namespace Assets.Code
             relations.Add(this, rel);
         }
 
+        public virtual string getTypeName() { return "Generic Group"; }
+        public virtual string getTypeDesc() { return "This group has no associated information."; }
+
         public bool isAtWar()
         {
             foreach (SocialGroup sg in map.socialGroups)

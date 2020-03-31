@@ -16,6 +16,7 @@ namespace Assets.Code
             powers.Add(new Ab_Fishman_CultOfTheDeep());
             powers.Add(new Ab_Fishman_Attack());
             powers.Add(new Ab_Fishman_HauntingSong());
+            powers.Add(new Ab_Fishman_AbyssalSirens());
         }
 
 

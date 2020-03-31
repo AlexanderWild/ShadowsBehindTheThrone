@@ -160,8 +160,11 @@ namespace Assets.Code
         public int ability_auraOfLunacyEvidence = 14;
         public int ability_auraOfLunacyHit = 7;
         public int ability_auraOfLunacyCost = 7;
-        public int ability_fishmanHauntingSongCost = 4;
-        public int ability_fishmanHauntingSongHit = 7;
+        public int ability_fishmanHauntingSongCost = 7;
+        public int ability_fishmanHauntingSongHit = 5;
+        public int ability_fishmanHauntingAbyssalSirensCost = 14;
+        public double ability_fishmanHauntingAbyssalSirensShadowPerTurn = 0.07;
+        public int ability_fishmanHauntingAbyssalSirensDur = 20;
         public double ability_provincialSentimentLikingChangePositive = 10;
         public double ability_provincialSentimentLikingChangeNegative = -20;
         public int ability_provincialSentimentLikingChangeCooldown = 20;

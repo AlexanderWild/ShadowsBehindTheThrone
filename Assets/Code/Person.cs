@@ -254,10 +254,6 @@ namespace Assets.Code
             {
                 evidence = 1;
             }
-            if (state != personState.broken && state != personState.enthralled) {
-                shadow -= map.param.person_shadowDecayPerTurn;
-                if (shadow < 0) { shadow = 0; }
-            }
             foreach (Person p in society.people)
             {
                 if (p == this) { continue; }
@@ -294,6 +290,12 @@ namespace Assets.Code
             {
                 this.state = personState.broken;
                 map.turnMessages.Add(new MsgEvent(this.getFullName() + " has been fully enshadowed, their soul can no longer resist the dark", MsgEvent.LEVEL_GREEN,true));
+            }
+            //If you've not broken yet, decay the shadow away
+            if (state != personState.broken && state != personState.enthralled)
+            {
+                shadow -= map.param.person_shadowDecayPerTurn;
+                if (shadow < 0) { shadow = 0; }
             }
         }
 

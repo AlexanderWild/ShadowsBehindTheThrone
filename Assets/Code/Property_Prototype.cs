@@ -22,7 +22,7 @@ namespace Assets.Code
         {
             this.name = name;
         }
-        public virtual void turnTick(Location location)
+        public virtual void turnTick(Property p,Location location)
         {
         }
 
@@ -43,6 +43,10 @@ namespace Assets.Code
             map.globalist.propertyMap.Add(proto.name, proto);
 
             proto = new Pr_DeepOneCult(map, "Cult of the Deep");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_DeepOneAbyssalSirens(map, "Abyssal Sirens");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
 

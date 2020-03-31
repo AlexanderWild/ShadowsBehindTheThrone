@@ -23,6 +23,16 @@ namespace Assets.Code
             this.threat_mult = map.param.dark_fishmanStartingThreatMult;
         }
 
+        public override string getTypeName()
+        {
+            return "Player Controlled";
+        }
+        public override string getTypeDesc()
+        {
+            return "A race of aquatic life-forms. They grow by expanding their undersea cities, then corrupting humans to join them as armies. They remain partially hidden (reduced threat) " +
+                "until they attack the human forces. They can affect coastal cities if they neighbour them to harm the nobles therein.";
+        }
+
         public override void turnTick()
         {
             base.turnTick();

@@ -137,7 +137,7 @@ namespace Assets.Code
             
             foreach (Property p in properties)
             {
-                p.proto.turnTick(this);
+                p.proto.turnTick(p,this);
             }
             checkPropertiesEndOfTurn();
         }

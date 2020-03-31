@@ -22,6 +22,15 @@ namespace Assets.Code
             this.threat_mult = map.param.dark_fleshThreatMult;
         }
 
+        public override string getTypeName()
+        {
+            return "Player Controlled";
+        }
+        public override string getTypeDesc()
+        {
+            return "A forest of limbs, teeth and claws, stretching across hills, fields and valleys. An agressive life-form you can expand and command to attack human settlements." +
+                " It is recommended to cause civil wars to weaken the human nations before you attack.";
+        }
         public override void turnTick()
         {
             base.turnTick();

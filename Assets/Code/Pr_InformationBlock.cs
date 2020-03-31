@@ -17,10 +17,6 @@ namespace Assets.Code
             this.stackStyle = stackStyleEnum.ADD_CHARGE;
         }
 
-        public override void turnTick(Location location)
-        {
-        }
-
         public override Sprite getSprite(World world)
         {
             return world.textureStore.unit_lookingGlass;

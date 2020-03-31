@@ -23,6 +23,15 @@ namespace Assets.Code
             this.threat_mult = map.param.dark_evilThreatMult;
         }
 
+        public override string getTypeName()
+        {
+            return "Neutral Monstrosities";
+        }
+        public override string getTypeDesc()
+        {
+            return "A swarm of giant worms, capable of ripping through plate mail with their powerful jaws. These nests will arise in unoccupied lands, and grow over time, but shy away from attacking human settlements if unprovoked.";
+        }
+
         public override void turnTick()
         {
             base.turnTick();
