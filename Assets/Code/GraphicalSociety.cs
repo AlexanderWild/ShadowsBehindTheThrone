@@ -226,10 +226,10 @@ namespace Assets.Code
                     ds.targetEndColor = Color.Lerp(ds.neutralColor, ds.goodColor, to / 100);
                 ds.targetStartColor.a = ds.targetEndColor.a = 0.5f;
 
-                ds.upperRightText.text  = "lkd. by: " + to.ToString("N0") + "%";
-                ds.upperRightText.text += "\nlikes: " + from.ToString("N0") + "%";
-                ds.lowerRightText.text  = "susp. by: " + rto.suspicion.ToString("N0") + "%";
-                ds.lowerRightText.text += "\n suspects: " + rfrom.suspicion.ToString("N0") + "%";
+                ds.upperRightText.text  = "liking for center: " + from.ToString("N0") + "%";
+                ds.upperRightText.text += "\nliking from center: " + to.ToString("N0") + "%";
+                ds.lowerRightText.text  = "suspicion for center: " + rfrom.suspicion.ToString("N0") + "%";
+                ds.lowerRightText.text += "\nsuspicion from center: " + rto.suspicion.ToString("N0") + "%";
 
                 i += 1;
             }
@@ -291,10 +291,10 @@ namespace Assets.Code
                     ds.targetEndColor = Color.Lerp(ds.neutralColor, ds.goodColor, to / 100);
                 ds.targetStartColor.a = ds.targetEndColor.a = 0.5f;
 
-                ds.upperRightText.text  = "lkd. by: " + to.ToString("N0") + "%";
-                ds.upperRightText.text += "\nlikes: " + from.ToString("N0") + "%";
-                ds.lowerRightText.text  = "susp. by: " + rto.suspicion.ToString("N0") + "%";
-                ds.lowerRightText.text += "\n suspects: " + rfrom.suspicion.ToString("N0") + "%";
+                ds.upperRightText.text  = "liking for center: " + from.ToString("N0") + "%";
+                ds.upperRightText.text += "\nliking from center: " + to.ToString("N0") + "%";
+                ds.lowerRightText.text  = "suspicion for center: " + rfrom.suspicion.ToString("N0") + "%";
+                ds.lowerRightText.text += "\nsuspicion from center: " + rto.suspicion.ToString("N0") + "%";
 
                 i += 1;
             }

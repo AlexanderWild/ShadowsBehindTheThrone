@@ -20,6 +20,7 @@ namespace Assets.Code
         public Text subtitle;
         public Text upperRightText;
         public Text lowerRightText;
+        public GameObject popupBox;
         public Text riseBox;
         public Text fallBox;
         public LineRenderer line;
@@ -102,12 +103,13 @@ namespace Assets.Code
 
         public void OnMouseEnter()
         {
-            GraphicalSociety.showHover(inner);
+            if (upperRightText.text != "")
+                popupBox.SetActive(true);
         }
 
         public void OnMouseExit()
         {
-            GraphicalSociety.showHover(null);
+            popupBox.SetActive(false);
         }
 
         public void Update()

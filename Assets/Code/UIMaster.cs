@@ -265,14 +265,9 @@ namespace Assets.Code
                 if (GraphicalMap.selectedHex == null) { return; }
                 if (GraphicalMap.selectedHex.owner == null) { return; }
                 if (GraphicalMap.selectedHex.owner is Society == false) { return; }
+
+                GraphicalSociety.focus = GraphicalMap.selectedHex.location.person();
                 setToSociety((Society)GraphicalMap.selectedHex.owner);
-                if (GraphicalMap.selectedHex.settlement != null)
-                {
-                    if (GraphicalMap.selectedHex.location.person() != null)
-                    {
-                        GraphicalSociety.refresh(GraphicalMap.selectedHex.location.person());
-                    }
-                }
             }
         }
 
