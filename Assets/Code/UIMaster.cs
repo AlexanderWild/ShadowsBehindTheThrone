@@ -323,7 +323,7 @@ namespace Assets.Code
             GraphicalMap.purge();
 
             GraphicalSociety.setup(soc);
-            uiLeftPrimary.bShowHierarchy();
+            uiLeftPrimary.bShowNeighbor();
 
             checkData();
         }
