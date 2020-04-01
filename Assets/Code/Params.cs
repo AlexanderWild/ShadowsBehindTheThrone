@@ -152,9 +152,9 @@ namespace Assets.Code
         public int ability_apoptosisCost = 15;
         public int ability_darkEmpireCost = 12;
         public double ability_darkEmpireThreatMultGain = 0.5;
-        public int ability_sharedGloryLikingGain = 8;
+        public int ability_sharedGloryLikingGain = 16;
         public int ability_addLikingAmount = 20;
-        public int ability_addLikingCost = 5;
+        public int ability_addLikingCost = 4;
         public int ability_reduceSuspicionCost = 5;
         public int ability_sharedGloryAmount = 5;
         public int ability_auraOfLunacyEvidence = 14;
@@ -189,7 +189,7 @@ namespace Assets.Code
         public double trait_warmaster = 10;
         public double trait_defender = 10;
         public double trait_badCommander = -10;
-        public double trait_incompetent_loss = 7;
+        public double trait_incompetent_loss = -7;
         public double trait_competent_gain = 7;
         public double trait_incompetent_desirability = -75;
         public double trait_competent_desirability = 75;

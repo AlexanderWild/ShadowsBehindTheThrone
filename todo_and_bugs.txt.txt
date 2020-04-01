@@ -1,25 +1,39 @@
-High criticality:
+	High criticality:
+
+check data on vote switch doesn't work
 
 
+	Medium criticality:
+	
+-Dark nobles desire to invade societies
 
+-Predatory instinct to expand society
 
-Medium criticality:
-
--A way to view how votes will affect people's liking of you
+-A person must understand they won't have themselves as follower, so can't hate you for making them their own follower
 
 -Prestige breakdown
 
--Re-arrange UI on left hand panel
+-Add turns remaining on voting for
 
-Low criticality:
+	Low criticality:
 
 -Ongoing wars added to right hand scrollables
 
+-Dark nobles shouldn't hate the defensive stance
+
+-Allow player to vote on all econ reforms available in society
+
 -Wordwrap on power info looks ugly
+
+-Two nations named the same thing
 
 -Turn counter up there too
 
 -----------------------RESOLVED-----------------------
+
+-Are incompetent followers helping their leader?
+-A way to view how votes will affect people's liking of you
+-Re-arrange UI on left hand panel
 
 -Cities die slowly after habilitability drops below 0
 
