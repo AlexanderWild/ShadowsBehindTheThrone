@@ -11,11 +11,9 @@ namespace Assets.Code
             if (!castable(map, hex)) { return; }
 
 
-            hex.location.person().sanity -= World.staticMap.param.ability_fishmanHauntingSongHit;
-            if (hex.location.person().sanity < 0) { hex.location.person().sanity = 0; }
+            Property.addProperty(map, hex.location, "Haunting Song");
 
-                map.world.prefabStore.popImgMsg("The song of the Deep Ones at " + hex.location.getName() + " grows to a maddening pitch, constant regardless of obstruction. " + hex.location.person().getFullName() + "'s sanity drops by "
-                   + World.staticMap.param.ability_fishmanHauntingSongHit + " and is now " + hex.location.person().sanity + ".",
+            map.world.prefabStore.popImgMsg("The song of the Deep Ones at " + hex.location.getName() + " grows to a maddening pitch, constant regardless of obstruction. " + hex.location.person().getFullName() + "'s sanity will drop over time as the song persists.",
                 map.world.wordStore.lookup("ABILITY_FISHMAN_HAUNTING_SONG"));
 
         }
@@ -41,7 +39,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Aggravates the Deep One's song, causing damaging the sanity of those who hear it. Causes " + World.staticMap.param.ability_fishmanHauntingSongHit + " sanity damage."
+            return "Aggravates the Deep One's song, causing damaging the sanity of those who hear it. Causes the noble present at this location to have a 50% chance per turn to lose a point of sanity."
                 + "\n[Requires a location with active Deep One Cult]";
         }
 

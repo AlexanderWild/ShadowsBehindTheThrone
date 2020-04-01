@@ -48,7 +48,8 @@ person_threatMult: 100
 person_defaultPrestige: 5
 person_evidencePerShadow: 0.025
 person_evidenceExponent: 1.5
-person_suspicionPerEvidence: 0.06
+person_evidenceReduceEnthralled: 0.66
+person_suspicionPerEvidence: 0.1
 person_dislikingFromSuspicion: -200
 person_shadowContagionMult: 0.05
 person_threatFromSuspicion: 400
@@ -61,7 +62,8 @@ society_votingRelChangePerUtilityNegative: 0.14
 society_instablityTillRebellion: 10
 society_rebelLikingThreshold: -5
 society_zeitDuration: 3
-society_sovreignPrestige: 10
+society_sovreignPrestige: 15
+society_dukePrestige: 10
 society_threatMultFromOffensivePosture: 0.5
 society_minTimeBetweenLocReassignments: 40
 society_minTimeBetweenTitleReassignments: 40
@@ -115,6 +117,7 @@ threat_temporaryDreadDecay: 0.97
 ability_informationBlackoutCost: 4
 ability_informationBlackoutDuration: 15
 ability_FishmanCultDuration: 15
+ability_FishmanMadnessDuration: 15
 ability_fishmanCultMilRegen: 0.5
 ability_fishmanCultTempThreat: 1
 ability_fishmanCultDread: 6
@@ -136,8 +139,8 @@ ability_auraOfLunacyCost: 7
 ability_fishmanHauntingSongCost: 7
 ability_fishmanHauntingSongHit: 5
 ability_fishmanHauntingAbyssalSirensCost: 14
-ability_fishmanHauntingAbyssalSirensShadowPerTurn: 0.07
-ability_fishmanHauntingAbyssalSirensDur: 20
+ability_fishmanHauntingAbyssalSirensShadowPerTurn: 0.02
+ability_fishmanHauntingAbyssalSirensDur: 50
 ability_provincialSentimentLikingChangePositive: 10
 ability_provincialSentimentLikingChangeNegative: -20
 ability_provincialSentimentLikingChangeCooldown: 20
@@ -147,7 +150,7 @@ ability_coldAsDeathCost: 5
 ability_coldAsDeathCooldown: 10
 ability_deathOfTheSunCost: 0
 ability_deathOfTheSunCooldown: 10
-insanity_sanityRegen: 0.5
+insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10
 insanity_lashOutProbability: 0.07

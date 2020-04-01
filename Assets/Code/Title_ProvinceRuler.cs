@@ -22,7 +22,7 @@ namespace Assets.Code{
         }
         public override double getPrestige()
         {
-            return society.map.param.society_sovreignPrestige;
+            return society.map.param.society_dukePrestige;
         }
     }
 }

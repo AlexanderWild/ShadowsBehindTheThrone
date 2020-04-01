@@ -264,6 +264,11 @@ namespace Assets.Code
                     double infoAvail = map.getInformationAvailability(this.getLocation(), sg);
                     RelObj rel = getRelation(p);
                     double evidenceMult = Math.Pow(p.evidence, map.param.person_evidenceExponent);//Make low evidence a bit slower to cause suspicion
+                    //Give a bonus to the player, to allow their henchmen to be caught first
+                    if (p.state == personState.enthralled)
+                    {
+                        evidenceMult *= map.param.person_evidenceReduceEnthralled;
+                    }
                     double fromTraits = 1;
                     foreach (Trait t in traits) { fromTraits *= t.suspicionMult(); }
                     rel.suspicion += infoAvail * evidenceMult * map.param.person_suspicionPerEvidence * fromTraits;

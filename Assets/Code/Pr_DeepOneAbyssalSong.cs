@@ -7,7 +7,7 @@ namespace Assets.Code
         
         public Pr_DeepOneAbyssalSirens(Map map,string name) : base(map,name)
         {
-            this.baseCharge = map.param.ability_FishmanCultDuration;
+            this.baseCharge = map.param.ability_fishmanHauntingAbyssalSirensDur;
             this.decaysOverTime = true;
             this.stackStyle = stackStyleEnum.ADD_CHARGE;
         }

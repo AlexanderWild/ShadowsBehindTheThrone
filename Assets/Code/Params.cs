@@ -70,7 +70,8 @@ namespace Assets.Code
         public double person_defaultPrestige = 5;
         public double person_evidencePerShadow = 0.025;
         public double person_evidenceExponent = 1.5;
-        public double person_suspicionPerEvidence = 0.06;
+        public double person_evidenceReduceEnthralled = 0.66;
+        public double person_suspicionPerEvidence = 0.1;
         public double person_dislikingFromSuspicion = -200;
         public double person_shadowContagionMult = 0.05;
         public double person_threatFromSuspicion = 400;
@@ -85,7 +86,8 @@ namespace Assets.Code
         public int society_instablityTillRebellion = 10;
         public int society_rebelLikingThreshold = -5;
         public int society_zeitDuration = 3;
-        public double society_sovreignPrestige = 10;
+        public double society_sovreignPrestige = 15;
+        public double society_dukePrestige = 10;
         public double society_threatMultFromOffensivePosture = 0.5;
         public int society_minTimeBetweenLocReassignments = 40;
         public int society_minTimeBetweenTitleReassignments = 40;
@@ -143,6 +145,7 @@ namespace Assets.Code
         public int ability_informationBlackoutCost = 4;
         public int ability_informationBlackoutDuration = 15;
         public int ability_FishmanCultDuration = 15;
+        public int ability_FishmanMadnessDuration = 15;
         public double ability_fishmanCultMilRegen = 0.5;
         public double ability_fishmanCultTempThreat = 1;
         public double ability_fishmanCultDread = 6;
@@ -164,8 +167,8 @@ namespace Assets.Code
         public int ability_fishmanHauntingSongCost = 7;
         public int ability_fishmanHauntingSongHit = 5;
         public int ability_fishmanHauntingAbyssalSirensCost = 14;
-        public double ability_fishmanHauntingAbyssalSirensShadowPerTurn = 0.07;
-        public int ability_fishmanHauntingAbyssalSirensDur = 20;
+        public double ability_fishmanHauntingAbyssalSirensShadowPerTurn = 0.02;
+        public int ability_fishmanHauntingAbyssalSirensDur = 50;
         public double ability_provincialSentimentLikingChangePositive = 10;
         public double ability_provincialSentimentLikingChangeNegative = -20;
         public int ability_provincialSentimentLikingChangeCooldown = 20;
@@ -176,7 +179,7 @@ namespace Assets.Code
         public int ability_deathOfTheSunCost = 0;
         public int ability_deathOfTheSunCooldown = 10;
 
-        public double insanity_sanityRegen = 0.5;
+        public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;
         public int insanity_relHit = -10;
         public double insanity_lashOutProbability = 0.07;
