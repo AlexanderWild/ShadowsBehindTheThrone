@@ -1,19 +1,11 @@
 	High criticality:
 
-check data on vote switch doesn't work
 
 
 	Medium criticality:
 	
 -Dark nobles desire to invade societies
 
--Predatory instinct to expand society
-
--A person must understand they won't have themselves as follower, so can't hate you for making them their own follower
-
--Prestige breakdown
-
--Add turns remaining on voting for
 
 	Low criticality:
 
@@ -30,6 +22,14 @@ check data on vote switch doesn't work
 -Turn counter up there too
 
 -----------------------RESOLVED-----------------------
+-Add turns remaining on voting for
+
+-A person must understand they won't have themselves as follower, so can't hate you for making them their own follower
+-Prestige breakdown
+
+-check data on vote switch doesn't work
+
+-Predatory instinct to expand society
 
 -Are incompetent followers helping their leader?
 -A way to view how votes will affect people's liking of you

@@ -25,6 +25,7 @@ utility_econEffect: 0.5
 utility_econEffectOther: 0.1
 utility_militaryTargetRelStrengthOffensive: 300
 utility_militaryTargetCompleteProvince: 50
+utility_militaryTargetExpansion: 25
 utility_militaryTargetRelStrengthDefensive: 250
 utility_vassaliseReluctance: -90
 utility_vassaliseMilMult: 80
@@ -124,9 +125,9 @@ ability_fearmongerCooldown: 15
 ability_apoptosisCost: 15
 ability_darkEmpireCost: 12
 ability_darkEmpireThreatMultGain: 0.5
-ability_sharedGloryLikingGain: 8
+ability_sharedGloryLikingGain: 16
 ability_addLikingAmount: 20
-ability_addLikingCost: 5
+ability_addLikingCost: 4
 ability_reduceSuspicionCost: 5
 ability_sharedGloryAmount: 5
 ability_auraOfLunacyEvidence: 14
@@ -159,8 +160,8 @@ trait_hateful: -25
 trait_warmaster: 10
 trait_defender: 10
 trait_badCommander: -10
-trait_incompetent_loss: -7
-trait_competent_gain: 7
+trait_incompetent_loss: 5
+trait_competent_gain: 5
 trait_incompetent_desirability: -75
 trait_competent_desirability: 75
 trait_basic_desirability: 30

@@ -71,6 +71,13 @@ namespace Assets.Code
                 msgs.Add(new ReasonMsg("Has territory from my province", localU));
                 u += localU;
             }
+            //We want to own more land
+            if (option.group is Society)
+            {
+                localU = society.map.param.utility_militaryTargetExpansion;
+                msgs.Add(new ReasonMsg("Expand our holdings", localU));
+                u += localU;
+            }
 
 
             foreach (ThreatItem threat in voter.threatEvaluations)

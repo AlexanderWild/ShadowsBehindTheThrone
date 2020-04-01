@@ -46,6 +46,7 @@ namespace Assets.Code
         public double utility_econEffectOther = 0.10;
         public double utility_militaryTargetRelStrengthOffensive = 300;
         public double utility_militaryTargetCompleteProvince = 50;
+        public double utility_militaryTargetExpansion = 25;
         public double utility_militaryTargetRelStrengthDefensive = 250;
         public double utility_vassaliseReluctance = -90;
         public double utility_vassaliseMilMult = 80;
@@ -189,8 +190,8 @@ namespace Assets.Code
         public double trait_warmaster = 10;
         public double trait_defender = 10;
         public double trait_badCommander = -10;
-        public double trait_incompetent_loss = -7;
-        public double trait_competent_gain = 7;
+        public double trait_incompetent_loss = 5;
+        public double trait_competent_gain = 5;
         public double trait_incompetent_desirability = -75;
         public double trait_competent_desirability = 75;
         public double trait_basic_desirability = 30;

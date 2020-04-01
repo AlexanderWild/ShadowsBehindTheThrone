@@ -81,7 +81,7 @@ namespace Assets.Code
 
             processEnshadowment();
 
-            this.targetPrestige = getTargetPrestige();
+            this.targetPrestige = getTargetPrestige(null);
             if (Math.Abs(prestige-targetPrestige) < map.param.person_prestigeDeltaPerTurn)
             {
                 prestige = targetPrestige;
@@ -113,21 +113,43 @@ namespace Assets.Code
             processSanity();
         }
 
-        public double getTargetPrestige()
+        public double getTargetPrestige(List<string> reasons)
         {
-            double prestige =  map.param.person_defaultPrestige;
+            double prestige = map.param.person_defaultPrestige;
+            if (reasons != null)
+            {
+                reasons.Add("Basic default: " + (int)(map.param.person_defaultPrestige));
+            } 
 
             if (title_land != null)
             {
                 prestige += title_land.settlement.getPrestige();
+                if (reasons != null)
+                {
+                    reasons.Add("Land Title: " + (int)(title_land.settlement.getPrestige()));
+                }
             }
-            foreach (Title t in titles) { prestige += t.getPrestige(); }
+            foreach (Title t in titles)
+            {
+                if (reasons != null)
+                {
+                    reasons.Add(t.getName() + " " + (int)(t.getPrestige()));
+                }
+                prestige += t.getPrestige();
+            }
 
             foreach (Person p in this.getDirectSubordinates())
             {
                 foreach (Trait t in p.traits)
                 {
-                    prestige -= t.superiorPrestigeChange();
+                    if (t.superiorPrestigeChange() != 0)
+                    {
+                        if (reasons != null)
+                        {
+                            reasons.Add(p.getFullName() + " (" + t.name + ") " + (int)(t.superiorPrestigeChange()));
+                        }
+                        prestige += t.superiorPrestigeChange();
+                    }
                 }
             }
             if (prestige < 0) { prestige = 0; }

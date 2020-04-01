@@ -24,6 +24,8 @@ namespace Assets.Code
         public Text personBody;
         public Text maskTitle;
         public Text maskBody;
+        public Text prestigeText;
+        public Text prestigeDescText;
         public Image profileBack;
         public Image profileMid;
         public Image profileFore;
@@ -34,6 +36,7 @@ namespace Assets.Code
         public GameObject screenSociety;
         public GameObject screenLocation;
         public GameObject insanityDescBox;
+        public GameObject prestigeDescBox;
         public GameObject socTypeBox;
         public GameObject[] traits;
         public GameObject[] traitDescBoxes;
@@ -143,8 +146,7 @@ namespace Assets.Code
             {
                 bodyText += "\nDirect Superior: None";
             }
-            bodyText += "\nPrestige: " + (int)(p.prestige);
-            bodyText += "\nPrestige Moving towards: " + (int)(p.targetPrestige);
+            prestigeText.text = "Prestige: " + (int)(p.prestige) + "\nPrestige Moving towards: " + (int)(p.getTargetPrestige(null));
             bodyText += "\nShadow: " + (int)(p.shadow * 100) + "%";
             bodyText += "\nEvidence: " + (int)(p.evidence * 100) + "%";
             bodyText += "\nMilitarism: " + (int)(p.politics_militarism * 100) + "%";
@@ -189,6 +191,13 @@ namespace Assets.Code
                 "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner. "
                 + "Characters will dislike insane characters to a moderate degree, and insane characters will occasionally lash out, further reducing their relationships."
                    + "\nYou can cause reduce sanity using certain abilities.";
+
+            prestigeDescText.text = "";
+            List<string> prestigeReasons = new List<string>();
+            p.getTargetPrestige(prestigeReasons);
+            foreach (string s in prestigeReasons){
+                prestigeDescText.text += "*" + s + "\n";
+            }
 
             for (int i = 0; i < traits.Length; i++)
             {
@@ -283,6 +292,7 @@ namespace Assets.Code
             personTitle.text = "No Person Selected";
             locText.text = "";
             personBody.text = "";
+            prestigeText.text = "";
             insanityText.text = "";
             socTypeTitle.text = "";
             socTypeDesc.text = "";
@@ -291,6 +301,7 @@ namespace Assets.Code
             body.text = "";
             title.text = "";
             socTypeBox.SetActive(false);
+            prestigeDescText.text = "Characters have a prestige score. This approaches a target value over time. Prestige is affected by the settlement a character rules (if any) and any other titles they hold.";
             insanityDescText.text = "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
                    + "\nYou can cause reduce sanity using certain abilities.";
             for (int i = 0; i < traits.Length; i++)
@@ -303,6 +314,10 @@ namespace Assets.Code
         public void bInsanityDescClick()
         {
             insanityDescBox.SetActive(!insanityDescBox.activeInHierarchy);
+        }
+        public void bPrestigeDescClick()
+        {
+            prestigeDescBox.SetActive(!prestigeDescBox.activeInHierarchy);
         }
         public void bTypeDesc()
         {
@@ -449,6 +464,7 @@ namespace Assets.Code
                         if (locSoc.voteSession != null)
                         {
                             bodyText += "\nVoting on: " + locSoc.voteSession.issue.ToString();
+                            bodyText += "\nTurns Remaining: " + locSoc.voteSession.timeRemaining;
                         }
 
                         string econEffects = "";

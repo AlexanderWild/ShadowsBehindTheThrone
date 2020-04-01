@@ -94,6 +94,13 @@ namespace Assets.Code
                 u += localU;
             }
 
+            //We want to own more land
+            if (option.group is Society)
+            {
+                localU = society.map.param.utility_militaryTargetExpansion * parityMult;
+                msgs.Add(new ReasonMsg("Expand our holdings", localU));
+                u += localU;
+            }
             /*
             if (relMilU > 0 && target is Society)
             {
