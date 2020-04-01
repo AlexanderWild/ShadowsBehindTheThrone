@@ -23,26 +23,31 @@ namespace Assets.Code
         public static void setup(Society soc)
         {
             activeSociety = soc;
-            Person ss = activeSociety.getSovreign();
+            //Person ss = activeSociety.getSovreign();
 
             foreach (Person p in activeSociety.people)
             {
                 world.prefabStore.getGraphicalSlot(p);
                 if (p.getLocation() == null)
                     continue;
-                
+            }
+
+            foreach (Person p in activeSociety.people)
+            {
                 Province pp = p.getLocation().province;
                 if (!loadedPlaceholders.ContainsKey(pp))
                 {
                     GraphicalSlot ds = world.prefabStore.getGraphicalSlotPlaceholder(pp.name);
                     originalScale = ds.gameObject.transform.localScale;
 
-                    if (ss != null && ss.getLocation().province.name == pp.name)
-                    {
-                        ds.layerBack.enabled = false;
-                        ds.border.enabled = false;
-                    }
+                    //if (ss != null && ss.getLocation().province.name == pp.name)
+                    //{
+                        //ds.layerBack.enabled = false;
+                        //ds.border.enabled = false;
+                    //}
 
+                    ds.border.enabled = false;
+                    ds.layerBack.sprite = world.textureStore.emptyDukeSlot;
                     loadedPlaceholders.Add(pp, ds);
                 }
             }
@@ -86,8 +91,8 @@ namespace Assets.Code
             clear();
 
             Person ss = activeSociety.getSovreign();
-            if (ss == null)
-                return;
+            //if (ss == null)
+            //    return;
 
             focus = (state == viewState.HIERARCHY && nfocus != null) ? nfocus : ss;
 

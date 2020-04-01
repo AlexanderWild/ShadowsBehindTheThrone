@@ -15,6 +15,7 @@ namespace Assets.Code
         public UIScrollableRight uiScrollables;
         public UIMidTop uiMidTop;
         public UILeftPrimary uiLeftPrimary;
+        public GameObject endTurnButton;
 
         public List<GameObject> blockerQueue;
         public List<GameObject> blockerQueueDelayed = new List<GameObject>();
@@ -88,6 +89,7 @@ namespace Assets.Code
                 uiLeftPrimary.unlandedViewButton.gameObject.SetActive(false);
                 uiLeftPrimary.neighborViewButton.gameObject.SetActive(false);
                 uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(false);
+                endTurnButton.SetActive(true);
             }
             else if (state == uiState.SOCIETY)
             {
@@ -98,6 +100,7 @@ namespace Assets.Code
                 uiLeftPrimary.unlandedViewButton.gameObject.SetActive(true);
                 uiLeftPrimary.neighborViewButton.gameObject.SetActive(true);
                 uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(true);
+                endTurnButton.SetActive(false);
             }
             else
             {

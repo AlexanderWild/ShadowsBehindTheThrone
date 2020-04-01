@@ -73,6 +73,8 @@ namespace Assets.Code
 
         public Sprite questionMark;
 
+        public Sprite emptyDukeSlot;
+
         public Sprite flora_forest;
         public Sprite flora_forestSnow;
         public Sprite flora_flesh;

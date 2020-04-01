@@ -70,11 +70,27 @@ namespace Assets.Code
         }
         public override string getTypeDesc()
         {
-            return "A human society, consisting of large numbers of serfs, and the nobles who rule over them."
+            string reply = "A human society, consisting of large numbers of serfs, and the nobles who rule over them."
                 + "\nThis society is an elective monarchy, that is to say that the nobles vote on their rulers, selecting a single noble to act as sovreign."
-                + "\nIf the nation owns territory outside the sovreign's province, they will elect dukes to rule some of these provinces. If they do, the sovreign can only be elected from the dukes (or be re-elected)"
+                + "\nIf the nation owns enough territory outside the sovreign's province, they will elect dukes to rule over provinces. If they do, the sovreign can only be elected from the dukes (or be re-elected)"
                 + " Only nobles residing in a province are eligible to become that province's duke."
                 + "\n\nAll the actions (wars, territory allocation, criminal trials...) the society takes are voted on by the nobles, with weight a noble's vote carries equal to their prestige.";
+
+            reply += "\n\nThis society's unlanded titles are:\n";
+            foreach (Title t in titles)
+            {
+                reply += t.getName() + "\n";
+                if (t.heldBy != null)
+                {
+                    reply += "  Held by: " + t.heldBy.getFullName() + "\n";
+                }
+                else
+                {
+                    reply += "  Currently Vacant\n";
+                }
+            }
+
+            return reply;
         }
 
         public void misc()
@@ -699,7 +715,7 @@ namespace Assets.Code
                 if (t is Title_ProvinceRuler)
                 {
                     Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
-                    if (provCounts[t2.province.index] < 2 || (this.getCapital() != null && t2.province == this.getCapital().province))
+                    if (provCounts[t2.province.index] < 2)
                     {
                         rems.Add(t2);
                     }
@@ -715,21 +731,37 @@ namespace Assets.Code
                 {
                     if (map.overmind.enthralled != null && t.heldBy.society == map.overmind.enthralled.society)
                     {
-                        map.addMessage(t.heldBy.getFullName() + " loses rule over " + t.province.name + " due to loss of territory.",MsgEvent.LEVEL_RED,false);
+                        map.addMessage(t.heldBy.getFullName() + " loses provincial rule over " + t.province.name + " due to loss of territory.",MsgEvent.LEVEL_RED,false);
                     }
+                    
                     t.heldBy.titles.Remove(t);
                     t.heldBy = null;
                     titles.Remove(t);
                 }
             }
+            int nHeldProvinces = 0;
+
+            for (int i = 0; i < provCounts.Length; i++)
+            {
+                if (provCounts[i] > 1)
+                {
+                    nHeldProvinces += 1;
+                }
+            }
+
             if (titles.Count <= World.staticMap.param.society_maxDukes)
             {
                 for (int i = 0; i < provCounts.Length; i++)
                 {
-                    if (provCounts[i] > 1 && this.getCapital() != null && (this.getCapital().province.index != i) && (!present[i]))
+                    if (provCounts[i] > 1 && nHeldProvinces > 1 && (!present[i]))
                     {
                         Title_ProvinceRuler title = new Title_ProvinceRuler(this, map.provinces[i]);
                         titles.Add(title);
+
+                        if (map.overmind.enthralled != null && this == map.overmind.enthralled.society)
+                        {
+                            map.addMessage(this.getName() + " adds a new provincial ruler title, for " + title.province.name, MsgEvent.LEVEL_GREEN, false);
+                        }
                     }
                 }
             }

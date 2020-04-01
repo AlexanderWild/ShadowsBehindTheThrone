@@ -197,7 +197,7 @@ namespace Assets.Code
         public Person getDirectSuperiorIfAny()
         {
             if (this == society.getSovreign()) { return null; }
-            if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovreign(); }
+            //if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovreign(); }
             foreach (Title t in society.titles)
             {
                 if (t is Title_ProvinceRuler)
