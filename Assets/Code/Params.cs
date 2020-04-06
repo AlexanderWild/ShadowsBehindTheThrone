@@ -32,7 +32,7 @@ namespace Assets.Code
         public double relObj_defaultLiking = 5;
         public double relObj_decayRate = 0.98;
 
-        public double combat_prestigeLossFromConquest = 0.333;//multiplier on captured lords' prestige
+        public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
         public double combat_thresholdAttackStrength = 0.25;
         public double combat_lethality = 0.5;//How much of an army is destroyed in a battle at maximum roll against an equivalent force
         public double combat_takeLandThreshold = 1.25;//How much over their strength do you have to be to take some land
@@ -46,7 +46,7 @@ namespace Assets.Code
         public double utility_econEffectOther = 0.10;
         public double utility_militaryTargetRelStrengthOffensive = 300;
         public double utility_militaryTargetCompleteProvince = 50;
-        public double utility_militaryTargetExpansion = 25;
+        public double utility_militaryTargetExpansion = 60;
         public double utility_militaryTargetRelStrengthDefensive = 250;
         public double utility_vassaliseReluctance = -90;
         public double utility_vassaliseMilMult = 80;
@@ -63,6 +63,7 @@ namespace Assets.Code
         public double utility_prestigeMultForTitle = 1.5;
         public double utility_dismissFromCourt = 2;
 
+        public double person_likingFromBeingInvaded = -25;
         public double person_maxLikingGainFromVoteAccordance = 30;
         public double person_maxLikingLossFromVoteDiscord = -50;
         public double person_prestigeDeltaPerTurn = 0.5;
@@ -76,6 +77,9 @@ namespace Assets.Code
         public double person_shadowContagionMult = 0.05;
         public double person_threatFromSuspicion = 400;
         public double person_shadowDecayPerTurn = 0.005;
+        public double person_threatFromBeingOffensiveTarget = 75;
+        public int person_fearLevel_afraid = 100;
+        public int person_fearLevel_terrified = 150;
 
         public int econ_buffDuration = 50;
 
@@ -103,7 +107,7 @@ namespace Assets.Code
         public double threat_takeLocation = 5;
         public double victory_targetEnshadowmentAvrg = 0.75;
 
-        public double dark_evilThreatMult = 1.5;
+        public double dark_evilThreatMult = 2;
         public double dark_fleshThreatMult = 2;
         public double dark_fishmanStartingThreatMult = -0.25;
         
@@ -178,6 +182,19 @@ namespace Assets.Code
         public int ability_coldAsDeathCooldown = 10;
         public int ability_deathOfTheSunCost = 0;
         public int ability_deathOfTheSunCooldown = 10;
+        public double ability_denounceLeaderLikingMult = 0.5;
+        public double ability_denounceLeaderMax = 35;
+        public int ability_denounceLeaderCooldown = 10;
+        public int ability_instillDreadCooldown = 5;
+        public int ability_callToViolenceCooldown = 5;
+        public int ability_breakMindCooldown = 15;
+        public int ability_spreadFearCooldown = 5;
+        public double ability_instillDreadMult = 0.33;
+        public int ability_breakMindMaxSanity = 7;
+        public int ability_polariseByFearCooldown = 20;
+        public double ability_polariseByFearMult = 0.5;
+        public int ability_denouncePacifistsCooldown = 15;
+        public double ability_denouncePacisfistsLiking = -25;
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;

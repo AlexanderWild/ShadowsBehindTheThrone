@@ -1,0 +1,2 @@
+ABILITY_SPREAD_FEAR
+Panic is contagious. Humans, like animals, sense it in their flock, and will stampede without even seeing the danger themselves.

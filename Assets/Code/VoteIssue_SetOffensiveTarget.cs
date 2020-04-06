@@ -71,8 +71,8 @@ namespace Assets.Code
                 msgs.Add(new ReasonMsg("Has territory from my province", localU));
                 u += localU;
             }
-            //We want to own more land
-            if (option.group is Society)
+            //We want to own more land. Invade weak neighbours
+            if (option.group is Society && option.group.currentMilitary < this.society.currentMilitary && option.group.getNeighbours().Contains(this.society))
             {
                 localU = society.map.param.utility_militaryTargetExpansion;
                 msgs.Add(new ReasonMsg("Expand our holdings", localU));

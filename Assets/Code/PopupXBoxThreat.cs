@@ -31,7 +31,19 @@ namespace Assets.Code
         public void setTo(ThreatItem item)
         {
             titleText.text = item.getTitle();
-            if (item.p != null)
+            if (item.threat > World.staticMap.param.person_fearLevel_terrified)
+            {
+                titleText.text += "\n[Terrified]";
+            }else if (item.threat > World.staticMap.param.person_fearLevel_afraid)
+            {
+                titleText.text += "\n[Afraid]";
+            }
+            else
+            {
+                titleText.text += "\n[Modest Concern]";
+
+            }
+                if (item.p != null)
             {
                 string t = "";
 

@@ -10,7 +10,6 @@ namespace Assets.Code
         public SocialGroup group;
         public Map map;
         public Person p;
-        public double zeitgeist = 1;
         public double temporaryDread;
         public double threat;
         public List<ReasonMsg> reasons = new List<ReasonMsg>();
@@ -22,14 +21,8 @@ namespace Assets.Code
         public static int RESPONSE_DARKNESSWITHIN = 0;
         public static int RESPONSE_MILITARY = 1;
         public static string[] responseNames = new string[] { "Introspection","Military"};
-
-        public static float param_at_war = 5;
-        public static float param_strength = 2;
-        public static float param_territory = 2;
-        public static float param_zeitgeistDecay = 0.95f;
-        public static float param_accumulatorDecay = 0.97f;
-        public static float param_stance_offensive = 1.75f;
-        public static float param_stance_defensive = 1.25f;
+        
+        public double threatBeforeTemporaryDread;
 
         public ThreatItem(Map map,Person parent)
         {

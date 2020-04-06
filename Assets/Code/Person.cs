@@ -404,14 +404,18 @@ namespace Assets.Code
 
                     double infoAvailability = map.getInformationAvailability(sourceLoc, item.group);
                     int intInfoAvailability = (int)(infoAvailability * 100);
-                    item.reasons.Add(new ReasonMsg("Information (% kept)", intInfoAvailability));
+                    item.reasons.Add(new ReasonMsg("Distance (% multiplier)", intInfoAvailability));
                     value *= infoAvailability;
 
-                    double militaryStrengthMult = 50 / ((society.currentMilitary + (society.maxMilitary / 2)) + 1);
+                    double ourMilitary = society.currentMilitary + (society.maxMilitary/2);
+                    double theirMilitary = item.group.currentMilitary + (item.group.maxMilitary/2);
+                    double militaryStrengthMult = theirMilitary / (ourMilitary + 1);
+                    //double militaryStrengthMult = 50 / ((society.currentMilitary + (society.maxMilitary / 2)) + 1);
                     if (militaryStrengthMult < 0.5) { militaryStrengthMult = 0.5; }
+                    if (militaryStrengthMult > 2.5) { militaryStrengthMult = 2.5; }
                     item.reasons.Add(new ReasonMsg("Relative strengths of social-group's militaries (% multiplier)", (int)(100 * militaryStrengthMult)));
                     value *= militaryStrengthMult;
-
+                    
                     item.threat = value;
 
                     if (item.group is Society)
@@ -428,8 +432,16 @@ namespace Assets.Code
                         }
                         item.reasons.Add(new ReasonMsg("Suspicion that nobles are enshadowed", (int)susThreat));
                         item.threat += susThreat;
+
+                        if (soc.offensiveTarget == this.society && soc.posture == Society.militaryPosture.offensive)
+                        {
+                            item.reasons.Add(new ReasonMsg("We are their offensive target", map.param.person_threatFromBeingOffensiveTarget));
+                            item.threat += map.param.person_threatFromBeingOffensiveTarget;
+                        }
                     }
                 }
+
+                item.threatBeforeTemporaryDread = item.threat;
 
                 if (Math.Abs(item.temporaryDread) > 1)
                 {

@@ -1,6 +1,6 @@
 	High criticality:
 
-
+-Relative military strengths are the same for all target social groups?
 
 	Medium criticality:
 	
@@ -20,6 +20,24 @@
 -Two nations named the same thing
 
 -Turn counter up there too
+
+	Features:
+	
+Fascism God:
+VV-Add disliking to everyone towards sovreign if sovreign does not consider their top fear to be relevant, proportional to their top fear
+VV-Amplify fear
+VV-Make character paranoid if fearful
+VV-Spread fear to local area (neighbouring)
+VV-Polarise along fear lines
+-Add evidence to target at cost of evidence to yourself
+VV-Boost militarism if fearful
+VV-Add disliking to all pacisfists from fearful people
+-Reduce cooldowns using power
+
+General:
+Reduce prestige of other at cost of your own
+Reduce prestige of other at cost of power
+Delay voting
 
 -----------------------RESOLVED-----------------------
 -Add turns remaining on voting for

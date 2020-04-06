@@ -296,6 +296,10 @@ namespace Assets.Code
                     {
                         Society socAtt = (Society)att;
                         lord.prestige *= param.combat_prestigeLossFromConquest;
+                        if (socAtt.getSovreign() != null)
+                        {
+                            lord.getRelation(socAtt.getSovreign()).addLiking(param.person_likingFromBeingInvaded, "Their nation invaded mine", turn);
+                        }
                         foreach (Title t in lord.titles) { t.heldBy = null; }
                         lord.titles.Clear();
 
