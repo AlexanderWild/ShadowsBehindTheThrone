@@ -60,8 +60,8 @@ namespace Assets.Code
                 ui.setToMainMenu();
             }
 
-            potentialGods.Add(new God_LordOfBroken());
             potentialGods.Add(new God_Easy());
+            potentialGods.Add(new God_MerchantOfNightmares());
             potentialGods.Add(new God_DeepOnes());
             potentialGods.Add(new God_WintersScythe());
             potentialGods.Add(new God_Flesh());

@@ -195,6 +195,10 @@ namespace Assets.Code
         public double ability_polariseByFearMult = 0.5;
         public int ability_denouncePacifistsCooldown = 15;
         public double ability_denouncePacisfistsLiking = -25;
+        public int ability_delayVoteTurnsAdded = 4;
+        public int ability_delayVoteCost = 8;
+        public int ability_delayVoteCooldown = 24;
+
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;

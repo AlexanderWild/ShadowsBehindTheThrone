@@ -1,6 +1,5 @@
 	High criticality:
 
--Relative military strengths are the same for all target social groups?
 
 	Medium criticality:
 	
@@ -19,7 +18,7 @@
 
 -Two nations named the same thing
 
--Turn counter up there too
+-Turn counter added to top right
 
 	Features:
 	
@@ -37,9 +36,10 @@ VV-Add disliking to all pacisfists from fearful people
 General:
 Reduce prestige of other at cost of your own
 Reduce prestige of other at cost of power
-Delay voting
+VV-Delay voting
 
 -----------------------RESOLVED-----------------------
+-Relative military strengths are the same for all target social groups?
 -Add turns remaining on voting for
 
 -A person must understand they won't have themselves as follower, so can't hate you for making them their own follower
