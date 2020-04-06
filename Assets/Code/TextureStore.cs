@@ -23,6 +23,10 @@ namespace Assets.Code
         public Sprite slotCount;
         public Sprite slotBasic;
 
+        public Sprite boxImg_ship;
+        public Sprite boxImg_thumb;
+        public Sprite boxImg_blue;
+
         public Sprite hex_base;
         public Sprite hex_simplified;
         public Sprite hex_terrain_sea;

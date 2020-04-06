@@ -445,6 +445,10 @@ namespace Assets.Code
             specific.ui = ui;
             specific.textBody.text = body;
             specific.textFlavour.text = flavour;
+            int q = Eleven.random.Next(3);
+            if (q == 0) { specific.img.sprite = ui.world.textureStore.boxImg_blue; }
+            if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
+            if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
