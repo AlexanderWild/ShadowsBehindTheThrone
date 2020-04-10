@@ -42,6 +42,21 @@ namespace Assets.Code
             info2.text = "";
         }
 
+        public void SetInfo(War war)
+        {
+            foreground.sprite = war.att.map.world.textureStore.icon_shield;
+            foreground.enabled = true;
+            midground.enabled = false;
+            background.enabled = false;
+
+            name.text = war.att.getName() + " attacking " + war.def.getName();
+
+            info.text = "Started Turn: " + war.startTurn;
+            info.text += "\nTurns Remaining: " + (war.att.map.param.war_defaultLength - (war.att.map.turn - war.startTurn));
+
+            name2.text = "";
+            info2.text = "";
+        }
         public void SetInfo(Settlement s)
         {
             foreground.sprite = s.getSprite();

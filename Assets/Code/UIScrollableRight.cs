@@ -25,8 +25,9 @@ namespace Assets.Code
         public Toggle bPlaces;
         public Toggle bVotes;
         public Toggle bMessages;
+        public Toggle bWars;
 
-        public enum Tab { People, Places, Votes,Messages, Actions };
+        public enum Tab { People, Places, Votes,Messages, Actions ,War};
         private Tab currentTab;
 
         public void Start()
@@ -51,6 +52,25 @@ namespace Assets.Code
                 title.text = "EVENT MESSAGES";
                 fillMessagesTab();
                 return;
+            }
+            else if (currentTab == Tab.War)
+            {
+                HashSet<War> wars = new HashSet<War>();
+                foreach (SocialGroup sg in master.world.map.socialGroups)
+                {
+                    foreach (DipRel rel in sg.relations.values)
+                    {
+                        if (rel.other(sg).isGone() == false && rel.war != null)
+                        {
+                            wars.Add(rel.war);
+                        }
+                    }
+                }
+                foreach (War war in wars)
+                {
+                    GameObject sp = Instantiate(master.world.prefabStore.prefabPersonPortrait, listContent);
+                    sp.GetComponent<Portrait>().SetInfo(war);
+                }
             }
 
             if (activeSociety == null) return;
@@ -128,6 +148,7 @@ namespace Assets.Code
             else if (bPlaces.isOn) currentTab = Tab.Places;
             else if (bVotes.isOn) currentTab = Tab.Votes;
             else if (bMessages.isOn) currentTab = Tab.Messages;
+            else if (bWars.isOn) currentTab = Tab.War;
 
             checkData();
         }
@@ -135,8 +156,7 @@ namespace Assets.Code
         public void onClick()
         {
             if (activeSociety == null) { return; }
-
-            Debug.Log("poop");
+            
             if (master.state == UIMaster.uiState.WORLD)
                 master.setToSociety(activeSociety);
             else

@@ -123,7 +123,7 @@ namespace Assets.Code
             word += alpha[letter];
             int a = -1;
             int b = -1;
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 8; i++)
             {
                 bool canEnd = i > 2;
                 a = b;

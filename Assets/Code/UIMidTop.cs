@@ -11,6 +11,7 @@ namespace Assets.Code
     {
         public UIMaster master;
         public Text powerText;
+        public Text turnText;
         public Text victoryText;
         public InputField cheatField;
 
@@ -22,6 +23,7 @@ namespace Assets.Code
         public void checkData()
         {
             powerText.text = "POWER: " + ((int)Math.Ceiling(master.world.map.overmind.power) + "/" + master.world.map.param.overmind_maxPower);
+            turnText.text = "Turn: " + master.world.map.turn;
             victoryText.text = "Enshadowment: " + (int)(100*master.world.map.data_avrgEnshadowment) + "/" + (int)(100*master.world.map.param.victory_targetEnshadowmentAvrg)+"%"
                 + "\nHuman Settlements: " + master.world.map.data_nSocietyLocations;
         }
