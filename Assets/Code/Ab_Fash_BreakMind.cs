@@ -57,7 +57,7 @@ namespace Assets.Code
 
         public override string getName()
         {
-            return "Beak Mind";
+            return "Break Mind";
         }
 
         public override Sprite getSprite(Map map)

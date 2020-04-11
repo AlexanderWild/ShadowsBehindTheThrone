@@ -60,7 +60,7 @@ namespace Assets.Code
         }
         public override int getCost()
         {
-            return 0;
+            return World.staticMap.param.ability_instillDreadCost;
         }
 
         public override string getDesc()

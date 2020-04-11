@@ -17,8 +17,10 @@ namespace Assets.Code
 
         public override string getDescMechanics()
         {
-            return "This Name revolves around creating then spreading fear across the population. The fear can be used to divide the population and topple established power structures, leaving "
-                + " a vacuum for you to rise to the top of. Once there, you can begin a campaign of miliary conquest, constantly expelling any who oppose your rampant militarism.";
+            return "This Name revolves around creating then spreading fear (as seen by noble's threat items) across the population. The fear can be used to divide the population and topple established power structures, leaving "
+                + " a vacuum for you to rise to the top of. Once there, you can begin a campaign of miliary conquest, constantly expelling any who oppose your rampant militarism."
+                + "\n\nNote that this Name's powers are better suited for spreading existing fear than creating it from nothing. Other Names, finding prime targets, or creating suspicion of your" +
+                " true nature may be useful in starting the process.";
         }
 
         public override string getName()
@@ -49,10 +51,7 @@ namespace Assets.Code
 
         public override void onStart(Map map)
         {
-            foreach (God g in map.world.potentialGods)
-            {
-                map.overmind.powers.AddRange(g.getUniquePowers());
-            }
+            map.overmind.powers.AddRange(this.getUniquePowers());
         }
     }
 }

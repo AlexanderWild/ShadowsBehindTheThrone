@@ -27,7 +27,10 @@ namespace Assets.Code
             powers.Add(new Ab_Enth_DarkEmpire());
             powers.Add(new Ab_Over_HateTheLight());
             //abilities.Add(new Ab_TestAddShadow());
+        }
 
+        public void addDefaultAbilities()
+        {
             powers.Add(new Ab_Enth_MiliaryAid());
             powers.Add(new Ab_Enth_TrustingFool());
             powers.Add(new Ab_Enth_Enshadow());

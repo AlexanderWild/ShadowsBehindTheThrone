@@ -158,6 +158,7 @@ ability_denounceLeaderLikingMult: 0.5
 ability_denounceLeaderMax: 35
 ability_denounceLeaderCooldown: 10
 ability_instillDreadCooldown: 5
+ability_instillDreadCost: 5
 ability_callToViolenceCooldown: 5
 ability_breakMindCooldown: 15
 ability_spreadFearCooldown: 5
@@ -167,8 +168,9 @@ ability_polariseByFearCooldown: 20
 ability_polariseByFearMult: 0.5
 ability_denouncePacifistsCooldown: 15
 ability_denouncePacisfistsLiking: -25
-ability_delayVoteTurnsAdded: 3
-ability_delayVoteCost: 6
+ability_delayVoteTurnsAdded: 4
+ability_delayVoteCost: 8
+ability_delayVoteCooldown: 24
 insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10

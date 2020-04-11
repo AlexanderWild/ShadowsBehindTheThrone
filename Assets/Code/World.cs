@@ -235,6 +235,7 @@ namespace Assets.Code
             foreach (God chosenGod in chosenGods){
                 chosenGod.onStart(map);
             }
+            map.overmind.addDefaultAbilities();
             chosenGods = null;//Just in case this fucks with something
             ui.setToWorld();
         }

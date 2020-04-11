@@ -186,6 +186,7 @@ namespace Assets.Code
         public double ability_denounceLeaderMax = 35;
         public int ability_denounceLeaderCooldown = 10;
         public int ability_instillDreadCooldown = 5;
+        public int ability_instillDreadCost = 5;
         public int ability_callToViolenceCooldown = 5;
         public int ability_breakMindCooldown = 15;
         public int ability_spreadFearCooldown = 5;

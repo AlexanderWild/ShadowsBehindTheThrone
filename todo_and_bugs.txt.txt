@@ -1,14 +1,15 @@
 	High criticality:
 
+-Make sure threat and fear are definitely understood to be the same
 
 	Medium criticality:
 	
 -Dark nobles desire to invade societies
 
+-Short memories listed twice
 
 	Low criticality:
 
--Ongoing wars added to right hand scrollables
 
 -Dark nobles shouldn't hate the defensive stance
 
@@ -17,8 +18,6 @@
 -Wordwrap on power info looks ugly
 
 -Two nations named the same thing
-
--Turn counter added to top right
 
 	Features:
 	
@@ -39,6 +38,9 @@ Reduce prestige of other at cost of power
 VV-Delay voting
 
 -----------------------RESOLVED-----------------------
+
+-Ongoing wars added to right hand scrollables
+-Turn counter added to top right
 -Relative military strengths are the same for all target social groups?
 -Add turns remaining on voting for
 

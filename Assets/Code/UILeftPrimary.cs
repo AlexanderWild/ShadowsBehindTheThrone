@@ -175,6 +175,7 @@ namespace Assets.Code
             if (threat != null)
             {
                 bodyText += "\nBelieved Greatest Threat: " + threat.getTitle();
+                bodyText += "\nFear of threat: " + (int)threat.threat;
                 if (threat.threat > World.staticMap.param.person_fearLevel_terrified) { bodyText += "\n[Terrified]"; }
                 else if (threat.threat > World.staticMap.param.person_fearLevel_afraid) { bodyText += "\n[Afraid]"; }
                 else { bodyText += "\n[Moderate Concern]"; }
