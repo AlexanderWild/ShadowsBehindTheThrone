@@ -303,7 +303,7 @@ namespace Assets.Code
             socThreat.text = "";
             socEcon.text = "";
             body.text = "";
-            title.text = "";
+            title.text = "Nothing Selected";
             socTypeBox.SetActive(false);
             prestigeDescText.text = "Characters have a prestige score. This approaches a target value over time. Prestige is affected by the settlement a character rules (if any) and any other titles they hold.";
             insanityDescText.text = "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
