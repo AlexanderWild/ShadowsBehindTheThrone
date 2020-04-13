@@ -159,6 +159,7 @@ namespace Assets.Code
             param.mapGen_sizeX = opts.sizeX;
             param.mapGen_sizeY = opts.sizeY;
             param.mapGen_burnInSteps = opts.burnIn;
+            param.useAwareness = opts.useAwareness ? 1:0 ;
 
             map = new Map(param);
             GraphicalMap.map = map;

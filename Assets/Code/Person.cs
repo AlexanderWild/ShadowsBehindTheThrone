@@ -338,6 +338,23 @@ namespace Assets.Code
             }
         }
 
+        public double getAwarenessMult()
+        {
+            double v = (1 - this.shadow);
+            if (this.state == personState.enthralled) { return 0 ; }
+
+            if (this.title_land != null && this.title_land.settlement is Set_University) 
+            {
+                v *= map.param.awarenessUniversityBonusMult;
+            }
+
+            foreach (Trait t in traits)
+            {
+                v *= t.getAwarenessMult();
+            }
+
+            return v;
+        }
         public bool enthrallable()
         {
             if (state == personState.broken) { return true; }

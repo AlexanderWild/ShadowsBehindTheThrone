@@ -130,13 +130,13 @@ namespace Assets.Code
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha7))
                 {
-                    if (world.map.masker.mask == MapMaskManager.maskType.EVIDENCE)
+                    if (world.map.masker.mask == MapMaskManager.maskType.AWARENESS)
                     {
                         world.map.masker.mask = MapMaskManager.maskType.NONE;
                     }
                     else
                     {
-                        world.map.masker.mask = MapMaskManager.maskType.EVIDENCE;
+                        world.map.masker.mask = MapMaskManager.maskType.AWARENESS;
                     }
                     GraphicalMap.checkData();
                 }

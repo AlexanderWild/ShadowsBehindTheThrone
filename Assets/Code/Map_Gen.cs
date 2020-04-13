@@ -173,7 +173,7 @@ namespace Assets.Code
                 }else
                 {
                     int q = 0;
-                    double[] weights = new double[] { 2, 1, 2 };
+                    double[] weights = new double[] { 2, 0.7, 2 };
                     double roll = 0;
                     for (int i = 0; i < weights.Length; i++) { roll += weights[i]; }
                     roll *= Eleven.random.NextDouble();

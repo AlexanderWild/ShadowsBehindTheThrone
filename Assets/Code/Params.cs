@@ -22,6 +22,15 @@ namespace Assets.Code
         public int mapGen_burnInSteps = 150;
         public float map_tempTemperatureReversion = 0.002f;
 
+        public int useAwareness = 1;
+        public double panic_panicPerPower = 0.25;
+        public double panic_dropPerTurn = 0.1;
+        public double awarenessBaseWeighting = 1;
+        public double awarenessUniversityBonusMult = 4;
+        public double trait_aware_awarenessMult = 1.5;
+        public double awarenessInvestigationDetectMult = 10;
+        public double awareness_increasePerCost = 0.02;
+
         public bool flashEnthrallables = true;
         public int overmind_maxPower = 24;
         public double overmind_powerRegen = 1.0;
@@ -188,7 +197,7 @@ namespace Assets.Code
         public int ability_instillDreadCooldown = 5;
         public int ability_instillDreadCost = 5;
         public int ability_callToViolenceCooldown = 5;
-        public int ability_breakMindCooldown = 15;
+        public int ability_breakMindCooldown = 21;
         public int ability_spreadFearCooldown = 5;
         public double ability_instillDreadMult = 0.33;
         public int ability_breakMindMaxSanity = 7;
@@ -208,6 +217,7 @@ namespace Assets.Code
         public int insanity_maxSanity = 14;
 
         public double trait_incautious = 0.5;
+        public double trait_incautious_awarenessMult = 0.33;
         public double trait_aware = 2;
         public double trait_charismatic = 15;
         public double trait_unlikable = -15;

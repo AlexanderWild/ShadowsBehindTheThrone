@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Assets.Code
@@ -32,6 +33,10 @@ namespace Assets.Code
             if (map.param.overmind_singleAbilityPerTurn) { map.overmind.hasTakenAction = true; }
             World.log("Cast " + this.ToString() + " " + this.getName());
             turnLastCast = map.turn;
+
+            if (map.param.useAwareness == 1) {
+                map.overmind.increasePanicFromPower(getCost(), this);
+            }
         }
     }
 }

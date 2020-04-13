@@ -23,6 +23,7 @@ namespace Assets.Code
         public virtual double defChange() { return 0; }
         public virtual double superiorPrestigeChange() { return 0; }
         public virtual double desirabilityAsFollower() { return 0; }
+        public virtual double getAwarenessMult() { return 1; }
         public int groupCode;
 
         public virtual void turnTick(Person p) { }

@@ -17,6 +17,7 @@ namespace Assets.Code
         public Person enthralled;
         public bool victoryAchieved = false;
         public bool hasEnthrallAbilities = false;
+        public double panicFromPowerUse;
 
         public Overmind(Map map)
         {
@@ -57,6 +58,65 @@ namespace Assets.Code
             abilities.Add(new Ab_Soc_BoostMilitarism());
         }
 
+        public double computeWorldPanic(List<ReasonMsg> reasons)
+        {
+            double panic = 0;
+            panic += panicFromPowerUse;
+            reasons.Add(new ReasonMsg("Power use", panic));
+
+            double shadow = map.data_avrgEnshadowment;
+            panic += shadow;
+            reasons.Add(new ReasonMsg("World Shadow", shadow));
+
+            return panic;
+        }
+        public void increasePanicFromPower(int cost, Ability ability)
+        {
+            map.worldPanic += cost * map.param.panic_panicPerPower;
+            if (map.worldPanic > 100) { map.worldPanic = 100; }
+
+            List<Person> allPeople = new List<Person>();
+            foreach (SocialGroup sg in map.socialGroups)
+            {
+                if (sg is Society)
+                {
+                    allPeople.AddRange(((Society)sg).people);
+                }
+            }
+            double sumWeighting = 0;
+            foreach (Person p in allPeople)
+            {
+                double pv = p.getAwarenessMult();
+                if (p.title_land == null) { continue; }
+                if (p.awareness >= 1) { pv = 0; }
+                if (p.awareness > 0) { pv *= map.param.awarenessInvestigationDetectMult; }
+                sumWeighting += pv;
+            }
+            Person detector = null;
+            double roll = Eleven.random.NextDouble() * sumWeighting;
+            foreach (Person p in allPeople)
+            {
+                double pv = p.getAwarenessMult();
+                if (p.title_land == null) { continue; }
+                if (p.awareness >= 1) { pv = 0; }
+                if (p.awareness > 0) { pv *= map.param.awarenessInvestigationDetectMult; }
+                roll -= pv;
+                if (roll <= 0)
+                {
+                    detector = p;
+                    break;
+                }
+            }
+
+            if (detector != null) {
+                double gain = cost * map.param.awareness_increasePerCost;
+                gain *= detector.getAwarenessMult();
+                detector.awareness += gain;
+                if (detector.awareness > 1) { detector.awareness = 0; }
+                map.turnMessages.Add(new MsgEvent(detector.getFullName() + " has noticed a sign of dark power. Gains " + (int)(100 * gain) + " awareness", MsgEvent.LEVEL_RED, false));
+             }
+        }
+
         public void turnTick()
         {
             hasTakenAction = false;
@@ -64,6 +124,8 @@ namespace Assets.Code
             power = Math.Min(power, map.param.overmind_maxPower);
 
 
+            panicFromPowerUse -= map.param.panic_dropPerTurn;
+            if (panicFromPowerUse < 0) { panicFromPowerUse = 0; }
 
             processEnthralled();
             int count = 0;

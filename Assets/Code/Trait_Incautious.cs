@@ -12,7 +12,7 @@ namespace Assets.Code
             name = "Incautious";
 
             desc = "This character does not pay enough attention to the evidence of darkness around others," +
-                " and will become suspicion from seeing evidence at a slower rate.";
+                " and will become suspicion from seeing evidence at a slower rate. They will gain awareness slower.";
             groupCode = Trait.CODE_SUSPICION;
         }
         public override double suspicionMult()
@@ -20,5 +20,9 @@ namespace Assets.Code
             return World.staticMap.param.trait_incautious;
         }
 
+        public override double getAwarenessMult()
+        {
+            return World.staticMap.param.trait_incautious_awarenessMult;
+        }
     }
 }

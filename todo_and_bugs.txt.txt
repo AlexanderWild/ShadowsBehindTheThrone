@@ -4,6 +4,8 @@
 
 -Make sure threat and fear are definitely understood to be the same
 
+-Option to disable edge scrolling
+
 	Medium criticality:
 	
 -Dark nobles desire to invade societies

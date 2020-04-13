@@ -190,7 +190,8 @@ namespace Assets.Code
             int n = 0;
             foreach (Person p in activeSociety.people)
             {
-                if (p != focus && (p.title_land != null || p == originalFocus))
+                //if (p != focus && (p.title_land != null || p == originalFocus))
+                if (p != focus || p == originalFocus)
                     n += 1;
             }
 
@@ -200,7 +201,8 @@ namespace Assets.Code
             int i = 0;
             foreach (Person p in activeSociety.people)
             {
-                if (p == focus || (p.title_land == null && p != originalFocus))
+                //if (p == focus || (p.title_land == null && p != originalFocus))
+                if (p == focus)
                     continue;
 
                 GraphicalSlot ds = p.outer;

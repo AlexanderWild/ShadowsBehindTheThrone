@@ -41,6 +41,7 @@ namespace Assets.Code
         public GameObject insanityDescBox;
         public GameObject prestigeDescBox;
         public GameObject awarenessDescBox;
+        public GameObject personAwarenessBlock;
         public GameObject socTypeBox;
         public GameObject[] traits;
         public GameObject[] traitDescBoxes;
@@ -203,7 +204,9 @@ namespace Assets.Code
                    + "\nYou can cause reduce sanity using certain abilities.";
 
             personAwarenssDesc.text = "A person's awareness is how much they have realised about the threat their world faces.\nIt allows them to take actions against the darkenss directly." +
-                "\nSome nobles gain awareness each time you expend power, they can also gain awareness by gaining suspicion as they seen evidence, and can be warned by their fellow nobles, especially neighbours.";
+                "\nSome nobles gain awareness each time you expend power, they can also gain awareness by gaining suspicion as they seen evidence, and can be warned by their fellow nobles, especially neighbours."
+                + "\nAwareness gain can be increased by being in a place of learning, or increased or decreased by traits."
+                +"\n\nThis noble has an awareness rate of " + (int)(100*p.getAwarenessMult()) + "%";
 
             prestigeDescText.text = "";
             List<string> prestigeReasons = new List<string>();
@@ -388,6 +391,8 @@ namespace Assets.Code
                     abilityButtonText.text = "Use Ability (" + master.world.map.overmind.countAvailableAbilities(GraphicalSociety.focus) + ")";
                     powerButtonText.text = "Use Power (" + master.world.map.overmind.countAvailablePowers(GraphicalSociety.focus) + ")";
                 }
+                
+                personAwarenessBlock.SetActive(World.staticMap.param.useAwareness == 1);
             }
 
 

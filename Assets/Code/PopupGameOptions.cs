@@ -17,11 +17,14 @@ namespace Assets.Code
         public InputField historicalField;
         public Button bDismiss;
         public UIMaster ui;
+        
 
         public Button bEasy;
         public Button bMedium;
         public Button bHard;
+        public Toggle tAwareness;
 
+        public bool useAwareness = false;
         public int susGainPercent = 100;
         public int powerGainPercent = 100;
         public int currentSeed;
@@ -31,6 +34,7 @@ namespace Assets.Code
 
         public void dismiss()
         {
+            useAwareness = tAwareness.isOn;
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed,this);
         }

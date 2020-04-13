@@ -9,7 +9,7 @@ namespace Assets.Code
     //[Serializable,HideInInspector]
     public class MapMaskManager
     {
-        public enum maskType { NONE, NATION, PROVINCE, INFORMATION,VOTE_EFFECT,THREAT,LIKING_ME,LIKING_THEM, EVIDENCE,SUSPICION, SUSPICION_FROM,TESTING };
+        public enum maskType { NONE, NATION, PROVINCE, INFORMATION,VOTE_EFFECT,THREAT,LIKING_ME,LIKING_THEM, AWARENESS,SUSPICION, SUSPICION_FROM,TESTING };
         public maskType mask = maskType.NONE;
         public Map map;
         [NonSerialized]
@@ -57,9 +57,9 @@ namespace Assets.Code
             {
                 return "Mask: Liking for Selected Person";
             }
-            else if (mask == maskType.EVIDENCE)
+            else if (mask == maskType.AWARENESS)
             {
-                return "Mask: Evidence";
+                return "Mask: Awareness";
             }
             else if (mask == maskType.SUSPICION)
             {
@@ -411,17 +411,17 @@ namespace Assets.Code
                 }
                 return c;
             }
-            else if (mask == maskType.EVIDENCE)
+            else if (mask == maskType.AWARENESS)
             {
                 try
                 {
                     Person them = hex.settlement.title.heldBy;
 
-                    return new Color((float)them.evidence, 0, 0, 0.5f);
+                    return new Color((float)them.awareness, 0, 0, 0.9f);
                 }
                 catch (Exception e)
                 {
-                    return new Color(0, 0, 0, 0.5f);
+                    return new Color(0, 0, 0, 0.9f);
                 }
             }
             else if (mask == maskType.SUSPICION)

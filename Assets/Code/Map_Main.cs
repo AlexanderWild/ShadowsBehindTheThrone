@@ -26,6 +26,8 @@ namespace Assets.Code
         public double data_avrgEnshadowment;
         public int data_nSocietyLocations;
 
+        public double worldPanic;
+
         public Map(Params param)
         {
             this.param = param;
@@ -46,6 +48,7 @@ namespace Assets.Code
             //overmind.turnTick();
             //panic.turnTick();
 
+            worldPanic = overmind.computeWorldPanic(new List<ReasonMsg>());
 
             //Then grid cells
             for (int i = 0; i < sx; i++)
