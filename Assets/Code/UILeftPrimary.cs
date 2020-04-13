@@ -19,9 +19,12 @@ namespace Assets.Code
         public Text locInfoBody;
         public Text locNumsBody;
         public Text locNumsNumbers;
+        public Text locFlavour;
         public Text body;
         public Text personTitle;
         public Text personBody;
+        public Text personAwarenss;
+        public Text personAwarenssDesc;
         public Text maskTitle;
         public Text maskBody;
         public Text prestigeText;
@@ -37,6 +40,7 @@ namespace Assets.Code
         public GameObject screenLocation;
         public GameObject insanityDescBox;
         public GameObject prestigeDescBox;
+        public GameObject awarenessDescBox;
         public GameObject socTypeBox;
         public GameObject[] traits;
         public GameObject[] traitDescBoxes;
@@ -154,6 +158,8 @@ namespace Assets.Code
 
             bodyText += "\n";
 
+            personAwarenss.text = (int)(p.awareness * 100) + "%";
+
             Society soc = getSociety(GraphicalMap.selectedHex);
             VoteSession vote = (soc != null) ? soc.voteSession : null;
 
@@ -196,6 +202,9 @@ namespace Assets.Code
                 + "Characters will dislike insane characters to a moderate degree, and insane characters will occasionally lash out, further reducing their relationships."
                    + "\nYou can cause reduce sanity using certain abilities.";
 
+            personAwarenssDesc.text = "A person's awareness is how much they have realised about the threat their world faces.\nIt allows them to take actions against the darkenss directly." +
+                "\nSome nobles gain awareness each time you expend power, they can also gain awareness by gaining suspicion as they seen evidence, and can be warned by their fellow nobles, especially neighbours.";
+
             prestigeDescText.text = "";
             List<string> prestigeReasons = new List<string>();
             p.getTargetPrestige(prestigeReasons);
@@ -224,6 +233,7 @@ namespace Assets.Code
                 locInfoBody.text = "No location selected";
                 locNumsBody.text = "";
                 locNumsNumbers.text = "";
+                locFlavour.text = "";
             }
             else
             {
@@ -271,10 +281,14 @@ namespace Assets.Code
                     }
                 }
 
-                if (loc.settlement != null && loc.settlement is Set_City)
+                if (loc.settlement != null)
                 {
-                    valuesBody += "\n" + ((Set_City)loc.settlement).getStatsDesc();
-                    valuesNumbers += "\n" + ((Set_City)loc.settlement).getStatsValues();
+                    locFlavour.text = loc.settlement.getFlavour();
+                    if (loc.settlement is Set_City)
+                    {
+                        valuesBody += "\n" + ((Set_City)loc.settlement).getStatsDesc();
+                        valuesNumbers += "\n" + ((Set_City)loc.settlement).getStatsValues();
+                    }
                 }
 
                 valuesBody += "\nTemperature ";
@@ -285,6 +299,7 @@ namespace Assets.Code
                 locNumsBody.text = valuesBody;
                 locNumsNumbers.text = valuesNumbers;
                 locInfoBody.text = bodyText;
+                
             }
         }
 
@@ -303,6 +318,7 @@ namespace Assets.Code
             socThreat.text = "";
             socEcon.text = "";
             body.text = "";
+            personAwarenss.text = "";
             title.text = "Nothing Selected";
             socTypeBox.SetActive(false);
             prestigeDescText.text = "Characters have a prestige score. This approaches a target value over time. Prestige is affected by the settlement a character rules (if any) and any other titles they hold.";
@@ -322,6 +338,10 @@ namespace Assets.Code
         public void bPrestigeDescClick()
         {
             prestigeDescBox.SetActive(!prestigeDescBox.activeInHierarchy);
+        }
+        public void bAwarenessDescClick()
+        {
+            awarenessDescBox.SetActive(!awarenessDescBox.activeInHierarchy);
         }
         public void bTypeDesc()
         {

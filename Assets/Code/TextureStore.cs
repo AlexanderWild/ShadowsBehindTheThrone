@@ -54,6 +54,7 @@ namespace Assets.Code
         public Sprite loc_minor_emptyOcean;
         public Sprite loc_minor_ritualCircle;
         public Sprite loc_minor_fort;
+        public Sprite loc_minor_university;
         public Sprite loc_minor_church;
         public Sprite loc_minor_ruins;
         public Sprite loc_minor_farm;

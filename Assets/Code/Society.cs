@@ -479,7 +479,25 @@ namespace Assets.Code
                             }
                             else
                             {
-                                loc.settlement = new Set_Fort(loc);
+                                int q = 0;
+                                double[] weights = new double[] { 2, 1, 2 };
+                                double roll = 0;
+                                for (int i = 0; i < weights.Length; i++) { roll += weights[i]; }
+                                roll *= Eleven.random.NextDouble();
+                                for (int i = 0; i < weights.Length; i++) { roll -= weights[i]; if (roll <= 0) { q = i; break; } }
+                                
+                                if (q == 0)
+                                {
+                                    loc.settlement = new Set_Abbey(loc);
+                                }
+                                else if (q == 1)
+                                {
+                                    loc.settlement = new Set_University(loc);
+                                }
+                                else
+                                {
+                                    loc.settlement = new Set_Fort(loc);
+                                }
                             }
                         }
                     }

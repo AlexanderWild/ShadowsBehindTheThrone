@@ -29,6 +29,7 @@ namespace Assets.Code
         public int maxSanity = 10;
         public double sanity = 0;
         public List<Trait> traits = new List<Trait>();
+        public double awareness;
 
         public ThreatItem threat_enshadowedNobles;
 
