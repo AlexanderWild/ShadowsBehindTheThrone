@@ -33,6 +33,32 @@ namespace Assets.Code
             
             worldPanicBlock.SetActive(master.world.map.param.useAwareness == 1);
             worldPanicValue.text = ((int)master.world.map.worldPanic) + "%";
+
+            string desc = "World Panic represents how concerned the world at large is about the coming darkness. As it rises, nobles with awareness can begin to take actions to either warn each other or"
+                + " to take action against you and your enthralled.";
+
+            desc += "\nWorld Panic is increased temporarily by you using power, by the fall of human settlements and by enshadowed nobles.";
+            desc += "\nYour current panic level is caused by:";
+
+            List<ReasonMsg> reasons = new List<ReasonMsg>();
+            master.world.map.overmind.computeWorldPanic(reasons);
+            foreach (ReasonMsg msg in reasons)
+            {
+                desc += "\n>" + ((int)msg.value) + "% " + msg.msg;
+            }
+
+            desc += "\n\nPanic will allow the following actions:";
+
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_canInvestigate)) +
+                "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_canInvestigate)) + "% can perform 'Investigate', allowing them to add evidence to enthralled neighbouring them.";
+
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_letterWritingLevel)) +
+                "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Friend', allowing them to warn a neighbouring friendly noble.";
+
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_letterWritingToAllLevel)) +
+                "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Noble', allowing them to warn a neighbouring noble.";
+
+            worldPanicDesc.text = desc;
         }
 
         public void bExpandPanic()

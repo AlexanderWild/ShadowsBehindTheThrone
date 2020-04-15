@@ -166,10 +166,12 @@ namespace Assets.Code
             if (p.action == null)
             {
                 actionText.text = "Not Taking Action";
+                actionDesc.text += "\n\nThis character is not taking an action.";
             }
             else
             {
                 actionText.text = p.action.getShort();
+                actionDesc.text += "\n\n" + p.action.getLong();
             }
 
             Society soc = getSociety(GraphicalMap.selectedHex);

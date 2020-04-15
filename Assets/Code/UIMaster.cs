@@ -172,8 +172,6 @@ namespace Assets.Code
             uiLeftPrimary.checkData();
             uiMidTop.checkData();
             uiScrollables.checkData();
-
-
         }
 
         public void bPowers()
@@ -271,6 +269,29 @@ namespace Assets.Code
 
                 GraphicalSociety.focus = GraphicalMap.selectedHex.location.person();
                 setToSociety((Society)GraphicalMap.selectedHex.owner);
+            }
+        }
+
+        public void bViewEnthralled()
+        {
+            if (world.map.overmind.enthralled == null)
+            {
+                world.prefabStore.popMsg("You have no enthralled currently\n\nYou may enthrall a low-prestige noble (highlighted with flashing purple background) using the \"Enthrall\" power");
+                return;
+            }
+            if (state == uiState.SOCIETY)
+            {
+                if (GraphicalSociety.focus.society != world.map.overmind.enthralled.society)
+                {
+                    world.prefabStore.popMsg("Your enthralled does not belong to this society");
+                    return;
+                }
+                GraphicalSociety.refreshNeighbor(world.map.overmind.enthralled);
+            }
+            else
+            {
+                GraphicalSociety.focus = world.map.overmind.enthralled;
+                setToSociety(world.map.overmind.enthralled.society);
             }
         }
 

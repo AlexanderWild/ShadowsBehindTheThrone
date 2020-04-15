@@ -210,28 +210,60 @@ namespace Assets.Code
         public void scrollKeys()
         {
 
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.mousePosition.y >= Screen.height - 5)
+            if (world.map.param.option_edgeScroll == 1)
+            {
+
+                if (Input.mousePosition.y >= Screen.height - 5)
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.y -= scrollSpeed;
+                    if (GraphicalMap.y < 0) { GraphicalMap.y = 0; }
+                }
+                else if (Input.mousePosition.y <= 2)
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.y += scrollSpeed;
+                    if (GraphicalMap.y > world.map.sy) { GraphicalMap.y = world.map.sy; }
+                }
+                if ( Input.mousePosition.x <= 0)
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.x += scrollSpeed;
+                    if (GraphicalMap.x > world.map.sx) { GraphicalMap.x = world.map.sx; }
+                }
+                else if (Input.mousePosition.x >= Screen.width - 5)
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.x -= scrollSpeed;
+                    if (GraphicalMap.x < 0) { GraphicalMap.x = 0; }
+                }
+            }
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
                 //GraphicalMap.panStepsToTake = 0;
                 GraphicalMap.lastMapChange += 1;
                 GraphicalMap.y -= scrollSpeed;
                 if (GraphicalMap.y < 0) { GraphicalMap.y = 0; }
             }
-            else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.mousePosition.y <= 2)
+            else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
                 //GraphicalMap.panStepsToTake = 0;
                 GraphicalMap.lastMapChange += 1;
                 GraphicalMap.y += scrollSpeed;
                 if (GraphicalMap.y > world.map.sy) { GraphicalMap.y = world.map.sy; }
             }
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.mousePosition.x <= 0)
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
                 //GraphicalMap.panStepsToTake = 0;
                 GraphicalMap.lastMapChange += 1;
                 GraphicalMap.x += scrollSpeed;
                 if (GraphicalMap.x > world.map.sx) { GraphicalMap.x = world.map.sx; }
             }
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - 5)
+            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             {
                 //GraphicalMap.panStepsToTake = 0;
                 GraphicalMap.lastMapChange += 1;

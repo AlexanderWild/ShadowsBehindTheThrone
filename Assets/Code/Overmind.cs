@@ -18,6 +18,7 @@ namespace Assets.Code
         public bool victoryAchieved = false;
         public bool hasEnthrallAbilities = false;
         public double panicFromPowerUse;
+        public int nStartingHumanSettlements;
 
         public Overmind(Map map)
         {
@@ -64,10 +65,17 @@ namespace Assets.Code
             panic += panicFromPowerUse;
             reasons.Add(new ReasonMsg("Power use", panic));
 
-            double shadow = map.data_avrgEnshadowment;
+            double shadow = map.data_avrgEnshadowment*map.param.panic_panicAtFullShadow;
             panic += shadow;
             reasons.Add(new ReasonMsg("World Shadow", shadow));
 
+            double nHumans = map.data_nSocietyLocations;
+            double extinction = (nStartingHumanSettlements - nHumans)/nStartingHumanSettlements;
+            extinction *= map.param.panic_panicAtFullExtinction;
+            panic += extinction;
+            reasons.Add(new ReasonMsg("Lost Settlements", extinction));
+
+            if (panic > 100) { panic = 100; }
             return panic;
         }
         public void increasePanicFromPower(int cost, Ability ability)
@@ -151,6 +159,18 @@ namespace Assets.Code
             }
             map.data_nSocietyLocations = nHumanSettlements;
         }
+
+        public void startedComplete()
+        {
+            foreach (Location loc in map.locations)
+            {
+                if (loc.soc is Society && loc.settlement != null)
+                {
+                    nStartingHumanSettlements += 1;
+                }
+            }
+        }
+
         public void victory()
         {
             victoryAchieved = true;

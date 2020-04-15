@@ -31,6 +31,7 @@ namespace Assets.Code
         public GameObject prefabAlertPopup;
         public GameObject prefabVote;
         public GameObject prefabVoteReasons;
+        public GameObject prefabIOOpts;
         public GameObject scrollSet;
         public GameObject menuBox;
         public GameObject menuIconicBox;
@@ -423,6 +424,18 @@ namespace Assets.Code
 
             specific.currentSeed = Eleven.random.Next();
             specific.setTextFieldsToCurrentValues();
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popGameOpts()
+        {
+            if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabIOOpts) as GameObject;
+            PopupIOOptions specific = obj.GetComponent<PopupIOOptions>();
+            specific.ui = ui;
+            specific.map = ui.world.map;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bEdgeScroll.onClick.AddListener(delegate { specific.toggleEdgeScroll(); });
             ui.addBlocker(specific.gameObject);
         }
         public void popMsg(string words)

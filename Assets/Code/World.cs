@@ -20,7 +20,6 @@ namespace Assets.Code
     public class World : MonoBehaviour
     {
         public static bool logging   = false;
-        public static bool developer = false;
 
         public UIMaster ui;
         public TextureStore textureStore;
@@ -49,16 +48,7 @@ namespace Assets.Code
 
 
             specificStartup();
-            if (developer)
-            {
-                Eleven.random = new System.Random(2);
-                startup();
-                ui.setToWorld();
-            }
-            else
-            {
-                ui.setToMainMenu();
-            }
+            ui.setToMainMenu();
 
             potentialGods.Add(new God_Easy());
             potentialGods.Add(new God_MerchantOfNightmares());
@@ -171,6 +161,7 @@ namespace Assets.Code
             map.world = this;
             map.globalist.buildBasicElements();
             map.gen();
+            map.overmind.startedComplete();
 
 
             //ui.setToWorld();
@@ -180,6 +171,7 @@ namespace Assets.Code
 
             //bQuicksave();
         }
+        /*
         public void startup()
         {
             Log("Called startup");
@@ -204,6 +196,7 @@ namespace Assets.Code
 
             //bQuicksave();
         }
+        */
 
         public void bStartGameOptions()
         {

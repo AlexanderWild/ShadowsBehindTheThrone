@@ -135,9 +135,17 @@ namespace Assets.Code
             {
                 possibleActions.Add(0);
             }
-            if (awareness > 0 && title_land != null && title_land.settlement is Set_University)
+            if (awareness > 0 && awareness < 1 && title_land != null && title_land.settlement is Set_University)
             {
                 possibleActions.Add(1);
+            }
+            if (map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel)
+            {
+                possibleActions.Add(2);
+            }
+            if (map.worldPanic >= map.param.panic_letterWritingToAllLevel && awareness >= map.param.awareness_letterWritingLevel)
+            {
+                possibleActions.Add(3);
             }
 
 
@@ -146,47 +154,21 @@ namespace Assets.Code
             int act = possibleActions[Eleven.random.Next(possibleActions.Count)];
 
             switch (act) {
-                case 0:{ action = new Act_Investigate(); break; }
+                case 0: { action = new Act_Investigate(); break; }
                 case 1: { action = new Act_Research(); break; }
+                case 2: { action = new Act_LetterToFriend(); break; }
+                case 3: { action = new Act_LetterToFriend(); break; }
             }
         }
 
         public void computeAwareness()
         {
             if (map.param.useAwareness != 1) { return; }
-            if (map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel){
-                if (letterWritingCharge >= map.param.awareness_letterWritingInterval)
-                {
-                    int c = 0;
-                    Person chosenTarget = null;
-                    foreach (Location loc in this.getLocation().getNeighbours())
-                    {
-                        if (loc.person() != null)
-                        {
-                            RelObj rel = getRelation(loc.person());
-                            bool talkTo = rel.suspicion < 0.5;
-                            if (map.worldPanic < map.param.panic_letterWritingToAllLevel && rel.getLiking() <= 0) { talkTo = false; }
-                            if (talkTo && loc.person().awareness < this.awareness)
-                            {
-                                c += 1;
-                                if (Eleven.random.Next(c) == 0) { chosenTarget = loc.person(); }
-                            }
-                        }
-                    }
-                    if (chosenTarget != null)
-                    {
-                        double delta = map.param.awareness_letterWritingAwarenessGain * chosenTarget.getAwarenessMult();
-                        delta = Math.Min(delta, 1 - chosenTarget.awareness);
-                        delta = Math.Min(delta, this.awareness - chosenTarget.awareness);//Can't exceed your own awareness
-                        chosenTarget.awareness += delta;
-                        map.addMessage(this.getFullName() + " writes to " + chosenTarget.getFullName() + " to warn them. " + (int)(delta * 100) + " awareness gained", MsgEvent.LEVEL_ORANGE, false);
-                        letterWritingCharge = 0;
-                    }
-                }
-                else
-                {
-                    letterWritingCharge += 1;
-                }
+            if (this.state == personState.enthralled || this.state == personState.broken) { this.awareness = 0;return; }
+
+            if (awareness > 0 && awareness < 1)
+            {
+                awareness -= map.param.awareness_decay;
             }
         }
 
