@@ -166,12 +166,14 @@ namespace Assets.Code
             if (p.action == null)
             {
                 actionText.text = "Not Taking Action";
-                actionDesc.text += "\n\nThis character is not taking an action.";
+                actionDesc.text = "Characters can take actions if they become aware and world panic is sufficiently high.";
+                actionDesc.text = "\n\nThis character is not taking an action.";
             }
             else
             {
                 actionText.text = p.action.getShort();
-                actionDesc.text += "\n\n" + p.action.getLong();
+                actionDesc.text = "Characters can take actions if they become aware and world panic is sufficiently high.";
+                actionDesc.text = "\n\n" + p.action.getLong();
             }
 
             Society soc = getSociety(GraphicalMap.selectedHex);

@@ -22,19 +22,23 @@ namespace Assets.Code
 
         public int useAwareness = 1;
 
-        public double panic_panicPerPower = 0.25;
-        public double panic_dropPerTurn = 0.1;
+        public double panic_panicPerPower = 0.0025;
+        public double panic_dropPerTurn = 0.001;
         public double panic_canInvestigate = 0;
         public double panic_letterWritingLevel = 0.15;
-        public double panic_letterWritingToAllLevel = 0.3;
-        public double panic_panicAtFullExtinction = 200;
-        public double panic_panicAtFullShadow = 150;
+        public double panic_letterWritingToAllLevel = 0.25;
+        public double panic_researchAtUniWithoutAwareness = 0.35;
+        public double panic_cleanseSoulLevel = 0.25;
+        public double panic_panicAtFullExtinction = 2;
+        public double panic_panicAtFullShadow = 1.5;
 
+        public double awareness_master_speed = 1;
         public double awarenessBaseWeighting = 1;
+        public double awareness_cleanseSoulLevel = 0.3;
         public double awarenessUniversityBonusMult = 2;
         public double awareness_letterWritingLevel = 0.25;
-        public int awareness_letterWritingInterval = 6;
-        public double awareness_letterWritingAwarenessGain = 0.25;
+        public int awareness_letterWritingInterval = 4;
+        public double awareness_letterWritingAwarenessGain = 0.35;
         public double awarenessInvestigationDetectMult = 4;
         public double awareness_increasePerCost = 0.02;
         public double awareness_canInvestigate = 0.1;
@@ -44,6 +48,8 @@ namespace Assets.Code
 
         public int action_letterWritingTurns = 5;
         public int action_investigateTurns = 7;
+        public int action_cleanseSoulTurns = 7;
+        public double action_cleanseSoulAmount = 0.1;
         public double action_investigateEvidence = 0.25;
 
         public bool flashEnthrallables = true;
@@ -223,6 +229,8 @@ namespace Assets.Code
         public int ability_delayVoteTurnsAdded = 4;
         public int ability_delayVoteCost = 8;
         public int ability_delayVoteCooldown = 24;
+        public int ability_disruptActionCost = 3;
+        public int ability_disruptActionDuration = 7;
 
 
         public double insanity_sanityRegen = 0.1;

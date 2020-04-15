@@ -57,6 +57,11 @@ namespace Assets.Code
             abilities.Add(new Ab_Soc_SwitchVote());
             abilities.Add(new Ab_Soc_ShareTruth());
             abilities.Add(new Ab_Soc_BoostMilitarism());
+
+            if (map.param.useAwareness == 1)
+            {
+                powers.Add(new Ab_Over_DisruptAction());
+            }
         }
 
         public double computeWorldPanic(List<ReasonMsg> reasons)
@@ -67,15 +72,16 @@ namespace Assets.Code
 
             double shadow = map.data_avrgEnshadowment*map.param.panic_panicAtFullShadow;
             panic += shadow;
-            reasons.Add(new ReasonMsg("World Shadow", shadow));
+            reasons.Add(new ReasonMsg("World Shadow", shadow*100));
 
             double nHumans = map.data_nSocietyLocations;
             double extinction = (nStartingHumanSettlements - nHumans)/nStartingHumanSettlements;
             extinction *= map.param.panic_panicAtFullExtinction;
+            if (extinction < 0) { extinction = 0; }//In the off chance they reclaim something
             panic += extinction;
-            reasons.Add(new ReasonMsg("Lost Settlements", extinction));
+            reasons.Add(new ReasonMsg("Lost Settlements", extinction*100));
 
-            if (panic > 100) { panic = 100; }
+            if (panic > 1) { panic = 1; }
             return panic;
         }
         public void increasePanicFromPower(int cost, Ability ability)
@@ -98,6 +104,7 @@ namespace Assets.Code
                 if (p.title_land == null) { continue; }
                 if (p.awareness >= 1) { pv = 0; }
                 if (p.awareness > 0) { pv *= map.param.awarenessInvestigationDetectMult; }
+                pv *= pv;
                 sumWeighting += pv;
             }
             Person detector = null;
@@ -108,6 +115,7 @@ namespace Assets.Code
                 if (p.title_land == null) { continue; }
                 if (p.awareness >= 1) { pv = 0; }
                 if (p.awareness > 0) { pv *= map.param.awarenessInvestigationDetectMult; }
+                pv *= pv;
                 roll -= pv;
                 if (roll <= 0)
                 {
@@ -117,7 +125,7 @@ namespace Assets.Code
             }
 
             if (detector != null) {
-                double gain = cost * map.param.awareness_increasePerCost;
+                double gain = cost * map.param.awareness_increasePerCost * map.param.awareness_master_speed;
                 gain *= detector.getAwarenessMult();
                 detector.awareness += gain;
                 if (detector.awareness > 1) { detector.awareness = 1; }
@@ -142,7 +150,7 @@ namespace Assets.Code
             foreach (Location loc in map.locations)
             {
                 if (loc.person() != null) { sum += loc.person().shadow;count += 1; }
-                if (loc.soc != null && loc.settlement != null && loc.soc is Society)
+                if (loc.soc != null && loc.settlement != null && (loc.settlement is Set_Ruins == false) && (loc.settlement is Set_CityRuins == false) && loc.soc is Society)
                 {
                     nHumanSettlements += 1;
                 }

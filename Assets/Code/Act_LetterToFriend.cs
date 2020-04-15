@@ -34,7 +34,7 @@ namespace Assets.Code
                 }
                 if (chosenTarget != null)
                 {
-                    double delta = person.map.param.awareness_letterWritingAwarenessGain * chosenTarget.getAwarenessMult();
+                    double delta = person.map.param.awareness_letterWritingAwarenessGain * chosenTarget.getAwarenessMult() * person.map.param.awareness_master_speed;
                     delta = Math.Min(delta, 1 - chosenTarget.awareness);
                     delta = Math.Min(delta, person.awareness - chosenTarget.awareness);//Can't exceed your own awareness
                     chosenTarget.awareness += delta;

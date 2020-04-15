@@ -11,6 +11,7 @@ namespace Assets.Code
     {
         public InputField suspicionGain;
         public InputField powerGain;
+        public InputField awarenessGain;
         public InputField seedField;
         public InputField sizeXField;
         public InputField sizeYField;
@@ -27,6 +28,7 @@ namespace Assets.Code
         public bool useAwareness = false;
         public int susGainPercent = 100;
         public int powerGainPercent = 100;
+        public int awarenessGainSpeed = 100;
         public int currentSeed;
         public int sizeX = 32;
         public int sizeY = 24;
@@ -43,6 +45,7 @@ namespace Assets.Code
         {
             susGainPercent = 75;
             powerGainPercent = 150;
+            awarenessGainSpeed = 50;
             setTextFieldsToCurrentValues();
         }
 
@@ -50,12 +53,14 @@ namespace Assets.Code
         {
             susGainPercent = 100;
             powerGainPercent = 100;
+            awarenessGainSpeed = 100;
             setTextFieldsToCurrentValues();
         }
         public void setHard()
         {
             susGainPercent = 150;
             powerGainPercent = 50;
+            awarenessGainSpeed = 150;
             setTextFieldsToCurrentValues();
         }
         public void setTextFieldsToCurrentValues()
@@ -63,6 +68,7 @@ namespace Assets.Code
             World.log("Setting seed " + currentSeed);
             suspicionGain.text = "" + susGainPercent;
             powerGain.text = "" + powerGainPercent;
+            awarenessGain.text = "" + awarenessGainSpeed;
             seedField.text = "" + currentSeed;
             sizeXField.text = "" + sizeX;
             sizeYField.text = "" + sizeY;
@@ -78,6 +84,15 @@ namespace Assets.Code
                     susGainPercent = susGain;
                 }
             }catch(Exception e){ }
+            try
+            {
+                int awar = int.Parse(awarenessGain.text);
+                if (awar >= 0 && awar < 1000)
+                {
+                    awarenessGainSpeed = awar;
+                }
+            }
+            catch (Exception e) { }
             try
             {
                 int val = int.Parse(powerGain.text);

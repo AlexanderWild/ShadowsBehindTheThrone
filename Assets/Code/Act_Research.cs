@@ -15,10 +15,10 @@ namespace Assets.Code
         {
             if (person.title_land == null) { person.action = null;return; }
             if (person.title_land.settlement is Set_University == false) { person.action = null; return; }
-            if (person.awareness >= 1) { return; }
+            if (person.awareness >= 1) { person.awareness = 1; person.action = null; }
 
-            person.awareness += World.staticMap.param.action_research_expectedAwarenessPerTurn*Eleven.random.NextDouble();
-            if (person.awareness > 1) { person.awareness = 1;person.action = null; }
+            person.awareness += World.staticMap.param.action_research_expectedAwarenessPerTurn*Eleven.random.NextDouble() * person.map.param.awareness_master_speed;
+            if (person.awareness >= 1) { person.awareness = 1;person.action = null; }
             if (person.sanity > 0 && Eleven.random.NextDouble() < World.staticMap.param.action_research_pSanityHit)
             {
                 if (person.sanity > 0) { person.sanity -= 1; }

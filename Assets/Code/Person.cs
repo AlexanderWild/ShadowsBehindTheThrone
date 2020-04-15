@@ -137,6 +137,10 @@ namespace Assets.Code
             }
             if (awareness > 0 && awareness < 1 && title_land != null && title_land.settlement is Set_University)
             {
+                //possibleActions.Add(1);
+            }
+            if (awareness < 1 && title_land != null && title_land.settlement is Set_University && map.worldPanic >= map.param.panic_researchAtUniWithoutAwareness)
+            {
                 possibleActions.Add(1);
             }
             if (map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel)
@@ -146,6 +150,10 @@ namespace Assets.Code
             if (map.worldPanic >= map.param.panic_letterWritingToAllLevel && awareness >= map.param.awareness_letterWritingLevel)
             {
                 possibleActions.Add(3);
+            }
+            if (shadow > 0 && map.worldPanic >= map.param.panic_cleanseSoulLevel && awareness >= map.param.awareness_cleanseSoulLevel)
+            {
+                possibleActions.Add(4);
             }
 
 
@@ -158,13 +166,14 @@ namespace Assets.Code
                 case 1: { action = new Act_Research(); break; }
                 case 2: { action = new Act_LetterToFriend(); break; }
                 case 3: { action = new Act_LetterToFriend(); break; }
+                case 4: { action = new Act_CleanseSoul(); break; }
             }
         }
 
         public void computeAwareness()
         {
             if (map.param.useAwareness != 1) { return; }
-            if (this.state == personState.enthralled || this.state == personState.broken) { this.awareness = 0;return; }
+            if (this.state == personState.enthralled || this.state == personState.broken) { this.awareness = 0;this.action = null; return; }
 
             if (awareness > 0 && awareness < 1)
             {

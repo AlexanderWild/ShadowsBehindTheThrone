@@ -413,6 +413,7 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             specific.seedField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.suspicionGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.awarenessGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.powerGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.sizeXField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.sizeYField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });

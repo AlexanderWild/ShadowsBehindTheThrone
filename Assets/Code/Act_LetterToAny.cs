@@ -9,7 +9,7 @@ namespace Assets.Code
         public int turns;
         public override string getShort() { return "Warn Others " + turns + "/" + World.staticMap.param.action_letterWritingTurns; }
         public override string getLong() {
-            return "This character is writing a letter which they will send to a neighbouring noble (any nearby), to warn them and increase their awareness of the dark.";
+            return "This character is writing a letter which they will send to a nearby noble, to warn them and increase their awareness of the dark.";
         }
         public override void turnTick(Person person)
         {
@@ -22,19 +22,21 @@ namespace Assets.Code
                 Person chosenTarget = null;
                 foreach (Location loc in person.getLocation().getNeighbours())
                 {
-                    if (loc.person() != null)
+                    foreach (Location l2 in loc.getNeighbours())
                     {
-                        RelObj rel = person.getRelation(loc.person());
-                        if (loc.person().awareness < person.awareness)
+                        if (l2.person() != null && l2.person() != person)
                         {
-                            c += 1;
-                            if (Eleven.random.Next(c) == 0) { chosenTarget = loc.person(); }
+                            if (l2.person().awareness < person.awareness)
+                            {
+                                c += 1;
+                                if (Eleven.random.Next(c) == 0) { chosenTarget = l2.person(); }
+                            }
                         }
                     }
                 }
                 if (chosenTarget != null)
                 {
-                    double delta = person.map.param.awareness_letterWritingAwarenessGain * chosenTarget.getAwarenessMult();
+                    double delta = person.map.param.awareness_letterWritingAwarenessGain * chosenTarget.getAwarenessMult() * person.map.param.awareness_master_speed;
                     delta = Math.Min(delta, 1 - chosenTarget.awareness);
                     delta = Math.Min(delta, person.awareness - chosenTarget.awareness);//Can't exceed your own awareness
                     chosenTarget.awareness += delta;

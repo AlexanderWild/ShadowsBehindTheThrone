@@ -32,7 +32,7 @@ namespace Assets.Code
                 + "\nHuman Settlements: " + master.world.map.data_nSocietyLocations;
             
             worldPanicBlock.SetActive(master.world.map.param.useAwareness == 1);
-            worldPanicValue.text = ((int)master.world.map.worldPanic) + "%";
+            worldPanicValue.text = ((int)(100*master.world.map.worldPanic)) + "%";
 
             string desc = "World Panic represents how concerned the world at large is about the coming darkness. As it rises, nobles with awareness can begin to take actions to either warn each other or"
                 + " to take action against you and your enthralled.";
@@ -56,7 +56,15 @@ namespace Assets.Code
                 "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Friend', allowing them to warn a neighbouring friendly noble.";
 
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_letterWritingToAllLevel)) +
-                "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Noble', allowing them to warn a neighbouring noble.";
+                "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Noble', allowing them to warn a nearby noble.";
+
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_cleanseSoulLevel)) +
+                "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_cleanseSoulLevel)) + "% can perform 'Cleanse Soul', removing a small amount of shadow from themselves.";
+
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_researchAtUniWithoutAwareness)) +
+                "% Nobles at a place of learning (university/library/archive) can begin research to gain awareness even if they have none.";
+
+
 
             worldPanicDesc.text = desc;
         }

@@ -115,6 +115,7 @@ namespace Assets.Code
 
         public void processMapEvents()
         {
+            /*
             int nEvils = 0;
             foreach (SocialGroup sg in socialGroups)
             {
@@ -146,6 +147,7 @@ namespace Assets.Code
                     }
                 }
             }
+            */
         }
 
         public void processWars()
