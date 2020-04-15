@@ -12,7 +12,7 @@ namespace Assets.Code
 
             string msgs = "You shatter the mind of " + hex.location.person().getFullName() + ", as their fears and terrors overwhelm them. They now see enemies everywhere they look, and desperately seek to defend themselves against these nebulous foes.";
             hex.location.person().sanity = 0;
-            hex.location.person().madness = new Insanity_Paranoid();
+            hex.location.person().madness =            new Insanity_Paranoid();
 
             map.world.prefabStore.popImgMsg(
                 msgs,

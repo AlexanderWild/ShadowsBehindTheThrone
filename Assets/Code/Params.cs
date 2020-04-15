@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Assets.Code
 {
@@ -23,13 +20,26 @@ namespace Assets.Code
         public float map_tempTemperatureReversion = 0.002f;
 
         public int useAwareness = 1;
+
         public double panic_panicPerPower = 0.25;
         public double panic_dropPerTurn = 0.1;
+        public double panic_letterWritingLevel = 0.4;
+        public double panic_canInvestigate = 0;
+
         public double awarenessBaseWeighting = 1;
-        public double awarenessUniversityBonusMult = 4;
-        public double trait_aware_awarenessMult = 1.5;
-        public double awarenessInvestigationDetectMult = 10;
+        public double awarenessUniversityBonusMult = 2;
+        public double awareness_letterWritingLevel = 0.25;
+        public double panic_letterWritingToAllLevel = 0.4;
+        public int awareness_letterWritingInterval = 6;
+        public double awareness_letterWritingAwarenessGain = 0.25;
+        public double awarenessInvestigationDetectMult = 4;
         public double awareness_increasePerCost = 0.02;
+        public double awareness_canInvestigate = 0.1;
+        public double action_research_expectedAwarenessPerTurn = 0.15;
+        public double action_research_pSanityHit = 0.5;
+
+        public int action_investigateTurns = 7;
+        public double action_investigateEvidence = 0.25;
 
         public bool flashEnthrallables = true;
         public int overmind_maxPower = 24;
@@ -231,6 +241,7 @@ namespace Assets.Code
         public double trait_competent_desirability = 75;
         public double trait_basic_desirability = 30;
         public double trait_basic_undesirability = -30;
+        public double trait_aware_awarenessMult = 1.5;
 
         public double city_popMaxPerHabilitability = 100;
         public double city_popDmg = 5;

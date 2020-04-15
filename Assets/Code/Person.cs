@@ -30,6 +30,8 @@ namespace Assets.Code
         public double sanity = 0;
         public List<Trait> traits = new List<Trait>();
         public double awareness;
+        public int letterWritingCharge = 0;
+        public Action action;
 
         public ThreatItem threat_enshadowedNobles;
 
@@ -46,7 +48,7 @@ namespace Assets.Code
         {
             this.society = soc;
             firstName = TextStore.getName(isMale);
-            madness = soc.map.globalist.madness_sane;
+            madness = new Insanity_Sane();
 
             maxSanity = Eleven.random.Next(map.param.insanity_maxSanity);
             sanity = maxSanity;
@@ -109,9 +111,83 @@ namespace Assets.Code
                 t.turnTick(this);
             }
 
+            computeAwareness();
             computeSuspicionGain();
+            processActions();
             processThreats();
             processSanity();
+        }
+
+        public void processActions()
+        {
+            if (action != null)
+            {
+                action.turnTick(this);
+                return;
+            }
+
+            if (state == personState.enthralled) { return; }
+            if (state == personState.broken) { return; }
+
+            //No action underway
+            List<int> possibleActions = new List<int>();
+            if (awareness >= map.param.awareness_canInvestigate && map.worldPanic >= map.param.panic_canInvestigate)
+            {
+                possibleActions.Add(0);
+            }
+            if (awareness > 0 && title_land != null && title_land.settlement is Set_University)
+            {
+                possibleActions.Add(1);
+            }
+
+
+
+            if (possibleActions.Count == 0) { return; }
+            int act = possibleActions[Eleven.random.Next(possibleActions.Count)];
+
+            switch (act) {
+                case 0:{ action = new Act_Investigate(); break; }
+                case 1: { action = new Act_Research(); break; }
+            }
+        }
+
+        public void computeAwareness()
+        {
+            if (map.param.useAwareness != 1) { return; }
+            if (map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel){
+                if (letterWritingCharge >= map.param.awareness_letterWritingInterval)
+                {
+                    int c = 0;
+                    Person chosenTarget = null;
+                    foreach (Location loc in this.getLocation().getNeighbours())
+                    {
+                        if (loc.person() != null)
+                        {
+                            RelObj rel = getRelation(loc.person());
+                            bool talkTo = rel.suspicion < 0.5;
+                            if (map.worldPanic < map.param.panic_letterWritingToAllLevel && rel.getLiking() <= 0) { talkTo = false; }
+                            if (talkTo && loc.person().awareness < this.awareness)
+                            {
+                                c += 1;
+                                if (Eleven.random.Next(c) == 0) { chosenTarget = loc.person(); }
+                            }
+                        }
+                    }
+                    if (chosenTarget != null)
+                    {
+                        double delta = map.param.awareness_letterWritingAwarenessGain * chosenTarget.getAwarenessMult();
+                        delta = Math.Min(delta, 1 - chosenTarget.awareness);
+                        delta = Math.Min(delta, this.awareness - chosenTarget.awareness);//Can't exceed your own awareness
+                        chosenTarget.awareness += delta;
+                        map.addMessage(this.getFullName() + " writes to " + chosenTarget.getFullName() + " to warn them. " + (int)(delta * 100) + " awareness gained", MsgEvent.LEVEL_ORANGE, false);
+                        letterWritingCharge = 0;
+                    }
+                }
+                else
+                {
+                    letterWritingCharge += 1;
+                }
+            }
         }
 
         public double getTargetPrestige(List<string> reasons)
@@ -230,7 +306,7 @@ namespace Assets.Code
 
         public void processSanity()
         {
-            if (madness == map.globalist.madness_sane) {
+            if (madness is Insanity_Sane) {
                 if (sanity <= 0)
                 {
                     goInsane();

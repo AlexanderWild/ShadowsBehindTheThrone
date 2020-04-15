@@ -12,7 +12,6 @@ namespace Assets.Code
         public List<EconTrait> allEconTraits = new List<EconTrait>();
         public List<Property_Prototype> allProperties = new List<Property_Prototype>();
         public SavableMap_String_PropertyP propertyMap = new SavableMap_String_PropertyP();
-        public Insanity madness_sane = new Insanity_Sane();
 
         public EconTrait econTrait(string name)
         {

@@ -29,6 +29,8 @@ namespace Assets.Code
         public Text maskBody;
         public Text prestigeText;
         public Text prestigeDescText;
+        public Text actionText;
+        public Text actionDesc;
         public Image profileBack;
         public Image profileMid;
         public Image profileFore;
@@ -39,6 +41,7 @@ namespace Assets.Code
         public GameObject screenSociety;
         public GameObject screenLocation;
         public GameObject insanityDescBox;
+        public GameObject actionDescBox;
         public GameObject prestigeDescBox;
         public GameObject awarenessDescBox;
         public GameObject personAwarenessBlock;
@@ -160,6 +163,14 @@ namespace Assets.Code
             bodyText += "\n";
 
             personAwarenss.text = (int)(p.awareness * 100) + "%";
+            if (p.action == null)
+            {
+                actionText.text = "Not Taking Action";
+            }
+            else
+            {
+                actionText.text = p.action.getShort();
+            }
 
             Society soc = getSociety(GraphicalMap.selectedHex);
             VoteSession vote = (soc != null) ? soc.voteSession : null;
@@ -321,12 +332,14 @@ namespace Assets.Code
             socThreat.text = "";
             socEcon.text = "";
             body.text = "";
+            actionText.text = "";
             personAwarenss.text = "";
             title.text = "Nothing Selected";
             socTypeBox.SetActive(false);
             prestigeDescText.text = "Characters have a prestige score. This approaches a target value over time. Prestige is affected by the settlement a character rules (if any) and any other titles they hold.";
             insanityDescText.text = "Characters have a sanity score. If this value drops to zero, they become insane, and begin to act in an erratic and dangerous manner."
                    + "\nYou can cause reduce sanity using certain abilities.";
+            actionDesc.text = "Characters can take actions if they become aware and world panic is sufficiently high.";
             for (int i = 0; i < traits.Length; i++)
             {
                 traits[i].SetActive(false);
@@ -345,6 +358,10 @@ namespace Assets.Code
         public void bAwarenessDescClick()
         {
             awarenessDescBox.SetActive(!awarenessDescBox.activeInHierarchy);
+        }
+        public void bActionDescBox()
+        {
+            actionDescBox.SetActive(!actionDescBox.activeInHierarchy);
         }
         public void bTypeDesc()
         {

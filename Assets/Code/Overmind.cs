@@ -112,7 +112,7 @@ namespace Assets.Code
                 double gain = cost * map.param.awareness_increasePerCost;
                 gain *= detector.getAwarenessMult();
                 detector.awareness += gain;
-                if (detector.awareness > 1) { detector.awareness = 0; }
+                if (detector.awareness > 1) { detector.awareness = 1; }
                 map.turnMessages.Add(new MsgEvent(detector.getFullName() + " has noticed a sign of dark power. Gains " + (int)(100 * gain) + " awareness", MsgEvent.LEVEL_RED, false));
              }
         }
