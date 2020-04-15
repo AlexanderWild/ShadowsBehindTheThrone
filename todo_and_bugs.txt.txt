@@ -1,16 +1,11 @@
 	High criticality:
 
--Find enthralled
 
--Make sure threat and fear are definitely understood to be the same
 
--Option to disable edge scrolling
 
 	Medium criticality:
 	
--Dark nobles desire to invade societies
 
--Short memories listed twice
 
 	Low criticality:
 
@@ -25,23 +20,27 @@
 
 	Features:
 	
+General:
+Reduce prestige of other at cost of your own
+Reduce prestige of other at cost of power
+-Add evidence to target at cost of evidence to yourself
+-Reduce cooldowns using power
+
+-----------------------RESOLVED-----------------------
+-Make sure threat and fear are definitely understood to be the same
+-Dark nobles desire to invade societies
+-Short memories listed twice
 Fascism God:
 VV-Add disliking to everyone towards sovreign if sovreign does not consider their top fear to be relevant, proportional to their top fear
 VV-Amplify fear
 VV-Make character paranoid if fearful
 VV-Spread fear to local area (neighbouring)
 VV-Polarise along fear lines
--Add evidence to target at cost of evidence to yourself
 VV-Boost militarism if fearful
 VV-Add disliking to all pacisfists from fearful people
--Reduce cooldowns using power
-
-General:
-Reduce prestige of other at cost of your own
-Reduce prestige of other at cost of power
 VV-Delay voting
-
------------------------RESOLVED-----------------------
+-Option to disable edge scrolling
+-Find enthralled
 
 -Ongoing wars added to right hand scrollables
 -Turn counter added to top right
