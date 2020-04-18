@@ -12,9 +12,9 @@ panic_panicPerPower: 0.0025
 panic_dropPerTurn: 0.001
 panic_canInvestigate: 0
 panic_letterWritingLevel: 0.15
-panic_letterWritingToAllLevel: 0.3
-panic_researchAtUniWithoutAwareness: 0.4
-panic_cleanseSoulLevel: 0.3
+panic_letterWritingToAllLevel: 0.25
+panic_researchAtUniWithoutAwareness: 0.35
+panic_cleanseSoulLevel: 0.25
 panic_panicAtFullExtinction: 2
 panic_panicAtFullShadow: 1.5
 awareness_master_speed: 1
