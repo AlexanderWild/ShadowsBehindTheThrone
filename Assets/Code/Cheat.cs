@@ -32,6 +32,10 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().shadow = 1;
                 }
+                if (command == "aware")
+                {
+                    GraphicalMap.selectedHex.location.person().awareness = 1;
+                }
                 if (command == "testproperty")
                 {
                     Property.addProperty(map, GraphicalMap.selectedHex.location, "Military Aid");

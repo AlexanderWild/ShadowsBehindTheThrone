@@ -92,6 +92,13 @@ namespace Assets.Code
                 else
                     return new string[] { "Remain Independent", "Become a Vassal" }[index];
             }
+            if (issue is VoteIssue_LightAlliance && this.group == null)
+            {
+                if (shrt)
+                    return "Indenpendence";
+                else
+                    return "Remain Independent";
+            }
 
             if (person != null) { reply += person.getFullName() + " "; }
             if (location != null) { reply += location.getName() + " "; }

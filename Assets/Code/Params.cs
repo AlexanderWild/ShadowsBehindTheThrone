@@ -30,8 +30,10 @@ namespace Assets.Code
         public double panic_researchAtUniWithoutAwareness = 0.35;
         public double panic_cleanseSoulLevel = 0.25;
         public double panic_panicAtFullExtinction = 2;
-        public double panic_panicAtFullShadow = 1.5;
+        public double panic_panicAtFullShadow = 1.75;
+        public double panic_canAlly = 0.5;
 
+        public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;
         public double awarenessBaseWeighting = 1;
         public double awareness_cleanseSoulLevel = 0.3;
@@ -81,6 +83,9 @@ namespace Assets.Code
         public double utility_vassaliseReluctance = -90;
         public double utility_vassaliseMilMult = 80;
         public double utility_vassaliseThreatMult = 0.75;
+        public double utility_lightAllianceMult = 200;
+        public double utility_lightAllianceMilMult = 2;
+        public double utility_lightAlliancSusMult = 50;
         public double utility_introversionFromInstability = 50;
         public double utility_militarism = 100;
         public double utility_landedTitleMult = 0.2;

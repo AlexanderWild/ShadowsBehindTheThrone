@@ -16,7 +16,9 @@ panic_letterWritingToAllLevel: 0.25
 panic_researchAtUniWithoutAwareness: 0.35
 panic_cleanseSoulLevel: 0.25
 panic_panicAtFullExtinction: 2
-panic_panicAtFullShadow: 1.5
+panic_panicAtFullShadow: 1.75
+panic_canAlly: 0.5
+awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
 awareness_cleanseSoulLevel: 0.3
@@ -59,6 +61,9 @@ utility_militaryTargetRelStrengthDefensive: 250
 utility_vassaliseReluctance: -90
 utility_vassaliseMilMult: 80
 utility_vassaliseThreatMult: 0.75
+utility_lightAllianceMult: 200
+utility_lightAllianceMilMult: 2
+utility_lightAlliancSusMult: 50
 utility_introversionFromInstability: 50
 utility_militarism: 100
 utility_landedTitleMult: 0.2

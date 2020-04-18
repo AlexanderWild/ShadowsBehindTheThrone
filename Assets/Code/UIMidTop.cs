@@ -44,7 +44,7 @@ namespace Assets.Code
             master.world.map.overmind.computeWorldPanic(reasons);
             foreach (ReasonMsg msg in reasons)
             {
-                desc += "\n>" + ((int)msg.value) + "% " + msg.msg;
+                desc += "\n*" + ((int)msg.value) + "% " + msg.msg;
             }
 
             desc += "\n\nPanic will allow the following actions:";
@@ -63,6 +63,10 @@ namespace Assets.Code
 
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_researchAtUniWithoutAwareness)) +
                 "% Nobles at a place of learning (university/library/archive) can begin research to gain awareness even if they have none.";
+
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_canAlly)) +
+                "% Nobles with awareness " + ((int)(100 * master.world.map.param.awareness_canProposeLightAlliance)) + "% can propose an alliance against the darkness with other nations.";
+
 
 
 

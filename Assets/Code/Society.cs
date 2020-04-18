@@ -35,6 +35,8 @@ namespace Assets.Code
         public bool needsToDecreasePopulation = false;
         public bool isDarkEmpire = false;
 
+        public string allianceName = null;
+
         public LogBox logbox;
         public double data_societalStability;
         public int data_nProvinceRulers;
@@ -358,6 +360,10 @@ namespace Assets.Code
             if (this.isDarkEmpire)
             {
                 return "Dark Empire of " + basic;
+            }
+            if (allianceName != null)
+            {
+                return allianceName;
             }
             if (this.people.Count > map.param.society_nPeopleForEmpire)
             {

@@ -37,7 +37,7 @@ namespace Assets.Code
 
         public double politics_militarism;
 
-        public enum personState { normal,enthralled,broken};
+        public enum personState { normal,enthralled,broken,lightbringer};
         public personState state = personState.normal;
         public bool isDead;
         public Society rebellingFrom;
@@ -82,7 +82,6 @@ namespace Assets.Code
         {
             if (World.logging) { log.takeLine("---------Turn " + map.turn + "------------"); }
 
-            processEnshadowment();
 
             this.targetPrestige = getTargetPrestige(null);
             if (Math.Abs(prestige-targetPrestige) < map.param.person_prestigeDeltaPerTurn)
@@ -111,6 +110,7 @@ namespace Assets.Code
                 t.turnTick(this);
             }
 
+            processEnshadowment();
             computeAwareness();
             computeSuspicionGain();
             processActions();
@@ -359,6 +359,11 @@ namespace Assets.Code
             if (evidence > 1)
             {
                 evidence = 1;
+            }
+            if (state == personState.lightbringer)
+            {
+                shadow = 0;
+                return;
             }
             foreach (Person p in society.people)
             {
@@ -693,6 +698,11 @@ namespace Assets.Code
                 benefit = false;
                 priority = MsgEvent.LEVEL_ORANGE;
             }
+            else if (state == Person.personState.lightbringer)
+            {
+                benefit = true;
+                priority = MsgEvent.LEVEL_GREEN;
+            }
             else
             {
                 benefit = true;
@@ -741,6 +751,10 @@ namespace Assets.Code
             if (state == personState.enthralled)
             {
                 return map.world.textureStore.person_dark;
+            }
+            if (state == personState.lightbringer)
+            {
+                return map.world.textureStore.person_lightbringer;
             }
             if (state == personState.broken)
             {

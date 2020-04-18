@@ -379,6 +379,35 @@ namespace Assets.Code
                             }
                         }
                     }
+                    if (map.param.useAwareness == 1 && map.worldPanic >= map.param.panic_canAlly && this.awareness >= map.param.awareness_canProposeLightAlliance)
+                    {
+                        issue = new VoteIssue_LightAlliance(society, null, this);
+                        VoteOption option_0 = new VoteOption();
+                        option_0.group = null;
+                        issue.options.Add(option_0);
+
+                        foreach (SocialGroup sg in society.getNeighbours())
+                        {
+                            if (sg is Society == false) { continue; }
+                            if (sg == this.society) { continue; }
+                            Society other = (Society)sg;
+                            if (other.isDarkEmpire) { continue; }
+
+                            VoteOption option_1 = new VoteOption();
+                            option_1.group = sg;
+                            issue.options.Add(option_1);
+
+                            //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+                            //Random factor to prevent them all rushing a singular voting choice
+                            double localU = issue.computeUtility(this, option_1, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                            if (localU > bestU)
+                            {
+                                bestU = localU;
+                                bestIssue = issue;
+                            }
+                            logVote(issue);
+                        }
+                    }
 
                     //Check if you want to execute someone
                     if (society.posture == Society.militaryPosture.introverted)
