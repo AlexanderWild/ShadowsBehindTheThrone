@@ -1,11 +1,18 @@
 	High criticality:
 
+-Game crashes if you start a new game while one is already running
+	null on "Assets\Code\PopupXBoxGodSelectMsg.cs:25"
 
+-Zero cost powers still cause awareness messages, albeit with zero value
+
+-Vote effect is broken
 
 
 	Medium criticality:
 	
+-Awareness gain on individuals seems too high, world panic seems to decay too fast or gain too slow from power
 
+-Utilities for assign title are very high
 
 	Low criticality:
 
