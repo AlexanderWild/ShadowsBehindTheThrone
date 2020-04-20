@@ -58,6 +58,7 @@ namespace Assets.Code
             {
                 map.overmind.enthralled.forcedVoteOption = this.option;
                 map.overmind.enthralled.forcedVoteSession = this.sess;
+                map.overmind.enthralled.society.voteSession.assignVoters();
             }
         }
 

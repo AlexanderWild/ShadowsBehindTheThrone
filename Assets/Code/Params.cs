@@ -42,7 +42,7 @@ namespace Assets.Code
         public int awareness_letterWritingInterval = 4;
         public double awareness_letterWritingAwarenessGain = 0.35;
         public double awarenessInvestigationDetectMult = 4;
-        public double awareness_increasePerCost = 0.02;
+        public double awareness_increasePerCost = 0.015;
         public double awareness_canInvestigate = 0.1;
         public double action_research_expectedAwarenessPerTurn = 0.15;
         public double action_research_pSanityHit = 0.5;

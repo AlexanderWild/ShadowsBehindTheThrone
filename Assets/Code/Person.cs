@@ -436,14 +436,14 @@ namespace Assets.Code
             foreach (Person p in soc.people)
             {
                 if (p.title_land == null) { continue; }
-                if (p.prestige < minPrestige)
+                if (p.targetPrestige < minPrestige)
                 {
-                    minPrestige = p.prestige;
+                    minPrestige = p.targetPrestige;
                 }
             }
 
             //return soc.getEnthrallables().Contains(hex.location.settlement.title.heldBy);
-            return prestige < (1 + minPrestige);
+            return targetPrestige < (1 + minPrestige);
         }
         public void computeThreats()
         {

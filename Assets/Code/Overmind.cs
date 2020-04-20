@@ -86,8 +86,10 @@ namespace Assets.Code
         }
         public void increasePanicFromPower(int cost, Ability ability)
         {
-            map.worldPanic += cost * map.param.panic_panicPerPower;
-            if (map.worldPanic > 100) { map.worldPanic = 100; }
+            if (cost == 0) { return; }
+
+            panicFromPowerUse += cost * map.param.panic_panicPerPower;
+            if (panicFromPowerUse > 1) { panicFromPowerUse = 1; }
 
             List<Person> allPeople = new List<Person>();
             foreach (SocialGroup sg in map.socialGroups)
@@ -131,6 +133,8 @@ namespace Assets.Code
                 if (detector.awareness > 1) { detector.awareness = 1; }
                 map.turnMessages.Add(new MsgEvent(detector.getFullName() + " has noticed a sign of dark power. Gains " + (int)(100 * gain) + " awareness", MsgEvent.LEVEL_RED, false));
              }
+
+            map.worldPanic = this.computeWorldPanic(new List<ReasonMsg>());
         }
 
         public void turnTick()

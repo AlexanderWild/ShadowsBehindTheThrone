@@ -1,17 +1,8 @@
 	High criticality:
-
--Game crashes if you start a new game while one is already running
-	null on "Assets\Code\PopupXBoxGodSelectMsg.cs:25"
-
--Zero cost powers still cause awareness messages, albeit with zero value
-
--Vote effect is broken
-
+	
 
 	Medium criticality:
 	
--Awareness gain on individuals seems too high, world panic seems to decay too fast or gain too slow from power
-
 -Utilities for assign title are very high
 
 	Low criticality:
@@ -34,6 +25,13 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Awareness gain on individuals seems too high
+-World panic seems to decay too fast or gain too slow from power
+-Vote effect is broken
+-Game crashes if you start a new game while one is already running
+	null on "Assets\Code\PopupXBoxGodSelectMsg.cs:25"
+		FIXED BY SUPPRESSING THE BUTTON. TOP BRAIN PROGRAMMER RIGHT HERE
+-Zero cost powers still cause awareness messages, albeit with zero value
 -Make sure threat and fear are definitely understood to be the same
 -Dark nobles desire to invade societies
 -Short memories listed twice
