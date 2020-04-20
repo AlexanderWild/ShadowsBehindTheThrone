@@ -12,8 +12,6 @@
 
 -Allow player to vote on all econ reforms available in society
 
--Wordwrap on power info looks ugly
-
 -Two nations named the same thing
 
 	Features:
@@ -25,6 +23,7 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Wordwrap on power info looks ugly
 -Awareness gain on individuals seems too high
 -World panic seems to decay too fast or gain too slow from power
 -Vote effect is broken

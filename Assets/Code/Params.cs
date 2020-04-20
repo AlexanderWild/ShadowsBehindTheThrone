@@ -115,6 +115,7 @@ namespace Assets.Code
         public double person_threatFromBeingOffensiveTarget = 75;
         public int person_fearLevel_afraid = 100;
         public int person_fearLevel_terrified = 150;
+        public double person_dislikeFromNotBeingVotedFor = -50;
 
         public int econ_buffDuration = 50;
 

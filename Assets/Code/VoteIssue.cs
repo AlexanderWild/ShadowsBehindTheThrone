@@ -29,13 +29,13 @@ namespace Assets.Code
             World.staticMap.addMessage(msg, priority, positive);
         }
 
-        public void changeLikingForVotes(VoteOption option)
+        public void changeLikingForVotes(VoteOption option,VoteIssue issue)
         {
             //Everyone affected/concerned about the vote now changes their opinion of all the voters for the winning option
             //depending on how much they care and how much they were affected
             foreach (Person p in society.people)
             {
-                double deltaRel = getLikingDelta(p, option);
+                double deltaRel = getLikingDelta(p, option,issue);
                 foreach (Person voter in option.votesFor)
                 {
                     p.getRelation(voter).addLiking(deltaRel,"Vote on issue " + this.ToString(),society.map.turn);
@@ -43,10 +43,31 @@ namespace Assets.Code
             }
         }
 
-        public double getLikingDelta(Person p,VoteOption option)
+        public double getLikingDelta(Person p,VoteOption option,VoteIssue issue)
         {
-            double utility = computeUtility(p, option, new List<ReasonMsg>());
+            //Special case voting
+            if (issue is VoteIssue_AssignTitle)
+            {
+                bool votedForSelf = false;
+                foreach (VoteOption opt in issue.options)
+                {
+                    if (opt.person == p && opt.votesFor.Contains(p))
+                    {
+                        //I voted for myself
+                        votedForSelf = true;
+                    }
+                }
+                if (votedForSelf)
+                {
+                    if (option.person != p)
+                    {
+                        //Didn't vote for me! Loathesome!
+                        return p.map.param.person_dislikeFromNotBeingVotedFor;
+                    }
+                }
+            }
 
+            double utility = computeUtility(p, option, new List<ReasonMsg>());
             double deltaRel = utility;
             if (deltaRel > 0)
             {

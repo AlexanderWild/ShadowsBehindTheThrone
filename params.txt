@@ -27,7 +27,7 @@ awareness_letterWritingLevel: 0.25
 awareness_letterWritingInterval: 4
 awareness_letterWritingAwarenessGain: 0.35
 awarenessInvestigationDetectMult: 4
-awareness_increasePerCost: 0.02
+awareness_increasePerCost: 0.015
 awareness_canInvestigate: 0.1
 action_research_expectedAwarenessPerTurn: 0.15
 action_research_pSanityHit: 0.5
@@ -92,6 +92,7 @@ person_shadowDecayPerTurn: 0.005
 person_threatFromBeingOffensiveTarget: 75
 person_fearLevel_afraid: 100
 person_fearLevel_terrified: 150
+person_dislikeFromNotBeingVotedFor: -50
 econ_buffDuration: 50
 soc_untitledPeople: 3
 society_votingDuration: 2

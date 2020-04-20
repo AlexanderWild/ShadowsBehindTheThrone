@@ -664,7 +664,7 @@ namespace Assets.Code
                         topVote = option.votingWeight;
                     }
 
-                    voteSession.issue.changeLikingForVotes(option);
+                    voteSession.issue.changeLikingForVotes(option,voteSession.issue);
                 }
 
                 if (World.logging && logbox != null) { logbox.takeLine("End voting on " + voteSession.issue.ToString()); }

@@ -273,7 +273,7 @@ namespace Assets.Code
                             }
                             if (soc.voteSession != null)
                             {
-                                float delta = (float)soc.voteSession.issue.getLikingDelta(hex.location.person(), opt);
+                                float delta = (float)soc.voteSession.issue.getLikingDelta(hex.location.person(), opt,soc.voteSession.issue);
                                 delta /= 25;
                                 if (delta > 1) { delta = 1f; }
                                 if (delta < -1) { delta = -1f; }
