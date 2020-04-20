@@ -27,6 +27,11 @@ namespace Assets.Code
             isHuman = true;
         }
 
+
+        public override string getFlavour()
+        {
+            return location.map.world.wordStore.lookup("SET_FORT");
+        }
         public override Sprite getSprite()
         {
             return location.map.world.textureStore.loc_minor_fort;

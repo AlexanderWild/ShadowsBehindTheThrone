@@ -143,16 +143,16 @@ namespace Assets.Code
         {
             if (this.getLevel() >= LEVEL_CITY)
             {
-                if (this.location.hex.purity > 0.9)
+                if (this.location.hex.purity > 0.5)
                 {
                     return location.map.world.wordStore.lookup("SET_CITY_PURE");
                 }
+                else
+                {
+                    return location.map.world.wordStore.lookup("SET_CITY_DARK");
+                }
             }
-            else
-            {
-
-            }
-            return "";
+            return location.map.world.wordStore.lookup("SET_FARM");
         }
         public override void fallIntoRuin()
         {
