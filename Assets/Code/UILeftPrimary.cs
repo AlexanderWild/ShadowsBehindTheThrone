@@ -411,14 +411,12 @@ namespace Assets.Code
 
             if (World.staticMap != null)
             {
-                if (World.staticMap.param.overmind_singleAbilityPerTurn)
-                {
-                    powerButton.gameObject.SetActive(master.world.map.overmind.power > 0 && (master.world.map.overmind.hasTakenAction == false));
-                    abilityButton.gameObject.SetActive((master.world.map.overmind.hasTakenAction == false));
-                }
-                else
-                {
-                    powerButton.gameObject.SetActive(master.world.map.overmind.power > 0);
+                bool canUsePower = master.world.map.overmind.power > 0;
+                bool canUseAbility = true;
+
+                if (World.staticMap.param.overmind_singleAbilityPerTurn && master.world.map.overmind.hasTakenAction) {
+                    canUsePower = false;
+                    canUseAbility = false;
                 }
 
                 if (master.state == UIMaster.uiState.WORLD)
@@ -428,11 +426,17 @@ namespace Assets.Code
                 }
                 else if (master.state == UIMaster.uiState.SOCIETY)
                 {
-
+                    if (GraphicalSociety.focus == null || GraphicalSociety.focus.title_land == null)
+                    {
+                        canUseAbility = false;
+                        canUsePower = false;
+                    }
                     abilityButtonText.text = "Use Ability (" + master.world.map.overmind.countAvailableAbilities(GraphicalSociety.focus) + ")";
                     powerButtonText.text = "Use Power (" + master.world.map.overmind.countAvailablePowers(GraphicalSociety.focus) + ")";
                 }
-                
+                powerButton.gameObject.SetActive(canUsePower);
+                abilityButton.gameObject.SetActive(canUseAbility);
+
                 personAwarenessBlock.SetActive(World.staticMap.param.useAwareness == 1);
             }
 
