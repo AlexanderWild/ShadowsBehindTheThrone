@@ -83,36 +83,48 @@ namespace Assets.Code
 
         public void bSetStatePerson()
         {
+            master.world.audioStore.playClick();
+
             state = tabState.PERSON;
             checkData();
         }
 
         public void bSetStateSociety()
         {
+            master.world.audioStore.playClick();
+
             state = tabState.SOCIETY;
             checkData();
         }
 
         public void bSetStateLocation()
         {
+            master.world.audioStore.playClick();
+
             state = tabState.LOCATION;
             checkData();
         }
 
         public void bShowUnlanded()
         {
+            master.world.audioStore.playClick();
+
             maskTitle.text = "Unlanded Liking View";
             GraphicalSociety.refreshUnlanded(GraphicalSociety.focus);
         }
 
         public void bShowNeighbor()
         {
+            master.world.audioStore.playClick();
+
             maskTitle.text = "Neighbor Liking View";
             GraphicalSociety.refreshNeighbor(GraphicalSociety.focus);
         }
 
         public void bShowHierarchy()
         {
+            master.world.audioStore.playClick();
+
             maskTitle.text = "Country Hierarchy View";
             GraphicalSociety.refreshHierarchy(null);
         }
@@ -353,34 +365,42 @@ namespace Assets.Code
 
         public void bInsanityDescClick()
         {
+            master.world.audioStore.playClickInfo();
             insanityDescBox.SetActive(!insanityDescBox.activeInHierarchy);
         }
         public void bPrestigeDescClick()
         {
+            master.world.audioStore.playClickInfo();
             prestigeDescBox.SetActive(!prestigeDescBox.activeInHierarchy);
         }
         public void bAwarenessDescClick()
         {
+            master.world.audioStore.playClickInfo();
             awarenessDescBox.SetActive(!awarenessDescBox.activeInHierarchy);
         }
         public void bActionDescBox()
         {
+            master.world.audioStore.playClickInfo();
             actionDescBox.SetActive(!actionDescBox.activeInHierarchy);
         }
         public void bTypeDesc()
         {
+            master.world.audioStore.playClickInfo();
             socTypeBox.SetActive(!socTypeBox.activeInHierarchy);
         }
         public void bTraitDesc1()
         {
+            master.world.audioStore.playClickInfo();
             traitDescBoxes[0].SetActive(!traitDescBoxes[0].activeInHierarchy);
         }
         public void bTraitDesc2()
         {
+            master.world.audioStore.playClickInfo();
             traitDescBoxes[1].SetActive(!traitDescBoxes[1].activeInHierarchy);
         }
         public void bTraitDesc3()
         {
+            master.world.audioStore.playClickInfo();
             traitDescBoxes[2].SetActive(!traitDescBoxes[2].activeInHierarchy);
         }
 

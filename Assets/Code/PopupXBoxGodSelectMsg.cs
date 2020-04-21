@@ -22,6 +22,7 @@ namespace Assets.Code
 
         public void onClick()
         {
+            // sound?
             ui.world.chosenGods.Add(god);
 
             if (god is God_Omni)

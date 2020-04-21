@@ -8,9 +8,11 @@ namespace Assets.Code
 	{
 		public float effectVolume = 1.0f;
 
-		public AudioClip back;
+		public AudioClip breath;
+		public AudioClip scratch;
+
 		public AudioClip click;
-		public AudioClip confirm;
+		public AudioClip clickInfo;
 
 		private AudioSource source;
 
@@ -21,11 +23,13 @@ namespace Assets.Code
 
 		void playEffect(AudioClip c)
 		{
-			//source.PlayOneShot(c, effectVolume);
+			source.PlayOneShot(c, effectVolume);
 		}
 
-		public void playBack() { playEffect(back); }
+		public void playBreath() { playEffect(breath); }
+		public void playScratch() { playEffect(scratch); }
+
 		public void playClick() { playEffect(click); }
-		public void playConfirm() { playEffect(confirm); }
+		public void playClickInfo() { playEffect(clickInfo); }
 	}
 }

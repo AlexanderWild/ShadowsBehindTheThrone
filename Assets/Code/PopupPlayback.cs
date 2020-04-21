@@ -116,14 +116,18 @@ namespace Assets.Code
 
         public void buttonReplay()
         {
+            world.audioStore.playClick();
             snapshotIndex = 0;
         }
         public void buttonPause()
         {
+            world.audioStore.playClick();
             paused = !paused;
         }
         public void buttonBack()
         {
+            world.audioStore.playClick();
+
             Destroy(midpoint);
             world.ui.removeBlocker(this.gameObject);
             world.ui.setToWorld();

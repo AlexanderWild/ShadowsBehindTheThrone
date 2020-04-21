@@ -60,6 +60,8 @@ namespace Assets.Code
         }
         public void bNext()
         {
+            ui.world.audioStore.playClickInfo();
+
             index += 1;
             if (index >= scrollables.Count)
             {
@@ -69,6 +71,8 @@ namespace Assets.Code
 
         public void bPrev()
         {
+            ui.world.audioStore.playClickInfo();
+
             index -= 1;
             if (index < 0)
             {
@@ -77,6 +81,7 @@ namespace Assets.Code
         }
         public void bCancel()
         {
+            ui.world.audioStore.playClick();
             ui.removeBlocker(this.gameObject);
         }
 

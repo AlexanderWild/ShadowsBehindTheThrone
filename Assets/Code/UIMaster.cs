@@ -137,6 +137,7 @@ namespace Assets.Code
 
            // if (alertQueue.Count > 0) { bViewAlerts(); return; }
 
+            // sound?
 
             world.turnLock = true;
             world.map.turnTick();
@@ -178,6 +179,8 @@ namespace Assets.Code
         {
             if (world.turnLock) { return; }
             if (blocker != null) { return; }
+
+            world.audioStore.playClick();
             if (state == uiState.WORLD)
             {
                 if (GraphicalMap.selectedHex == null) { return; }
@@ -215,6 +218,7 @@ namespace Assets.Code
             if (world.turnLock) { return; }
             if (blocker != null) { return; }
 
+            world.audioStore.playClick();
             if (state == uiState.WORLD)
             {
                 if (GraphicalMap.selectedHex == null) { return; }
@@ -259,6 +263,8 @@ namespace Assets.Code
                         GraphicalMap.selectedHex = hex;
                     }
                 }
+
+                world.audioStore.playClick();
                 setToWorld();
             }
             else if (state == uiState.WORLD)
@@ -267,6 +273,8 @@ namespace Assets.Code
                 if (GraphicalMap.selectedHex.owner == null) { return; }
                 if (GraphicalMap.selectedHex.owner is Society == false) { return; }
 
+                world.audioStore.playClick();
+
                 GraphicalSociety.focus = GraphicalMap.selectedHex.location.person();
                 setToSociety((Society)GraphicalMap.selectedHex.owner);
             }
@@ -274,6 +282,7 @@ namespace Assets.Code
 
         public void bViewEnthralled()
         {
+            world.audioStore.playClick();
             if (world.map.overmind.enthralled == null)
             {
                 world.prefabStore.popMsg("You have no enthralled currently\n\nYou may enthrall a low-prestige noble (highlighted with flashing purple background) using the \"Enthrall\" power");
@@ -342,7 +351,9 @@ namespace Assets.Code
             GraphicalMap.purge();
 
             GraphicalSociety.setup(soc);
-            uiLeftPrimary.bShowNeighbor();
+
+            uiLeftPrimary.maskTitle.text = "Neighbor Liking View";
+            GraphicalSociety.refreshNeighbor(GraphicalSociety.focus);
 
             checkData();
         }
@@ -484,6 +495,7 @@ namespace Assets.Code
 
         public void bTutorial()
         {
+            world.audioStore.playClick();
             for (int i = 0; i < 5; i++)
             {
                 PopupTutorialMsg msg = world.prefabStore.getTutorial(i);
@@ -553,6 +565,7 @@ namespace Assets.Code
 
         public void bMainMenu()
         {
+            world.audioStore.playClick();
             this.setToMainMenu();
         }
 
@@ -583,6 +596,8 @@ namespace Assets.Code
             {
                 return;
             }
+
+            world.audioStore.playClick();
         }
 
         public void bViewVotes()
@@ -605,6 +620,8 @@ namespace Assets.Code
             VoteSession vs = p.society.voteSession;
             if (vs == null)
                 return;
+
+            world.audioStore.playClick();
 
             vs.assignVoters();
             addBlocker(world.prefabStore.getScrollSetVotes(p, vs.issue).gameObject);

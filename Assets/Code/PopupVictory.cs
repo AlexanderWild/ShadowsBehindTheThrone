@@ -15,8 +15,9 @@ namespace Assets.Code
 
         public void dismiss()
         {
+            ui.world.audioStore.playClick();
+            
             ui.removeBlocker(this.gameObject);
-
             ui.addBlocker(ui.world.prefabStore.getPlayback(ui.world,ui.world.map).gameObject);
         }
     }

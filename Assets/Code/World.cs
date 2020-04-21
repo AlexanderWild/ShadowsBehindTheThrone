@@ -24,6 +24,7 @@ namespace Assets.Code
         public UIMaster ui;
         public TextureStore textureStore;
         public PrefabStore prefabStore;
+        public AudioStore audioStore;
         public Camera outerCamera;
         public TextStore wordStore;
         //public SoundObj soundSource;
@@ -201,11 +202,14 @@ namespace Assets.Code
 
         public void bStartGameOptions()
         {
+            audioStore.playClick();
             ui.addBlocker(ui.world.prefabStore.getScrollSetGods(ui.world.potentialGods).gameObject);
         }
 
         public void bFlashEnthrallables()
         {
+            audioStore.playClick();
+
             map.param.flashEnthrallables = !map.param.flashEnthrallables;
             GraphicalMap.checkData();
         }
@@ -216,10 +220,13 @@ namespace Assets.Code
         }
         public void bViewPlayback()
         {
+            audioStore.playClick();
             ui.addBlocker(prefabStore.getPlayback(this, map).gameObject);
         }
         public void bStartGameSeeded(int seed, PopupGameOptions opts)
         {
+            // sound?
+
             Eleven.random = new System.Random(seed);
             startup(opts);
             for (int i = 0; i < map.param.mapGen_burnInSteps; i++)
@@ -237,11 +244,14 @@ namespace Assets.Code
 
         public void bContinue()
         {
+            audioStore.playClick();
             ui.setToWorld();
         }
 
         public void bEndTurn()
         {
+            // sound?
+
             if (turnLock) { return; }
             if (ui.blocker != null) { return; }
 
@@ -388,10 +398,13 @@ namespace Assets.Code
 
         public void bQuicksave()
         {
+            audioStore.playClick();
             save("quicksave.sv");
         }
         public void bQuickload()
         {
+            audioStore.playClick();
+
             World.Log("load clicked");
             load("quicksave.sv");
         }

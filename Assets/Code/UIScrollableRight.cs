@@ -144,6 +144,7 @@ namespace Assets.Code
 
         public void onToggle(bool b)
         {
+            master.world.audioStore.playClick();
             if (bPeople.isOn) currentTab = Tab.People;
             else if (bPlaces.isOn) currentTab = Tab.Places;
             else if (bVotes.isOn) currentTab = Tab.Votes;
@@ -157,6 +158,7 @@ namespace Assets.Code
         {
             if (activeSociety == null) { return; }
             
+            master.world.audioStore.playClick();
             if (master.state == UIMaster.uiState.WORLD)
                 master.setToSociety(activeSociety);
             else

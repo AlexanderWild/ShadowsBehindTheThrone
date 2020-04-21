@@ -41,8 +41,15 @@ namespace Assets.Code
             ui.world.bStartGameSeeded(currentSeed,this);
         }
 
+        public void toggleOption()
+        {
+            ui.world.audioStore.playClickInfo();
+        }
+
         public void setEasy()
         {
+            ui.world.audioStore.playClickInfo();
+
             susGainPercent = 75;
             powerGainPercent = 150;
             awarenessGainSpeed = 50;
@@ -51,6 +58,8 @@ namespace Assets.Code
 
         public void setMedium()
         {
+            ui.world.audioStore.playClickInfo();
+
             susGainPercent = 100;
             powerGainPercent = 100;
             awarenessGainSpeed = 100;
@@ -58,6 +67,8 @@ namespace Assets.Code
         }
         public void setHard()
         {
+            ui.world.audioStore.playClickInfo();
+
             susGainPercent = 150;
             powerGainPercent = 50;
             awarenessGainSpeed = 150;

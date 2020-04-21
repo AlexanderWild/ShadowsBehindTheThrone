@@ -112,6 +112,8 @@ namespace Assets.Code
         }
         public void clicked(Map map)
         {
+            // sound?
+
             //selector.selected(person,agent);
             if (hex != null)
             {

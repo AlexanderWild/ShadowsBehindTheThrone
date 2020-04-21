@@ -49,6 +49,7 @@ namespace Assets.Code
         }
         public void clicked(Map map)
         {
+            map.world.audioStore.playClick();
             this.ability.turnLastCast = map.turn;
 
             soc.voteCooldown = 0;

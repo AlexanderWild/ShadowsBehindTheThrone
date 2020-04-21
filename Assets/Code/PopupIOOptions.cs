@@ -22,10 +22,12 @@ namespace Assets.Code
 
         public void toggleEdgeScroll()
         {
+            ui.world.audioStore.playClickInfo();
             map.param.option_edgeScroll = map.param.option_edgeScroll == 1 ? 0 : 1;
         }
         public void dismiss()
         {
+            ui.world.audioStore.playClickInfo();
             ui.removeBlocker(this.gameObject);
         }
     }

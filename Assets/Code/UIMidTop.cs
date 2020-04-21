@@ -75,6 +75,7 @@ namespace Assets.Code
 
         public void bExpandPanic()
         {
+            master.world.audioStore.playClickInfo();
             worldPanicDescBox.SetActive(!worldPanicDescBox.activeInHierarchy);
         }
     }

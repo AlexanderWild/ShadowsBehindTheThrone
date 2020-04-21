@@ -16,6 +16,7 @@ namespace Assets.Code
 
         public void setTo(int i)
         {
+            ui.world.audioStore.playClick();
             if (i == 0)
             {
                 img.sprite = ui.world.textureStore.tutorial1;
