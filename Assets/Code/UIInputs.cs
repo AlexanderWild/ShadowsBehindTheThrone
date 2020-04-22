@@ -342,6 +342,7 @@ namespace Assets.Code
             {
                 GraphicalMap.selectedProperty = null;
                 GraphicalMap.selectedHex = clickedHex;
+                world.audioStore.playClick();
                 return;
             }
 
@@ -388,6 +389,7 @@ namespace Assets.Code
                         GraphicalMap.selectedProperty = u;
                         //world.ui.uiUnit.setTo(GraphicalMap.selectedProperty);
                         GraphicalMap.selectedHex = null;
+                        world.audioStore.playClickInfo();
                         return;
 
                     }
@@ -397,6 +399,7 @@ namespace Assets.Code
             if (!selectedAProperty)
             {
                 GraphicalMap.selectedHex = clickedHex;
+                world.audioStore.playClick();
             }
 
             world.ui.checkData();

@@ -13,7 +13,7 @@ namespace Assets.Code
         public int option_edgeScroll = 1;
         public int mapGen_sizeX = 32;
         public int mapGen_sizeY = 24;
-        public double mapGen_proportionOfMapForHumans = 0.65;
+        public double mapGen_proportionOfMapForHumans = 0.7;
         public double mapGen_minHabitabilityForHumans = 0.15;
         public int mapGen_stepsPerIsland = 12;
         public int mapGen_maxBrushSize = 5;
