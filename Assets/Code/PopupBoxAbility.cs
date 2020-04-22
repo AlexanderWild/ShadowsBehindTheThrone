@@ -112,7 +112,7 @@ namespace Assets.Code
         }
         public void clicked(Map map)
         {
-            // sound?
+            map.world.audioStore.playActivate();
 
             //selector.selected(person,agent);
             if (hex != null)

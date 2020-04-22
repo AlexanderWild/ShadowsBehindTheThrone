@@ -60,7 +60,7 @@ namespace Assets.Code
         }
         public void bNext()
         {
-            ui.world.audioStore.playClickInfo();
+            ui.world.audioStore.playClickSelect();
 
             index += 1;
             if (index >= scrollables.Count)
@@ -71,7 +71,7 @@ namespace Assets.Code
 
         public void bPrev()
         {
-            ui.world.audioStore.playClickInfo();
+            ui.world.audioStore.playClickSelect();
 
             index -= 1;
             if (index < 0)

@@ -13,6 +13,11 @@ namespace Assets.Code
 
 		public AudioClip click;
 		public AudioClip clickInfo;
+		public AudioClip clickSelect;
+
+		public AudioClip activate;
+		public AudioClip activateFlesh;
+		public AudioClip activateFishmen;
 
 		private AudioSource source;
 
@@ -31,5 +36,10 @@ namespace Assets.Code
 
 		public void playClick() { playEffect(click); }
 		public void playClickInfo() { playEffect(clickInfo); }
+		public void playClickSelect() { playEffect(clickSelect); }
+
+		public void playActivate() { playEffect(activate); }
+		public void playActivateFlesh() { playEffect(activateFlesh); }
+		public void playActivateFishmen() { playEffect(activateFishmen); }
 	}
 }
