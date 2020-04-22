@@ -68,7 +68,7 @@ namespace Assets.Code
                 title.titleF = "Countess";
                 title.titleM = "Count";
                 basePrestige = 30;
-                defensiveStrengthMax = 20;
+                defensiveStrengthMax = 10;
                 militaryRegenAdd = 0.2;
                 militaryCapAdd = 20;
             }
@@ -78,7 +78,7 @@ namespace Assets.Code
                 title.titleF = "Countess";
                 title.titleM = "Count";
                 basePrestige = 25;
-                defensiveStrengthMax = 10;
+                defensiveStrengthMax = 8;
                 militaryRegenAdd = 0.15;
                 militaryCapAdd = 15;
             }
@@ -88,7 +88,7 @@ namespace Assets.Code
                 title.titleF = "Mayor";
                 title.titleM = "Mayor";
                 basePrestige = 15;
-                defensiveStrengthMax = 5;
+                defensiveStrengthMax = 4;
                 militaryRegenAdd = 0.1;
                 militaryCapAdd = 10;
             }
