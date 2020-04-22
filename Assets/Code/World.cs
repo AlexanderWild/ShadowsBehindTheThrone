@@ -225,7 +225,7 @@ namespace Assets.Code
         }
         public void bStartGameSeeded(int seed, PopupGameOptions opts)
         {
-            // sound?
+            audioStore.playClick();
 
             Eleven.random = new System.Random(seed);
             startup(opts);
@@ -250,7 +250,7 @@ namespace Assets.Code
 
         public void bEndTurn()
         {
-            // sound?
+            audioStore.playClick();
 
             if (turnLock) { return; }
             if (ui.blocker != null) { return; }
