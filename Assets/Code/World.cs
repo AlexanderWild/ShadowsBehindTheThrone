@@ -225,7 +225,7 @@ namespace Assets.Code
         }
         public void bStartGameSeeded(int seed, PopupGameOptions opts)
         {
-            audioStore.playClick();
+            audioStore.playActivate();
 
             Eleven.random = new System.Random(seed);
             startup(opts);
