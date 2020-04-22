@@ -137,7 +137,7 @@ namespace Assets.Code
 
            // if (alertQueue.Count > 0) { bViewAlerts(); return; }
 
-            // sound?
+            world.audioStore.playClick();
 
             world.turnLock = true;
             world.map.turnTick();
