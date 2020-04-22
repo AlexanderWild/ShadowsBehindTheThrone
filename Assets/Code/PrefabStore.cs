@@ -437,6 +437,7 @@ namespace Assets.Code
             specific.map = ui.world.map;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             specific.bEdgeScroll.onClick.AddListener(delegate { specific.toggleEdgeScroll(); });
+            specific.bSoundEffects.onClick.AddListener(delegate { specific.toggleSoundEffects(); });
             ui.addBlocker(specific.gameObject);
         }
         public void popMsg(string words)

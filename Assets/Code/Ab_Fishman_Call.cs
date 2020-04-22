@@ -33,6 +33,11 @@ namespace Assets.Code
                 map.world.wordStore.lookup("ABILITY_FISHMAN_CALL"));
         }
 
+        public override void playSound(AudioStore audioStore)
+        {
+            audioStore.playActivateFishmen();
+        }
+
         public override bool castable(Map map, Hex hex)
         {
             if (hex.location == null) { return false; }

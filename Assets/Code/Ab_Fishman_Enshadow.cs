@@ -19,6 +19,11 @@ namespace Assets.Code
 
         }
 
+        public override void playSound(AudioStore audioStore)
+        {
+            audioStore.playActivateFishmen();
+        }
+
         public override bool castable(Map map, Hex hex)
         {
             if (hex.location == null) { return false; }

@@ -38,5 +38,9 @@ namespace Assets.Code
                 map.overmind.increasePanicFromPower(getCost(), this);
             }
         }
+
+        public virtual void playSound(AudioStore audioStore) {
+            audioStore.playActivate();
+        }
     }
 }

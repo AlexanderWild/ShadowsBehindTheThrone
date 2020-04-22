@@ -23,6 +23,11 @@ namespace Assets.Code
             cast(map, person.getLocation().hex);
         }
 
+        public override void playSound(AudioStore audioStore)
+        {
+            audioStore.playClick();
+        }
+
         public override bool castable(Map map, Person person)
         {
             if (map.overmind.enthralled == null) { return false; }
@@ -63,5 +68,6 @@ namespace Assets.Code
         {
             return map.world.textureStore.icon_mask;
         }
+        
     }
 }

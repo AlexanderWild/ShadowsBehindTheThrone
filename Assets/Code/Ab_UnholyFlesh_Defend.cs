@@ -26,6 +26,11 @@ namespace Assets.Code
             }
         }
 
+        public override void playSound(AudioStore audioStore)
+        {
+            audioStore.playActivateFlesh();
+        }
+
         public override bool castable(Map map, Hex hex)
         {
             if (hex.location == null) { return false; }

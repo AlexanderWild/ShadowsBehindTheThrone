@@ -112,9 +112,8 @@ namespace Assets.Code
         }
         public void clicked(Map map)
         {
-            map.world.audioStore.playActivate();
-
             //selector.selected(person,agent);
+            ability.playSound(map.world.audioStore);
             if (hex != null)
             {
                 ability.cast(map, hex);

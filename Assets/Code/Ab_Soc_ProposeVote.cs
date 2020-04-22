@@ -219,6 +219,11 @@ namespace Assets.Code
             return reply;
         }
 
+        public override void playSound(AudioStore audioStore)
+        {
+            audioStore.playClick();
+        }
+
         public override bool castable(Map map, Hex hex)
         {
             if (map.overmind.enthralled == null) { return false; }
