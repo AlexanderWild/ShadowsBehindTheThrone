@@ -68,7 +68,7 @@ namespace Assets.Code
         {
             double panic = 0;
             panic += panicFromPowerUse;
-            reasons.Add(new ReasonMsg("Power use", panic));
+            reasons.Add(new ReasonMsg("Power use", panic*100));
 
             double shadow = map.data_avrgEnshadowment*map.param.panic_panicAtFullShadow;
             panic += shadow;
