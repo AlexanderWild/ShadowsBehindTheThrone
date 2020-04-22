@@ -18,7 +18,14 @@ namespace Assets.Code
 
         public override string ToString()
         {
-            return "Rebalance Economy (" + econFrom.name + "/" + econTo.name + ")";
+            try
+            {
+                return "Rebalance Economy (" + econFrom.name + "/" + econTo.name + ")";
+            }catch(Exception e)
+            {
+                World.log("Null pointer in econ rebalance");
+                return "Rebalance economy";
+            }
         }
 
         public override string getLargeDesc()
