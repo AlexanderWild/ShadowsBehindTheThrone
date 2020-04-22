@@ -56,7 +56,7 @@ namespace Assets.Code
         {
             if (map.overmind.enthralled != null)
             {
-                map.world.audioStore.playClick();
+                map.world.audioStore.playActivate();
 
                 map.overmind.enthralled.forcedVoteOption = this.option;
                 map.overmind.enthralled.forcedVoteSession = this.sess;

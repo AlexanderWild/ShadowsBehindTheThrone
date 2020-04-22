@@ -49,7 +49,7 @@ namespace Assets.Code
         }
         public void clicked(Map map)
         {
-            map.world.audioStore.playClick();
+            map.world.audioStore.playActivate();
             this.ability.turnLastCast = map.turn;
 
             soc.voteCooldown = 0;
