@@ -250,10 +250,10 @@ namespace Assets.Code
 
         public void bEndTurn()
         {
-            audioStore.playClick();
-
             if (turnLock) { return; }
             if (ui.blocker != null) { return; }
+
+            audioStore.playClick();
 
             turnLock = true;
             if (map != null) {
