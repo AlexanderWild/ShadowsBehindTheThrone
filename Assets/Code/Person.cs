@@ -137,7 +137,7 @@ namespace Assets.Code
             }
             if (awareness > 0 && awareness < 1 && title_land != null && title_land.settlement is Set_University)
             {
-                //possibleActions.Add(1);
+                possibleActions.Add(1);
             }
             if (awareness < 1 && title_land != null && title_land.settlement is Set_University && map.worldPanic >= map.param.panic_researchAtUniWithoutAwareness)
             {
