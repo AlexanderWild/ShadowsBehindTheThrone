@@ -138,6 +138,9 @@ namespace Assets.Code
         public double society_votingEconHiddenBiasMult = 1.5;
         public int society_billsBetweenLandAssignments = 3;
         public double society_pExpandIntoEmpty = 0.1;
+        public double society_prestigeFromVotingFailure = 5;
+        public double society_prestigeFromVotingSuccess = -5;
+        public double society_dislikeFromFailedProposal = -15;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 5;
@@ -159,7 +162,7 @@ namespace Assets.Code
         public int ability_shareTruthCooldown = 10;
         public double ability_avrgDarkEmpireShadowPerTurn = 0.075;
         public int ability_denounceOtherCooldown = 32;
-        public int ability_proposeVoteCooldown = 7;
+        public int ability_proposeVoteCooldown = 15;
         public double ability_growFleshThreatAdd = 5;
         public int ability_shareEvidenceLikingCost = 20;
         public int ability_switchVoteLikingCost = 15;
@@ -274,6 +277,11 @@ namespace Assets.Code
         public int war_battleDeadDur = 4;
         public int combat_popDamageMax = 10;
         public int combat_infraDamageMax = 10;
+
+        public int voting_powerToSwitchMin = 2;
+        public int voting_likingToSwitchMin = 5;
+        public double voting_powerToSwitchPerU = 0.1;
+        public double voting_likingToSwitchPerU = 0.25;
 
         public void saveToFile()
         {

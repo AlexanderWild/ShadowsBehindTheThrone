@@ -56,6 +56,23 @@ namespace Assets.Code
         public GameObject prefabPersonPortrait;
         public GameObject prefabGameOptions;
         public GameObject prefabCombatParticle;
+        public GameObject prefabPopVoterBar;
+        public GameObject prefabPopOptBar;
+
+        public PopOptBar getVoteOptBar(VoteOption opt,VoteSession sess)
+        {
+            GameObject obj = Instantiate(prefabPopOptBar) as GameObject;
+            PopOptBar part = obj.GetComponent<PopOptBar>();
+            part.setTo(opt,sess);
+            return part;
+        }
+        public PopVoterBar getVoterBar(Person p)
+        {
+            GameObject obj = Instantiate(prefabPopVoterBar) as GameObject;
+            PopVoterBar part = obj.GetComponent<PopVoterBar>();
+            part.setTo(p);
+            return part;
+        }
 
         public void particleCombat(Hex a,Hex b)
         {

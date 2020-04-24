@@ -15,6 +15,7 @@ namespace Assets.Code
         public UIScrollableRight uiScrollables;
         public UIMidTop uiMidTop;
         public UILeftPrimary uiLeftPrimary;
+        public UIVoting uiVoting;
         public GameObject endTurnButton;
 
         public List<GameObject> blockerQueue;
@@ -28,7 +29,7 @@ namespace Assets.Code
 
         //public List<Alert> alertQueue = new List<Alert>();
 
-        public enum uiState {  SOCIETY, WORLD, BACKGROUND, MAIN_MENU };
+        public enum uiState {  SOCIETY, WORLD, BACKGROUND, MAIN_MENU,VOTING };
         public uiState state = uiState.MAIN_MENU;
 
         public void Update()
@@ -312,6 +313,7 @@ namespace Assets.Code
             uiLeftPrimary.gameObject.SetActive(false);
             uiScrollables.gameObject.SetActive(false);
             uiMidTop.gameObject.SetActive(false);
+            uiVoting.gameObject.SetActive(false);
             hexSelector.SetActive(false);
 
             GraphicalMap.purge();
@@ -326,6 +328,7 @@ namespace Assets.Code
             uiLeftPrimary.gameObject.SetActive(true);
             uiScrollables.gameObject.SetActive(true);
             uiMidTop.gameObject.SetActive(true);
+            uiVoting.gameObject.SetActive(false);
             hexSelector.SetActive(true);
 
             uiScrollables.viewSocButtonText.text = "View Society";
@@ -343,6 +346,7 @@ namespace Assets.Code
             uiLeftPrimary.gameObject.SetActive(true);
             uiScrollables.gameObject.SetActive(true);
             uiMidTop.gameObject.SetActive(true);
+            uiVoting.gameObject.SetActive(false);
             hexSelector.SetActive(false);
 
             uiScrollables.viewSocButtonText.text = "View World";
@@ -367,6 +371,7 @@ namespace Assets.Code
             uiLeftPrimary.gameObject.SetActive(false);
             uiScrollables.gameObject.SetActive(false);
             uiMidTop.gameObject.SetActive(false);
+            uiVoting.gameObject.SetActive(false);
             hexSelector.SetActive(false);
 
 
@@ -375,6 +380,36 @@ namespace Assets.Code
                 GraphicalSociety.purge();
                 GraphicalMap.purge();
             }
+        }
+        public void setToVoting()
+        {
+
+            state = uiState.VOTING ;
+
+            uiMainMenu.gameObject.SetActive(false);
+            uiLeftPrimary.gameObject.SetActive(false);
+            uiScrollables.gameObject.SetActive(false);
+            uiMidTop.gameObject.SetActive(false);
+            uiVoting.gameObject.SetActive(true);
+            hexSelector.SetActive(false);
+
+
+            if (World.staticMap != null)
+            {
+                GraphicalSociety.purge();
+                GraphicalMap.purge();
+            }
+        }
+
+        public void bVoting()
+        {
+            if (GraphicalMap.selectedHex == null) { return; }
+            if (GraphicalMap.selectedHex.location == null) { return; }
+            if (GraphicalMap.selectedHex.location.soc == null) { return; }
+            if (GraphicalMap.selectedHex.location.soc is Society == false) { return; }
+            if (((Society)GraphicalMap.selectedHex.location.soc).voteSession == null) { return; }
+            uiVoting.populate((Society)GraphicalMap.selectedHex.location.soc, ((Society)GraphicalMap.selectedHex.location.soc).getSovreign());
+            setToVoting();
         }
 
         //public void bViewWorld()

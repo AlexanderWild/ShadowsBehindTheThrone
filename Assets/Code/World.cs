@@ -171,6 +171,8 @@ namespace Assets.Code
             Log("Got to end of initial startup");
             ui.checkData();
 
+            ui.setToVoting();
+            ui.setToWorld();
             //bQuicksave();
         }
         /*

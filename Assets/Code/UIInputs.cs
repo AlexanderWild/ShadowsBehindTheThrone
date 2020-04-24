@@ -45,6 +45,10 @@ namespace Assets.Code
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
+                if (world.ui.state == UIMaster.uiState.VOTING)
+                {
+                    world.ui.uiVoting.bDismiss();
+                }
                 world.ui.setToMainMenu();
             }
 

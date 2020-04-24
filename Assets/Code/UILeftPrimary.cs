@@ -55,6 +55,7 @@ namespace Assets.Code
         public Text socTypeTitle;
         public Text socTypeDesc;
 
+        public Button votingButton;
         public Button powerButton;
         public Text powerButtonText;
         public Button abilityButton;
@@ -436,6 +437,8 @@ namespace Assets.Code
                 }
                 powerButton.gameObject.SetActive(canUsePower);
                 abilityButton.gameObject.SetActive(canUseAbility);
+
+                votingButton.gameObject.SetActive(hex != null && hex.location != null && hex.location.soc != null && hex.location.soc is Society && ((Society)hex.location.soc).voteSession != null);
 
                 personAwarenessBlock.SetActive(World.staticMap.param.useAwareness == 1);
             }

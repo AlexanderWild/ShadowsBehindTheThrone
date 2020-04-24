@@ -771,5 +771,12 @@ namespace Assets.Code
             }
             return map.world.textureStore.layerFore[imgIndFore];
         }
+        public Sprite getImageBorder()
+        {
+            if (this == this.society.getSovreign()) { return map.world.textureStore.slotKing; }
+            if (this.titles.Count > 0) { return map.world.textureStore.slotDuke; }
+            if (this.title_land != null) { return map.world.textureStore.slotCount; }
+            return map.world.textureStore.slotBasic;
+        }
     }
 }

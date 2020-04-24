@@ -27,6 +27,24 @@ namespace Assets.Code
             string msg = society.getName() + ": chose " + option.info(this) + " for " + this.ToString();
 
             World.staticMap.addMessage(msg, priority, positive);
+
+            bool proposerPassed = false;
+            foreach (Person p in option.votesFor)
+            {
+                if (option.votesFor.Contains(p))
+                {
+                    proposerPassed = true;
+                }
+            }
+            if (proposerPassed)
+            {
+                proposer.prestige += World.staticMap.param.society_prestigeFromVotingSuccess;
+            }
+            else
+            {
+                proposer.prestige += World.staticMap.param.society_prestigeFromVotingFailure;
+                if (proposer.prestige < 0) { proposer.prestige = 0; }
+            }
         }
 
         public void changeLikingForVotes(VoteOption option,VoteIssue issue)
@@ -36,6 +54,13 @@ namespace Assets.Code
             foreach (Person p in society.people)
             {
                 double deltaRel = getLikingDelta(p, option,issue);
+                if (issue.proposer == p && (option.votesFor.Contains(p) == false))
+                {
+                    foreach (Person voter in option.votesFor)
+                    {
+                        p.getRelation(voter).addLiking(society.map.param.society_dislikeFromFailedProposal, "Did not vote on my proposed measure " + this.ToString(), society.map.turn);
+                    }
+                }
                 foreach (Person voter in option.votesFor)
                 {
                     p.getRelation(voter).addLiking(deltaRel,"Vote on issue " + this.ToString(),society.map.turn);
