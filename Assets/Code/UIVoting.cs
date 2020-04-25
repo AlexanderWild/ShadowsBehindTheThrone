@@ -18,6 +18,10 @@ namespace Assets.Code
         public Image proposerMid;
         public Image proposerFore;
         public Image proposerBorder;
+        public Image agentBack;
+        public Image agentMid;
+        public Image agentFore;
+        public Image agentBorder;
         public VoteSession sess;
         public Text textVoterName;
         public Text textVoterUtility;
@@ -27,8 +31,11 @@ namespace Assets.Code
         public Text textVPower;
         public Text textVLiking;
         public Text textWinningOpt;
+        public Text textAgentName;
+        public Text textAgentDesc;
         public Person agent;
         public Button switchPower;
+        public Button switchEnthralled;
         public Button switchLiking;
 
         public float offsetPrimary = 0;
@@ -51,6 +58,7 @@ namespace Assets.Code
             {
                 voteOptBars[i].targetPosition = offset + (i * offsetPerItem);
             }
+            switchEnthralled.gameObject.SetActive(voterBars[0].voter.state == Person.personState.enthralled);
         }
 
         public void populate(Society soc,Person agent)
@@ -75,6 +83,24 @@ namespace Assets.Code
                 PopOptBar bar = world.prefabStore.getVoteOptBar(opt, soc.voteSession);
                 //bar.gameObject.transform.parent = this.gameObject.transform;
                 voteOptBars.Add(bar);
+            }
+            if (agent != null)
+            {
+                textAgentName.text = "Interacting with:\n" + agent.getFullName();
+                agentBack.sprite = agent.getImageBack();
+                agentBorder.sprite = agent.getImageBorder();
+                agentFore.sprite = agent.getImageFore();
+                agentMid.sprite = agent.getImageMid();
+                textAgentDesc.text = "You may use the voter's liking for " + agent.getFullName() + " to sway their votes one way or another, spending this liking as political capital.";
+            }
+            else
+            {
+                agentBack.sprite = world.textureStore.icon_mask;
+                agentMid.sprite = world.textureStore.icon_mask;
+                agentBorder.sprite = world.textureStore.slotCount;
+                agentFore.sprite = world.textureStore.icon_mask;
+                textAgentName.text = "Interacting without character";
+                textAgentDesc.text = "If you interact with a society with an enthralled noble, or use an agent, you can spend the liking the voters have towards them to sway their votes.";
             }
             sess = soc.voteSession;
             checkData();
@@ -115,6 +141,11 @@ namespace Assets.Code
                 switchPower.gameObject.SetActive(false);
             }
 
+            foreach (PopVoterBar bar in voterBars)
+            {
+                bar.checkData();
+            }
+
             double highest = voteOptBars[0].opt.votingWeight;
             VoteOption winner = voteOptBars[0].opt;
             for (int i = 1; i < voteOptBars.Count; i++)
@@ -128,6 +159,12 @@ namespace Assets.Code
             textWinningOpt.text = winner.info(sess.issue);
         }
 
+        public void bSwitchVote()
+        {
+            voterBars[0].voter.forcedVoteOption = voteOptBars[0].opt;
+            voterBars[0].voter.forcedVoteSession = sess;
+            checkData();
+        }
         public void bSwitchUsingPower()
         {
             if (world.map.overmind.power < 0)

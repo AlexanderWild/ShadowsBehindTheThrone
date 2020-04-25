@@ -408,7 +408,12 @@ namespace Assets.Code
             if (GraphicalMap.selectedHex.location.soc == null) { return; }
             if (GraphicalMap.selectedHex.location.soc is Society == false) { return; }
             if (((Society)GraphicalMap.selectedHex.location.soc).voteSession == null) { return; }
-            uiVoting.populate((Society)GraphicalMap.selectedHex.location.soc, ((Society)GraphicalMap.selectedHex.location.soc).getSovreign());
+            Person interacter = null;
+            foreach (Person p in ((Society)GraphicalMap.selectedHex.location.soc).people)
+            {
+                if (p.state == Person.personState.enthralled) { interacter = p; }
+            }
+            uiVoting.populate((Society)GraphicalMap.selectedHex.location.soc, interacter);
             setToVoting();
         }
 

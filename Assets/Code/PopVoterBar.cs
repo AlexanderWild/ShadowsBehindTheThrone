@@ -32,6 +32,11 @@ namespace Assets.Code
             }
             mover.transform.localPosition = new Vector3(100, pos + delta, 0);
         }
+        public void checkData()
+        {
+            textVotingOption.text = "Voting: " + voter.getVote(voter.society.voteSession).info(voter.society.voteSession.issue);
+
+        }
         public void setTo(Person p)
         {
             profileBack.sprite = p.getImageBack();
