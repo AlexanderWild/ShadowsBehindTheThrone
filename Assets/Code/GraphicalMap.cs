@@ -18,7 +18,7 @@ namespace Assets.Code
         public static float hexSizeX = 1.31f;
         public static float hexSizeY = 1.11f;
         public static Hex selectedHex;
-        public static Property selectedProperty;
+        public static object selectedSelectable;
         public static float maxScale = 1.5f;
         public static float minScale = 0.5f;
         public static int lastMapChange;

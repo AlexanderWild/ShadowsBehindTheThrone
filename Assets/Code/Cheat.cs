@@ -140,6 +140,12 @@ namespace Assets.Code
                 {
                     World.staticMap.overmind.hasTakenAction = false;
                 }
+                if (command == "unit")
+                {
+                    Unit u = new Unit(GraphicalMap.selectedHex.location);
+                    map.units.Add(u);
+                    GraphicalMap.selectedHex.location.units.Add(u);
+                }
                 if (command == "victory")
                 {
                     World.staticMap.overmind.victory();
@@ -154,6 +160,7 @@ namespace Assets.Code
                     }
                     
                 }
+                map.world.ui.checkData();
             }
             catch(Exception e)
             {

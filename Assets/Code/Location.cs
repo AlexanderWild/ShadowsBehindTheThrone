@@ -25,6 +25,7 @@ namespace Assets.Code
         public string shortName;
         public bool isMajor;//Remember if it's a city, so we have roughly the same amount at all times, regardless of razing
         public List<Property> properties = new List<Property>();
+        public List<Unit> units = new List<Unit>();
         public int turnLastTaken = -1000;
         public double inherentInformationAvailability = 0.85;
         public int lastTaken;

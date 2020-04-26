@@ -448,28 +448,29 @@ namespace Assets.Code
                 maskTitle.text = GraphicalMap.map.masker.getTitleText();
             locText.text = "";
 
-            if (GraphicalMap.selectedProperty != null)
+            if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Property)
             {
+                Property sel = (Property)GraphicalMap.selectedSelectable;
                 screenSociety.SetActive(true);
                 screenPerson.SetActive(false);
                 screenLocation.SetActive(false);
                 setToEmpty();
                 
-                socTitle.text = GraphicalMap.selectedProperty.proto.name;
+                socTitle.text = sel.proto.name;
                 socTypeDesc.text = "Effects remain bound to locations, regardless of societal and political change, until they expire or are dispelled by another means." +
                     " \n(Rapidly select a location without selecting properties by holding CTRL while clicking on it)";
-                if (GraphicalMap.selectedProperty.proto.decaysOverTime)
+                if (sel.proto.decaysOverTime)
                 {
-                    title.text = GraphicalMap.selectedProperty.proto.name;
-                    socTypeTitle.text = "Turns Remaining: " + GraphicalMap.selectedProperty.charge;
+                    title.text = sel.proto.name;
+                    socTypeTitle.text = "Turns Remaining: " + sel.charge;
                 }
                 else
                 {
-                    title.text = GraphicalMap.selectedProperty.proto.name;
+                    title.text = sel.proto.name;
                     socTypeTitle.text = "Indefinite Effect";
                     socTypeDesc.text = "Effects remain bound to locations, regardless of societal and political change. This one decays over time.";
                 }
-                string bodyText = GraphicalMap.selectedProperty.proto.getDescription();
+                string bodyText = sel.proto.getDescription();
                 body.text = bodyText;
             }
             else if (state == tabState.PERSON)

@@ -61,6 +61,13 @@ namespace Assets.Code
                                 Destroy(p.outer.gameObject);
                             }
                         }
+                        foreach (Unit p in hex.location.units)
+                        {
+                            if (p.outer != null)
+                            {
+                                Destroy(p.outer.gameObject);
+                            }
+                        }
                     }
                     Destroy(this.gameObject);
                 }
@@ -410,6 +417,13 @@ namespace Assets.Code
                     if (p.outer == null)
                     {
                         p.outer = map.world.prefabStore.getGraphicalProperty(map, p);
+                    }
+                }
+                foreach (Unit p in hex.location.units)
+                {
+                    if (p.outer == null)
+                    {
+                        p.outer = map.world.prefabStore.getGraphicalUnit(map, p);
                     }
                 }
             }

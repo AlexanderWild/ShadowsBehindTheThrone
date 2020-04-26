@@ -344,68 +344,61 @@ namespace Assets.Code
 
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                GraphicalMap.selectedProperty = null;
+                GraphicalMap.selectedSelectable = null;
                 GraphicalMap.selectedHex = clickedHex;
                 world.audioStore.playClick();
                 return;
             }
+            world.ui.checkData();
 
 
-            bool deselectedProperty = false;
-            bool selectedAProperty = false;
-            if (GraphicalMap.selectedProperty != null)
-            {
-                //If we've clicked on his hex we want to cycle to the next unit in the cycle
-                if (GraphicalMap.selectedProperty.location.hex == clickedHex)
+            if (clickedHex.location != null) {
+                List<object> selectables = new List<object>();
+                foreach (object o in clickedHex.location.units)
                 {
-                    int index = GraphicalMap.selectedProperty.location.properties.IndexOf(GraphicalMap.selectedProperty);
-                    bool foundAny = false;
-                    for (int i = index + 1; i < clickedHex.location.properties.Count; i++)
-                    {
-                        foundAny = true;
-                        GraphicalMap.selectedProperty = clickedHex.location.properties[i];
-                        //world.ui.uiUnit.setTo(GraphicalMap.selectedProperty);
-                        GraphicalMap.selectedHex = null;
-                        selectedAProperty = true;
-                        break;
-                    }
-
-                    //Found no further units, want to select hex instead
-                    if (!foundAny)
-                    {
-                        deselectedProperty = true;
-                        GraphicalMap.selectedProperty = null;
-                    }
+                    selectables.Add(o);
+                }
+                foreach (object o in clickedHex.location.properties)
+                {
+                    selectables.Add(o);
+                }
+                int index = -1;
+                if (GraphicalMap.selectedSelectable != null)
+                {
+                    index = selectables.IndexOf(GraphicalMap.selectedSelectable);
+                }
+                if (index == -1)//Nothing from this loc selected yet
+                {
+                    index = 0;
                 }
                 else
                 {
-                    GraphicalMap.selectedProperty = null;
+                    index += 1;
                 }
-            }
-
-            if (GraphicalMap.selectedProperty == null && !deselectedProperty)
-            {
-                //See if there's someone to select
-                if (clickedHex.location != null)
+                //See if we're out of selectables (including if there were none)
+                if (index >= selectables.Count)
                 {
-                    foreach (Property u in clickedHex.location.properties)
-                    {
-                        GraphicalMap.selectedProperty = u;
-                        //world.ui.uiUnit.setTo(GraphicalMap.selectedProperty);
-                        GraphicalMap.selectedHex = null;
-                        world.audioStore.playClickInfo();
-                        return;
-
-                    }
+                    GraphicalMap.selectedSelectable = null;
+                    GraphicalMap.selectedHex = clickedHex;
+                    world.audioStore.playClick();
+                    world.ui.checkData();
+                    return;
                 }
+                else
+                {
+                    GraphicalMap.selectedSelectable = selectables[index];
+                    GraphicalMap.selectedHex = clickedHex;
+                    world.audioStore.playClick();
+                    world.ui.checkData();
+                    return;
+
+                }
+                
             }
 
-            if (!selectedAProperty)
-            {
-                GraphicalMap.selectedHex = clickedHex;
-                world.audioStore.playClick();
-            }
-
+            GraphicalMap.selectedSelectable = null;
+            GraphicalMap.selectedHex = clickedHex;
+            world.audioStore.playClick();
             world.ui.checkData();
         }
 

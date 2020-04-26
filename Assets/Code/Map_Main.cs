@@ -23,6 +23,7 @@ namespace Assets.Code
         public Params param;
         public Overmind overmind;
         public List<MsgEvent> turnMessages = new List<MsgEvent>();
+        public List<Unit> units = new List<Unit>();
         public double data_avrgEnshadowment;
         public int data_nSocietyLocations;
 
@@ -85,6 +86,10 @@ namespace Assets.Code
             foreach (SocialGroup g in rems)
             {
                 socialGroups.Remove(g);
+            }
+            foreach (Unit unit in units)
+            {
+                unit.turnTick(this);
             }
 
             overmind.turnTick();

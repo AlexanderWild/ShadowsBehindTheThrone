@@ -485,13 +485,20 @@ namespace Assets.Code
             ui.addBlocker(specific.gameObject);
         }
 
+        internal GraphicalUnit getGraphicalUnit(Map map, Unit p)
+        {
+            GameObject obj = Instantiate(graphicalUnit) as GameObject;
+            GraphicalUnit property = obj.GetComponent<GraphicalUnit>();
+            property.setTo(p, world);
+            property.borderLayer1.enabled = true;
+            property.borderLayer2.enabled = true;
+            return property;
+        }
         internal GraphicalProperty getGraphicalProperty(Map map, Property p)
         {
             GameObject obj = Instantiate(graphicalProperty) as GameObject;
             GraphicalProperty property = obj.GetComponent<GraphicalProperty>();
             property.setTo(p,world);
-            property.borderLayer1.enabled = false;
-            property.borderLayer2.enabled = false;
             return property;
         }
 

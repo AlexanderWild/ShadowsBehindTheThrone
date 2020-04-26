@@ -7,38 +7,42 @@ using UnityEngine.UI;
 
 namespace Assets.Code
 {
-    public class GraphicalProperty : MonoBehaviour
+    public class GraphicalUnit : MonoBehaviour
     {
         public World world;
         public SpriteRenderer unitLayer;
+        public SpriteRenderer borderLayer1;
+        public SpriteRenderer borderLayer2;
+        public SpriteRenderer hostilityBorder;
+        public GameObject hpBar;
+        public Text hpText;
         public int lastMapChange = -1;//Tracks if the map has shrunk or moved, so you need to alter your position instantly
         public bool wasSelectedUnit = false;
         public static Color col_medDark = new Color(0.5f, 0.5f, 0.5f);
-        
-        Property property;
-        Location location = null;
+
+        public Unit unit;
 
         public void Update()
         {
-            if (location.properties.Contains(property) == false)
+            if (unit.location.units.Contains(unit) == false)
             {
-                property.outer = null;
+                unit.outer = null;
                 Destroy(gameObject);
                 return;
             }
-            if (location.hex.outer == null)
+            if (unit.location.hex.outer == null)
             {
-                property.outer = null;
+                unit.outer = null;
                 Destroy(this.gameObject);
                 return;
             }
 
             gameObject.transform.localScale = new Vector3(0.75f * GraphicalMap.scale, 0.75f * GraphicalMap.scale, 1);
 
-            Vector3 loc = GraphicalMap.getLoc(location.hex);
+            Vector3 loc = GraphicalMap.getLoc(unit.location.hex);
 
             float radius = 0.55f * GraphicalMap.scale;
-            if (location.hex == GraphicalMap.selectedHex || property == GraphicalMap.selectedSelectable)
+            if (unit.location.hex == GraphicalMap.selectedHex || unit == GraphicalMap.selectedSelectable)
             {
                 radius = 1.1f * GraphicalMap.scale;
                 loc = loc + new Vector3(0, 0, -5f);
@@ -49,8 +53,8 @@ namespace Assets.Code
             }
 
 
-            double ang = location.properties.IndexOf(property) + location.units.Count;
-            ang /= location.units.Count + location.properties.Count;
+            double ang = unit.location.units.IndexOf(unit);
+            ang /= unit.location.units.Count + unit.location.properties.Count;
             ang *= 6.28;
             loc.x += (float)(radius * Math.Sin(ang));
             loc.y += (float)(radius * Math.Cos(ang));
@@ -75,25 +79,21 @@ namespace Assets.Code
             
             //hostilityBorder.color = Color.clear;
 
-            if (GraphicalMap.selectedSelectable != null)
+            if (GraphicalMap.selectedSelectable == unit)
             {
-                if (GraphicalMap.selectedSelectable == property)
-                {
-                    wasSelectedUnit = true;
-                    //if (((int)(Time.time*2))%2 == 0)
-                    //{
-                    float size = ((float)Math.Abs(Math.Sin(2 * Time.time)) * 0.5f + 0.5f) * GraphicalMap.scale;
-                    gameObject.transform.localScale = new Vector3(size, size, 1);
-                    //}
-                }
+                wasSelectedUnit = true;
+                //if (((int)(Time.time*2))%2 == 0)
+                //{
+                float size = ((float)Math.Abs(Math.Sin(2 * Time.time)) * 0.5f + 0.5f) * GraphicalMap.scale;
+                gameObject.transform.localScale = new Vector3(size, size, 1);
+                //}
             }
         }
 
-        public void setTo(Property p,World world)
+        public void setTo(Unit unit,World world)
         {
-            this.property = p;
-            this.location = p.location;
-            this.unitLayer.sprite = p.proto.getSprite(world);
+            this.unit = unit;
+            this.unitLayer.sprite = unit.getSprite(world);
         }
 
         public void checkData()
