@@ -12,6 +12,7 @@ namespace Assets.Code
         public Location location;
         public GraphicalUnit outer;
         public Society society;
+        public Task task;
         public bool dontDisplayBorder = false;
 
         public Unit(Location loc,Society soc)
@@ -35,6 +36,7 @@ namespace Assets.Code
                 
                 }
                 map.remove(this);
+                location.units.Remove(this);
                 bool positive = person == null || person.state != Person.personState.enthralledAgent;
                 map.addMessage(this.getName() + " disbands as their society is gone", MsgEvent.LEVEL_GREEN, positive);
                 return true;
@@ -44,6 +46,14 @@ namespace Assets.Code
         public virtual string getName()
         {
             return person.getFullName();
+        }
+        public virtual string getTaskShort()
+        {
+            if (task != null)
+            {
+                return task.getShort();
+            }
+            return "No current task";
         }
         public abstract void turnTick(Map map);
 

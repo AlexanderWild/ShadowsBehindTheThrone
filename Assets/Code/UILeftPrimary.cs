@@ -55,6 +55,8 @@ namespace Assets.Code
         public Text socTypeTitle;
         public Text socTypeDesc;
 
+        public UILeftUnit uiUnit;
+
         public Button votingButton;
         public Button powerButton;
         public Text powerButtonText;
@@ -448,14 +450,23 @@ namespace Assets.Code
                 maskTitle.text = GraphicalMap.map.masker.getTitleText();
             locText.text = "";
 
-            if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Property)
+            //Disable all, re-enable as per need
+            screenSociety.SetActive(false);
+            screenPerson.SetActive(false);
+            screenLocation.SetActive(false);
+            uiUnit.gameObject.SetActive(false);
+
+            if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
+            {
+                uiUnit.setTo((Unit)GraphicalMap.selectedSelectable);
+                uiUnit.gameObject.SetActive(true);
+            }
+            else if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Property)
             {
                 Property sel = (Property)GraphicalMap.selectedSelectable;
                 screenSociety.SetActive(true);
-                screenPerson.SetActive(false);
-                screenLocation.SetActive(false);
                 setToEmpty();
-                
+
                 socTitle.text = sel.proto.name;
                 socTypeDesc.text = "Effects remain bound to locations, regardless of societal and political change, until they expire or are dispelled by another means." +
                     " \n(Rapidly select a location without selecting properties by holding CTRL while clicking on it)";
@@ -476,8 +487,6 @@ namespace Assets.Code
             else if (state == tabState.PERSON)
             {
                 screenPerson.SetActive(true);
-                screenSociety.SetActive(false);
-                screenLocation.SetActive(false);
                 if (master.state == UIMaster.uiState.SOCIETY && GraphicalSociety.focus != null)
                 {
                     Person p = GraphicalSociety.focus;
@@ -495,15 +504,11 @@ namespace Assets.Code
             }
             else if (state == tabState.LOCATION)
             {
-                screenPerson.SetActive(false);
                 screenLocation.SetActive(true);
-                screenSociety.SetActive(false);
                 showLocationInfo();
             }
             else if (state == tabState.SOCIETY)
             {
-                screenPerson.SetActive(false);
-                screenLocation.SetActive(false);
                 screenSociety.SetActive(true);
                 if (hex != null && hex.location != null && hex.location.soc != null)
                 {
@@ -551,11 +556,7 @@ namespace Assets.Code
                             econEffects += "Econ from " + effect.from.name + " to " + effect.to.name + "\n";
                         }
                         socEcon.text = econEffects;
-
-                        foreach (Person p in locSoc.people)
-                        {
-                            //bodyText += "\n   -" + p.getFullName();
-                        }
+                        
 
                         bodyText += "\nMILITARY POSTURE: " + locSoc.posture;
                         if (locSoc.offensiveTarget != null)
@@ -581,8 +582,8 @@ namespace Assets.Code
                         {
                             bodyText += "\nTURNS TILL CIVIL WAR: " + (locSoc.map.param.society_instablityTillRebellion - locSoc.instabilityTurns);
                         }
-
                     }
+                    body.text = bodyText;
 
                     string strThreat = "";
                     List<ReasonMsg> msgs = new List<ReasonMsg>();

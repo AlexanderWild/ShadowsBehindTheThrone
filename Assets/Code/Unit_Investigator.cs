@@ -8,10 +8,9 @@ namespace Assets.Code
 {
     public class Unit_Investigator : Unit
     {
-        LinkedList<Location> visitBuffer = new LinkedList<Location>();
-        int bufferSize = 16;
-        int wanderDur = 8;
         int sinceHome = 0;
+
+        int wanderDur = 8;
 
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {
@@ -19,17 +18,9 @@ namespace Assets.Code
 
         public override void turnTick(Map map)
         {
-            checkForDisband(map);
+            if (checkForDisband(map)) { return; }
 
 
-            /*
-            int distHome = map.getStepDist(location, society);
-            if (distHome > maxWanderRange)
-            {
-                map.instaMoveTo(this,map.getPathTo(location, society.getCapital())[0]);
-                return;
-            }
-            /*
             if (this.location == society.getCapital())
             {
                 sinceHome = 0;
@@ -38,43 +29,20 @@ namespace Assets.Code
             {
                 sinceHome += 1;
             }
-            if (sinceHome > wanderDur)
+
+            if (task != null)
             {
-                map.instaMoveTo(this, map.getPathTo(location, society.getCapital())[0]);
+                task.turnTick(this);
                 return;
             }
-            */
 
-            World.log("Turn taking " + this.getName());
-            List<Location> neighbours = location.getNeighbours();
+            if (sinceHome > wanderDur)
+            {
+                task = new Task_GoToLocation(society.getCapital());
+                return;
+            }
 
-            int c = 0;
-            Location chosen = null;
-            foreach (Location loc in neighbours)
-            {
-                if (visitBuffer.Contains(loc) == false)
-                {
-                    c += 1;
-                    if (Eleven.random.Next(c) == 0)
-                    {
-                        chosen = loc;
-                    }
-                }
-            }
-            if (chosen != null)
-            {
-                visitBuffer.AddLast(chosen);
-            }
-            else
-            {
-                int q = Eleven.random.Next(neighbours.Count);
-                chosen = neighbours[q];
-            }
-            map.instaMoveTo(this, chosen);
-            if (visitBuffer.Count > bufferSize)
-            {
-                visitBuffer.RemoveFirst();
-            }
+            task = new Task_Wander();
         }
 
         public override Sprite getSprite(World world)

@@ -204,7 +204,6 @@ namespace Assets.Code
                     loc = open[i];
                     foreach (Location l2 in getNeighbours(loc))
                     {
-                        World.log("Adding " + l2.hex.getName());
                         if (seen.Contains(l2)) { continue; }
                         Location[] path = new Location[paths[i].Length + 1];
                         for (int j = 0; j < paths[i].Length; j++) { path[j] = paths[i][j]; }
@@ -218,7 +217,7 @@ namespace Assets.Code
                 open = border;
                 paths = newPaths;
 
-                if (nSteps > 1024)
+                if (nSteps > 64)
                 {
                     throw new Exception("Map discontinuity detected");
                 }
@@ -272,6 +271,14 @@ namespace Assets.Code
             }
         }
         
+        public void moveTowards(Unit u,Location loc)
+        {
+            if (u.location == loc) { return; }
+
+            Location[] locations = getPathTo(u.location, loc);
+            if (locations == null || locations.Length < 2) { return; }
+            instaMoveTo(u, locations[1]);
+        }
         public void instaMoveTo(Unit u,Location loc)
         {
             u.location.units.Remove(u);

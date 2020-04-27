@@ -283,7 +283,7 @@ namespace Assets.Code
         public double voting_powerToSwitchPerU = 0.1;
         public double voting_likingToSwitchPerU = 0.25;
 
-        public double unit_targetUnitsPerLoc = 0.0;
+        public double unit_targetUnitsPerLoc = 0.1;
 
         public void saveToFile()
         {

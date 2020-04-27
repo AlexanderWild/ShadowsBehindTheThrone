@@ -247,4 +247,4 @@ voting_powerToSwitchMin: 2
 voting_likingToSwitchMin: 5
 voting_powerToSwitchPerU: 0.1
 voting_likingToSwitchPerU: 0.25
-unit_targetUnitsPerLoc: 0
+unit_targetUnitsPerLoc: 0.1
