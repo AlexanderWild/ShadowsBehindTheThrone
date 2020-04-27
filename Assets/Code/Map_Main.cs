@@ -26,7 +26,7 @@ namespace Assets.Code
         public List<Unit> units = new List<Unit>();
         public double data_avrgEnshadowment;
         public int data_nSocietyLocations;
-
+        public UnitManager unitManager;
         public double worldPanic;
 
         public Map(Params param)
@@ -36,6 +36,7 @@ namespace Assets.Code
             //overmind = new Overmind(this);
             //eventManager = new MapEventManager(this);
            stats = new StatRecorder(this);
+            unitManager = new UnitManager(this);
         }
 
         public void turnTick()
@@ -60,10 +61,10 @@ namespace Assets.Code
                 }
             }
 
-            //Wars
+            processUnits();
             processWars();
-            //Map events
             processMapEvents();
+
 
             //Finally societies
             //Use a duplication list so they can modify the primary society list (primarly adding a child soc)
@@ -86,10 +87,6 @@ namespace Assets.Code
             foreach (SocialGroup g in rems)
             {
                 socialGroups.Remove(g);
-            }
-            foreach (Unit unit in units)
-            {
-                unit.turnTick(this);
             }
 
             overmind.turnTick();
@@ -116,6 +113,23 @@ namespace Assets.Code
                     turnMessages.Add(new MsgEvent(msg, MsgEvent.LEVEL_GREEN, true));
                 }
             }
+        }
+
+        public void processUnits()
+        {
+            List<Unit> mutable = new List<Unit>();
+            mutable.AddRange(units);
+            foreach (Unit u in mutable)
+            {
+                u.turnTick(this);
+            }
+
+            unitManager.turnTick();
+        }
+
+        public void remove(Unit unit)
+        {
+            units.Remove(unit);
         }
 
         public void processMapEvents()

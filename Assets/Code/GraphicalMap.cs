@@ -118,10 +118,10 @@ namespace Assets.Code
             foreach (GraphicalHex hex in loaded)
             {
                 hex.checkData();
-
-                /*
+                
                 if (hex.hex.location != null)
                 {
+                    /*
                     foreach (Property u in hex.hex.location.getProperties())
                     {
                         if (u.outer != null)
@@ -133,11 +133,19 @@ namespace Assets.Code
                             world.prefabStore.getGraphicalProperty(u);
                         }
                     }
+                    */
+                    foreach (Unit u in hex.hex.location.units)
+                    {
+                        if (u.outer != null)
+                        {
+                            u.outer.checkData();
+                        }
+                    }
                 }
-                */
             }
             
-            world.ui.uiLeftPrimary.checkData();
+            
+            //world.ui.uiLeftPrimary.checkData();
             //world.ui.uiScrollables.checkData();
             //world.ui.uiMidTop.checkData();
         }

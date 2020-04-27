@@ -88,6 +88,23 @@ namespace Assets.Code
                 gameObject.transform.localScale = new Vector3(size, size, 1);
                 //}
             }
+
+
+            if (unit.person != null && unit.person.state == Person.personState.enthralledAgent)
+            {
+                borderLayer1.color = Color.black;
+                borderLayer2.color = Color.black;
+            }
+            else if (unit.society == null || unit.dontDisplayBorder)
+            {
+                borderLayer1.color = Color.clear;
+                borderLayer2.color = Color.clear;
+            }
+            else
+            {
+                borderLayer1.color = unit.society.color;
+                borderLayer2.color = unit.society.color2;
+            }
         }
 
         public void setTo(Unit unit,World world)
@@ -98,6 +115,22 @@ namespace Assets.Code
 
         public void checkData()
         {
+            if (unit.person != null && unit.person.state == Person.personState.enthralledAgent)
+            {
+                borderLayer1.color = Color.black;
+                borderLayer2.color = Color.black;
+            }
+            else if (unit.society == null || unit.dontDisplayBorder)
+            {
+                borderLayer1.color = Color.clear;
+                borderLayer2.color = Color.clear;
+            }
+            else
+            {
+                borderLayer1.color = unit.society.color;
+                borderLayer2.color = unit.society.color2;
+            }
+
             /*
             hpBar.SetActive(unit.isMilitary);
             if (unit.isMilitary)
@@ -105,21 +138,6 @@ namespace Assets.Code
                 hpText.text = "" + (int)(unit.getStrength());
             }
             unitLayer.sprite = unit.getSprite();
-            if (unit.enthralled)
-            {
-                borderLayer1.color = Color.black;
-                borderLayer2.color = Color.black;
-            }
-            else if (unit.soc == null || unit.dontDisplayBorder)
-            {
-                borderLayer1.color = Color.clear;
-                borderLayer2.color = Color.clear;
-            }
-            else
-            {
-                borderLayer1.color = unit.soc.color;
-                borderLayer2.color = unit.soc.color2;
-            }
             */
         }
     }

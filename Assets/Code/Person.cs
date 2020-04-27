@@ -37,11 +37,11 @@ namespace Assets.Code
 
         public double politics_militarism;
 
-        public enum personState { normal,enthralled,broken,lightbringer};
+        public enum personState { normal,enthralled,broken,lightbringer,enthralledAgent};
         public personState state = personState.normal;
         public bool isDead;
         public Society rebellingFrom;
-
+        public Unit unit;
         public Insanity madness;
 
         public Person(Society soc)
@@ -346,6 +346,7 @@ namespace Assets.Code
 
         public Location getLocation()
         {
+            if (unit != null) { return unit.location; }
             if (this.title_land != null)
             {
                 return this.title_land.settlement.location;
@@ -429,6 +430,7 @@ namespace Assets.Code
         }
         public bool enthrallable()
         {
+            if (unit != null) { return false; }
             if (state == personState.broken) { return true; }
 
             Society soc = society;
@@ -645,6 +647,14 @@ namespace Assets.Code
 
         public string getTitles()
         {
+            if (unit != null)
+            {
+                if (isMale)
+                {
+                    return unit.getTitleM();
+                }
+                return unit.getTitleF();
+            }
             double bestPrestige = 0;
             Title bestTitle = null;
             foreach (Title t in titles)

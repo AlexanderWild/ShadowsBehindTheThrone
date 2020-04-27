@@ -108,9 +108,10 @@ namespace Assets.Code
                     open.Add(loc);
                 }
 
-                if (nSteps > 1024)
+                if (nSteps > 128)
                 {
-                    throw new Exception("Map discontinuity detected");
+                    return nSteps;
+                    //throw new Exception("Map discontinuity detected");
                 }
             }
         }
@@ -269,6 +270,13 @@ namespace Assets.Code
                     throw new Exception("Map discontinuity detected");
                 }
             }
+        }
+        
+        public void instaMoveTo(Unit u,Location loc)
+        {
+            u.location.units.Remove(u);
+            loc.units.Add(u);
+            u.location = loc;
         }
 
         public void recomputeInformationAvailability(SocialGroup sg)

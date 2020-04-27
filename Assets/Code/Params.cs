@@ -120,7 +120,7 @@ namespace Assets.Code
         public int econ_buffDuration = 50;
 
         public int soc_untitledPeople = 3;
-        public int society_votingDuration = 2;
+        public int society_votingDuration = 1;
         public double society_votingRelChangePerUtilityPositive = 0.085;//If benefitted by a vote
         public double society_votingRelChangePerUtilityNegative = 0.14;//If harmed by a vote
         public int society_instablityTillRebellion = 10;
@@ -282,6 +282,8 @@ namespace Assets.Code
         public int voting_likingToSwitchMin = 5;
         public double voting_powerToSwitchPerU = 0.1;
         public double voting_likingToSwitchPerU = 0.25;
+
+        public double unit_targetUnitsPerLoc = 0.0;
 
         public void saveToFile()
         {

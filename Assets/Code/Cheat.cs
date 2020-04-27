@@ -142,7 +142,7 @@ namespace Assets.Code
                 }
                 if (command == "unit")
                 {
-                    Unit u = new Unit(GraphicalMap.selectedHex.location);
+                    Unit u = new Unit_Investigator(GraphicalMap.selectedHex.location,(Society)GraphicalMap.selectedHex.location.soc);
                     map.units.Add(u);
                     GraphicalMap.selectedHex.location.units.Add(u);
                 }

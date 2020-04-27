@@ -593,13 +593,6 @@ namespace Assets.Code
                         strThreat += "\n   " + msg.msg + " " + (int)msg.value;
                     }
                     socThreat.text = strThreat;
-
-
-                    foreach (Property p in hex.location.properties)
-                    {
-                        bodyText += "\nProperty " + p.proto.name;
-                    }
-                    body.text = bodyText;
                 }
                 else
                 {

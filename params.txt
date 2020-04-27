@@ -95,7 +95,7 @@ person_fearLevel_terrified: 150
 person_dislikeFromNotBeingVotedFor: -50
 econ_buffDuration: 50
 soc_untitledPeople: 3
-society_votingDuration: 2
+society_votingDuration: 1
 society_votingRelChangePerUtilityPositive: 0.085
 society_votingRelChangePerUtilityNegative: 0.14
 society_instablityTillRebellion: 10
@@ -247,3 +247,4 @@ voting_powerToSwitchMin: 2
 voting_likingToSwitchMin: 5
 voting_powerToSwitchPerU: 0.1
 voting_likingToSwitchPerU: 0.25
+unit_targetUnitsPerLoc: 0
