@@ -85,10 +85,16 @@ namespace Assets.Code
                 if (t.heldBy != null)
                 {
                     reply += "  Held by: " + t.heldBy.getFullName() + "\n";
+                    int turnsRemaining = map.param.society_minTimeBetweenTitleReassignments - (map.turn - t.turnLastAssigned);
+                    if (turnsRemaining < 0) { turnsRemaining = 0; }
+                    reply += "     Turns till election: " + turnsRemaining + "\n";
                 }
                 else
                 {
                     reply += "  Currently Vacant\n";
+                    int turnsRemaining = map.param.society_minTimeBetweenTitleReassignments - (map.turn - t.turnLastAssigned);
+                    if (turnsRemaining < 0) { turnsRemaining = 0; }
+                    reply += "     Turns till election: " + turnsRemaining + "\n";
                 }
             }
 

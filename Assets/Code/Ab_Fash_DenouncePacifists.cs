@@ -11,7 +11,12 @@ namespace Assets.Code
             base.cast(map, hex);
 
             if (hex.location.soc == null || (hex.location.soc is Society == false)) { return; }
-            Society soc = (Society)hex.location.soc;
+
+            castInner(map, hex.location.person());
+        }
+        public override void castInner(Map map, Person person)
+        {
+            Society soc = person.society;
 
             int nAffected = 0;
             foreach (Person p in soc.people)
@@ -31,20 +36,16 @@ namespace Assets.Code
                     }
                     if (affected)
                     {
-                     nAffected += 1;
+                        nAffected += 1;
                     }
 
                 }
             }
-            
+
             map.world.prefabStore.popImgMsg(
                 "You call on the nobles of " + soc.getName() + " to reject the pacifists in their midst, explaining that these people are exposing you all to danger by refusing to take up arms against your many foes.\n" +
                 nAffected + " nobles are affected.",
                 map.world.wordStore.lookup("ABILITY_DENOUNCE_PACIFISTS"));
-        }
-        public override void castInner(Map map, Person person)
-        {
-            cast(map, person.getLocation().hex);
         }
 
         public override bool castable(Map map, Person person)
@@ -62,10 +63,6 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return World.staticMap.param.ability_denouncePacifistsCooldown;
-        }
-        public override string specialCost()
-        {
-            return "";
         }
         public override int getCost()
         {

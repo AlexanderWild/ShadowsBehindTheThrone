@@ -9,8 +9,12 @@ namespace Assets.Code
         public override void cast(Map map, Hex hex)
         {
             base.cast(map, hex);
-            
-            ThreatItem item = hex.location.person().getGreatestThreat();
+            castInner(map, hex.location.person());
+        }
+        public override void castInner(Map map, Person person)
+        {
+
+            ThreatItem item = person.getGreatestThreat();
             if (item == null) { return; }
 
             double prevThreat = item.threat;
@@ -27,16 +31,12 @@ namespace Assets.Code
                 item.threat += addDread;
             }
 
-            string msgs = "You draw upon " + hex.location.person().getFullName() + "'s fears, adding to their dread of " + item.getTitle() + ". Their threat estimate has gone from "
+            string msgs = "You draw upon " + person.getFullName() + "'s fears, adding to their dread of " + item.getTitle() + ". Their threat estimate has gone from "
                 + (int)(prevThreat) + " to " + (int)(item.threat) + ".";
             if (hitCap) { msgs += "\n(It is now at its maximum value)"; }
             map.world.prefabStore.popImgMsg(
                 msgs,
                 map.world.wordStore.lookup("ABILITY_INSTILL_DREAD"));
-        }
-        public override void castInner(Map map, Person person)
-        {
-            cast(map, person.getLocation().hex);
         }
 
         public override bool castable(Map map, Person person)
@@ -54,10 +54,6 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return World.staticMap.param.ability_instillDreadCooldown;
-        }
-        public override string specialCost()
-        {
-            return "";
         }
         public override int getCost()
         {

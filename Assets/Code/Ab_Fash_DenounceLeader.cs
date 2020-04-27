@@ -11,10 +11,17 @@ namespace Assets.Code
             base.cast(map, hex);
 
             if (hex.location.soc == null || (hex.location.soc is Society == false)) { return; }
-            ThreatItem item = hex.location.person().getGreatestThreat();
+
+            castInner(map, hex.location.person());
+        }
+
+
+        public override void castInner(Map map, Person person)
+        {
+            ThreatItem item = person.getGreatestThreat();
             if (item == null) { return; }
 
-            Society soc = (Society)hex.location.soc;
+            Society soc = person.society;
             Person sov = soc.getSovreign();
             if (sov == null) { return; }
             int nAffected = 0;
@@ -62,10 +69,6 @@ namespace Assets.Code
                 nAffected + " nobles agree, with an average liking change of of " + (int)(-avrg),
                 map.world.wordStore.lookup("ABILITY_DENOUNCE_LEADER"));
         }
-        public override void castInner(Map map, Person person)
-        {
-            cast(map, person.getLocation().hex);
-        }
 
         public override bool castable(Map map, Person person)
         {
@@ -88,10 +91,6 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return World.staticMap.param.ability_denounceLeaderCooldown;
-        }
-        public override string specialCost()
-        {
-            return "";
         }
         public override int getCost()
         {

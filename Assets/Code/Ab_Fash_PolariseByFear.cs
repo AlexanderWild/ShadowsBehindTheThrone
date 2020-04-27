@@ -11,7 +11,12 @@ namespace Assets.Code
             base.cast(map, hex);
 
             if (hex.location.soc == null || (hex.location.soc is Society == false)) { return; }
-            Society soc = (Society)hex.location.soc;
+
+            castInner(map, hex.location.person());
+        }
+        public override void castInner(Map map, Person person)
+        {
+            Society soc = person.society;
 
             int nAffected = 0;
             double totalV = 0;
@@ -55,10 +60,6 @@ namespace Assets.Code
                 nAffected + " nobles are affected, with an average liking change of of " + (int)(-avrg),
                 map.world.wordStore.lookup("ABILITY_POLARISE_BY_FEAR"));
         }
-        public override void castInner(Map map, Person person)
-        {
-            cast(map, person.getLocation().hex);
-        }
 
         public override bool castable(Map map, Person person)
         {
@@ -75,10 +76,6 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return World.staticMap.param.ability_denounceLeaderCooldown;
-        }
-        public override string specialCost()
-        {
-            return "";
         }
         public override int getCost()
         {

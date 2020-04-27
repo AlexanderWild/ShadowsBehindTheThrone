@@ -9,18 +9,17 @@ namespace Assets.Code
         public override void cast(Map map, Hex hex)
         {
             base.cast(map, hex);
+            castInner(map, hex.location.person());
 
-
-            hex.location.person().politics_militarism = 1;
-
-            string msgs = "You exploit the terror of " + hex.location.person().getFullName() + ", causing them to become violent and cruel, as an attempt to defend themselves.";
-            map.world.prefabStore.popImgMsg(
-                msgs,
-                map.world.wordStore.lookup("ABILITY_CALL_TO_VIOLENCE"));
         }
         public override void castInner(Map map, Person person)
         {
-            cast(map, person.getLocation().hex);
+            person.politics_militarism = 1;
+
+            string msgs = "You exploit the terror of " + person.getFullName() + ", causing them to become violent and cruel, as an attempt to defend themselves.";
+            map.world.prefabStore.popImgMsg(
+                msgs,
+                map.world.wordStore.lookup("ABILITY_CALL_TO_VIOLENCE"));
         }
 
         public override bool castable(Map map, Person person)
@@ -37,10 +36,6 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return World.staticMap.param.ability_callToViolenceCooldown;
-        }
-        public override string specialCost()
-        {
-            return "";
         }
         public override int getCost()
         {

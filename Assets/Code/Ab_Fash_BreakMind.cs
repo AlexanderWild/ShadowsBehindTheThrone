@@ -10,17 +10,17 @@ namespace Assets.Code
         {
             base.cast(map, hex);
 
-            string msgs = "You shatter the mind of " + hex.location.person().getFullName() + ", as their fears and terrors overwhelm them. They now see enemies everywhere they look, and desperately seek to defend themselves against these nebulous foes.";
-            hex.location.person().sanity = 0;
-            hex.location.person().madness =            new Insanity_Paranoid();
+            castInner(map, hex.location.person());
+        }
+        public override void castInner(Map map, Person person)
+        {
+            string msgs = "You shatter the mind of " + person.getFullName() + ", as their fears and terrors overwhelm them. They now see enemies everywhere they look, and desperately seek to defend themselves against these nebulous foes.";
+            person.sanity = 0;
+            person.madness = new Insanity_Paranoid();
 
             map.world.prefabStore.popImgMsg(
                 msgs,
                 map.world.wordStore.lookup("ABILITY_BREAK_MIND"));
-        }
-        public override void castInner(Map map, Person person)
-        {
-            cast(map, person.getLocation().hex);
         }
 
         public override bool castable(Map map, Person person)
@@ -39,10 +39,6 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return World.staticMap.param.ability_breakMindCooldown;
-        }
-        public override string specialCost()
-        {
-            return "";
         }
         public override int getCost()
         {

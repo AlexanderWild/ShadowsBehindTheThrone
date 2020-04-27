@@ -10,6 +10,7 @@ namespace Assets.Code
         {
             base.cast(map, hex);
             
+
             ThreatItem item = hex.location.person().getGreatestThreat();
             if (item == null) { return; }
 
@@ -63,14 +64,10 @@ namespace Assets.Code
                 msgs,
                 map.world.wordStore.lookup("ABILITY_SPREAD_FEAR"));
         }
-        public override void castInner(Map map, Person person)
-        {
-            cast(map, person.getLocation().hex);
-        }
 
         public override bool castable(Map map, Person person)
         {
-            return true;
+            return false;
         }
 
         public override bool castable(Map map, Hex hex)
@@ -83,10 +80,6 @@ namespace Assets.Code
         {
             return World.staticMap.param.ability_spreadFearCooldown;
         }
-        public override string specialCost()
-        {
-            return "";
-        }
         public override int getCost()
         {
             return 0;
@@ -95,7 +88,7 @@ namespace Assets.Code
         public override string getDesc()
         {
             return "Causes the neighbours of a noble to gain dread towards that noble's greatest fear, proportional to how much they like the noble and how much that noble's fear exceeds theirs."
-                + "\n[Requires a noble]";
+                + "\n[Requires a location belonging to a noble]";
         }
 
         public override string getName()
