@@ -175,12 +175,8 @@ namespace Assets.Code
             {
                 locLayer.enabled = true;
                 locLayer.sprite = hex.location.getSprite();
+                evidenceLayer.enabled = hex.location.evidence.Count > 0;
             }
-            //else if (hex.terrain == Hex.terrainType.SEA && hex.amphibPoint)
-            //{
-            //    locLayer.enabled = true;
-            //    locLayer.sprite = world.textureStore.hex_loc_lighthouse;
-            //}
             else
             {
                 locLayer.enabled = false;

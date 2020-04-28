@@ -15,6 +15,7 @@ namespace Assets.Code
         public virtual int getCooldown() { return 0; }
         public int turnLastCast;
         public virtual bool castable(Map map,Person person) { return false; }
+        public virtual bool castable(Map map,Unit unit) { return false; }
         public void cast(Map map,Person person)
         {
             map.overmind.power -= getCost();

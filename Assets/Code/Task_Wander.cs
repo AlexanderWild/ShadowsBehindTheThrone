@@ -5,10 +5,10 @@ namespace Assets.Code
 {
     public class Task_Wander : Task
     {
-        LinkedList<Location> visitBuffer = new LinkedList<Location>();
-        int bufferSize = 16;
-        int wanderDur = 8;
-        int wanderTimer = 0;
+        public LinkedList<Location> visitBuffer = new LinkedList<Location>();
+        public int bufferSize = 16;
+        public int wanderDur = 8;
+        public int wanderTimer = 0;
 
         public override string getShort()
         {
@@ -21,12 +21,23 @@ namespace Assets.Code
 
         public override void turnTick(Unit unit)
         {
+
+            if (unit.location.evidence.Count > 0)
+            {
+                unit.task = new Task_Investigate();
+                return;
+            }
             List<Location> neighbours = unit.location.getNeighbours();
 
             int c = 0;
             Location chosen = null;
             foreach (Location loc in neighbours)
             {
+                if (loc.evidence.Count > 0)
+                {
+                    chosen = loc;
+                    break;
+                }
                 if (visitBuffer.Contains(loc) == false)
                 {
                     c += 1;
@@ -49,6 +60,13 @@ namespace Assets.Code
             if (visitBuffer.Count > bufferSize)
             {
                 visitBuffer.RemoveFirst();
+            }
+
+            //Start investigating the evidence you just moved to
+            if (unit.location.evidence.Count > 0)
+            {
+                unit.task = new Task_Investigate();
+                return;
             }
 
             wanderTimer += 1;

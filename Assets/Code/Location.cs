@@ -33,6 +33,7 @@ namespace Assets.Code
         public int debugVal;
         //public int turnLastAssigned;
         public Province province;
+        public List<Evidence> evidence = new List<Evidence>();
 
         public Location(Map map, Hex hex,bool isMajor)
         {

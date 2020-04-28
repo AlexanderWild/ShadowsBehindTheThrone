@@ -2,7 +2,7 @@
 
 namespace Assets.Code
 {
-    public abstract class Evidence
+    public class Evidence
     {
     }
 }

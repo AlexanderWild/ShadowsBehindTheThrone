@@ -416,6 +416,7 @@ namespace Assets.Code
             {
                 bool canUsePower = master.world.map.overmind.power > 0;
                 bool canUseAbility = true;
+                bool canVote = hex != null && hex.location != null && hex.location.soc != null && hex.location.soc is Society && ((Society)hex.location.soc).voteSession != null;
 
                 if (World.staticMap.param.overmind_singleAbilityPerTurn && master.world.map.overmind.hasTakenAction) {
                     canUsePower = false;
@@ -424,8 +425,24 @@ namespace Assets.Code
 
                 if (master.state == UIMaster.uiState.WORLD)
                 {
-                    abilityButtonText.text = "Use Ability (" + master.world.map.overmind.countAvailableAbilities(hex) + ")";
-                    powerButtonText.text = "Use Power (" + master.world.map.overmind.countAvailablePowers(hex) + ")";
+                    if (GraphicalMap.selectedSelectable == null)
+                    {
+                        abilityButtonText.text = "Use Ability (" + master.world.map.overmind.countAvailableAbilities(hex) + ")";
+                        powerButtonText.text = "Use Power (" + master.world.map.overmind.countAvailablePowers(hex) + ")";
+                    }
+                    else if (GraphicalMap.selectedSelectable is Unit)
+                    {
+
+                        canUseAbility = false;
+                        canUsePower = false;
+                        canVote = ((Unit)GraphicalMap.selectedSelectable).person != null && ((Unit)GraphicalMap.selectedSelectable).person.state == Person.personState.enthralledAgent;
+                    }
+                    else
+                    {
+                        canUseAbility = false;
+                        canUsePower = false;
+                        canVote = false;
+                    }
                 }
                 else if (master.state == UIMaster.uiState.SOCIETY)
                 {
@@ -439,8 +456,7 @@ namespace Assets.Code
                 }
                 powerButton.gameObject.SetActive(canUsePower);
                 abilityButton.gameObject.SetActive(canUseAbility);
-
-                votingButton.gameObject.SetActive(hex != null && hex.location != null && hex.location.soc != null && hex.location.soc is Society && ((Society)hex.location.soc).voteSession != null);
+                votingButton.gameObject.SetActive(canVote);
 
                 personAwarenessBlock.SetActive(World.staticMap.param.useAwareness == 1);
             }

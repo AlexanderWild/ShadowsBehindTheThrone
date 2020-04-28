@@ -12,8 +12,10 @@ namespace Assets.Code
 
         int wanderDur = 8;
 
+        
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {
+            maxHp = 3;
         }
 
         public override void turnTick(Map map)
@@ -36,13 +38,21 @@ namespace Assets.Code
                 return;
             }
 
-            if (sinceHome > wanderDur)
+            if (location.evidence.Count > 0)
+            {
+                task = new Task_Investigate();
+            }
+            else if (sinceHome > wanderDur)
             {
                 task = new Task_GoToLocation(society.getCapital());
-                return;
+            }
+            else
+            {
+                task = new Task_Wander();
             }
 
-            task = new Task_Wander();
+
+            task.turnTick(this);
         }
 
         public override Sprite getSprite(World world)

@@ -14,6 +14,10 @@ namespace Assets.Code
         public Society society;
         public Task task;
         public bool dontDisplayBorder = false;
+        public int hp;
+        public int maxHp = 5;
+
+        public List<Unit> hostility = new List<Unit>();
 
         public Unit(Location loc,Society soc)
         {
@@ -45,7 +49,14 @@ namespace Assets.Code
         }
         public virtual string getName()
         {
-            return person.getFullName();
+            if (person != null)
+            {
+                return person.getFullName();
+            }
+            else
+            {
+                return "Agent";
+            }
         }
         public virtual string getTaskShort()
         {

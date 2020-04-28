@@ -150,6 +150,11 @@ namespace Assets.Code
                 {
                     World.staticMap.overmind.victory();
                 }
+                if (command == "placeevidence")
+                {
+                    GraphicalMap.selectedHex.location.evidence.Add(new Evidence());
+                    World.log("Placing evidence");
+                }
                 if (command == "vote")
                 {
                     Society soc = map.overmind.enthralled.society;

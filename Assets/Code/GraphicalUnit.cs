@@ -20,6 +20,7 @@ namespace Assets.Code
         public bool wasSelectedUnit = false;
         public static Color col_medDark = new Color(0.5f, 0.5f, 0.5f);
 
+
         public Unit unit;
 
         public void Update()
@@ -131,6 +132,7 @@ namespace Assets.Code
                 borderLayer2.color = unit.society.color2;
             }
 
+            hpText.text = unit.hp + "/" + unit.maxHp;
             /*
             hpBar.SetActive(unit.isMilitary);
             if (unit.isMilitary)
