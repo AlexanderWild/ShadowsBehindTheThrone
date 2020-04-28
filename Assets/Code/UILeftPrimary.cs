@@ -429,7 +429,7 @@ namespace Assets.Code
                 }
                 else if (master.state == UIMaster.uiState.SOCIETY)
                 {
-                    if (GraphicalSociety.focus == null || GraphicalSociety.focus.title_land == null)
+                    if (GraphicalSociety.focus == null)
                     {
                         canUseAbility = false;
                         canUsePower = false;

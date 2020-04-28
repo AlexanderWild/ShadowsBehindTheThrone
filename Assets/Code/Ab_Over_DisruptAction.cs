@@ -10,10 +10,16 @@ namespace Assets.Code
         {
             base.cast(map, hex);
 
-            hex.location.person().action = new Act_Disrupted();
+            castInner(map, hex.location.person());
+        }
+
+        public override void castInner(Map map, Person person)
+        {
+
+            person.action = new Act_Disrupted();
 
             map.world.prefabStore.popImgMsg(
-                "You disrupt the efforts of " + hex.location.person().getFullName() + ". They will need time to re-establish themselves and undo the chaos you've sown before they can act again.",
+                "You disrupt the efforts of " + person.getFullName() + ". They will need time to re-establish themselves and undo the chaos you've sown before they can act again.",
                 map.world.wordStore.lookup("ABILITY_DISRUPT_ACTION"));
         }
 
