@@ -184,18 +184,33 @@ namespace Assets.Code
             world.audioStore.playClick();
             if (state == uiState.WORLD)
             {
-                if (GraphicalMap.selectedHex == null) { return; }
-
-                List<Ability> abilities = world.map.overmind.getAvailablePowers(GraphicalMap.selectedHex);
-                List<Ability> uncastables = new List<Ability>();
-                foreach (Ability a in world.map.overmind.powers)
+                if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
                 {
-                    if (abilities.Contains(a) == false)
+                    List<Ability> abilities = world.map.overmind.getAvailablePowers((Unit)GraphicalMap.selectedSelectable);
+                    List<Ability> uncastables = new List<Ability>();
+                    foreach (Ability a in world.map.overmind.powers)
                     {
-                        uncastables.Add(a);
+                        if (abilities.Contains(a) == false)
+                        {
+                            uncastables.Add(a);
+                        }
                     }
+                    addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, (Unit)GraphicalMap.selectedSelectable).gameObject);
+                    return;
                 }
-                addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, GraphicalMap.selectedHex).gameObject);
+                else if (GraphicalMap.selectedHex != null)
+                {
+                    List<Ability> abilities = world.map.overmind.getAvailablePowers(GraphicalMap.selectedHex);
+                    List<Ability> uncastables = new List<Ability>();
+                    foreach (Ability a in world.map.overmind.powers)
+                    {
+                        if (abilities.Contains(a) == false)
+                        {
+                            uncastables.Add(a);
+                        }
+                    }
+                    addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, GraphicalMap.selectedHex).gameObject);
+                }
             }else if (state == uiState.SOCIETY)
             {
                 if (GraphicalSociety.focus == null) { return; }

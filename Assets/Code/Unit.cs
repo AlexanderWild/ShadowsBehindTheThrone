@@ -11,11 +11,12 @@ namespace Assets.Code
         public Person person;
         public Location location;
         public GraphicalUnit outer;
-        public Society society;
+        public SocialGroup society;
         public Task task;
         public bool dontDisplayBorder = false;
         public int hp;
         public int maxHp = 5;
+        public int movesTaken = 0;
 
         public List<Unit> hostility = new List<Unit>();
 
@@ -24,6 +25,15 @@ namespace Assets.Code
             this.location = loc;
             this.society = soc;
             loc.units.Add(this);
+        }
+
+        public virtual bool hostileTo (Unit other)
+        {
+            if (this.society.hostileTo(other))
+            {
+                return true;
+            }
+            return hostility.Contains(other);
         }
 
         public bool checkForDisband(Map map)
@@ -47,6 +57,13 @@ namespace Assets.Code
             }
             return false;
         }
+
+        public virtual bool isEnthralled()
+        {
+            if (person == null) { return false; }
+            return person.state == Person.personState.enthralledAgent;
+        }
+
         public virtual string getName()
         {
             if (person != null)
@@ -66,7 +83,26 @@ namespace Assets.Code
             }
             return "No current task";
         }
-        public abstract void turnTick(Map map);
+        public virtual string getTaskDesc()
+        {
+            if (task != null)
+            {
+                return task.getLong();
+            }
+            return "No current task";
+        }
+        public virtual void turnTick(Map map)
+        {
+            movesTaken = 0;
+            if (checkForDisband(map)) { return; }
+            turnTickInner(map);
+            if (isEnthralled() == false)
+            {
+                turnTickAI(map);
+            }
+        }
+        public virtual void turnTickInner(Map map) { }
+        public abstract void turnTickAI(Map map);
 
         public abstract Sprite getSprite(World world);
 

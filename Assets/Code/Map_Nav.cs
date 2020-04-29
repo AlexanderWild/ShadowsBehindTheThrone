@@ -217,12 +217,52 @@ namespace Assets.Code
                 open = border;
                 paths = newPaths;
 
-                if (nSteps > 64)
+                if (nSteps > 128)
                 {
                     throw new Exception("Map discontinuity detected");
                 }
             }
-            return null;
+        }
+
+        public Location[] getPathTo(Location a, SocialGroup b)
+        {
+            HashSet<Location> seen = new HashSet<Location>();
+            List<Location> open = new List<Location>();
+            List<Location[]> paths = new List<Location[]>();
+            open.Add(a);
+            seen.Add(a);
+            paths.Add(new Location[] { a });
+
+            int nSteps = 0;
+            Location loc;
+            while (true)
+            {
+                List<Location> border = new List<Location>();
+                List<Location[]> newPaths = new List<Location[]>();
+                nSteps += 1;
+                for (int i = 0; i < open.Count; i++)
+                {
+                    loc = open[i];
+                    foreach (Location l2 in getNeighbours(loc))
+                    {
+                        if (seen.Contains(l2)) { continue; }
+                        Location[] path = new Location[paths[i].Length + 1];
+                        for (int j = 0; j < paths[i].Length; j++) { path[j] = paths[i][j]; }
+                        path[path.Length - 1] = l2;
+                        if (l2.soc == b) { return path; }
+                        border.Add(l2);
+                        newPaths.Add(path);
+                        seen.Add(l2);
+                    }
+                }
+                open = border;
+                paths = newPaths;
+
+                if (nSteps > 128)
+                {
+                    return null;
+                }
+            }
         }
         public Location[] getEmptyPathTo(SocialGroup source, SocialGroup b)
         {
@@ -264,13 +304,21 @@ namespace Assets.Code
                 open = border;
                 paths = newPaths;
 
-                if (nSteps > 1024)
+                if (nSteps > 128)
                 {
                     throw new Exception("Map discontinuity detected");
                 }
             }
         }
-        
+
+        public void moveTowards(Unit u,SocialGroup sg)
+        {
+            if (u.location.soc == sg) { return; }
+
+            Location[] locations = getPathTo(u.location, sg);
+            if (locations == null || locations.Length < 2) { return; }
+            instaMoveTo(u, locations[1]);
+        }
         public void moveTowards(Unit u,Location loc)
         {
             if (u.location == loc) { return; }

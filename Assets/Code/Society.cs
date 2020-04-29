@@ -458,7 +458,6 @@ namespace Assets.Code
                     break;
                 }
             }
-            //Falling into ruin can occur at any time, not just war
             foreach (Location loc in map.locations)
             {
                 if (loc.soc == this)
@@ -472,12 +471,12 @@ namespace Assets.Code
                                 loc.settlement.fallIntoRuin();
                             }
                         }
-                        loc.soc = null;
+                        //Note it remains under our control
                     }
                 }
             }
             //Expansion can only happen at peace time
-             if (!hasWar)
+            if (!hasWar)
             {
                 foreach (Location loc in map.locations)
                 {
@@ -525,6 +524,25 @@ namespace Assets.Code
                                     l2.soc = this;
                                 }
                             }
+                        }
+                    }
+                }
+
+                //Drop your naval/desert presence
+                foreach (Location loc in map.locations)
+                {
+                    if (loc.soc == this)
+                    {
+                        if (loc.isForSocieties == false || loc.hex.getHabilitability() < map.param.mapGen_minHabitabilityForHumans)
+                        {
+                            if (loc.settlement != null)
+                            {
+                                if (loc.settlement.isHuman)
+                                {
+                                    loc.settlement.fallIntoRuin();
+                                }
+                            }
+                            loc.soc = null;
                         }
                     }
                 }

@@ -152,7 +152,7 @@ namespace Assets.Code
                 }
                 if (command == "placeevidence")
                 {
-                    GraphicalMap.selectedHex.location.evidence.Add(new Evidence());
+                    GraphicalMap.selectedHex.location.evidence.Add(new Evidence(map.turn));
                     World.log("Placing evidence");
                 }
                 if (command == "vote")

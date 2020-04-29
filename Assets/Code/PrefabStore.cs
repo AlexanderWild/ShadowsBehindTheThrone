@@ -331,6 +331,25 @@ namespace Assets.Code
 
             return specific;
         }
+        public PopupScrollSet getScrollSet(List<Ability> abilities, List<Ability> abilities_uncastable, Unit u)
+        {
+            PopupScrollSet specific = getInnerScrollSet();
+
+            foreach (Ability b in abilities)
+            {
+                PopupBoxAbility box = getAbilityBox(b, u);
+                box.gameObject.transform.SetParent(specific.gameObject.transform);
+                specific.scrollables.Add(box);
+            }
+            foreach (Ability b in abilities_uncastable)
+            {
+                PopupBoxAbility box = getAbilityBox(b, u);
+                box.gameObject.transform.SetParent(specific.gameObject.transform);
+                specific.scrollables.Add(box);
+            }
+
+            return specific;
+        }
         public PopupScrollSet getScrollSet(List<Ability> abilities, List<Ability> abilities_uncastable, Person person)
         {
             PopupScrollSet specific = getInnerScrollSet();
@@ -411,6 +430,14 @@ namespace Assets.Code
             GameObject obj = Instantiate(abilityBox) as GameObject;
             PopupBoxAbility specific = obj.GetComponent<PopupBoxAbility>();
             specific.setTo(a,hex);
+
+            return specific;
+        }
+        public PopupBoxAbility getAbilityBox(Ability a, Unit u)
+        {
+            GameObject obj = Instantiate(abilityBox) as GameObject;
+            PopupBoxAbility specific = obj.GetComponent<PopupBoxAbility>();
+            specific.setTo(a, u);
 
             return specific;
         }

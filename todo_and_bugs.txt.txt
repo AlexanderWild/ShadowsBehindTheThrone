@@ -1,5 +1,6 @@
 	High criticality:
-	
+
+-War across ocean doesn't work, hasn't for a while now, I believe
 
 	Medium criticality:
 	

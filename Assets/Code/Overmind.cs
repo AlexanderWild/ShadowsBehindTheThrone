@@ -26,6 +26,7 @@ namespace Assets.Code
 
             hasEnthrallAbilities = true;
             powers.Add(new Ab_Enth_Enthrall());
+            powers.Add(new Ab_Over_EnthrallAgent());
             powers.Add(new Ab_Enth_DarkEmpire());
             powers.Add(new Ab_Over_HateTheLight());
             //abilities.Add(new Ab_TestAddShadow());
@@ -292,6 +293,58 @@ namespace Assets.Code
             return reply;
         }
         public List<Ability> getAvailablePowers(Person p)
+        {
+            if (p == null) { return new List<Ability>(); }
+            List<Ability> reply = new List<Ability>();
+            foreach (Ability a in powers)
+            {
+                if (a.castable(map, p))
+                {
+                    reply.Add(a);
+                }
+            }
+            return reply;
+        }
+        public int countAvailableAbilities(Unit p)
+        {
+            if (p == null) { return 0; }
+            int n = 0;
+            foreach (Ability a in abilities)
+            {
+                if (a.castable(map, p))
+                {
+                    n += 1;
+                }
+            }
+            return n;
+        }
+        public int countAvailablePowers(Unit p)
+        {
+            if (p == null) { return 0; }
+            int n = 0;
+            foreach (Ability a in powers)
+            {
+                if (a.castable(map, p))
+                {
+                    n += 1;
+                }
+            }
+            return n;
+        }
+        public List<Ability> getAvailableAbilities(Unit p)
+        {
+            if (p == null) { return new List<Ability>(); }
+            List<Ability> reply = new List<Ability>();
+            foreach (Ability a in abilities)
+            {
+                if (a.castable(map, p))
+                {
+                    reply.Add(a);
+                }
+            }
+            return reply;
+        }
+        public List<Ability> getAvailablePowers(Unit p)
         {
             if (p == null) { return new List<Ability>(); }
             List<Ability> reply = new List<Ability>();

@@ -433,8 +433,8 @@ namespace Assets.Code
                     else if (GraphicalMap.selectedSelectable is Unit)
                     {
 
-                        canUseAbility = false;
-                        canUsePower = false;
+                        abilityButtonText.text = "Use Ability (" + master.world.map.overmind.countAvailableAbilities((Unit)GraphicalMap.selectedSelectable) + ")";
+                        powerButtonText.text = "Use Power (" + master.world.map.overmind.countAvailablePowers((Unit)GraphicalMap.selectedSelectable) + ")";
                         canVote = ((Unit)GraphicalMap.selectedSelectable).person != null && ((Unit)GraphicalMap.selectedSelectable).person.state == Person.personState.enthralledAgent;
                     }
                     else

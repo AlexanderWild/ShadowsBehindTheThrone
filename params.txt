@@ -1,7 +1,7 @@
 option_edgeScroll: 1
 mapGen_sizeX: 32
 mapGen_sizeY: 24
-mapGen_proportionOfMapForHumans: 0.7
+mapGen_proportionOfMapForHumans: 0.5
 mapGen_minHabitabilityForHumans: 0.15
 mapGen_stepsPerIsland: 12
 mapGen_maxBrushSize: 5
@@ -43,7 +43,7 @@ overmind_powerRegen: 1
 overmind_singleAbilityPerTurn: True
 econ_multFromBuff: 1.33
 relObj_defaultLiking: 5
-relObj_decayRate: 0.98
+relObj_decayRate: 0.97
 combat_prestigeLossFromConquest: 0
 combat_thresholdAttackStrength: 0.25
 combat_lethality: 0.5
@@ -52,8 +52,8 @@ combat_maxMilitaryCapExponent: 0.82
 combat_defensivePostureDmgMult: 0.666
 war_defaultLength: 16
 minInformationAvailability: 0.2
-utility_econEffect: 0.5
-utility_econEffectOther: 0.1
+utility_econEffect: 0.75
+utility_econEffectOther: 0
 utility_militaryTargetRelStrengthOffensive: 300
 utility_militaryTargetCompleteProvince: 75
 utility_militaryTargetExpansion: 80
@@ -66,16 +66,16 @@ utility_lightAllianceMilMult: 2
 utility_lightAlliancSusMult: 50
 utility_introversionFromInstability: 50
 utility_militarism: 100
-utility_landedTitleMult: 0.2
+utility_landedTitleMult: 0.15
 utility_unlandedTitleMult: 0.1
 utility_introversionFromSuspicion: 3
 utility_killSuspectFromSuspicion: 350
 utility_killSuspectRelucatance: 66
 utility_wouldBeOutvotedMult: 0.25
-utility_landedTitleAssignBaseline: 100
+utility_landedTitleAssignBaseline: 75
 utility_prestigeMultForTitle: 1.5
 utility_dismissFromCourt: 2
-person_likingFromBeingInvaded: -25
+person_likingFromBeingInvaded: -50
 person_maxLikingGainFromVoteAccordance: 30
 person_maxLikingLossFromVoteDiscord: -50
 person_prestigeDeltaPerTurn: 0.5
@@ -122,6 +122,7 @@ victory_targetEnshadowmentAvrg: 0.75
 dark_evilThreatMult: 2
 dark_fleshThreatMult: 2
 dark_fishmanStartingThreatMult: -0.25
+ability_enthrallUnitCost: 0
 ability_uncannyGlamourEvidence: 10
 ability_uncannyGlamourGain: 15
 ability_uncannyGlamourCost: 10
@@ -248,3 +249,6 @@ voting_likingToSwitchMin: 5
 voting_powerToSwitchPerU: 0.1
 voting_likingToSwitchPerU: 0.25
 unit_targetUnitsPerLoc: 0.1
+unit_investigateTime: 4
+units_maxEnthralled: 3
+unit_suspicionFromProximity: 0.1

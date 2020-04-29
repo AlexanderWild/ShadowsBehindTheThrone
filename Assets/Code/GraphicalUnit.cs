@@ -141,6 +141,22 @@ namespace Assets.Code
             }
             unitLayer.sprite = unit.getSprite();
             */
+
+            this.hostilityBorder.enabled = false;
+            if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
+            {
+                Unit other = (Unit)GraphicalMap.selectedSelectable;
+                if (unit.hostileTo(other))
+                {
+                    this.hostilityBorder.enabled = true;
+                    this.hostilityBorder.color = Color.red;
+                }
+                else if (unit.person != null && other.person != null && unit.person.getRelation(other.person).suspicion > 0)
+                {
+                    this.hostilityBorder.enabled = true;
+                    this.hostilityBorder.color = Color.yellow;
+                }
+            }
         }
     }
 }

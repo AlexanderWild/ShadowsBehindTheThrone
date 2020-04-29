@@ -18,12 +18,13 @@ namespace Assets.Code
             maxHp = 3;
         }
 
-        public override void turnTick(Map map)
+        public override void turnTickInner(Map map)
         {
-            if (checkForDisband(map)) { return; }
+        }
 
-
-            if (this.location == society.getCapital())
+        public override void turnTickAI(Map map)
+        {
+            if (this.location.soc == society)
             {
                 sinceHome = 0;
             }
@@ -31,6 +32,20 @@ namespace Assets.Code
             {
                 sinceHome += 1;
             }
+
+            //Scan local units
+            foreach (Unit u in location.units)
+            {
+                if (u.isEnthralled())
+                {
+                    if (this.person != null && u.person != null)
+                    {
+                        this.person.getRelation(u.person).suspicion = Math.Min(1, this.person.getRelation(u.person).suspicion + map.param.unit_suspicionFromProximity);
+                        map.addMessage(this.getName() + " has gained suspicion of " + u.getName(), MsgEvent.LEVEL_RED, false);
+                    }
+                }
+            }
+
 
             if (task != null)
             {
@@ -44,7 +59,7 @@ namespace Assets.Code
             }
             else if (sinceHome > wanderDur)
             {
-                task = new Task_GoToLocation(society.getCapital());
+                task = new Task_GoToSocialGroup(society);
             }
             else
             {

@@ -62,7 +62,7 @@ namespace Assets.Code
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
         
         public double relObj_defaultLiking = 5;
-        public double relObj_decayRate = 0.98;
+        public double relObj_decayRate = 0.97;
 
         public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
         public double combat_thresholdAttackStrength = 0.25;
@@ -74,8 +74,8 @@ namespace Assets.Code
         public int war_defaultLength = 16;
         public double minInformationAvailability = 0.2;
 
-        public double utility_econEffect = 0.5;
-        public double utility_econEffectOther = 0.10;
+        public double utility_econEffect = 0.75;
+        public double utility_econEffectOther = 0.00;
         public double utility_militaryTargetRelStrengthOffensive = 300;
         public double utility_militaryTargetCompleteProvince = 75;
         public double utility_militaryTargetExpansion = 80;
@@ -88,17 +88,17 @@ namespace Assets.Code
         public double utility_lightAlliancSusMult = 50;
         public double utility_introversionFromInstability = 50;
         public double utility_militarism = 100;
-        public double utility_landedTitleMult = 0.2;
+        public double utility_landedTitleMult = 0.15;
         public double utility_unlandedTitleMult = 0.1;
         public double utility_introversionFromSuspicion = 3;
         public double utility_killSuspectFromSuspicion = 350;
         public double utility_killSuspectRelucatance = 66;
         public double utility_wouldBeOutvotedMult = 0.25;
-        public double utility_landedTitleAssignBaseline = 100;
+        public double utility_landedTitleAssignBaseline = 75;
         public double utility_prestigeMultForTitle = 1.5;
         public double utility_dismissFromCourt = 2;
 
-        public double person_likingFromBeingInvaded = -25;
+        public double person_likingFromBeingInvaded = -50;
         public double person_maxLikingGainFromVoteAccordance = 30;
         public double person_maxLikingLossFromVoteDiscord = -50;
         public double person_prestigeDeltaPerTurn = 0.5;
@@ -149,7 +149,9 @@ namespace Assets.Code
         public double dark_evilThreatMult = 2;
         public double dark_fleshThreatMult = 2;
         public double dark_fishmanStartingThreatMult = -0.25;
-        
+
+        public int ability_enthrallUnitCost = 0;
+
         public int ability_uncannyGlamourEvidence = 10;
         public int ability_uncannyGlamourGain = 15;
         public int ability_uncannyGlamourCost = 10;
@@ -285,6 +287,8 @@ namespace Assets.Code
 
         public double unit_targetUnitsPerLoc = 0.1;
         public int unit_investigateTime = 4;
+        public int units_maxEnthralled = 3;
+        public double unit_suspicionFromProximity = 0.1;
 
         public void saveToFile()
         {

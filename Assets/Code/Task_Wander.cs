@@ -16,7 +16,7 @@ namespace Assets.Code
         }
         public override string getLong()
         {
-            return getShort();
+            return "This unit is patrolling their nation and surrounding lands, looking for evidence. If they find any, they will begin to investigate it.";
         }
 
         public override void turnTick(Unit unit)
@@ -73,7 +73,7 @@ namespace Assets.Code
             if (wanderTimer > wanderDur)
             {
                 //Done wandering, go home to ensure you don't wander too far for too long
-                unit.task = new Task_GoToLocation(unit.society.getCapital());
+                unit.task = new Task_GoToSocialGroup(unit.society);
             }
         }
     }

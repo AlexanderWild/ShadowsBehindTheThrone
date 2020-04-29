@@ -404,7 +404,23 @@ namespace Assets.Code
 
         public void rightClickOnHex()
         {
-            GraphicalMap.checkData();
+
+            Hex clickedHex = GraphicalMap.getHexUnderMouse(Input.mousePosition).hex;
+            if (clickedHex.location != null)
+            {
+                if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit && ((Unit)GraphicalMap.selectedSelectable).isEnthralled())
+                {
+                    Unit u = (Unit)GraphicalMap.selectedSelectable;
+                    if (u.location.getNeighbours().Contains(clickedHex.location)){
+                        if (u.movesTaken == 0)
+                        {
+                            u.location.map.instaMoveTo(u,clickedHex.location);
+                            u.movesTaken += 1;
+                            u.location.map.world.audioStore.playClickSelect();
+                        }
+                    }
+                }
+            }
         }
     }
 }

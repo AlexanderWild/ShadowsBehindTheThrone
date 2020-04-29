@@ -762,6 +762,10 @@ namespace Assets.Code
             {
                 return map.world.textureStore.person_dark;
             }
+            if (state == personState.enthralledAgent)
+            {
+                return map.world.textureStore.person_dark;
+            }
             if (state == personState.lightbringer)
             {
                 return map.world.textureStore.person_lightbringer;

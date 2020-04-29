@@ -9,6 +9,8 @@ namespace Assets.Code
         public Text title;
         public Text desc;
         public Text task;
+        public Text taskDesc;
+        public Text hasMoved;
         public Image personBack;
         public Image personMid;
         public Image personFore;
@@ -22,6 +24,7 @@ namespace Assets.Code
             title.text = unit.getName();
             desc.text = unit.getDesc();
             task.text = unit.getTaskShort();
+            taskDesc.text = unit.getTaskDesc();
 
             if (unit.person == null) { clearPerson(); }
             else
@@ -29,6 +32,12 @@ namespace Assets.Code
                 personBack.sprite = unit.person.getImageBack();
                 personMid.sprite = unit.person.getImageMid();
                 personFore.sprite = unit.person.getImageFore();
+            }
+
+            if (unit.isEnthralled())
+            {
+                if (unit.movesTaken == 0) { hasMoved.text = "Can Move"; }
+                else { hasMoved.text = "Has Taken Turn"; }
             }
         }
 
@@ -43,7 +52,9 @@ namespace Assets.Code
         {
             title.text = "No Unit Selected";
             desc.text = "";
-                clearPerson();
+            clearPerson();
+            hasMoved.text = "";
+            taskDesc.text = "";
         }
     }
 }

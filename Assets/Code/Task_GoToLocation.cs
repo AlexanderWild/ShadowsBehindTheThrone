@@ -2,13 +2,13 @@
 
 namespace Assets.Code
 {
-    public class Task_GoToLocation : Task
+    public class Task_GoToSocialGroup : Task
     {
-        public Location target;
+        public SocialGroup target;
 
-        public Task_GoToLocation(Location location)
+        public Task_GoToSocialGroup(SocialGroup sg)
         {
-            this.target = location;
+            this.target = sg;
         }
 
         public override string getShort()
@@ -22,11 +22,11 @@ namespace Assets.Code
 
         public override void turnTick(Unit unit)
         {
-            if (unit.location == target) { unit.task = null;return; }
+            if (unit.location.soc == target) { unit.task = null;return; }
 
             unit.location.map.moveTowards(unit, target);
 
-            if (unit.location == target) { unit.task = null; return; }
+            if (unit.location.soc == target) { unit.task = null; return; }
         }
     }
 }

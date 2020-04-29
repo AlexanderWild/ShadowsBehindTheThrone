@@ -102,7 +102,7 @@ namespace Assets.Code
             map = hex.map;
             gameObject.transform.localScale = new Vector3(GraphicalMap.scale, GraphicalMap.scale, 1);
 
-            float dark = 0.1f + (0.55f * hex.purity);
+            float dark = 0.1f + (0.5f * hex.purity);
             float floraDark = 0.3f + (+0.7f * hex.purity);
             Color colour = new Color(dark, dark, dark);
 
