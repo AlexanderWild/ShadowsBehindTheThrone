@@ -60,7 +60,12 @@ namespace Assets.Code
 
             politics_militarism = Math.Pow(Eleven.random.NextDouble(), 0.5);//Bias towards 0
             politics_militarism = 1 - politics_militarism;//0 to 1, bias towards 1
-            politics_militarism = (2*politics_militarism)-1;//1 to -1, bias towards 1
+            politics_militarism = (2 * politics_militarism) - 1;//1 to -1, bias towards 1
+            //Bias towards positive values
+            if (politics_militarism < 0 && Eleven.random.NextDouble() < 0.3)
+            {
+                politics_militarism *= -1;
+            }
 
             //Add permanent threats
             threat_enshadowedNobles = new ThreatItem(map,this);

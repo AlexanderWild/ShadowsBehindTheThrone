@@ -53,6 +53,7 @@ namespace Assets.Code
                     u.person = new Person(chosen);
                     u.person.unit = u;
                     map.units.Add(u);
+                    u.parentLocation = chosen.getCapital();
                 }
             }
         }

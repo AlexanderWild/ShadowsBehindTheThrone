@@ -44,10 +44,10 @@ namespace Assets.Code
         public double awarenessInvestigationDetectMult = 4;
         public double awareness_increasePerCost = 0.015;
         public double awareness_canInvestigate = 0.1;
-        public double action_research_expectedAwarenessPerTurn = 0.15;
-        public double action_research_pSanityHit = 0.5;
         public double awareness_decay = 0.002;
 
+        public double action_research_expectedAwarenessPerTurn = 0.15;
+        public double action_research_pSanityHit = 0.5;
         public int action_letterWritingTurns = 5;
         public int action_investigateTurns = 7;
         public int action_cleanseSoulTurns = 7;
@@ -74,24 +74,26 @@ namespace Assets.Code
         public int war_defaultLength = 16;
         public double minInformationAvailability = 0.2;
 
-        public double utility_econEffect = 0.75;
-        public double utility_econEffectOther = 0.00;
-        public double utility_militaryTargetRelStrengthOffensive = 300;
-        public double utility_militaryTargetCompleteProvince = 75;
+        public double utility_econEffect = 0.55;
+        public double utility_econEffectOther = 0.1;
+        public double utility_militaryTargetRelStrengthOffensive = 250;
+        public double utility_militaryTargetCompleteProvince = 100;
         public double utility_militaryTargetExpansion = 80;
-        public double utility_militaryTargetRelStrengthDefensive = 250;
-        public double utility_vassaliseReluctance = -90;
+        public double utility_militaryTargetRelStrengthDefensive = 200;
+        public double utility_vassaliseReluctance = -70;
         public double utility_vassaliseMilMult = 80;
         public double utility_vassaliseThreatMult = 0.75;
         public double utility_lightAllianceMult = 200;
         public double utility_lightAllianceMilMult = 2;
         public double utility_lightAlliancSusMult = 50;
-        public double utility_introversionFromInstability = 50;
+        public double utility_introversionFromInstability = 120;
         public double utility_militarism = 100;
-        public double utility_landedTitleMult = 0.15;
+        public double utility_landedTitleMult = 0.1;
         public double utility_unlandedTitleMult = 0.1;
         public double utility_introversionFromSuspicion = 3;
-        public double utility_killSuspectFromSuspicion = 350;
+        public double utility_killSuspectFromSuspicion = 200;
+        public double utility_exileSuspectFromSuspicion = 200;
+        public double utility_exileSuspectRelucatance = 66;
         public double utility_killSuspectRelucatance = 66;
         public double utility_wouldBeOutvotedMult = 0.25;
         public double utility_landedTitleAssignBaseline = 75;
@@ -117,12 +119,12 @@ namespace Assets.Code
         public int person_fearLevel_terrified = 150;
         public double person_dislikeFromNotBeingVotedFor = -50;
 
-        public int econ_buffDuration = 50;
+        public int econ_buffDuration = 45;
 
         public int soc_untitledPeople = 3;
         public int society_votingDuration = 1;
         public double society_votingRelChangePerUtilityPositive = 0.085;//If benefitted by a vote
-        public double society_votingRelChangePerUtilityNegative = 0.14;//If harmed by a vote
+        public double society_votingRelChangePerUtilityNegative = 0.125;//If harmed by a vote
         public int society_instablityTillRebellion = 10;
         public int society_rebelLikingThreshold = -5;
         public int society_zeitDuration = 3;

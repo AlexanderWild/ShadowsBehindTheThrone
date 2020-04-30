@@ -28,7 +28,7 @@ namespace Assets.Code
 
         public VoteIssue proposeVotingIssue()
         {
-            double bestU = -1000;
+            double bestU = 25;
             VoteIssue bestIssue = null;
             bool forcedBest = false;
             bool existFreeTitles = false;
@@ -113,6 +113,7 @@ namespace Assets.Code
             {
                 int oldestAssignment = 100000000;
                 Location bestAssignable = null;
+                /*
                 if (society.billsSinceLastSettlementAssignment > map.param.society_billsBetweenLandAssignments)
                 {
                     foreach (Location loc in map.locations)
@@ -127,6 +128,8 @@ namespace Assets.Code
                         }
                     }
                 }
+                */
+
                 foreach (Location loc in map.locations)
                 {
                     //If there are unhanded out titles, only consider those. Else, check all.
@@ -257,71 +260,103 @@ namespace Assets.Code
                     }
 
                     //Check to see if you want to alter offensive military targetting
-                    issue = new VoteIssue_SetOffensiveTarget(society, this);
-                    foreach (SocialGroup neighbour in map.getExtendedNeighbours(society))
+                    if (map.turn - society.lastOffensiveTargetSetting > 8)
                     {
-                        VoteOption option = new VoteOption();
-                        option.group = neighbour;
-                        issue.options.Add(option);
-                    }
-                    foreach (VoteOption opt in issue.options)
-                    {
-                        //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
-
-                        //Random factor to prevent them all rushing a singular voting choice
-                        double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
-                        if (localU > bestU)
+                        issue = new VoteIssue_SetOffensiveTarget(society, this);
+                        foreach (SocialGroup neighbour in map.getExtendedNeighbours(society))
                         {
-                            bestU = localU;
+                            VoteOption option = new VoteOption();
+                            option.group = neighbour;
+                            issue.options.Add(option);
+                        }
+                        double localBest = 0;
+                        VoteOption voteOpt = null;
+                        foreach (VoteOption opt in issue.options)
+                        {
+                            //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+
+                            //Random factor to prevent them all rushing a singular voting choice
+                            double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                            if (localU > localBest)
+                            {
+                                localBest = localU;
+                                voteOpt = opt;
+                            }
+                        }
+                        if (voteOpt != null && voteOpt.group != society.offensiveTarget && localBest > bestU)
+                        {
+                            bestU = localBest;
                             bestIssue = issue;
                         }
+                        logVote(issue);
                     }
-                    logVote(issue);
 
-                    //Check to see if you want to alter defensive military targetting
-                    issue = new VoteIssue_SetDefensiveTarget(society, this);
-                    foreach (ThreatItem item in threatEvaluations)
                     {
-                        if (item.group == null) { continue; }
-                        VoteOption option = new VoteOption();
-                        option.group = item.group;
-                        issue.options.Add(option);
-                    }
-                    foreach (VoteOption opt in issue.options)
-                    {
-                        //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
-
-                        //Random factor to prevent them all rushing a singular voting choice
-                        double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
-                        if (localU > bestU)
+                        //Check to see if you want to alter defensive military targetting
+                        issue = new VoteIssue_SetDefensiveTarget(society, this);
+                        foreach (ThreatItem item in threatEvaluations)
                         {
-                            bestU = localU;
+                            if (item.group == null) { continue; }
+                            VoteOption option = new VoteOption();
+                            option.group = item.group;
+                            issue.options.Add(option);
+                        }
+                        double localBest = 0;
+                        VoteOption voteOpt = null;
+                        foreach (VoteOption opt in issue.options)
+                        {
+                            //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+
+                            //Random factor to prevent them all rushing a singular voting choice
+                            double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                            if (localU > localBest)
+                            {
+                                localBest = localU;
+                                voteOpt = opt;
+                            }
+                        }
+                        if (voteOpt != null && voteOpt.group != society.defensiveTarget && localBest > bestU)
+                        {
+                            bestU = localBest;
                             bestIssue = issue;
                         }
+                        logVote(issue);
                     }
-                    logVote(issue);
 
-                    //Change military posture, to either improve defence, fix internal problems, or attack an enemy
-                    issue = new VoteIssue_MilitaryStance(society, this);
-                    for (int i = 0; i < 3; i++)
                     {
-                        VoteOption opt = new VoteOption();
-                        opt.index = i;
-                        issue.options.Add(opt);
-                    }
-                    foreach (VoteOption opt in issue.options)
-                    {
-                        //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
-
-                        //Random factor to prevent them all rushing a singular voting choice
-                        double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
-                        if (localU > bestU)
+                        //Change military posture, to either improve defence, fix internal problems, or attack an enemy
+                        issue = new VoteIssue_MilitaryStance(society, this);
+                        for (int i = 0; i < 3; i++)
                         {
-                            bestU = localU;
+                            VoteOption opt = new VoteOption();
+                            opt.index = i;
+                            issue.options.Add(opt);
+                        }
+                        double localBest = 0;
+                        VoteOption voteOpt = null;
+                        foreach (VoteOption opt in issue.options)
+                        {
+                            //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+
+                            //Random factor to prevent them all rushing a singular voting choice
+                            double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                            if (localU > localBest)
+                            {
+                                localBest = localU;
+                                voteOpt = opt;
+                            }
+                        }
+                        int ourIndex = 0;
+                        if (society.posture == Society.militaryPosture.defensive) { ourIndex = 0; }
+                        if (society.posture == Society.militaryPosture.offensive) { ourIndex = 1; }
+                        if (society.posture == Society.militaryPosture.introverted) { ourIndex = 2; }
+                        if (voteOpt != null && voteOpt.index != ourIndex && localBest > bestU)
+                        {
+                            bestU = localBest;
                             bestIssue = issue;
                         }
+                        logVote(issue);
                     }
-                    logVote(issue);
 
                     //Check to see if you want to declare war
                     //You need to be in offensive posture to be allowed to do so
@@ -434,6 +469,30 @@ namespace Assets.Code
                             }
                             logVote(issue);
                         }
+                    }
+                    foreach (Unit u in map.units)
+                    {
+                        if (u.person == null) { continue; }
+                        if (getRelation(u.person).getLiking() >= 0) { continue; }
+                        if (society.enemies.Contains(unit)) { continue; }
+                        issue = new VoteIssue_ExileUnit(society, u, this);
+                        VoteOption option_0 = new VoteOption();
+                        option_0.index = 0;
+                        issue.options.Add(option_0);
+
+                        VoteOption option_1 = new VoteOption();
+                        option_1.index = 1;
+                        issue.options.Add(option_1);
+
+                        //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+                        //Random factor to prevent them all rushing a singular voting choice
+                        double localU = issue.computeUtility(this, option_1, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                        if (localU > bestU)
+                        {
+                            bestU = localU;
+                            bestIssue = issue;
+                        }
+                        logVote(issue);
                     }
                 }
 

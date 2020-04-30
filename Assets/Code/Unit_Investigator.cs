@@ -16,6 +16,7 @@ namespace Assets.Code
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {
             maxHp = 3;
+            hp = 3;
         }
 
         public override void turnTickInner(Map map)
@@ -27,6 +28,18 @@ namespace Assets.Code
             if (this.location.soc == society)
             {
                 sinceHome = 0;
+                if (person != null && location.person() != null && location.person().state != Person.personState.broken){
+                    foreach (RelObj rel in person.relations.Values)
+                    {
+                        double them = location.person().getRelation(rel.them).suspicion;
+                        double me = rel.suspicion;
+                        if (me > them)
+                        {
+                            map.addMessage(this.getName() + " warns " + location.person().getFullName() + " about " + rel.them.getFullName(),MsgEvent.LEVEL_ORANGE,false);
+                            location.person().getRelation(rel.them).suspicion = me;
+                        }
+                    }
+                }
             }
             else
             {

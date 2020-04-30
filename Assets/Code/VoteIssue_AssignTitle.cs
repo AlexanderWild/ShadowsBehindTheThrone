@@ -58,7 +58,7 @@ namespace Assets.Code
             {
                 foreach (Person p2 in voter.society.people)
                 {
-                    if (p2.prestige > p.prestige*2.5)
+                    if (p2.prestige > p.prestige*2)
                     {
                         wouldBeOutvoted = true;
                     }

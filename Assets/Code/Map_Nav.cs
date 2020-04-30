@@ -183,7 +183,7 @@ namespace Assets.Code
         }
 
 
-        public Location[] getPathTo(Location a, Location b)
+        public Location[] getPathTo(Location a, Location b, Unit u = null, bool safeMove = false)
         {
             HashSet<Location> seen = new HashSet<Location>();
             List<Location> open = new List<Location>();
@@ -205,6 +205,7 @@ namespace Assets.Code
                     foreach (Location l2 in getNeighbours(loc))
                     {
                         if (seen.Contains(l2)) { continue; }
+                        if (safeMove && u != null && l2.soc != null && l2.soc.hostileTo(u)) { continue; }//Unsafe location
                         Location[] path = new Location[paths[i].Length + 1];
                         for (int j = 0; j < paths[i].Length; j++) { path[j] = paths[i][j]; }
                         path[path.Length - 1] = l2;
@@ -224,7 +225,7 @@ namespace Assets.Code
             }
         }
 
-        public Location[] getPathTo(Location a, SocialGroup b)
+        public Location[] getPathTo(Location a, SocialGroup b,Unit u=null,bool safeMove=false)
         {
             HashSet<Location> seen = new HashSet<Location>();
             List<Location> open = new List<Location>();
@@ -246,6 +247,7 @@ namespace Assets.Code
                     foreach (Location l2 in getNeighbours(loc))
                     {
                         if (seen.Contains(l2)) { continue; }
+                        if (safeMove && u != null && l2.soc != null && l2.soc.hostileTo(u)) { continue; }//Unsafe location
                         Location[] path = new Location[paths[i].Length + 1];
                         for (int j = 0; j < paths[i].Length; j++) { path[j] = paths[i][j]; }
                         path[path.Length - 1] = l2;
@@ -310,25 +312,26 @@ namespace Assets.Code
                 }
             }
         }
-
-        public void moveTowards(Unit u,SocialGroup sg)
-        {
-            if (u.location.soc == sg) { return; }
-
-            Location[] locations = getPathTo(u.location, sg);
-            if (locations == null || locations.Length < 2) { return; }
-            instaMoveTo(u, locations[1]);
-        }
+        
         public void moveTowards(Unit u,Location loc)
         {
             if (u.location == loc) { return; }
 
             Location[] locations = getPathTo(u.location, loc);
             if (locations == null || locations.Length < 2) { return; }
-            instaMoveTo(u, locations[1]);
+            adjacentMoveTo(u, locations[1]);
         }
-        public void instaMoveTo(Unit u,Location loc)
+        public void adjacentMoveTo(Unit u,Location loc)
         {
+            foreach (Unit u2 in loc.units)
+            {
+                if (u.hostileTo(u2))
+                {
+                    world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
+                    u2.hp -= 1;
+                    return;
+                }
+            }
             u.location.units.Remove(u);
             loc.units.Add(u);
             u.location = loc;

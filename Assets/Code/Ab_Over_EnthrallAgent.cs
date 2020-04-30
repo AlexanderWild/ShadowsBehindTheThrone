@@ -18,6 +18,9 @@ namespace Assets.Code
             ev.pointsTo = other;
             ev.weight = 0.34;
             other.location.evidence.Add(ev);
+
+            other.task = null;
+            other.movesTaken += 1;
         }
         public override bool castable(Map map, Person person)
         {

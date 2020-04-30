@@ -24,6 +24,10 @@ namespace Assets.Code
 
         public bool applyMask(Hex hex)
         {
+            if (mask == maskType.NONE && GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
+            {
+                return hex.owner != null && hex.owner.hostileTo((Unit)GraphicalMap.selectedSelectable);
+            }
             return mask != maskType.NONE;
         }
 
@@ -191,7 +195,17 @@ namespace Assets.Code
 
         public Color getColor(Hex hex)
         {
-            if (mask == maskType.NATION)
+            if (mask == maskType.NONE)
+            {
+                if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
+                {
+                    if (hex.owner != null && hex.owner.hostileTo((Unit)GraphicalMap.selectedSelectable)){
+                        return new Color(0.5f, 0.0f, 0f, 0.5f);
+                    }
+                }
+                return Color.clear;
+            }
+            else if (mask == maskType.NATION)
             {
                 if (hex.owner != null)
                 {

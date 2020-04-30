@@ -26,6 +26,7 @@ namespace Assets.Code
         public override bool castable(Map map, Person person)
         {
             if (person.sanity >= map.param.ability_breakMindMaxSanity) { return false; }
+            if (person.getGreatestThreat() == null) { return false; }
             if (person.getGreatestThreat().threat < map.param.person_fearLevel_terrified) { return false; }
             return true;
         }

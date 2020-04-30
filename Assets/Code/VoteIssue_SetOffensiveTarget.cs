@@ -141,6 +141,7 @@ namespace Assets.Code
         {
             base.implement(option);
             society.offensiveTarget = option.group;
+            society.lastOffensiveTargetSetting = society.map.turn;
         }
         public override bool stillValid(Map map)
         {

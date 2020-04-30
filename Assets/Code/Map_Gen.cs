@@ -193,11 +193,20 @@ namespace Assets.Code
                     }
                 }
 
-                Society soc = new Society(this);
-                soc.setName(loc.shortName);
-                loc.soc = soc;
-
-                socialGroups.Add(soc);
+                foreach (Location l2 in locations)
+                {
+                    if (l2.province == loc.province && l2.soc != null)
+                    {
+                        loc.soc = l2.soc;
+                    }
+                }
+                if (loc.soc == null)
+                {
+                    Society soc = new Society(this);
+                    soc.setName(loc.shortName);
+                    loc.soc = soc;
+                    socialGroups.Add(soc);
+                }
             }
 
 
@@ -245,7 +254,10 @@ namespace Assets.Code
                 {
                     grid[i][j].province.locations.Add(grid[i][j].location);
                 }
-
+                if (loc.province == null)
+                {
+                    loc.province = provinces[0];//Fallback
+                }
             }
             //Hexes follow their parent loc
             for (int i = 0; i < sx; i += 1)

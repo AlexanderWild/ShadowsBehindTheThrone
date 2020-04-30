@@ -56,7 +56,7 @@ namespace Assets.Code
                 int q = Eleven.random.Next(neighbours.Count);
                 chosen = neighbours[q];
             }
-            unit.location.map.instaMoveTo(unit, chosen);
+            unit.location.map.adjacentMoveTo(unit, chosen);
             if (visitBuffer.Count > bufferSize)
             {
                 visitBuffer.RemoveFirst();

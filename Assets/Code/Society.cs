@@ -40,6 +40,9 @@ namespace Assets.Code
         public LogBox logbox;
         public double data_societalStability;
         public int data_nProvinceRulers;
+        public List<Unit> enemies = new List<Unit>();
+
+        public int lastOffensiveTargetSetting;
 
         public Society(Map map) : base(map)
         {
@@ -116,6 +119,12 @@ namespace Assets.Code
         public void checkAssertions()
         {
             if (titles.Count == 0) { throw new Exception("Sovreign title not present"); }
+        }
+
+        public override bool hostileTo(Unit u)
+        {
+            if (this.getRel(u.society).state == DipRel.dipState.war) { return true; }
+            return enemies.Contains(u);
         }
 
         public void log()

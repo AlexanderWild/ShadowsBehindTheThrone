@@ -418,6 +418,27 @@ namespace Assets.Code
 
         public void bVoting()
         {
+            if (GraphicalMap.selectedSelectable != null)
+            {
+                if (GraphicalMap.selectedSelectable is Unit)
+                {
+                    Unit u = (Unit)GraphicalMap.selectedSelectable;
+                    if (u.person != null && u.person.state == Person.personState.enthralledAgent)
+                    {
+                        if (u.location.soc != null && u.location.soc is Society)
+                        {
+                            Society soc = (Society)u.location.soc;
+                            if (soc.voteSession != null)
+                            {
+                                uiVoting.populate(soc,u.person);
+                                setToVoting();
+                            }
+                        }
+                    }
+                }
+                return;
+            }
+
             if (GraphicalMap.selectedHex == null) { return; }
             if (GraphicalMap.selectedHex.location == null) { return; }
             if (GraphicalMap.selectedHex.location.soc == null) { return; }

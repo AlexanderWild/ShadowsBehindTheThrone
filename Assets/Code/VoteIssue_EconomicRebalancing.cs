@@ -73,10 +73,10 @@ namespace Assets.Code
             //If we're actually affected by this, don't care more about the wellbeing of others than of yourself
             if (Math.Abs(advtangeToMe) > 1)
             {
-                if (Math.Abs(advantageToAllies) > Math.Abs(advtangeToMe)/3)
+                if (Math.Abs(advantageToAllies) > Math.Abs(advtangeToMe)/4)
                 {
-                    if (advantageToAllies > 0) { advantageToAllies = Math.Abs(advtangeToMe)/3; }
-                    if (advantageToAllies < 0) { advantageToAllies = -Math.Abs(advtangeToMe)/3; }
+                    if (advantageToAllies > 0) { advantageToAllies = Math.Abs(advtangeToMe)/4; }
+                    if (advantageToAllies < 0) { advantageToAllies = -Math.Abs(advtangeToMe)/4; }
                 }
                 if (Math.Abs(advantageToEnemeies) > Math.Abs(advtangeToMe)/3)
                 {

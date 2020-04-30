@@ -11,6 +11,9 @@ namespace Assets.Code
         public Text task;
         public Text taskDesc;
         public Text hasMoved;
+        public Text nationText;
+        public Image nationFlag1;
+        public Image nationFlag2;
         public Image personBack;
         public Image personMid;
         public Image personFore;
@@ -39,6 +42,14 @@ namespace Assets.Code
                 if (unit.movesTaken == 0) { hasMoved.text = "Can Move"; }
                 else { hasMoved.text = "Has Taken Turn"; }
             }
+
+            nationText.text = unit.society.getName();
+            if (unit.parentLocation != null)
+            {
+                nationText.text += "\nFrom " + unit.parentLocation.getName();
+            }
+            nationFlag1.color = unit.society.color;
+            nationFlag2.color = unit.society.color2;
         }
 
         public void clearPerson()

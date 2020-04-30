@@ -9,6 +9,7 @@ namespace Assets.Code
     public abstract class Unit
     {
         public Person person;
+        public Location parentLocation;
         public Location location;
         public GraphicalUnit outer;
         public SocialGroup society;
@@ -36,26 +37,53 @@ namespace Assets.Code
             return hostility.Contains(other);
         }
 
-        public bool checkForDisband(Map map)
+        public virtual bool checkForDisband(Map map)
         {
+            if (parentLocation != null)
+            {
+                if (parentLocation.soc == null)
+                {
+                    if (person.state == Person.personState.enthralledAgent)
+                    {
+                        map.world.prefabStore.popMsg(this.getName() + " disbands as the location they depended on, " + parentLocation.getName() + ", is lost.");
+                    }
+                    disband(map, this.getName() + " disbands as their home is lost.");
+                    return true;
+                }
+                else
+                {
+                    if (this.society != parentLocation.soc)
+                    {
+                        this.society = parentLocation.soc;
+                        map.addMessage(this.getName() + " switches society to " + this.society.getName(), MsgEvent.LEVEL_GRAY, false);
+                    }
+                }
+                return false;
+            }
+
             if (map.socialGroups.Contains(society) == false)
             {
                 if (person != null)
                 {
-                    person.isDead = true;
                     if (person.state == Person.personState.enthralledAgent)
                     {
                         map.world.prefabStore.popMsg(this.getName() + " disbands as the society they depended on, " + this.society.getName() + ", is no more.");
                     }
-                
+                    disband(map, this.getName() + " disbands as their society is gone");
+                    return true;
+
                 }
-                map.remove(this);
-                location.units.Remove(this);
-                bool positive = person == null || person.state != Person.personState.enthralledAgent;
-                map.addMessage(this.getName() + " disbands as their society is gone", MsgEvent.LEVEL_GREEN, positive);
-                return true;
             }
             return false;
+        }
+        public virtual void disband(Map map,string msg)
+        {
+            person.isDead = true;
+            map.remove(this);
+            location.units.Remove(this);
+            bool positive = person == null || person.state != Person.personState.enthralledAgent;
+            map.addMessage(msg, MsgEvent.LEVEL_GREEN, positive);
+
         }
 
         public virtual bool isEnthralled()

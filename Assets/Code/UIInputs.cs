@@ -414,9 +414,10 @@ namespace Assets.Code
                     if (u.location.getNeighbours().Contains(clickedHex.location)){
                         if (u.movesTaken == 0)
                         {
-                            u.location.map.instaMoveTo(u,clickedHex.location);
+                            u.location.map.adjacentMoveTo(u,clickedHex.location);
                             u.movesTaken += 1;
                             u.location.map.world.audioStore.playClickSelect();
+                            u.task = null;
                         }
                     }
                 }

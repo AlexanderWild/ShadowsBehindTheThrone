@@ -49,11 +49,14 @@ namespace Assets.Code
             {
                 //Negative if we are stronger than the one we fear
                 defUtility += (defStr - ourStr) / (ourStr + defStr)*voter.map.param.utility_militaryTargetRelStrengthDefensive;
+
+                if (defUtility < -50) { defUtility = -50; }
             }
             double offUtility = 0;
             double offUtilityStr = 0;
             double offUtilityPersonality = 0;
             double offUtilityTerritory = 0;
+            double offUtilityInstab = 0;
             if (voter.society.offensiveTarget != null)
             {
                 //Negative if the offensive target is stronger
@@ -72,12 +75,22 @@ namespace Assets.Code
                 }
                 if (hasOurTerritory)
                 {
-                    offUtilityTerritory += society.map.param.utility_militaryTargetCompleteProvince;
+                    offUtilityTerritory += society.map.param.utility_militaryTargetCompleteProvince*society.data_societalStability;
                 }
 
+                if (offUtilityStr > 0 && society.offensiveTarget is Society)
+                {
+                    //Counters expansion desire. Value always negative or zero
+                    //u = off*stability
+                    //u = off + (off*(stability-1))  (Because we are removing 1 from stability mult)
+                    //If stab == 0 it's off - off
+                    //If stab < 0 it's less than off
+                    offUtilityInstab = offUtilityInstab * (society.data_societalStability-1);
+                }
                 offUtility += offUtilityStr;
                 offUtility += offUtilityPersonality;
                 offUtility += offUtilityTerritory;
+                offUtility += offUtilityInstab;
             }
             double introUtility = 0;
             double introUtilityStability = -(society.data_societalStability - 1);//0 if stability is 1, increasing to 1 if civil war is imminent, to 2 if every single person is a traitor
@@ -85,7 +98,6 @@ namespace Assets.Code
             double introFromInnerThreat = voter.threat_enshadowedNobles.threat*voter.map.param.utility_introversionFromSuspicion;
             introUtility += introUtilityStability;
             introUtility += introFromInnerThreat;
-            introUtility += 10;
 
             //Option 0 is DEFENSIVE
             //Option 1 is OFFENSIVE
@@ -106,40 +118,93 @@ namespace Assets.Code
                 msgs.Add(new ReasonMsg("Switching away from introversion", -introUtility));
             }
 
-            if (option.index == 0 && society.posture != Society.militaryPosture.defensive)
+            if (option.index == 0)
             {
-                u += defUtility;
-                msgs.Add(new ReasonMsg("Our relative strength against defensive target", defUtility));
-                if (voter.society.isDarkEmpire)
+                if (society.posture != Society.militaryPosture.defensive)
                 {
-                    int value = (int)(-100 * voter.shadow);
-                    u += value;
-                    msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    u += defUtility;
+                    msgs.Add(new ReasonMsg("Our relative strength against defensive target", defUtility));
+                    if (voter.society.isDarkEmpire)
+                    {
+                        int value = (int)(-100 * voter.shadow);
+                        u += value;
+                        msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    }
+                }
+                else
+                {
+                    u += defUtility;
+                    msgs.Add(new ReasonMsg("Our relative strength against defensive target", defUtility));
+                    if (voter.society.isDarkEmpire)
+                    {
+                        int value = (int)(-100 * voter.shadow);
+                        u += value;
+                        msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    }
+                    msgs.Add(new ReasonMsg("No need to change: It is our current stance", -u));
+                    u = 0;
                 }
             }
-            if (option.index == 1 && society.posture != Society.militaryPosture.offensive)
+            if (option.index == 1)
             {
-                u += offUtility;
-                msgs.Add(new ReasonMsg("Our relative strength against offensive target", offUtilityStr));
-                msgs.Add(new ReasonMsg("Militarism personality", offUtilityPersonality));
-                msgs.Add(new ReasonMsg("Desire for territory", offUtilityTerritory));
-                if (voter.society.isDarkEmpire)
+                if (society.posture != Society.militaryPosture.offensive)
                 {
-                    int value = (int)(100 * voter.shadow);
-                    u += value;
-                    msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    u += offUtility;
+                    msgs.Add(new ReasonMsg("Our relative strength against offensive target", offUtilityStr));
+                    msgs.Add(new ReasonMsg("Risk of instability from expansion", offUtilityInstab));
+                    msgs.Add(new ReasonMsg("Militarism personality", offUtilityPersonality));
+                    msgs.Add(new ReasonMsg("Desire for territory", offUtilityTerritory));
+                    if (voter.society.isDarkEmpire)
+                    {
+                        int value = (int)(100 * voter.shadow);
+                        u += value;
+                        msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    }
+                }
+                else
+                {
+                    u += offUtility;
+                    msgs.Add(new ReasonMsg("Our relative strength against offensive target", offUtilityStr));
+                    msgs.Add(new ReasonMsg("Risk of instability from expansion", offUtilityInstab));
+                    msgs.Add(new ReasonMsg("Militarism personality", offUtilityPersonality));
+                    msgs.Add(new ReasonMsg("Desire for territory", offUtilityTerritory));
+                    if (voter.society.isDarkEmpire)
+                    {
+                        int value = (int)(100 * voter.shadow);
+                        u += value;
+                        msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    }
+                    msgs.Add(new ReasonMsg("No need to change: It is our current stance", -u));
+                    u = 0;
                 }
             }
-            if (option.index == 2 && society.posture != Society.militaryPosture.introverted)
+            if (option.index == 2)
             {
-                u += introUtility;
-                msgs.Add(new ReasonMsg("Instability internally",introUtilityStability));
-                msgs.Add(new ReasonMsg("Suspicion of nobles' darkness", introFromInnerThreat));
-                if (voter.society.isDarkEmpire)
+                if (society.posture != Society.militaryPosture.introverted)
                 {
-                    int value = (int)(-100 * voter.shadow);
-                    u += value;
-                    msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    u += introUtility;
+                    msgs.Add(new ReasonMsg("Instability internally", introUtilityStability));
+                    msgs.Add(new ReasonMsg("Suspicion of nobles' darkness", introFromInnerThreat));
+                    if (voter.society.isDarkEmpire)
+                    {
+                        int value = (int)(-100 * voter.shadow);
+                        u += value;
+                        msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    }
+                }
+                else
+                {
+                    u += introUtility;
+                    msgs.Add(new ReasonMsg("Instability internally", introUtilityStability));
+                    msgs.Add(new ReasonMsg("Suspicion of nobles' darkness", introFromInnerThreat));
+                    if (voter.society.isDarkEmpire)
+                    {
+                        int value = (int)(-100 * voter.shadow);
+                        u += value;
+                        msgs.Add(new ReasonMsg("We must expand the Dark Empire", value));
+                    }
+                    msgs.Add(new ReasonMsg("No need to change: It is our current stance", -u));
+                    u = 0;
                 }
             }
 
