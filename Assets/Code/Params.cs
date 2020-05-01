@@ -62,7 +62,7 @@ namespace Assets.Code
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
         
         public double relObj_defaultLiking = 5;
-        public double relObj_decayRate = 0.97;
+        public double relObj_decayRate = 0.95;
 
         public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
         public double combat_thresholdAttackStrength = 0.25;
@@ -71,38 +71,39 @@ namespace Assets.Code
         public double combat_maxMilitaryCapExponent = 0.82;//Used to reduce the power of larger nations
         public double combat_defensivePostureDmgMult = 0.666;
 
-        public int war_defaultLength = 16;
+        public int war_defaultLength = 12;
         public double minInformationAvailability = 0.2;
 
         public double utility_econEffect = 0.55;
         public double utility_econEffectOther = 0.1;
         public double utility_militaryTargetRelStrengthOffensive = 250;
         public double utility_militaryTargetCompleteProvince = 100;
-        public double utility_militaryTargetExpansion = 80;
-        public double utility_militaryTargetRelStrengthDefensive = 200;
+        public double utility_militaryTargetExpansion = 200;
+        public double utility_militaryTargetRelStrengthDefensive = 300;
         public double utility_vassaliseReluctance = -70;
         public double utility_vassaliseMilMult = 80;
         public double utility_vassaliseThreatMult = 0.75;
         public double utility_lightAllianceMult = 200;
         public double utility_lightAllianceMilMult = 2;
         public double utility_lightAlliancSusMult = 50;
-        public double utility_introversionFromInstability = 120;
+        public double utility_introversionFromInstability = 200;
         public double utility_militarism = 100;
-        public double utility_landedTitleMult = 0.1;
-        public double utility_unlandedTitleMult = 0.1;
+        public double utility_landedTitleMult = 0.08;
+        public double utility_unlandedTitleMult = 0.08;
         public double utility_introversionFromSuspicion = 3;
         public double utility_killSuspectFromSuspicion = 200;
         public double utility_exileSuspectFromSuspicion = 200;
-        public double utility_exileSuspectRelucatance = 66;
-        public double utility_killSuspectRelucatance = 66;
+        public double utility_exileSuspectRelucatance = 60;
+        public double utility_killSuspectRelucatance = 75;
         public double utility_wouldBeOutvotedMult = 0.25;
         public double utility_landedTitleAssignBaseline = 75;
         public double utility_prestigeMultForTitle = 1.5;
         public double utility_dismissFromCourt = 2;
+        public double utility_fromThreat = 2;
 
-        public double person_likingFromBeingInvaded = -50;
-        public double person_maxLikingGainFromVoteAccordance = 30;
-        public double person_maxLikingLossFromVoteDiscord = -50;
+        public double person_likingFromBeingInvaded = -30;
+        public double person_maxLikingGainFromVoteAccordance = 25;
+        public double person_maxLikingLossFromVoteDiscord = -30;
         public double person_prestigeDeltaPerTurn = 0.5;
         public double person_threatMult = 100;
         public double person_defaultPrestige = 5;
@@ -114,19 +115,19 @@ namespace Assets.Code
         public double person_shadowContagionMult = 0.05;
         public double person_threatFromSuspicion = 400;
         public double person_shadowDecayPerTurn = 0.005;
-        public double person_threatFromBeingOffensiveTarget = 75;
+        public double person_threatFromBeingOffensiveTarget = 0.5;
         public int person_fearLevel_afraid = 100;
         public int person_fearLevel_terrified = 150;
-        public double person_dislikeFromNotBeingVotedFor = -50;
+        public double person_dislikeFromNotBeingVotedFor = -30;
+        public double person_votingRelChangePerUtilityPositive = 0.1;//If benefitted by a vote
+        public double person_votingRelChangePerUtilityNegative = 0.9;//If harmed by a vote
 
         public int econ_buffDuration = 45;
 
         public int soc_untitledPeople = 3;
         public int society_votingDuration = 1;
-        public double society_votingRelChangePerUtilityPositive = 0.085;//If benefitted by a vote
-        public double society_votingRelChangePerUtilityNegative = 0.125;//If harmed by a vote
-        public int society_instablityTillRebellion = 10;
-        public int society_rebelLikingThreshold = -5;
+        public int society_instablityTillRebellion = 12;
+        public int society_rebelLikingThreshold = -10;
         public int society_zeitDuration = 3;
         public double society_sovreignPrestige = 15;
         public double society_dukePrestige = 10;
@@ -135,7 +136,7 @@ namespace Assets.Code
         public int society_minTimeBetweenTitleReassignments = 40;
         public int society_nPeopleForEmpire = 21;
         public int society_nPeopleForKingdom = 12;
-        public int society_maxDukes = 4;
+        public int society_maxDukes = 3;
         public double society_introversionStabilityGain = 1.2;
         public double society_votingEconHiddenBiasMult = 1.5;
         public int society_billsBetweenLandAssignments = 3;

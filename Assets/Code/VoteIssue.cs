@@ -96,11 +96,11 @@ namespace Assets.Code
             double deltaRel = utility;
             if (deltaRel > 0)
             {
-                deltaRel *= p.map.param.society_votingRelChangePerUtilityPositive;
+                deltaRel *= p.map.param.person_votingRelChangePerUtilityPositive;
             }
             else
             {
-                deltaRel *= p.map.param.society_votingRelChangePerUtilityNegative;
+                deltaRel *= p.map.param.person_votingRelChangePerUtilityNegative;
             }
             if (deltaRel > p.map.param.person_maxLikingGainFromVoteAccordance)
             {

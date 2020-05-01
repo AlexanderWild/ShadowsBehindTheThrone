@@ -13,6 +13,7 @@ namespace Assets.Code
         bool leftClickDown = false;
         bool rightClickDown = false;
         public float scrollSpeed = 0.4f;
+        public float socScrollSpeed = 0.1f;
 
         public void Update()
         {
@@ -210,6 +211,25 @@ namespace Assets.Code
                     GraphicalMap.checkData();
                 }
             }
+            if (world.ui.state == UIMaster.uiState.SOCIETY)
+            {
+                if (Input.GetKeyDown("z") || Input.GetAxis("Mouse ScrollWheel") > 0)
+                {
+                    if (GraphicalSociety.focus != null)
+                    {
+                        GraphicalSociety.zoom += 0.1f;
+                        GraphicalSociety.refresh(GraphicalSociety.focus);
+                    }
+                }
+                else if (Input.GetKeyDown("x") || Input.GetAxis("Mouse ScrollWheel") < 0)
+                {
+                    if (GraphicalSociety.focus != null && GraphicalSociety.zoom > 1)
+                    {
+                        GraphicalSociety.zoom -= 0.1f;
+                        GraphicalSociety.refresh(GraphicalSociety.focus);
+                    }
+                }
+            }
         }
         public void scrollKeys()
         {
@@ -248,32 +268,80 @@ namespace Assets.Code
             }
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
-                //GraphicalMap.panStepsToTake = 0;
-                GraphicalMap.lastMapChange += 1;
-                GraphicalMap.y -= scrollSpeed;
-                if (GraphicalMap.y < 0) { GraphicalMap.y = 0; }
+                if (world.ui.state == UIMaster.uiState.SOCIETY) {
+                    if (GraphicalSociety.focus != null)
+                    {
+                        GraphicalSociety.offY -= socScrollSpeed;
+                        GraphicalSociety.refreshOffset();
+                    }
+                }
+                else
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.y -= scrollSpeed;
+                    if (GraphicalMap.y < 0) { GraphicalMap.y = 0; }
+                }
             }
             else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             {
-                //GraphicalMap.panStepsToTake = 0;
-                GraphicalMap.lastMapChange += 1;
-                GraphicalMap.y += scrollSpeed;
-                if (GraphicalMap.y > world.map.sy) { GraphicalMap.y = world.map.sy; }
+                if (world.ui.state == UIMaster.uiState.SOCIETY)
+                {
+                    if (GraphicalSociety.focus != null)
+                    {
+                        GraphicalSociety.offY += socScrollSpeed;
+                        GraphicalSociety.refreshOffset();
+                    }
+                }
+                else
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.y += scrollSpeed;
+                    if (GraphicalMap.y > world.map.sy) { GraphicalMap.y = world.map.sy; }
+                }
             }
             if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
-                //GraphicalMap.panStepsToTake = 0;
-                GraphicalMap.lastMapChange += 1;
-                GraphicalMap.x += scrollSpeed;
-                if (GraphicalMap.x > world.map.sx) { GraphicalMap.x = world.map.sx; }
+                if (world.ui.state == UIMaster.uiState.SOCIETY)
+                {
+                    if (GraphicalSociety.focus != null)
+                    {
+                        GraphicalSociety.offX += socScrollSpeed;
+                        GraphicalSociety.refreshOffset();
+                    }
+                }
+                else
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.x += scrollSpeed;
+                    if (GraphicalMap.x > world.map.sx) { GraphicalMap.x = world.map.sx; }
+
+
+                }
             }
             else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             {
-                //GraphicalMap.panStepsToTake = 0;
-                GraphicalMap.lastMapChange += 1;
-                GraphicalMap.x -= scrollSpeed;
-                if (GraphicalMap.x < 0) { GraphicalMap.x = 0; }
+                if (world.ui.state == UIMaster.uiState.SOCIETY)
+                {
+                    if (GraphicalSociety.focus != null)
+                    {
+                        GraphicalSociety.offX -= socScrollSpeed;
+                        GraphicalSociety.refreshOffset();
+                    }
+                }
+                else
+                {
+                    //GraphicalMap.panStepsToTake = 0;
+                    GraphicalMap.lastMapChange += 1;
+                    GraphicalMap.x -= scrollSpeed;
+                    if (GraphicalMap.x < 0) { GraphicalMap.x = 0; }
+
+
+                }
             }
+
         }
 
         public void mouseClicks()

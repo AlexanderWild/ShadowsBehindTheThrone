@@ -14,6 +14,9 @@ namespace Assets.Code
         public static Person originalFocus;
         public static List<GraphicalSlot> loadedSlots = new List<GraphicalSlot>();
         public static Dictionary<Province, GraphicalSlot> loadedPlaceholders = new Dictionary<Province, GraphicalSlot>();
+        public static float zoom = 1;
+        public static float offX = 0;
+        public static float offY = 0;
 
         public enum viewState { UNLANDED, NEIGHBOR, HIERARCHY };
         public static viewState state = viewState.HIERARCHY;
@@ -76,16 +79,27 @@ namespace Assets.Code
         {
             foreach (GraphicalSlot s in loadedSlots)
             {
-                if (!s.gameObject.active)
+                if (!s.gameObject.activeInHierarchy)
                     s.recenter();
             }
             foreach (var pair in loadedPlaceholders)
             {
-                if (!pair.Value.gameObject.active)
+                if (!pair.Value.gameObject.activeInHierarchy)
                     pair.Value.recenter();
             }
         }
 
+        public static void refreshOffset()
+        {
+            foreach (GraphicalSlot loaded in loadedSlots)
+            {
+                loaded.offset = new Vector3(offX, offY, 0);
+            }
+            foreach (GraphicalSlot loaded in loadedPlaceholders.Values)
+            {
+                loaded.offset = new Vector3(offX, offY, 0);
+            }
+        }
         public static void refreshHierarchy(Person nfocus)
         {
             clear();
@@ -131,18 +145,19 @@ namespace Assets.Code
             }
 
             ss.outer.gameObject.SetActive(true);
-            ss.outer.targetPosition = Vector3.zero;
+            focus.outer.targetPosition = Vector3.zero;
 
             int n = tree.Count, i = 0;
             foreach (var pair in tree)
             {
                 GraphicalSlot ds = pair.Key;
 
-                float radius = 2.0f;
+                float radius = 2.0f*zoom;
                 float angle  = 6.28f / n * i;
 
                 float x = Mathf.Cos(angle) * radius;
                 float y = Mathf.Sin(angle) * radius;
+                
 
                 ds.gameObject.SetActive(true);
                 ds.connection = ss.outer;
@@ -177,6 +192,7 @@ namespace Assets.Code
 
             state = viewState.HIERARCHY;
             resetHidden();
+            refreshOffset();
         }
 
         public static void refreshNeighbor(Person nfocus)
@@ -210,8 +226,11 @@ namespace Assets.Code
                 float radius = (n > 12) ? 3.5f - 1.3f * (i % 2) : 3.2f;
                 float angle  = 6.28f / n * i;
 
+                radius *= zoom;
+
                 float x = Mathf.Cos(angle) * radius;
                 float y = Mathf.Sin(angle) * radius;
+                
 
                 ds.gameObject.SetActive(true);
                 ds.connection = focus.outer;
@@ -243,6 +262,7 @@ namespace Assets.Code
 
             state = viewState.NEIGHBOR;
             resetHidden();
+            refreshOffset();
         }
 
         // FIXME: could be combined easily with refreshNeighbor
@@ -272,7 +292,7 @@ namespace Assets.Code
 
                 GraphicalSlot ds = p.outer;
 
-                float radius = 2.5f;
+                float radius = 2.5f*zoom;
                 float angle  = 6.28f / n * i;
 
                 float x = Mathf.Cos(angle) * radius;
@@ -308,6 +328,7 @@ namespace Assets.Code
 
             state = viewState.UNLANDED;
             resetHidden();
+            refreshOffset();
         }
 
         public static void refresh(Person pf)
@@ -327,6 +348,10 @@ namespace Assets.Code
 
         public static void purge()
         {
+            zoom = 1;
+            offX = 0;
+            offY = 0;
+
             // FIXME: is this still needed?
             foreach (SocialGroup sg in World.staticMap.socialGroups)
             {

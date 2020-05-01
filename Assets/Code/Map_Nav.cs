@@ -329,6 +329,13 @@ namespace Assets.Code
                 {
                     world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
                     u2.hp -= 1;
+                    if (u2.isEnthralled()) {
+                        world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting 1HP damage!");
+                            }
+                    if (u2.hp < 0)
+                    {
+                        u2.die(this,"Attacked by " + u.getName());
+                    }
                     return;
                 }
             }

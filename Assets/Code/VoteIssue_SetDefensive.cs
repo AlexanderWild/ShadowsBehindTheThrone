@@ -42,7 +42,7 @@ namespace Assets.Code
             {
                 if (threat.group == option.group)
                 {
-                    localU = threat.threat;
+                    localU = threat.threat*society.map.param.utility_fromThreat;
                     msgs.Add(new ReasonMsg("Perceived Threat", localU));
                     u += localU;
                     break;
@@ -60,7 +60,7 @@ namespace Assets.Code
                 {
                     if (threat.group == society.defensiveTarget)
                     {
-                        localU -= threat.threat;
+                        localU -= threat.threat * society.map.param.utility_fromThreat;
                         msgs.Add(new ReasonMsg("Threat of current target (" + society.defensiveTarget.getName() + ")", localU));
                         u += localU;
                         break;

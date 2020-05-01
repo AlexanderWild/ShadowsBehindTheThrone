@@ -31,6 +31,7 @@ namespace Assets.Code
 
         public GraphicalSlot connection = null;
         public Vector3 targetPosition = Vector3.zero;
+        public Vector3 offset = Vector3.zero;
         public Color targetStartColor;
         public Color targetEndColor;
 
@@ -88,6 +89,7 @@ namespace Assets.Code
 
         public void recenter()
         {
+            offset = Vector3.zero;
             transform.position = new Vector3(0.0f, 0.0f, 0.1f);
             line.SetPosition(0, transform.position);
         }
@@ -124,7 +126,7 @@ namespace Assets.Code
             //     transform.Translate(delta);
             // }
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, 0.1f);
+            transform.position = Vector3.Lerp(transform.position, targetPosition+offset, 0.1f);
             line.SetPosition(0, transform.position);
 
             Vector3 origin = (connection == null) ? Vector3.zero : connection.gameObject.transform.position;

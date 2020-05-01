@@ -58,12 +58,9 @@ namespace Assets.Code
                 log = new LogBox(this);
             }
 
-            politics_militarism = Math.Pow(Eleven.random.NextDouble(), 0.5);//Bias towards 0
-            politics_militarism = 1 - politics_militarism;//0 to 1, bias towards 1
-            politics_militarism = (2 * politics_militarism) - 1;//1 to -1, bias towards 1
-            //Bias towards positive values
-            if (politics_militarism < 0 && Eleven.random.NextDouble() < 0.3)
-            {
+            politics_militarism = Math.Pow(Eleven.random.NextDouble(), 2);//Bias towards 0
+            //Chance of pacifism
+            if (Eleven.random.NextDouble() < 0.33) { 
                 politics_militarism *= -1;
             }
 
@@ -532,8 +529,9 @@ namespace Assets.Code
 
                         if (soc.offensiveTarget == this.society && soc.posture == Society.militaryPosture.offensive)
                         {
-                            item.reasons.Add(new ReasonMsg("We are their offensive target", map.param.person_threatFromBeingOffensiveTarget));
-                            item.threat += map.param.person_threatFromBeingOffensiveTarget;
+                            double threatAdd = map.param.person_threatFromBeingOffensiveTarget * item.threat;
+                            item.reasons.Add(new ReasonMsg("We are their offensive target", threatAdd));
+                            item.threat += threatAdd;
                         }
                     }
                 }

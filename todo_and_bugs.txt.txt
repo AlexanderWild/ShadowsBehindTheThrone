@@ -1,6 +1,7 @@
 	High criticality:
 
--War across ocean doesn't work, hasn't for a while now, I believe
+-Unselectable units hanging out on a sea tile
+	Had HP
 
 	Medium criticality:
 	
@@ -25,6 +26,7 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-War across ocean doesn't work, hasn't for a while now, I believe
 -Wordwrap on power info looks ugly
 -Awareness gain on individuals seems too high
 -World panic seems to decay too fast or gain too slow from power

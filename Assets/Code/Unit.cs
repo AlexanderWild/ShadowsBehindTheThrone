@@ -76,14 +76,34 @@ namespace Assets.Code
             }
             return false;
         }
+
+        public void die(Map map, string v)
+        {
+            disband(map, null);
+            bool positive = person == null || person.state != Person.personState.enthralledAgent;
+            map.addMessage(this.getName() + " dies! " + v, MsgEvent.LEVEL_GREEN, positive);
+
+            if (this.isEnthralled())
+            {
+                map.world.prefabStore.popMsg(this.getName() + " dies!\n" + v);
+            }
+        }
+
         public virtual void disband(Map map,string msg)
         {
             person.isDead = true;
             map.remove(this);
             location.units.Remove(this);
-            bool positive = person == null || person.state != Person.personState.enthralledAgent;
-            map.addMessage(msg, MsgEvent.LEVEL_GREEN, positive);
+            if (msg != null)
+            {
+                bool positive = person == null || person.state != Person.personState.enthralledAgent;
+                map.addMessage(msg, MsgEvent.LEVEL_GREEN, positive);
 
+                if (this.isEnthralled())
+                {
+                    map.world.prefabStore.popMsg(this.getName() + " is gone.\n" + msg);
+                }
+            }
         }
 
         public virtual bool isEnthralled()
@@ -123,11 +143,31 @@ namespace Assets.Code
         {
             movesTaken = 0;
             if (checkForDisband(map)) { return; }
+            if (checkForLocDamage(map)) { return; }
             turnTickInner(map);
             if (isEnthralled() == false)
             {
                 turnTickAI(map);
             }
+        }
+
+        public virtual bool checkForLocDamage(Map map)
+        {
+            if (location.soc != null && location.soc.hostileTo(this))
+            {
+                this.hp -= 1;
+                map.world.prefabStore.particleCombat(location.hex, location.hex);
+                if (this.isEnthralled())
+                {
+                    map.world.prefabStore.popMsg(this.getName() + " takes damage from being in the territory of " + location.soc.getName());
+                }
+                if (hp <= 0)
+                {
+                    die(map, "Killed by " + location.soc.getName());
+                    return true;
+                }
+            }
+            return false;
         }
         public virtual void turnTickInner(Map map) { }
         public abstract void turnTickAI(Map map);
@@ -137,5 +177,6 @@ namespace Assets.Code
         public abstract string getTitleM();
         public abstract string getTitleF();
         public abstract string getDesc();
+
     }
 }

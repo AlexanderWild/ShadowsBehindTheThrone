@@ -85,6 +85,13 @@ namespace Assets.Code
                 else
                     return new string[] { "Pronounce Innocent", "Pronounce Guilty" }[index];
             }
+            if (issue is VoteIssue_CondemnAgent)
+            {
+                if (shrt)
+                    return new string[] { "Innocent", "Guilty" }[index];
+                else
+                    return new string[] { "Pronounce Innocent", "Pronounce Guilty" }[index];
+            }
             if (issue is VoteIssue_Vassalise)
             {
                 if (shrt)

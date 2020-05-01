@@ -51,7 +51,11 @@ namespace Assets.Code
             //Assignment of sovreign takes priority over any other voting, in the minds of the lords and ladies
             foreach (Title t in society.titles)
             {
-                if (t.heldBy != null && (map.turn - t.turnLastAssigned < map.param.society_minTimeBetweenTitleReassignments)) { continue; }
+                //You can hold emergency elections in the event of upcoming civil war
+                if (society.data_societalStability > 0)
+                {
+                    if (t.heldBy != null && (map.turn - t.turnLastAssigned < map.param.society_minTimeBetweenTitleReassignments)) { continue; }
+                }
                 issue = new VoteIssue_AssignTitle(society, this, t);
 
                 if (t is Title_Sovreign)
@@ -475,7 +479,7 @@ namespace Assets.Code
                         if (u.person == null) { continue; }
                         if (getRelation(u.person).getLiking() >= 0) { continue; }
                         if (society.enemies.Contains(unit)) { continue; }
-                        issue = new VoteIssue_ExileUnit(society, u, this);
+                        issue = new VoteIssue_CondemnAgent(society, u, this);
                         VoteOption option_0 = new VoteOption();
                         option_0.index = 0;
                         issue.options.Add(option_0);

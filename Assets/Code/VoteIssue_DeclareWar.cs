@@ -52,55 +52,93 @@ namespace Assets.Code
             //return 100 * parityMult;
 
             //Option 0 is "Don't declare war"
-            //Multiply values based on this, as they should be symmetric for most parts
-            double parityMult = 1;
-            if (option.index == 0) { parityMult = -1; }
+
+            //1 if we're 100% of the balance, -1 if they are
 
             double ourStrength = society.currentMilitary;
             double theirStrength = target.currentMilitary;
             if (ourStrength + theirStrength == 0) { ourStrength += 0.001; }
+            double relativeStrength = (ourStrength - theirStrength) / (ourStrength + theirStrength + 1);
             double localU = 0;
 
-            if (ourStrength < 1)
+            double relMilU = society.map.param.utility_militaryTargetRelStrengthOffensive * relativeStrength;
+
+            //Peace
+            if (option.index == 0)
             {
-                localU = -1000 * parityMult;
-                msgs.Add(new ReasonMsg("We are too weak", localU));
-                u += localU;
-                return u;
-            }
-
-            //1 if we're 100% of the balance, -1 if they are
-            double relativeStrength = (ourStrength - theirStrength) / (ourStrength + theirStrength + 1);
-
-            double relMilU = society.map.param.utility_militaryTargetRelStrengthOffensive * relativeStrength * parityMult;
-            msgs.Add(new ReasonMsg("Relative strength of current militaries", relMilU));
-            u += relMilU;
-
-
-            //We want to expand into territory we already partially own
-            bool hasOurTerritory = false;
-            foreach (Location loc in target.lastTurnLocs)
-            {
-                if (loc.province == voter.getLocation().province)
+                if (ourStrength < 1)
                 {
-                    hasOurTerritory = true;
-                    break;
+                    localU = -1000;
+                    msgs.Add(new ReasonMsg("We are too weak", localU));
+                    u += localU;
+                    return u;
+                }
+
+                if (relMilU < 0)
+                {
+                    msgs.Add(new ReasonMsg("Relative strength of current militaries", -relMilU));
+                    u += relMilU;
+                }
+
+                localU = voter.politics_militarism * -100;
+                msgs.Add(new ReasonMsg("Militarism of " + voter.getFullName(), localU));
+                u += localU;
+            }
+            else //Pro-war
+            {
+
+                //We want to expand into territory we already partially own
+                bool hasOurTerritory = false;
+                foreach (Location loc in target.lastTurnLocs)
+                {
+                    if (loc.province == voter.getLocation().province)
+                    {
+                        hasOurTerritory = true;
+                        break;
+                    }
+                }
+                if (hasOurTerritory)
+                {
+                    localU = society.map.param.utility_militaryTargetCompleteProvince;
+                    msgs.Add(new ReasonMsg("Has territory from my province", localU));
+                    u += localU;
+                }
+
+                //We want to own more land. Invade weak neighbours
+                bool shouldExpand = true;
+                int nDukes = 0;
+                foreach (Title t in society.titles)
+                {
+                    if (t is Title_ProvinceRuler) { nDukes += 1; }
+                }
+                if (nDukes >= society.map.param.society_maxDukes) { shouldExpand = false; }
+                if (shouldExpand && option.group is Society && option.group.currentMilitary * 1.5 < this.society.currentMilitary && option.group.getNeighbours().Contains(this.society))
+                {
+                    localU = society.map.param.utility_militaryTargetExpansion;
+                    msgs.Add(new ReasonMsg("Expand our holdings", localU));
+                    u += localU;
+                }
+
+                localU = voter.politics_militarism * 100;
+                msgs.Add(new ReasonMsg("Militarism of " + voter.getFullName(), localU));
+                u += localU;
+
+                foreach (ThreatItem threat in voter.threatEvaluations)
+                {
+                    if (threat.group == option.group)
+                    {
+                        localU = threat.threat*4;
+                        msgs.Add(new ReasonMsg("Perceived Threat", localU));
+                        u += localU;
+                        break;
+                    }
                 }
             }
-            if (hasOurTerritory)
-            {
-                localU = society.map.param.utility_militaryTargetCompleteProvince * parityMult;
-                msgs.Add(new ReasonMsg("Has territory from my province", localU));
-                u += localU;
-            }
+
+
+
+
             
-            //We want to own more land. Invade weak neighbours
-            if (option.group is Society && option.group.currentMilitary < this.society.currentMilitary && option.group.getNeighbours().Contains(this.society))
-            {
-                localU = society.map.param.utility_militaryTargetExpansion * parityMult;
-                msgs.Add(new ReasonMsg("Expand our holdings", localU));
-                u += localU;
-            }
             /*
             if (relMilU > 0 && target is Society)
             {
@@ -112,21 +150,8 @@ namespace Assets.Code
             }
             */
 
-            localU = voter.politics_militarism * parityMult * 50;
-            msgs.Add(new ReasonMsg("Militarism of " + voter.getFullName(), localU));
-            u += localU;
 
 
-            foreach (ThreatItem threat in voter.threatEvaluations)
-            {
-                if (threat.group == option.group)
-                {
-                    localU = threat.threat;
-                    msgs.Add(new ReasonMsg("Perceived Threat", localU));
-                    u += localU;
-                    break;
-                }
-            }
 
             /*
             if (this.society.defensiveTarget != null && this.society.defensiveTarget != this.society.offensiveTarget)

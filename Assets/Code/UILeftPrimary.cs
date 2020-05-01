@@ -120,6 +120,8 @@ namespace Assets.Code
         {
             master.world.audioStore.playClick();
 
+            GraphicalSociety.offX = 0;
+            GraphicalSociety.offY = 0;
             maskTitle.text = "Neighbor Liking View";
             GraphicalSociety.refreshNeighbor(GraphicalSociety.focus);
         }
@@ -128,6 +130,8 @@ namespace Assets.Code
         {
             master.world.audioStore.playClick();
 
+            GraphicalSociety.offX = 0;
+            GraphicalSociety.offY = 0;
             maskTitle.text = "Country Hierarchy View";
             GraphicalSociety.refreshHierarchy(null);
         }

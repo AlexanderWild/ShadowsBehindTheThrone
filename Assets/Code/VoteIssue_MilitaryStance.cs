@@ -61,6 +61,10 @@ namespace Assets.Code
             {
                 //Negative if the offensive target is stronger
                 offUtilityStr += (ourStr - offStr) / (ourStr + offStr) * voter.map.param.utility_militaryTargetRelStrengthOffensive;
+                if (voter.society.offensiveTarget is Society)
+                {
+                    offUtilityStr = Math.Min(offUtilityStr, voter.map.param.utility_militaryTargetRelStrengthOffensive);//Capped to prevent insanity snowballing
+                }
                 offUtilityPersonality += voter.politics_militarism * voter.map.param.utility_militarism;
                 
                 //We want to expand into territory we already partially own
@@ -93,7 +97,11 @@ namespace Assets.Code
                 offUtility += offUtilityInstab;
             }
             double introUtility = 0;
-            double introUtilityStability = -(society.data_societalStability - 1);//0 if stability is 1, increasing to 1 if civil war is imminent, to 2 if every single person is a traitor
+            double introUtilityStability = 0;
+            if (society.data_societalStability < 0.66)
+            {
+                introUtilityStability  = - (society.data_societalStability - 1);//0 if stability is 1, increasing to 1 if civil war is imminent, to 2 if every single person is a traitor
+            }
             introUtilityStability *= voter.map.param.utility_introversionFromInstability;
             double introFromInnerThreat = voter.threat_enshadowedNobles.threat*voter.map.param.utility_introversionFromSuspicion;
             introUtility += introUtilityStability;

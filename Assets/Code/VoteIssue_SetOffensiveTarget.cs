@@ -72,7 +72,14 @@ namespace Assets.Code
                 u += localU;
             }
             //We want to own more land. Invade weak neighbours
-            if (option.group is Society && option.group.currentMilitary < this.society.currentMilitary && option.group.getNeighbours().Contains(this.society))
+            bool shouldExpand = true;
+            int nDukes = 0;
+            foreach (Title t in society.titles)
+            {
+                if (t is Title_ProvinceRuler) { nDukes += 1; }
+            }
+            if (nDukes >= society.map.param.society_maxDukes) { shouldExpand = false; }
+            if (shouldExpand && option.group is Society && option.group.currentMilitary*1.5 < this.society.currentMilitary && option.group.getNeighbours().Contains(this.society))
             {
                 localU = society.map.param.utility_militaryTargetExpansion;
                 msgs.Add(new ReasonMsg("Expand our holdings", localU));
@@ -84,7 +91,7 @@ namespace Assets.Code
             {
                 if (threat.group == option.group)
                 {
-                    localU = threat.threat;
+                    localU = threat.threat*society.map.param.utility_fromThreat;
                     msgs.Add(new ReasonMsg("Perceived Threat", localU));
                     u += localU;
                     break;
