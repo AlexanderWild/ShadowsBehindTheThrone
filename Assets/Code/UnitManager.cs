@@ -52,6 +52,7 @@ namespace Assets.Code
                     Unit_Investigator u = new Unit_Investigator(chosen.getCapital(), chosen);
                     u.person = new Person(chosen);
                     u.person.unit = u;
+                    u.person.traits.Clear();//Can't see traits, best to have them removed
                     map.units.Add(u);
                     u.parentLocation = chosen.getCapital();
                 }

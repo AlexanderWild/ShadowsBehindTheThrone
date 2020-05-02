@@ -56,21 +56,34 @@ namespace Assets.Code
             }
 
             //We want to expand into territory we already partially own
-            bool hasOurTerritory = false;
+            bool hasMyTerritory = false;
             foreach (Location loc in option.group.lastTurnLocs)
             {
                 if (loc.province == voter.getLocation().province)
                 {
-                    hasOurTerritory = true;
+                    hasMyTerritory = true;
                     break;
                 }
             }
-            if (hasOurTerritory)
+            if (hasMyTerritory)
             {
                 localU = society.map.param.utility_militaryTargetCompleteProvince;
                 msgs.Add(new ReasonMsg("Has territory from my province", localU));
                 u += localU;
             }
+
+            bool hasOurTerritory = false;
+            foreach (Location loc in option.group.lastTurnLocs)
+            {
+                foreach (Location l2 in society.lastTurnLocs)
+                {
+                    if (loc.province == l2.province)
+                    {
+                        hasOurTerritory = true;
+                    }
+                }
+            }
+
             //We want to own more land. Invade weak neighbours
             bool shouldExpand = true;
             int nDukes = 0;
@@ -81,9 +94,16 @@ namespace Assets.Code
             if (nDukes >= society.map.param.society_maxDukes) { shouldExpand = false; }
             if (shouldExpand && option.group is Society && option.group.currentMilitary*1.5 < this.society.currentMilitary && option.group.getNeighbours().Contains(this.society))
             {
-                localU = society.map.param.utility_militaryTargetExpansion;
-                msgs.Add(new ReasonMsg("Expand our holdings", localU));
-                u += localU;
+                //Society soc = (Society)option.group;
+                //if (this.society.getCapital() != null && soc.getCapital() != null)
+                //{
+                //    if (soc.getCapital().hex.getHabilitability() > 0.5)
+                //    {
+                        localU = society.map.param.utility_militaryTargetExpansion;
+                        msgs.Add(new ReasonMsg("Expand our holdings", localU));
+                        u += localU;
+                //    }
+                //}
             }
 
 

@@ -197,7 +197,7 @@ namespace Assets.Code
                 {
                     if (l2.province == loc.province && l2.soc != null)
                     {
-                        loc.soc = l2.soc;
+                        //loc.soc = l2.soc;
                     }
                 }
                 if (loc.soc == null)

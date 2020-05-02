@@ -106,6 +106,7 @@ namespace Assets.Code
             double introFromInnerThreat = voter.threat_enshadowedNobles.threat*voter.map.param.utility_introversionFromSuspicion;
             introUtility += introUtilityStability;
             introUtility += introFromInnerThreat;
+            introUtility += 10;
 
             //Option 0 is DEFENSIVE
             //Option 1 is OFFENSIVE
@@ -188,6 +189,7 @@ namespace Assets.Code
             }
             if (option.index == 2)
             {
+                msgs.Add(new ReasonMsg("Default position", 10));
                 if (society.posture != Society.militaryPosture.introverted)
                 {
                     u += introUtility;

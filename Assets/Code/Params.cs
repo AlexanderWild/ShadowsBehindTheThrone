@@ -74,13 +74,14 @@ namespace Assets.Code
         public int war_defaultLength = 12;
         public double minInformationAvailability = 0.2;
 
-        public double utility_econEffect = 0.55;
+        public double utility_econEffect = 1;
         public double utility_econEffectOther = 0.1;
-        public double utility_militaryTargetRelStrengthOffensive = 250;
-        public double utility_militaryTargetCompleteProvince = 100;
-        public double utility_militaryTargetExpansion = 200;
+        public double utility_militaryTargetRelStrengthOffensive = 350;
+        public double utility_militaryTargetCompleteProvince = 80;
+        public double utility_militaryTargetExpansion = 150;
+        public double utility_militaryOverexpansionHalt = 200;
         public double utility_militaryTargetRelStrengthDefensive = 300;
-        public double utility_vassaliseReluctance = -70;
+        public double utility_vassaliseReluctance = -100;
         public double utility_vassaliseMilMult = 80;
         public double utility_vassaliseThreatMult = 0.75;
         public double utility_lightAllianceMult = 200;
@@ -99,7 +100,7 @@ namespace Assets.Code
         public double utility_landedTitleAssignBaseline = 75;
         public double utility_prestigeMultForTitle = 1.5;
         public double utility_dismissFromCourt = 2;
-        public double utility_fromThreat = 2;
+        public double utility_fromThreat = 1.6;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;
@@ -119,7 +120,7 @@ namespace Assets.Code
         public int person_fearLevel_afraid = 100;
         public int person_fearLevel_terrified = 150;
         public double person_dislikeFromNotBeingVotedFor = -30;
-        public double person_votingRelChangePerUtilityPositive = 0.1;//If benefitted by a vote
+        public double person_votingRelChangePerUtilityPositive = 0.125;//If benefitted by a vote
         public double person_votingRelChangePerUtilityNegative = 0.9;//If harmed by a vote
 
         public int econ_buffDuration = 45;

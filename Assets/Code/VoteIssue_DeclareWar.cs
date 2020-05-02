@@ -63,13 +63,41 @@ namespace Assets.Code
 
             double relMilU = society.map.param.utility_militaryTargetRelStrengthOffensive * relativeStrength;
 
+            bool shouldExpand = true;
+            int nDukes = 0;
+            foreach (Title t in society.titles)
+            {
+                if (t is Title_ProvinceRuler) { nDukes += 1; }
+            }
+            if (nDukes >= society.map.param.society_maxDukes) { shouldExpand = false; }
+
+            bool hasOurTerritory = false;
+            foreach (Location loc in target.lastTurnLocs)
+            {
+                foreach (Location l2 in society.lastTurnLocs)
+                {
+                    if (loc.province == l2.province)
+                    {
+                        hasOurTerritory = true;
+                    }
+                }
+            }
+
             //Peace
             if (option.index == 0)
             {
                 if (ourStrength < 1)
                 {
-                    localU = -1000;
+                    localU = 1000;
                     msgs.Add(new ReasonMsg("We are too weak", localU));
+                    u += localU;
+                    return u;
+                }
+
+                if (ourStrength*2 < theirStrength)
+                {
+                    localU = 1000;
+                    msgs.Add(new ReasonMsg("We stand no chance", localU));
                     u += localU;
                     return u;
                 }
@@ -80,6 +108,15 @@ namespace Assets.Code
                     u += relMilU;
                 }
 
+                bool tinyComplete = target.lastTurnLocs.Count <= 3 && hasOurTerritory;//You can take over tiny nations to complete your provinces
+                if (!tinyComplete && society.isDarkEmpire == false && shouldExpand == false && target is Society)
+                {
+
+                    localU = society.map.param.utility_militaryOverexpansionHalt;
+                    msgs.Add(new ReasonMsg("We have as much as we can control", localU));
+                    u += localU;
+                }
+
                 localU = voter.politics_militarism * -100;
                 msgs.Add(new ReasonMsg("Militarism of " + voter.getFullName(), localU));
                 u += localU;
@@ -88,16 +125,16 @@ namespace Assets.Code
             {
 
                 //We want to expand into territory we already partially own
-                bool hasOurTerritory = false;
+                bool hasMyTerritory = false;
                 foreach (Location loc in target.lastTurnLocs)
                 {
                     if (loc.province == voter.getLocation().province)
                     {
-                        hasOurTerritory = true;
+                        hasMyTerritory = true;
                         break;
                     }
                 }
-                if (hasOurTerritory)
+                if (hasMyTerritory)
                 {
                     localU = society.map.param.utility_militaryTargetCompleteProvince;
                     msgs.Add(new ReasonMsg("Has territory from my province", localU));
@@ -105,18 +142,18 @@ namespace Assets.Code
                 }
 
                 //We want to own more land. Invade weak neighbours
-                bool shouldExpand = true;
-                int nDukes = 0;
-                foreach (Title t in society.titles)
+                if (shouldExpand && target is Society && target.currentMilitary * 1.5 < this.society.currentMilitary && target.getNeighbours().Contains(this.society))
                 {
-                    if (t is Title_ProvinceRuler) { nDukes += 1; }
-                }
-                if (nDukes >= society.map.param.society_maxDukes) { shouldExpand = false; }
-                if (shouldExpand && option.group is Society && option.group.currentMilitary * 1.5 < this.society.currentMilitary && option.group.getNeighbours().Contains(this.society))
-                {
-                    localU = society.map.param.utility_militaryTargetExpansion;
-                    msgs.Add(new ReasonMsg("Expand our holdings", localU));
-                    u += localU;
+                    //Society soc = (Society)target;
+                    //if (this.society.getCapital() != null && soc.getCapital() != null)
+                    //{
+                    //    if (soc.getCapital().hex.getHabilitability() > 0.5)
+                    //    {
+                            localU = society.map.param.utility_militaryTargetExpansion * Math.Max(0, voter.politics_militarism);
+                            msgs.Add(new ReasonMsg("Expand our holdings", localU));
+                            u += localU;
+                    //    }
+                    //}
                 }
 
                 localU = voter.politics_militarism * 100;
@@ -125,9 +162,9 @@ namespace Assets.Code
 
                 foreach (ThreatItem threat in voter.threatEvaluations)
                 {
-                    if (threat.group == option.group)
+                    if (threat.group == target)
                     {
-                        localU = threat.threat*4;
+                        localU = threat.threat*society.map.param.utility_fromThreat;
                         msgs.Add(new ReasonMsg("Perceived Threat", localU));
                         u += localU;
                         break;

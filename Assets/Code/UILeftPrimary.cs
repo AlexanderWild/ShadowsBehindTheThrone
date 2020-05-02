@@ -37,6 +37,8 @@ namespace Assets.Code
         public Image profileBorder;
         public Image titleTextDarkener;
         public Image bodyTextDarkener;
+        public Image flag1;
+        public Image flag2;
         public GameObject screenPerson;
         public GameObject screenSociety;
         public GameObject screenLocation;
@@ -357,6 +359,8 @@ namespace Assets.Code
             body.text = "";
             actionText.text = "";
             personAwarenss.text = "";
+            flag1.color = Color.clear;
+            flag2.color = Color.clear;
             title.text = "Nothing Selected";
             socTypeBox.SetActive(false);
             prestigeDescText.text = "Characters have a prestige score. This approaches a target value over time. Prestige is affected by the settlement a character rules (if any) and any other titles they hold.";
@@ -436,7 +440,6 @@ namespace Assets.Code
                     }
                     else if (GraphicalMap.selectedSelectable is Unit)
                     {
-
                         abilityButtonText.text = "Use Ability (" + master.world.map.overmind.countAvailableAbilities((Unit)GraphicalMap.selectedSelectable) + ")";
                         powerButtonText.text = "Use Power (" + master.world.map.overmind.countAvailablePowers((Unit)GraphicalMap.selectedSelectable) + ")";
                         canVote = ((Unit)GraphicalMap.selectedSelectable).person != null && ((Unit)GraphicalMap.selectedSelectable).person.state == Person.personState.enthralledAgent;
@@ -530,8 +533,12 @@ namespace Assets.Code
             else if (state == tabState.SOCIETY)
             {
                 screenSociety.SetActive(true);
+                flag1.color = Color.clear;
+                flag2.color = Color.clear;
                 if (hex != null && hex.location != null && hex.location.soc != null)
                 {
+                    flag1.color = hex.location.soc.color;
+                    flag2.color = hex.location.soc.color2;
                     title.text = GraphicalMap.selectedHex.getName();
                     locText.text = "";
                     if (GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.soc != null)

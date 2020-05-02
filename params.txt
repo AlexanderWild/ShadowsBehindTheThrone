@@ -52,13 +52,14 @@ combat_maxMilitaryCapExponent: 0.82
 combat_defensivePostureDmgMult: 0.666
 war_defaultLength: 12
 minInformationAvailability: 0.2
-utility_econEffect: 0.55
+utility_econEffect: 1
 utility_econEffectOther: 0.1
-utility_militaryTargetRelStrengthOffensive: 250
-utility_militaryTargetCompleteProvince: 100
-utility_militaryTargetExpansion: 200
+utility_militaryTargetRelStrengthOffensive: 350
+utility_militaryTargetCompleteProvince: 80
+utility_militaryTargetExpansion: 150
+utility_militaryOverexpansionHalt: 200
 utility_militaryTargetRelStrengthDefensive: 300
-utility_vassaliseReluctance: -70
+utility_vassaliseReluctance: -100
 utility_vassaliseMilMult: 80
 utility_vassaliseThreatMult: 0.75
 utility_lightAllianceMult: 200
@@ -77,7 +78,7 @@ utility_wouldBeOutvotedMult: 0.25
 utility_landedTitleAssignBaseline: 75
 utility_prestigeMultForTitle: 1.5
 utility_dismissFromCourt: 2
-utility_fromThreat: 2
+utility_fromThreat: 1.6
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -96,7 +97,7 @@ person_threatFromBeingOffensiveTarget: 0.5
 person_fearLevel_afraid: 100
 person_fearLevel_terrified: 150
 person_dislikeFromNotBeingVotedFor: -30
-person_votingRelChangePerUtilityPositive: 0.1
+person_votingRelChangePerUtilityPositive: 0.125
 person_votingRelChangePerUtilityNegative: 0.9
 econ_buffDuration: 45
 soc_untitledPeople: 3

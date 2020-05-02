@@ -309,6 +309,19 @@ namespace Assets.Code
         {
             if (p == null) { return 0; }
             int n = 0;
+
+            if (p.isEnthralled())
+            {
+                foreach (Ability a in p.actions)
+                {
+                    if (a.castable(map, p))
+                    {
+                        n += 1;
+                    }
+                }
+                return n;
+            }
+
             foreach (Ability a in abilities)
             {
                 if (a.castable(map, p))
@@ -322,6 +335,19 @@ namespace Assets.Code
         {
             if (p == null) { return 0; }
             int n = 0;
+
+            if (p.isEnthralled())
+            {
+                foreach (Ability a in p.powers)
+                {
+                    if (a.castable(map, p))
+                    {
+                        n += 1;
+                    }
+                }
+                return n;
+            }
+
             foreach (Ability a in powers)
             {
                 if (a.castable(map, p))

@@ -82,7 +82,18 @@ namespace Assets.Code
                 try
                 {
                     Hex hex = GraphicalMap.getHexUnderMouse(Input.mousePosition).hex;
-                    Person me = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    Person me = null; 
+                    if (GraphicalMap.selectedSelectable is Unit)
+                    {
+                        if (((Unit)GraphicalMap.selectedSelectable).person != null)
+                        {
+                            me = ((Unit)GraphicalMap.selectedSelectable).person;
+                        }
+                    }
+                    else
+                    {
+                        me = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    }
                     Person them = hex.location.settlement.title.heldBy;
 
                     if (me.state == Person.personState.enthralled)
@@ -128,7 +139,18 @@ namespace Assets.Code
                 try
                 {
                     Hex hex = GraphicalMap.getHexUnderMouse(Input.mousePosition).hex;
-                    Person them = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    Person them = null; 
+                    if (GraphicalMap.selectedSelectable is Unit)
+                    {
+                        if (((Unit)GraphicalMap.selectedSelectable).person != null)
+                        {
+                            them = ((Unit)GraphicalMap.selectedSelectable).person;
+                        }
+                    }
+                    else
+                    {
+                        them = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    }
                     Person me = hex.location.settlement.title.heldBy;
 
                     if (me.state == Person.personState.enthralled)
@@ -175,17 +197,17 @@ namespace Assets.Code
                 if (GraphicalMap.selectedHex != null && GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.person() != null)
                 {
                     Person voter = GraphicalMap.selectedHex.location.person();
-                            Society soc = (Society)voter.society;
-                            if (soc.voteSession == null) { return "No voting currently happening in " + voter.getFullName() + "'s society"; }
-                            VoteOption opt = soc.voteSession.issue.options[0];
-                            foreach (VoteOption o2 in soc.voteSession.issue.options)
-                            {
-                                if (o2.votesFor.Contains(voter))
-                                {
-                                    opt = o2;
-                                    break;
-                                }
-                            }
+                    Society soc = (Society)voter.society;
+                    if (soc.voteSession == null) { return "No voting currently happening in " + voter.getFullName() + "'s society"; }
+                    VoteOption opt = soc.voteSession.issue.options[0];
+                    foreach (VoteOption o2 in soc.voteSession.issue.options)
+                    {
+                        if (o2.votesFor.Contains(voter))
+                        {
+                            opt = o2;
+                            break;
+                        }
+                    }
                     return "The change in liking towards " + voter.getFullName() + " if they vote for their currently preferred option (" + opt.info(soc.voteSession.issue) + ").";
                         
                 }
@@ -363,7 +385,19 @@ namespace Assets.Code
                 Color c = new Color(0, 0, 0, 0.5f);
                 try
                 {
-                    Person me = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    Person me = null;
+                    if (GraphicalMap.selectedSelectable is Unit)
+                    {
+                        if (((Unit)GraphicalMap.selectedSelectable).person != null)
+                        {
+                            me = ((Unit)GraphicalMap.selectedSelectable).person;
+                        }
+                    }
+                    else
+                    {
+                        me = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    }
+
                     Person them = hex.location.settlement.title.heldBy;
                     float liking = (float)them.getRelation(me).getLiking();
                     if (liking > 0)
@@ -397,7 +431,18 @@ namespace Assets.Code
                 Color c = new Color(0, 0, 0, 0.5f);
                 try
                 {
-                    Person me = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    Person me = null;
+                    if (GraphicalMap.selectedSelectable is Unit)
+                    {
+                        if (((Unit)GraphicalMap.selectedSelectable).person != null)
+                        {
+                            me = ((Unit)GraphicalMap.selectedSelectable).person;
+                        }
+                    }
+                    else
+                    {
+                        me = GraphicalMap.selectedHex.location.settlement.title.heldBy;
+                    }
                     Person them = hex.location.settlement.title.heldBy;
                     float liking = (float)me.getRelation(them).getLiking();
                     if (liking > 0)

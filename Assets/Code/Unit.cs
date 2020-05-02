@@ -18,6 +18,8 @@ namespace Assets.Code
         public int hp;
         public int maxHp = 5;
         public int movesTaken = 0;
+        public List<Ability> actions = new List<Ability>();
+        public List<Ability> powers = new List<Ability>();
 
         public List<Unit> hostility = new List<Unit>();
 

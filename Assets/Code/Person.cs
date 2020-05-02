@@ -64,6 +64,7 @@ namespace Assets.Code
                 politics_militarism *= -1;
             }
 
+
             //Add permanent threats
             threat_enshadowedNobles = new ThreatItem(map,this);
             threat_enshadowedNobles.form = ThreatItem.formTypes.ENSHADOWED_NOBLES;
@@ -83,8 +84,7 @@ namespace Assets.Code
         public void turnTick()
         {
             if (World.logging) { log.takeLine("---------Turn " + map.turn + "------------"); }
-
-
+            
             this.targetPrestige = getTargetPrestige(null);
             if (Math.Abs(prestige-targetPrestige) < map.param.person_prestigeDeltaPerTurn)
             {
