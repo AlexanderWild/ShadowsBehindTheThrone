@@ -41,6 +41,11 @@ namespace Assets.Code
             return castable(map,unit.person);
         }
 
+        public override int getCooldown()
+        {
+            return World.staticMap.param.ability_enthrallUnitCooldown;
+        }
+
         public override bool castable(Map map, Hex hex)
         {
             return false;

@@ -43,7 +43,7 @@ overmind_powerRegen: 1
 overmind_singleAbilityPerTurn: True
 econ_multFromBuff: 1.33
 relObj_defaultLiking: 5
-relObj_decayRate: 0.95
+relObj_decayRate: 0.97
 combat_prestigeLossFromConquest: 0
 combat_thresholdAttackStrength: 0.25
 combat_lethality: 0.5
@@ -216,6 +216,7 @@ ability_delayVoteCost: 8
 ability_delayVoteCooldown: 24
 ability_disruptActionCost: 3
 ability_disruptActionDuration: 7
+ability_enthrallUnitCooldown: 32
 insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10
@@ -248,11 +249,14 @@ temporaryThreatConversion: 0.01
 war_battleDeadDur: 4
 combat_popDamageMax: 10
 combat_infraDamageMax: 10
-voting_powerToSwitchMin: 2
+voting_powerToSwitchMin: 4
 voting_likingToSwitchMin: 5
-voting_powerToSwitchPerU: 0.1
+voting_powerToSwitchPerU: 0.2
 voting_likingToSwitchPerU: 0.25
 unit_targetUnitsPerLoc: 0.1
 unit_investigateTime: 4
-units_maxEnthralled: 3
+unit_socialiseAtCourtTime: 3
+unit_socialiseAtCourtMax: 30
+unit_socialiseAtCourtGain: 15
+units_maxEnthralled: 2
 unit_suspicionFromProximity: 0.1

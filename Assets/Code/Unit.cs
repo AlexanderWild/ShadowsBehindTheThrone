@@ -18,7 +18,7 @@ namespace Assets.Code
         public int hp;
         public int maxHp = 5;
         public int movesTaken = 0;
-        public List<Ability> actions = new List<Ability>();
+        public List<Ability> abilities = new List<Ability>();
         public List<Ability> powers = new List<Ability>();
 
         public List<Unit> hostility = new List<Unit>();
@@ -28,6 +28,27 @@ namespace Assets.Code
             this.location = loc;
             this.society = soc;
             loc.units.Add(this);
+        }
+
+        public virtual void turnTick(Map map)
+        {
+            movesTaken = 0;
+            if (hp == 0)
+            {
+                if (map.units.Contains(this)) { die(map, "Death of unknown cause."); }
+                return;
+            }
+            if (checkForDisband(map)) { return; }
+            if (checkForLocDamage(map)) { return; }
+            turnTickInner(map);
+            if (isEnthralled() == false)
+            {
+                turnTickAI(map);
+            }
+            else
+            {
+                if (task != null) { task.turnTick(this); }
+            }
         }
 
         public virtual bool hostileTo (Unit other)
@@ -140,17 +161,6 @@ namespace Assets.Code
                 return task.getLong();
             }
             return "No current task";
-        }
-        public virtual void turnTick(Map map)
-        {
-            movesTaken = 0;
-            if (checkForDisband(map)) { return; }
-            if (checkForLocDamage(map)) { return; }
-            turnTickInner(map);
-            if (isEnthralled() == false)
-            {
-                turnTickAI(map);
-            }
         }
 
         public virtual bool checkForLocDamage(Map map)

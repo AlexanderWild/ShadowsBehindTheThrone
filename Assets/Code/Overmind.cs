@@ -312,7 +312,7 @@ namespace Assets.Code
 
             if (p.isEnthralled())
             {
-                foreach (Ability a in p.actions)
+                foreach (Ability a in p.abilities)
                 {
                     if (a.castable(map, p))
                     {
@@ -361,11 +361,24 @@ namespace Assets.Code
         {
             if (p == null) { return new List<Ability>(); }
             List<Ability> reply = new List<Ability>();
-            foreach (Ability a in abilities)
+            if (p.isEnthralled())
             {
-                if (a.castable(map, p))
+                foreach (Ability a in p.abilities)
                 {
-                    reply.Add(a);
+                    if (a.castable(map, p))
+                    {
+                        reply.Add(a);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Ability a in abilities)
+                {
+                    if (a.castable(map, p))
+                    {
+                        reply.Add(a);
+                    }
                 }
             }
             return reply;
@@ -374,11 +387,24 @@ namespace Assets.Code
         {
             if (p == null) { return new List<Ability>(); }
             List<Ability> reply = new List<Ability>();
-            foreach (Ability a in powers)
+            if (p.isEnthralled())
             {
-                if (a.castable(map, p))
+                foreach (Ability a in p.powers)
                 {
-                    reply.Add(a);
+                    if (a.castable(map, p))
+                    {
+                        reply.Add(a);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Ability a in powers)
+                {
+                    if (a.castable(map, p))
+                    {
+                        reply.Add(a);
+                    }
                 }
             }
             return reply;

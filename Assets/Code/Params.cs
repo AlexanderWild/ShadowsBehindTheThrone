@@ -62,7 +62,7 @@ namespace Assets.Code
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
         
         public double relObj_defaultLiking = 5;
-        public double relObj_decayRate = 0.95;
+        public double relObj_decayRate = 0.97;
 
         public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
         public double combat_thresholdAttackStrength = 0.25;
@@ -246,6 +246,7 @@ namespace Assets.Code
         public int ability_delayVoteCooldown = 24;
         public int ability_disruptActionCost = 3;
         public int ability_disruptActionDuration = 7;
+        public int ability_enthrallUnitCooldown = 32;
 
 
         public double insanity_sanityRegen = 0.1;
@@ -284,14 +285,17 @@ namespace Assets.Code
         public int combat_popDamageMax = 10;
         public int combat_infraDamageMax = 10;
 
-        public int voting_powerToSwitchMin = 2;
+        public int voting_powerToSwitchMin = 4;
         public int voting_likingToSwitchMin = 5;
-        public double voting_powerToSwitchPerU = 0.1;
+        public double voting_powerToSwitchPerU = 0.2;
         public double voting_likingToSwitchPerU = 0.25;
 
         public double unit_targetUnitsPerLoc = 0.1;
         public int unit_investigateTime = 4;
-        public int units_maxEnthralled = 3;
+        public int unit_socialiseAtCourtTime = 3;
+        public int unit_socialiseAtCourtMax = 30;
+        public int unit_socialiseAtCourtGain = 15;
+        public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
 
         public void saveToFile()

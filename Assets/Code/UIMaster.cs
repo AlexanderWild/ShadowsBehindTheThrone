@@ -186,17 +186,37 @@ namespace Assets.Code
             {
                 if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
                 {
-                    List<Ability> abilities = world.map.overmind.getAvailablePowers((Unit)GraphicalMap.selectedSelectable);
-                    List<Ability> uncastables = new List<Ability>();
-                    foreach (Ability a in world.map.overmind.powers)
+                    Unit u = (Unit)GraphicalMap.selectedSelectable;
+                    if (u.isEnthralled())
                     {
-                        if (abilities.Contains(a) == false)
+                        List<Ability> abilities = world.map.overmind.getAvailablePowers(u);
+                        List<Ability> uncastables = new List<Ability>();
+                        foreach (Ability a in u.powers)
                         {
-                            uncastables.Add(a);
+                            if (abilities.Contains(a) == false)
+                            {
+                                uncastables.Add(a);
+                            }
+                        }
+                        if (abilities.Count + uncastables.Count > 0)
+                        {
+                            addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, u).gameObject);
                         }
                     }
-                    addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, (Unit)GraphicalMap.selectedSelectable).gameObject);
-                    return;
+                    else
+                    {
+                        List<Ability> abilities = world.map.overmind.getAvailablePowers((Unit)GraphicalMap.selectedSelectable);
+                        List<Ability> uncastables = new List<Ability>();
+                        foreach (Ability a in world.map.overmind.powers)
+                        {
+                            if (abilities.Contains(a) == false)
+                            {
+                                uncastables.Add(a);
+                            }
+                        }
+                        addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, (Unit)GraphicalMap.selectedSelectable).gameObject);
+                        return;
+                    }
                 }
                 else if (GraphicalMap.selectedHex != null)
                 {
@@ -237,17 +257,53 @@ namespace Assets.Code
             world.audioStore.playClick();
             if (state == uiState.WORLD)
             {
-                if (GraphicalMap.selectedHex == null) { return; }
-                List<Ability> abilities = world.map.overmind.getAvailableAbilities(GraphicalMap.selectedHex);
-                List<Ability> uncastables = new List<Ability>();
-                foreach (Ability a in world.map.overmind.abilities)
+                if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
                 {
-                    if (abilities.Contains(a) == false)
+                    Unit u = (Unit)GraphicalMap.selectedSelectable;
+                    if (u.isEnthralled())
                     {
-                        uncastables.Add(a);
+                        List<Ability> abilities = world.map.overmind.getAvailableAbilities(u);
+                        List<Ability> uncastables = new List<Ability>();
+                        foreach (Ability a in u.abilities)
+                        {
+                            if (abilities.Contains(a) == false)
+                            {
+                                uncastables.Add(a);
+                            }
+                        }
+                        if (abilities.Count + uncastables.Count > 0)
+                        {
+                            addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, u).gameObject);
+                        }
+                    }
+                    else
+                    {
+                        List<Ability> abilities = world.map.overmind.getAvailableAbilities((Unit)GraphicalMap.selectedSelectable);
+                        List<Ability> uncastables = new List<Ability>();
+                        foreach (Ability a in world.map.overmind.abilities)
+                        {
+                            if (abilities.Contains(a) == false)
+                            {
+                                uncastables.Add(a);
+                            }
+                        }
+                        addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, (Unit)GraphicalMap.selectedSelectable).gameObject);
                     }
                 }
-                addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, GraphicalMap.selectedHex).gameObject);
+                else
+                {
+                    if (GraphicalMap.selectedHex == null) { return; }
+                    List<Ability> abilities = world.map.overmind.getAvailableAbilities(GraphicalMap.selectedHex);
+                    List<Ability> uncastables = new List<Ability>();
+                    foreach (Ability a in world.map.overmind.abilities)
+                    {
+                        if (abilities.Contains(a) == false)
+                        {
+                            uncastables.Add(a);
+                        }
+                    }
+                    addBlocker(world.prefabStore.getScrollSet(abilities, uncastables, GraphicalMap.selectedHex).gameObject);
+                }
             }else if (state == uiState.SOCIETY)
             {
 

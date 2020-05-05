@@ -12,6 +12,7 @@ namespace Assets.Code
         public Text taskDesc;
         public Text hasMoved;
         public Text nationText;
+        public Text evidenceText;
         public Image nationFlag1;
         public Image nationFlag2;
         public Image personBack;
@@ -50,6 +51,8 @@ namespace Assets.Code
             }
             nationFlag1.color = unit.society.color;
             nationFlag2.color = unit.society.color2;
+
+            evidenceText.text = "Evidence: " + (int)(100 * unit.person.evidence);
         }
 
         public void clearPerson()

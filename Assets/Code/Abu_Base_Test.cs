@@ -26,7 +26,12 @@ namespace Assets.Code
 
         public override int getCost()
         {
-            return 32;
+            return 0;
+        }
+
+        public override int getCooldown()
+        {
+            return 8;
         }
 
         public override string getDesc()

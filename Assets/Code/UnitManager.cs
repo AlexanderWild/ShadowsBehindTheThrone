@@ -16,6 +16,14 @@ namespace Assets.Code
 
         public void turnTick()
         {
+            int nInvestigators = 0;
+            foreach (Unit u in map.units)
+            {
+                if (u is Unit_Investigator && u.isEnthralled() == false)
+                {
+
+                }
+            }
             if (map.units.Count < map.param.unit_targetUnitsPerLoc * map.locations.Count)
             {
                 List<Society> socs = new List<Society>();

@@ -17,6 +17,7 @@ namespace Assets.Code
         {
             maxHp = 3;
             hp = 3;
+            abilities.Add(new Abu_Base_SocialiseAtCourt());
         }
 
         public override void turnTickInner(Map map)
