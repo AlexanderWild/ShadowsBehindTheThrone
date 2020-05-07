@@ -220,7 +220,8 @@ namespace Assets.Code
 
                 if (nSteps > 128)
                 {
-                    throw new Exception("Map discontinuity detected");
+                    return null;
+                    //throw new Exception("Map discontinuity detected");
                 }
             }
         }
@@ -332,7 +333,7 @@ namespace Assets.Code
                     if (u2.isEnthralled()) {
                         world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting 1HP damage!");
                             }
-                    if (u2.hp < 0)
+                    if (u2.hp <= 0)
                     {
                         u2.die(this,"Attacked by " + u.getName());
                     }

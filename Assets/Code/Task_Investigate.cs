@@ -46,6 +46,15 @@ namespace Assets.Code
 
                         unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsTo.getName(), MsgEvent.LEVEL_RED, false);
                     }
+                    else if (ev.pointsToPerson != null)
+                    {
+                        if (unit.person != null && ev.pointsToPerson != null)
+                        {
+                            unit.person.getRelation(ev.pointsToPerson).suspicion = System.Math.Min(1, unit.person.getRelation(ev.pointsToPerson).suspicion + ev.weight);
+                        }
+
+                        unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsToPerson.getFullName(), MsgEvent.LEVEL_RED, false);
+                    }
 
                     unit.location.evidence.Remove(ev);
                     unit.task = null;

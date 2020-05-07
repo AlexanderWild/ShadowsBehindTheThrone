@@ -726,6 +726,10 @@ namespace Assets.Code
             if (state == personState.enthralled)
             {
                 map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "\n\nTheir death is not the end, you may enthrall a new noble, and continue your work through a new vessel.");
+            }else if (society.hasEnthralled())
+            {
+                map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "");
+
             }
             removeFromGame(v);
         }

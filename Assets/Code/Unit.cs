@@ -102,6 +102,7 @@ namespace Assets.Code
 
         public void die(Map map, string v)
         {
+            person.die(v);
             disband(map, null);
             bool positive = person == null || person.state != Person.personState.enthralledAgent;
             map.addMessage(this.getName() + " dies! " + v, MsgEvent.LEVEL_GREEN, positive);

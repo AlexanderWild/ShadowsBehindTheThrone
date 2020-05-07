@@ -350,7 +350,7 @@ namespace Assets.Code
 
             if (isRebellion)
             {
-                if (isAtWar())
+                if (!isAtWar())
                 {
                     if (this.getCapital() != null)
                     {

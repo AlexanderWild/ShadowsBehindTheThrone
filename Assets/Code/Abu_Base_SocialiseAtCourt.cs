@@ -11,7 +11,7 @@ namespace Assets.Code
             u.task = new Task_SocialiseAtCourt();
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins socialising at court. This will take " + map.param.unit_socialiseAtCourtTime + " turns, after which their relationship" +
-                " with the local noble will improve by " + map.param.unit_socialiseAtCourtGain + ", to a maximum of " + map.param.unit_socialiseAtCourtMax+ ".", u.location.map.world.wordStore.lookup("ABILITY_UNIT_SOCIALISE_AT_COURT"));
+                " with the local noble will improve by up to " + map.param.unit_socialiseAtCourtGain + ", with lower gains the higher the noble's prestige.", u.location.map.world.wordStore.lookup("ABILITY_UNIT_SOCIALISE_AT_COURT"));
 
         }
         public override bool castable(Map map, Unit u)
@@ -40,8 +40,8 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Begins a " + World.staticMap.param.unit_socialiseAtCourtTime + " turn task which will improve noble's liking for the agent by " 
-                + World.staticMap.param.unit_socialiseAtCourtGain + " to a max of " + World.staticMap.param.unit_socialiseAtCourtMax + "."
+            return "Begins a " + World.staticMap.param.unit_socialiseAtCourtTime + " turn task which will improve noble's liking for the agent by up to " 
+                + World.staticMap.param.unit_socialiseAtCourtGain + ", with lower gains the higher the noble's prestige."
                 + "\n[Requires a noble]";
         }
 

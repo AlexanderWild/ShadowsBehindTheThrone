@@ -36,12 +36,17 @@ namespace Assets.Code
                 personBack.sprite = unit.person.getImageBack();
                 personMid.sprite = unit.person.getImageMid();
                 personFore.sprite = unit.person.getImageFore();
+                evidenceText.text = "Evidence: " + (int)(100 * unit.person.evidence) + "%";
             }
 
             if (unit.isEnthralled())
             {
                 if (unit.movesTaken == 0) { hasMoved.text = "Can Move"; }
                 else { hasMoved.text = "Has Taken Turn"; }
+            }
+            else
+            {
+                hasMoved.text = "Not an Enthralled Agent";
             }
 
             nationText.text = unit.society.getName();
@@ -52,7 +57,6 @@ namespace Assets.Code
             nationFlag1.color = unit.society.color;
             nationFlag2.color = unit.society.color2;
 
-            evidenceText.text = "Evidence: " + (int)(100 * unit.person.evidence);
         }
 
         public void clearPerson()
@@ -60,6 +64,7 @@ namespace Assets.Code
             personBack.sprite = world.textureStore.icon_mask;
             personFore.sprite = null;
             personMid.sprite = null;
+            evidenceText.text = "No Evidence";
         }
 
         public void setToNull()
@@ -69,6 +74,7 @@ namespace Assets.Code
             clearPerson();
             hasMoved.text = "";
             taskDesc.text = "";
+            evidenceText.text = "";
         }
     }
 }

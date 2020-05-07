@@ -7,6 +7,9 @@
 	
 -Utilities for assign title are very high
 
+
+-Bunch of green tiles. No set, no soc
+
 	Low criticality:
 
 -Location didn't have province
@@ -26,6 +29,9 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Repeated duke assignments in same turn
+-Some guy voted on war dec but voted for peace
+
 -War across ocean doesn't work, hasn't for a while now, I believe
 -Wordwrap on power info looks ugly
 -Awareness gain on individuals seems too high

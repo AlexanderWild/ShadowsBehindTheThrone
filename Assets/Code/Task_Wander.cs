@@ -69,11 +69,33 @@ namespace Assets.Code
                 return;
             }
 
+            //See if you want to warn this new person about anything
+            if (unit.location.person() != null)
+            {
+                Person noble = unit.location.person();
+                foreach (RelObj rel in unit.person.relations.Values)
+                {
+                    //Goes negative if they suspect more than we do, reaches 1.0 if we suspect 1.0 and they suspect 0.0
+                    if ((rel.suspicion - noble.getRelation(rel.them).suspicion) > Eleven.random.NextDouble())
+                    {
+                        unit.task = new Task_ShareSuspicions();
+                        return;
+                    }
+                }
+            }
+
             wanderTimer += 1;
             if (wanderTimer > wanderDur)
             {
-                //Done wandering, go home to ensure you don't wander too far for too long
-                unit.task = new Task_GoToSocialGroup(unit.society);
+                if (unit.parentLocation != null)
+                {
+                    unit.task = new Task_GoToLocation(unit.parentLocation);
+                }
+                else
+                {
+                    //Done wandering, go home to ensure you don't wander too far for too long
+                    unit.task = new Task_GoToSocialGroup(unit.society);
+                }
             }
         }
     }

@@ -51,11 +51,13 @@ namespace Assets.Code
             //Assignment of sovreign takes priority over any other voting, in the minds of the lords and ladies
             foreach (Title t in society.titles)
             {
+                //Can assign an unassigned title, or hold routine elections
+                bool canHold = t.heldBy == null || (map.turn - t.turnLastAssigned >= map.param.society_minTimeBetweenTitleReassignments);
                 //You can hold emergency elections in the event of upcoming civil war
-                if (society.data_societalStability > 0)
-                {
-                    if (t.heldBy != null && (map.turn - t.turnLastAssigned < map.param.society_minTimeBetweenTitleReassignments)) { continue; }
-                }
+                if (society.data_societalStability < 0 && t == society.sovreign) { canHold = true; }
+
+                if (!canHold) { continue; }
+
                 issue = new VoteIssue_AssignTitle(society, this, t);
 
                 if (t is Title_Sovreign)
@@ -377,7 +379,9 @@ namespace Assets.Code
 
                         //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
                         //Random factor to prevent them all rushing a singular voting choice
-                        double localU = issue.computeUtility(this, option_1, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+                        double uWar = issue.computeUtility(this, option_1, new List<ReasonMsg>());
+                        double uPeace = issue.computeUtility(this, option_0, new List<ReasonMsg>());
+                        double localU =( uWar - uPeace)*Eleven.random.NextDouble();
                         if (localU > bestU)
                         {
                             bestU = localU;

@@ -18,6 +18,11 @@ namespace Assets.Code
             maxHp = 3;
             hp = 3;
             abilities.Add(new Abu_Base_SocialiseAtCourt());
+            abilities.Add(new Abu_Base_PleadCase());
+            abilities.Add(new Abu_Base_Recruit());
+            abilities.Add(new Abu_Base_Disrupt());
+            abilities.Add(new Abu_Base_FalseEvidence());
+            abilities.Add(new Abu_Base_SpreadShadow());
         }
 
         public override void turnTickInner(Map map)
@@ -29,6 +34,7 @@ namespace Assets.Code
             if (this.location.soc == society)
             {
                 sinceHome = 0;
+                /*
                 if (person != null && location.person() != null && location.person().state != Person.personState.broken){
                     foreach (RelObj rel in person.relations.Values)
                     {
@@ -41,6 +47,7 @@ namespace Assets.Code
                         }
                     }
                 }
+                */
             }
             else
             {

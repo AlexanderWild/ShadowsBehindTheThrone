@@ -5,6 +5,7 @@ namespace Assets.Code
     public class Evidence
     {
         public Unit pointsTo;
+        public Person pointsToPerson;
         public double weight;
         public int turnDropped = 0;
 

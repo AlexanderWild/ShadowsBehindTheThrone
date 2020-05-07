@@ -120,7 +120,7 @@ namespace Assets.Code
         public int person_fearLevel_afraid = 100;
         public int person_fearLevel_terrified = 150;
         public double person_dislikeFromNotBeingVotedFor = -30;
-        public double person_votingRelChangePerUtilityPositive = 0.125;//If benefitted by a vote
+        public double person_votingRelChangePerUtilityPositive = 0.1;//If benefitted by a vote
         public double person_votingRelChangePerUtilityNegative = 0.9;//If harmed by a vote
 
         public int econ_buffDuration = 45;
@@ -290,11 +290,19 @@ namespace Assets.Code
         public double voting_powerToSwitchPerU = 0.2;
         public double voting_likingToSwitchPerU = 0.25;
 
+        public int unit_falseEvidenceCooldown = 24;
+        public int unit_disruptDuration = 5;
+        public int unit_disruptCooldown = 10;
         public double unit_targetUnitsPerLoc = 0.1;
         public int unit_investigateTime = 4;
+        public int unit_shareSuspicionTime = 1;
         public int unit_socialiseAtCourtTime = 3;
-        public int unit_socialiseAtCourtMax = 30;
-        public int unit_socialiseAtCourtGain = 15;
+        public int unit_socialiseAtCourtGain = 30;
+        public int unit_pleadCaseTime = 3;
+        public int unit_spreadShadowTime = 7;
+        public double unit_spreadShadowAmount = 0.35;
+        public int unit_spreadShadowMinLiking = 65;
+        public double unit_spreadShadowEvidence = 0.5; 
         public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
 
