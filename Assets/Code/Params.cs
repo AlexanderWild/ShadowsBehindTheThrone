@@ -61,7 +61,7 @@ namespace Assets.Code
 
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
         
-        public double relObj_defaultLiking = 5;
+        public double relObj_defaultLiking = 0;
         public double relObj_decayRate = 0.97;
 
         public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
@@ -74,8 +74,8 @@ namespace Assets.Code
         public int war_defaultLength = 12;
         public double minInformationAvailability = 0.2;
 
-        public double utility_econEffect = 1;
-        public double utility_econEffectOther = 0.1;
+        public double utility_econEffect = 0.75;
+        public double utility_econEffectOther = 0.05;
         public double utility_militaryTargetRelStrengthOffensive = 350;
         public double utility_militaryTargetCompleteProvince = 80;
         public double utility_militaryTargetExpansion = 150;
@@ -155,6 +155,7 @@ namespace Assets.Code
         public double dark_fishmanStartingThreatMult = -0.25;
 
         public int ability_enthrallUnitCost = 0;
+        public int ability_disruptAgentCost = 5;
 
         public int ability_uncannyGlamourEvidence = 10;
         public int ability_uncannyGlamourGain = 15;
@@ -290,17 +291,23 @@ namespace Assets.Code
         public double voting_powerToSwitchPerU = 0.2;
         public double voting_likingToSwitchPerU = 0.25;
 
+        public double unit_recruitEvidence = 0.1;
+        public int unit_investigatorsSeeEnthralled = 1;
+        public double unit_investigatorsPerProvince = 0.66;
         public int unit_falseEvidenceCooldown = 24;
         public int unit_disruptDuration = 5;
         public int unit_disruptCooldown = 10;
         public double unit_targetUnitsPerLoc = 0.1;
         public int unit_investigateTime = 4;
+        public int unit_investigateNobleTime = 4;
+        public double unit_investigateNobleEvidenceGain = 0.20;
+        public int unit_investigateNobleCooldown = 16;
         public int unit_shareSuspicionTime = 1;
         public int unit_socialiseAtCourtTime = 3;
         public int unit_socialiseAtCourtGain = 30;
         public int unit_pleadCaseTime = 3;
-        public int unit_spreadShadowTime = 7;
-        public double unit_spreadShadowAmount = 0.35;
+        public int unit_spreadShadowTime = 8;
+        public double unit_spreadShadowAmount = 0.6;
         public int unit_spreadShadowMinLiking = 65;
         public double unit_spreadShadowEvidence = 0.5; 
         public int units_maxEnthralled = 2;

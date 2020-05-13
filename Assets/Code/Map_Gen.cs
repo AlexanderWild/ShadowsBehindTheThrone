@@ -37,7 +37,6 @@ namespace Assets.Code
         public int param_nSmallForests = 20;
         public float param_targetHexesPerTown = 20;
         public int param_isolatedTownMinIsolation = 3;//Dist between an isolated town and its nearest neighbour
-        public int param_locations_per_province = 5;
         public int param_maxTerritoryRange = 7;
         public int param_margin = 0;
         public int param_nSerpents = 3;
@@ -45,7 +44,8 @@ namespace Assets.Code
         public float param_seaMargin = 0;
         public double param_cityPlacementMult = 7;
         public float param_cityPlacementMapLimit = 0.35f;
-        public int param_provinceStepSize = 5;
+        public int param_provinceStepSizeX = 6;
+        public int param_provinceStepSizeY = 6;
 
         public int countLandmassID;
         public int nLandmasses;
@@ -197,7 +197,7 @@ namespace Assets.Code
                 {
                     if (l2.province == loc.province && l2.soc != null)
                     {
-                        //loc.soc = l2.soc;
+                        loc.soc = l2.soc;
                     }
                 }
                 if (loc.soc == null)
@@ -216,9 +216,9 @@ namespace Assets.Code
 
         public void placeProvinces()
         {
-            for (int i = 0; i < sx; i += param_provinceStepSize)
+            for (int i = 0; i < sx; i += param_provinceStepSizeX)
             {
-                for (int j = 0; j < sy; j += param_provinceStepSize)
+                for (int j = 0; j < sy; j += param_provinceStepSizeY)
                 {
                     int x = Eleven.random.Next(5) + i - 2;
                     int y = Eleven.random.Next(5) + j - 2;

@@ -1,5 +1,9 @@
 	High criticality:
 
+-For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
+
+-Able to fishmen cult a ruins settlement
+
 -Unselectable units hanging out on a sea tile
 	Had HP
 

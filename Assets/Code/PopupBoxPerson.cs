@@ -11,7 +11,6 @@ namespace Assets.Code
     {
         public Text title;
         public Text body;
-        public Text body2;
         //public Selector_Person selector;
         public Person person;
         public Image layerBack;
@@ -68,7 +67,7 @@ namespace Assets.Code
 
         public float ySize()
         {
-            return 100;
+            return 75;
         }
 
         public void setTargetY(float y)
@@ -83,13 +82,13 @@ namespace Assets.Code
         public string getTitle()
         {
             //return person.getFullName();
-            return "dummyTitle";
+            return "";
         }
 
         public string getBody()
         {
             ///return selector.getDescriptionOfSelection() ;
-            return "Body of selection command";
+            return "";
         }
 
         public bool overwriteSidebar()
@@ -100,6 +99,15 @@ namespace Assets.Code
         public bool selectable()
         {
             return true;
+        }
+
+        public void setTo(Person person)
+        {
+            title.text = person.getFullName();
+            layerBack.sprite = person.getImageBack();
+            layerBorder.sprite = person.getImageBorder();
+            layerFore.sprite = person.getImageFore();
+            layerMid.sprite = person.getImageMid();
         }
     }
 }

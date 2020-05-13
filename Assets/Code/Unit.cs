@@ -53,6 +53,7 @@ namespace Assets.Code
 
         public virtual bool hostileTo (Unit other)
         {
+            if (this == other) { return false; }
             if (this.society.hostileTo(other))
             {
                 return true;

@@ -37,6 +37,7 @@ namespace Assets.Code
 
         public double politics_militarism;
 
+        public int investigationLastTurn = 0;
         public enum personState { normal,enthralled,broken,lightbringer,enthralledAgent};
         public personState state = personState.normal;
         public bool isDead;

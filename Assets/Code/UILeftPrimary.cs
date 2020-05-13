@@ -110,6 +110,27 @@ namespace Assets.Code
             checkData();
         }
 
+        public void bViewRelations()
+        {
+            master.world.audioStore.playClick();
+
+            if (GraphicalMap.selectedHex == null) { return; }
+            if (GraphicalMap.selectedHex.location == null) { return; }
+            if (GraphicalMap.selectedHex.location.person() == null) { return; }
+
+            List<RelObj> rels = new List<RelObj>();
+            foreach (RelObj rel in GraphicalMap.selectedHex.location.person().relations.Values)
+            {
+                if (Math.Abs(rel.getLiking()) > 10)
+                {
+                    rels.Add(rel);
+                }
+            }
+            rels.Sort(uiUnit);
+
+            master.addBlocker(master.world.prefabStore.getScrollSetRelations(rels).gameObject);
+        }
+
         public void bShowUnlanded()
         {
             master.world.audioStore.playClick();

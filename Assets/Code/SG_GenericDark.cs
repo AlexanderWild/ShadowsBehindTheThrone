@@ -27,6 +27,12 @@ namespace Assets.Code
             return true;
         }
 
+        public override bool hostileTo(Unit u)
+        {
+            if (u.isEnthralled() == false) { return true; }
+            return base.hostileTo(u);
+        }
+
         public override void turnTick()
         {
             base.turnTick();

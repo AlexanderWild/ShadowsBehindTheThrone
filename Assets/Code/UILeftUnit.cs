@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
 
 namespace Assets.Code
 {
-    public class UILeftUnit : MonoBehaviour
+    public class UILeftUnit : MonoBehaviour , IComparer<RelObj>
     {
         public Text title;
         public Text desc;
@@ -59,6 +61,27 @@ namespace Assets.Code
 
         }
 
+        public void bViewRelationships()
+        {
+            if (GraphicalMap.selectedSelectable is Unit == false) { return; }
+            Unit u = (Unit)GraphicalMap.selectedSelectable;
+            if (u.person == null) { return; }
+            if (u.person.state == Person.personState.enthralledAgent) { return; }
+            if (u.person.state == Person.personState.enthralled) { return; }
+
+            List<RelObj> rels = new List<RelObj>();
+            foreach (RelObj rel in u.person.relations.Values)
+            {
+                if (Math.Abs(rel.getLiking()) > 10)
+                {
+                    rels.Add(rel);
+                }
+            }
+            rels.Sort(this);
+
+            world.ui.addBlocker(world.prefabStore.getScrollSetRelations(rels).gameObject);
+        }
+
         public void clearPerson()
         {
             personBack.sprite = world.textureStore.icon_mask;
@@ -75,6 +98,13 @@ namespace Assets.Code
             hasMoved.text = "";
             taskDesc.text = "";
             evidenceText.text = "";
+        }
+
+        public int Compare(RelObj x, RelObj y)
+        {
+            double a = Math.Abs(x.getLiking());
+            double b = Math.Abs(y.getLiking());
+            return Math.Sign(b - a);
         }
     }
 }

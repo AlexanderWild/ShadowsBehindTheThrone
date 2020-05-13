@@ -11,7 +11,7 @@ namespace Assets.Code
 
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;
-            e2.weight = 0.25;
+            e2.weight = 0.1;
             u.location.evidence.Add(e2);
 
             int n = 0;
@@ -25,7 +25,7 @@ namespace Assets.Code
             }
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " distrupts the activities of " + n + " other units in " + u.location.getName() + ", they will need time before they can act again.",
-                u.location.map.world.wordStore.lookup("ABILITY_DISRUPT"));
+                u.location.map.world.wordStore.lookup("ABILITY_UNIT_DISRUPT"));
 
         }
         public override bool castable(Map map, Unit u)
@@ -52,7 +52,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Cancels all the actions of units in this location, disrupting them for " + World.staticMap.param.unit_disruptDuration + " turns. Leaves 25% evidence."
+            return "Cancels all the actions of units in this location, disrupting them for " + World.staticMap.param.unit_disruptDuration + " turns. Leaves 10% evidence."
                 + "\n[Requires a unit in the location]";
         }
 

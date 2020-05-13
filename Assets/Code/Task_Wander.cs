@@ -33,6 +33,7 @@ namespace Assets.Code
             Location chosen = null;
             foreach (Location loc in neighbours)
             {
+                if (loc.soc != null && loc.soc.hostileTo(unit)) { continue; }
                 if (loc.evidence.Count > 0)
                 {
                     chosen = loc;
@@ -79,6 +80,28 @@ namespace Assets.Code
                     if ((rel.suspicion - noble.getRelation(rel.them).suspicion) > Eleven.random.NextDouble())
                     {
                         unit.task = new Task_ShareSuspicions();
+                        return;
+                    }
+                }
+
+                if (noble.state == Person.personState.enthralled)
+                {
+                    bool alreadyInv = false;
+                    foreach (Unit u2 in unit.location.units)
+                    {
+                        if (u2 is Unit_Investigator && u2.task is Task_InvestigateNoble)
+                        {
+                            alreadyInv = true;
+                            break;
+                        }
+                    }
+                    if ((!alreadyInv) && unit.location.map.turn - noble.investigationLastTurn > unit.location.map.param.unit_investigateNobleCooldown)
+                    {
+                        unit.location.map.world.prefabStore.popMsg(unit.getName() + " is beginning an investigation regarding " + noble.getFullName() + ", as they suspected they were under the influence of dark powers." +
+                            " If their investigation ends, " +  noble.getFullName() + " will gain " + ((int)(unit.location.map.param.unit_investigateNobleEvidenceGain * 100))
+                            + "% evidence. This task can be disrupted to prevent the evidence being generated, or the evidence can be given away to other friendly nobles.");
+
+                        unit.task = new Task_InvestigateNoble();
                         return;
                     }
                 }

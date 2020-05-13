@@ -12,6 +12,7 @@ namespace Assets.Code
         public InputField suspicionGain;
         public InputField powerGain;
         public InputField awarenessGain;
+        public InputField investigatorPercentField;
         public InputField seedField;
         public InputField sizeXField;
         public InputField sizeYField;
@@ -24,11 +25,14 @@ namespace Assets.Code
         public Button bMedium;
         public Button bHard;
         public Toggle tAwareness;
+        public Toggle tInvestigatorsSee;
 
+        public bool investigatorsSee = false;
         public bool useAwareness = false;
         public int susGainPercent = 100;
         public int powerGainPercent = 100;
         public int awarenessGainSpeed = 100;
+        public int investigatorCount = 100;
         public int currentSeed;
         public int sizeX = 32;
         public int sizeY = 24;
@@ -37,6 +41,7 @@ namespace Assets.Code
         public void dismiss()
         {
             useAwareness = tAwareness.isOn;
+            investigatorsSee = tInvestigatorsSee.isOn;
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed,this);
         }
@@ -53,6 +58,7 @@ namespace Assets.Code
             susGainPercent = 75;
             powerGainPercent = 150;
             awarenessGainSpeed = 50;
+            investigatorCount = 50;
             setTextFieldsToCurrentValues();
         }
 
@@ -63,6 +69,7 @@ namespace Assets.Code
             susGainPercent = 100;
             powerGainPercent = 100;
             awarenessGainSpeed = 100;
+            investigatorCount = 100;
             setTextFieldsToCurrentValues();
         }
         public void setHard()
@@ -72,6 +79,7 @@ namespace Assets.Code
             susGainPercent = 150;
             powerGainPercent = 50;
             awarenessGainSpeed = 150;
+            investigatorCount = 150;
             setTextFieldsToCurrentValues();
         }
         public void setTextFieldsToCurrentValues()
@@ -80,6 +88,7 @@ namespace Assets.Code
             suspicionGain.text = "" + susGainPercent;
             powerGain.text = "" + powerGainPercent;
             awarenessGain.text = "" + awarenessGainSpeed;
+            investigatorPercentField.text = "" + investigatorCount;
             seedField.text = "" + currentSeed;
             sizeXField.text = "" + sizeX;
             sizeYField.text = "" + sizeY;
@@ -110,6 +119,15 @@ namespace Assets.Code
                 if (val >= 0 && val < 1000)
                 {
                     powerGainPercent = val;
+                }
+            }
+            catch (Exception e) { }
+            try
+            {
+                int val = int.Parse(investigatorPercentField.text);
+                if (val >= 0 && val < 1000)
+                {
+                    investigatorCount = val;
                 }
             }
             catch (Exception e) { }

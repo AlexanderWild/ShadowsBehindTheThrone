@@ -22,6 +22,12 @@ namespace Assets.Code
             this.threat_mult = map.param.dark_fleshThreatMult;
         }
 
+        public override bool hostileTo(Unit u)
+        {
+            if (u.isEnthralled() == false) { return true; }
+            return base.hostileTo(u);
+        }
+
         public override string getTypeName()
         {
             return "Player Controlled";

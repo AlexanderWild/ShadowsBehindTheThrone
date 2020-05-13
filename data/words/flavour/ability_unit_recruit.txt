@@ -1,0 +1,2 @@
+ABILITY_UNIT_RECRUIT
+Mercenaries and porters can be hired for coin, guides and journeymen employed via guilds, men-at-arms levied from the local garrison. The forces under your agent's control swell, back to what could be hoped for had the prior lot not met their untimely end.

@@ -58,12 +58,13 @@ namespace Assets.Code
                 {
                     foreach (Person voter in option.votesFor)
                     {
-                        p.getRelation(voter).addLiking(society.map.param.society_dislikeFromFailedProposal, "Did not vote on my proposed measure " + this.ToString(), society.map.turn);
+                        p.getRelation(voter).addLiking(society.map.param.society_dislikeFromFailedProposal, "Did not vote on my proposed measure " + this.ToString(), 
+                            society.map.turn,RelObj.STACK_NONE);
                     }
                 }
                 foreach (Person voter in option.votesFor)
                 {
-                    p.getRelation(voter).addLiking(deltaRel,"Vote on issue " + this.ToString(),society.map.turn);
+                    p.getRelation(voter).addLiking(deltaRel,"Vote on issue " + this.ToString(),society.map.turn, RelObj.STACK_REPLACE);
                 }
             }
         }

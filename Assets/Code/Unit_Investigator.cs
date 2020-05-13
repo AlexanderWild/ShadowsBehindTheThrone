@@ -20,6 +20,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Base_SocialiseAtCourt());
             abilities.Add(new Abu_Base_PleadCase());
             abilities.Add(new Abu_Base_Recruit());
+            abilities.Add(new Abu_Base_RecruitOutlaws());
             abilities.Add(new Abu_Base_Disrupt());
             abilities.Add(new Abu_Base_FalseEvidence());
             abilities.Add(new Abu_Base_SpreadShadow());
@@ -55,14 +56,17 @@ namespace Assets.Code
             }
 
             //Scan local units
-            foreach (Unit u in location.units)
+            if (map.param.unit_investigatorsSeeEnthralled == 1)
             {
-                if (u.isEnthralled())
+                foreach (Unit u in location.units)
                 {
-                    if (this.person != null && u.person != null)
+                    if (u.isEnthralled())
                     {
-                        this.person.getRelation(u.person).suspicion = Math.Min(1, this.person.getRelation(u.person).suspicion + map.param.unit_suspicionFromProximity);
-                        map.addMessage(this.getName() + " has gained suspicion of " + u.getName(), MsgEvent.LEVEL_RED, false);
+                        if (this.person != null && u.person != null)
+                        {
+                            this.person.getRelation(u.person).suspicion = Math.Min(1, this.person.getRelation(u.person).suspicion + map.param.unit_suspicionFromProximity);
+                            map.addMessage(this.getName() + " has gained suspicion of " + u.getName(), MsgEvent.LEVEL_RED, false);
+                        }
                     }
                 }
             }
@@ -108,7 +112,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "LORUM IPSUM";
+            return "Investigators are agents who wander near their home location searching for evidence of dark powers. They can analyse evidence and recognise both enthralled agents and enthralled nobles.";
         }
     }
 }

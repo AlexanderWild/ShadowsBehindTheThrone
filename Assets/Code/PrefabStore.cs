@@ -26,6 +26,7 @@ namespace Assets.Code
         public GameObject prefabLinkLine;
         public GameObject prefabMsg;
         public GameObject prefabImgMsg;
+        public GameObject prefabVoteMsg;
         public GameObject prefabSlot;
         public GameObject prefabParticleCombat;
         public GameObject prefabAlertPopup;
@@ -318,6 +319,30 @@ namespace Assets.Code
             return msg;
         }
 
+        public PopupScrollSet getScrollSetRelations(List<RelObj> rels)
+        {
+            PopupScrollSet specific = getInnerScrollSet();
+            
+            foreach (RelObj rel in rels)
+            {
+                PopupBoxPerson box = getPersonBox();
+                box.gameObject.transform.SetParent(specific.gameObject.transform);
+                specific.scrollables.Add(box);
+                box.setTo(rel.them);
+                box.body.text = "Liking: " + (int)rel.getLiking() + "\nSuspicion: " + (int)rel.suspicion*100 + "%";
+                float scale = (float)rel.getLiking();
+                if (scale > 1) { scale = 1; }
+                else if (scale < -1) { scale = -1; }
+                float r = 0;
+                float g = 0;
+                float b = 0;
+                if (scale > 0) { g = scale; }
+                else { r = -scale; }
+                box.body.color = new Color(r, g, b);
+            }
+
+            return specific;
+        }
         public PopupScrollSet getScrollSet(List<int> indices)
         {
             PopupScrollSet specific = getInnerScrollSet();
@@ -458,6 +483,7 @@ namespace Assets.Code
             specific.seedField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.suspicionGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.awarenessGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.investigatorPercentField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.powerGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.sizeXField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.sizeYField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
@@ -508,6 +534,19 @@ namespace Assets.Code
             if (q == 0) { specific.img.sprite = ui.world.textureStore.boxImg_blue; }
             if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
             if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popVoteMsg(string title,string subtitle,string body)
+        {
+            if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabVoteMsg) as GameObject;
+            PopupVotingMsg specific = obj.GetComponent<PopupVotingMsg>();
+            specific.ui = ui;
+            specific.title.text = title;
+            specific.subtitle.text = subtitle;
+            specific.textBody.text = body;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }

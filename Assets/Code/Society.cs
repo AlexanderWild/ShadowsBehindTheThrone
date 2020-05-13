@@ -412,7 +412,8 @@ namespace Assets.Code
                 computeCapital();
                 return capital;
             }
-            if (capital.settlement.location.soc != this) { computeCapital(); }
+            if (capital.settlement == null) { computeCapital();return capital; }
+            if (capital.soc != this) { computeCapital(); }
             return capital;
         }
 
@@ -713,7 +714,10 @@ namespace Assets.Code
                     }
                     str = str.Substring(0, str.Length - 2);
 
-                    map.world.prefabStore.popImgMsg(str, "Voting concluded. Issue: " + voteSession.issue.getLargeDesc());
+                    string strTitle = "Vote Concluded on " + voteSession.issue.ToString();
+                    string strSubtitle = "Outcome: " + winner.info(voteSession.issue);
+                    map.world.prefabStore.popVoteMsg(strTitle,strSubtitle,voteSession.issue.getLargeDesc());
+                    //map.world.prefabStore.popImgMsg(str, "Voting concluded. Issue: " + voteSession.issue.getLargeDesc());
                 }
 
                 voteSession.issue.implement(winner);

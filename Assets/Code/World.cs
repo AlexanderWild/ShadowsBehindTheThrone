@@ -148,9 +148,11 @@ namespace Assets.Code
             param.overmind_powerRegen *= opts.powerGainPercent / 100f;
             param.person_suspicionPerEvidence *= opts.susGainPercent / 100f;
             param.awareness_master_speed *= opts.awarenessGainSpeed / 100f;
+            param.unit_investigatorsPerProvince *= opts.investigatorCount / 100f;
             param.mapGen_sizeX = opts.sizeX;
             param.mapGen_sizeY = opts.sizeY;
             param.mapGen_burnInSteps = opts.burnIn;
+            param.unit_investigatorsSeeEnthralled = opts.investigatorsSee? 1 : 0;
             param.useAwareness = opts.useAwareness ? 1:0 ;
 
             map = new Map(param);
