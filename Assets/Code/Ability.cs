@@ -47,7 +47,7 @@ namespace Assets.Code
         {
 
         }
-        public void cast(Map map, Unit unit)
+        public virtual void cast(Map map, Unit unit)
         {
             map.overmind.power -= getCost();
             if (map.param.overmind_singleAbilityPerTurn) { map.overmind.hasTakenAction = true; }

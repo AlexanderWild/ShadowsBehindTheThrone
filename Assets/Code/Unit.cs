@@ -23,7 +23,7 @@ namespace Assets.Code
 
         public List<Unit> hostility = new List<Unit>();
 
-        public Unit(Location loc,Society soc)
+        public Unit(Location loc,SocialGroup soc)
         {
             this.location = loc;
             this.society = soc;
@@ -49,6 +49,23 @@ namespace Assets.Code
             {
                 if (task != null) { task.turnTick(this); }
             }
+        }
+        
+        public virtual bool hasSpecialInfo()
+        {
+            return false;
+        }
+        public virtual string specialInfoLong()
+        {
+            return "This unit has no special mechanics.";
+        }
+        public virtual string specialInfo()
+        {
+            return "";
+        }
+        public virtual Color specialInfoColour()
+        {
+            return Color.white;
         }
 
         public virtual bool hostileTo (Unit other)
@@ -116,7 +133,10 @@ namespace Assets.Code
 
         public virtual void disband(Map map,string msg)
         {
-            person.isDead = true;
+            if (person != null)
+            {
+                person.isDead = true;
+            }
             map.remove(this);
             location.units.Remove(this);
             if (msg != null)

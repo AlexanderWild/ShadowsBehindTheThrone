@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Abu_Base_Test: Ability
+    public class Abu_Base_Test: AbilityUnit
     {
 
         public override void castInner(Map map, Unit u)

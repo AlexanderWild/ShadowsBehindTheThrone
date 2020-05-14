@@ -3,26 +3,22 @@
 
 namespace Assets.Code
 {
-    public class Abu_Base_Recruit: AbilityUnit
+    public class Abu_Merch_LoadCargo: AbilityUnit
     {
 
         public override void castInner(Map map, Unit u)
         {
-            u.hp += 1;
-            if (u.hp > u.maxHp)
-            {
-                u.hp = u.maxHp;
-            }
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " recruits from " + u.location.getName() + ", replenishing their forces. They are now at " + u.hp + "/" + u.maxHp + ".",
-                u.location.map.world.wordStore.lookup("ABILITY_RECRUIT"));
+            u.task = new Task_LoadCargo();
+
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins loading cargo, ready to be sold for profit in distant towns.", u.location.map.world.wordStore.lookup("ABILITY_UNIT_LOAD_CARGO"));
 
         }
         public override bool castable(Map map, Unit u)
         {
-            if (u.hp == u.maxHp) { return false; }
             if (u.location.settlement == null) { return false; }
             if (u.location.soc != u.society) { return false; }
-            if (u.location.soc is Society == false) { return false; }
+            if (u is Unit_Merchant == false) { return false; }
+            if (((Unit_Merchant)u).cargo >= 100) { return false; }
             return true;
         }
 
@@ -39,23 +35,23 @@ namespace Assets.Code
 
         public override int getCooldown()
         {
-            return 3;
+            return 0;
         }
 
         public override string getDesc()
         {
-            return "Recruits from the local population, replenishing the forces of this agent (+1HP)"
-                + "\n[Requires a human settlement from the agent's society]";
+            return "Begins loading cargo into your mechant's reserves. You load twice as fast in a metropole, city, town or village."
+                + "\n[Requires a location in your agent's nation with a settlement]";
         }
 
         public override string getName()
         {
-            return "Recruit";
+            return "Load Cargo";
         }
 
         public override Sprite getSprite(Map map)
         {
-            return map.world.textureStore.icon_shield;
+            return map.world.textureStore.icon_eyes;
         }
     }
 }

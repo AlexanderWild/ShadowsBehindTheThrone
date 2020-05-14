@@ -3,25 +3,18 @@
 
 namespace Assets.Code
 {
-    public class Abu_Base_RecruitOutlaws: AbilityUnit
+    public class Abu_Base_BecomeVampire: Ability
     {
 
         public override void castInner(Map map, Unit u)
         {
-            u.hp += 1;
-            if (u.hp > u.maxHp)
-            {
-                u.hp = u.maxHp;
-            }
-            u.person.evidence += map.param.unit_recruitEvidence;
-            if (u.person.evidence > 1) { u.person.evidence = 1; }
-
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " recruits from " + u.location.getName() +
-                ", replenishing their forces but adding " + (int)(100*map.param.unit_recruitEvidence) + "% . They are now at " + u.hp + "/" + u.maxHp + " and " +
-                (int)(100*u.person.evidence) +  "% evidence.",
-                u.location.map.world.wordStore.lookup("ABILITY_RECRUIT_OUTLAWS"));
-
+            Unit u2 = new Unit_Vampire(u.location, u.society);
+            u2.person = u.person;
+            u.person = null;
+            u.disband(map, "Became vampire");
+            u2.location.units.Add(u2);
         }
+
         public override bool castable(Map map, Unit u)
         {
             if (u.hp == u.maxHp) { return false; }

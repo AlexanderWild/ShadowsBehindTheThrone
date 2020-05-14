@@ -15,6 +15,8 @@ namespace Assets.Code
         public Text hasMoved;
         public Text nationText;
         public Text evidenceText;
+        public Text specialText;
+        public Text specialDesc;
         public Image nationFlag1;
         public Image nationFlag2;
         public Image personBack;
@@ -59,6 +61,10 @@ namespace Assets.Code
             nationFlag1.color = unit.society.color;
             nationFlag2.color = unit.society.color2;
 
+
+            specialDesc.text = unit.specialInfoLong();
+            specialText.color = unit.specialInfoColour();
+            specialText.text = unit.specialInfo();
         }
 
         public void bViewRelationships()
@@ -98,6 +104,9 @@ namespace Assets.Code
             hasMoved.text = "";
             taskDesc.text = "";
             evidenceText.text = "";
+            specialDesc.text = "No unit selected";
+            specialDesc.color = Color.white;
+            specialText.text = "";
         }
 
         public int Compare(RelObj x, RelObj y)

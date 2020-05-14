@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class Unit_Investigator : Unit
+    public class Unit_Vampire : Unit
     {
-        public int sinceHome = 0;
+        int sinceHome = 0;
 
-        public int wanderDur = 8;
+        int wanderDur = 8;
 
         
-        public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
+        public Unit_Vampire(Location loc,SocialGroup soc) : base(loc,soc)
         {
             maxHp = 3;
             hp = 3;
@@ -97,22 +97,22 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
-            return world.textureStore.unit_lookingGlass;
+            return world.textureStore.unit_ghoul;
         }
 
         public override string getTitleM()
         {
-            return "Investigator";
+            return "Vampire";
         }
 
         public override string getTitleF()
         {
-            return "Investigator";
+            return "Vampire";
         }
 
         public override string getDesc()
         {
-            return "Investigators are agents who wander near their home location searching for evidence of dark powers. They can analyse evidence and recognise both enthralled agents and enthralled nobles.";
+            return "Vampires are charming and aristrocratic, but depend on a constant supply of blood to survive, which leaves a trail of evidence.";
         }
     }
 }
