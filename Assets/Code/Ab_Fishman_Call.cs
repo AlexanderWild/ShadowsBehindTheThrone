@@ -44,6 +44,7 @@ namespace Assets.Code
             if (hex.location.soc == null) { return false; }
             if (!(hex.location.soc is Society)) { return false; }
             if (hex.location.settlement == null) { return false; }
+            if (hex.location.settlement.isHuman == false) { return false; }
 
             foreach (Location l in hex.location.getNeighbours())
             {

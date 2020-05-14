@@ -27,7 +27,8 @@ namespace Assets.Code
             if (hex.location.settlement == null) { return false; }
             if (hex.location.soc == null) { return false; }
             if (hex.location.soc is Society == false) { return false; }
-            
+            if (hex.location.settlement.isHuman == false) { return false; }
+
             foreach (Location loc in hex.location.getNeighbours())
             {
                 if (loc.soc != null && loc.soc is SG_Fishmen) { return true; }

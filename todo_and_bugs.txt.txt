@@ -3,12 +3,14 @@
 
 -For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
 
--Able to fishmen cult a ruins settlement
 
 -Unselectable units hanging out on a sea tile (unreplicated in a long time. Fixed?)
 	Had HP
 
 	Medium criticality:
+	
+-Recruit outlaws doesn't actually give evidence
+	Or evidence doesn't actually cause suspicion
 	
 -Utilities for assign title are very high
 
@@ -35,6 +37,7 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Able to fishmen cult a ruins settlement
 -Taking a unit action takes your overmind's action
 -Repeated duke assignments in same turn
 -Some guy voted on war dec but voted for peace
