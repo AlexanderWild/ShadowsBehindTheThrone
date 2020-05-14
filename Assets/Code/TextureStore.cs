@@ -23,6 +23,7 @@ namespace Assets.Code
         public Sprite slotCount;
         public Sprite slotBasic;
 
+        public Sprite boxImg_coins;
         public Sprite boxImg_ship;
         public Sprite boxImg_thumb;
         public Sprite boxImg_blue;
@@ -73,6 +74,7 @@ namespace Assets.Code
         public Sprite icon_moon;
         public Sprite icon_fog;
         public Sprite icon_vampire;
+        public Sprite icon_coins;
 
         public Sprite icon_combat;
 

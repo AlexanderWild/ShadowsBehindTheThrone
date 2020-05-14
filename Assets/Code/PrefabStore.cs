@@ -521,7 +521,7 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
-        public void popImgMsg(string body,string flavour)
+        public void popImgMsg(string body,string flavour,int img=0)
         {
             if (world.displayMessages == false) { return; }
 
@@ -530,10 +530,16 @@ namespace Assets.Code
             specific.ui = ui;
             specific.textBody.text = body;
             specific.textFlavour.text = flavour;
-            int q = Eleven.random.Next(3);
-            if (q == 0) { specific.img.sprite = ui.world.textureStore.boxImg_blue; }
-            if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
-            if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
+            if (img == 0)
+            {
+                int q = Eleven.random.Next(3);
+                if (q == 0) { specific.img.sprite = ui.world.textureStore.boxImg_blue; }
+                if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
+                if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
+            }else if (img == 1)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_coins;
+            }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }

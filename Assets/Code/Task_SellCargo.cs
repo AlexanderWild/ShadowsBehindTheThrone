@@ -23,6 +23,7 @@ namespace Assets.Code
             if (loc.settlement == null) { return 0; }
             float sellMult = 1;
             if (seller == loc.soc) { sellMult = 0.5f; }
+            if (loc.soc.getNeighbours().Contains(seller)) { sellMult = 0.75f; }
             if (loc.settlement is Set_City)
             {
                 Set_City city = (Set_City)loc.settlement;

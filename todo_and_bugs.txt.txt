@@ -14,6 +14,7 @@
 
 
 -Bunch of green tiles. No set, no soc
+	Unhandled terrain type
 
 	Low criticality:
 

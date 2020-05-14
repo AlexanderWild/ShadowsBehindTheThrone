@@ -14,7 +14,7 @@ namespace Assets.Code
             float profit = task.getSaleValue(u.society, u.location);
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins selling cargo, generating wealth. Every turn they will sell 10% of their cargo, with a proft of " +((int)(100 * profit))
                 + "%. Metropoles, cities and towns give greater profit, and selling in your home nation generates less than selling in foreign lands."
-                , u.location.map.world.wordStore.lookup("ABILITY_UNIT_SELL_CARGO"));
+                , u.location.map.world.wordStore.lookup("ABILITY_UNIT_SELL_CARGO"), 1);
 
         }
         public override bool castable(Map map, Unit u)
@@ -55,7 +55,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(Map map)
         {
-            return map.world.textureStore.icon_eyes;
+            return map.world.textureStore.icon_coins;
         }
     }
 }

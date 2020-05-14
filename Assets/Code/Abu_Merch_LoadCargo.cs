@@ -10,7 +10,8 @@ namespace Assets.Code
         {
             u.task = new Task_LoadCargo();
 
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins loading cargo, ready to be sold for profit in distant towns.", u.location.map.world.wordStore.lookup("ABILITY_UNIT_LOAD_CARGO"));
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins loading cargo, ready to be sold for profit in distant towns.",
+                u.location.map.world.wordStore.lookup("ABILITY_UNIT_LOAD_CARGO"),1);
 
         }
         public override bool castable(Map map, Unit u)
@@ -51,7 +52,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(Map map)
         {
-            return map.world.textureStore.icon_eyes;
+            return map.world.textureStore.icon_coins;
         }
     }
 }

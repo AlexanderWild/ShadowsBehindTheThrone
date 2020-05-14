@@ -127,6 +127,7 @@ dark_evilThreatMult: 2
 dark_fleshThreatMult: 2
 dark_fishmanStartingThreatMult: -0.25
 ability_enthrallUnitCost: 0
+ability_disruptAgentCost: 5
 ability_uncannyGlamourEvidence: 10
 ability_uncannyGlamourGain: 15
 ability_uncannyGlamourCost: 10

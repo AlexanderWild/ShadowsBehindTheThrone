@@ -18,6 +18,7 @@ namespace Assets.Code
             hp = 2;
             abilities.Add(new Abu_Merch_LoadCargo());
             abilities.Add(new Abu_Merch_SellCargo());
+            abilities.Add(new Abu_Merch_SpendWealth());
             abilities.Add(new Abu_Base_PleadCase());
             abilities.Add(new Abu_Base_Recruit());
             abilities.Add(new Abu_Base_RecruitOutlaws());

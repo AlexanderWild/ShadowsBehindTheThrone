@@ -1,0 +1,2 @@
+ABILITY_UNIT_SELL_CARGO
+The caravan unloads its wares in the market. Exotic spices, the flavours of lands far away. Rare gemstones, unseen here but as plentiful as pebbles in their native island. Valuable metals and expensive silks.
