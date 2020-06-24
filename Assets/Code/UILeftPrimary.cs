@@ -31,6 +31,9 @@ namespace Assets.Code
         public Text prestigeDescText;
         public Text actionText;
         public Text actionDesc;
+        public Text infiltrationText;
+        public Text infiltrationVals;
+        public Text securityDescText;
         public Image profileBack;
         public Image profileMid;
         public Image profileFore;
@@ -294,6 +297,9 @@ namespace Assets.Code
                 locNumsBody.text = "";
                 locNumsNumbers.text = "";
                 locFlavour.text = "";
+                infiltrationText.text = "No Infiltration Possible";
+                infiltrationVals.text = "";
+                securityDescText.text = "";
             }
             else
             {
@@ -308,6 +314,8 @@ namespace Assets.Code
                 string valuesBody = "";
                 string valuesNumbers = "";
 
+                infiltrationText.text = "No Infiltration Possible";
+                securityDescText.text = "";
                 Hex hex = loc.hex;
                 bodyText += "\nProvince: " + hex.province.name;
                 foreach (EconTrait t in hex.province.econTraits)
@@ -343,6 +351,18 @@ namespace Assets.Code
 
                 if (loc.settlement != null)
                 {
+                    if (loc.soc != null && loc.soc is Society)
+                    {
+                        List<ReasonMsg> reasons = new List<ReasonMsg>();
+                        int sec = loc.settlement.getSecurity(reasons);
+                        infiltrationText.text = "Infiltration:\nSecurity Level:";
+                        infiltrationVals.text = "" + (int)(100 * loc.settlement.infiltration) + "%\n" + (int)(sec);
+                        securityDescText.text = "Security Level: " + sec;
+                        foreach (ReasonMsg msg in reasons)
+                        {
+                            securityDescText.text += "\n+" + (int)(msg.value) + " from " + msg.msg;
+                        }
+                    }
                     locFlavour.text = loc.settlement.getFlavour();
                     if (loc.settlement is Set_City)
                     {

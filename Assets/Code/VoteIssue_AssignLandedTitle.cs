@@ -142,6 +142,7 @@ namespace Assets.Code
 
             World.log(option.person.getFullName() + " has been granted the title of " + title.getName());
             title.heldBy = option.person;
+            title.settlement.infiltration = 0;
             option.person.title_land = title;
             if (title.settlement != null)
             {

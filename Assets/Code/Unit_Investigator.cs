@@ -17,12 +17,14 @@ namespace Assets.Code
         {
             maxHp = 3;
             hp = 3;
+            abilities.Add(new Abu_Base_Infiltrate());
             abilities.Add(new Abu_Base_SocialiseAtCourt());
             abilities.Add(new Abu_Base_PleadCase());
             abilities.Add(new Abu_Base_Recruit());
             abilities.Add(new Abu_Base_RecruitOutlaws());
             abilities.Add(new Abu_Base_Disrupt());
             abilities.Add(new Abu_Base_FalseEvidence());
+            abilities.Add(new Abu_Base_EnthrallNoble());
             abilities.Add(new Abu_Base_SpreadShadow());
         }
 

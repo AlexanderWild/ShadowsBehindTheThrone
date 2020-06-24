@@ -103,7 +103,10 @@ namespace Assets.Code
         {
             if (overmind.enthralled == null)
             {
-                turnMessages.Add(new MsgEvent("You may enthrall a noble. Use your power on a low-prestige noble", MsgEvent.LEVEL_BLUE, true));
+                if (param.overmind_allowDirectEnthralling == 1)
+                {
+                    turnMessages.Add(new MsgEvent("You may enthrall a noble. Use your power on a low-prestige noble", MsgEvent.LEVEL_BLUE, true));
+                }
             }
             else
             {

@@ -21,7 +21,15 @@ namespace Assets.Code
         {
             if (unit.person == null) { unit.task = null;return; }
             if (unit.location.person() == null) { unit.task = null;  return; }
-            if (unit.location.person().getRelation(unit.person).getLiking() < unit.location.map.param.unit_spreadShadowMinLiking/2)
+            if (unit.location.settlement == null) { unit.task = null;return; }
+            if (unit.location.settlement.infiltration < unit.location.map.param.ability_unit_spreadShadowInfiltrationReq)
+            {
+
+                unit.location.map.world.prefabStore.popMsg(unit.getName() + " can no longer spread shadow over " + unit.location.person().getFullName() + " as the infiltration level has dropped too low.");
+                unit.task = null;
+                return;
+            }
+            if (unit.location.person().getRelation(unit.person).getLiking() < unit.location.map.param.ability_unit_spreadShadowMinLiking/2)
             {
 
                 unit.location.map.world.prefabStore.popMsg(unit.getName() + " can no longer spread shadow over " + unit.location.person().getFullName() + " as their liking is too low.");

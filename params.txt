@@ -38,6 +38,7 @@ action_cleanseSoulTurns: 7
 action_cleanseSoulAmount: 0.1
 action_investigateEvidence: 0.25
 flashEnthrallables: True
+overmind_allowDirectEnthralling: 1
 overmind_maxPower: 24
 overmind_powerRegen: 1
 overmind_singleAbilityPerTurn: True
@@ -218,6 +219,8 @@ ability_delayVoteCooldown: 24
 ability_disruptActionCost: 3
 ability_disruptActionDuration: 7
 ability_enthrallUnitCooldown: 32
+ability_unit_spreadShadowInfiltrationReq: 0.5
+ability_unit_spreadShadowMinLiking: 35
 insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10
@@ -269,9 +272,12 @@ unit_shareSuspicionTime: 1
 unit_socialiseAtCourtTime: 3
 unit_socialiseAtCourtGain: 30
 unit_pleadCaseTime: 3
+unit_infiltrateTime: 3
+unit_infiltrateAmount: 1
+unit_divisorOffset: 2
+unit_infiltrateEvidence: 0.2
 unit_spreadShadowTime: 8
 unit_spreadShadowAmount: 0.6
-unit_spreadShadowMinLiking: 65
 unit_spreadShadowEvidence: 0.5
 units_maxEnthralled: 2
 unit_suspicionFromProximity: 0.1

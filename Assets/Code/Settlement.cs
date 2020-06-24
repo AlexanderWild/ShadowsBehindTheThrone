@@ -18,6 +18,8 @@ namespace Assets.Code
         public double defensiveStrengthRegen = 0.33;
         public double defensiveStrengthCurrent = 0;
         public double defensiveStrengthMax;
+        public double infiltration = 0;
+        public int security;
         public bool isHuman = false;//Mainly used to determine whether it can be maintained by a human society
         public int lastAssigned = -1;
 
@@ -123,6 +125,85 @@ namespace Assets.Code
                     title.heldBy = null;
                 }
             }
+        }
+
+
+        public virtual int getSecurity(List<ReasonMsg> reasons)
+        {
+            int security = 0;
+            if (this.isHuman && location.soc != null && location.soc is Society)
+            {
+                Society soc = (Society)location.soc;
+                if (this.title != null && title.heldBy != null)
+                {
+                    if (title.heldBy.society.getSovreign() == title.heldBy)
+                    {
+                        if (soc.lastTurnLocs.Count >= location.map.param.society_nPeopleForEmpire)
+                        {
+                            security += 5;
+                            reasons.Add(new ReasonMsg("Major Sovreign", 5));
+                        }
+                        else if (soc.lastTurnLocs.Count >= location.map.param.society_nPeopleForKingdom)
+                        {
+                            security += 4;
+                            reasons.Add(new ReasonMsg("Sovreign", 4));
+                        }
+                        else
+                        {
+                            security += 2;
+                            reasons.Add(new ReasonMsg("Minor Sovreign", 2));
+                        }
+                    }
+                    else
+                    {
+                        bool isDuke = false;
+                        foreach (Title t in title.heldBy.titles)
+                        {
+                            if (t is Title_ProvinceRuler)
+                            {
+                                if (soc.lastTurnLocs.Count >= location.map.param.society_nPeopleForEmpire)
+                                {
+                                    security += 4;
+                                    reasons.Add(new ReasonMsg("High Ranking Noble", 4));
+                                }
+                                else if (soc.lastTurnLocs.Count >= location.map.param.society_nPeopleForKingdom)
+                                {
+                                    security += 3;
+                                    reasons.Add(new ReasonMsg("High Ranking Noble", 3));
+                                }
+                                else
+                                {
+                                    security += 2;
+                                    reasons.Add(new ReasonMsg("High Ranking Noble", 2));
+                                }
+                                isDuke = true;
+                                break;
+                            }
+                        }
+                        if (!isDuke)
+                        {
+                            security += 1;
+                            reasons.Add(new ReasonMsg("Low Rank Noble", 1));
+                        }
+                    }
+                }
+                if (soc.posture == Society.militaryPosture.defensive)
+                {
+                    security += 1;
+                    reasons.Add(new ReasonMsg("Defensive Society", 1));
+                }
+                if (soc.posture == Society.militaryPosture.introverted)
+                {
+                    security += 2;
+                    reasons.Add(new ReasonMsg("Introverted Society", 2));
+                }
+                if (soc.posture == Society.militaryPosture.offensive)
+                {
+                    reasons.Add(new ReasonMsg("Offensive Society", 0));
+                }
+            }
+            
+            return security;
         }
 
         public virtual Sprite getSprite()

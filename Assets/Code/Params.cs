@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Assets.Code
 {
@@ -55,6 +56,7 @@ namespace Assets.Code
         public double action_investigateEvidence = 0.25;
 
         public bool flashEnthrallables = true;
+        public int overmind_allowDirectEnthralling = 1;
         public int overmind_maxPower = 24;
         public double overmind_powerRegen = 1.0;
         public bool overmind_singleAbilityPerTurn = true;
@@ -249,6 +251,10 @@ namespace Assets.Code
         public int ability_disruptActionDuration = 7;
         public int ability_enthrallUnitCooldown = 32;
 
+        public double ability_unit_enthrallNobleReq = 0.9;
+        public double ability_unit_spreadShadowInfiltrationReq = 0.5;
+        public int ability_unit_spreadShadowMinLiking = 35;
+
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;
@@ -306,9 +312,12 @@ namespace Assets.Code
         public int unit_socialiseAtCourtTime = 3;
         public int unit_socialiseAtCourtGain = 30;
         public int unit_pleadCaseTime = 3;
+        public int unit_infiltrateTime = 3;
+        public double unit_infiltrateAmount = 1;
+        public double unit_divisorOffset = 2;
+        public double unit_infiltrateEvidence = 0.2;
         public int unit_spreadShadowTime = 8;
         public double unit_spreadShadowAmount = 0.6;
-        public int unit_spreadShadowMinLiking = 65;
         public double unit_spreadShadowEvidence = 0.5; 
         public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
