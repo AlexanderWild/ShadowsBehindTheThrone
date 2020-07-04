@@ -342,6 +342,7 @@ namespace Assets.Code
                     }
                     double fromTraits = 1;
                     foreach (Trait t in traits) { fromTraits *= t.suspicionMult(); }
+                    if (rel.suspicion > p.evidence * map.param.relObj_suspicionLimiterMult) { continue; }
                     rel.suspicion += infoAvail * evidenceMult * map.param.person_suspicionPerEvidence * fromTraits;
                 }
             }

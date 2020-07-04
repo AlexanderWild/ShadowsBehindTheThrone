@@ -36,6 +36,10 @@ namespace Assets.Code
         public string pathPrefix = "";
         public static string separator = "";
         public bool isWindows = false;
+        public static World self;
+
+        public static int autosaveCount = 5;
+        public static int autosavePeriod = 10;
 
         public List<God> potentialGods = new List<God>();
         public List<God> chosenGods = new List<God>();
@@ -62,6 +66,8 @@ namespace Assets.Code
 
         public void Update()
         {
+            if (self == null) { self = this; }
+
             if (lastFrame == -1) {
                 lastFrame = Time.realtimeSinceStartup;
                 return;
@@ -252,6 +258,9 @@ namespace Assets.Code
             ui.setToWorld();
         }
 
+        /*
+         *Not used by button. Used by cheats and suchlike if need be
+        */
         public void bEndTurn()
         {
             if (turnLock) { return; }
@@ -345,7 +354,7 @@ namespace Assets.Code
             ui.addBlocker(prefabStore.getScrollSetThreats(threats).gameObject);
         }
 
-        public void save(string filename)
+        public void save(string filename,bool popMsg=true)
         {
             try
             {
@@ -383,7 +392,10 @@ namespace Assets.Code
                 world.map.world = world;
                 staticMap = map;
 
-                world.prefabStore.popMsg("Game saved as: " + filename);
+                if (popMsg)
+                {
+                    world.prefabStore.popMsg("Game saved as: " + filename);
+                }
 
                 //// step 1: parse the JSON data
                 //fsData data = fsJsonParser.Parse(serializedState);
@@ -412,6 +424,14 @@ namespace Assets.Code
             World.Log("load clicked");
             load("quicksave.sv");
         }
+        public void bLoad()
+        {
+            audioStore.playClick();
+
+            World.Log("load clicked");
+            prefabStore.popScrollSetSaves();
+        }
+
         public void bDumpData()
         {
             World.log("nSocieties " + map.socialGroups.Count);

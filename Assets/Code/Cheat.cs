@@ -23,10 +23,11 @@ namespace Assets.Code
                 if (command == "testsave")
                 {
                     map.world.save("testSave.sv");
+                    //map.world.prefabStore.popAutosave();
                 }
                 if (command == "testload")
                 {
-                    map.world.load("testSave.sv");
+                    //map.world.load("testSave.sv");
                 }
                 if (command == "shadow")
                 {

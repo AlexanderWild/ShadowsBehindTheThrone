@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -39,6 +40,7 @@ namespace Assets.Code
         public GameObject personBox;
         public GameObject voteBox;
         public GameObject abilityBox;
+        public GameObject saveBox;
         public GameObject popScrollVoteIssue;
         public GameObject xBoxDate;
         public GameObject xBoxThreat;
@@ -59,6 +61,7 @@ namespace Assets.Code
         public GameObject prefabCombatParticle;
         public GameObject prefabPopVoterBar;
         public GameObject prefabPopOptBar;
+        public GameObject prefabAutosave;
 
         public PopOptBar getVoteOptBar(VoteOption opt,VoteSession sess)
         {
@@ -233,6 +236,7 @@ namespace Assets.Code
 
             return specific;
         }
+
         public PopupXScroll getScrollSetVotes(Person p, VoteIssue vi)
         {
             PopupXScroll specific = getInnerXScrollSet();
@@ -300,6 +304,35 @@ namespace Assets.Code
 
             return specific;
         }
+        public void popScrollSetSaves()
+        {
+            PopupScrollSet specific = getInnerScrollSet();
+
+            var info = new DirectoryInfo(".");
+            var fileInfo = info.GetFiles();
+            List<FileInfo> files = new List<FileInfo>();
+            foreach (FileInfo file in fileInfo)
+            {
+                if (file.Name.EndsWith(".sv")){
+                    files.Add(file);
+                }
+            }
+            if (files.Count > 0)
+            {
+                foreach (FileInfo file in files)
+                {
+                    var saveBox = getSaveBox();
+                    saveBox.setTo(file);
+                    saveBox.gameObject.transform.SetParent(saveBox.gameObject.transform);
+                    specific.scrollables.Add(saveBox);
+                }
+            }
+            else { 
+                popMsg("No save games found to load");
+            }
+
+            ui.addBlocker(specific.gameObject);
+        }
 
         public PopupTutorialMsg getTutorial(int item)
         {
@@ -329,7 +362,7 @@ namespace Assets.Code
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
                 specific.scrollables.Add(box);
                 box.setTo(rel.them);
-                box.body.text = "Liking: " + (int)rel.getLiking() + "\nSuspicion: " + (int)rel.suspicion*100 + "%";
+                box.body.text = "Liking: " + (int)rel.getLiking() + "\nSuspicion: " + (int)(rel.suspicion*100) + "%";
                 float scale = (float)rel.getLiking();
                 if (scale > 1) { scale = 1; }
                 else if (scale < -1) { scale = -1; }
@@ -450,6 +483,14 @@ namespace Assets.Code
 
             return specific;
         }
+        public PopupBoxSavegame getSaveBox()
+        {
+            GameObject obj = Instantiate(saveBox) as GameObject;
+            PopupBoxSavegame specific = obj.GetComponent<PopupBoxSavegame>();
+            //specific.setTo(viewer, p, select);
+
+            return specific;
+        }
         public PopupBoxAbility getAbilityBox(Ability a,Hex hex)
         {
             GameObject obj = Instantiate(abilityBox) as GameObject;
@@ -518,6 +559,17 @@ namespace Assets.Code
             PopupMsg specific = obj.GetComponent<PopupMsg>();
             specific.ui = ui;
             specific.text.text = words;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popAutosave()
+        {
+            if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabAutosave) as GameObject;
+            PopupAutosaveDialog specific = obj.GetComponent<PopupAutosaveDialog>();
+            specific.ui = ui;
+            specific.text.text = "Saving game...";
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }

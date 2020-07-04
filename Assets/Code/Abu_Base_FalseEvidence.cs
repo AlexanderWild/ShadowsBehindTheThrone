@@ -11,16 +11,11 @@ namespace Assets.Code
 
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;
-            e2.weight = 0.5;
+            e2.weight = 0.25;
             u.location.evidence.Add(e2);
 
-            Evidence e1 = new Evidence(map.turn);
-            e1.pointsToPerson = u.location.person();
-            e1.weight = 0.5;
-            u.location.evidence.Add(e1);
-
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " plants evidence against " + u.location.person().getFullName() + ", which will be found by investigators (evidence strength 50%)." +
-                " They also leave behind evidence incriminating themselves (evidence strength 50%).",
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " plants evidence on " + u.location.person().getFullName() + ", increasing their evidence by 10%." +
+                " They also leave behind evidence incriminating themselves (evidence strength 25%).",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_FALSE_EVIDENCE"));
 
         }
@@ -28,6 +23,8 @@ namespace Assets.Code
         {
             if (u.location.person() == null) { return false; }
             if (u.location.person().titles.Count > 0) { return false; }
+            if (u.location.settlement == null) { return false; }
+            if (u.location.settlement.infiltration < map.param.ability_unit_falseEvidenceInfiltration) { return false; }
             return true;
         }
 
@@ -49,8 +46,8 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Places a piece of evidence against a low-ranking noble which will lead to 50% suspicion against them by any investigator which finds it. Places similar evidence against your investigator"
-                + "\n[Requires a noble without an elected title]";
+            return "Increases the evidence on a noble by 10%. Places findable evidence against your investigator (25%)"
+                + "\n[Requires infiltration above " + (int)(100*World.staticMap.param.ability_unit_falseEvidenceInfiltration) + "%]";
         }
 
         public override string getName()

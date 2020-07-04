@@ -62,7 +62,8 @@ namespace Assets.Code
         public bool overmind_singleAbilityPerTurn = true;
 
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
-        
+
+        public double relObj_suspicionLimiterMult = 2.5;
         public double relObj_defaultLiking = 0;
         public double relObj_decayRate = 0.97;
 
@@ -254,6 +255,7 @@ namespace Assets.Code
         public double ability_unit_enthrallNobleReq = 0.9;
         public double ability_unit_spreadShadowInfiltrationReq = 0.5;
         public int ability_unit_spreadShadowMinLiking = 35;
+        public double ability_unit_falseEvidenceInfiltration = 0.4;
 
 
         public double insanity_sanityRegen = 0.1;

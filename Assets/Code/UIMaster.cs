@@ -145,6 +145,11 @@ namespace Assets.Code
             world.turnLock = false;
 
             checkData();
+
+            if (World.autosavePeriod != -1 && world.map.turn % World.autosavePeriod == 0)
+            {
+                world.prefabStore.popAutosave();
+            }
         }
 
         public void checkData()
