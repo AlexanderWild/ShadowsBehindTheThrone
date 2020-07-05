@@ -16,11 +16,13 @@ namespace Assets.Code
         public UIMaster ui;
         public Text mouseEdgeText;
         public Text soundEffectText;
+        public Text autosaveText;
 
         public void Update()
         {
             mouseEdgeText.text = map.param.option_edgeScroll == 1 ? "On" : "Off";
             soundEffectText.text = ui.world.audioStore.effectVolume == 0 ? "Off" : "On";
+            autosaveText.text = World.autosavePeriod == -1 ? "Off" : "On";
         }
 
         public void toggleEdgeScroll()
@@ -37,6 +39,10 @@ namespace Assets.Code
         {
             ui.world.audioStore.playClickInfo();
             ui.removeBlocker(this.gameObject);
+        }
+        public void autosaveToggle()
+        {
+            World.autosavePeriod = World.autosavePeriod == -1 ? 10 : -1;
         }
     }
 }

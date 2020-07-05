@@ -482,7 +482,7 @@ namespace Assets.Code
                     {
                         if (u.person == null) { continue; }
                         if (getRelation(u.person).getLiking() >= 0) { continue; }
-                        if (society.enemies.Contains(unit)) { continue; }
+                        if (society.enemies.Contains(u)) { continue; }
                         issue = new VoteIssue_CondemnAgent(society, u, this);
                         VoteOption option_0 = new VoteOption();
                         option_0.index = 0;

@@ -142,6 +142,49 @@ namespace Assets.Code
                 p.proto.turnTick(p,this);
             }
             checkPropertiesEndOfTurn();
+
+            if (soc != null && soc is Society) {
+                foreach (Evidence e in evidence)
+                {
+                    if (e.assignedInvestigator != null)
+                    {
+                        if (map.units.Contains(e.assignedInvestigator) == false) { e.assignedInvestigator = null; }//Dead
+                        else if (e.assignedInvestigator.location != this && e.assignedInvestigator.task is Task_GoToClue == false)
+                        {
+                            e.assignedInvestigator = null;//Disrupted
+                        }
+                    }
+                    if (e.assignedInvestigator == null)
+                    {
+                        double minDist = 0;
+                        Unit bestU = null;
+                        foreach (Unit u in map.units)
+                        {
+                            if (
+                                u is Unit_Investigator &&
+                                u.person != null &&
+                                u.person.state != Person.personState.enthralledAgent &&
+                                u.task is Task_Wander &&
+                                u.location.evidence.Count == 0)
+                            {
+                                double dist = map.getDist(u.location, this);
+                                dist *= Eleven.random.NextDouble();
+                                if (dist < minDist || bestU == null)
+                                {
+                                    bestU = u;
+                                    minDist = dist;
+                                }
+                            }
+                        }
+                        if (bestU != null)
+                        {
+                            e.assignedInvestigator = bestU;
+                            bestU.task = new Task_GoToClue(this);
+                            map.world.prefabStore.popMsg(bestU.getName() + " has learnt of evidence in " + this.getName() + " and is travelling to investigate.");
+                        }
+                    }
+            }
+            }
         }
 
         public void checkPropertiesEndOfTurn()

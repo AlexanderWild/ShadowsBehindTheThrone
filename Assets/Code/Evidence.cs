@@ -8,6 +8,7 @@ namespace Assets.Code
         public Person pointsToPerson;
         public double weight;
         public int turnDropped = 0;
+        public Unit assignedInvestigator;
 
         public Evidence(int turn)
         {

@@ -8,13 +8,27 @@ namespace Assets.Code
 
         public override void castInner(Map map, Unit u)
         {
-            //u.task = new Task_SpreadShadow();
+            if (map.overmind.enthralled != null)
+            {
+                map.world.prefabStore.popMsg("You already have an enthralled noble, and may only have one at a time. Use apoptosis to kill them if you need a new one.");
+                return;
+            }
 
-            //u.location.map.world.prefabStore.popImgMsg(u.getName() + " beings darkening the soul of " + u.location.person().getFullName() + "." +
-            //    " This will take " + map.param.unit_spreadShadowTime + " turns, after which " + u.location.person().getFullName() + "'s shadow will increase by "
-            //    + (int)(100*map.param.unit_spreadShadowAmount) + "%. This will leave " + ((int)(100*World.staticMap.param.unit_spreadShadowEvidence))+ "  evidence.",
-            //    u.location.map.world.wordStore.lookup("ABILITY_UNIT_SPREAD_SHADOW"));
 
+            if (u.location.person() != null)
+            {
+                u.location.person().state = Person.personState.enthralled;
+                map.overmind.enthralled = u.location.person();
+            }
+            else
+            {
+
+                map.world.prefabStore.popMsg("No noble present in this location.");
+                return;
+            }
+
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " brings " + u.location.person().getFullName() + " under your command, enthralling them to your will.",
+                u.location.map.world.wordStore.lookup("ABILITY_UNIT_ENTHRALL_NOBLE"));
         }
         public override bool castable(Map map, Unit u)
         {

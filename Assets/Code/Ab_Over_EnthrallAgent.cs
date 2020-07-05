@@ -16,7 +16,7 @@ namespace Assets.Code
 
             Evidence ev = new Evidence(map.turn);
             ev.pointsTo = other;
-            ev.weight = 0.34;
+            ev.weight = 0.66;
             other.location.evidence.Add(ev);
 
             other.task = null;

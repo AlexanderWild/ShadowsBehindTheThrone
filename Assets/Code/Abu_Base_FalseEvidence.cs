@@ -22,7 +22,6 @@ namespace Assets.Code
         public override bool castable(Map map, Unit u)
         {
             if (u.location.person() == null) { return false; }
-            if (u.location.person().titles.Count > 0) { return false; }
             if (u.location.settlement == null) { return false; }
             if (u.location.settlement.infiltration < map.param.ability_unit_falseEvidenceInfiltration) { return false; }
             return true;

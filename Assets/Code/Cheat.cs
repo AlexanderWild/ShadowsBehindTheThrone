@@ -164,7 +164,12 @@ namespace Assets.Code
                         World.log("Attempting to build blocker");
                         map.world.ui.addBlocker(map.world.prefabStore.getScrollSet(soc.voteSession, soc.voteSession.issue.options).gameObject);
                     }
-                    
+
+                }
+                if (command == "infiltrate")
+                {
+                    GraphicalMap.selectedHex.location.settlement.infiltration = 1;
+                    World.log("Infiltrate");
                 }
                 map.world.ui.checkData();
             }
