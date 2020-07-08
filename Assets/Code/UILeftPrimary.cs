@@ -93,6 +93,19 @@ namespace Assets.Code
         {
             master.world.audioStore.playClick();
 
+            if (GraphicalMap.selectedSelectable != null)
+            {
+                if (GraphicalMap.selectedSelectable is Unit)
+                {
+                    Unit unit = (Unit)GraphicalMap.selectedSelectable;
+                    GraphicalMap.selectedHex = unit.location.hex;
+                }else if (GraphicalMap.selectedSelectable is Property)
+                {
+                    Property pr = (Property)GraphicalMap.selectedSelectable;
+                    GraphicalMap.selectedHex = pr.location.hex;
+                }
+                GraphicalMap.selectedSelectable = null;
+            }
             state = tabState.PERSON;
             checkData();
         }
@@ -101,6 +114,20 @@ namespace Assets.Code
         {
             master.world.audioStore.playClick();
 
+            if (GraphicalMap.selectedSelectable != null)
+            {
+                if (GraphicalMap.selectedSelectable is Unit)
+                {
+                    Unit unit = (Unit)GraphicalMap.selectedSelectable;
+                    GraphicalMap.selectedHex = unit.location.hex;
+                }
+                else if (GraphicalMap.selectedSelectable is Property)
+                {
+                    Property pr = (Property)GraphicalMap.selectedSelectable;
+                    GraphicalMap.selectedHex = pr.location.hex;
+                }
+                GraphicalMap.selectedSelectable = null;
+            }
             state = tabState.SOCIETY;
             checkData();
         }
@@ -109,6 +136,20 @@ namespace Assets.Code
         {
             master.world.audioStore.playClick();
 
+            if (GraphicalMap.selectedSelectable != null)
+            {
+                if (GraphicalMap.selectedSelectable is Unit)
+                {
+                    Unit unit = (Unit)GraphicalMap.selectedSelectable;
+                    GraphicalMap.selectedHex = unit.location.hex;
+                }
+                else if (GraphicalMap.selectedSelectable is Property)
+                {
+                    Property pr = (Property)GraphicalMap.selectedSelectable;
+                    GraphicalMap.selectedHex = pr.location.hex;
+                }
+                GraphicalMap.selectedSelectable = null;
+            }
             state = tabState.LOCATION;
             checkData();
         }

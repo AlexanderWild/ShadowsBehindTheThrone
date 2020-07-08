@@ -18,6 +18,7 @@ namespace Assets.Code
         public bool victoryAchieved = false;
         public bool hasEnthrallAbilities = false;
         public double panicFromPowerUse;
+        public double panicFromCluesDiscovered;
         public int nStartingHumanSettlements;
 
         public Overmind(Map map)
@@ -78,6 +79,9 @@ namespace Assets.Code
             double shadow = map.data_avrgEnshadowment*map.param.panic_panicAtFullShadow;
             panic += shadow;
             reasons.Add(new ReasonMsg("World Shadow", shadow*100));
+
+            panic += panicFromCluesDiscovered;
+            reasons.Add(new ReasonMsg("Evidence Discovered", panicFromCluesDiscovered * 100));
 
             double nHumans = map.data_nSocietyLocations;
             double extinction = (nStartingHumanSettlements - nHumans)/nStartingHumanSettlements;
@@ -152,6 +156,9 @@ namespace Assets.Code
             panicFromPowerUse -= map.param.panic_dropPerTurn;
             if (panicFromPowerUse < 0) { panicFromPowerUse = 0; }
 
+            panicFromCluesDiscovered -= map.param.panic_dropPerTurn;
+            if (panicFromCluesDiscovered < 0) { panicFromCluesDiscovered = 0; }
+
             processEnthralled();
             int count = 0;
             double sum = 0;
@@ -186,6 +193,121 @@ namespace Assets.Code
                     nStartingHumanSettlements += 1;
                 }
             }
+        }
+
+        public List<MsgEvent> getThreats()
+        {
+            List<MsgEvent> reply = new List<MsgEvent>();
+
+            List<Unit> agents = new List<Unit>();
+            foreach (Unit u in map.units)
+            {
+                if (u.isEnthralled()) { agents.Add(u); }
+            }
+            int[] suspicions = new int[agents.Count];
+
+            foreach (SocialGroup sg in map.socialGroups)
+            {
+                bool relevant = false;
+                if (sg.hasEnthralled())
+                {
+                    relevant = true;
+                }
+                if (sg is Society)
+                {
+                    Society soc = (Society)sg;
+                    if (soc.isDarkEmpire)
+                    {
+                        relevant = true;
+                    }
+
+                    foreach (Person p in soc.people)
+                    {
+                        if (p.state == Person.personState.enthralled || p.state == Person.personState.broken) { continue; }
+
+                        for (int i=0;i<agents.Count;i++)
+                        {
+                            Unit u = agents[i];
+                            if (u.person != null)
+                            {
+                                if (p.getRelation(u.person).suspicion > 0)
+                                {
+                                    suspicions[i] += 1;
+                                }
+                            }
+                        }
+                    }
+
+                    if (soc.voteSession != null)
+                    {
+                        if (soc.voteSession.issue is VoteIssue_CondemnAgent)
+                        {
+                            VoteIssue_CondemnAgent issue = (VoteIssue_CondemnAgent)soc.voteSession.issue;
+                            if (issue.target.isEnthralled())
+                            {
+                                reply.Add(new MsgEvent(soc.getName() + " is voting to exile " + issue.target.getName(), MsgEvent.LEVEL_RED, false));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (sg.isDark()) { relevant = true; }
+                }
+
+                if (relevant)
+                {
+                    foreach (SocialGroup s2 in map.socialGroups)
+                    {
+                        if (s2 == sg) { continue; }
+                        if (s2 is Society)
+                        {
+                            Society soc = (Society)s2;
+                            if (soc.offensiveTarget == sg)
+                            {
+                                if (soc.posture == Society.militaryPosture.offensive)
+                                {
+                                    reply.Add(new MsgEvent(soc.getName() + " is offensive and targetting " + sg.getName(), MsgEvent.LEVEL_RED, false));
+                                    if (soc.voteSession != null && soc.voteSession.issue is VoteIssue_DeclareWar)
+                                    {
+                                        reply.Add(new MsgEvent(soc.getName() + " is voting to declare war on " + sg.getName(), MsgEvent.LEVEL_RED, false));
+                                    }
+                                }
+                                else
+                                {
+                                    reply.Add(new MsgEvent(soc.getName() + " is targetting " + sg.getName(), MsgEvent.LEVEL_ORANGE, false));
+                                }
+                            }
+                            else
+                            {
+                                int nThreat = 0;
+                                foreach (Person p in soc.people)
+                                {
+                                    ThreatItem t = p.getGreatestThreat();
+                                    if (t.group == sg)
+                                    {
+                                        nThreat += 1;
+                                    }
+                                }
+                                if (nThreat > 0)
+                                {
+                                    reply.Add(new MsgEvent(nThreat + " nobles from " + soc.getName() + " consider " + sg.getName() + " their greatest threat", MsgEvent.LEVEL_YELLOW, false));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < agents.Count; i++)
+            {
+                if (suspicions[i] > 0)
+                {
+                    reply.Add(new MsgEvent(suspicions[i] + " nobles are suspicious of " + agents[i].getName(), MsgEvent.LEVEL_YELLOW, false));
+
+                }
+            }
+
+                return reply;
         }
 
         public void victory()

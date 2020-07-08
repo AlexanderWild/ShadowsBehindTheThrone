@@ -9,6 +9,7 @@ namespace Assets.Code
         public double weight;
         public int turnDropped = 0;
         public Unit assignedInvestigator;
+        public int rumourCounter;
 
         public Evidence(int turn)
         {

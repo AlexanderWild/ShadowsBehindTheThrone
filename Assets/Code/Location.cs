@@ -156,31 +156,36 @@ namespace Assets.Code
                     }
                     if (e.assignedInvestigator == null)
                     {
-                        double minDist = 0;
-                        Unit bestU = null;
-                        foreach (Unit u in map.units)
+                        e.rumourCounter += 1;
+                        if (e.rumourCounter > 2)
                         {
-                            if (
-                                u is Unit_Investigator &&
-                                u.person != null &&
-                                u.person.state != Person.personState.enthralledAgent &&
-                                u.task is Task_Wander &&
-                                u.location.evidence.Count == 0)
+                            e.rumourCounter = 0;
+                            double minDist = 0;
+                            Unit bestU = null;
+                            foreach (Unit u in map.units)
                             {
-                                double dist = map.getDist(u.location, this);
-                                dist *= Eleven.random.NextDouble();
-                                if (dist < minDist || bestU == null)
+                                if (
+                                    u is Unit_Investigator &&
+                                    u.person != null &&
+                                    u.person.state != Person.personState.enthralledAgent &&
+                                    u.task is Task_Wander &&
+                                    u.location.evidence.Count == 0)
                                 {
-                                    bestU = u;
-                                    minDist = dist;
+                                    double dist = map.getDist(u.location, this);
+                                    dist *= Eleven.random.NextDouble();
+                                    if (dist < minDist || bestU == null)
+                                    {
+                                        bestU = u;
+                                        minDist = dist;
+                                    }
                                 }
                             }
-                        }
-                        if (bestU != null)
-                        {
-                            e.assignedInvestigator = bestU;
-                            bestU.task = new Task_GoToClue(this);
-                            map.world.prefabStore.popMsg(bestU.getName() + " has learnt of evidence in " + this.getName() + " and is travelling to investigate.");
+                            if (bestU != null)
+                            {
+                                e.assignedInvestigator = bestU;
+                                bestU.task = new Task_GoToClue(this);
+                                map.world.prefabStore.popMsg(bestU.getName() + " has learnt of evidence in " + this.getName() + " and is travelling to investigate.");
+                            }
                         }
                     }
             }

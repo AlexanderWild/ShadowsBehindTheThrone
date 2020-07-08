@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -35,9 +36,36 @@ namespace Assets.Code
             ui.world.audioStore.effectVolume = (ui.world.audioStore.effectVolume == 0) ? 1 : 0;
             ui.world.audioStore.playClickInfo();
         }
+
+        public static void load(Map map)
+        {
+            try
+            {
+                if (File.Exists("settings.txt"))
+                {
+                    string data = File.ReadAllText("settings.txt");
+                    string[] split = data.Split(',');
+                    map.param.option_edgeScroll = int.Parse(split[0]);
+                    map.world.audioStore.effectVolume = int.Parse(split[1]);
+                    World.autosavePeriod = int.Parse(split[2]);
+                }
+            }catch(Exception e)
+            {
+
+            }
+        }
+
         public void dismiss()
         {
             ui.world.audioStore.playClickInfo();
+
+            string stateStr = map.param.option_edgeScroll + "," + ui.world.audioStore.effectVolume + "," + World.autosavePeriod;
+            if (File.Exists("settings.txt"))
+            {
+                File.Delete("settings.txt");
+            }
+            File.WriteAllText("settings.txt", stateStr);
+
             ui.removeBlocker(this.gameObject);
         }
         public void autosaveToggle()

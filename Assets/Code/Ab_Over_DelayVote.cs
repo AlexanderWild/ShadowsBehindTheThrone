@@ -49,7 +49,7 @@ namespace Assets.Code
         {
             return "Delay Vote";
         }
-
+ 
         public override Sprite getSprite(Map map)
         {
             return map.world.textureStore.icon_convert;

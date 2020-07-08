@@ -33,6 +33,7 @@ namespace Assets.Code
         public double panic_panicAtFullExtinction = 2;
         public double panic_panicAtFullShadow = 1.75;
         public double panic_canAlly = 0.5;
+        public double panic_fromClueFound = 0.025;
 
         public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;
@@ -302,7 +303,7 @@ namespace Assets.Code
         public double unit_recruitEvidence = 0.1;
         public int unit_investigatorsSeeEnthralled = 1;
         public double unit_investigatorsPerProvince = 0.66;
-        public int unit_falseEvidenceCooldown = 24;
+        public int unit_falseEvidenceCooldown = 8;
         public int unit_disruptDuration = 5;
         public int unit_disruptCooldown = 10;
         public double unit_targetUnitsPerLoc = 0.1;

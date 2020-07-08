@@ -25,9 +25,12 @@ namespace Assets.Code
         public Toggle bPlaces;
         public Toggle bVotes;
         public Toggle bMessages;
+        public Toggle bThreats;
         public Toggle bWars;
 
-        public enum Tab { People, Places, Votes,Messages, Actions ,War};
+        public Text bThreatsText;
+
+        public enum Tab { People, Places, Votes,Messages, Actions ,War,Threats};
         private Tab currentTab;
 
         public void Start()
@@ -35,7 +38,6 @@ namespace Assets.Code
             currentTab = Tab.Messages;
             activeSociety = null;
         }
-
         public void checkData()
         {
             title.text = "";
@@ -46,11 +48,22 @@ namespace Assets.Code
                 GameObject.Destroy(t.gameObject);
             }
 
+
+            if (master.world.map != null && master.world.map.overmind != null)
+            {
+                setThreatButton();
+            }
             activeSociety = getSociety(GraphicalMap.selectedHex);
             if (currentTab == Tab.Messages)
             {
                 title.text = "EVENT MESSAGES";
                 fillMessagesTab();
+                return;
+            }
+            else if (currentTab == Tab.Threats)
+            {
+                title.text = "THREATS";
+                fillThreatsTab();
                 return;
             }
             else if (currentTab == Tab.War)
@@ -125,6 +138,37 @@ namespace Assets.Code
             }
         }
 
+
+        public void setThreatButton()
+        {
+            List<MsgEvent> threats = master.world.map.overmind.getThreats();
+            double worst = 100;
+            foreach (MsgEvent item in threats)
+            {
+                if (item.priority < worst)
+                {
+                    worst = item.priority;
+                }
+            }
+            if (worst > MsgEvent.LEVEL_GRAY)
+            {
+                bThreatsText.color = new Color(0f, 0.7f, 0f);
+            }
+            else if (worst > MsgEvent.LEVEL_YELLOW)
+            {
+                bThreatsText.color = new Color(1f, 1f, 0.7f);
+            }
+            else if (worst > MsgEvent.LEVEL_ORANGE)
+            {
+                bThreatsText.color = new Color(0.8f, 0.8f, 0.3f);
+            }
+            else
+            {
+                bThreatsText.color = new Color(0.8f, 0.0f, 0.0f);
+            }
+            bThreatsText.text = threats.Count + " Threats";
+
+        }
         public void fillMessagesTab()
         {
             if (master.world == null) { return; }
@@ -137,6 +181,20 @@ namespace Assets.Code
                 obj.GetComponent<MonoMapMsg>().SetInfo(msg);
             }
         }
+
+        public void fillThreatsTab()
+        {
+            if (master.world == null) { return; }
+            if (master.world.map == null) { return; }
+            List<MsgEvent> threats = master.world.map.overmind.getThreats();
+            threats.Sort();
+            foreach (MsgEvent msg in threats)
+            {
+                GameObject obj = Instantiate(master.world.prefabStore.mapMsg, listContent);
+                obj.GetComponent<MonoMapMsg>().SetInfo(msg);
+            }
+        }
+
         public void bTestClick(int i)
         {
             World.log("Received data " + i);
@@ -149,6 +207,7 @@ namespace Assets.Code
             else if (bPlaces.isOn) currentTab = Tab.Places;
             else if (bVotes.isOn) currentTab = Tab.Votes;
             else if (bMessages.isOn) currentTab = Tab.Messages;
+            else if (bThreats.isOn) currentTab = Tab.Threats;
             else if (bWars.isOn) currentTab = Tab.War;
 
             checkData();

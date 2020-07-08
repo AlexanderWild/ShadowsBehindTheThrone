@@ -33,6 +33,11 @@ namespace Assets.Code
                 "until they attack the human forces. They can affect coastal cities if they neighbour them to harm the nobles therein.";
         }
 
+
+        public override bool isDark()
+        {
+            return true;
+        }
         public override bool hostileTo(Unit u)
         {
             if (u.isEnthralled() == false) { return true; }

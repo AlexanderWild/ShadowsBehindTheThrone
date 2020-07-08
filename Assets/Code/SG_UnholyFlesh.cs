@@ -28,6 +28,10 @@ namespace Assets.Code
             return base.hostileTo(u);
         }
 
+        public override bool isDark()
+        {
+            return true;
+        }
         public override string getTypeName()
         {
             return "Player Controlled";

@@ -220,5 +220,10 @@ namespace Assets.Code
         {
             this.temporaryThreat += map.param.threat_takeLocation;
         }
+
+        public virtual bool isDark()
+        {
+            return false;
+        }
     }
 }

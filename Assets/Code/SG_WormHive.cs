@@ -51,7 +51,8 @@ namespace Assets.Code
                 }
             }
 
-            if (Eleven.random.NextDouble() < 0.25/(size+1))
+            //if (Eleven.random.NextDouble() < 0.25/(size+1))
+            if (Eleven.random.NextDouble() < 0.15)
             {
                 Location expansion = null;
                 int c = 0;
@@ -79,6 +80,17 @@ namespace Assets.Code
                     expansion.soc = this;
                     expansion.settlement = new Set_WormNest(expansion);
                 }
+            }
+
+            if (!this.isAtWar()) {
+                foreach (SocialGroup sg in this.getNeighbours())
+                {
+                    if (this.currentMilitary > sg.currentMilitary * 1.5)
+                    {
+                        this.map.declareWar(this,sg);
+                        break;
+                    }
+            }
             }
         }
 

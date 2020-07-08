@@ -151,6 +151,11 @@ namespace Assets.Code
                 {
                     World.staticMap.overmind.victory();
                 }
+                if (command == "worm")
+                {
+                    SG_WormHive add = new SG_WormHive(map, GraphicalMap.selectedHex.location);
+                    map.socialGroups.Add(add);
+                }
                 if (command == "placeevidence")
                 {
                     GraphicalMap.selectedHex.location.evidence.Add(new Evidence(map.turn));

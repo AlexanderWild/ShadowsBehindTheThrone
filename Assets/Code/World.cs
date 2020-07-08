@@ -172,6 +172,7 @@ namespace Assets.Code
             map.globalist.buildBasicElements();
             map.gen();
             map.overmind.startedComplete();
+            PopupIOOptions.load(map);
 
 
             //ui.setToWorld();

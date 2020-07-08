@@ -58,6 +58,9 @@ namespace Assets.Code
 
                     unit.location.evidence.Remove(ev);
                     unit.task = null;
+
+                    unit.location.map.overmind.panicFromCluesDiscovered += unit.location.map.param.panic_fromClueFound;
+                    if (unit.location.map.overmind.panicFromCluesDiscovered > 1) { unit.location.map.overmind.panicFromCluesDiscovered = 1; }
                 }
             }
             else
