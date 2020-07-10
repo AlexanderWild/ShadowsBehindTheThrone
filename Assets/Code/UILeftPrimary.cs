@@ -512,6 +512,10 @@ namespace Assets.Code
                     canUsePower = false;
                     canUseAbility = false;
                 }
+                if (GraphicalMap.selectedSelectable is Unit)
+                {
+                    if (((Unit)GraphicalMap.selectedSelectable).isEnthralled()) { canUseAbility = true; }
+                }
 
                 if (master.state == UIMaster.uiState.WORLD)
                 {

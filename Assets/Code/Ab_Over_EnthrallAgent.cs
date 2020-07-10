@@ -10,8 +10,15 @@ namespace Assets.Code
         {
             other.person.state = Person.personState.enthralledAgent;
 
+            string addMsg = "";
+            if (map.overmind.isFirstEnthralledAgent)
+            {
+                map.overmind.isFirstEnthralledAgent = false;
+                this.turnLastCast = 0;
+                addMsg += "\nNo cooldown as this is your first enthralled agent.";
+            }
             map.world.prefabStore.popImgMsg(
-                "You take " + other.getName() + " under your control",
+                "You take " + other.getName() + " under your control" + addMsg,
                 map.world.wordStore.lookup("ABILITY_ENTHRALL_AGENT"));
 
             Evidence ev = new Evidence(map.turn);

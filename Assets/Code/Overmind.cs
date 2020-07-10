@@ -20,7 +20,7 @@ namespace Assets.Code
         public double panicFromPowerUse;
         public double panicFromCluesDiscovered;
         public int nStartingHumanSettlements;
-
+        public bool isFirstEnthralledAgent = true;
         public Overmind(Map map)
         {
             this.map = map;
@@ -203,6 +203,18 @@ namespace Assets.Code
             foreach (Unit u in map.units)
             {
                 if (u.isEnthralled()) { agents.Add(u); }
+                else
+                {
+                    if (u.task is Task_Investigate)
+                    {
+                        reply.Add(new MsgEvent(u.getName() + " is investigating evidence at " + u.location.getName(), MsgEvent.LEVEL_ORANGE, false));
+                    }
+                    else if (u.task is Task_ShareSuspicions)
+                    {
+                        reply.Add(new MsgEvent(u.getName() + " is warning the noble at " + u.location.getName(), MsgEvent.LEVEL_ORANGE, false));
+
+                    }
+                }
             }
             int[] suspicions = new int[agents.Count];
 
@@ -245,7 +257,7 @@ namespace Assets.Code
                             VoteIssue_CondemnAgent issue = (VoteIssue_CondemnAgent)soc.voteSession.issue;
                             if (issue.target.isEnthralled())
                             {
-                                reply.Add(new MsgEvent(soc.getName() + " is voting to exile " + issue.target.getName(), MsgEvent.LEVEL_RED, false));
+                                reply.Add(new MsgEvent(soc.getName() + " is voting to condemn " + issue.target.getName(), MsgEvent.LEVEL_RED, false));
                             }
                         }
                     }

@@ -535,6 +535,7 @@ namespace Assets.Code
             specific.bHard.onClick.AddListener(delegate { specific.setHard(); });
 
             specific.currentSeed = Eleven.random.Next();
+            specific.currentSeed = 0;
             specific.setTextFieldsToCurrentValues();
             ui.addBlocker(specific.gameObject);
         }
