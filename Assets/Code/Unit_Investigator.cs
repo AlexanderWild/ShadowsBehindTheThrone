@@ -14,6 +14,7 @@ namespace Assets.Code
 
         public Unit victim;
         public Location falseEvidenceDropLocation;
+        public int victimUses = 0;
         
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {

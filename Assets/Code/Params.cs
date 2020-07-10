@@ -253,7 +253,8 @@ namespace Assets.Code
         public int ability_disruptActionDuration = 7;
         public int ability_enthrallUnitCooldown = 32;
 
-        public double ability_unit_falseAccusationEffect = 0.35;
+        public int ability_unit_falseAccusationCharges = 3;
+        public double ability_unit_falseAccusationEffect = 0.25;
         public double ability_unit_enthrallNobleReq = 0.9;
         public double ability_unit_spreadShadowInfiltrationReq = 0.5;
         public int ability_unit_spreadShadowMinLiking = 35;

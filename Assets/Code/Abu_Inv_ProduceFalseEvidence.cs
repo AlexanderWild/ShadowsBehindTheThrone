@@ -18,7 +18,9 @@ namespace Assets.Code
                 }
             }
 
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " gathers personal items of " + inv.victim.getName() + ", and can now falsely accuse them to nobles.",
+            inv.victimUses = map.param.ability_unit_falseAccusationCharges;
+
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " gathers personal items of " + inv.victim.getName() + ", and can now falsely accuse them to nobles (" + inv.victimUses + " uses until they will need more fake evidence).",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_PRODUCE_FALSE_EVIDENCE"));
 
         }

@@ -22,8 +22,16 @@ namespace Assets.Code
             p.getRelation(inv.victim.person).suspicion += effect;
             if (p.getRelation(inv.victim.person).suspicion > 1) { p.getRelation(inv.victim.person).suspicion = 1; }
 
+
+            string add = "";
+            inv.victimUses -= 1;
+            if (inv.victimUses <= 0)
+            {
+                add += "\nThey have used all the false evidence they produced, and now must collect more from their victim to continue.";
+            }
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " accuses " + inv.victim.getName() + " of being in league with shadow, presenting false evidence to " + p.getFullName()
-                + "\nTheir suspicion rises by "+  (int)(100*effect) + "% (after applying infiltration and liking bonuses), and is now " + (int)(100*p.getRelation(inv.victim.person).suspicion) + "%.",
+                + "\nTheir suspicion rises by "+  (int)(100*effect) + "% (after applying infiltration and liking bonuses), and is now " + (int)(100*p.getRelation(inv.victim.person).suspicion) + "%." + add,
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_FALSE_ACCUSE"));
 
         }
