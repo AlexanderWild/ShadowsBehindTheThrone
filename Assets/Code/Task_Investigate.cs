@@ -61,6 +61,22 @@ namespace Assets.Code
 
                     unit.location.map.overmind.panicFromCluesDiscovered += unit.location.map.param.panic_fromClueFound;
                     if (unit.location.map.overmind.panicFromCluesDiscovered > 1) { unit.location.map.overmind.panicFromCluesDiscovered = 1; }
+
+
+                    if (unit.location.person() != null)
+                    {
+                        Person noble = unit.location.person();
+                        foreach (RelObj rel in unit.person.relations.Values)
+                        {
+                            ////Goes negative if they suspect more than we do, reaches 1.0 if we suspect 1.0 and they suspect 0.0
+                            // if ((rel.suspicion - noble.getRelation(rel.them).suspicion) > Eleven.random.NextDouble())
+                            if ((rel.suspicion > noble.getRelation(rel.them).suspicion * 1.1))
+                            {
+                                unit.task = new Task_ShareSuspicions();
+                                return;
+                            }
+                        }
+                    }
                 }
             }
             else

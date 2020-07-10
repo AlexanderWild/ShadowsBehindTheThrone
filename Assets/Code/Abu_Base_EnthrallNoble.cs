@@ -59,7 +59,7 @@ namespace Assets.Code
         public override string getDesc()
         {
             return "Takes full control of a noble, allowing you to vote through them, and to access the advanced abilities associated with aristocratic society."
-                + "\n[Requires no other enthralled noble and infiltration above " + (int)(100*World.staticMap.param.ability_unit_spreadShadowInfiltrationReq) + "%]";
+                + "\n[Requires no other enthralled noble and infiltration above " + (int)(100*World.staticMap.param.ability_unit_enthrallNobleReq) + "%]";
         }
 
         public override string getName()

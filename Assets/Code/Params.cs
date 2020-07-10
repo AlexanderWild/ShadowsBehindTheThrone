@@ -152,6 +152,7 @@ namespace Assets.Code
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 5;
+        public double threat_temporaryDreadDecay = 0.97;
         public double victory_targetEnshadowmentAvrg = 0.75;
 
         public double dark_evilThreatMult = 2;
@@ -195,7 +196,6 @@ namespace Assets.Code
         public int ability_fleshScreamThreatAdd = 10;
         public int ability_fleshScreamCost = 7;
         public int ability_fleshScreamSanity = 4;
-        public double threat_temporaryDreadDecay = 0.97;
         public int ability_informationBlackoutCost = 4;
         public int ability_informationBlackoutDuration = 15;
         public int ability_FishmanCultDuration = 15;
@@ -253,6 +253,7 @@ namespace Assets.Code
         public int ability_disruptActionDuration = 7;
         public int ability_enthrallUnitCooldown = 32;
 
+        public double ability_unit_falseAccusationEffect = 0.5;
         public double ability_unit_enthrallNobleReq = 0.9;
         public double ability_unit_spreadShadowInfiltrationReq = 0.5;
         public int ability_unit_spreadShadowMinLiking = 35;

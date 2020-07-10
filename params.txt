@@ -18,6 +18,7 @@ panic_cleanseSoulLevel: 0.25
 panic_panicAtFullExtinction: 2
 panic_panicAtFullShadow: 1.75
 panic_canAlly: 0.5
+panic_fromClueFound: 0.025
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -45,7 +46,7 @@ overmind_singleAbilityPerTurn: True
 econ_multFromBuff: 1.33
 relObj_suspicionLimiterMult: 2.5
 relObj_defaultLiking: 0
-relObj_decayRate: 0.97
+relObj_decayRate: 0.96
 combat_prestigeLossFromConquest: 0
 combat_thresholdAttackStrength: 0.25
 combat_lethality: 0.5
@@ -263,7 +264,7 @@ voting_likingToSwitchPerU: 0.25
 unit_recruitEvidence: 0.1
 unit_investigatorsSeeEnthralled: 1
 unit_investigatorsPerProvince: 0.66
-unit_falseEvidenceCooldown: 24
+unit_falseEvidenceCooldown: 8
 unit_disruptDuration: 5
 unit_disruptCooldown: 10
 unit_targetUnitsPerLoc: 0.1

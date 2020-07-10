@@ -4,9 +4,6 @@
 -For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
 
 
--Unselectable units hanging out on a sea tile (unreplicated in a long time. Fixed?)
-	Had HP
-
 	Medium criticality:
 	
 -Recruit outlaws doesn't actually give evidence
@@ -14,9 +11,6 @@
 	
 -Utilities for assign title are very high
 
-
--Bunch of green tiles. No set, no soc
-	Unhandled terrain type
 
 	Low criticality:
 
@@ -37,6 +31,11 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+
+-Bunch of green tiles. No set, no soc
+	Unhandled terrain type
+-Unselectable units hanging out on a sea tile (unreplicated in a long time. Fixed?)
+	Had HP
 -Able to fishmen cult a ruins settlement
 -Taking a unit action takes your overmind's action
 -Repeated duke assignments in same turn

@@ -63,7 +63,7 @@ namespace Assets.Code
         }
         public override string getDesc()
         {
-            return "Enthrall an agent to turn it to your control. Places a piece of evidence pointing to the guilt of your new agent."
+            return "Enthrall an agent to turn it to your control. Places a piece of evidence pointing to the guilt of your new agent.\nDoes not trigger cooldown on first ever agent enthrallment."
                 + "\n[Requires a unit. Max " + World.staticMap.param.units_maxEnthralled + "]";
         }
 

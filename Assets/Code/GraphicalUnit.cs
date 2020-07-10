@@ -103,8 +103,8 @@ namespace Assets.Code
             }
             else
             {
-                borderLayer1.color = unit.society.color;
-                borderLayer2.color = unit.society.color2;
+                borderLayer1.color = unit.society.color2;
+                borderLayer2.color = unit.society.color;
             }
         }
 
@@ -128,8 +128,8 @@ namespace Assets.Code
             }
             else
             {
-                borderLayer1.color = unit.society.color;
-                borderLayer2.color = unit.society.color2;
+                borderLayer1.color = unit.society.color2;
+                borderLayer2.color = unit.society.color;
             }
 
             hpText.text = unit.hp + "/" + unit.maxHp;

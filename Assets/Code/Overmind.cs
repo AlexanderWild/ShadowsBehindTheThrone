@@ -50,7 +50,7 @@ namespace Assets.Code
             powers.Add(new Ab_Over_UncannyGlamour());
             powers.Add(new Ab_Enth_AuraOfLunacy());
 
-            abilities.Add(new Ab_Soc_Vote());
+            //abilities.Add(new Ab_Soc_Vote());
             abilities.Add(new Ab_Soc_ProposeVote());
             abilities.Add(new Ab_Soc_SharedGlory());
             abilities.Add(new Ab_Soc_JoinRebels());
@@ -60,7 +60,7 @@ namespace Assets.Code
             abilities.Add(new Ab_Soc_Fearmonger());
             abilities.Add(new Ab_Soc_DenounceOther());
             abilities.Add(new Ab_Soc_ProvincialSentiments());
-            abilities.Add(new Ab_Soc_SwitchVote());
+            //abilities.Add(new Ab_Soc_SwitchVote());
             abilities.Add(new Ab_Soc_ShareTruth());
             abilities.Add(new Ab_Soc_BoostMilitarism());
 
@@ -296,7 +296,7 @@ namespace Assets.Code
                                 foreach (Person p in soc.people)
                                 {
                                     ThreatItem t = p.getGreatestThreat();
-                                    if (t.group == sg)
+                                    if (t != null && t.group == sg)
                                     {
                                         nThreat += 1;
                                     }

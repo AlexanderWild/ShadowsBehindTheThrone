@@ -12,6 +12,8 @@ namespace Assets.Code
 
         public int wanderDur = 8;
 
+        public Unit victim;
+        public Location falseEvidenceDropLocation;
         
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {
@@ -110,6 +112,34 @@ namespace Assets.Code
         public override string getTitleF()
         {
             return "Investigator";
+        }
+
+        public override bool hasSpecialInfo()
+        {
+            return true;
+        }
+
+        public override Color specialInfoColour()
+        {
+            return base.specialInfoColour();
+        }
+
+        public override string specialInfo()
+        {
+            if (victim == null)
+            {
+                return "No False Accusation Target";
+            }
+            else
+            {
+                return "Able to Accuse " + victim.getName();
+            }
+        }
+
+        public override string specialInfoLong()
+        {
+            return "The infiltrator can accuse another agent of being in league with the darkness. This will possibly get them condemned by " +
+                "the society, and can reduce the risk of their own accusations being believed (to prevent an investigator with evidence against you being effective)";
         }
 
         public override string getDesc()
