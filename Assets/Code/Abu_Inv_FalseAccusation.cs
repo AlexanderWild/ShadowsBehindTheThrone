@@ -20,7 +20,7 @@ namespace Assets.Code
             if (effect > 1) { effect = 1; }
 
             p.getRelation(inv.victim.person).suspicion += effect;
-            if (p.getRelation(inv.victim.person).suspicion > 0) { p.getRelation(inv.victim.person).suspicion = 0; }
+            if (p.getRelation(inv.victim.person).suspicion > 1) { p.getRelation(inv.victim.person).suspicion = 1; }
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " accuses " + inv.victim.getName() + " of being in league with shadow, presenting false evidence to " + p.getFullName()
                 + "\nTheir suspicion rises by "+  (int)(100*effect) + "% (after applying infiltration and liking bonuses), and is now " + (int)(100*p.getRelation(inv.victim.person).suspicion) + "%.",
