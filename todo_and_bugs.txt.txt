@@ -1,11 +1,16 @@
 	High criticality:
 
-
--For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
+-People's data is poorly arranged. Shadow and evidence are tiny, with no information, despite being critical.
 
 
 	Medium criticality:
 	
+-Heirarchy view doesn't autoscroll to target
+	
+-Traits should affect infiltration difficulty
+
+-For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map#
+
 -Recruit outlaws doesn't actually give evidence
 	Or evidence doesn't actually cause suspicion
 	

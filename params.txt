@@ -46,7 +46,7 @@ overmind_singleAbilityPerTurn: True
 econ_multFromBuff: 1.33
 relObj_suspicionLimiterMult: 2.5
 relObj_defaultLiking: 0
-relObj_decayRate: 0.96
+relObj_decayRate: 0.97
 combat_prestigeLossFromConquest: 0
 combat_thresholdAttackStrength: 0.25
 combat_lethality: 0.5
@@ -125,12 +125,13 @@ society_prestigeFromVotingSuccess: -5
 society_dislikeFromFailedProposal: -15
 temporaryThreatDecay: 0.95
 threat_takeLocation: 5
+threat_temporaryDreadDecay: 0.97
 victory_targetEnshadowmentAvrg: 0.75
 dark_evilThreatMult: 2
 dark_fleshThreatMult: 2
 dark_fishmanStartingThreatMult: -0.25
 ability_enthrallUnitCost: 0
-ability_disruptAgentCost: 5
+ability_disruptAgentCost: 10
 ability_uncannyGlamourEvidence: 10
 ability_uncannyGlamourGain: 15
 ability_uncannyGlamourCost: 10
@@ -164,7 +165,6 @@ ability_shortMemoriesCost: 5
 ability_fleshScreamThreatAdd: 10
 ability_fleshScreamCost: 7
 ability_fleshScreamSanity: 4
-threat_temporaryDreadDecay: 0.97
 ability_informationBlackoutCost: 4
 ability_informationBlackoutDuration: 15
 ability_FishmanCultDuration: 15
@@ -221,6 +221,7 @@ ability_delayVoteCooldown: 24
 ability_disruptActionCost: 3
 ability_disruptActionDuration: 7
 ability_enthrallUnitCooldown: 32
+ability_unit_falseAccusationEffect: 0.35
 ability_unit_enthrallNobleReq: 0.9
 ability_unit_spreadShadowInfiltrationReq: 0.5
 ability_unit_spreadShadowMinLiking: 35

@@ -514,7 +514,7 @@ namespace Assets.Code
                 }
                 if (GraphicalMap.selectedSelectable is Unit)
                 {
-                    if (((Unit)GraphicalMap.selectedSelectable).isEnthralled()) { canUseAbility = true; }
+                    canUseAbility = ((Unit)GraphicalMap.selectedSelectable).isEnthralled() && ((Unit)GraphicalMap.selectedSelectable).lastTurnActionTaken != World.staticMap.turn;
                 }
 
                 if (master.state == UIMaster.uiState.WORLD)

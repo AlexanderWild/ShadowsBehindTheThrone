@@ -27,7 +27,17 @@ namespace Assets.Code
                     {
                         double them = unit.location.person().getRelation(rel.them).suspicion;
                         double me = rel.suspicion;
-                        double gain = (me - them) * 0.5;
+                        double gain = (me - them) * 1;
+
+                        RelObj toInv = unit.location.person().getRelation(unit.person);
+                        double relLiking = toInv.getLiking();
+                        relLiking += 50;
+                        if (relLiking < 0) { relLiking = 0; }
+                        relLiking /= 100;
+                        if (relLiking > 1) { relLiking = 1; }//0 to 1
+
+                        gain *= relLiking;
+
                         if (me > them)
                         {
                             unit.location.map.addMessage(unit.getName() + " warns " + unit.location.person().getFullName() + " about " + rel.them.getFullName(), MsgEvent.LEVEL_ORANGE, false);

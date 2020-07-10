@@ -22,7 +22,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Base_Recruit());
             abilities.Add(new Abu_Base_RecruitOutlaws());
             abilities.Add(new Abu_Base_Disrupt());
-            abilities.Add(new Abu_Base_FalseEvidence());
+            abilities.Add(new Abu_Inv_Incriminate());
             abilities.Add(new Abu_Base_SpreadShadow());
         }
 

@@ -160,7 +160,7 @@ namespace Assets.Code
         public double dark_fishmanStartingThreatMult = -0.25;
 
         public int ability_enthrallUnitCost = 0;
-        public int ability_disruptAgentCost = 5;
+        public int ability_disruptAgentCost = 10;
 
         public int ability_uncannyGlamourEvidence = 10;
         public int ability_uncannyGlamourGain = 15;
@@ -253,7 +253,7 @@ namespace Assets.Code
         public int ability_disruptActionDuration = 7;
         public int ability_enthrallUnitCooldown = 32;
 
-        public double ability_unit_falseAccusationEffect = 0.5;
+        public double ability_unit_falseAccusationEffect = 0.35;
         public double ability_unit_enthrallNobleReq = 0.9;
         public double ability_unit_spreadShadowInfiltrationReq = 0.5;
         public int ability_unit_spreadShadowMinLiking = 35;

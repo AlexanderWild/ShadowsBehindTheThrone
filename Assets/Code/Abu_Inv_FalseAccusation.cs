@@ -3,22 +3,28 @@
 
 namespace Assets.Code
 {
-    public class Abu_Base_FalseAccusation: AbilityUnit
+    public class Abu_Inv_FalseAccusation: AbilityUnit
     {
 
         public override void castInner(Map map, Unit u)
         {
             Unit_Investigator inv = (Unit_Investigator)u;
-            u.task = new Task_PleadCase();
 
             double effect = 0;
             Person p = u.location.person();
             double liking = p.getRelation(u.person).getLiking();//0 to 100
             double infiltration = u.location.settlement.infiltration * 100;//Also 0 to 100
-            effect = (liking + infiltration) * map.param.ability_unit_falseAccusationEffect;
+            effect = (liking + infiltration + 100) * map.param.ability_unit_falseAccusationEffect;
+            if (effect < 0) { effect = 0; }
+            effect /= 100;
+            if (effect > 1) { effect = 1; }
 
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " accuses " + inv.victim.getName() + " of being in league with shadow.",
-                u.location.map.world.wordStore.lookup("ABILITY_UNIT_PLEAD_CASE"));
+            p.getRelation(inv.victim.person).suspicion += effect;
+            if (p.getRelation(inv.victim.person).suspicion > 0) { p.getRelation(inv.victim.person).suspicion = 0; }
+
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " accuses " + inv.victim.getName() + " of being in league with shadow, presenting false evidence to " + p.getFullName()
+                + "\nTheir suspicion rises by "+  (int)(100*effect) + "% (after applying infiltration and liking bonuses), and is now " + (int)(100*p.getRelation(inv.victim.person).suspicion) + "%.",
+                u.location.map.world.wordStore.lookup("ABILITY_UNIT_FALSE_ACCUSE"));
 
         }
         public override bool castable(Map map, Unit u)
@@ -26,7 +32,7 @@ namespace Assets.Code
             if (u.location.person() == null) { return false; }
             if (u is Unit_Investigator == false) { return false; }
             Unit_Investigator u2 = (Unit_Investigator)u;
-            return u2.victim != null;
+            return u2.victim != null && u2.victim.person != null;
         }
 
         public override void cast(Map map, Hex hex) { }

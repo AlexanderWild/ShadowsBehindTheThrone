@@ -11,6 +11,7 @@ namespace Assets.Code
             turnLastCast = map.turn;
             castInner(map, unit);
 
+            unit.lastTurnActionTaken = map.turn;
             if (map.param.useAwareness == 1)
             {
                 map.overmind.increasePanicFromPower(getCost(), this);
