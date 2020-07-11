@@ -9,7 +9,8 @@
 	
 -Traits should affect infiltration difficulty
 
--For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map#
+-For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
+	Repeated. Unsure of cause
 
 -Recruit outlaws doesn't actually give evidence
 	Or evidence doesn't actually cause suspicion

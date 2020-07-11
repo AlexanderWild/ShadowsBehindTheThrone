@@ -271,6 +271,8 @@ namespace Assets.Code
                         issue = new VoteIssue_SetOffensiveTarget(society, this);
                         foreach (SocialGroup neighbour in map.socialGroups)
                         {
+                            if (neighbour == this.society) { continue; }//Don't declare war on yourself
+
                             VoteOption option = new VoteOption();
                             option.group = neighbour;
                             issue.options.Add(option);

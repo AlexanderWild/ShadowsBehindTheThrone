@@ -24,8 +24,8 @@ namespace Assets.Code
 
         public override bool hostileTo(Unit u)
         {
-            if (u.isEnthralled() == false) { return true; }
-            return base.hostileTo(u);
+            if (u.society.isDark()) { return false; }
+            return !u.isEnthralled();
         }
 
         public override bool isDark()

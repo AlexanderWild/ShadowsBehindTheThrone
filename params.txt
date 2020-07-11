@@ -124,7 +124,7 @@ society_prestigeFromVotingFailure: 5
 society_prestigeFromVotingSuccess: -5
 society_dislikeFromFailedProposal: -15
 temporaryThreatDecay: 0.95
-threat_takeLocation: 5
+threat_takeLocation: 12
 threat_temporaryDreadDecay: 0.97
 victory_targetEnshadowmentAvrg: 0.75
 dark_evilThreatMult: 2
@@ -169,7 +169,7 @@ ability_informationBlackoutCost: 4
 ability_informationBlackoutDuration: 15
 ability_FishmanCultDuration: 15
 ability_FishmanMadnessDuration: 15
-ability_fishmanCultMilRegen: 0.5
+ability_fishmanCultMilRegen: 4
 ability_fishmanCultTempThreat: 1
 ability_fishmanCultDread: 6
 ability_trustingFoolCost: 5
@@ -221,7 +221,8 @@ ability_delayVoteCooldown: 24
 ability_disruptActionCost: 3
 ability_disruptActionDuration: 7
 ability_enthrallUnitCooldown: 32
-ability_unit_falseAccusationEffect: 0.35
+ability_unit_falseAccusationCharges: 3
+ability_unit_falseAccusationEffect: 0.25
 ability_unit_enthrallNobleReq: 0.9
 ability_unit_spreadShadowInfiltrationReq: 0.5
 ability_unit_spreadShadowMinLiking: 35

@@ -11,14 +11,34 @@ namespace Assets.Code
         public Set_Fishman_Lair(Location loc) : base(loc)
         {
             this.isHuman = false;
-            name = "Fishman Lair";
+            name = "Deep One Lair";
+
+            militaryCapAdd += 25;
 
 
-            militaryCapAdd += 10;
-            militaryRegenAdd = 0;
+            Unit_Fishman army = new Unit_Fishman(location, location.soc);
+            location.map.units.Add(army);
+            army.maxHp = (int)this.getMilitaryCap();
+            this.attachedUnit = army;
         }
 
-        public override Sprite getSprite()
+    public override void checkUnitSpawning()
+    {
+        spawnCounter += 1;
+        if (spawnCounter > 5)
+        {
+            spawnCounter = 0;
+
+            if (this.attachedUnit != null) { throw new Exception(); }
+
+            Unit_Fishman army = new Unit_Fishman(location, location.soc);
+            location.map.units.Add(army);
+            army.maxHp = (int)this.getMilitaryCap();
+            this.attachedUnit = army;
+        }
+    }
+
+    public override Sprite getSprite()
         {
             return location.map.world.textureStore.loc_minor_ritualCircle;
         }

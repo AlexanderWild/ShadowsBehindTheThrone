@@ -284,6 +284,10 @@ namespace Assets.Code
                     {
                         p.title_land.settlement.location.soc = rebellion;
 
+                        if (p.title_land.settlement.attachedUnit != null)
+                        {
+                            p.title_land.settlement.attachedUnit.society = rebellion;
+                        }
                         if (p.title_land.settlement.embeddedUnit != null)
                         {
                             p.title_land.settlement.embeddedUnit.society = rebellion;

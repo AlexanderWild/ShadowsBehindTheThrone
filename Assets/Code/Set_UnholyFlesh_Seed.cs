@@ -14,8 +14,6 @@ namespace Assets.Code
             name = "Unholy Seed";
 
 
-            militaryCapAdd += 2;
-            militaryRegenAdd = 0.1;
         }
 
         public override Sprite getSprite()

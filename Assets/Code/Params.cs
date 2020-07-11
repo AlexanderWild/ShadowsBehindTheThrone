@@ -151,7 +151,7 @@ namespace Assets.Code
         public double society_dislikeFromFailedProposal = -15;
 
         public double temporaryThreatDecay = 0.95;
-        public double threat_takeLocation = 5;
+        public double threat_takeLocation = 12;
         public double threat_temporaryDreadDecay = 0.97;
         public double victory_targetEnshadowmentAvrg = 0.75;
 
@@ -200,8 +200,8 @@ namespace Assets.Code
         public int ability_informationBlackoutDuration = 15;
         public int ability_FishmanCultDuration = 15;
         public int ability_FishmanMadnessDuration = 15;
-        public double ability_fishmanCultMilRegen = 0.5;
-        public double ability_fishmanCultTempThreat = 1;
+        public int ability_fishmanCultMilRegen = 2;
+        public double ability_fishmanCultTempThreat = 2;
         public double ability_fishmanCultDread = 6;
         public int ability_trustingFoolCost = 5;
         public int ability_trustingFoolCooldown = 25;

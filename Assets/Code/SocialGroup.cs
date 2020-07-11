@@ -157,12 +157,12 @@ namespace Assets.Code
                 reasons.Add(msg);
             }
 
-            threat += (currentMilitary + (maxMilitary/2))*0.2;
+            threat += (currentMilitary + (maxMilitary/2))*0.3;
             if (reasons != null)
             {
-                msg = new ReasonMsg("Current Military", currentMilitary * 0.2);
+                msg = new ReasonMsg("Current Military", currentMilitary * 0.3);
                 reasons.Add(msg);
-                msg = new ReasonMsg("Max Military", (maxMilitary/ 2) * 0.2);
+                msg = new ReasonMsg("Max Military", (maxMilitary/ 2) * 0.3);
                 reasons.Add(msg);
             }
 

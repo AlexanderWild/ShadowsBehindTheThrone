@@ -54,7 +54,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Forms a field of hardened spines, plates and scales, to allow the flesh to defend itself. Provides low military strength, but can absorb damage for the hive."
+            return "Forms a field of hardened spines, plates and scales, to allow the flesh to defend itself. Can absorb damage for the hive, protecting the flesh units."
                  + "\nAdds " + (int)(World.staticMap.param.ability_growFleshThreatAdd) + " temporary threat to the growing flesh."
                  + "\n[Requires a land location adjacent to an existing unholy flesh location]";
         }

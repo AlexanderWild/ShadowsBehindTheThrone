@@ -54,7 +54,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Causes flesh from all neighbouring hives to rise up and attack the inhabitants of the selected location."
+            return "Causes flesh to become hostile to a neighbouring society, causing your flesh units to attack them."
                  + "\n[Requires a land location adjacent to an existing unholy flesh location]";
         }
 

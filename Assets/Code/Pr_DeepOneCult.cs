@@ -18,27 +18,37 @@ namespace Assets.Code
             if (location.settlement == null) { return; }
             if (location.soc == null || (location.soc is Society == false)) { return; }
 
-            SG_Fishmen target = null;
-            foreach (SocialGroup sg in location.map.socialGroups)
+            int c = 0;
+            Unit target = null;
+            foreach (Unit u in location.map.units)
             {
-                if (sg is SG_Fishmen)
+                if (u is Unit_Fishman)
                 {
-                    target = (SG_Fishmen)sg;
+                    if (u.hp < u.maxHp)
+                    {
+                        c += 1;
+                        if (Eleven.random.Next(c) == 0)
+                        {
+                            target = u;
+                        }
+                    }
                 }
             }
 
-            if (target == null) { return; }
-
-            target.currentMilitary += location.map.param.ability_fishmanCultMilRegen;
-            target.temporaryThreat += location.map.param.ability_fishmanCultTempThreat;
-
-            if (location.person() != null)
+            if (target != null)
             {
-                foreach (ThreatItem item in location.person().threatEvaluations)
+                target.hp += location.map.param.ability_fishmanCultMilRegen;
+                if (target.hp > target.maxHp) { target.hp = target.maxHp; }
+
+                target.society.temporaryThreat += location.map.param.ability_fishmanCultTempThreat;
+                if (location.person() != null)
                 {
-                    if (item.group == target && item.temporaryDread < 100)
+                    foreach (ThreatItem item in location.person().threatEvaluations)
                     {
-                        item.temporaryDread += location.map.param.ability_fishmanCultDread;
+                        if (item.group == target.society && item.temporaryDread < 100)
+                        {
+                            item.temporaryDread += location.map.param.ability_fishmanCultDread;
+                        }
                     }
                 }
             }
@@ -51,8 +61,8 @@ namespace Assets.Code
 
         internal override string getDescription()
         {
-            return "The people in this area are drawn to the sea. Fishermen report constant song, drawing them towards the deep. Slowly adds Deep Ones to your colony, but adds temporary threat"
-                + " to this colony, and causes the local noble (if there is one) to dread the Deep Ones (adding threat perception).";
+            return "The people in this area are drawn to the sea. Fishermen report constant song, drawing them towards the deep. Slowly resupplies your Deep One raiders with military force, but adds temporary threat"
+                + " to this colony, and causes the local noble (if there is one) to dread the Deep Ones (adding dread to the noble's threat estimates).";
         }
     }
 }

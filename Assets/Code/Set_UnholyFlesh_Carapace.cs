@@ -14,9 +14,7 @@ namespace Assets.Code
             name = "Unholy Carapace";
 
 
-            militaryCapAdd += 2;
-            militaryRegenAdd = 0;
-            defensiveStrengthMax = 10;
+            defensiveStrengthMax = 20;
         }
 
         public override Sprite getSprite()

@@ -385,7 +385,7 @@ namespace Assets.Code
         public void movePerson(Person lord,Society receiving)
         {
             if (lord.society.people.Contains(lord) == false) { throw new Exception("Person attempting to leave society they were not a part of"); }
-            if (receiving.people.Contains(lord)) { throw new Exception("Lord already in group they are attempting to join"); }
+            if (receiving.people.Contains(lord)) { throw new Exception("Lord already in group they are attempting to join " + lord.society.getName() + " to " + receiving.getName()); }
 
             lord.society.people.Remove(lord);
             receiving.people.Add(lord);
