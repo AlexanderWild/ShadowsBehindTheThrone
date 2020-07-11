@@ -169,7 +169,10 @@ namespace Assets.Code
 
                 if (loc.isMajor)
                 {
-                    loc.settlement = new Set_City(loc);
+                    Set_City city = new Set_City(loc);
+                    loc.settlement = city;
+                    city.population = city.getMaxPopulation();
+                    city.infrastructure = city.population;
                 }else
                 {
                     int q = 0;

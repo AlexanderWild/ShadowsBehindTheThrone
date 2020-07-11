@@ -174,6 +174,7 @@ namespace Assets.Code
 
         public void processWars()
         {
+            /*
             //Every society decides which other to attack, assuming it is over threshold combat strength
             foreach (SocialGroup sg in socialGroups)
             {
@@ -252,6 +253,7 @@ namespace Assets.Code
                     world.prefabStore.particleCombat(attackFrom.hex, attackTo.hex);
                 }
             }
+            */
 
             foreach (SocialGroup group in socialGroups)
             {

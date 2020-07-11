@@ -136,7 +136,6 @@ namespace Assets.Code
             temporaryThreat *= map.param.temporaryThreatDecay;
             permanentThreat += temporaryThreat * map.param.temporaryThreatConversion;
             computeMilitaryCap();
-            processMilitaryRegen();
 
             lastTurnLocs.Clear();
             foreach (Location loc in map.locations)
@@ -158,12 +157,12 @@ namespace Assets.Code
                 reasons.Add(msg);
             }
 
-            threat += (currentMilitary + (maxMilitary/2));
+            threat += (currentMilitary + (maxMilitary/2))*0.2;
             if (reasons != null)
             {
-                msg = new ReasonMsg("Current Military", currentMilitary);
+                msg = new ReasonMsg("Current Military", currentMilitary * 0.2);
                 reasons.Add(msg);
-                msg = new ReasonMsg("Max Military", (maxMilitary/ 2));
+                msg = new ReasonMsg("Max Military", (maxMilitary/ 2) * 0.2);
                 reasons.Add(msg);
             }
 
@@ -199,16 +198,27 @@ namespace Assets.Code
         public void computeMilitaryCap() {
             maxMilitary = 0;
             militaryRegen = 0;
+            currentMilitary = 0;
             foreach (Location loc in map.locations)
             {
                 if (loc.soc == this && loc.settlement != null)
                 {
                     militaryRegen += loc.settlement.militaryRegenAdd;
                     maxMilitary += loc.settlement.getMilitaryCap() ;
+
+                    if (loc.settlement.embeddedUnit != null && loc.settlement.embeddedUnit.isMilitary)
+                    {
+                        currentMilitary += loc.settlement.embeddedUnit.hp;
+                    }
                 }
             }
-            maxMilitary = Math.Pow(maxMilitary, map.param.combat_maxMilitaryCapExponent);
-            militaryRegen = Math.Pow(militaryRegen, map.param.combat_maxMilitaryCapExponent);
+            foreach (Unit u in map.units)
+            {
+                if (u.isMilitary && u.society == this)
+                {
+                    currentMilitary += u.hp;
+                }
+            }
         }
 
         public void processMilitaryRegen() { 

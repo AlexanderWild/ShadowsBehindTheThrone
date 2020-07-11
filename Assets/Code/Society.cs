@@ -236,6 +236,7 @@ namespace Assets.Code
             }
             map.addMessage(this.getName() + " falls into civil war! Provinces declare war on the sovreign's loyal forces.",
                 level, goodThing);
+            this.posture = militaryPosture.offensive;//Flip to offensive to recapture lost territory
 
             List<Province> seenProvinces = new List<Province>();
             List<List<Person>> rebelsByProvince = new List<List<Person>>();
@@ -282,6 +283,11 @@ namespace Assets.Code
                     if (p.title_land != null)
                     {
                         p.title_land.settlement.location.soc = rebellion;
+
+                        if (p.title_land.settlement.embeddedUnit != null)
+                        {
+                            p.title_land.settlement.embeddedUnit.society = rebellion;
+                        }
                     }
                     this.people.Remove(p);
                     rebellion.people.Add(p);
@@ -311,6 +317,8 @@ namespace Assets.Code
                     this.killOrders.Add(killRebel);
 
                 }
+
+                rebellion.posture = militaryPosture.offensive;
                 this.map.declareWar(rebellion, this);
             }
         }

@@ -135,7 +135,7 @@ namespace Assets.Code
             }
             else
             {
-                return "Able to Accuse " + victim.getName();
+                return "Able to Accuse " + victim.getName() + "( " + victimUses + " uses)";
             }
         }
 

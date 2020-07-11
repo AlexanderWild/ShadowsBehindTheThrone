@@ -113,6 +113,10 @@ namespace Assets.Code
                     foreach (Location loc in trans)
                     {
                         receiever.map.takeLocationFromOther(receiever, society, loc);
+                        if (loc.settlement != null && loc.settlement.embeddedUnit != null)
+                        {
+                            loc.settlement.embeddedUnit.society = target;
+                        }
                     }
                 }
             }

@@ -55,8 +55,8 @@ namespace Assets.Code
 
             //1 if we're 100% of the balance, -1 if they are
 
-            double ourStrength = society.currentMilitary;
-            double theirStrength = target.currentMilitary;
+            double ourStrength = society.currentMilitary + (society.maxMilitary*0.5);
+            double theirStrength = target.currentMilitary + (target.maxMilitary*0.5);
             if (ourStrength + theirStrength == 0) { ourStrength += 0.001; }
             double relativeStrength = (ourStrength - theirStrength) / (ourStrength + theirStrength + 1);
             double localU = 0;

@@ -22,6 +22,9 @@ namespace Assets.Code
         public int security;
         public bool isHuman = false;//Mainly used to determine whether it can be maintained by a human society
         public int lastAssigned = -1;
+        public Unit embeddedUnit = null;
+        public Unit attachedUnit = null;
+        public int spawnCounter = 0;
 
         public Settlement(Location loc)
         {
@@ -109,6 +112,60 @@ namespace Assets.Code
             if (title != null && title.heldBy != null)
             {
                 location.hex.purity = (float)(1 - title.heldBy.shadow);
+            }
+
+            //Deploy forces if you're at war
+            if (embeddedUnit != null && location.soc != null)
+            {
+                if (location.soc.isAtWar())
+                {
+                    location.units.Add(embeddedUnit);
+                    location.map.units.Add(embeddedUnit);
+                    embeddedUnit = null;
+                }
+            }
+
+            //Check if our unit is dead
+            if (attachedUnit != null && embeddedUnit != attachedUnit && location.map.units.Contains(attachedUnit) == false)
+            {
+                attachedUnit = null;
+            }
+            //Check if we want to spawn a unit
+            if (attachedUnit == null)
+            {
+                if (embeddedUnit != null) { attachedUnit = embeddedUnit; }//Unsure why this would occur, but best to catch
+                else
+                {
+                    checkUnitSpawning();
+                }
+            }
+            if (attachedUnit != null)
+            {
+                attachedUnit.maxHp = (int)(this.getMilitaryCap());
+            }
+            //Reset the values downwards if they're too high
+            if (embeddedUnit != null)
+            {
+                embeddedUnit.hp = embeddedUnit.maxHp;
+            }
+        }
+
+        public virtual void checkUnitSpawning()
+        {
+            if (isHuman && location.soc != null && location.soc is Society)
+            {
+                spawnCounter += 1;
+                if (spawnCounter > 5)
+                {
+                    spawnCounter = 0;
+
+                    if (this.attachedUnit != null) { throw new Exception(); }
+
+                    Unit_Army army = new Unit_Army(location, location.soc);
+                    location.map.units.Add(army);
+                    army.maxHp = (int)this.getMilitaryCap();
+                    this.attachedUnit = army;
+                }
             }
         }
 

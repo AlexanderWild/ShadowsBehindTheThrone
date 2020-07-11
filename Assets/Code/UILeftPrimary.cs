@@ -410,6 +410,11 @@ namespace Assets.Code
                         valuesBody += "\n" + ((Set_City)loc.settlement).getStatsDesc();
                         valuesNumbers += "\n" + ((Set_City)loc.settlement).getStatsValues();
                     }
+
+                    if (hex.location.settlement.embeddedUnit != null)
+                    {
+                        bodyText += "\nARMY IN GARRISON (Strength " + hex.location.settlement.embeddedUnit.hp + ")";
+                    }
                 }
 
                 valuesBody += "\nTemperature ";

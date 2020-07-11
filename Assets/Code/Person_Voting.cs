@@ -269,7 +269,7 @@ namespace Assets.Code
                     if (map.turn - society.lastOffensiveTargetSetting > 8)
                     {
                         issue = new VoteIssue_SetOffensiveTarget(society, this);
-                        foreach (SocialGroup neighbour in map.getExtendedNeighbours(society))
+                        foreach (SocialGroup neighbour in map.socialGroups)
                         {
                             VoteOption option = new VoteOption();
                             option.group = neighbour;

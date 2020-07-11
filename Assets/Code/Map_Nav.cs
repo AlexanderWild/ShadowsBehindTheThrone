@@ -329,14 +329,46 @@ namespace Assets.Code
                 if (u.hostileTo(u2))
                 {
                     world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
-                    u2.hp -= 1;
+                    int dmgDone = (int)(u.hp * (0.25 + (Eleven.random.NextDouble() * 0.25)));
+                    if (u2.isMilitary)
+                    {
+                        if (loc.settlement != null && loc.settlement.defensiveStrengthCurrent > 0)
+                        {
+                            double ablated = Math.Min(loc.settlement.defensiveStrengthCurrent,dmgDone / 2d);
+                            dmgDone -= (int)ablated;
+                            loc.settlement.defensiveStrengthCurrent -= ablated;
+                        }
+                    }
+
+                    if (dmgDone < 1) { dmgDone = 1; }
+
+
+                    u2.hp -= dmgDone;
                     if (u2.isEnthralled()) {
-                        world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting 1HP damage!");
+                        world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
                             }
                     if (u2.hp <= 0)
                     {
                         u2.die(this,"Attacked by " + u.getName());
                     }
+
+                    if (loc.settlement != null)
+                    {
+                        if (loc.settlement is Set_City)
+                        {
+                            Set_City city = (Set_City)loc.settlement;
+                            city.infrastructure *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
+                            city.population *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
+                            if (city.infrastructure < 1) { city.infrastructure = 1; }
+                            if (city.population < 1) { city.population = 1; }
+                        }
+                    }
+
+                    if (u.society is Society && u2.society is Society)
+                    {
+                        Property.addProperty(this, loc, "Recent Human Battle");
+                    }
+
                     return;
                 }
             }

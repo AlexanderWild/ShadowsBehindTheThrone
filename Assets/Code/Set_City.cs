@@ -69,8 +69,8 @@ namespace Assets.Code
                 title.titleM = "Count";
                 basePrestige = 30;
                 defensiveStrengthMax = 10;
-                militaryRegenAdd = 0.2;
-                militaryCapAdd = 20;
+                militaryRegenAdd = 7;
+                militaryCapAdd = 40;
             }
             else if (level == LEVEL_CITY)
             {
@@ -79,8 +79,8 @@ namespace Assets.Code
                 title.titleM = "Count";
                 basePrestige = 25;
                 defensiveStrengthMax = 8;
-                militaryRegenAdd = 0.15;
-                militaryCapAdd = 15;
+                militaryRegenAdd = 5;
+                militaryCapAdd = 30;
             }
             else if (level == LEVEL_TOWN)
             {
@@ -89,8 +89,8 @@ namespace Assets.Code
                 title.titleM = "Mayor";
                 basePrestige = 15;
                 defensiveStrengthMax = 4;
-                militaryRegenAdd = 0.1;
-                militaryCapAdd = 10;
+                militaryRegenAdd = 4;
+                militaryCapAdd = 20;
             }
             else if (level == LEVEL_VILLAGE)
             {
@@ -98,8 +98,8 @@ namespace Assets.Code
                 title.titleF = "Mayor";
                 title.titleM = "Mayor";
                 basePrestige = 10;
-                militaryRegenAdd = 0.1;
-                militaryCapAdd = 5;
+                militaryRegenAdd = 2;
+                militaryCapAdd = 15;
             }
             else
             {
@@ -107,8 +107,8 @@ namespace Assets.Code
                 title.titleF = "Mayor";
                 title.titleM = "Mayor";
                 basePrestige = 5;
-                militaryRegenAdd = 0.1;
-                militaryCapAdd = 3;
+                militaryRegenAdd = 2;
+                militaryCapAdd = 10;
             }
         }
 

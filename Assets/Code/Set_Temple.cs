@@ -25,8 +25,8 @@ namespace Assets.Code
             }
 
 
-            militaryCapAdd += 5;
-            militaryRegenAdd = 0.1;
+            militaryCapAdd += 15;
+            militaryRegenAdd = 7;
             isHuman = true;
         }
 

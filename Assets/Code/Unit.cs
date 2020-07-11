@@ -15,6 +15,7 @@ namespace Assets.Code
         public SocialGroup society;
         public Task task;
         public bool dontDisplayBorder = false;
+        public bool isMilitary = false;
         public int hp;
         public int maxHp = 5;
         public int movesTaken = 0;
@@ -121,7 +122,10 @@ namespace Assets.Code
 
         public void die(Map map, string v)
         {
-            person.die(v);
+            if (person != null)
+            {
+                person.die(v);
+            }
             disband(map, null);
             bool positive = person == null || person.state != Person.personState.enthralledAgent;
             map.addMessage(this.getName() + " dies! " + v, MsgEvent.LEVEL_GREEN, positive);
