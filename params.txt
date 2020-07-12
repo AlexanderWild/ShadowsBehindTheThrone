@@ -106,9 +106,9 @@ econ_buffDuration: 45
 soc_untitledPeople: 3
 society_votingDuration: 1
 society_instablityTillRebellion: 12
-society_rebelLikingThreshold: -10
+society_rebelLikingThreshold: -25
 society_zeitDuration: 3
-society_sovreignPrestige: 15
+society_sovreignPrestige: 20
 society_dukePrestige: 10
 society_threatMultFromOffensivePosture: 0.5
 society_minTimeBetweenLocReassignments: 40

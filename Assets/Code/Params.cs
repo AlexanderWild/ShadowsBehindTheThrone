@@ -132,9 +132,9 @@ namespace Assets.Code
         public int soc_untitledPeople = 3;
         public int society_votingDuration = 1;
         public int society_instablityTillRebellion = 12;
-        public int society_rebelLikingThreshold = -10;
+        public int society_rebelLikingThreshold = -25;
         public int society_zeitDuration = 3;
-        public double society_sovreignPrestige = 15;
+        public double society_sovreignPrestige = 20;
         public double society_dukePrestige = 10;
         public double society_threatMultFromOffensivePosture = 0.5;
         public int society_minTimeBetweenLocReassignments = 40;
