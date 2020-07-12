@@ -1,5 +1,6 @@
 	High criticality:
 
+-Agents died but the ability wouldn't accept them being bought back
 
 -Voting screen needs self-vote support
 

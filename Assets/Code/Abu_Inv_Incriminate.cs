@@ -14,10 +14,12 @@ namespace Assets.Code
             e2.weight = 0.25;
             u.location.evidence.Add(e2);
 
+            u.location.person().evidence += 0.1;
+            if (u.location.person().evidence > 1) { u.location.person().evidence = 1; }
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " plants evidence on " + u.location.person().getFullName() + ", increasing their evidence by 10%." +
                 " They also leave behind evidence incriminating themselves (evidence strength 25%).",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_FALSE_EVIDENCE"));
-
         }
         public override bool castable(Map map, Unit u)
         {
@@ -51,7 +53,7 @@ namespace Assets.Code
 
         public override string getName()
         {
-            return "False Evidence";
+            return "Incriminate";
         }
 
         public override Sprite getSprite(Map map)
