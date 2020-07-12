@@ -25,6 +25,7 @@ namespace Assets.Code
         public Text personBody;
         public Text personAwarenss;
         public Text personAwarenssDesc;
+        public Text personShadowAndEvidenceVals;
         public Text maskTitle;
         public Text maskBody;
         public Text prestigeText;
@@ -241,8 +242,9 @@ namespace Assets.Code
                 bodyText += "\nDirect Superior: None";
             }
             prestigeText.text = "Prestige: " + (int)(p.prestige) + "\nPrestige Moving towards: " + (int)(p.getTargetPrestige(null));
-            bodyText += "\nShadow: " + (int)(p.shadow * 100) + "%";
-            bodyText += "\nEvidence: " + (int)(p.evidence * 100) + "%";
+            personShadowAndEvidenceVals.text = (int)(p.shadow * 100) + "%\n" + (int)(p.evidence * 100) + "%";
+            // bodyText += "\nShadow: " + (int)(p.shadow * 100) + "%";
+            //bodyText += "\nEvidence: " + (int)(p.evidence * 100) + "%";
             bodyText += "\nMilitarism: " + (int)(p.politics_militarism * 100) + "%";
             bodyText += " (" + p.getMilitarismInfo() + ")";
 
@@ -341,6 +343,7 @@ namespace Assets.Code
                 infiltrationText.text = "No Infiltration Possible";
                 infiltrationVals.text = "";
                 securityDescText.text = "";
+                personShadowAndEvidenceVals.text = "";
             }
             else
             {

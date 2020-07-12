@@ -1,7 +1,7 @@
 	High criticality:
 
--People's data is poorly arranged. Shadow and evidence are tiny, with no information, despite being critical.
 
+-Voting screen needs self-vote support
 
 	Medium criticality:
 	
@@ -15,7 +15,7 @@
 -Recruit outlaws doesn't actually give evidence
 	Or evidence doesn't actually cause suspicion
 	
--Utilities for assign title are very high
+-Utilities for assign title are very high (possibly fixed)
 
 
 	Low criticality:
@@ -38,6 +38,7 @@ Reduce prestige of other at cost of power
 
 -----------------------RESOLVED-----------------------
 
+-People's data is poorly arranged. Shadow and evidence are tiny, with no information, despite being critical.
 -Bunch of green tiles. No set, no soc
 	Unhandled terrain type
 -Unselectable units hanging out on a sea tile (unreplicated in a long time. Fixed?)
