@@ -40,6 +40,7 @@ namespace Assets.Code
                 personBack.sprite = unit.person.getImageBack();
                 personMid.sprite = unit.person.getImageMid();
                 personFore.sprite = unit.person.getImageFore();
+                personFore.color = Color.white;
                 evidenceText.text = "Evidence: " + (int)(100 * unit.person.evidence) + "%";
             }
 
@@ -93,6 +94,7 @@ namespace Assets.Code
             personBack.sprite = world.textureStore.icon_mask;
             personFore.sprite = null;
             personMid.sprite = null;
+            personFore.color = new Color(0, 0.1f, 0);
             evidenceText.text = "No Evidence";
         }
 

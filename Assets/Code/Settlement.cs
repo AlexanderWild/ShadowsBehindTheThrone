@@ -195,12 +195,12 @@ namespace Assets.Code
                 {
                     if (title.heldBy.society.getSovreign() == title.heldBy)
                     {
-                        if (soc.lastTurnLocs.Count >= location.map.param.society_nPeopleForEmpire)
+                        if (soc.people.Count >= location.map.param.society_nPeopleForEmpire)
                         {
-                            security += 5;
-                            reasons.Add(new ReasonMsg("Major Sovreign", 5));
+                            security += 7;
+                            reasons.Add(new ReasonMsg("Major Sovreign", 7));
                         }
-                        else if (soc.lastTurnLocs.Count >= location.map.param.society_nPeopleForKingdom)
+                        else if (soc.people.Count >= location.map.param.society_nPeopleForKingdom)
                         {
                             security += 4;
                             reasons.Add(new ReasonMsg("Sovreign", 4));
@@ -257,6 +257,11 @@ namespace Assets.Code
                 if (soc.posture == Society.militaryPosture.offensive)
                 {
                     reasons.Add(new ReasonMsg("Offensive Society", 0));
+                }
+                if (embeddedUnit != null)
+                {
+                    security += 1;
+                    reasons.Add(new ReasonMsg("Army in garrison", 1));
                 }
             }
             

@@ -31,6 +31,10 @@
 	Features:
 	
 General:
+
+Infiltrator:
+	Add ability to transfer clue-evidence to noble as noble evidence
+
 Reduce prestige of other at cost of your own
 Reduce prestige of other at cost of power
 -Add evidence to target at cost of evidence to yourself

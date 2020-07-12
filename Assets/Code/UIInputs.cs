@@ -99,13 +99,13 @@ namespace Assets.Code
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha4))
                 {
-                    if (world.map.masker.mask == MapMaskManager.maskType.THREAT)
+                    if (world.map.masker.mask == MapMaskManager.maskType.INFILTRATION)
                     {
                         world.map.masker.mask = MapMaskManager.maskType.NONE;
                     }
                     else
                     {
-                        world.map.masker.mask = MapMaskManager.maskType.THREAT;
+                        world.map.masker.mask = MapMaskManager.maskType.INFILTRATION;
                     }
                     GraphicalMap.checkData();
                 }

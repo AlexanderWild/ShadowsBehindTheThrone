@@ -318,7 +318,7 @@ namespace Assets.Code
         public int unit_socialiseAtCourtGain = 30;
         public int unit_pleadCaseTime = 3;
         public int unit_infiltrateTime = 7;
-        public double unit_infiltrateAmount = 1.25;
+        public double unit_infiltrateAmount = 1.35;
         public double unit_divisorOffset = 2;
         public double unit_infiltrateEvidence = 0.35;
         public int unit_spreadShadowTime = 8;
