@@ -40,6 +40,7 @@ namespace Assets.Code
             if (u.location.person() == null) { return false; }
             if (u is Unit_Investigator == false) { return false; }
             Unit_Investigator u2 = (Unit_Investigator)u;
+            if (u2.victimUses <= 0) { return false; }
             return u2.victim != null && u2.victim.person != null;
         }
 

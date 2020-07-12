@@ -221,7 +221,7 @@ ability_delayVoteCooldown: 24
 ability_disruptActionCost: 3
 ability_disruptActionDuration: 7
 ability_enthrallUnitCooldown: 32
-ability_unit_falseAccusationCharges: 3
+ability_unit_falseAccusationCharges: 5
 ability_unit_falseAccusationEffect: 0.25
 ability_unit_enthrallNobleReq: 0.9
 ability_unit_spreadShadowInfiltrationReq: 0.5

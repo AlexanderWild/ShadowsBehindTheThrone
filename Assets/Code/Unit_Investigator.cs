@@ -20,8 +20,8 @@ namespace Assets.Code
         {
             maxHp = 3;
             hp = 3;
-            abilities.Add(new Abu_Inv_ProduceFalseEvidence());
             abilities.Add(new Abu_Inv_FalseAccusation());
+            abilities.Add(new Abu_Inv_ProduceFalseEvidence());
             abilities.Add(new Abu_Inv_Incriminate());
             abilities.Add(new Abu_Base_Infiltrate());
             abilities.Add(new Abu_Base_SocialiseAtCourt());
