@@ -342,14 +342,47 @@ namespace Assets.Code
 
                     if (dmgDone < 1) { dmgDone = 1; }
 
+                    bool kicked = false;
+                    if (dmgDone > 1 && u2.isEnthralled()) { dmgDone = 1; kicked = true; }
+
 
                     u2.hp -= dmgDone;
                     if (u2.isEnthralled()) {
                         world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
-                            }
+                    }
                     if (u2.hp <= 0)
                     {
                         u2.die(this,"Attacked by " + u.getName());
+                    }
+                    else if (kicked)
+                    {
+                        int c = 0;
+                        Location kickedTo = null;
+                        foreach (Location l2 in u2.location.getNeighbours())
+                        {
+                            bool bad = false;
+                            foreach (Unit u3 in l2.units)
+                            {
+                                if (u3.hostileTo(u2) || u2.hostileTo(u3)) { bad = true;break; }
+                            }
+                            if (!bad)
+                            {
+                                c += 1;
+                                if (Eleven.random.Next(c) == 0)
+                                {
+                                    kickedTo = l2;
+                                }
+                            }
+                        }
+                        if (kickedTo != null)
+                        {
+                            adjacentMoveTo(u2, kickedTo);
+                            if (u2.isEnthralled())
+                            {
+                                world.prefabStore.popMsg(u2.getName() + " is forced to retreat, and is now in " + u2.location.getName());
+
+                            }
+                        }
                     }
 
                     if (loc.settlement != null)

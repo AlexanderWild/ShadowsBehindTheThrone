@@ -27,13 +27,17 @@ namespace Assets.Code
             }
             if (i == 2)
             {
-                img.sprite = ui.world.textureStore.tutorial3;
+                img.sprite = ui.world.textureStore.tutorialVoting;
             }
             if (i == 3)
             {
-                img.sprite = ui.world.textureStore.tutorial4;
+                img.sprite = ui.world.textureStore.tutorial3;
             }
             if (i == 4)
+            {
+                img.sprite = ui.world.textureStore.tutorial4;
+            }
+            if (i == 5)
             {
                 img.sprite = ui.world.textureStore.tutorial5;
             }

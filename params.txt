@@ -60,7 +60,7 @@ utility_econEffectOther: 0.05
 utility_militaryTargetRelStrengthOffensive: 350
 utility_militaryTargetCompleteProvince: 80
 utility_militaryTargetExpansion: 150
-utility_militaryOverexpansionHalt: 200
+utility_militaryOverexpansionHalt: 225
 utility_militaryTargetRelStrengthDefensive: 300
 utility_vassaliseReluctance: -100
 utility_vassaliseMilMult: 80
@@ -88,9 +88,9 @@ person_maxLikingLossFromVoteDiscord: -30
 person_prestigeDeltaPerTurn: 0.5
 person_threatMult: 100
 person_defaultPrestige: 5
-person_evidencePerShadow: 0.025
+person_evidencePerShadow: 0.02
 person_evidenceExponent: 1.5
-person_evidenceReduceEnthralled: 0.66
+person_evidenceReduceEnthralled: 0.45
 person_suspicionPerEvidence: 0.1
 person_dislikingFromSuspicion: -200
 person_shadowContagionMult: 0.05
@@ -272,7 +272,7 @@ unit_disruptCooldown: 10
 unit_targetUnitsPerLoc: 0.1
 unit_investigateTime: 3
 unit_investigateNobleTime: 3
-unit_investigateNobleEvidenceGain: 0.2
+unit_investigateNobleEvidenceGain: 0.15
 unit_investigateNobleCooldown: 16
 unit_shareSuspicionTime: 1
 unit_socialiseAtCourtTime: 3

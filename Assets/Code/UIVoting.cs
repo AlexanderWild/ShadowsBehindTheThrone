@@ -37,6 +37,7 @@ namespace Assets.Code
         public Button switchPower;
         public Button switchEnthralled;
         public Button switchLiking;
+        public Button viewSelf;
 
         public float offsetPrimary = 0;
         public float offset = 0;
@@ -59,6 +60,8 @@ namespace Assets.Code
                 voteOptBars[i].targetPosition = offset + (i * offsetPerItem);
             }
             switchEnthralled.gameObject.SetActive(voterBars[0].voter.state == Person.personState.enthralled);
+
+            
         }
 
         public void populate(Society soc,Person agent)
@@ -84,6 +87,7 @@ namespace Assets.Code
                 //bar.gameObject.transform.parent = this.gameObject.transform;
                 voteOptBars.Add(bar);
             }
+            viewSelf.gameObject.SetActive(false);
             if (agent != null)
             {
                 textAgentName.text = "Interacting with:\n" + agent.getFullName();
@@ -92,6 +96,7 @@ namespace Assets.Code
                 agentFore.sprite = agent.getImageFore();
                 agentMid.sprite = agent.getImageMid();
                 textAgentDesc.text = "You may use the voter's liking for " + agent.getFullName() + " to sway their votes one way or another, spending this liking as political capital.";
+
             }
             else
             {
@@ -104,6 +109,12 @@ namespace Assets.Code
             }
             sess = soc.voteSession;
             checkData();
+
+            if (agent != null && agent == soc.map.overmind.enthralled)
+            {
+                bGoToSelf();
+                viewSelf.gameObject.SetActive(true);
+            }
         }
 
         public void checkData()
@@ -159,6 +170,24 @@ namespace Assets.Code
             textWinningOpt.text = winner.info(sess.issue);
         }
 
+        public void bGoToSelf()
+        {
+            for (int i = 0; i < voterBars.Count; i++)
+            {
+                if (voterBars[i].voter.state == Person.personState.enthralled)
+                {
+                    while(voterBars[0].voter.state != Person.personState.enthralled)
+                    {
+                        PopVoterBar element = voterBars[voterBars.Count - 1];
+                        voterBars.RemoveAt(voterBars.Count - 1);
+                        voterBars.Insert(0, element);
+                    }
+                    world.audioStore.playClick();
+                    checkData();
+                    break;
+                }
+            }
+        }
         public void bSwitchVote()
         {
             voterBars[0].voter.forcedVoteOption = voteOptBars[0].opt;

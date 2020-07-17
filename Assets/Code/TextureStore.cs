@@ -109,6 +109,7 @@ namespace Assets.Code
 
         public Sprite tutorial1;
         public Sprite tutorial2;
+        public Sprite tutorialVoting;
         public Sprite tutorial3;
         public Sprite tutorial4;
         public Sprite tutorial5;

@@ -83,7 +83,7 @@ namespace Assets.Code
         public double utility_militaryTargetRelStrengthOffensive = 350;
         public double utility_militaryTargetCompleteProvince = 80;
         public double utility_militaryTargetExpansion = 150;
-        public double utility_militaryOverexpansionHalt = 200;
+        public double utility_militaryOverexpansionHalt = 225;
         public double utility_militaryTargetRelStrengthDefensive = 300;
         public double utility_vassaliseReluctance = -100;
         public double utility_vassaliseMilMult = 80;
@@ -112,9 +112,9 @@ namespace Assets.Code
         public double person_prestigeDeltaPerTurn = 0.5;
         public double person_threatMult = 100;
         public double person_defaultPrestige = 5;
-        public double person_evidencePerShadow = 0.025;
+        public double person_evidencePerShadow = 0.02;
         public double person_evidenceExponent = 1.5;
-        public double person_evidenceReduceEnthralled = 0.66;
+        public double person_evidenceReduceEnthralled = 0.45;
         public double person_suspicionPerEvidence = 0.1;
         public double person_dislikingFromSuspicion = -200;
         public double person_shadowContagionMult = 0.05;
@@ -311,7 +311,7 @@ namespace Assets.Code
         public double unit_targetUnitsPerLoc = 0.1;
         public int unit_investigateTime = 3;
         public int unit_investigateNobleTime = 3;
-        public double unit_investigateNobleEvidenceGain = 0.20;
+        public double unit_investigateNobleEvidenceGain = 0.15;
         public int unit_investigateNobleCooldown = 16;
         public int unit_shareSuspicionTime = 1;
         public int unit_socialiseAtCourtTime = 3;
