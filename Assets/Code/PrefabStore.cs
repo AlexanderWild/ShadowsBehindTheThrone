@@ -323,7 +323,7 @@ namespace Assets.Code
                 {
                     var saveBox = getSaveBox();
                     saveBox.setTo(file);
-                    saveBox.gameObject.transform.SetParent(saveBox.gameObject.transform);
+                    saveBox.gameObject.transform.SetParent(specific.gameObject.transform);
                     specific.scrollables.Add(saveBox);
                 }
             }
