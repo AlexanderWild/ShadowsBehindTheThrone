@@ -62,6 +62,7 @@ namespace Assets.Code
         public GameObject prefabPopVoterBar;
         public GameObject prefabPopOptBar;
         public GameObject prefabAutosave;
+        public GameObject prefabSaveName;
 
         public PopOptBar getVoteOptBar(VoteOption opt,VoteSession sess)
         {
@@ -571,6 +572,17 @@ namespace Assets.Code
             specific.ui = ui;
             specific.text.text = "Saving game...";
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popSaveName()
+        {
+            if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabSaveName) as GameObject;
+            PopupSaveDialog specific = obj.GetComponent<PopupSaveDialog>();
+            specific.ui = ui;
+            specific.bSave.onClick.AddListener(delegate { specific.save(); });
+            specific.bCancel.onClick.AddListener(delegate { specific.cancel(); });
             ui.addBlocker(specific.gameObject);
         }
         public void popImgMsg(string body,string flavour,int img=0)

@@ -416,7 +416,9 @@ namespace Assets.Code
         public void bQuicksave()
         {
             audioStore.playClick();
-            save("quicksave.sv");
+            // save("quicksave.sv");
+
+            prefabStore.popSaveName();
         }
         public void bQuickload()
         {
