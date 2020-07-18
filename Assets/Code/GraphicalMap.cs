@@ -75,6 +75,10 @@ namespace Assets.Code
                 for (int y = 0; y < world.map.grid[0].Length; y++)
                 {
                     world.map.grid[x][y].outer = null;
+                    if (world.map.grid[x][y].settlement != null && world.map.grid[x][y].settlement.embeddedUnit != null)
+                    {
+                        world.map.grid[x][y].settlement.embeddedUnit.outer = null;
+                    }
                 }
             } 
             List<GraphicalHex> unNeeded = new List<GraphicalHex>();

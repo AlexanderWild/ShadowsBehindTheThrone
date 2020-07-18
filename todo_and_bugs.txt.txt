@@ -3,21 +3,18 @@
 -Agents died but the ability wouldn't accept them being bought back
 	Unable to replicate
 
--Voting screen needs self-vote support
 
 	Medium criticality:
 	
+-Units disappear when dismissing a dialog option (only in compiled)
+
 -Heirarchy view doesn't autoscroll to target
 	
 -Traits should affect infiltration difficulty
 
 -For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
 	Repeated. Unsure of cause
-
--Recruit outlaws doesn't actually give evidence
-	Or evidence doesn't actually cause suspicion
 	
--Utilities for assign title are very high (possibly fixed)
 
 
 	Low criticality:
@@ -29,6 +26,7 @@
 -Allow player to vote on all econ reforms available in society
 
 -Two nations named the same thing
+-Utilities for assign title are very high (possibly fixed)
 
 	Features:
 	
@@ -43,6 +41,10 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+
+-Recruit outlaws doesn't actually give evidence
+	Or evidence doesn't actually cause suspicion
+-Voting screen needs self-vote support
 
 -People's data is poorly arranged. Shadow and evidence are tiny, with no information, despite being critical.
 -Bunch of green tiles. No set, no soc

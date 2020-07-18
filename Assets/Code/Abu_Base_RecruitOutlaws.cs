@@ -13,14 +13,10 @@ namespace Assets.Code
             {
                 u.hp = u.maxHp;
             }
-            u.person.evidence += map.param.unit_recruitEvidence;
-            if (u.person.evidence > 1) { u.person.evidence = 1; }
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " recruits from " + u.location.getName() +
-                ", replenishing their forces but adding " + (int)(100*map.param.unit_recruitEvidence) + "% . They are now at " + u.hp + "/" + u.maxHp + " and " +
-                (int)(100*u.person.evidence) +  "% evidence.",
+                ", replenishing their forces.",
                 u.location.map.world.wordStore.lookup("ABILITY_RECRUIT_OUTLAWS"));
-
         }
         public override bool castable(Map map, Unit u)
         {
@@ -47,13 +43,12 @@ namespace Assets.Code
 
         public override int getCooldown()
         {
-            return 5;
+            return 10;
         }
 
         public override string getDesc()
         {
-            return "Recruits from the local population of outlaws and exiles, replenishing the forces of this agent (+1HP), adds " + ((int)(100*World.staticMap.param.unit_recruitEvidence))
-                + "% evidence to the agent"
+            return "Recruits from the local population of outlaws and exiles, replenishing the forces of this agent (+1HP)"
                 + "\n[Requires an empty non-ocean location next to a human society]";
         }
 

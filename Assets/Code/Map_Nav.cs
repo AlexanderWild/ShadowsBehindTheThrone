@@ -380,7 +380,6 @@ namespace Assets.Code
                             if (u2.isEnthralled())
                             {
                                 world.prefabStore.popMsg(u2.getName() + " is forced to retreat, and is now in " + u2.location.getName());
-
                             }
                         }
                     }

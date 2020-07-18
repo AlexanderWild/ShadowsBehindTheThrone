@@ -633,7 +633,7 @@ namespace Assets.Code
         public void bTutorial()
         {
             world.audioStore.playClick();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 9; i++)
             {
                 PopupTutorialMsg msg = world.prefabStore.getTutorial(i);
                 addBlocker(msg.gameObject);
