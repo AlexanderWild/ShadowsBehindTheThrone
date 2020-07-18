@@ -463,6 +463,7 @@ namespace Assets.Code
                 map = (Map)deserialized;
                 map.world = this;
                 staticMap = map;
+                World.self.displayMessages = true;
                 GraphicalMap.map = map;
                 //ui.setToMainMenu();
                 //GraphicalMap.checkLoaded();

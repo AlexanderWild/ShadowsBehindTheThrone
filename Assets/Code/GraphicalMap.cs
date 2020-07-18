@@ -81,6 +81,10 @@ namespace Assets.Code
                     }
                 }
             } 
+            foreach (Unit u in map.units)
+            {
+                u.outer = null;
+            }
             List<GraphicalHex> unNeeded = new List<GraphicalHex>();
             foreach (GraphicalHex hex in loaded)
             {
