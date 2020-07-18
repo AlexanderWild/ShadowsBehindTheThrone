@@ -26,6 +26,9 @@ namespace Assets.Code
         public Button bHard;
         public Toggle tAwareness;
         public Toggle tInvestigatorsSee;
+        public Button bSeedZero;
+        public Button bSeedOne;
+        public Button bAllOptsOn;
 
         public bool investigatorsSee = false;
         public bool useAwareness = false;
@@ -51,6 +54,21 @@ namespace Assets.Code
             ui.world.audioStore.playClickInfo();
         }
 
+        public void setSeed0()
+        {
+            currentSeed = 0;
+            setTextFieldsToCurrentValues();
+        }
+        public void setSeed1()
+        {
+            currentSeed = 1;
+            setTextFieldsToCurrentValues();
+        }
+        public void activateAllGameOpts()
+        {
+            tAwareness.isOn = true;
+            tInvestigatorsSee.isOn = true;
+        }
         public void setEasy()
         {
             ui.world.audioStore.playClickInfo();

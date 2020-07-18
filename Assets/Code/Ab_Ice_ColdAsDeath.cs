@@ -27,7 +27,7 @@ namespace Assets.Code
                 {
                     if (targets.Contains(h.territoryOf))
                     {
-                        h.temporaryTempDelta += (float)map.param.ability_coldAsDeathTempChange;
+                        h.transientTempDelta += (float)map.param.ability_coldAsDeathTempChange;
                     }
                 }
             }

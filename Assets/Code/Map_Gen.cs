@@ -1087,8 +1087,6 @@ namespace Assets.Code
                 }
                 if (lighthouse != null)
                 {
-                    lighthouse.amphibPoint = true;
-                    set.hex.amphibPoint = true;
                     set.isCoastal = true;
                 }
             }

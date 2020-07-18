@@ -19,7 +19,7 @@ namespace Assets.Code
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " plants evidence on " + u.location.person().getFullName() + ", increasing their evidence by 10%." +
                 " They also leave behind evidence incriminating themselves (evidence strength 25%).",
-                u.location.map.world.wordStore.lookup("ABILITY_UNIT_FALSE_EVIDENCE"));
+                u.location.map.world.wordStore.lookup("ABILITY_UNIT_INCRIMINATE"));
         }
         public override bool castable(Map map, Unit u)
         {

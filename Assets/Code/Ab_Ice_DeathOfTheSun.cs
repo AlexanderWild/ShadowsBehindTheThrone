@@ -43,7 +43,7 @@ namespace Assets.Code
             {
                 foreach (Hex h in row)
                 {
-                    h.temporaryTempDelta += delta;
+                    h.transientTempDelta += delta;
                 }
             }
 

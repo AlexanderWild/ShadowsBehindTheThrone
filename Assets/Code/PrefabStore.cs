@@ -530,10 +530,14 @@ namespace Assets.Code
             specific.sizeXField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.sizeYField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.historicalField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.bAllOptsOn.onClick.AddListener(delegate { specific.activateAllGameOpts(); });
 
             specific.bEasy.onClick.AddListener(delegate { specific.setEasy(); });
             specific.bMedium.onClick.AddListener(delegate { specific.setMedium(); });
             specific.bHard.onClick.AddListener(delegate { specific.setHard(); });
+
+            specific.bSeedZero.onClick.AddListener(delegate { specific.setSeed0(); });
+            specific.bSeedOne.onClick.AddListener(delegate { specific.setSeed1(); });
 
             specific.currentSeed = Eleven.random.Next();
             specific.setTextFieldsToCurrentValues();

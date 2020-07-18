@@ -16,21 +16,15 @@ namespace Assets.Code
         public Location location;
         public enum terrainType { SEA, MOUNTAIN, GRASS, PATH,  SWAMP, MUD, DESERT, DRY, WETLAND, TUNDRA, SNOW };
         public terrainType terrain;
-        public bool road;
         public Location territoryOf;
         public Flora flora;
-        public bool amphibPoint;
 
-        public float combatDead;
-        public float civilianDead;
-        public int lastCombatDeath = -1;
         public float purity = 1;
 
-        public float temporaryTempDelta = 0;
+        public float transientTempDelta = 0;
 
         public float tX;
         public float tY;
-        public float graphicalScale;
         public int graphicalIndexer;
 
         public Province province;
@@ -84,7 +78,7 @@ namespace Assets.Code
         {
             float temp = map.tempMap[x][y];
 
-            temp += temporaryTempDelta;
+            temp += transientTempDelta;
             temp += map.globalTemporaryTempDelta;
             if (temp < 0) { temp = 0; }
             if (temp > 1) { temp = 1; }
@@ -126,16 +120,16 @@ namespace Assets.Code
                 newPurity /= neighbours.Count;
                 purity = (purity + newPurity) / 2;
             }
-            if (Math.Abs(temporaryTempDelta) < map.param.map_tempTemperatureReversion)
+            if (Math.Abs(transientTempDelta) < map.param.map_tempTemperatureReversion)
             {
-                temporaryTempDelta = 0;
-            }else if (temporaryTempDelta > 0)
+                transientTempDelta = 0;
+            }else if (transientTempDelta > 0)
             {
-                temporaryTempDelta -= map.param.map_tempTemperatureReversion;
+                transientTempDelta -= map.param.map_tempTemperatureReversion;
             }
             else
             {
-                temporaryTempDelta += map.param.map_tempTemperatureReversion;
+                transientTempDelta += map.param.map_tempTemperatureReversion;
             }
         }
 

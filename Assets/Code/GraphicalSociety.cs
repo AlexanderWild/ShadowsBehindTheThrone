@@ -169,7 +169,7 @@ namespace Assets.Code
                 float n2 = pair.Value.Count, j = 0;
                 foreach (GraphicalSlot ds2 in pair.Value)
                 {
-                    float radius2 = 1.5f;
+                    float radius2 = 1.5f*zoom;
                     float spread  = (n2 > 4) ? 3.5f : 2.5f;
                     float angle2  = (angle - spread / 2) + spread / n2 * (j + 0.5f);
 
