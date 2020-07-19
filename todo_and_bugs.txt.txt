@@ -5,8 +5,10 @@
 
 
 	Medium criticality:
-	
--Units disappear when dismissing a dialog option (only in compiled)
+
+-If you have no saves to load it reads "New text" on the scroll view
+
+-Units disappear when dismissing a dialog option (only in compiled?)
 
 -Heirarchy view doesn't autoscroll to target
 	

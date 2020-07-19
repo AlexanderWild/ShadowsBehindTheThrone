@@ -355,10 +355,37 @@ namespace Assets.Code
             ui.addBlocker(prefabStore.getScrollSetThreats(threats).gameObject);
         }
 
-        public void save(string filename,bool popMsg=true)
+        public static bool hasWritePermission(string folderPath)
         {
             try
             {
+
+                //Because Unity isn't re-implementing the correct libraries, we're doing it this way. Apologies to the future, we make war with the army with have not the one we want
+                File.WriteAllLines("trialWrite.tmp", new string[] { "trialForPermissionCheck" });
+                File.Delete("trialWrite.tmp");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public void save(string filename,bool popMsg=true)
+        {
+            Map rescueMap = World.staticMap;
+
+            if (!hasWritePermission("."))
+            {
+                prefabStore.popMsg("You don't have write permissions to this folder. Saving cannot function yet without the game being able to write to its directory.");
+                World.autosavePeriod = -1;
+                return;
+            }
+
+            try
+            {
+
+
                 World world = this;
                 // world.ui.setToMainMenu();
                 GraphicalMap.purge();
@@ -410,6 +437,10 @@ namespace Assets.Code
                 World.log(e.StackTrace);
                 prefabStore.popMsg("Failure to save");
                 prefabStore.popMsg("Exception: " + e.StackTrace);
+
+                map = rescueMap;
+                map.world = this;
+                staticMap = map;
             }
         }
 
