@@ -17,16 +17,16 @@ namespace Assets.Code
 
         public override string ToString()
         {
-            string add = ""; 
-            if (title.heldBy != null)
-            {
-                add = " (now held by " + title.heldBy.getFullName() + ")";
-            }
-            else
-            {
-                add = " (unassigned)";
-            }
-            return "Assign " + title.getName() + " " + add;
+            string add = "";
+            //if (title.heldBy != null)
+            //{
+            //    add = " (now held by " + title.heldBy.getFullName() + ")";
+            //}
+            //else
+            //{
+            //    add = " (unassigned)";
+            //}
+            return "Assign " + title.getName();
         }
 
         public override string getLargeDesc()

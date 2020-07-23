@@ -1,5 +1,7 @@
 	High criticality:
 
+-Societies should not vassalise if they are large
+
 -Agents died but the ability wouldn't accept them being bought back
 	Unable to replicate
 

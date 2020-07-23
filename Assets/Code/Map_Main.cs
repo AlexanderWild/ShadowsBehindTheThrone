@@ -28,6 +28,11 @@ namespace Assets.Code
         public int data_nSocietyLocations;
         public UnitManager unitManager;
         public double worldPanic;
+        public int personIndexCount = 0;
+
+        public List<Person> persons = new List<Person>();
+
+        public Dictionary<string, string> compressionMap = new Dictionary<string, string>();
 
         public Map(Params param)
         {
@@ -172,6 +177,121 @@ namespace Assets.Code
             */
         }
 
+        public void compressForSave()
+        {
+            compressionMap.Clear();
+            foreach (SocialGroup sg in socialGroups)
+            {
+                if (sg is Society)
+                {
+                    Society soc = (Society)sg;
+                    foreach (Person p in soc.people)
+                    {
+                        compressPerson(p);
+                    }
+                }
+            }
+            foreach (Unit u in units)
+            {
+                if (u.person != null) { compressPerson(u.person); }
+            }
+            foreach (Location loc in locations)
+            {
+                foreach (Link l in loc.links)
+                {
+                    loc.savedLinks.Add(l.other(loc).index);
+                }
+                loc.links.Clear();
+            }
+        }
+
+        public void compressPerson(Person p)
+        {
+
+            List<RelObj> rems = new List<RelObj>();
+            foreach (RelObj rel in p.relations.Values)
+            {
+                Person them = persons[rel.them];
+                if (
+                    Math.Abs(rel.getLiking()) < 10 &&
+                    rel.suspicion < 0.1 &&
+                    (them.state != Person.personState.enthralled || them.state != Person.personState.enthralledAgent))
+                {
+                    rems.Add(rel);
+                }
+                else
+                {
+                    foreach (RelEvent msg in rel.events)
+                    {
+                        if (!compressionMap.ContainsKey(msg.reason))
+                        {
+                            compressionMap.Add(msg.reason, "" + compressionMap.Count);
+                        }
+                        msg.reason = compressionMap[msg.reason];
+                    }
+                }
+            }
+            foreach (RelObj rel in rems)
+            {
+                p.relations.Remove(rel.them);
+            }
+        }
+
+        public void decompressFromSave()
+        {
+            Dictionary<string, string> invertedDictionary = new Dictionary<string, string>();
+            foreach (String key in compressionMap.Keys)
+            {
+                string val = compressionMap[key];
+                invertedDictionary[val] = key;
+            }
+            foreach (SocialGroup sg in socialGroups)
+            {
+                if (sg is Society)
+                {
+                    Society soc = (Society)sg;
+                    foreach (Person p in soc.people)
+                    {
+                        decompressPerson(invertedDictionary,p);
+                    }
+                }
+            }
+            foreach (Unit u in units)
+            {
+                if (u.person != null) { decompressPerson(invertedDictionary,u.person); }
+            }
+            compressionMap.Clear();
+
+            foreach (Location loc in locations)
+            {
+                foreach (int i in loc.savedLinks)
+                {
+                    if (i > loc.index)
+                    {
+                        Link link = new Link(loc, locations[i]);
+                        loc.links.Add(link);
+                        locations[i].links.Add(link);
+                    }
+                }
+            }
+        }
+
+        public void decompressPerson(Dictionary<string, string> invertedDictionary,Person p)
+        {
+            foreach (int other in p.relations.Keys)
+            {
+                RelObj rel = p.relations[other];
+                foreach (RelEvent msg in rel.events)
+                {
+                    if (invertedDictionary.ContainsKey(msg.reason))
+                    {
+                        msg.reason = invertedDictionary[msg.reason];
+                    }
+                }
+                rel.them = other;
+            }
+
+        }
         public void processWars()
         {
             /*

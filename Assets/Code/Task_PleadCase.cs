@@ -28,11 +28,12 @@ namespace Assets.Code
                 string str = "";
                 foreach (RelObj rel in unit.location.person().relations.Values)
                 {
-                    if (rel.suspicion > 0 && (rel.them.state == Person.personState.enthralled || rel.them.state == Person.personState.enthralledAgent || rel.them.state == Person.personState.broken))
+                    Person them = World.staticMap.persons[rel.them];
+                    if (rel.suspicion > 0 && (them.state == Person.personState.enthralled || them.state == Person.personState.enthralledAgent || them.state == Person.personState.broken))
                     {
                         rel.suspicion /= 2;
                         n += 1;
-                        str += rel.them.getFullName() + "; ";
+                        str += them.getFullName() + "; ";
                     }
                 }
                 string add = "";

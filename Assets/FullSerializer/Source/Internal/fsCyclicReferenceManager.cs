@@ -40,12 +40,12 @@ namespace FullSerializer.Internal {
                 _nextId = 0;
                 _marked = new Dictionary<int, object>();
             }
-            World.saveLog.takeLine("Deserial 8c");
+            //World.saveLog.takeLine("Deserial 8c");
 
-            World.saveLog.takeLine("Deserial 8preErr " + _depth);
+            //World.saveLog.takeLine("Deserial 8preErr " + _depth);
             if (_depth < 0) {
                 _depth = 0;
-                World.saveLog.takeLine("Deserial 8err");
+                //World.saveLog.takeLine("Deserial 8err");
                 throw new InvalidOperationException("Internal Error - Mismatched Enter/Exit. Please report a bug at https://github.com/jacobdufault/fullserializer/issues with the serialization data.");
             }
 

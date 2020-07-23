@@ -362,7 +362,7 @@ namespace Assets.Code
                 PopupBoxPerson box = getPersonBox();
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
                 specific.scrollables.Add(box);
-                box.setTo(rel.them);
+                box.setTo(World.staticMap.persons[rel.them]);
                 box.body.text = "Liking: " + (int)rel.getLiking() + "\nSuspicion: " + (int)(rel.suspicion*100) + "%";
                 float scale = (float)rel.getLiking();
                 if (scale > 1) { scale = 1; }

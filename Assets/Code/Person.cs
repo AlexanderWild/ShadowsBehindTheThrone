@@ -8,13 +8,14 @@ namespace Assets.Code
 {
     public partial class Person
     {
+        public int index = 0;
         public string firstName;
         public bool isMale = Eleven.random.Next(2) == 0;
         public List<Title> titles = new List<Title>();
         public TitleLanded title_land;
         public Society society;
         //public SavableMap_Person_RelObj relations = new SavableMap_Person_RelObj();
-        public Dictionary<Person, RelObj> relations = new Dictionary<Person, RelObj>();
+        public Dictionary<int, RelObj> relations = new Dictionary<int, RelObj>();
         public double prestige = 1;
         public double targetPrestige = 1;
         public int lastVoteProposalTurn;
@@ -48,6 +49,9 @@ namespace Assets.Code
         public Person(Society soc)
         {
             this.society = soc;
+            index = World.staticMap.personIndexCount;
+            World.staticMap.personIndexCount += 1;
+            World.staticMap.persons.Add(this);//I can't believe this awful structure is required, but it is, for serializing. No references to others
             firstName = TextStore.getName(isMale);
             madness = new Insanity_Sane();
 
@@ -95,7 +99,7 @@ namespace Assets.Code
             else if (prestige > targetPrestige) { prestige -= map.param.person_prestigeDeltaPerTurn; }
             
             foreach (RelObj rel in relations.Values) {
-                rel.turnTick(this, rel.them);
+                rel.turnTick(this);
             }
 
             List<Title> rems = new List<Title>();
@@ -612,9 +616,9 @@ namespace Assets.Code
             return g;
         }
 
-        public double getRelBaseline(Person other)
+        public double getRelBaseline(int other)
         {
-            if (other == this) { return madness.selfLove; }
+            if (other == this.index) { return madness.selfLove; }
             return map.param.relObj_defaultLiking;
         }
 
@@ -641,12 +645,19 @@ namespace Assets.Code
         {
             if (other == null) { throw new NullReferenceException(); }
 
-            if (relations.ContainsKey(other)){
+            return getRelation(other.index);
+        }
+
+        public RelObj getRelation(int other)
+        {
+
+            if (relations.ContainsKey(other))
+            {
                 return relations[other];
             }
             RelObj rel = new RelObj(this, other);
-            relations.Add(other,rel);
-            
+            relations.Add(other, rel);
+
             return rel;
         }
 

@@ -17,6 +17,7 @@ namespace Assets.Code
         public HashSet<Hex> territory = new HashSet<Hex>();
         public Color territoryColor;
         public List<Link> links = new List<Link>();
+        public List<int> savedLinks = new List<int>();
         public bool isCoastal;
         public bool isOcean;
         public bool isForSocieties = true;

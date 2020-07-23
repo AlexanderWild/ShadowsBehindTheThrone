@@ -79,6 +79,18 @@ namespace Assets.Code
                     {
                         world.map.grid[x][y].settlement.embeddedUnit.outer = null;
                     }
+                    if (world.map.grid[x][y].location != null)
+                    {
+                        foreach (Property p in world.map.grid[x][y].location.properties)
+                        {
+                            p.outer = null;
+                        }
+                        //Should already be covered, but let's check
+                        foreach (Unit u in world.map.grid[x][y].location.units)
+                        {
+                            u.outer = null;
+                        }
+                    }
                 }
             } 
             foreach (Unit u in map.units)

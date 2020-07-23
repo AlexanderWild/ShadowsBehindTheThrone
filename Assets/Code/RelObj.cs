@@ -18,12 +18,11 @@ namespace Assets.Code
         public LinkedList<RelEvent> events = new LinkedList<RelEvent>();
         public bool isSelf = false;
         public Person me;
-        public Person them;
-        public List<RelEvent> rems = new List<RelEvent>();
+        public int them;
 
-        public RelObj(Person me,Person them)
+        public RelObj(Person me,int them)
         {
-            isSelf = me == them;
+            isSelf = me.index == them;
             this.me = me;
             this.them = them;
         }
@@ -44,8 +43,9 @@ namespace Assets.Code
             return liking;
         }
 
-        public static double getLikingModifiers(Person me,Person them,List<ReasonMsg> reasons)
+        public static double getLikingModifiers(Person me,int themIndex,List<ReasonMsg> reasons)
         {
+            Person them = World.staticMap.persons[themIndex];
             double u = 0;
 
             if (them.madness is Insanity_Sane == false)
@@ -98,13 +98,14 @@ namespace Assets.Code
         }
         */
 
-        public void turnTick(Person me,Person them)
+        public void turnTick(Person me)
         {
             //if (them == me) { liking = 100; }//Be at least loyal to yourself (till traits override this)
 
             double baseline = me.getRelBaseline(them);
 
-            rems.Clear();
+
+            List<RelEvent> rems = new List<RelEvent>();
             foreach (RelEvent ev in events)
             {
                 ev.amount *= me.map.param.relObj_decayRate;

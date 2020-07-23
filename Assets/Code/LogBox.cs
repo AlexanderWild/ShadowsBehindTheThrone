@@ -24,14 +24,12 @@ namespace Assets.Code
 
         public void takeLine(string line)
         {
-            /*
-            //Don't use this as a field, or it'll get maximally shrivelled when serialising
-            //Just don't log so much you faithless wretch
-            System.IO.StreamWriter file;
-            file = new System.IO.StreamWriter(path, true);
-            file.WriteLine(line);
-            file.Close();
-            */
+            ////Don't use this as a field, or it'll get maximally shrivelled when serialising
+            ////Just don't log so much you faithless wretch
+            //System.IO.StreamWriter file;
+            //file = new System.IO.StreamWriter(path, true);
+            //file.WriteLine(line);
+            //file.Close();
         }
 
     }

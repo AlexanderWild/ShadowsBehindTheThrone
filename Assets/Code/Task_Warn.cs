@@ -40,7 +40,8 @@ namespace Assets.Code
 
                         if (me > them)
                         {
-                            unit.location.map.addMessage(unit.getName() + " warns " + unit.location.person().getFullName() + " about " + rel.them.getFullName(), MsgEvent.LEVEL_ORANGE, false);
+                            Person themP = World.staticMap.persons[rel.them];
+                            unit.location.map.addMessage(unit.getName() + " warns " + unit.location.person().getFullName() + " about " + themP.getFullName(), MsgEvent.LEVEL_ORANGE, false);
                             unit.location.person().getRelation(rel.them).suspicion += gain;
                         }
                     }

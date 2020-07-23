@@ -115,7 +115,7 @@ namespace Assets.Code
                     }
 
                     List<ReasonMsg> msgs = new List<ReasonMsg>();
-                    RelObj.getLikingModifiers(me, them, msgs);
+                    RelObj.getLikingModifiers(me, them.index, msgs);
                     foreach (ReasonMsg msg in msgs)
                     {
                         words += "\n\n  -" + msg.msg + " " + ((int)msg.value);
@@ -173,7 +173,7 @@ namespace Assets.Code
                     }
 
                     List<ReasonMsg> msgs = new List<ReasonMsg>();
-                    RelObj.getLikingModifiers(me, them, msgs);
+                    RelObj.getLikingModifiers(me, them.index, msgs);
                     foreach (ReasonMsg msg in msgs)
                     {
                         words += "\n\n  -" + msg.msg + " " + ((int)msg.value);

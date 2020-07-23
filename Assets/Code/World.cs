@@ -390,6 +390,7 @@ namespace Assets.Code
                 // world.ui.setToMainMenu();
                 GraphicalMap.purge();
                 GraphicalSociety.purge();
+                map.compressForSave();
                 world.map.world = null;
 
 
@@ -419,6 +420,7 @@ namespace Assets.Code
 
                 world.map.world = world;
                 staticMap = map;
+                map.decompressFromSave();
 
                 if (popMsg)
                 {
@@ -431,7 +433,8 @@ namespace Assets.Code
                 //// step 2: deserialize the data
                 //object deserialized = null;
                 //_serializer.TryDeserialize(data, type, ref deserialized).AssertSuccessWithoutWarnings();
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
                 World.log(e.Message);
                 World.log(e.StackTrace);
@@ -500,6 +503,7 @@ namespace Assets.Code
                 //GraphicalMap.checkLoaded();
                 //GraphicalMap.checkData();
                 //graphicalMap.loadArea(0, 0);
+                map.decompressFromSave();
                 prefabStore.popMsg("Loaded file: " + filename);
                 World.Log("reached end of loading code");
                 // prefabStore.popMsg("Load may well have succeeded.");

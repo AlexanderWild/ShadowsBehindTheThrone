@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FullSerializer.Internal;
 using Assets.Code;
+using System.Diagnostics;
 
 #if !UNITY_EDITOR && UNITY_WSA
 // For System.Reflection.TypeExtensions
@@ -753,7 +754,7 @@ namespace FullSerializer {
         /// Attempts to deserialize a value from a serialized state.
         /// </summary>
         public fsResult TryDeserialize(fsData data, Type storageType, Type overrideConverterType, ref object result) {
-            World.saveLog.takeLine("Deserial 1");
+            //World.saveLog.takeLine("Deserial 1");
             if (data.IsNull) {
                 result = null;
                 var processors = GetProcessors(storageType);
@@ -761,11 +762,11 @@ namespace FullSerializer {
                 Invoke_OnAfterDeserialize(processors, storageType, null);
                 return fsResult.Success;
             }
-            World.saveLog.takeLine("Deserial 2");
+            //World.saveLog.takeLine("Deserial 2");
 
             // Convert legacy data into modern style data
             ConvertLegacyData(ref data);
-            World.saveLog.takeLine("Deserial 3");
+            //World.saveLog.takeLine("Deserial 3");
 
 
             try {
@@ -774,17 +775,18 @@ namespace FullSerializer {
                 // references, ie, a list of objects that are cyclic w.r.t. the
                 // list
                 _references.Enter();
-                World.saveLog.takeLine("Deserial 4");
+                //World.saveLog.takeLine("Deserial 4");
 
 
                 List<fsObjectProcessor> processors;
-                World.saveLog.takeLine("Deserial 5");
+                //World.saveLog.takeLine("Deserial 5");
                 var r = InternalDeserialize_1_CycleReference(overrideConverterType, data, storageType, ref result, out processors);
-                World.saveLog.takeLine("Deserial 6");
+                //World.saveLog.takeLine("Deserial 6");
                 if (r.Succeeded) {
                     Invoke_OnAfterDeserialize(processors, storageType, result);
-                    World.saveLog.takeLine("Deserial 7");
+                    //World.saveLog.takeLine("Deserial 7");
                 }
+
                 return r;
             }
             finally
