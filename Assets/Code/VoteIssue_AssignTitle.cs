@@ -106,6 +106,7 @@ namespace Assets.Code
             society.turnSovreignAssigned = society.map.turn;
             title.turnLastAssigned = society.map.turn;
 
+            Person incumbent = title.heldBy;
             if (title.heldBy == option.person)
             {
                 World.log("Title: " + title.getName() + " remains held by " + option.person.getFullName());
@@ -125,10 +126,18 @@ namespace Assets.Code
             {
                 if (t != title)
                 {
-                    t.heldBy = null;
+                    if (incumbent != null && option.person != incumbent)
+                    {
+                        t.heldBy = incumbent;
+                        incumbent.titles.Add(t);
+                    }
+                    else
+                    {
+                        t.heldBy = null;
+                    }
                     if (t.society.hasEnthralled())
                     {
-                        t.society.map.addMessage("Title: " + t.getName() + " is now unassigned");
+                        t.society.map.addMessage("Title: " + t.getName() + " is now reassigned");
                     }
                 }
             }

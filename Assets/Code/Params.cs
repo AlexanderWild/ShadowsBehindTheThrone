@@ -297,6 +297,7 @@ namespace Assets.Code
         public int combat_popDamageMax = 10;
         public int combat_infraDamageMax = 10;
 
+        public int voting_maxLocationsForVassalisation = 7;
         public int voting_powerToSwitchMin = 4;
         public int voting_likingToSwitchMin = 5;
         public double voting_powerToSwitchPerU = 0.2;

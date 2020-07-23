@@ -394,7 +394,7 @@ namespace Assets.Code
 
                     //Check to see if you want to defensively vassalise yourself
                     //You need to be in defensive posture to be allowed to do so
-                    if (society.offensiveTarget != null && society.posture == Society.militaryPosture.defensive && (society.isAtWar() == false))
+                    if (society.offensiveTarget != null && society.posture == Society.militaryPosture.defensive && (society.isAtWar() == false) && society.lastTurnLocs.Count < World.staticMap.param.voting_maxLocationsForVassalisation)
                     {
                         foreach (SocialGroup sg in society.getNeighbours())
                         {
