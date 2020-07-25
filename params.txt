@@ -259,6 +259,7 @@ temporaryThreatConversion: 0.01
 war_battleDeadDur: 4
 combat_popDamageMax: 10
 combat_infraDamageMax: 10
+voting_maxLocationsForVassalisation: 7
 voting_powerToSwitchMin: 4
 voting_likingToSwitchMin: 5
 voting_powerToSwitchPerU: 0.2

@@ -18,6 +18,21 @@ namespace Assets.Code
             militaryRegenAdd = 3;
         }
 
+        public override Sprite getCustomTerrain()
+        {
+            return World.staticMap.world.textureStore.hex_special_flesh;
+        }
+
+        public override void turnTick()
+        {
+            base.turnTick();
+
+            foreach (Hex h in location.territory)
+            {
+                h.flora = null;
+            }
+        }
+
         public override void checkUnitSpawning()
         {
             spawnCounter += 1;

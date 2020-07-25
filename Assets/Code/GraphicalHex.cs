@@ -106,7 +106,11 @@ namespace Assets.Code
             float floraDark = 0.3f + (+0.7f * hex.purity);
             Color colour = new Color(dark, dark, dark);
 
-            if (hex.terrain == Hex.terrainType.SEA)
+            if (hex.territoryOf != null && hex.territoryOf.settlement != null && hex.territoryOf.settlement.getCustomTerrain() != null)
+            {
+                terrainLayer.sprite = hex.territoryOf.settlement.getCustomTerrain();
+            }
+            else if (hex.terrain == Hex.terrainType.SEA)
             {
                 terrainLayer.sprite = world.textureStore.hex_terrain_sea;
             }

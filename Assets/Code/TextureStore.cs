@@ -43,6 +43,8 @@ namespace Assets.Code
         public Sprite hex_terrain_snow;
         public Sprite hex_terrain_mountain;
 
+        public Sprite hex_special_flesh;
+
         public Sprite loc_empty;
         public Sprite loc_green;
         public Sprite loc_city_roman;

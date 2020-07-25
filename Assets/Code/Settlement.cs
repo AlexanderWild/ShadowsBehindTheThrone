@@ -31,6 +31,11 @@ namespace Assets.Code
             this.location = loc;
         }
 
+        public virtual Sprite getCustomTerrain()
+        {
+            return null;
+        }
+
         public double getMilitaryCap()
         {
             double cap = militaryCapAdd;

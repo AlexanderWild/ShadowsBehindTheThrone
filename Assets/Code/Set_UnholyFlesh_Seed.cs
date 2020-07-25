@@ -16,6 +16,21 @@ namespace Assets.Code
 
         }
 
+        public override Sprite getCustomTerrain()
+        {
+            return World.staticMap.world.textureStore.hex_special_flesh;
+        }
+
+        public override void turnTick()
+        {
+            base.turnTick();
+
+            foreach (Hex h in location.territory)
+            {
+                h.flora = null;
+            }
+        }
+
         public override Sprite getSprite()
         {
             return location.map.world.textureStore.loc_flesh;
