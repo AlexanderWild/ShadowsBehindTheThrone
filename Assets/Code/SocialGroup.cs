@@ -29,20 +29,29 @@ namespace Assets.Code
         public SocialGroup(Map map)
         {
             this.map = map;
-            color = new Color(
-                (float)Eleven.random.NextDouble(),
-                (float)Eleven.random.NextDouble(),
-                (float)Eleven.random.NextDouble());
-            color2 = new Color(
-                (float)Eleven.random.NextDouble(),
-                (float)Eleven.random.NextDouble(),
-                (float)Eleven.random.NextDouble());
+            color = getViableColor();
+            color2 = getViableColor();
             name = "SocialGroup";
 
             //Self-diplomacy
             DipRel rel = new DipRel(map, this, this);
             selfRel = rel;
             relations.Add(this, rel);
+        }
+
+        public static Color getViableColor()
+        {
+            while (true)
+            {
+                float f1 = (float)Eleven.random.NextDouble();
+                float f2 = (float)Eleven.random.NextDouble();
+                float f3 = (float)Eleven.random.NextDouble();
+
+                if (f1 + f2 + (f3*0.3) > 1)
+                {
+                    return new Color(f1, f2, f3);
+                }
+            }
         }
 
         public virtual string getTypeName() { return "Generic Group"; }
