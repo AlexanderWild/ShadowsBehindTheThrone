@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking.NetworkSystem;
 
 namespace Assets.Code
 {
@@ -30,7 +31,7 @@ namespace Assets.Code
         public int turnLastTaken = -1000;
         public double inherentInformationAvailability = 0.85;
         public int lastTaken;
-        public SavableMap_SG_Double information = new SavableMap_SG_Double();
+        public Dictionary<SocialGroup,int> distanceToTarget = new Dictionary<SocialGroup, int>();
         public int debugVal;
         //public int turnLastAssigned;
         public Province province;

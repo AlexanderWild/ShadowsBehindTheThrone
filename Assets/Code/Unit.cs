@@ -52,6 +52,16 @@ namespace Assets.Code
                 if (task != null) { task.turnTick(this); }
             }
         }
+
+        public virtual bool definesBackground()
+        {
+            return false;
+        }
+
+        public virtual Sprite getPortraitBackground()
+        {
+            return null;
+        }
         
         public virtual bool hasSpecialInfo()
         {

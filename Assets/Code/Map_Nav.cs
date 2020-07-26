@@ -162,25 +162,7 @@ namespace Assets.Code
                 }
             }
         }
-        /**
-         * This function tells you "how much do you know about this particular social group?"
-         * It is a function of how blotted out information is by intervening terrain
-         * 
-         * This implementation should 100% be replaced with A*
-         */
-        public double getInformationAvailability(Location a,SocialGroup b)
-        {
-            if (a == null) { return 0; }
-            if (a.soc == b) { return 1; }
-            if (a.information.ContainsKey(b))
-            {
-                return a.information.lookup(b);
-            }
-            else
-            {
-                return 0;
-            }
-        }
+
 
 
         public Location[] getPathTo(Location a, Location b, Unit u = null, bool safeMove = false)
@@ -414,16 +396,16 @@ namespace Assets.Code
             int CUTOFF = 128;
             HashSet<Location> closed = new HashSet<Location>();
             List<Location> working = new List<Location>();
-            List<double> distances = new List<double>();
+            List<int> distances = new List<int>();
             foreach (Location a in locations)
             {
                 if (a.soc == sg)
                 {
                     closed.Add(a);
                     working.Add(a);
-                    double dist = 1;
+                    int dist = 0;
                     distances.Add(dist);
-                    a.information.set(sg, dist);
+                    a.distanceToTarget[sg] = 0;
                 }
 
             }
@@ -434,16 +416,15 @@ namespace Assets.Code
                 steps += 1;
                 if (steps >= CUTOFF) { break; }
                 List<Location> next = new List<Location>();
-                List<double> nextDistances = new List<double>();
+                List<int> nextDistances = new List<int>();
                 for (int i = 0; i < working.Count; i++)
                 {
                     Location l = working[i];
-                    double dist = distances[i];
-                    dist *= l.getInformationAvailability();
+                    int dist = distances[i];
 
-                    dist =  Math.Max(param.minInformationAvailability, dist);
+                    l.distanceToTarget[sg] = dist;
 
-                    l.information.set(sg, dist);
+                    dist += 1;
 
                     foreach (Location n in l.getNeighbours())
                     {

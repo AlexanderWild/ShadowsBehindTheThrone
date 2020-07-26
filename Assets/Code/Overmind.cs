@@ -30,6 +30,7 @@ namespace Assets.Code
             {
                 powers.Add(new Ab_Enth_Enthrall());
             }
+            powers.Add(new Ab_Over_CreateAgent());
             powers.Add(new Ab_Over_EnthrallAgent());
             powers.Add(new Ab_Enth_DarkEmpire());
             powers.Add(new Ab_Over_HateTheLight());

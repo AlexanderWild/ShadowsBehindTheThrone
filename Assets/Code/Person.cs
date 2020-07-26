@@ -336,7 +336,12 @@ namespace Assets.Code
                 foreach (Person p in soc.people)
                 {
                     if (p == this) { continue; }
-                    double infoAvail = map.getInformationAvailability(this.getLocation(), sg);
+                    double distance = 0;
+                    if (this.getLocation().distanceToTarget.ContainsKey(sg)) { distance = getLocation().distanceToTarget[sg]; }
+                    if (distance < 1) { distance = 1; }
+                    distance = Math.Sqrt(distance);
+                    double infoAvail = 1 / distance;
+                    if (infoAvail < 0.2) { infoAvail = 0.2; }
                     RelObj rel = getRelation(p);
                     double evidenceMult = Math.Pow(p.evidence, map.param.person_evidenceExponent);//Make low evidence a bit slower to cause suspicion
                     //Give a bonus to the player, to allow their henchmen to be caught first
@@ -502,10 +507,16 @@ namespace Assets.Code
                         sourceLoc = map.locations[0];
                     }
 
-                    double infoAvailability = map.getInformationAvailability(sourceLoc, item.group);
-                    int intInfoAvailability = (int)(infoAvailability * 100);
+                    double distance = 0;
+                    if (this.getLocation().distanceToTarget.ContainsKey(item.group)) { distance = getLocation().distanceToTarget[item.group]; }
+                    if (distance < 1) { distance = 1; }
+                    int distanceI = (int)distance;
+                    distance = Math.Sqrt(distance);
+                    double infoAvail = 1 / distance;
+                    if (infoAvail < 0.2) { infoAvail = 0.2; }
+                    int intInfoAvailability = (int)(infoAvail * 100);
                     item.reasons.Add(new ReasonMsg("Distance (% multiplier)", intInfoAvailability));
-                    value *= infoAvailability;
+                    value *= infoAvail;
 
                     double ourMilitary = society.currentMilitary + (society.maxMilitary/2);
                     double theirMilitary = item.group.currentMilitary + (item.group.maxMilitary/2);
@@ -765,6 +776,7 @@ namespace Assets.Code
 
         public Sprite getImageBack()
         {
+            if (unit != null && unit.definesBackground()) { return unit.getPortraitBackground(); }
             if (imgIndBack == -1)
             {
                 imgIndBack = Eleven.random.Next(map.world.textureStore.layerBack.Count);

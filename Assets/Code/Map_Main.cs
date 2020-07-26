@@ -30,6 +30,8 @@ namespace Assets.Code
         public double worldPanic;
         public int personIndexCount = 0;
 
+        public Society soc_dark;
+
         public List<Person> persons = new List<Person>();
 
         public Dictionary<string, string> compressionMap = new Dictionary<string, string>();
@@ -40,8 +42,9 @@ namespace Assets.Code
             masker = new MapMaskManager(this);
             //overmind = new Overmind(this);
             //eventManager = new MapEventManager(this);
-           stats = new StatRecorder(this);
+            stats = new StatRecorder(this);
             unitManager = new UnitManager(this);
+            soc_dark = new SG_AgentDark(this);
         }
 
         public void turnTick()

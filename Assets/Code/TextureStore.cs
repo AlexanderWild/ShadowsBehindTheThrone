@@ -17,6 +17,7 @@ namespace Assets.Code
         public Sprite person_halfDark;
         public Sprite person_basic;
 
+        public Sprite person_back_vampire;
 
         public Sprite slotKing;
         public Sprite slotDuke;
@@ -107,6 +108,7 @@ namespace Assets.Code
         public Sprite unit_ghast;
         public Sprite unit_refugees;
         public Sprite unit_cyclops;
+        public Sprite unit_vampire;
         public Sprite unit_fleshmaw;
 
         public Sprite tutorial1;

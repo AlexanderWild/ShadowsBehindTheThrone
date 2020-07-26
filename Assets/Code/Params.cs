@@ -251,7 +251,9 @@ namespace Assets.Code
         public int ability_delayVoteCooldown = 24;
         public int ability_disruptActionCost = 3;
         public int ability_disruptActionDuration = 7;
+        public int ability_unit_bloodCostInfiltrate = 7;
         public int ability_enthrallUnitCooldown = 32;
+        public int ability_createUnitCooldown = 64;
 
         public int ability_unit_falseAccusationCharges = 5;
         public double ability_unit_falseAccusationEffect = 0.25;
@@ -328,6 +330,7 @@ namespace Assets.Code
         public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
 
+        public int unit_vampire_maxBlood = 27;
         public void saveToFile()
         {
             StreamWriter writer = new StreamWriter("params.txt");
