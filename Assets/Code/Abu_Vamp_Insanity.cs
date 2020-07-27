@@ -3,18 +3,19 @@
 
 namespace Assets.Code
 {
-    public class Abu_Base_Infiltrate: AbilityUnit
+    public class Abu_Vamp_Insanity: AbilityUnit
     {
 
         public override void castInner(Map map, Unit u)
         {
-            u.task = new Task_Infiltrate();
+            u.task = new Task_Vamp_Insanity();
 
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins infiltrating "+ u.location.person().getFullName() + ". If successful your infiltration level will increase by " + 
-                (int)(100*Task_Infiltrate.getEffectiveness(u)) + "%." +
-                " Security will reduce the amount of infiltration gained, and " + (int)(100*World.staticMap.param.unit_infiltrateEvidence) + "% evidence will be left behind."
-                + " If the noble likes your agent this infiltration will be more effective, but will reduce if they dislike them.",
-                u.location.map.world.wordStore.lookup("ABILITY_UNIT_INFILTRATE"));
+            Unit_Vampire vamp = (Unit_Vampire)u;
+            vamp.blood -= World.staticMap.param.ability_unit_bloodCostInsanity;
+
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " beings imposing their dark will on the mind of "+ u.location.person().getFullName() + ". Each turn, they will lose sanity" +
+                " until their mind snaps.",
+                u.location.map.world.wordStore.lookup("ABILITY_VAMP_INSANITY"));
 
         }
         public override bool castable(Map map, Unit u)
@@ -22,6 +23,8 @@ namespace Assets.Code
             if (u.location.person() == null) { return false; }
             if (u.location.soc == null) { return false; }
             if (u.location.soc is Society == false) { return false; }
+            if (u.location.person().sanity <= 0) { return false; }
+            if (u.location.settlement.infiltration < World.staticMap.param.ability_unit_insanityInfiltrationReq) { return false; }
             return true;
         }
 
@@ -31,6 +34,10 @@ namespace Assets.Code
             return false;
         }
 
+        public override string specialCost()
+        {
+            return World.staticMap.param.ability_unit_bloodCostInsanity + " blood";
+        }
         public override int getCost()
         {
             return 0;
@@ -45,17 +52,17 @@ namespace Assets.Code
         {
             return "Begins a " + World.staticMap.param.unit_infiltrateTime + " turn task which will result in your infiltration level increasing." +
                 " Effectiveness reduces based on security level, and increased by noble's liking."
-                + "\n[Requires a society-held location]";
+                + "\n[Requires a location with a non-insane noble with infiltration > " + (int)(100* World.staticMap.param.ability_unit_insanityInfiltrationReq) + "%]";
         }
 
         public override string getName()
         {
-            return "Infiltrate";
+            return "Drive to Madness";
         }
 
         public override Sprite getSprite(Map map)
         {
-            return map.world.textureStore.icon_mask;
+            return map.world.textureStore.icon_vampire;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Assets.Code
             Unit_Vampire vamp = (Unit_Vampire)u;
             vamp.blood -= World.staticMap.param.ability_unit_bloodCostInfiltrate;
 
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " beings infiltrating "+ u.location.person().getFullName() + ". If successful your infiltration level will increase by " + 
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins infiltrating "+ u.location.person().getFullName() + ". If successful your infiltration level will increase by " + 
                 (int)(100* Task_Vamp_Infiltrate.getEffectiveness(u)) + "%." +
                 " Security will reduce the amount of infiltration gained. No evidence will be left behind."
                 + " If the noble likes your vampire this infiltration will be more effective, but will reduce if they dislike them.",
@@ -62,7 +62,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(Map map)
         {
-            return map.world.textureStore.icon_mask;
+            return map.world.textureStore.icon_vampire;
         }
     }
 }

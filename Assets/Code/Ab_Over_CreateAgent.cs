@@ -1,33 +1,30 @@
 ﻿using UnityEngine;
 
 using System;
-using System.Globalization;
+using System.Collections.Generic;
 
 namespace Assets.Code
 {
     public class Ab_Over_CreateAgent: Ability
     {
+        public static int VAMPIRE = 0;
+        public static string DESC_VAMPIRE = "Stealthy infiltrator and corruptor of the aristocracy." +
+            "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
+            " can travel great distances between their places of feeding and the places where they act. This makes them good infiltrators and political agents, as they can" +
+            " escape the consequences of their crimes for a great deal of time.";
+
         public override void cast(Map map, Hex hex)
         {
-            base.cast(map, hex);
+            List<int> indices = new List<int>();
+            List<string> titles = new List<string>();
+            List<string> descs = new List<string>();
+            List<Sprite> icons = new List<Sprite>();
 
-            Unit agent = new Unit_Vampire(hex.location, map.soc_dark);
-            map.world.prefabStore.popImgMsg(
-                "You draw upon the creatures of darkness, and choose one to serve as your instrument in this world",
-                map.world.wordStore.lookup("ABILITY_CREATE_AGENT"));
-
-            agent.person = new Person(map.soc_dark);
-            agent.person.state = Person.personState.enthralledAgent;
-            agent.person.unit = agent;
-            map.units.Add(agent);
-
-            Evidence ev = new Evidence(map.turn);
-            ev.pointsTo = agent;
-            ev.weight = 0.66;
-            agent.location.evidence.Add(ev);
-
-            agent.task = null;
-            agent.movesTaken += 1;
+            indices.Add(VAMPIRE);
+            titles.Add("Vampire");
+            descs.Add(DESC_VAMPIRE);
+            icons.Add(map.world.textureStore.icon_vampire);
+            map.world.ui.addBlocker(map.world.prefabStore.getScrollSetAgents(indices,titles,descs,icons).gameObject);
         }
 
 

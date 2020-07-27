@@ -337,7 +337,7 @@ namespace Assets.Code
                 {
                     if (p == this) { continue; }
                     double distance = 0;
-                    if (this.getLocation().distanceToTarget.ContainsKey(sg)) { distance = getLocation().distanceToTarget[sg]; }
+                    if (this.getLocation() != null && this.getLocation().distanceToTarget.ContainsKey(sg)) { distance = getLocation().distanceToTarget[sg]; }
                     if (distance < 1) { distance = 1; }
                     distance = Math.Sqrt(distance);
                     double infoAvail = 1 / distance;

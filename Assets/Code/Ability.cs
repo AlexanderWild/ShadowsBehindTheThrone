@@ -6,6 +6,8 @@ namespace Assets.Code
 {
     public abstract class Ability
     {
+        public int turnLastCast = -100000;
+
         public abstract string getName();
         public abstract string getDesc();
         public abstract int getCost();
@@ -13,7 +15,6 @@ namespace Assets.Code
         public abstract Sprite getSprite(Map map);
         public virtual string specialCost() { return null; }
         public virtual int getCooldown() { return 0; }
-        public int turnLastCast;
         public virtual bool castable(Map map,Person person) { return false; }
         public virtual bool castable(Map map,Unit unit) { return false; }
 

@@ -252,6 +252,8 @@ namespace Assets.Code
         public int ability_disruptActionCost = 3;
         public int ability_disruptActionDuration = 7;
         public int ability_unit_bloodCostInfiltrate = 7;
+        public int ability_unit_bloodCostInsanity = 7;
+        public double ability_unit_insanityInfiltrationReq = 0.2;
         public int ability_enthrallUnitCooldown = 32;
         public int ability_createUnitCooldown = 64;
 

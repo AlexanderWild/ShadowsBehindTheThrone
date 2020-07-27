@@ -22,6 +22,7 @@ namespace Assets.Code
 
             abilities.Add(new Abu_Vamp_Drink());
             abilities.Add(new Abu_Vamp_Infiltrate());
+            abilities.Add(new Abu_Vamp_Insanity());
             abilities.Add(new Abu_Base_SpreadShadow());
         }
 
@@ -90,7 +91,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Vampires are charming and aristrocratic, but depend on a constant supply of blood to survive, which leaves a trail of evidence.";
+            return "Vampires are powerful and stealthy while taking actions, but depend on a constant supply of blood to survive, which leaves a trail of evidence.";
         }
     }
 }

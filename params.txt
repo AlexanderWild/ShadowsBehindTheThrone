@@ -221,6 +221,8 @@ ability_delayVoteCooldown: 24
 ability_disruptActionCost: 3
 ability_disruptActionDuration: 7
 ability_unit_bloodCostInfiltrate: 7
+ability_unit_bloodCostInsanity: 7
+ability_unit_insanityInfiltrationReq: 0.2
 ability_enthrallUnitCooldown: 32
 ability_createUnitCooldown: 64
 ability_unit_falseAccusationCharges: 5

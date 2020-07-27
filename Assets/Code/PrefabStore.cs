@@ -42,6 +42,7 @@ namespace Assets.Code
         public GameObject abilityBox;
         public GameObject saveBox;
         public GameObject popScrollVoteIssue;
+        public GameObject popAgentBox;
         public GameObject xBoxDate;
         public GameObject xBoxThreat;
         public GameObject xScrollSet;
@@ -180,6 +181,19 @@ namespace Assets.Code
             return specific;
         }
 
+        public PopupScrollSet getScrollSetAgents(List<int> indices,List<string> titles,List<string> bodies,List<Sprite> icons)
+        {
+            PopupScrollSet specific = getInnerScrollSet();
+
+            for (int i = 0;i < bodies.Count;i++)
+            {
+                PopupBoxAgent box = getAgentBox(indices[i], icons[i], titles[i], bodies[i]);
+                box.gameObject.transform.SetParent(specific.gameObject.transform);
+                specific.scrollables.Add(box);
+            }
+
+            return specific;
+        }
         public PopupXScroll getScrollSetThreats(List<ThreatItem> threats)
         {
             PopupXScroll specific = getInnerXScrollSet();
@@ -350,6 +364,13 @@ namespace Assets.Code
             GameObject obj = Instantiate(popScrollVoteIssue) as GameObject;
             PopupBoxVoteIssue msg = obj.GetComponent<PopupBoxVoteIssue>();
             msg.setTo(ab,soc, issue);
+            return msg;
+        }
+        private PopupBoxAgent getAgentBox(int index,Sprite icon,string title,string body)
+        {
+            GameObject obj = Instantiate(popAgentBox) as GameObject;
+            PopupBoxAgent msg = obj.GetComponent<PopupBoxAgent>();
+            msg.setTo(index, title, body, icon);
             return msg;
         }
 
