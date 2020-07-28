@@ -18,6 +18,8 @@ namespace Assets.Code
         public Sprite person_basic;
 
         public Sprite person_back_vampire;
+        public Sprite person_back_eyes;
+        public Sprite person_back_shadow;
 
         public Sprite slotKing;
         public Sprite slotDuke;
@@ -78,6 +80,7 @@ namespace Assets.Code
         public Sprite icon_fog;
         public Sprite icon_vampire;
         public Sprite icon_coins;
+        public Sprite icon_doctor;
 
         public Sprite icon_combat;
 

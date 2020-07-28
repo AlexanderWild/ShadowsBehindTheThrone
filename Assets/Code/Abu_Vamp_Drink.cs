@@ -26,6 +26,8 @@ namespace Assets.Code
         {
             if (u.location.soc == null) { return false; }
             if (u.location.soc is Society == false) { return false; }
+            if (u.location.person() == null) { return false; }
+            if (u.location.person().getRelation(u.person.index).getLiking() < 0) { return false; }
             return true;
         }
 
@@ -48,7 +50,7 @@ namespace Assets.Code
         public override string getDesc()
         {
             return "Drinks the blood of the living, filling up the vampire's blood reserves. Leaves behind evidence."
-                + "\n[Requires a society-held location]";
+                + "\n[Requires a location with a noble who trusts the vampire (liking no lower than 0)]";
         }
 
         public override string getName()

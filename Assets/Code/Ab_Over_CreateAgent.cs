@@ -8,10 +8,12 @@ namespace Assets.Code
     public class Ab_Over_CreateAgent: Ability
     {
         public static int VAMPIRE = 0;
+        public static int DOCTOR = 1;
         public static string DESC_VAMPIRE = "Stealthy infiltrator and corruptor of the aristocracy." +
             "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
             " can travel great distances between their places of feeding and the places where they act. This makes them good infiltrators and political agents, as they can" +
             " escape the consequences of their crimes for a great deal of time.";
+        public static string DESC_DOCTOR = "Necromantic doctor desc here.";
 
         public override void cast(Map map, Hex hex)
         {
@@ -24,6 +26,10 @@ namespace Assets.Code
             titles.Add("Vampire");
             descs.Add(DESC_VAMPIRE);
             icons.Add(map.world.textureStore.icon_vampire);
+            indices.Add(DOCTOR);
+            titles.Add("Necromantic Doctor");
+            descs.Add(DESC_DOCTOR);
+            icons.Add(map.world.textureStore.icon_doctor);
             map.world.ui.addBlocker(map.world.prefabStore.getScrollSetAgents(indices,titles,descs,icons).gameObject);
         }
 
