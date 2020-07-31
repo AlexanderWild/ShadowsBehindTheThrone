@@ -67,6 +67,7 @@ namespace Assets.Code
         public Sprite loc_town;
         public Sprite loc_worm_nest;
         public Sprite loc_flesh;
+        public Sprite loc_corpseroot;
 
         public Sprite icon_enshadow;
         public Sprite icon_convert;
@@ -81,6 +82,7 @@ namespace Assets.Code
         public Sprite icon_vampire;
         public Sprite icon_coins;
         public Sprite icon_doctor;
+        public Sprite icon_corpseroot;
 
         public Sprite icon_combat;
 
@@ -91,6 +93,7 @@ namespace Assets.Code
         public Sprite flora_forest;
         public Sprite flora_forestSnow;
         public Sprite flora_flesh;
+        public Sprite flora_corpseroot;
 
         public Sprite unit_default;
         public Sprite unit_lookingGlass;
@@ -113,6 +116,7 @@ namespace Assets.Code
         public Sprite unit_cyclops;
         public Sprite unit_vampire;
         public Sprite unit_fleshmaw;
+        public Sprite unit_armyOfDead;
 
         public Sprite tutorial1;
         public Sprite tutorial2;

@@ -16,7 +16,6 @@ namespace Assets.Code
         public GameObject mover;
         public float targetY;
         public int index;
-        public Hex hex;
         public bool usable = false;
         public Image background;
 
@@ -53,7 +52,8 @@ namespace Assets.Code
         {
             //selector.selected(person,agent);
             map.world.audioStore.playActivate();
-            if (hex != null)
+            Hex hex = GraphicalMap.selectedHex;
+            if (hex != null && hex.location != null)
             {
                 if (index == Ab_Over_CreateAgent.VAMPIRE)
                 {

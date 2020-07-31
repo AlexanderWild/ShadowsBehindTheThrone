@@ -292,4 +292,5 @@ unit_spreadShadowAmount: 0.6
 unit_spreadShadowEvidence: 0.5
 units_maxEnthralled: 2
 unit_suspicionFromProximity: 0.1
+unit_armyOfDeadMaxHP: 100
 unit_vampire_maxBlood: 27

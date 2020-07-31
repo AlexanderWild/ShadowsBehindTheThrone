@@ -148,8 +148,8 @@ namespace Assets.Code
             {
                 attachedUnit.maxHp = (int)(this.getMilitaryCap());
             }
-            //Reset the values downwards if they're too high
-            if (embeddedUnit != null)
+            //Reset the values to what the society demands (accomodate trait changes and buffs and suchlikes)
+            if (embeddedUnit != null && location.soc is Society)
             {
                 embeddedUnit.hp = embeddedUnit.maxHp;
             }

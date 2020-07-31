@@ -19,10 +19,13 @@ namespace Assets.Code
 
             maxCorpses = 100;
 
+            abilities.Add(new Abu_Doctor_SowCorpseroot());
         }
 
         public override void turnTickInner(Map map)
         {
+            corpses -= 1;
+            if (corpses < 0) { corpses = 0; }
         }
 
         public override bool checkForDisband(Map map)

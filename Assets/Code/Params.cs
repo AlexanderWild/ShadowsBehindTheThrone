@@ -331,6 +331,7 @@ namespace Assets.Code
         public double unit_spreadShadowEvidence = 0.5; 
         public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
+        public int unit_armyOfDeadMaxHP = 100;
 
         public int unit_vampire_maxBlood = 27;
         public void saveToFile()
