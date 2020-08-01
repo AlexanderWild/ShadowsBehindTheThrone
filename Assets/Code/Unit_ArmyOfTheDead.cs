@@ -20,15 +20,15 @@ namespace Assets.Code
 
         public override void turnTickInner(Map map)
         {
-            if (home.soc != this.society || home.settlement == null || home.settlement.attachedUnit != this)
-            {
-                this.disband(map, "Disbanded due to loss of home");
-                if (home.settlement.attachedUnit == this)
-                {
-                    home.settlement.attachedUnit = null;
-                }
-                return;
-            }
+            //if (home.soc != this.society || home.settlement == null || home.settlement.attachedUnit != this)
+            //{
+            //    this.disband(map, "Disbanded due to loss of home");
+            //    if (home.settlement.attachedUnit == this)
+            //    {
+            //        home.settlement.attachedUnit = null;
+            //    }
+            //    return;
+            //}
 
             if (location.soc != null && this.society.getRel(location.soc).state == DipRel.dipState.war)
             {

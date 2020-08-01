@@ -19,7 +19,7 @@ namespace Assets.Code
 
         public override string getFlavour()
         {
-            return "Cap: " + this.getMilitaryCap() + " uHP " + embeddedUnit.hp + " of " + embeddedUnit.maxHp;
+            return "Corpseroot prevent all life, thus preventing the dead from decaying. The bodies lie in wait, ready to rise again.";
         }
         public override void turnTick()
         {

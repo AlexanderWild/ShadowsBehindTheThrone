@@ -247,7 +247,13 @@ namespace Assets.Code
                         defenceTag.gameObject.SetActive(true);
                         defenceTag.gameObject.transform.localScale = new Vector3(0.015f, 0.015f, 1);//This is apparently their default scale
                     }
-                    string strDef = "" + ((int)(hex.location.soc.currentMilitary + 0.5) + "/" + (int)(hex.location.soc.maxMilitary + 0.5));
+                    //string strDef = "" + ((int)(hex.location.soc.currentMilitary + 0.5) + "/" + (int)(hex.location.soc.maxMilitary + 0.5));
+                    string strDef = "";
+                    if (hex.location.settlement != null && hex.location.settlement.embeddedUnit != null)
+                    {
+                        strDef += hex.location.settlement.embeddedUnit.hp + "/" + hex.location.settlement.embeddedUnit.maxHp + " (" + hex.location.soc.currentMilitary + "/" + hex.location.soc.maxMilitary + ")";
+                    }
+
                     if (hex.location.getMaxMilitaryDefence() > 0)
                     {
                         strDef += " +DEF " + (int)(hex.location.getMilitaryDefence()+0.5) + "/" + (int)(0.5+hex.location.getMaxMilitaryDefence());

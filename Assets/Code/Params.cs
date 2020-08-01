@@ -91,7 +91,7 @@ namespace Assets.Code
         public double utility_lightAllianceMult = 200;
         public double utility_lightAllianceMilMult = 2;
         public double utility_lightAlliancSusMult = 50;
-        public double utility_introversionFromInstability = 200;
+        public double utility_introversionFromInstability = 130;
         public double utility_militarism = 100;
         public double utility_landedTitleMult = 0.08;
         public double utility_unlandedTitleMult = 0.08;
@@ -104,7 +104,7 @@ namespace Assets.Code
         public double utility_landedTitleAssignBaseline = 75;
         public double utility_prestigeMultForTitle = 1.5;
         public double utility_dismissFromCourt = 2;
-        public double utility_fromThreat = 1.6;
+        public double utility_fromThreat = 1.8;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;
@@ -331,8 +331,11 @@ namespace Assets.Code
         public double unit_spreadShadowEvidence = 0.5; 
         public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
-        public int unit_armyOfDeadMaxHP = 100;
+        public int unit_armyOfDeadMaxHP = 37;
 
+        public int unit_doctor_lootBodiesAmount = 12;
+        public int unit_doctor_emptyGravesDuration = 16;
+        public int unit_doctor_sowCorpserootCooldown = 5;
         public int unit_vampire_maxBlood = 27;
         public void saveToFile()
         {

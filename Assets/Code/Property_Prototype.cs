@@ -57,6 +57,10 @@ namespace Assets.Code
             proto = new Pr_DeepOneMadness(map, "Haunting Song");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_EmptyGraves(map, "Empty Graves");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
         }
 
         internal abstract string getDescription();

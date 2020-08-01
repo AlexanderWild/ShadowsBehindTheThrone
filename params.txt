@@ -68,7 +68,7 @@ utility_vassaliseThreatMult: 0.75
 utility_lightAllianceMult: 200
 utility_lightAllianceMilMult: 2
 utility_lightAlliancSusMult: 50
-utility_introversionFromInstability: 200
+utility_introversionFromInstability: 130
 utility_militarism: 100
 utility_landedTitleMult: 0.08
 utility_unlandedTitleMult: 0.08
@@ -81,7 +81,7 @@ utility_wouldBeOutvotedMult: 0.25
 utility_landedTitleAssignBaseline: 75
 utility_prestigeMultForTitle: 1.5
 utility_dismissFromCourt: 2
-utility_fromThreat: 1.6
+utility_fromThreat: 1.8
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -292,5 +292,8 @@ unit_spreadShadowAmount: 0.6
 unit_spreadShadowEvidence: 0.5
 units_maxEnthralled: 2
 unit_suspicionFromProximity: 0.1
-unit_armyOfDeadMaxHP: 100
+unit_armyOfDeadMaxHP: 37
+unit_doctor_lootBodiesAmount: 12
+unit_doctor_emptyGravesDuration: 16
+unit_doctor_sowCorpserootCooldown: 5
 unit_vampire_maxBlood: 27

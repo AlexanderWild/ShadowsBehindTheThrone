@@ -45,6 +45,11 @@ namespace Assets.Code
             base.turnTick();
         }
 
+        public override bool isDark()
+        {
+            return true;
+        }
+
         public override void takeLocationFromOther(SocialGroup def, Location taken)
         {
             base.takeLocationFromOther(def, taken);

@@ -118,6 +118,8 @@ namespace Assets.Code
         public Sprite unit_fleshmaw;
         public Sprite unit_armyOfDead;
 
+        public Sprite property_noDead;
+
         public Sprite tutorial1;
         public Sprite tutorial2;
         public Sprite tutorialVoting;

@@ -41,6 +41,7 @@ namespace Assets.Code
         {
             if (u.location.soc != null) { return false; }
             if (u.location.settlement != null) { return false; }
+            if (u.location.isOcean) { return false; }
             return true;
         }
 
@@ -57,7 +58,7 @@ namespace Assets.Code
 
         public override int getCooldown()
         {
-            return 0;
+            return World.staticMap.param.unit_doctor_sowCorpserootCooldown;
         }
 
         public override string getDesc()

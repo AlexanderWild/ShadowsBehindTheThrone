@@ -407,7 +407,7 @@ namespace Assets.Code
             {
                 return map.world.textureStore.loc_minor_emptyOcean;
             }
-            else if (hex.terrain == Hex.terrainType.GRASS || hex.terrain == Hex.terrainType.PATH)
+            else if (hex.terrain == Hex.terrainType.GRASS || hex.terrain == Hex.terrainType.PATH || hex.terrain == Hex.terrainType.MUD)
             {
                 return map.world.textureStore.loc_minor_emptyGrass;
             }

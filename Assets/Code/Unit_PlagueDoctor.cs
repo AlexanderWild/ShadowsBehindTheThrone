@@ -20,6 +20,8 @@ namespace Assets.Code
             maxCorpses = 100;
 
             abilities.Add(new Abu_Doctor_SowCorpseroot());
+            abilities.Add(new Abu_Doctor_DumpBodies());
+            abilities.Add(new Abu_Doctor_RobGraves());
         }
 
         public override void turnTickInner(Map map)
