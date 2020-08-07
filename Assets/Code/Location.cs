@@ -192,6 +192,39 @@ namespace Assets.Code
                     }
             }
             }
+
+            bool needDeletion = false;
+            foreach (Unit u in units)
+            {
+                if (u.location != this)
+                {
+                    throw new Exception("Unit at wrong location: " + u.getName() + " at " + this.getName());
+                }
+                if (map.units.Contains(u) == false)
+                {
+                    needDeletion = true;
+                    //throw new Exception("Badly handled unit");
+                }
+            }
+
+            //A horrific hack, because units were, for whatever reason, getting left behind in locations
+            //They called "disband", removed themselves from the main unit list, and even checked to ensure they were gone. For whatever reason, either they were not or they were re-added later
+            //Bad times, can't fix, sad times
+            if (needDeletion)
+            {
+                List<Unit> rems = new List<Unit>();
+                foreach (Unit u in units)
+                {
+                    if (map.units.Contains(u) == false)
+                    {
+                        rems.Add(u);
+                    }
+                }
+                foreach (Unit u in rems)
+                {
+                    units.Remove(u);
+                }
+            }
         }
 
         public void checkPropertiesEndOfTurn()

@@ -362,6 +362,7 @@ namespace Assets.Code
                 securityDescText.text = "";
                 Hex hex = loc.hex;
                 bodyText += "\nProvince: " + hex.province.name;
+
                 foreach (EconTrait t in hex.province.econTraits)
                 {
                     bodyText += "\nIndustry: " + t.name;

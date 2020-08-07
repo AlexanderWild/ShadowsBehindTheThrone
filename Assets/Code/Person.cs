@@ -508,7 +508,10 @@ namespace Assets.Code
                     }
 
                     double distance = 0;
-                    if (this.getLocation().distanceToTarget.ContainsKey(item.group)) { distance = getLocation().distanceToTarget[item.group]; }
+                    if (this.getLocation() != null)
+                    {
+                        if (this.getLocation().distanceToTarget.ContainsKey(item.group)) { distance = getLocation().distanceToTarget[item.group]; }
+                    }
                     if (distance < 1) { distance = 1; }
                     int distanceI = (int)distance;
                     distance = Math.Sqrt(distance);

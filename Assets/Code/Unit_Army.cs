@@ -9,7 +9,7 @@ namespace Assets.Code
     public class Unit_Army : Unit
     {
         public Location home;
-        
+
         public Unit_Army(Location loc,SocialGroup soc) : base(loc,soc)
         {
             maxHp = 20;
@@ -23,15 +23,11 @@ namespace Assets.Code
             if (home.soc != this.society || home.settlement == null || home.settlement.attachedUnit != this)
             {
                 this.disband(map, this.getName() + "disbanded due to loss of home");
+
                 if (home.settlement.attachedUnit == this)
                 {
                     home.settlement.attachedUnit = null;
                 }
-                if (home.settlement.embeddedUnit == this)
-                {
-                    home.settlement.embeddedUnit = null;
-                }
-                return;
             }
             if (location.units.Contains(this) == false) { return; }//We're embedded at home
 
@@ -144,7 +140,7 @@ namespace Assets.Code
 
         public override string getName()
         {
-            return "Army of " + home.shortName;
+            return "Army of " + home.shortName; ;
         }
 
         public override bool hasSpecialInfo()

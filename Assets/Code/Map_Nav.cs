@@ -308,7 +308,7 @@ namespace Assets.Code
         {
             foreach (Unit u2 in loc.units)
             {
-                if (u.hostileTo(u2))
+                if (u != u2 && u.hostileTo(u2))
                 {
                     world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
                     int dmgDone = (int)(u.hp * (0.25 + (Eleven.random.NextDouble() * 0.25)));
@@ -378,7 +378,7 @@ namespace Assets.Code
                         }
                     }
 
-                    if (u.society is Society && u2.society is Society)
+                    if (u.isMilitary && u2.isMilitary && u.society is Society && u2.society is Society)
                     {
                         Property.addProperty(this, loc, "Recent Human Battle");
                     }

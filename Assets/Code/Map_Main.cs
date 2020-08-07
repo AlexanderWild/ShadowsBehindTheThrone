@@ -537,6 +537,19 @@ namespace Assets.Code
 
             att.getRel(def).state = DipRel.dipState.war;
             att.getRel(def).war = new War(this,att, def);
+
+            foreach (Location loc in locations)
+            {
+                if (loc.soc == att || loc.soc == def)
+                {
+                    if (loc.settlement != null && loc.settlement.embeddedUnit != null)
+                    {
+                        loc.units.Add(loc.settlement.embeddedUnit);
+                        units.Add(loc.settlement.embeddedUnit);
+                        loc.settlement.embeddedUnit = null;
+                    }
+                }
+            }
         }
     }
 }

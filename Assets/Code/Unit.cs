@@ -154,6 +154,7 @@ namespace Assets.Code
             }
             map.remove(this);
             location.units.Remove(this);
+            if (location.units.Contains(this)) { throw new Exception("Double-presence in list"); }
             if (msg != null)
             {
                 bool positive = person == null || person.state != Person.personState.enthralledAgent;
@@ -162,6 +163,13 @@ namespace Assets.Code
                 if (this.isEnthralled())
                 {
                     map.world.prefabStore.popMsg(this.getName() + " is gone.\n" + msg);
+                }
+            }
+            foreach (Location loc in map.locations)
+            {
+                if (loc.units.Contains(this))
+                {
+                    throw new Exception("My loc " + this.location.getName() + " but am at " + loc.getName());
                 }
             }
         }

@@ -22,6 +22,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Doctor_SowCorpseroot());
             abilities.Add(new Abu_Doctor_DumpBodies());
             abilities.Add(new Abu_Doctor_RobGraves());
+            abilities.Add(new Abu_Doctor_WarAgainstLife());
         }
 
         public override void turnTickInner(Map map)
