@@ -56,7 +56,12 @@ namespace Assets.Code
 
         public virtual string getTypeName() { return "Generic Group"; }
         public virtual string getTypeDesc() { return "This group has no associated information."; }
-        public virtual bool hostileTo(Unit u) { return false; }
+
+        public virtual bool hostileTo(Unit u)
+        {
+            if (this.getRel(u.society).state == DipRel.dipState.war) { return true; }
+            return false;
+        }
         public bool isAtWar()
         {
             foreach (SocialGroup sg in map.socialGroups)

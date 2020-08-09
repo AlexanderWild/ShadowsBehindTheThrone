@@ -20,6 +20,7 @@ namespace Assets.Code
         public int maxHp = 5;
         public int movesTaken = 0;
         public int lastTurnActionTaken;
+        public bool isDead = false;
         public List<Ability> abilities = new List<Ability>();
         public List<Ability> powers = new List<Ability>();
 
@@ -132,12 +133,14 @@ namespace Assets.Code
 
         public void die(Map map, string v)
         {
+            isDead = true;
             if (person != null)
             {
                 person.die(v);
             }
             disband(map, null);
             bool positive = person == null || person.state != Person.personState.enthralledAgent;
+            if (society.isDark()) { positive = false; }
             map.addMessage(this.getName() + " dies! " + v, MsgEvent.LEVEL_GREEN, positive);
 
             if (this.isEnthralled())

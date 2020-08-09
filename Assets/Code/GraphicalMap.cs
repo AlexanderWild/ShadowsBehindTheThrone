@@ -75,19 +75,28 @@ namespace Assets.Code
                 for (int y = 0; y < world.map.grid[0].Length; y++)
                 {
                     world.map.grid[x][y].outer = null;
-                    if (world.map.grid[x][y].settlement != null && world.map.grid[x][y].settlement.embeddedUnit != null)
+                    if (world.map.grid[x][y].settlement != null && world.map.grid[x][y].settlement.embeddedUnit != null && world.map.grid[x][y].settlement.embeddedUnit.outer != null)
                     {
+                        UIMaster.Destroy(world.map.grid[x][y].settlement.embeddedUnit.outer.gameObject);
                         world.map.grid[x][y].settlement.embeddedUnit.outer = null;
                     }
                     if (world.map.grid[x][y].location != null)
                     {
                         foreach (Property p in world.map.grid[x][y].location.properties)
                         {
+                            if (p.outer != null && p.outer.gameObject != null)
+                            {
+                                UIMaster.Destroy(p.outer.gameObject);
+                            }
                             p.outer = null;
                         }
                         //Should already be covered, but let's check
                         foreach (Unit u in world.map.grid[x][y].location.units)
                         {
+                            if (u.outer != null && u.outer.gameObject != null)
+                            {
+                                UIMaster.Destroy(u.outer.gameObject);
+                            }
                             u.outer = null;
                         }
                     }
@@ -95,6 +104,10 @@ namespace Assets.Code
             } 
             foreach (Unit u in map.units)
             {
+                if (u.outer != null && u.outer.gameObject != null)
+                {
+                    UIMaster.Destroy(u.outer.gameObject);
+                }
                 u.outer = null;
             }
             List<GraphicalHex> unNeeded = new List<GraphicalHex>();
@@ -108,6 +121,7 @@ namespace Assets.Code
             {
                 hex.needed = false;
                 loaded.Remove(hex);
+                UIMaster.Destroy(hex.gameObject);
             }
         }
 

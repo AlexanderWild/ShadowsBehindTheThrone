@@ -143,6 +143,7 @@ namespace Assets.Code
             */
 
             this.hostilityBorder.enabled = false;
+            this.hostilityBorder.color = Color.clear;
             if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
             {
                 Unit other = (Unit)GraphicalMap.selectedSelectable;

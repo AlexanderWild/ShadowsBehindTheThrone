@@ -27,14 +27,20 @@ namespace Assets.Code
             audioStore.playActivateFlesh();
         }
 
-        public override bool castable(Map map, Hex hex)
+        public override bool castable(Map map, Unit u)
         {
+            Hex hex = u.location.hex;
             if (hex.location == null) { return false; }
             if (hex.location.soc == null) { return false; }
             if (!(hex.location.soc is SG_Undead)) { return false; }
             if (hex.location.settlement == null) { return false; }
             if (!(hex.location.settlement is Set_Corpseroot)) { return false; }
             return true;
+        }
+        public override void cast(Map map, Hex hex) { }
+        public override bool castable(Map map, Hex hex)
+        {
+            return false;
         }
 
         public override int getCost()

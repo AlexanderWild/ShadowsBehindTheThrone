@@ -132,6 +132,7 @@ namespace Assets.Code
             mutable.AddRange(units);
             foreach (Unit u in mutable)
             {
+                if (u.isDead) { continue; }
                 u.turnTick(this);
             }
 
@@ -537,6 +538,8 @@ namespace Assets.Code
 
             att.getRel(def).state = DipRel.dipState.war;
             att.getRel(def).war = new War(this,att, def);
+
+            if (def.getRel(att).state != DipRel.dipState.war) { throw new Exception("Asymmetric war"); }
 
             foreach (Location loc in locations)
             {

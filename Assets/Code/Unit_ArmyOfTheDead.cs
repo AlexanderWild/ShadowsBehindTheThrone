@@ -13,7 +13,7 @@ namespace Assets.Code
         public Unit_ArmyOfTheDead(Location loc,SocialGroup soc) : base(loc,soc)
         {
             hp = 1;
-            maxHp = World.staticMap.param.unit_armyOfDeadMaxHP;
+            maxHp = World.staticMap.param.unit_armyOfDeadMaxHP*100;
             home = loc;
             isMilitary = true;
         }
@@ -54,6 +54,7 @@ namespace Assets.Code
 
         public void warAI()
         {
+            World.log("UNDEAD WAR AI");
             HashSet<Location> closed = new HashSet<Location>();
             HashSet<Location> open = new HashSet<Location>();
             HashSet<Location> open2 = new HashSet<Location>();
@@ -77,7 +78,7 @@ namespace Assets.Code
                         }
                         if (l2.soc != null && l2.soc.getRel(this.society).state == DipRel.dipState.war)
                         {
-                            c += 1;
+                              c += 1;
                             if (Eleven.random.Next(c) == 0)
                             {
                                 target = l2;
