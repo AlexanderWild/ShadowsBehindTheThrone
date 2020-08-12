@@ -1,7 +1,7 @@
 option_edgeScroll: 1
 mapGen_sizeX: 32
 mapGen_sizeY: 24
-mapGen_proportionOfMapForHumans: 0.5
+mapGen_proportionOfMapForHumans: 0.6
 mapGen_minHabitabilityForHumans: 0.15
 mapGen_stepsPerIsland: 12
 mapGen_maxBrushSize: 5

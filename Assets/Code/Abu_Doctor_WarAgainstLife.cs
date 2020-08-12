@@ -18,6 +18,12 @@ namespace Assets.Code
                 }
             }
 
+            double amount = 1;
+            Evidence e2 = new Evidence(map.turn);
+            e2.pointsTo = u;
+            e2.weight = amount;
+            u.location.evidence.Add(e2);
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " calls upon the dead to rise up, and begin their war against life.",
                 u.location.map.world.wordStore.lookup("ABILITY_DOCTOR_WAR_AGAINST_LIFE"));
         }

@@ -14,7 +14,7 @@ namespace Assets.Code
         public int option_edgeScroll = 1;
         public int mapGen_sizeX = 32;
         public int mapGen_sizeY = 24;
-        public double mapGen_proportionOfMapForHumans = 0.5;
+        public double mapGen_proportionOfMapForHumans = 0.6;
         public double mapGen_minHabitabilityForHumans = 0.15;
         public int mapGen_stepsPerIsland = 12;
         public int mapGen_maxBrushSize = 5;
@@ -333,6 +333,7 @@ namespace Assets.Code
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
 
+        public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 12;
         public int unit_doctor_emptyGravesDuration = 16;
         public int unit_doctor_sowCorpserootCooldown = 5;

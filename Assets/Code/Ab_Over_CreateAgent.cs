@@ -13,7 +13,9 @@ namespace Assets.Code
             "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
             " can travel great distances between their places of feeding and the places where they act. This makes them good infiltrators and political agents, as they can" +
             " escape the consequences of their crimes for a great deal of time.";
-        public static string DESC_DOCTOR = "Necromantic doctor desc here.";
+        public static string DESC_DOCTOR = "Necromantic Doctors pose as plague doctors to gain access to corpses, which they load onto their wagon for disposal. " +
+            "Once sufficient are gathered, they can raise armies of the dead."
+            +"\nThey gather corpses from graveyards, and need to travel far to collect sufficient for large armies. This nomadic life may well leave evidence behind, if they are unable to infiltrate or find recent battlefields.";
 
         public override void cast(Map map, Hex hex)
         {

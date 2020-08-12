@@ -22,6 +22,8 @@ namespace Assets.Code
             abilities.Add(new Abu_Doctor_SowCorpseroot());
             abilities.Add(new Abu_Doctor_DumpBodies());
             abilities.Add(new Abu_Doctor_RobGraves());
+            abilities.Add(new Abu_Doctor_LegalRemoval());
+            abilities.Add(new Abu_Doctor_LootBattlefield());
             abilities.Add(new Abu_Doctor_WarAgainstLife());
         }
 
@@ -71,7 +73,7 @@ namespace Assets.Code
 
         public override string specialInfoLong()
         {
-            return "Doctors gather corpses from locations (using various abilities), for storage in corpseroot fields. They can raise the dead once you feel you have enough for a army to attack the human nations.";
+            return "Doctors gather corpses from locations (using abilities), for storage in corpseroot fields. They can raise the dead once you feel you have enough for a army to attack the human nations.";
         }
 
         public override string getTitleM()
