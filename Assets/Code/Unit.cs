@@ -134,6 +134,11 @@ namespace Assets.Code
         public void die(Map map, string v)
         {
             isDead = true;
+
+            if (GraphicalMap.selectedSelectable == this)
+            {
+                GraphicalMap.selectedSelectable = null;
+            }
             if (person != null)
             {
                 person.die(v);

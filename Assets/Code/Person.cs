@@ -758,11 +758,17 @@ namespace Assets.Code
                 map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "");
 
             }
+
             removeFromGame(v);
         }
 
         public void removeFromGame(string v) { 
             World.log(v);
+
+            if (GraphicalMap.selectedSelectable == this)
+            {
+                GraphicalMap.selectedSelectable = null;
+            }
 
             society.people.Remove(this);
             if (this.title_land != null)
