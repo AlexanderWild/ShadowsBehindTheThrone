@@ -79,7 +79,7 @@ namespace Assets.Code
 
         public override string getName()
         {
-            return "Desacrate Battlefield";
+            return "Desecrate Battlefield";
         }
 
         public override Sprite getSprite(Map map)
