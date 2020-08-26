@@ -296,13 +296,14 @@ namespace Assets.Code
             }
         }
         
-        public void moveTowards(Unit u,Location loc)
+        public bool moveTowards(Unit u,Location loc)
         {
-            if (u.location == loc) { return; }
+            if (u.location == loc) { return true; }
 
             Location[] locations = getPathTo(u.location, loc);
-            if (locations == null || locations.Length < 2) { return; }
+            if (locations == null || locations.Length < 2) { return false; }
             adjacentMoveTo(u, locations[1]);
+            return true;
         }
         public void adjacentMoveTo(Unit u,Location loc)
         {

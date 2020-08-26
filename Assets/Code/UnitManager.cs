@@ -8,6 +8,7 @@ namespace Assets.Code
     public class UnitManager
     {
         public Map map;
+        public bool hasSpawnedPaladin;
 
         public UnitManager(Map m)
         {
@@ -19,6 +20,78 @@ namespace Assets.Code
             if (map.turn % 5 == 0) {
                 checkInvestigators();
                 checkMerchants();
+                checkPaladins();
+            }
+        }
+
+        public void checkPaladins() {
+
+
+            int nPaladins = 0;
+            if (map.worldPanic >= map.param.panic_paladinSpawn_1)
+            {
+                bool hasAgents = false;
+                foreach (Unit u in map.units)
+                {
+                    if (u is Unit_Paladin)
+                    {
+                        nPaladins += 1;
+                    }
+                    if (u.isEnthralled())
+                    {
+                        hasAgents = true;
+                    }
+                }
+
+                if (hasAgents && nPaladins < 1)
+                {
+                    double bestScore = 0;
+                    Location l2 = null;
+                    int c = 0;
+                    foreach (Location loc in map.locations)
+                    {
+                        double score = 0;
+                        if (loc.person() == null) { continue; }
+                        if (loc.person().state == Person.personState.enthralled) { continue; }
+
+                        bool occupied = false;
+                        foreach (Unit u in loc.units)
+                        {
+                            if (u.isEnthralled()) { occupied = true; break; }
+                        }
+                        if (occupied) { continue; }
+
+                        score += 0.1;
+                        score -= loc.person().shadow;
+                        score += loc.person().awareness;
+
+                        if (score > bestScore)
+                        {
+                            c = 0;
+                            bestScore = score;
+
+                        }
+                        if (score == bestScore)
+                        {
+                            c += 1;
+                            if (Eleven.random.Next(c) == 0)
+                            {
+                                l2 = loc;
+                            }
+                        }
+                    }
+                    if (l2 != null)
+                    {
+                        if (!hasSpawnedPaladin)
+                        {
+                            map.world.prefabStore.popMsg("A Paladin has arrived in " + l2.getName() + ". A holy warrior, they will hunt down your agents.");
+                        }
+                        Unit_Paladin paladin = new Unit_Paladin(l2, map.soc_light);
+                        map.units.Add(paladin);
+                        l2.units.Add(paladin);
+                        hasSpawnedPaladin = true;
+                    }
+                }
             }
         }
 

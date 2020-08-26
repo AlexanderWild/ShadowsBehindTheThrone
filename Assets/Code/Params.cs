@@ -34,6 +34,7 @@ namespace Assets.Code
         public double panic_panicAtFullShadow = 1.75;
         public double panic_canAlly = 0.5;
         public double panic_fromClueFound = 0.025;
+        public double panic_paladinSpawn_1 = 0.0;
 
         public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;
@@ -332,6 +333,7 @@ namespace Assets.Code
         public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
+        public int unit_paladin_trackPoints = 7;
 
         public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 12;

@@ -45,6 +45,7 @@ namespace Assets.Code
         public override bool castable(Map map, Unit unit)
         {
             if (unit.person == null) { return false; }
+            if (unit is Unit_Paladin) { return false; }
             return castable(map,unit.person);
         }
 

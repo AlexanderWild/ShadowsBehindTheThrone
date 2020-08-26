@@ -29,8 +29,10 @@ namespace Assets.Code
         public UnitManager unitManager;
         public double worldPanic;
         public int personIndexCount = 0;
+        public EventManager eventManager;
 
         public Society soc_dark;
+        public Society soc_light;
 
         public List<Person> persons = new List<Person>();
 
@@ -45,6 +47,8 @@ namespace Assets.Code
             stats = new StatRecorder(this);
             unitManager = new UnitManager(this);
             soc_dark = new SG_AgentDark(this);
+            soc_light = new SG_AgentLight(this);
+            eventManager = new EventManager(this);
         }
 
         public void turnTick()
@@ -54,7 +58,7 @@ namespace Assets.Code
 
             lastTurnTime = UnityEngine.Time.fixedTime;
             turnMessages.Clear();
-            //eventManager.turnTick();
+            eventManager.turnTick();
             //overmind.turnTick();
             //panic.turnTick();
 
@@ -201,6 +205,7 @@ namespace Assets.Code
             }
             foreach (Location loc in locations)
             {
+                loc.savedLinks.Clear();
                 foreach (Link l in loc.links)
                 {
                     loc.savedLinks.Add(l.other(loc).index);

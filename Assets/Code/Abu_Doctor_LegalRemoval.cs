@@ -27,7 +27,7 @@ namespace Assets.Code
             if (u.location.soc == null) { return false; }
             if (u.location.soc is Society == false) { return false; }
             if (u.location.settlement == null) { return false; }
-            if (u.location.settlement.infiltration > World.staticMap.param.unit_doctor_legalInfiltrationReq) { return false; }
+            if (u.location.settlement.infiltration < World.staticMap.param.unit_doctor_legalInfiltrationReq) { return false; }
 
             foreach (Property prop in u.location.properties)
             {

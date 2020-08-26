@@ -19,6 +19,7 @@ panic_panicAtFullExtinction: 2
 panic_panicAtFullShadow: 1.75
 panic_canAlly: 0.5
 panic_fromClueFound: 0.025
+panic_paladinSpawn_1: 0
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -293,6 +294,7 @@ unit_spreadShadowEvidence: 0.5
 units_maxEnthralled: 2
 unit_suspicionFromProximity: 0.1
 unit_armyOfDeadMaxHP: 37
+unit_doctor_legalInfiltrationReq: 0.1
 unit_doctor_lootBodiesAmount: 12
 unit_doctor_emptyGravesDuration: 16
 unit_doctor_sowCorpserootCooldown: 5

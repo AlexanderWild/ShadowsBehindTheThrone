@@ -117,6 +117,7 @@ namespace Assets.Code
         public Sprite unit_vampire;
         public Sprite unit_fleshmaw;
         public Sprite unit_armyOfDead;
+        public Sprite unit_paladin;
 
         public Sprite property_noDead;
 
