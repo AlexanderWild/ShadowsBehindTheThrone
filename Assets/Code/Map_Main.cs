@@ -58,7 +58,7 @@ namespace Assets.Code
 
             lastTurnTime = UnityEngine.Time.fixedTime;
             turnMessages.Clear();
-            eventManager.turnTick();
+            //eventManager.turnTick();
             //overmind.turnTick();
             //panic.turnTick();
 
@@ -75,7 +75,7 @@ namespace Assets.Code
 
             processUnits();
             processWars();
-            processMapEvents();
+            //processMapEvents();
 
 
             //Finally societies

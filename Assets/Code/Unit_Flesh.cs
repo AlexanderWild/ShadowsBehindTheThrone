@@ -22,7 +22,7 @@ namespace Assets.Code
             if (home.soc != this.society || home.settlement == null || home.settlement.attachedUnit != this)
             {
                 this.disband(map, "Disbanded due to loss of home");
-                if (home.settlement.attachedUnit == this)
+                if (home != null && home.settlement != null && home.settlement.attachedUnit == this)
                 {
                     home.settlement.attachedUnit = null;
                 }

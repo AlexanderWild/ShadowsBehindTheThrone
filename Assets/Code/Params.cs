@@ -152,7 +152,7 @@ namespace Assets.Code
         public double society_dislikeFromFailedProposal = -15;
 
         public double temporaryThreatDecay = 0.95;
-        public double threat_takeLocation = 12;
+        public double threat_takeLocation = 24;
         public double threat_temporaryDreadDecay = 0.97;
         public double victory_targetEnshadowmentAvrg = 0.75;
 

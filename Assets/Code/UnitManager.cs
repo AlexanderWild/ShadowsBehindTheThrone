@@ -20,7 +20,7 @@ namespace Assets.Code
             if (map.turn % 5 == 0) {
                 checkInvestigators();
                 checkMerchants();
-                checkPaladins();
+                //checkPaladins();
             }
         }
 

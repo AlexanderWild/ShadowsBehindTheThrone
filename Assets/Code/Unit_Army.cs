@@ -24,7 +24,7 @@ namespace Assets.Code
             {
                 this.disband(map, this.getName() + "disbanded due to loss of home");
 
-                if (home.settlement.attachedUnit == this)
+                if (home != null && home.settlement != null && home.settlement.attachedUnit == this)
                 {
                     home.settlement.attachedUnit = null;
                 }
