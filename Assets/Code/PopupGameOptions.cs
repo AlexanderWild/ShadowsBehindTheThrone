@@ -12,6 +12,7 @@ namespace Assets.Code
         public InputField suspicionGain;
         public InputField powerGain;
         public InputField awarenessGain;
+        public InputField agentCount;
         public InputField investigatorPercentField;
         public InputField seedField;
         public InputField sizeXField;
@@ -42,6 +43,7 @@ namespace Assets.Code
         public int sizeX = 32;
         public int sizeY = 24;
         public int burnIn = 100;
+        public int nAgents = 2;
 
         public void dismiss()
         {
@@ -115,6 +117,7 @@ namespace Assets.Code
             sizeXField.text = "" + sizeX;
             sizeYField.text = "" + sizeY;
             historicalField.text = "" + burnIn;
+            agentCount.text = "" + nAgents;
         }
         public void onEditEnd()
         {
@@ -176,7 +179,15 @@ namespace Assets.Code
                 if (burnIn < 1) { burnIn = 1; }
             }
             catch (Exception e) { }
-
+            try
+            {
+                int n = int.Parse(agentCount.text);
+                if (n >= 0 && n < 100)
+                {
+                    nAgents = n;
+                }
+            }
+            catch (Exception e) { }
             //Reset all values. If they're fucked, they're good now
             setTextFieldsToCurrentValues();
         }

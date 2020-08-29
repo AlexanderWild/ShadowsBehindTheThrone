@@ -161,6 +161,7 @@ namespace Assets.Code
             param.unit_investigatorsSeeEnthralled = opts.investigatorsSee? 1 : 0;
             param.useAwareness = opts.useAwareness ? 1:0;
             param.usePaladins = opts.usePaladins ? 1 : 0;
+            param.units_maxEnthralled = opts.nAgents;
 
             map = new Map(param);
             GraphicalMap.map = map;
