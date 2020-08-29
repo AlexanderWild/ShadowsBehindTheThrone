@@ -72,6 +72,7 @@ namespace Assets.Code
         public Button unlandedViewButton;
         public Button neighborViewButton;
         public Button hierarchyViewButton;
+        public Button dynamicViewButton;
 
         public enum tabState { PERSON, SOCIETY, LOCATION };
         public tabState state = tabState.SOCIETY;
@@ -202,6 +203,16 @@ namespace Assets.Code
             GraphicalSociety.offY = 0;
             maskTitle.text = "Country Hierarchy View";
             GraphicalSociety.refreshHierarchy(null);
+        }
+
+        public void bShowDynamic()
+        {
+            master.world.audioStore.playClick();
+
+            GraphicalSociety.offX = 0;
+            GraphicalSociety.offY = 0;
+            maskTitle.text = "Dynamic Relationship View";
+            GraphicalSociety.refreshDynamic(null);
         }
 
         public void showPersonInfo(Person p)
