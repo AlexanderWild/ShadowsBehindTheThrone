@@ -126,10 +126,11 @@ namespace Assets.Code
             //     transform.Translate(delta);
             // }
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition+offset, 0.1f);
+            if (targetPosition != null)
+                transform.position = Vector3.Lerp(transform.position, targetPosition+offset, 0.1f);
             line.SetPosition(0, transform.position);
 
-            Vector3 origin = (connection == null) ? Vector3.zero : connection.gameObject.transform.position;
+            Vector3 origin = (connection == null) ? transform.position : connection.gameObject.transform.position;
             line.SetPosition(1, new Vector3(origin.x, origin.y, 0.1f));
 
             line.startColor = Color.Lerp(line.startColor, targetStartColor, 0.1f);
