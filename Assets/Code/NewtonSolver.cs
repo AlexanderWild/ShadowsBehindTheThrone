@@ -20,9 +20,9 @@ namespace Assets.Code
 			public Node(T e) { element = e; }
 		}
 
-		public const float SPRING = 0.001f;
+		public const float SPRING = 0.01f;
 		public const float DAMPING = 0.8f;
-		public const float REPULSION_DISTANCE = 0.2f;
+		public const float REPULSION_DISTANCE = 0.7f;
 
 		public List<Node> nodes = new List<Node>();
 		public IDistanceMetric metric;
@@ -55,8 +55,20 @@ namespace Assets.Code
 
 					if (magsqr != 0.0f && magsqr < REPULSION_DISTANCE)
 					{
-						nodes[i].velocity += dist / magsqr * SPRING;
-						nodes[j].velocity -= dist / magsqr * SPRING;
+						nodes[i].velocity -= dist / magsqr * SPRING;
+						nodes[j].velocity += dist / magsqr * SPRING;
+					}
+
+					float desire = (float)metric.getDistance(a, b);
+					desire *= desire;
+
+					float diff = desire - magsqr;
+					Vector3 dir = dist.normalized;
+
+					if (diff != 0.0f)
+					{
+						nodes[i].velocity -= dir * diff * SPRING * SPRING;
+						nodes[j].velocity += dir * diff * SPRING * SPRING;
 					}
 				}
 			}
