@@ -159,7 +159,8 @@ namespace Assets.Code
             param.mapGen_sizeY = opts.sizeY;
             param.mapGen_burnInSteps = opts.burnIn;
             param.unit_investigatorsSeeEnthralled = opts.investigatorsSee? 1 : 0;
-            param.useAwareness = opts.useAwareness ? 1:0 ;
+            param.useAwareness = opts.useAwareness ? 1:0;
+            param.usePaladins = opts.usePaladins ? 1 : 0;
 
             map = new Map(param);
             GraphicalMap.map = map;

@@ -28,11 +28,11 @@ namespace Assets.Code
         {
             powerText.text = "POWER: " + ((int)Math.Ceiling(master.world.map.overmind.power) + "/" + master.world.map.param.overmind_maxPower);
             turnText.text = "Turn: " + master.world.map.turn;
-            victoryText.text = "Enshadowment: " + (int)(100*master.world.map.data_avrgEnshadowment) + "/" + (int)(100*master.world.map.param.victory_targetEnshadowmentAvrg)+"%"
+            victoryText.text = "Enshadowment: " + (int)(100 * master.world.map.data_avrgEnshadowment) + "/" + (int)(100 * master.world.map.param.victory_targetEnshadowmentAvrg) + "%"
                 + "\nHuman Settlements: " + master.world.map.data_nSocietyLocations;
-            
+
             worldPanicBlock.SetActive(master.world.map.param.useAwareness == 1);
-            worldPanicValue.text = ((int)(100*master.world.map.worldPanic)) + "%";
+            worldPanicValue.text = ((int)(100 * master.world.map.worldPanic)) + "%";
 
             string desc = "World Panic represents how concerned the world at large is about the coming darkness. As it rises, nobles with awareness can begin to take actions to either warn each other or"
                 + " to take action against you and your enthralled.";
@@ -52,8 +52,11 @@ namespace Assets.Code
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_canInvestigate)) +
                 "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_canInvestigate)) + "% can perform 'Investigate', allowing them to add evidence to enthralled neighbouring them.";
 
-            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_paladinSpawn_1)) +
-                "% A paladin will arrive to track down and kill your agents.";
+            if (master.world.map.param.usePaladins != 0)
+            {
+                desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_paladinSpawn_1)) +
+                    "% A paladin will arrive to track down and kill your agents.";
+            }
 
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_letterWritingLevel)) +
                 "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Friend', allowing them to warn a neighbouring friendly noble.";
@@ -64,8 +67,11 @@ namespace Assets.Code
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_cleanseSoulLevel)) +
                 "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_cleanseSoulLevel)) + "% can perform 'Cleanse Soul', removing a small amount of shadow from themselves.";
 
-            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_paladinSpawn_2)) +
+            if (master.world.map.param.usePaladins != 0)
+            {
+                desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_paladinSpawn_2)) +
                 "% A second paladin will arrive to track down and kill your agents.";
+            }
 
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_researchAtUniWithoutAwareness)) +
                 "% Nobles at a place of learning (university/library/archive) can begin research to gain awareness even if they have none.";

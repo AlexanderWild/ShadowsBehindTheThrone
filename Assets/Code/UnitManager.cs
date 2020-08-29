@@ -43,6 +43,10 @@ namespace Assets.Code
                     targetPaladins += 1;
                 }
             }
+            else
+            {
+                targetPaladins += 1;
+            }
 
             if (targetPaladins > 0) { 
                 bool hasAgents = false;

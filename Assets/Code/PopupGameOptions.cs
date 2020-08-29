@@ -26,12 +26,14 @@ namespace Assets.Code
         public Button bHard;
         public Toggle tAwareness;
         public Toggle tInvestigatorsSee;
+        public Toggle tPaladins;
         public Button bSeedZero;
         public Button bSeedOne;
         public Button bAllOptsOn;
 
         public bool investigatorsSee = false;
         public bool useAwareness = false;
+        public bool usePaladins = false;
         public int susGainPercent = 100;
         public int powerGainPercent = 100;
         public int awarenessGainSpeed = 100;
@@ -45,6 +47,7 @@ namespace Assets.Code
         {
             useAwareness = tAwareness.isOn;
             investigatorsSee = tInvestigatorsSee.isOn;
+            usePaladins = tPaladins.isOn;
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed,this);
         }
@@ -68,6 +71,7 @@ namespace Assets.Code
         {
             tAwareness.isOn = true;
             tInvestigatorsSee.isOn = true;
+            tPaladins.isOn = true;
         }
         public void setEasy()
         {
