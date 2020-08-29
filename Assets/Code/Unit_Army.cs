@@ -79,28 +79,48 @@ namespace Assets.Code
             Society soc = (Society)this.society;
             if (soc.posture == Society.militaryPosture.offensive)
             {
-                HashSet<Location> closed = new HashSet<Location>();
-                HashSet<Location> open = new HashSet<Location>();
-                HashSet<Location> open2 = new HashSet<Location>();
+                attack();
+            }
+            else
+            {
+                defendHomeTerritory();
+            }
+        }
 
-                closed.Add(location);
-                open.Add(location);
+        private void attack()
+        {
+            HashSet<Location> closed = new HashSet<Location>();
+            HashSet<Location> open = new HashSet<Location>();
+            HashSet<Location> open2 = new HashSet<Location>();
 
-                int c = 0;
-                Location target = null;
-                for (int tries = 0; tries < 128; tries++)
+            closed.Add(location);
+            open.Add(location);
+
+            int c = 0;
+            Location target = null;
+            for (int tries = 0; tries < 128; tries++)
+            {
+                open2.Clear();
+                foreach (Location loc in open)
                 {
-                    open2.Clear();
-                    foreach (Location loc in open)
+                    foreach (Location l2 in loc.getNeighbours())
                     {
-                        foreach (Location l2 in loc.getNeighbours())
+                        if (!closed.Contains(l2))
                         {
-                            if (!closed.Contains(l2))
+                            closed.Add(l2);
+                            open2.Add(l2);
+                        }
+                        if (l2.soc != null && l2.soc.getRel(this.society).state == DipRel.dipState.war)
+                        {
+                            c += 1;
+                            if (Eleven.random.Next(c) == 0)
                             {
-                                closed.Add(l2);
-                                open2.Add(l2);
+                                target = l2;
                             }
-                            if (l2.soc != null && l2.soc.getRel(this.society).state == DipRel.dipState.war)
+                        }
+                        foreach (Unit u2 in l2.units)
+                        {
+                            if (this.hostileTo(u2))
                             {
                                 c += 1;
                                 if (Eleven.random.Next(c) == 0)
@@ -108,29 +128,23 @@ namespace Assets.Code
                                     target = l2;
                                 }
                             }
-                            foreach (Unit u2 in l2.units)
-                            {
-                                if (this.hostileTo(u2))
-                                {
-                                    c += 1;
-                                    if (Eleven.random.Next(c) == 0)
-                                    {
-                                        target = l2;
-                                    }
-                                }
-                            }
                         }
                     }
-                    if (target != null) { break; }//Now found the closest unit set
-                    open = open2;
-                    open2 = new HashSet<Location>();
                 }
-
-                if (target != null)
-                {
-                    task = new Task_GoToLocationAgressively(target);
-                }
+                if (target != null) { break; }//Now found the closest unit set
+                open = open2;
+                open2 = new HashSet<Location>();
             }
+
+            if (target != null)
+            {
+                task = new Task_GoToLocationAgressively(target);
+            }
+        }
+
+        private void defendHomeTerritory()
+        {
+            task = new Task_DefendHomeland();
         }
 
         public override Sprite getSprite(World world)

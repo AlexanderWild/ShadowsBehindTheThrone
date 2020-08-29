@@ -8,9 +8,10 @@ mapGen_maxBrushSize: 5
 mapGen_burnInSteps: 150
 map_tempTemperatureReversion: 0.002
 useAwareness: 1
+usePaladins: 0
 panic_panicPerPower: 0.0025
 panic_dropPerTurn: 0.001
-panic_canInvestigate: 0
+panic_canInvestigate: 0.1
 panic_letterWritingLevel: 0.15
 panic_letterWritingToAllLevel: 0.25
 panic_researchAtUniWithoutAwareness: 0.35
@@ -19,7 +20,8 @@ panic_panicAtFullExtinction: 2
 panic_panicAtFullShadow: 1.75
 panic_canAlly: 0.5
 panic_fromClueFound: 0.025
-panic_paladinSpawn_1: 0
+panic_paladinSpawn_1: 0.15
+panic_paladinSpawn_2: 0.3
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -125,7 +127,7 @@ society_prestigeFromVotingFailure: 5
 society_prestigeFromVotingSuccess: -5
 society_dislikeFromFailedProposal: -15
 temporaryThreatDecay: 0.95
-threat_takeLocation: 12
+threat_takeLocation: 24
 threat_temporaryDreadDecay: 0.97
 victory_targetEnshadowmentAvrg: 0.75
 dark_evilThreatMult: 2

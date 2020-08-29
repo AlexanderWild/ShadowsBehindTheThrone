@@ -90,6 +90,8 @@ namespace Assets.Code
             List<SocialGroup> rems = new List<SocialGroup>();
             foreach (SocialGroup group in socialGroups)
             {
+                if (group is SG_AgentLight) { continue; }
+                if (group is SG_AgentDark) { continue; }
                 if (group.checkIsGone()) { rems.Add(group); }
                 else
                 {

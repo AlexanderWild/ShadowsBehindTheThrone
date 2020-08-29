@@ -22,10 +22,11 @@ namespace Assets.Code
         public float map_tempTemperatureReversion = 0.002f;
 
         public int useAwareness = 1;
+        public int usePaladins = 0;
 
         public double panic_panicPerPower = 0.0025;
         public double panic_dropPerTurn = 0.001;
-        public double panic_canInvestigate = 0;
+        public double panic_canInvestigate = 0.1;
         public double panic_letterWritingLevel = 0.15;
         public double panic_letterWritingToAllLevel = 0.25;
         public double panic_researchAtUniWithoutAwareness = 0.35;
@@ -34,7 +35,8 @@ namespace Assets.Code
         public double panic_panicAtFullShadow = 1.75;
         public double panic_canAlly = 0.5;
         public double panic_fromClueFound = 0.025;
-        public double panic_paladinSpawn_1 = 0.0;
+        public double panic_paladinSpawn_1 = 0.15;
+        public double panic_paladinSpawn_2 = 0.3;
 
         public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;

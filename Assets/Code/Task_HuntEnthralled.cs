@@ -14,17 +14,22 @@ namespace Assets.Code
 
         public override string getShort()
         {
-            return "Hunting " + target.getName();
+            return "Hunting " + target.getName() + "\nTurns left: " + turnsLeft;
         }
 
         public override string getLong()
         {
-            return getShort();
+            return "This agent is hunting " + target.getName() + ", and will continue to do so for " + turnsLeft + " turns. They will not enter hostile territory, but otherwise will seek out their prey tirelessly, until the trail runs cold.";
         }
 
         public override void turnTick(Unit unit)
         {
-            //Nothing, just used to get the UI on screen
+            turnsLeft -= 1;
+            if (turnsLeft <= 0) { unit.task = null;return; }
+
+            Location[] path = unit.location.map.getPathTo(unit.location, target.location, unit, true);
+            if (path == null || path.Length < 2) { unit.task = null; return; }
+            unit.location.map.adjacentMoveTo(unit, path[1]);
         }
     }
 }

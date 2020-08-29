@@ -52,6 +52,9 @@ namespace Assets.Code
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_canInvestigate)) +
                 "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_canInvestigate)) + "% can perform 'Investigate', allowing them to add evidence to enthralled neighbouring them.";
 
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_paladinSpawn_1)) +
+                "% A paladin will arrive to track down and kill your agents.";
+
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_letterWritingLevel)) +
                 "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Friend', allowing them to warn a neighbouring friendly noble.";
 
@@ -60,6 +63,9 @@ namespace Assets.Code
 
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_cleanseSoulLevel)) +
                 "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_cleanseSoulLevel)) + "% can perform 'Cleanse Soul', removing a small amount of shadow from themselves.";
+
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_paladinSpawn_2)) +
+                "% A second paladin will arrive to track down and kill your agents.";
 
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_researchAtUniWithoutAwareness)) +
                 "% Nobles at a place of learning (university/library/archive) can begin research to gain awareness even if they have none.";

@@ -162,7 +162,7 @@ namespace Assets.Code
             }
             map.remove(this);
             location.units.Remove(this);
-            if (location.units.Contains(this)) { throw new Exception("Double-presence in list"); }
+            if (location.units.Contains(this)) { throw new Exception("Double-presence in list " + this.getName()); }
             if (msg != null)
             {
                 bool positive = person == null || person.state != Person.personState.enthralledAgent;

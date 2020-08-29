@@ -20,16 +20,31 @@ namespace Assets.Code
             if (map.turn % 5 == 0) {
                 checkInvestigators();
                 checkMerchants();
-                //checkPaladins();
+                checkPaladins();
             }
         }
 
         public void checkPaladins() {
 
+            if (map.param.usePaladins == 0) { return; }
 
             int nPaladins = 0;
-            if (map.worldPanic >= map.param.panic_paladinSpawn_1)
+            int targetPaladins = 0;
+
+
+            if (map.param.useAwareness == 1)
             {
+                if (map.worldPanic >= map.param.panic_paladinSpawn_1)
+                {
+                    targetPaladins += 1;
+                }
+                if (map.worldPanic >= map.param.panic_paladinSpawn_2)
+                {
+                    targetPaladins += 1;
+                }
+            }
+
+            if (targetPaladins > 0) { 
                 bool hasAgents = false;
                 foreach (Unit u in map.units)
                 {
@@ -43,7 +58,7 @@ namespace Assets.Code
                     }
                 }
 
-                if (hasAgents && nPaladins < 1)
+                if (hasAgents && nPaladins < targetPaladins)
                 {
                     double bestScore = 0;
                     Location l2 = null;
@@ -87,8 +102,10 @@ namespace Assets.Code
                             map.world.prefabStore.popMsg("A Paladin has arrived in " + l2.getName() + ". A holy warrior, they will hunt down your agents.");
                         }
                         Unit_Paladin paladin = new Unit_Paladin(l2, map.soc_light);
+                        paladin.person = new Person(map.soc_light);
+                        paladin.person.unit = paladin;
+                        paladin.person.traits.Clear();//Can't see traits, best to have them removed
                         map.units.Add(paladin);
-                        l2.units.Add(paladin);
                         hasSpawnedPaladin = true;
                     }
                 }
