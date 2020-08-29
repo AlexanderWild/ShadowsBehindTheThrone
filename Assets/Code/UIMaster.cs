@@ -87,9 +87,10 @@ namespace Assets.Code
                     uiLeftPrimary.maskBody.text = "";
                 }
 
-                uiLeftPrimary.unlandedViewButton.gameObject.SetActive(false);
+                //uiLeftPrimary.unlandedViewButton.gameObject.SetActive(false);
                 uiLeftPrimary.neighborViewButton.gameObject.SetActive(false);
                 uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(false);
+                uiLeftPrimary.dynamicViewButton.gameObject.SetActive(false);
                 endTurnButton.SetActive(true);
             }
             else if (state == uiState.SOCIETY)
@@ -98,10 +99,13 @@ namespace Assets.Code
                 uiLeftPrimary.titleTextDarkener.enabled = true;
                 uiLeftPrimary.bodyTextDarkener.enabled = false;
 
-                uiLeftPrimary.unlandedViewButton.gameObject.SetActive(true);
+                //uiLeftPrimary.unlandedViewButton.gameObject.SetActive(true);
                 uiLeftPrimary.neighborViewButton.gameObject.SetActive(true);
                 uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(true);
+                uiLeftPrimary.dynamicViewButton.gameObject.SetActive(true);
                 endTurnButton.SetActive(false);
+
+                GraphicalSociety.update();
             }
             else
             {

@@ -18,10 +18,23 @@ namespace Assets.Code
         public static float offX = 0;
         public static float offY = 0;
 
-        public enum viewState { UNLANDED, NEIGHBOR, HIERARCHY };
+        public enum viewState { UNLANDED, NEIGHBOR, HIERARCHY, DYNAMIC };
         public static viewState state = viewState.HIERARCHY;
+        public static NewtonSolver<GraphicalSlot> solver = null;
 
         private static Vector3 originalScale;
+
+        private class AverageLikingMetric : NewtonSolver<GraphicalSlot>.IDistanceMetric
+        {
+            public double getDistance(GraphicalSlot a, GraphicalSlot b)
+            {
+                RelObj ra = a.inner.getRelation(b.inner);
+                RelObj rb = b.inner.getRelation(a.inner);
+                double liking = ra.getLiking() + rb.getLiking();
+
+                return (liking + 100) / 40;
+            }
+        }
 
         public static void setup(Society soc)
         {
@@ -56,10 +69,17 @@ namespace Assets.Code
             }
         }
 
+        public static void update()
+        {
+            if (state == viewState.DYNAMIC && solver != null)
+                solver.solve();
+        }
+
         public static void clear()
         {
             foreach (GraphicalSlot s in loadedSlots)
             {
+                s.targetEnabled = true;
                 s.gameObject.transform.localScale = originalScale;
                 s.gameObject.SetActive(false);
 
@@ -265,7 +285,6 @@ namespace Assets.Code
             refreshOffset();
         }
 
-        // FIXME: could be combined easily with refreshNeighbor
         public static void refreshUnlanded(Person nfocus)
         {
             clear();
@@ -331,6 +350,27 @@ namespace Assets.Code
             refreshOffset();
         }
 
+        public static void refreshDynamic(Person nfocus)
+        {
+            clear();
+
+            List<GraphicalSlot> nodes = new List<GraphicalSlot>();
+            foreach (Person p in activeSociety.people)
+            {
+                GraphicalSlot ds = p.outer;
+                ds.targetEnabled = false;
+
+                ds.gameObject.SetActive(true);
+                nodes.Add(ds);
+            }
+
+            solver = new NewtonSolver<GraphicalSlot>(nodes, new AverageLikingMetric());
+
+            state = viewState.DYNAMIC;
+            resetHidden();
+            refreshOffset();
+        }
+
         public static void refresh(Person pf)
         {
             switch (state)
@@ -338,6 +378,7 @@ namespace Assets.Code
                 case viewState.HIERARCHY: refreshHierarchy(pf); break;
                 case viewState.UNLANDED: refreshUnlanded(pf); break;
                 case viewState.NEIGHBOR: refreshNeighbor(pf); break;
+                case viewState.DYNAMIC: refreshDynamic(pf); break;
             }
         }
 
