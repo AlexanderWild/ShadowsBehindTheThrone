@@ -30,9 +30,9 @@ namespace Assets.Code
             {
                 RelObj ra = a.inner.getRelation(b.inner);
                 RelObj rb = b.inner.getRelation(a.inner);
-                double liking = (ra.getLiking() + rb.getLiking()) / 3;
+                double liking = (ra.getLiking() + rb.getLiking()) / 2;
 
-                return (liking + 100) / 40;
+                return 1.0f + (liking + 100) / 20;
             }
         }
 
