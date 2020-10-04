@@ -482,14 +482,14 @@ namespace Assets.Code
                         }
                         if (totalSus > 1)
                         {
-                            item.reasons.Add(new ReasonMsg("Supicion of enshadowed nobles", totalSus));
+                            item.reasons.Add(new ReasonMsg("Supicion of enshadowed nobles (+" + (int)(totalSus) + ")", totalSus));
                         }
                     }
                 }
                 else
                 {
                     double value = item.group.getThreat(null);
-                    item.reasons.Add(new ReasonMsg("Social Group's total threat: ", value));
+                    item.reasons.Add(new ReasonMsg("Social Group's total threat (+" + (int)(value) + ")", value));
                     Location sourceLoc = null;
                     //Fear things which are nearby
                     if (this.title_land != null)
@@ -518,7 +518,7 @@ namespace Assets.Code
                     double infoAvail = 1 / distance;
                     if (infoAvail < 0.2) { infoAvail = 0.2; }
                     int intInfoAvailability = (int)(infoAvail * 100);
-                    item.reasons.Add(new ReasonMsg("Distance (% multiplier)", intInfoAvailability));
+                    item.reasons.Add(new ReasonMsg("Distance (" + (int)(intInfoAvailability) + "% Multiplier)", intInfoAvailability));
                     value *= infoAvail;
 
                     double ourMilitary = society.currentMilitary + (society.maxMilitary/2);
@@ -527,7 +527,7 @@ namespace Assets.Code
                     //double militaryStrengthMult = 50 / ((society.currentMilitary + (society.maxMilitary / 2)) + 1);
                     if (militaryStrengthMult < 0.5) { militaryStrengthMult = 0.5; }
                     if (militaryStrengthMult > 2.5) { militaryStrengthMult = 2.5; }
-                    item.reasons.Add(new ReasonMsg("Relative strengths of social-group's militaries (% multiplier)", (int)(100 * militaryStrengthMult)));
+                    item.reasons.Add(new ReasonMsg("Relative strengths of social-group's militaries (" + (int)(100 * militaryStrengthMult) + "% Multiplier)" , (int)(100 * militaryStrengthMult)));
                     value *= militaryStrengthMult;
                     
                     item.threat = value;
@@ -544,14 +544,37 @@ namespace Assets.Code
                         {
                             susThreat = 200;
                         }
-                        item.reasons.Add(new ReasonMsg("Suspicion that nobles are enshadowed", (int)susThreat));
+                        item.reasons.Add(new ReasonMsg("Suspicion that nobles are enshadowed (+" + (int)(susThreat) + ")", (int)susThreat));
                         item.threat += susThreat;
 
                         if (soc.offensiveTarget == this.society && soc.posture == Society.militaryPosture.offensive)
                         {
                             double threatAdd = map.param.person_threatFromBeingOffensiveTarget * item.threat;
-                            item.reasons.Add(new ReasonMsg("We are their offensive target", threatAdd));
+                            item.reasons.Add(new ReasonMsg("We are their offensive target (" + (int)(threatAdd) + ")", threatAdd));
                             item.threat += threatAdd;
+                        }
+
+                        bool hasKillOrder = false;
+                        foreach (KillOrder order in soc.killOrders)
+                        {
+                            if (order.person == this)
+                            {
+                                hasKillOrder = true;
+                            }
+                        }
+                        if (hasKillOrder)
+                        {
+                            item.reasons.Add(new ReasonMsg("They intend to execute me! (+50)", 50));
+                            item.threat += 50;
+                        }
+                        else
+                        {
+                            if (item.threat > 75 && (soc.posture != Society.militaryPosture.offensive) && susThreat == 0 && (soc.isAtWar() == false))
+                            {
+
+                                item.reasons.Add(new ReasonMsg("They are at peace, non-offensive and have no suspected dark nobles (cap at 75)", 0));
+                                item.threat = 75;
+                            }
                         }
                     }
                 }
@@ -561,7 +584,7 @@ namespace Assets.Code
                 if (Math.Abs(item.temporaryDread) > 1)
                 {
                     item.threat += item.temporaryDread;
-                    item.reasons.Add(new ReasonMsg("Temporary Dread", item.temporaryDread));
+                    item.reasons.Add(new ReasonMsg("Temporary Dread (+" + (int)(item.temporaryDread) + ")", item.temporaryDread));
                 }
 
                 if (item.threat < 0) { item.threat = 0; }

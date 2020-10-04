@@ -53,7 +53,8 @@ namespace Assets.Code
             List<string> reply = new List<string>();
             foreach (ReasonMsg reason in reasons)
             {
-                reply.Add(reason.msg + " " + (int)(reason.value));
+                //reply.Add(reason.msg + " " + (int)(reason.value));
+                reply.Add(reason.msg);
             }
             return reply;
         }

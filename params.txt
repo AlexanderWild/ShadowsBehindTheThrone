@@ -20,7 +20,7 @@ panic_panicAtFullExtinction: 2
 panic_panicAtFullShadow: 1.75
 panic_canAlly: 0.5
 panic_fromClueFound: 0.025
-panic_paladinSpawn_1: 0.15
+panic_paladinSpawn_1: 0.1
 panic_paladinSpawn_2: 0.3
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
@@ -298,7 +298,7 @@ unit_suspicionFromProximity: 0.1
 unit_armyOfDeadMaxHP: 37
 unit_paladin_trackPoints: 7
 unit_doctor_legalInfiltrationReq: 0.1
-unit_doctor_lootBodiesAmount: 12
+unit_doctor_lootBodiesAmount: 8
 unit_doctor_emptyGravesDuration: 16
 unit_doctor_sowCorpserootCooldown: 5
 unit_vampire_maxBlood: 27
