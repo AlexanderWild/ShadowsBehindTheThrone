@@ -1,7 +1,15 @@
 	High criticality:
 
+-Army of dead HP off by two orders of mag
+
+
+-Leftover graphical properties, by the look of it
+
+-Maybe they rebuild too fast
 
 	Medium criticality:
+
+-Agent power should be affected by difficulty
 
 -If you have no saves to load it reads "New text" on the scroll view
 

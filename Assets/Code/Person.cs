@@ -65,24 +65,27 @@ namespace Assets.Code
 
             politics_militarism = Math.Pow(Eleven.random.NextDouble(), 2);//Bias towards 0
             //Chance of pacifism
-            if (Eleven.random.NextDouble() < 0.33) { 
+            if (Eleven.random.NextDouble() < 0.33) {
                 politics_militarism *= -1;
             }
 
 
             //Add permanent threats
-            threat_enshadowedNobles = new ThreatItem(map,this);
+            threat_enshadowedNobles = new ThreatItem(map, this);
             threat_enshadowedNobles.form = ThreatItem.formTypes.ENSHADOWED_NOBLES;
             threat_enshadowedNobles.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
             threatEvaluations.Add(threat_enshadowedNobles);
 
-            for (int i = 0; i < 3; i++)
+            if (!map.simplified)
             {
-                Trait add = map.globalist.getTrait(this);
-                if (add == null) { break; }
-                traits.Add(add);
+                for (int i = 0; i < 3; i++)
+                {
+                    Trait add = map.globalist.getTrait(this);
+                    if (add == null) { break; }
+                    traits.Add(add);
 
-                if (Eleven.random.Next(2) == 0) { break; }//50% chance to add another trait
+                    if (Eleven.random.Next(2) == 0) { break; }//50% chance to add another trait
+                }
             }
         }
 

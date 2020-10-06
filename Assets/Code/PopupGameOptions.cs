@@ -44,14 +44,28 @@ namespace Assets.Code
         public int sizeY = 24;
         public int burnIn = 100;
         public int nAgents = 2;
+        public bool useSimplified = false;
 
         public void dismiss()
         {
             useAwareness = tAwareness.isOn;
             investigatorsSee = tInvestigatorsSee.isOn;
             usePaladins = tPaladins.isOn;
+
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed,this);
+        }
+
+        public void startGame_Simplified()
+        {
+            useSimplified = true;
+            investigatorsSee = false;
+            useAwareness = false;
+            usePaladins = false;
+
+            World.log("Start streamlined");
+            ui.removeBlocker(this.gameObject);
+            ui.world.bStartGameSeeded(currentSeed, this);
         }
 
         public void toggleOption()
@@ -109,10 +123,13 @@ namespace Assets.Code
         public void setTextFieldsToCurrentValues()
         {
             World.log("Setting seed " + currentSeed);
-            suspicionGain.text = "" + susGainPercent;
-            powerGain.text = "" + powerGainPercent;
-            awarenessGain.text = "" + awarenessGainSpeed;
-            investigatorPercentField.text = "" + investigatorCount;
+            if (suspicionGain != null)
+            {
+                suspicionGain.text = "" + susGainPercent;
+                powerGain.text = "" + powerGainPercent;
+                awarenessGain.text = "" + awarenessGainSpeed;
+                investigatorPercentField.text = "" + investigatorCount;
+            }
             seedField.text = "" + currentSeed;
             sizeXField.text = "" + sizeX;
             sizeYField.text = "" + sizeY;

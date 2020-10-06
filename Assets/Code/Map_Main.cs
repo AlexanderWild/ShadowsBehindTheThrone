@@ -30,6 +30,8 @@ namespace Assets.Code
         public double worldPanic;
         public int personIndexCount = 0;
         public EventManager eventManager;
+        public bool simplified = true;
+        public bool agentsOnly = true;
 
         public Society soc_dark;
         public Society soc_light;

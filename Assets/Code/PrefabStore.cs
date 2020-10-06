@@ -59,6 +59,7 @@ namespace Assets.Code
         public GameObject popTutorial;
         public GameObject prefabPersonPortrait;
         public GameObject prefabGameOptions;
+        public GameObject prefabGameOptionsSimplified;
         public GameObject prefabCombatParticle;
         public GameObject prefabPopVoterBar;
         public GameObject prefabPopOptBar;
@@ -560,6 +561,28 @@ namespace Assets.Code
             specific.bSeedZero.onClick.AddListener(delegate { specific.setSeed0(); });
             specific.bSeedOne.onClick.AddListener(delegate { specific.setSeed1(); });
 
+            specific.currentSeed = Eleven.random.Next();
+            specific.setTextFieldsToCurrentValues();
+            ui.addBlocker(specific.gameObject);
+        }
+        public void getGameOptionsPopupSimplified()
+        {
+            GameObject obj = Instantiate(prefabGameOptionsSimplified) as GameObject;
+            PopupGameOptions specific = obj.GetComponent<PopupGameOptions>();
+            specific.ui = ui;
+            specific.seedField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.sizeXField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.sizeYField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+            specific.historicalField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
+
+            specific.bEasy.onClick.AddListener(delegate { specific.setEasy(); });
+            specific.bMedium.onClick.AddListener(delegate { specific.setMedium(); });
+            specific.bHard.onClick.AddListener(delegate { specific.setHard(); });
+
+            specific.bSeedZero.onClick.AddListener(delegate { specific.setSeed0(); });
+            specific.bSeedOne.onClick.AddListener(delegate { specific.setSeed1(); });
+
+            specific.nAgents += 1;
             specific.currentSeed = Eleven.random.Next();
             specific.setTextFieldsToCurrentValues();
             ui.addBlocker(specific.gameObject);

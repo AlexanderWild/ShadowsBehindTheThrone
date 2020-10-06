@@ -158,14 +158,24 @@ namespace Assets.Code
             param.mapGen_sizeX = opts.sizeX;
             param.mapGen_sizeY = opts.sizeY;
             param.mapGen_burnInSteps = opts.burnIn;
-            param.unit_investigatorsSeeEnthralled = opts.investigatorsSee? 1 : 0;
-            param.useAwareness = opts.useAwareness ? 1:0;
+            param.unit_investigatorsSeeEnthralled = opts.investigatorsSee ? 1 : 0;
+            param.useAwareness = opts.useAwareness ? 1 : 0;
             param.usePaladins = opts.usePaladins ? 1 : 0;
             param.units_maxEnthralled = opts.nAgents;
+
+            World.log("Opts use awareness " + opts.useAwareness);
 
             map = new Map(param);
             GraphicalMap.map = map;
             GraphicalMap.world = this;
+
+            if (opts.useSimplified)
+            {
+                map.simplified = true;
+                map.param.overmind_allowDirectEnthralling = 0;
+                map.agentsOnly = true;
+            }
+            if (param.overmind_allowDirectEnthralling == 0) { param.flashEnthrallables = false; }
 
             Property_Prototype.loadProperties(map);
             EconTrait.loadTraits(map);
@@ -217,6 +227,11 @@ namespace Assets.Code
         {
             audioStore.playClick();
             ui.addBlocker(ui.world.prefabStore.getScrollSetGods(ui.world.potentialGods).gameObject);
+        }
+        public void bStartGameOptionsStreamlined()
+        {
+            audioStore.playClick();
+            ui.world.prefabStore.getGameOptionsPopupSimplified();
         }
 
         public void bFlashEnthrallables()

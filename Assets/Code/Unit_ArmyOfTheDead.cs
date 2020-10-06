@@ -13,7 +13,7 @@ namespace Assets.Code
         public Unit_ArmyOfTheDead(Location loc,SocialGroup soc) : base(loc,soc)
         {
             hp = 1;
-            maxHp = World.staticMap.param.unit_armyOfDeadMaxHP*100;
+            maxHp = World.staticMap.param.unit_armyOfDeadMaxHP;
             home = loc;
             isMilitary = true;
         }

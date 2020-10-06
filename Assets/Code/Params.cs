@@ -338,7 +338,7 @@ namespace Assets.Code
         public int unit_paladin_trackPoints = 7;
 
         public double unit_doctor_legalInfiltrationReq = 0.1;
-        public int unit_doctor_lootBodiesAmount = 8;
+        public int unit_doctor_lootBodiesAmount = 10;
         public int unit_doctor_emptyGravesDuration = 16;
         public int unit_doctor_sowCorpserootCooldown = 5;
         public int unit_vampire_maxBlood = 27;

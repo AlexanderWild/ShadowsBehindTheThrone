@@ -26,48 +26,64 @@ namespace Assets.Code
             this.map = map;
 
             hasEnthrallAbilities = true;
-            if (map.param.overmind_allowDirectEnthralling == 1)
+            if (map.agentsOnly == false)
             {
-                powers.Add(new Ab_Enth_Enthrall());
+                if (map.param.overmind_allowDirectEnthralling == 1)
+                {
+                    powers.Add(new Ab_Enth_Enthrall());
+                }
+                powers.Add(new Ab_Over_CreateAgent());
+                powers.Add(new Ab_Over_EnthrallAgent());
+                powers.Add(new Ab_Enth_DarkEmpire());
+                powers.Add(new Ab_Over_HateTheLight());
             }
-            powers.Add(new Ab_Over_CreateAgent());
-            powers.Add(new Ab_Over_EnthrallAgent());
-            powers.Add(new Ab_Enth_DarkEmpire());
-            powers.Add(new Ab_Over_HateTheLight());
+            else
+            {
+                powers.Add(new Ab_Over_CreateAgent());
+                powers.Add(new Ab_Over_EnthrallAgent());
+            }
             //abilities.Add(new Ab_TestAddShadow());
         }
 
         public void addDefaultAbilities()
         {
-            powers.Add(new Ab_Enth_MiliaryAid());
-            powers.Add(new Ab_Enth_TrustingFool());
-            powers.Add(new Ab_Enth_Enshadow());
-            powers.Add(new Ab_Enth_Apoptosis());
-            powers.Add(new Ab_Over_DisruptAgent());
-            powers.Add(new Ab_Over_DelayVote());
-            powers.Add(new Ab_Over_CancelVote());
-            //powers.Add(new Ab_Over_InformationBlackout());
-            powers.Add(new Ab_Over_SowDissent());
-            powers.Add(new Ab_Over_UncannyGlamour());
-            powers.Add(new Ab_Enth_AuraOfLunacy());
-
-            //abilities.Add(new Ab_Soc_Vote());
-            abilities.Add(new Ab_Soc_ProposeVote());
-            abilities.Add(new Ab_Soc_SharedGlory());
-            abilities.Add(new Ab_Soc_JoinRebels());
-            abilities.Add(new Ab_Soc_JoinLoyalists());
-            abilities.Add(new Ab_Soc_ShareEvidence());
-            abilities.Add(new Ab_Soc_BoycottVote());
-            abilities.Add(new Ab_Soc_Fearmonger());
-            abilities.Add(new Ab_Soc_DenounceOther());
-            abilities.Add(new Ab_Soc_ProvincialSentiments());
-            //abilities.Add(new Ab_Soc_SwitchVote());
-            abilities.Add(new Ab_Soc_ShareTruth());
-            abilities.Add(new Ab_Soc_BoostMilitarism());
-
-            if (map.param.useAwareness == 1)
+            if (map.agentsOnly == false)
             {
-                powers.Add(new Ab_Over_DisruptAction());
+                powers.Add(new Ab_Enth_MiliaryAid());
+                powers.Add(new Ab_Enth_TrustingFool());
+                powers.Add(new Ab_Enth_Enshadow());
+                powers.Add(new Ab_Enth_Apoptosis());
+                powers.Add(new Ab_Over_DisruptAgent());
+                powers.Add(new Ab_Over_DelayVote());
+                powers.Add(new Ab_Over_CancelVote());
+                //powers.Add(new Ab_Over_InformationBlackout());
+                powers.Add(new Ab_Over_SowDissent());
+                powers.Add(new Ab_Over_UncannyGlamour());
+                powers.Add(new Ab_Enth_AuraOfLunacy());
+
+                //abilities.Add(new Ab_Soc_Vote());
+                abilities.Add(new Ab_Soc_ProposeVote());
+                abilities.Add(new Ab_Soc_SharedGlory());
+                abilities.Add(new Ab_Soc_JoinRebels());
+                abilities.Add(new Ab_Soc_JoinLoyalists());
+                abilities.Add(new Ab_Soc_ShareEvidence());
+                abilities.Add(new Ab_Soc_BoycottVote());
+                abilities.Add(new Ab_Soc_Fearmonger());
+                abilities.Add(new Ab_Soc_DenounceOther());
+                abilities.Add(new Ab_Soc_ProvincialSentiments());
+                //abilities.Add(new Ab_Soc_SwitchVote());
+                abilities.Add(new Ab_Soc_ShareTruth());
+                abilities.Add(new Ab_Soc_BoostMilitarism());
+
+                if (map.param.useAwareness == 1)
+                {
+                    powers.Add(new Ab_Over_DisruptAction());
+                }
+            }
+            else
+            {
+                powers.Add(new Ab_Over_DisruptAgent());
+                powers.Add(new Ab_Over_DelayVote());
             }
         }
 
