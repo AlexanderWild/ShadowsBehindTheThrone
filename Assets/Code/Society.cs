@@ -44,12 +44,19 @@ namespace Assets.Code
 
         public int lastOffensiveTargetSetting;
 
+        public SocType socType = new SocType_ElectiveMonarchy();
+
         public Society(Map map) : base(map)
         {
             setName("DEFAULT_SOC_NAME");
             sovreign = new Title_Sovreign(this);
             titles.Add(sovreign);
             econEffects = new List<EconEffect>();
+
+            if (map.simplified)
+            {
+                socType = new SocType_Monarchy();
+            }
         }
 
         public override void turnTick()
@@ -71,15 +78,13 @@ namespace Assets.Code
 
         public override string getTypeName()
         {
-            return "Elective Monarchy";
+            return socType.getName();
         }
         public override string getTypeDesc()
         {
-            string reply = "A human society, consisting of large numbers of serfs, and the nobles who rule over them."
-                + "\nThis society is an elective monarchy, that is to say that the nobles vote on their rulers, selecting a single noble to act as sovreign."
-                + "\nIf the nation owns enough territory outside the sovreign's province, they will elect dukes to rule over provinces. If they do, the sovreign can only be elected from the dukes (or be re-elected)"
-                + " Only nobles residing in a province are eligible to become that province's duke."
-                + "\n\nAll the actions (wars, territory allocation, criminal trials...) the society takes are voted on by the nobles, with weight a noble's vote carries equal to their prestige.";
+            string reply = socType.getDesc();
+
+
 
             reply += "\n\nThis society's unlanded titles are:\n";
             foreach (Title t in titles)

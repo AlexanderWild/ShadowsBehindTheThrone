@@ -54,7 +54,13 @@ namespace Assets.Code
                 //Can assign an unassigned title, or hold routine elections
                 bool canHold = t.heldBy == null || (map.turn - t.turnLastAssigned >= map.param.society_minTimeBetweenTitleReassignments);
                 //You can hold emergency elections in the event of upcoming civil war
-                if (society.data_societalStability < 0 && t == society.sovreign) { canHold = true; }
+                //if (society.data_societalStability < 0 && t == society.sovreign) { canHold = true; }
+                
+                //Can't hold elections if your society doesn't allow it
+                if (t.heldBy != null && (!society.socType.periodicElection()))
+                {
+                    continue;
+                }
 
                 if (!canHold) { continue; }
 
@@ -370,26 +376,30 @@ namespace Assets.Code
                     //You need to be in offensive posture to be allowed to do so
                     if (society.offensiveTarget != null && society.posture == Society.militaryPosture.offensive && society.getRel(society.offensiveTarget).state != DipRel.dipState.war)
                     {
-                        issue = new VoteIssue_DeclareWar(society, society.offensiveTarget, this);
-                        VoteOption option_0 = new VoteOption();
-                        option_0.index = 0;
-                        issue.options.Add(option_0);
-
-                        VoteOption option_1 = new VoteOption();
-                        option_1.index = 1;
-                        issue.options.Add(option_1);
-
-                        //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
-                        //Random factor to prevent them all rushing a singular voting choice
-                        double uWar = issue.computeUtility(this, option_1, new List<ReasonMsg>());
-                        double uPeace = issue.computeUtility(this, option_0, new List<ReasonMsg>());
-                        double localU =( uWar - uPeace)*Eleven.random.NextDouble();
-                        if (localU > bestU)
+                        if (map.burnInComplete == true || map.socialGroups.Count > 4)
                         {
-                            bestU = localU;
-                            bestIssue = issue;
+
+                            issue = new VoteIssue_DeclareWar(society, society.offensiveTarget, this);
+                            VoteOption option_0 = new VoteOption();
+                            option_0.index = 0;
+                            issue.options.Add(option_0);
+
+                            VoteOption option_1 = new VoteOption();
+                            option_1.index = 1;
+                            issue.options.Add(option_1);
+
+                            //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+                            //Random factor to prevent them all rushing a singular voting choice
+                            double uWar = issue.computeUtility(this, option_1, new List<ReasonMsg>());
+                            double uPeace = issue.computeUtility(this, option_0, new List<ReasonMsg>());
+                            double localU = (uWar - uPeace) * Eleven.random.NextDouble();
+                            if (localU > bestU)
+                            {
+                                bestU = localU;
+                                bestIssue = issue;
+                            }
+                            logVote(issue);
                         }
-                        logVote(issue);
                     }
 
                     //Check to see if you want to defensively vassalise yourself
