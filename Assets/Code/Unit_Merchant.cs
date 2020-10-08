@@ -24,7 +24,10 @@ namespace Assets.Code
             abilities.Add(new Abu_Base_Recruit());
             abilities.Add(new Abu_Base_RecruitOutlaws());
             //abilities.Add(new Abu_Base_Disrupt());
-            abilities.Add(new Abu_Base_EnthrallNoble());
+            if (loc.map.simplified == false)
+            {
+                abilities.Add(new Abu_Base_EnthrallNoble());
+            }
             abilities.Add(new Abu_Base_SpreadShadow());
         }
 

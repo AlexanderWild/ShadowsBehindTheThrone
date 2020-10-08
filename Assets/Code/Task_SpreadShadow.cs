@@ -29,13 +29,13 @@ namespace Assets.Code
                 unit.task = null;
                 return;
             }
-            if (unit.location.person().getRelation(unit.person).getLiking() < unit.location.map.param.ability_unit_spreadShadowMinLiking/2)
-            {
+            //if (unit.location.person().getRelation(unit.person).getLiking() < unit.location.map.param.ability_unit_spreadShadowMinLiking/2)
+            //{
 
-                unit.location.map.world.prefabStore.popMsg(unit.getName() + " can no longer spread shadow over " + unit.location.person().getFullName() + " as their liking is too low.");
-                unit.task = null;
-                return;
-            }
+            //    unit.location.map.world.prefabStore.popMsg(unit.getName() + " can no longer spread shadow over " + unit.location.person().getFullName() + " as their liking is too low.");
+            //    unit.task = null;
+            //    return;
+            //}
 
 
             dur += 1;

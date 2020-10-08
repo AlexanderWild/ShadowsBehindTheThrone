@@ -1,11 +1,8 @@
 	High criticality:
 
--Army of dead HP off by two orders of mag
-
-
 -Leftover graphical properties, by the look of it
 
--Maybe they rebuild too fast
+-Maybe they rebuild lost cities too fast
 
 	Medium criticality:
 
@@ -49,6 +46,7 @@ Reduce prestige of other at cost of power
 
 -----------------------RESOLVED-----------------------
 
+-Army of dead HP off by two orders of mag
 -Recruit outlaws doesn't actually give evidence
 	Or evidence doesn't actually cause suspicion
 -Voting screen needs self-vote support

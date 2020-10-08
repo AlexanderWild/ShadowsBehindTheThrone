@@ -312,7 +312,7 @@ namespace Assets.Code
 
         public double unit_recruitEvidence = 0.1;
         public int unit_investigatorsSeeEnthralled = 1;
-        public double unit_investigatorsPerProvince = 0.66;
+        public double unit_investigatorsPerProvince = 0.5;
         public int unit_falseEvidenceCooldown = 8;
         public int unit_disruptDuration = 5;
         public int unit_disruptCooldown = 10;
@@ -341,7 +341,9 @@ namespace Assets.Code
         public int unit_doctor_lootBodiesAmount = 10;
         public int unit_doctor_emptyGravesDuration = 16;
         public int unit_doctor_sowCorpserootCooldown = 5;
-        public int unit_vampire_maxBlood = 27;
+        public int unit_vampire_maxBlood = 31;
+        public int unit_vampire_drinkReqLiking = 0;
+
         public void saveToFile()
         {
             StreamWriter writer = new StreamWriter("params.txt");

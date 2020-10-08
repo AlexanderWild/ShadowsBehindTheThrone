@@ -22,7 +22,7 @@ namespace Assets.Code
             if (u.location.person() == null) { return false; }
             if (u.location.settlement == null) { return false; }
             if (u.location.settlement.infiltration < World.staticMap.param.ability_unit_spreadShadowInfiltrationReq) { return false; }
-            if (u.location.person().getRelation(u.person).getLiking() < World.staticMap.param.ability_unit_spreadShadowMinLiking) { return false; }
+            //if (u.location.person().getRelation(u.person).getLiking() < World.staticMap.param.ability_unit_spreadShadowMinLiking) { return false; }
             return true;
         }
 
@@ -44,9 +44,9 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Increases the shadow of a noble with liking of at least " + World.staticMap.param.ability_unit_spreadShadowMinLiking + " liking for your enshadow by " 
+            return "Increases the shadow of a noble by " 
                 + (int)(100*World.staticMap.param.unit_spreadShadowAmount) +  "%. Leaves " + ((int)(100*World.staticMap.param.unit_spreadShadowEvidence))+ "  evidence."
-                + "\n[Requires a noble with liking above " + World.staticMap.param.ability_unit_spreadShadowMinLiking + " and infiltration above " + (int)(100*World.staticMap.param.ability_unit_spreadShadowInfiltrationReq) + "%]";
+                + "\n[Requires a noble with infiltration above " + (int)(100*World.staticMap.param.ability_unit_spreadShadowInfiltrationReq) + "%]";
         }
 
         public override string getName()

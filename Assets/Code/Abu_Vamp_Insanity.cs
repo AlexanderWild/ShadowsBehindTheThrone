@@ -50,8 +50,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Begins a " + World.staticMap.param.unit_infiltrateTime + " turn task which will result in your infiltration level increasing." +
-                " Effectiveness reduces based on security level, and increased by noble's liking."
+            return "Begins a " + World.staticMap.param.unit_infiltrateTime + " task which will cause the local noble to lose 1 sanity each turn, as long as the vampire remains unmoving."
                 + "\n[Requires a location with a non-insane noble with infiltration > " + (int)(100* World.staticMap.param.ability_unit_insanityInfiltrationReq) + "%]";
         }
 

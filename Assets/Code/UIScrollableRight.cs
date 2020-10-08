@@ -29,6 +29,7 @@ namespace Assets.Code
         public Toggle bWars;
 
         public Text bThreatsText;
+        public Button bHighlightEnthrallables;
 
         public enum Tab { People, Places, Votes,Messages, Actions ,War,Threats};
         private Tab currentTab;
@@ -48,6 +49,11 @@ namespace Assets.Code
                 GameObject.Destroy(t.gameObject);
             }
 
+
+            if (master.world.map != null && master.world.map.param.overmind_allowDirectEnthralling == 0)
+            {
+                bHighlightEnthrallables.gameObject.SetActive(false);
+            }
 
             if (master.world.map != null && master.world.map.overmind != null)
             {

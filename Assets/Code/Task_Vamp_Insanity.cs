@@ -27,7 +27,7 @@ namespace Assets.Code
 
             unit.location.person().sanity -= 1;
 
-            if (unit.location.person().sanity <= 0)
+            if (unit.location.person().sanity < 1)
             {
                 unit.location.map.world.prefabStore.popImgMsg(unit.getName() + " breaks the mind of " + unit.location.person().getFullName() +
          ". They are now driven to madness.",
