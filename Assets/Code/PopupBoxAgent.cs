@@ -96,6 +96,29 @@ namespace Assets.Code
                     agent.task = null;
                     agent.movesTaken += 1;
                 }
+
+                if (index == Ab_Over_CreateAgent.SEEKER)
+                {
+                    Unit agent = new Unit_Seeker(hex.location, map.soc_dark);
+                    map.world.prefabStore.popImgMsg(
+                        "You draw upon the creatures of darkness, and choose one to serve as your instrument in this world",
+                        map.world.wordStore.lookup("ABILITY_CREATE_AGENT"));
+
+                    agent.person = new Person(map.soc_dark);
+                    agent.person.state = Person.personState.enthralledAgent;
+                    agent.person.unit = agent;
+                    map.units.Add(agent);
+
+                    Unit_Seeker.addForgottenSecrets(map);
+
+                    Evidence ev = new Evidence(map.turn);
+                    ev.pointsTo = agent;
+                    ev.weight = 0.66;
+                    agent.location.evidence.Add(ev);
+
+                    agent.task = null;
+                    agent.movesTaken += 1;
+                }
                 foreach (Ability a in map.overmind.abilities)
                 {
                     if (a is Ab_Over_CreateAgent)

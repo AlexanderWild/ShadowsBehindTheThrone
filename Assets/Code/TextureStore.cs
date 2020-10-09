@@ -82,6 +82,7 @@ namespace Assets.Code
         public Sprite icon_vampire;
         public Sprite icon_coins;
         public Sprite icon_doctor;
+        public Sprite icon_seeker;
         public Sprite icon_corpseroot;
 
         public Sprite icon_combat;
@@ -109,7 +110,7 @@ namespace Assets.Code
         public Sprite unit_letter;
         public Sprite unit_letterAlert;
         public Sprite unit_nomadicTribe;
-        public Sprite unit_witchHunter;
+        public Sprite unit_seeker;
         public Sprite unit_worm;
         public Sprite unit_ghast;
         public Sprite unit_refugees;

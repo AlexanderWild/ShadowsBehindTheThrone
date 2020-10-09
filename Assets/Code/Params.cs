@@ -31,10 +31,10 @@ namespace Assets.Code
         public double panic_letterWritingToAllLevel = 0.25;
         public double panic_researchAtUniWithoutAwareness = 0.35;
         public double panic_cleanseSoulLevel = 0.25;
-        public double panic_panicAtFullExtinction = 2;
+        public double panic_panicAtFullExtinction = 3;
         public double panic_panicAtFullShadow = 1.75;
         public double panic_canAlly = 0.5;
-        public double panic_fromClueFound = 0.025;
+        public double panic_fromClueFound = 0.015;
         public double panic_paladinSpawn_1 = 0.1;
         public double panic_paladinSpawn_2 = 0.3;
 
@@ -337,6 +337,8 @@ namespace Assets.Code
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackPoints = 7;
 
+        public int unit_seeker_nReqSecrets = 0;
+        public int unit_seeker_nCreatedSecrets = 7;
         public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 10;
         public int unit_doctor_emptyGravesDuration = 16;
