@@ -73,7 +73,6 @@ namespace Assets.Code
                     agent.location.evidence.Add(ev);
 
                     agent.task = null;
-                    agent.movesTaken += 1;
                 }
 
                 if (index == Ab_Over_CreateAgent.DOCTOR)
@@ -94,7 +93,6 @@ namespace Assets.Code
                     agent.location.evidence.Add(ev);
 
                     agent.task = null;
-                    agent.movesTaken += 1;
                 }
 
                 if (index == Ab_Over_CreateAgent.SEEKER)
@@ -117,7 +115,6 @@ namespace Assets.Code
                     agent.location.evidence.Add(ev);
 
                     agent.task = null;
-                    agent.movesTaken += 1;
                 }
                 foreach (Ability a in map.overmind.abilities)
                 {

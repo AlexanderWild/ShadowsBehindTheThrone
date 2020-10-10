@@ -20,6 +20,7 @@ namespace Assets.Code
 
             reqSecrets = loc.map.param.unit_seeker_nReqSecrets;
 
+            abilities.Add(new Abu_Seeker_SpreadTruth());
             abilities.Add(new Abu_Seeker_LearnTruth());
             abilities.Add(new Abu_Seeker_UncoverSecret());
             abilities.Add(new Abu_Seeker_ChangeDirection());

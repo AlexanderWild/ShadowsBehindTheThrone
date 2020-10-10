@@ -608,7 +608,7 @@ namespace Assets.Code
                 {
                     title.text = sel.proto.name;
                     socTypeTitle.text = "Indefinite Effect";
-                    socTypeDesc.text = "Effects remain bound to locations, regardless of societal and political change. This one decays over time.";
+                    socTypeDesc.text = "Effects remain bound to locations, regardless of societal and political change.";
                 }
                 string bodyText = sel.proto.getDescription();
                 body.text = bodyText;

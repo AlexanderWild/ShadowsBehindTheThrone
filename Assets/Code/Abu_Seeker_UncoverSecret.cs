@@ -9,29 +9,10 @@ namespace Assets.Code
 
         public override void castInner(Map map, Unit u)
         {
-            Unit_Seeker seeker = (Unit_Seeker)u;
-
-            seeker.secrets += 1;
-
-                List<Property> rems = new List<Property>();
-                foreach (Property pr in u.location.properties)
-                {
-                    if (pr.proto is Pr_ForgottenSecret)
-                    {
-                        rems.Add(pr);
-                    }
-                }
-                foreach (Property pr in rems)
-                {
-                    u.location.properties.Remove(pr);
-                }
-
-            string msg = u.getName() + " discovers a forgotten secret, they now have " + seeker.secrets + " and need " + seeker.reqSecrets + " to discover the truth.";
-            if (seeker.secrets == seeker.reqSecrets)
-            {
-                msg = u.getName() + " learns a forgotten secret, and now knows enough to piece together the truth they have been seeking. Use their ability to do so.";
-            }
-            u.location.map.world.prefabStore.popImgMsg(msg,u.location.map.world.wordStore.lookup("ABILITY_SEEKER_UNCOVER_SECRET"));
+            u.task = new Task_UncoverSecret();
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " beings uncovering the Forgotten Secret hidden at " + u.location.getName() + "," +
+                " a task which will take " + u.location.map.param.unit_seeker_uncoverTime + " turns, after which they will gain 1 secret.",
+                u.location.map.world.wordStore.lookup("ABILITY_SEEKER_UNCOVER_SECRET"),img:2);
 
         }
         public override bool castable(Map map, Unit u)
@@ -68,7 +49,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Uncovers a forgotten secret, adding one to your total discovered"
+            return "Uncovers a forgotten secret, adding one to your total discovered. Leaves evidence behind."
                 + "\n[Requires a Forgotten Secret at your location]";
         }
 

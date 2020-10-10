@@ -652,6 +652,10 @@ namespace Assets.Code
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_coins;
             }
+            else if (img == 2)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_seekerBook;
+            }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }

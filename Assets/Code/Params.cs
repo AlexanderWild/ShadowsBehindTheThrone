@@ -337,15 +337,17 @@ namespace Assets.Code
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackPoints = 7;
 
-        public int unit_seeker_nReqSecrets = 0;
-        public int unit_seeker_nCreatedSecrets = 7;
+        public int unit_seeker_nReqSecrets = 9;
+        public int unit_seeker_nCreatedSecrets = 9;
+        public int unit_seeker_uncoverTime = 3;
+        public double unit_seeker_uncoverEvidence = 0.2;
         public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 10;
         public int unit_doctor_emptyGravesDuration = 16;
         public int unit_doctor_sowCorpserootCooldown = 5;
         public int unit_vampire_maxBlood = 31;
         public int unit_vampire_drinkReqLiking = 0;
-
+        public double unit_seeker_truthShadow = 0.35;
         public void saveToFile()
         {
             StreamWriter writer = new StreamWriter("params.txt");

@@ -17,7 +17,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
-            return world.textureStore.unit_letter;
+            return world.textureStore.property_forgottenSecret;
         }
 
         internal override string getDescription()

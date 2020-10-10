@@ -30,6 +30,7 @@ namespace Assets.Code
         public Sprite boxImg_ship;
         public Sprite boxImg_thumb;
         public Sprite boxImg_blue;
+        public Sprite boxImg_seekerBook;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
@@ -121,6 +122,7 @@ namespace Assets.Code
         public Sprite unit_paladin;
 
         public Sprite property_noDead;
+        public Sprite property_forgottenSecret;
 
         public Sprite tutorial1;
         public Sprite tutorial2;

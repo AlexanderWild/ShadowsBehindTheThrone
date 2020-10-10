@@ -33,7 +33,7 @@ namespace Assets.Code
             Unit_Seeker.addForgottenSecrets(map);
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " changes their research direction, to a more promising path, allowing new secrets to be used.",
-                u.location.map.world.wordStore.lookup("ABILITY_SEEKER_CHANGE_DIRECTION"));
+                u.location.map.world.wordStore.lookup("ABILITY_SEEKER_CHANGE_DIRECTION"), img: 2);
 
         }
         public override bool castable(Map map, Unit u)
