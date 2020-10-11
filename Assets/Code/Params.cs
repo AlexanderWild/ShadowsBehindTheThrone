@@ -337,8 +337,8 @@ namespace Assets.Code
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackPoints = 7;
 
-        public int unit_seeker_nReqSecrets = 9;
-        public int unit_seeker_nCreatedSecrets = 9;
+        public int unit_seeker_nReqSecrets = 12;
+        public int unit_seeker_nCreatedSecrets = 7;
         public int unit_seeker_uncoverTime = 5;
         public double unit_seeker_libraryInfiltrationReq = 0.15;
         public double unit_seeker_uncoverEvidence = 0.2;
