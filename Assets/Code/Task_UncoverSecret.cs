@@ -7,7 +7,7 @@ namespace Assets.Code
     public class Task_UncoverSecret : Task
     {
         public int dur;
-
+        public bool leaveEvidence = true;
         public override string getShort()
         {
             return "Uncovering Secret " + dur  + "/" + World.staticMap.param.unit_seeker_uncoverTime;
@@ -45,13 +45,20 @@ namespace Assets.Code
                 {
                     msg = unit.getName() + " learns a forgotten secret, and now knows enough to piece together the truth they have been seeking. Use their ability to do so.";
                 }
+                if (leaveEvidence)
+                {
+                    msg += "\nThey left evidence behind.";
+                }
                 unit.location.map.world.prefabStore.popImgMsg(msg,unit.location.map.world.wordStore.lookup("ABILITY_SEEKER_UNCOVER_SECRET"), img: 2);
                 unit.task = null;
 
-                Evidence e = new Evidence(unit.location.map.turn);
-                e.pointsTo = unit;
-                e.weight = unit.location.map.param.unit_seeker_uncoverEvidence;
-                unit.location.evidence.Add(e);
+                if (leaveEvidence)
+                {
+                    Evidence e = new Evidence(unit.location.map.turn);
+                    e.pointsTo = unit;
+                    e.weight = unit.location.map.param.unit_seeker_uncoverEvidence;
+                    unit.location.evidence.Add(e);
+                }
             }
         }
     }

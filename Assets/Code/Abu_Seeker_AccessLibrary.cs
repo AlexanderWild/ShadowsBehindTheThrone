@@ -4,19 +4,24 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class Abu_Seeker_UncoverSecret: AbilityUnit
+    public class Abu_Seeker_AccessLibrary: AbilityUnit
     {
 
         public override void castInner(Map map, Unit u)
         {
-            u.task = new Task_UncoverSecret();
+            Task_UncoverSecret task = new Task_UncoverSecret();
+            task.leaveEvidence = false;
+            u.task = task;
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " beings uncovering the Forgotten Secret hidden at " + u.location.getName() + "," +
                 " a task which will take " + u.location.map.param.unit_seeker_uncoverTime + " turns, after which they will gain 1 secret.",
-                u.location.map.world.wordStore.lookup("ABILITY_SEEKER_UNCOVER_SECRET_START"),img:2);
+                u.location.map.world.wordStore.lookup("ABILITY_SEEKER_ACCESS_LIBRARY"),img:2);
 
         }
         public override bool castable(Map map, Unit u)
         {
+
+            if (u.location.settlement == null) { return false; }
+            if (u.location.settlement.infiltration < map.param.unit_seeker_libraryInfiltrationReq) { return false; }
             if (u is Unit_Seeker == false) { return false; }
             Unit_Seeker seeker = (Unit_Seeker)u;
 
@@ -27,6 +32,8 @@ namespace Assets.Code
                     return true;
                 }
             }
+
+            
 
             return false;
         }
@@ -49,13 +56,13 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Uncovers a forgotten secret, adding one to your total discovered. Leaves evidence behind."
-                + "\n[Requires a Forgotten Secret at your location]";
+            return "Safely obtains a forgotten secret, adding one to your total discovered. Does not leave evidence behind."
+                + "\n[Requires a Forgotten Secret, and infiltration of " + (int)(100*World.staticMap.param.unit_seeker_libraryInfiltrationReq) + "%]";
         }
 
         public override string getName()
         {
-            return "Uncover Secret";
+            return "Access Library";
         }
 
         public override Sprite getSprite(Map map)

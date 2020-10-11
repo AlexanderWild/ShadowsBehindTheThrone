@@ -103,7 +103,8 @@ namespace Assets.Code
                     {
                         if (!hasSpawnedPaladin)
                         {
-                            map.world.prefabStore.popMsg("A Paladin has arrived in " + l2.getName() + ". A holy warrior, they will hunt down your agents.");
+                            map.world.prefabStore.popMsg("A Paladin has arrived in " + l2.getName() + ". A holy warrior, they will hunt down your agents, tracking them across the map. " +
+                                "You can slow them with powers, and they will lose the trail occasionally, but always be aware and cautious of their presence.");
                         }
                         Unit_Paladin paladin = new Unit_Paladin(l2, map.soc_light);
                         paladin.person = new Person(map.soc_light);

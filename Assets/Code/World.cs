@@ -174,6 +174,10 @@ namespace Assets.Code
                 map.simplified = true;
                 map.param.overmind_allowDirectEnthralling = 0;
                 map.agentsOnly = true;
+                if (opts.difficultySetting > 0)
+                {
+                    map.param.usePaladins = 1;
+                }
             }
             if (param.overmind_allowDirectEnthralling == 0) { param.flashEnthrallables = false; }
 

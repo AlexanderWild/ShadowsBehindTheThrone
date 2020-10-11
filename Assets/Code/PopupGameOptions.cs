@@ -20,7 +20,8 @@ namespace Assets.Code
         public InputField historicalField;
         public Button bDismiss;
         public UIMaster ui;
-        
+
+        public Text tDifficulty;
 
         public Button bEasy;
         public Button bMedium;
@@ -31,6 +32,8 @@ namespace Assets.Code
         public Button bSeedZero;
         public Button bSeedOne;
         public Button bAllOptsOn;
+
+        public int difficultySetting = 1;
 
         public bool investigatorsSee = false;
         public bool useAwareness = false;
@@ -93,6 +96,7 @@ namespace Assets.Code
         {
             ui.world.audioStore.playClickInfo();
 
+            difficultySetting = 0;
             susGainPercent = 75;
             powerGainPercent = 150;
             awarenessGainSpeed = 50;
@@ -104,6 +108,7 @@ namespace Assets.Code
         {
             ui.world.audioStore.playClickInfo();
 
+            difficultySetting = 1;
             susGainPercent = 100;
             powerGainPercent = 100;
             awarenessGainSpeed = 100;
@@ -114,6 +119,7 @@ namespace Assets.Code
         {
             ui.world.audioStore.playClickInfo();
 
+            difficultySetting = 2;
             susGainPercent = 150;
             powerGainPercent = 50;
             awarenessGainSpeed = 150;
@@ -135,6 +141,19 @@ namespace Assets.Code
             sizeYField.text = "" + sizeY;
             historicalField.text = "" + burnIn;
             agentCount.text = "" + nAgents;
+
+            if (difficultySetting == 0)
+            {
+                tDifficulty.text = "Difficulty: Easy";
+            }
+            if (difficultySetting == 1)
+            {
+                tDifficulty.text = "Difficulty: Medium";
+            }
+            if (difficultySetting == 2)
+            {
+                tDifficulty.text = "Difficulty: Hard";
+            }
         }
         public void onEditEnd()
         {

@@ -41,7 +41,7 @@ namespace Assets.Code
 
         public float ySize()
         {
-            return 200;
+            return 180;
         }
 
         public void setTargetY(float y)

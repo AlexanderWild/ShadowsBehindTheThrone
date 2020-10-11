@@ -339,7 +339,8 @@ namespace Assets.Code
 
         public int unit_seeker_nReqSecrets = 9;
         public int unit_seeker_nCreatedSecrets = 9;
-        public int unit_seeker_uncoverTime = 3;
+        public int unit_seeker_uncoverTime = 5;
+        public double unit_seeker_libraryInfiltrationReq = 0.15;
         public double unit_seeker_uncoverEvidence = 0.2;
         public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 10;

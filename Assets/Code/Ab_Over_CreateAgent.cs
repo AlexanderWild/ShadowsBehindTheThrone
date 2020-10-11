@@ -18,7 +18,8 @@ namespace Assets.Code
             "Once sufficient are gathered, they can raise armies of the dead."
             +"\nThey gather corpses from graveyards, and need to travel far to collect sufficient for large armies. This nomadic life may well leave evidence behind, if they are unable to infiltrate or find recent battlefields.";
 
-        public static string DESC_SEEKER = "Seeker desc here";
+        public static string DESC_SEEKER = "The Seeker is compelled to search the world for forgotten secrets about a race of creatures which ruled the world before humanity to gain dark power."
+            + "\nThey are weak for most of the game, and may need other agents' help to avoid getting exiled, but after gathering their fragments they can enshadow or destroy entire empires.";
 
         public override void cast(Map map, Hex hex)
         {
