@@ -41,6 +41,7 @@ namespace Assets.Code
             else if (p.titles.Count > 0) { profileBorder.sprite = p.map.world.textureStore.slotDuke; }
             else { profileBorder.sprite = p.map.world.textureStore.slotCount; }
 
+            personTitle.text = p.getFullName();
             TitleLanded title = p.title_land;
             if (title == null)
             {

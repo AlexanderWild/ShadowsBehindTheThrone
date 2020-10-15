@@ -18,6 +18,53 @@ namespace Assets.Code
 
         public override void turnTickInner(Map map)
         {
+            if (this.task != null) { return; }
+
+            if (this.location.person() != null)
+            {
+                if (this.location.settlement.infiltration < World.staticMap.param.ability_unit_spreadShadowInfiltrationReq)
+                {
+                    this.task = new Task_Infiltrate();
+                    return;
+                }
+                if (this.location.person().shadow < 1)
+                {
+                    this.task = new Task_SpreadShadow();
+                    return;
+                }
+            }
+
+            //We're not starting a new task, so this location is bad. Onwards to greener pastures
+            Location target = null;
+            double bestDist = -1;
+            foreach (Location loc in map.locations)
+            {
+                if (loc == this.location) { continue; }
+                if (loc.soc == null) { continue; }
+                if (loc.soc.hostileTo(this)) { continue; }
+                if (loc.person() != null && loc.soc is Society && loc.person().shadow < 1)
+                {
+                    bool good = true;
+                    //foreach (Unit u in loc.units)
+                    //{
+                    //    if (u is Unit_TesterDark) { good = false;break; }
+                    //}
+                    if (good)
+                    {
+                        double dist = Math.Abs(loc.hex.x - this.location.hex.x) + Math.Abs(loc.hex.y - this.location.hex.y);
+                        //dist *= Eleven.random.NextDouble();
+                        if (dist < bestDist || bestDist == -1)
+                        {
+                            bestDist = dist;
+                            target = loc;
+                        }
+                    }
+                }
+            }
+            if (target != null)
+            {
+                task = new Task_GoToLocation(target);
+            }
         }
 
         public override bool checkForDisband(Map map)
@@ -75,7 +122,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Vampires are powerful and stealthy while taking actions, but depend on a constant supply of blood to survive, which leaves a trail of evidence.";
+            return "Automatic Testing Element.";
         }
     }
 }

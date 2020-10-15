@@ -32,6 +32,7 @@ namespace Assets.Code
         public EventManager eventManager;
         public bool simplified = true;
         public bool agentsOnly = true;
+        public bool automatic = false;
 
         public Society soc_dark;
         public Society soc_light;

@@ -199,6 +199,27 @@ namespace Assets.Code
                 victory();
             }
             map.data_nSocietyLocations = nHumanSettlements;
+
+            if (map.automatic)
+            {
+                automatic();
+            }
+        }
+
+        public void automatic()
+        {
+            if (this.power > 0)
+            {
+                foreach (Unit u in map.units)
+                {
+                    if (u is Unit_Investigator && u.task is Task_Investigate)
+                    {
+                        u.task = new Task_Disrupted();
+                        power -= map.param.ability_disruptAgentCost;
+                        break;
+                    }
+                }
+            }
         }
 
         public void startedComplete()

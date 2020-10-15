@@ -37,6 +37,7 @@ namespace Assets.Code
         public static string separator = "";
         public bool isWindows = false;
         public static World self;
+        public static bool automatic = false;
 
         public static int autosaveCount = 5;
         public static int autosavePeriod = 10;
@@ -169,6 +170,8 @@ namespace Assets.Code
             GraphicalMap.map = map;
             GraphicalMap.world = this;
 
+            map.automatic = automatic;
+
             if (opts.useSimplified)
             {
                 map.simplified = true;
@@ -192,7 +195,7 @@ namespace Assets.Code
 
 
             //ui.setToWorld();
-            displayMessages = true;
+            displayMessages = !automatic;
             Log("Got to end of initial startup");
             ui.checkData();
 
@@ -227,6 +230,12 @@ namespace Assets.Code
         }
         */
 
+        public void bStartGameAutomatic()
+        {
+            World.automatic = true;
+            audioStore.playClick();
+            ui.addBlocker(ui.world.prefabStore.getScrollSetGods(ui.world.potentialGods).gameObject);
+        }
         public void bStartGameOptions()
         {
             audioStore.playClick();
@@ -269,6 +278,7 @@ namespace Assets.Code
             foreach (God chosenGod in chosenGods){
                 chosenGod.onStart(map);
             }
+            map.burnInComplete = true;
             map.overmind.addDefaultAbilities();
             chosenGods = null;//Just in case this fucks with something
             ui.setToWorld();

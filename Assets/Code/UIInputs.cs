@@ -14,6 +14,7 @@ namespace Assets.Code
         bool rightClickDown = false;
         public float scrollSpeed = 0.4f;
         public float socScrollSpeed = 0.1f;
+        public float lastAutoturn = 0;
 
         public void Update()
         {
@@ -22,8 +23,19 @@ namespace Assets.Code
             scrollKeys();
             scaling();
             hotkeys();
+            automatic();
         }
 
+        public void automatic()
+        {
+            if (world.map.automatic == false) { return; }
+
+            float dT = Time.time - lastAutoturn;
+            if ((dT > 1 && Input.GetKey(KeyCode.LeftControl)) || Input.GetKey(KeyCode.LeftAlt)){
+                world.bEndTurn();
+                lastAutoturn = Time.time;
+            }
+        }
 
         public void hotkeys()
         {

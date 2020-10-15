@@ -17,12 +17,68 @@ namespace Assets.Code
 
         public void turnTick()
         {
-            if (map.turn % 5 == 0) {
+            if (map.turn % 5 == 0)
+            {
                 checkInvestigators();
                 checkMerchants();
                 checkPaladins();
             }
+            if (map.turn % 16 == 0)
+            {
+                checkAutomatic();
+            }
         }
+
+        public void checkAutomatic()
+        {
+            if (map.automatic == false) { return; }
+            if (map.burnInComplete == false) { return; }
+
+            int targetDarks = 3;
+
+            int presentDarks = 0;
+            foreach (Unit u in map.units)
+            {
+                if (u is Unit_TesterDark)
+                {
+                    presentDarks += 1;
+                }
+            }
+
+            if (presentDarks < targetDarks)
+            {
+                World.log("Spawning tester dark at turn " + map.turn);
+                Location spawn = null;
+                foreach (Unit u in map.units)
+                {
+                    if (u is Unit_TesterDark)
+                    {
+                        spawn = u.location.getNeighbours()[0];
+                    }
+                }
+                if (spawn == null)
+                {
+                    spawn = map.locations[Eleven.random.Next(map.locations.Count)];
+                }
+
+                Unit agent = new Unit_TesterDark(spawn, map.soc_dark);
+
+                agent.person = new Person(map.soc_dark);
+                agent.person.state = Person.personState.enthralledAgent;
+                agent.person.unit = agent;
+                map.units.Add(agent);
+
+                Evidence ev = new Evidence(map.turn);
+                ev.pointsTo = agent;
+                ev.weight = 0.66;
+                agent.location.evidence.Add(ev);
+
+                agent.task = null;
+
+                GraphicalMap.panTo(spawn.hex.x, spawn.hex.y);
+            }
+        }
+
 
         public void checkPaladins() {
 
