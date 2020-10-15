@@ -6,6 +6,8 @@
 
 	Medium criticality:
 
+-International relationships lens
+
 -Agent power should be affected by difficulty
 
 -If you have no saves to load it reads "New text" on the scroll view
@@ -45,6 +47,8 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Typo in seeker flavour when beginning secret research
+-When combat kicks you from a region, your task gotta cancel
 
 -Army of dead HP off by two orders of mag
 -Recruit outlaws doesn't actually give evidence

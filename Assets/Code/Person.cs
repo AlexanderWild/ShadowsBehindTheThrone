@@ -45,13 +45,14 @@ namespace Assets.Code
         public Society rebellingFrom;
         public Unit unit;
         public Insanity madness;
+        public House house;
 
-        public Person(Society soc)
+        public Person(Society soc,House assignedHouse = null)
         {
             this.society = soc;
             index = World.staticMap.personIndexCount;
             World.staticMap.personIndexCount += 1;
-            World.staticMap.persons.Add(this);//I can't believe this awful structure is required, but it is, for serializing. No references to others
+            World.staticMap.persons.Add(this);//I can't believe this awful structure is required, but it is, for serializing. Not allowed references to others
             firstName = TextStore.getName(isMale);
             madness = new Insanity_Sane();
 
@@ -69,6 +70,12 @@ namespace Assets.Code
                 politics_militarism *= -1;
             }
 
+
+            if (assignedHouse == null)
+            {
+                assignedHouse = society.houses[Eleven.random.Next(society.houses.Count)];
+            }
+            house = assignedHouse;
 
             //Add permanent threats
             threat_enshadowedNobles = new ThreatItem(map, this);
@@ -275,6 +282,7 @@ namespace Assets.Code
         public Person getDirectSuperiorIfAny()
         {
             if (this == society.getSovreign()) { return null; }
+            if (this.title_land == null) { return society.getSovreign(); }
             //if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovreign(); }
             foreach (Title t in society.titles)
             {
@@ -678,7 +686,12 @@ namespace Assets.Code
             {
                 return "Mad " + getTitles() + " " + firstName;
             }
-            return getTitles() + " " + firstName;
+            string add = "";
+            if (house != null && society.socType.usesHouses())
+            {
+                add += " " + house.name;
+            }
+            return getTitles() + " " + firstName + add;
         }
 
         public RelObj getRelation(Person other)
@@ -812,6 +825,7 @@ namespace Assets.Code
         public Sprite getImageBack()
         {
             if (unit != null && unit.definesBackground()) { return unit.getPortraitBackground(); }
+            if (house != null) { return map.world.textureStore.layerBack[house.background]; }
             if (imgIndBack == -1)
             {
                 imgIndBack = Eleven.random.Next(map.world.textureStore.layerBack.Count);

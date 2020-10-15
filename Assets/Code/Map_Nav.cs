@@ -359,6 +359,7 @@ namespace Assets.Code
                         }
                         if (kickedTo != null)
                         {
+                            u2.task = null;
                             adjacentMoveTo(u2, kickedTo);
                             if (u2.isEnthralled())
                             {

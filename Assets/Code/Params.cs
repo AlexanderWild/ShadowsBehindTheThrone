@@ -152,6 +152,7 @@ namespace Assets.Code
         public double society_prestigeFromVotingFailure = 5;
         public double society_prestigeFromVotingSuccess = -5;
         public double society_dislikeFromFailedProposal = -15;
+        public double society_houseLiking = 15;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;

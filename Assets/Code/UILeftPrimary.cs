@@ -35,10 +35,6 @@ namespace Assets.Code
         public Text infiltrationText;
         public Text infiltrationVals;
         public Text securityDescText;
-        public Image profileBack;
-        public Image profileMid;
-        public Image profileFore;
-        public Image profileBorder;
         public Image titleTextDarkener;
         public Image bodyTextDarkener;
         public Image flag1;
@@ -62,6 +58,7 @@ namespace Assets.Code
         public Text socTypeDesc;
 
         public UILeftUnit uiUnit;
+        public UILeftPerson uiPerson;
 
         public Button votingButton;
         public Button powerButton;
@@ -217,32 +214,8 @@ namespace Assets.Code
 
         public void showPersonInfo(Person p)
         {
-            profileBack.enabled = true;
-            profileMid.enabled = true;
-            profileFore.enabled = true;
-            profileBorder.enabled = true;
-            //Done to unfuck the distortion of images which periodically occurs
-            profileBack.sprite = null;
-            profileMid.sprite = null;
-            profileFore.sprite = null;
-            profileBorder.sprite = null;
-            profileBack.sprite = p.getImageBack();
-            profileMid.sprite = p.getImageMid();
-            profileFore.sprite = p.getImageFore();
-            if (p.society.getSovreign() == p) { profileBorder.sprite = p.map.world.textureStore.slotKing; }
-            else if (p.titles.Count > 0) { profileBorder.sprite = p.map.world.textureStore.slotDuke; }
-            else { profileBorder.sprite = p.map.world.textureStore.slotCount; }
+            uiPerson.setTo(p);
 
-            personTitle.text = p.getFullName();
-            TitleLanded title = p.title_land;
-            if (title == null)
-            {
-                locText.text = "No Landed Title";
-            }
-            else
-            {
-                locText.text = "of " + title.settlement.name;
-            }
             string bodyText = "";
             if (p.getDirectSuperiorIfAny() != null)
             {
@@ -275,20 +248,6 @@ namespace Assets.Code
                 actionDesc.text = "\n\n" + p.action.getLong();
             }
 
-            Society soc = getSociety(GraphicalMap.selectedHex);
-            VoteSession vote = (soc != null) ? soc.voteSession : null;
-
-            if (vote != null)
-            {
-                bodyText += "\nVoting on: " + vote.issue.ToString();
-
-                VoteOption vo = p.getVote(vote);
-                bodyText += "\n\tto " + vo.info(vote.issue);
-            }
-            else
-            {
-                bodyText += "\nNot voting.";
-            }
 
             bodyText += "\n";
 
@@ -446,9 +405,7 @@ namespace Assets.Code
 
         public void setToEmpty()
         {
-            profileBack.enabled = false;
-            profileMid.enabled = false;
-            profileFore.enabled = false;
+            uiPerson.setToNull();
             personTitle.text = "No Person Selected";
             locText.text = "";
             personBody.text = "";

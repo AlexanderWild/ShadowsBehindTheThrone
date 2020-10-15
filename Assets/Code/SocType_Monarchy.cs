@@ -20,5 +20,18 @@ namespace Assets.Code
         {
             return false;
         }
+
+        /**
+         * We can have an arbitrary number of dukes, since we don't have elections, it won't get all shrivelly with constant elections
+         */
+        public override int getNDukesMax()
+        {
+            return 128;
+        }
+
+        public override bool usesHouses()
+        {
+            return true;
+        }
     }
 }

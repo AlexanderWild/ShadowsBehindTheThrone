@@ -24,6 +24,7 @@ namespace Assets.Code
         public List<KillOrder> killOrders = new List<KillOrder>();
         public List<Zeit> zeits = new List<Zeit>();
         public Location capital;
+        public List<House> houses = new List<House>();
 
         public int billsSinceLastSettlementAssignment;
         public int instabilityTurns;
@@ -56,6 +57,14 @@ namespace Assets.Code
             if (map.simplified)
             {
                 socType = new SocType_Monarchy();
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                House house = new House();
+                house.name = TextStore.getName(false);
+                house.background = Eleven.random.Next(World.self.textureStore.layerBack.Count);
+                houses.Add(house);
             }
         }
 
@@ -827,7 +836,7 @@ namespace Assets.Code
                 }
             }
 
-            if (titles.Count <= World.staticMap.param.society_maxDukes)
+            if (titles.Count <= socType.getNDukesMax())
             {
                 for (int i = 0; i < provCounts.Length; i++)
                 {

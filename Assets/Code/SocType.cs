@@ -11,5 +11,9 @@ namespace Assets.Code
         public abstract string getDesc();
 
         public abstract bool periodicElection();
+
+        public abstract int getNDukesMax();
+
+        public abstract bool usesHouses();
     }
 }

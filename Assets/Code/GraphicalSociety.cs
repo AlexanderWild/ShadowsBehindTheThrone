@@ -134,7 +134,7 @@ namespace Assets.Code
             foreach (Person p in activeSociety.people)
             {
                 GraphicalSlot ds = null;
-                if (p == ss || p.title_land == null)
+                if (p == ss )
                     continue;
 
                 Person sp = p.getDirectSuperiorIfAny();
@@ -172,7 +172,7 @@ namespace Assets.Code
             {
                 GraphicalSlot ds = pair.Key;
 
-                float radius = 2.0f*zoom;
+                float radius = (float)(2.0f*Math.Pow(zoom,1.4));
                 float angle  = 6.28f / n * i;
 
                 float x = Mathf.Cos(angle) * radius;
@@ -197,7 +197,7 @@ namespace Assets.Code
                     float y2 = Mathf.Sin(angle2) * radius2 + y;
 
                     ds2.gameObject.SetActive(true);
-                    ds2.gameObject.transform.localScale = originalScale * 0.75f;
+                    //ds2.gameObject.transform.localScale = originalScale * 0.75f;
                     ds2.connection = ds;
 
                     ds2.targetPosition = new Vector3(x2, y2, 0.0f);

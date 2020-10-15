@@ -23,5 +23,14 @@ namespace Assets.Code
         {
             return true;
         }
+
+        public override int getNDukesMax()
+        {
+            return World.staticMap.param.society_maxDukes;
+        }
+        public override bool usesHouses()
+        {
+            return true;
+        }
     }
 }

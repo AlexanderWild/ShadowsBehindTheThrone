@@ -48,6 +48,15 @@ namespace Assets.Code
             Person them = World.staticMap.persons[themIndex];
             double u = 0;
 
+            if (me.society.socType.usesHouses() && (me.house == them.house))
+            {
+                u += me.map.param.society_houseLiking;
+                if (reasons != null)
+                {
+                    reasons.Add(new ReasonMsg("Same House", me.map.param.society_houseLiking));
+                }
+            }
+
             if (them.madness is Insanity_Sane == false)
             {
                 u += me.map.param.insanity_relHit;
