@@ -56,6 +56,12 @@ namespace Assets.Code
                         unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsToPerson.getFullName(), MsgEvent.LEVEL_ORANGE, false);
                     }
 
+
+                    if (unit is Unit_Investigator)
+                    {
+                        Unit_Investigator inv = (Unit_Investigator)unit;
+                        inv.evidenceCarried.Add(ev);
+                    }
                     unit.location.evidence.Remove(ev);
                     unit.task = null;
 

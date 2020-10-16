@@ -35,6 +35,7 @@ namespace Assets.Code
         public Action action;
 
         public ThreatItem threat_enshadowedNobles;
+        public ThreatItem threat_agents;
 
         public double politics_militarism;
 
@@ -78,6 +79,11 @@ namespace Assets.Code
             house = assignedHouse;
 
             //Add permanent threats
+            threat_agents = new ThreatItem(map, this);
+            threat_agents.form = ThreatItem.formTypes.AGENTS;
+            threat_agents.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
+            threatEvaluations.Add(threat_agents);
+
             threat_enshadowedNobles = new ThreatItem(map, this);
             threat_enshadowedNobles.form = ThreatItem.formTypes.ENSHADOWED_NOBLES;
             threat_enshadowedNobles.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
@@ -496,6 +502,13 @@ namespace Assets.Code
                             item.reasons.Add(new ReasonMsg("Supicion of enshadowed nobles (+" + (int)(totalSus) + ")", totalSus));
                         }
                     }
+                    if (item.form == ThreatItem.formTypes.AGENTS)
+                    {
+                        if (this.state == personState.broken) { continue; }//Broken minded can't fear the darkness
+                        double mult = 1 - shadow;
+                        item.threat += mult * society.dread_agents_evidenceFound;
+                        item.reasons.Add(new ReasonMsg("Evidence found (+" + (int)(mult*society.dread_agents_evidenceFound) + ")",(mult*society.dread_agents_evidenceFound)));
+                    }
                 }
                 else
                 {
@@ -585,6 +598,12 @@ namespace Assets.Code
 
                                 item.reasons.Add(new ReasonMsg("They are at peace, non-offensive and have no suspected dark nobles (cap at 75)", 0));
                                 item.threat = 75;
+                            }
+                            else if (item.threat > 125 && soc.offensiveTarget != this.society)
+                            {
+
+                                item.reasons.Add(new ReasonMsg("We are not their offensive target (cap at 125)", 0));
+                                item.threat = 125;
                             }
                         }
                     }

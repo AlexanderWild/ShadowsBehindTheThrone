@@ -43,9 +43,13 @@ namespace Assets.Code
         public int data_nProvinceRulers;
         public List<Unit> enemies = new List<Unit>();
 
+        public double dread_agents_evidenceFound = 0;
         public int lastOffensiveTargetSetting;
 
         public SocType socType = new SocType_ElectiveMonarchy();
+
+        public HashSet<Evidence> evidenceSubmitted = new HashSet<Evidence>();
+        public int lastEvidenceSubmission = 0;
 
         public Society(Map map) : base(map)
         {
@@ -128,6 +132,9 @@ namespace Assets.Code
             {
                 turnsNotInOffensiveStance += 1;
             }
+
+            dread_agents_evidenceFound -= map.param.threat_agentFearDecayPerTurn;
+            if (dread_agents_evidenceFound < 0) { dread_agents_evidenceFound = 0; }
         }
 
         public void checkAssertions()

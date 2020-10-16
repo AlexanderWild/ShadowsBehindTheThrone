@@ -27,6 +27,23 @@ namespace Assets.Code
                 unit.task = new Task_Investigate();
                 return;
             }
+            if (unit is Unit_Investigator)
+            {
+                Unit_Investigator inv = (Unit_Investigator)unit;
+                if (inv.evidenceCarried.Count > 0)
+                {
+                    if (inv.location.soc != inv.society)
+                    {
+                        inv.task = new Task_GoToSocialGroup(inv.society);
+                        return;
+                    }
+                    else
+                    {
+                        inv.task = new Task_ShareSuspicions();
+                        return;
+                    }
+                }
+            }
             List<Location> neighbours = unit.location.getNeighbours();
 
             int c = 0;

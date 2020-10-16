@@ -10,6 +10,7 @@ namespace Assets.Code
         public int turnDropped = 0;
         public Unit assignedInvestigator;
         public int rumourCounter;
+        public int turnSubmitted;
 
         public Evidence(int turn)
         {

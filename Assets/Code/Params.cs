@@ -157,6 +157,8 @@ namespace Assets.Code
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;
         public double threat_temporaryDreadDecay = 0.97;
+        public double threat_evidencePresented = 25;
+        public double threat_agentFearDecayPerTurn = 2;
         public double victory_targetEnshadowmentAvrg = 0.75;
 
         public double dark_evilThreatMult = 2;

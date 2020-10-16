@@ -47,6 +47,33 @@ namespace Assets.Code
                     }
                 }
                 
+
+                if (unit is Unit_Investigator && unit.location.soc != null && unit.location.soc is Society)
+                {
+                    Unit_Investigator inv = (Unit_Investigator)unit;
+                    Society soc = (Society)inv.location.soc;
+                    bool submitted = false;
+                    foreach (Evidence ev in inv.evidenceCarried)
+                    {
+                        if (soc.evidenceSubmitted.Contains(ev) == false)
+                        {
+                            submitted = true;
+                            soc.evidenceSubmitted.Add(ev);
+                            soc.lastEvidenceSubmission = unit.location.map.turn;
+                            ev.turnSubmitted = unit.location.map.turn;
+
+                            double deltaFear = World.staticMap.param.threat_evidencePresented;
+                            if (soc.isDarkEmpire == false)
+                            {
+                                soc.dread_agents_evidenceFound += deltaFear;
+                            }
+                        }
+                    }
+                    if (submitted)
+                    {
+                        unit.location.map.addMessage(unit.getName() + " presents evidence to " + soc.getName(), MsgEvent.LEVEL_ORANGE, false);
+                    }
+                }
                 unit.task = null;
             }
         }

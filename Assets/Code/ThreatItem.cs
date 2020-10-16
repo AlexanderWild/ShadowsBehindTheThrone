@@ -14,7 +14,7 @@ namespace Assets.Code
         public double threat;
         public List<ReasonMsg> reasons = new List<ReasonMsg>();
 
-        public enum formTypes { NONE, HOSTILE_NATION,ENSHADOWED_NOBLES}
+        public enum formTypes { NONE, HOSTILE_NATION,ENSHADOWED_NOBLES, AGENTS }
         public formTypes form = formTypes.HOSTILE_NATION;
 
         public int responseCode = RESPONSE_MILITARY;
@@ -87,6 +87,10 @@ namespace Assets.Code
                 if (form == formTypes.ENSHADOWED_NOBLES)
                 {
                     return "Enshadowed Nobles";
+                }
+                if (form == formTypes.AGENTS)
+                {
+                    return "Dark Agents";
                 }
                 return "UNKNOWN";
             }else

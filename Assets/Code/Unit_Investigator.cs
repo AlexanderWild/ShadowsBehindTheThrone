@@ -15,7 +15,8 @@ namespace Assets.Code
         public Unit victim;
         public Location falseEvidenceDropLocation;
         public int victimUses = 0;
-        
+        public List<Evidence> evidenceCarried = new List<Evidence>();
+
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {
             maxHp = 3;
