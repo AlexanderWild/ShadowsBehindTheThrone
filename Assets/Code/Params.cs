@@ -326,7 +326,7 @@ namespace Assets.Code
         public int unit_socialiseAtCourtTime = 3;
         public int unit_socialiseAtCourtGain = 30;
         public int unit_pleadCaseTime = 3;
-        public int unit_infiltrateTime = 7;
+        public int unit_infiltrateTime = 6;
         public double unit_infiltrateAmount = 1.35;
         public double unit_divisorOffset = 2;
         public double unit_infiltrateEvidence = 0.35;
@@ -342,6 +342,7 @@ namespace Assets.Code
         public int unit_seeker_nCreatedSecrets = 7;
         public int unit_seeker_uncoverTime = 5;
         public double unit_seeker_libraryInfiltrationReq = 0.15;
+        public double unit_vamp_infiltrateAmount = 1.6;
         public double unit_seeker_uncoverEvidence = 0.2;
         public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 10;

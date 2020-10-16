@@ -147,6 +147,8 @@ namespace Assets.Code
                 apoptose = true;
             }
 
+            selectable.gameObject.SetActive(this.inner == GraphicalSociety.focus);
+
             if (apoptose)
             {
                 try

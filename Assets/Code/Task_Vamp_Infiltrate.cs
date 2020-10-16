@@ -19,7 +19,7 @@ namespace Assets.Code
 
         public static double getEffectiveness(Unit unit)
         {
-            double value = World.staticMap.param.unit_infiltrateAmount / (World.staticMap.param.unit_divisorOffset + unit.location.settlement.getSecurity(new List<ReasonMsg>()));
+            double value = World.staticMap.param.unit_vamp_infiltrateAmount / (World.staticMap.param.unit_divisorOffset + unit.location.settlement.getSecurity(new List<ReasonMsg>()));
             double liking = 0;
             if (unit.location.person() != null && unit.person != null)
             {

@@ -13,7 +13,7 @@ namespace Assets.Code
         bool leftClickDown = false;
         bool rightClickDown = false;
         public float scrollSpeed = 0.4f;
-        public float socScrollSpeed = 0.1f;
+        public float socScrollSpeed = 0.3f;
         public float lastAutoturn = 0;
 
         public void Update()

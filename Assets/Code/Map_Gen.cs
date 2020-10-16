@@ -236,39 +236,35 @@ namespace Assets.Code
             }
 
             //Assign all locations to provinces
-            foreach (Location loc in locations)
-            {
-                int i = loc.hex.x;
-                int j = loc.hex.y;
-                double minDist = -1;
-                foreach (Province p in provinces)
-                {
-                    //Provinces must map to either all land or all sea tiles
-                    if (landmass[p.coreHex.x][p.coreHex.y] != landmass[i][j]) { continue; }
+            assignProvinces();
 
-                    double dist = getDist(p.coreHex, grid[i][j]);
-                    if (minDist == -1 || dist < minDist)
+            //Try to break up huge land provinces
+            List<Province> newProvinces = new List<Province>();
+            foreach (Province p in provinces)
+            {
+                if (p.locations.Count >= 7)
+                {
+                    Location splitCapital = null;
+                    int c = 0;
+                    foreach (Location loc in p.locations)
                     {
-                        minDist = dist;
-                        grid[i][j].province = p;
+                        if (loc == p.capital) { continue; }
+                        c += 1;
+                        if (Eleven.random.Next(c) == 0)
+                        {
+                            splitCapital = loc;
+                        }
                     }
-                }
-                if (grid[i][j].location != null)
-                {
-                    grid[i][j].province.locations.Add(grid[i][j].location);
-                }
-                if (loc.province == null)
-                {
-                    loc.province = provinces[0];//Fallback
+                    Province np = new Province(splitCapital.hex);
+                    np.index = provinces.Count + newProvinces.Count;
+                    newProvinces.Add(np);
                 }
             }
-            //Hexes follow their parent loc
-            for (int i = 0; i < sx; i += 1)
+            if (newProvinces.Count > 0)
             {
-                for (int j = 0; j < sy; j += 1)
-                {
-                    grid[i][j].province = grid[i][j].territoryOf.hex.province;
-                }
+                World.log("Adding " + newProvinces.Count + " new provinces to break up excess sized ones");
+                provinces.AddRange(newProvinces);
+                assignProvinces();
             }
 
             foreach (Province p in provinces)
@@ -359,6 +355,49 @@ namespace Assets.Code
                         }
                     }
                     next.econTraits.Add(globalist.allEconTraits[minInd]);
+                }
+            }
+        }
+
+        private void assignProvinces()
+        {
+            foreach (Province p in provinces)
+            {
+                p.locations.Clear();
+            }
+
+            foreach (Location loc in locations)
+            {
+                int i = loc.hex.x;
+                int j = loc.hex.y;
+                double minDist = -1;
+                foreach (Province p in provinces)
+                {
+                    //Provinces must map to either all land or all sea tiles
+                    if (landmass[p.coreHex.x][p.coreHex.y] != landmass[i][j]) { continue; }
+
+                    double dist = getDist(p.coreHex, grid[i][j]);
+                    if (minDist == -1 || dist < minDist)
+                    {
+                        minDist = dist;
+                        grid[i][j].province = p;
+                    }
+                }
+                if (grid[i][j].location != null)
+                {
+                    grid[i][j].province.locations.Add(grid[i][j].location);
+                }
+                if (loc.province == null)
+                {
+                    loc.province = provinces[0];//Fallback
+                }
+            }
+            //Hexes follow their parent loc
+            for (int i = 0; i < sx; i += 1)
+            {
+                for (int j = 0; j < sy; j += 1)
+                {
+                    grid[i][j].province = grid[i][j].territoryOf.hex.province;
                 }
             }
         }
