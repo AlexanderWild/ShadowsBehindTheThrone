@@ -108,6 +108,7 @@ namespace Assets.Code
         public double utility_prestigeMultForTitle = 1.5;
         public double utility_dismissFromCourt = 2;
         public double utility_fromThreat = 1.8;
+        public double utility_greatestThreatDelta = 25;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;
@@ -332,7 +333,7 @@ namespace Assets.Code
         public double unit_infiltrateAmount = 1.35;
         public double unit_divisorOffset = 2;
         public double unit_infiltrateEvidence = 0.35;
-        public int unit_spreadShadowTime = 8;
+        public int unit_spreadShadowTime = 5;
         public double unit_spreadShadowAmount = 0.6;
         public double unit_spreadShadowEvidence = 0.5; 
         public int units_maxEnthralled = 2;

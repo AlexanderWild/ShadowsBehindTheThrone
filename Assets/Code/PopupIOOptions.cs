@@ -48,6 +48,7 @@ namespace Assets.Code
                     map.param.option_edgeScroll = int.Parse(split[0]);
                     map.world.audioStore.effectVolume = int.Parse(split[1]);
                     World.autosavePeriod = int.Parse(split[2]);
+                    World.autodismissAutosave = int.Parse(split[3]);
                 }
             }catch(Exception e)
             {
@@ -59,14 +60,19 @@ namespace Assets.Code
         {
             ui.world.audioStore.playClickInfo();
 
-            string stateStr = map.param.option_edgeScroll + "," + ui.world.audioStore.effectVolume + "," + World.autosavePeriod;
+            saveState();
+
+            ui.removeBlocker(this.gameObject);
+        }
+
+        public static void saveState()
+        {
+            string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod + "," + World.autodismissAutosave;
             if (File.Exists("settings.txt"))
             {
                 File.Delete("settings.txt");
             }
             File.WriteAllText("settings.txt", stateStr);
-
-            ui.removeBlocker(this.gameObject);
         }
         public void autosaveToggle()
         {

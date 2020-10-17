@@ -12,6 +12,7 @@ namespace Assets.Code
     public class PopupAutosaveDialog: MonoBehaviour
     {
         public Button bDismiss;
+        public Button bAutoDismiss;
         public UIMaster ui;
         public Map map;
         public Text text;
@@ -71,10 +72,20 @@ namespace Assets.Code
                 }
                 hasSaved = true;
             }
+            else if (World.autodismissAutosave == 1)
+            {
+                this.dismiss();
+            }
         }
 
         public void dismiss()
         {
+            ui.removeBlocker(this.gameObject);
+        }
+        public void autoDismiss()
+        {
+            World.autodismissAutosave = 1;
+            PopupIOOptions.saveState();
             ui.removeBlocker(this.gameObject);
         }
     }

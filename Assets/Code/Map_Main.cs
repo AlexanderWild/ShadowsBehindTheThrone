@@ -30,7 +30,7 @@ namespace Assets.Code
         public double worldPanic;
         public int personIndexCount = 0;
         public EventManager eventManager;
-        public bool simplified = true;
+        public bool simplified = false;
         public bool agentsOnly = true;
         public bool automatic = false;
 

@@ -52,11 +52,13 @@ namespace Assets.Code
 
                 if (defUtility < -50) { defUtility = -50; }
             }
+            ThreatItem greatestThreat = voter.getGreatestThreat();
             double offUtility = 0;
             double offUtilityStr = 0;
             double offUtilityPersonality = 0;
             double offUtilityTerritory = 0;
             double offUtilityInstab = 0;
+            double offGreatestThreat = 0;
             if (voter.society.offensiveTarget != null)
             {
                 //Negative if the offensive target is stronger
@@ -91,6 +93,19 @@ namespace Assets.Code
                     //If stab < 0 it's less than off
                     offUtilityInstab = offUtilityInstab * (society.data_societalStability-1);
                 }
+
+                if (greatestThreat != null)
+                {
+                    if (greatestThreat.group != null && greatestThreat.group.currentMilitary < voter.society.currentMilitary)
+                    {
+                        offGreatestThreat += World.staticMap.param.utility_greatestThreatDelta;
+                        if (option.index == 1)
+                        {
+                            msgs.Add(new ReasonMsg("Our greatest threat (" + greatestThreat.group.getName() + ") is weaker than us, we must attack", offGreatestThreat));
+                        }
+                    }
+                }
+                offUtility += offGreatestThreat;
                 offUtility += offUtilityStr;
                 offUtility += offUtilityPersonality;
                 offUtility += offUtilityTerritory;

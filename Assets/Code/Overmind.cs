@@ -47,8 +47,14 @@ namespace Assets.Code
 
         public void addDefaultAbilities()
         {
+            World.log("Agents Only: " + map.agentsOnly);
             if (map.agentsOnly == false)
             {
+                World.log("ENTHRALLING STATUS: " + map.param.overmind_allowDirectEnthralling);
+                if (map.param.overmind_allowDirectEnthralling == 1)
+                {
+                    powers.Add(new Ab_Enth_Enthrall());
+                }
                 powers.Add(new Ab_Enth_MiliaryAid());
                 powers.Add(new Ab_Enth_TrustingFool());
                 powers.Add(new Ab_Enth_Enshadow());

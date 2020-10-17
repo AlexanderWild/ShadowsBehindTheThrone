@@ -620,6 +620,7 @@ namespace Assets.Code
             specific.ui = ui;
             specific.text.text = "Saving game...";
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bAutoDismiss.onClick.AddListener(delegate { specific.autoDismiss(); });
             ui.addBlocker(specific.gameObject);
         }
         public void popSaveName()

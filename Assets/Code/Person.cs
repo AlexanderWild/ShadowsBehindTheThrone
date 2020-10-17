@@ -599,10 +599,10 @@ namespace Assets.Code
                                 item.reasons.Add(new ReasonMsg("They are at peace, non-offensive and have no suspected dark nobles (cap at 75)", 0));
                                 item.threat = 75;
                             }
-                            else if (item.threat > 125 && soc.offensiveTarget != this.society)
+                            else if (item.threat > 125 && soc.offensiveTarget != this.society && susThreat == 0)
                             {
 
-                                item.reasons.Add(new ReasonMsg("We are not their offensive target (cap at 125)", 0));
+                                item.reasons.Add(new ReasonMsg("We are not their offensive target and no suspected dark nobles (cap at 125)", 0));
                                 item.threat = 125;
                             }
                         }

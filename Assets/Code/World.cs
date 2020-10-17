@@ -41,6 +41,7 @@ namespace Assets.Code
 
         public static int autosaveCount = 5;
         public static int autosavePeriod = 10;
+        public static int autodismissAutosave = 0;
 
         public List<God> potentialGods = new List<God>();
         public List<God> chosenGods = new List<God>();
@@ -181,6 +182,10 @@ namespace Assets.Code
                 {
                     map.param.usePaladins = 1;
                 }
+            }
+            else
+            {
+                map.agentsOnly = false;
             }
             if (param.overmind_allowDirectEnthralling == 0) { param.flashEnthrallables = false; }
 

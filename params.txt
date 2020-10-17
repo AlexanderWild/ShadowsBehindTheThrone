@@ -85,6 +85,7 @@ utility_landedTitleAssignBaseline: 75
 utility_prestigeMultForTitle: 1.5
 utility_dismissFromCourt: 2
 utility_fromThreat: 1.8
+utility_greatestThreatDelta: 25
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -126,9 +127,12 @@ society_pExpandIntoEmpty: 0.1
 society_prestigeFromVotingFailure: 5
 society_prestigeFromVotingSuccess: -5
 society_dislikeFromFailedProposal: -15
+society_houseLiking: 15
 temporaryThreatDecay: 0.95
 threat_takeLocation: 24
 threat_temporaryDreadDecay: 0.97
+threat_evidencePresented: 25
+threat_agentFearDecayPerTurn: 2
 victory_targetEnshadowmentAvrg: 0.75
 dark_evilThreatMult: 2
 dark_fleshThreatMult: 2
@@ -286,11 +290,11 @@ unit_shareSuspicionTime: 1
 unit_socialiseAtCourtTime: 3
 unit_socialiseAtCourtGain: 30
 unit_pleadCaseTime: 3
-unit_infiltrateTime: 7
+unit_infiltrateTime: 6
 unit_infiltrateAmount: 1.35
 unit_divisorOffset: 2
 unit_infiltrateEvidence: 0.35
-unit_spreadShadowTime: 8
+unit_spreadShadowTime: 5
 unit_spreadShadowAmount: 0.6
 unit_spreadShadowEvidence: 0.5
 units_maxEnthralled: 2
@@ -301,6 +305,7 @@ unit_seeker_nReqSecrets: 12
 unit_seeker_nCreatedSecrets: 7
 unit_seeker_uncoverTime: 5
 unit_seeker_libraryInfiltrationReq: 0.15
+unit_vamp_infiltrateAmount: 1.6
 unit_seeker_uncoverEvidence: 0.2
 unit_doctor_legalInfiltrationReq: 0.1
 unit_doctor_lootBodiesAmount: 10

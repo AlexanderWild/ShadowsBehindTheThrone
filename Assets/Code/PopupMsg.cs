@@ -13,7 +13,6 @@ namespace Assets.Code
         public Button bDismiss;
         public UIMaster ui;
 
-
         public void dismiss()
         {
             ui.removeBlocker(this.gameObject);
