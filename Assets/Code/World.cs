@@ -171,6 +171,7 @@ namespace Assets.Code
             GraphicalMap.map = map;
             GraphicalMap.world = this;
 
+            map.seed = opts.currentSeed;
             map.automatic = automatic;
 
             if (opts.useSimplified)

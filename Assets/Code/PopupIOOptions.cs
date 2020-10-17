@@ -18,12 +18,14 @@ namespace Assets.Code
         public Text mouseEdgeText;
         public Text soundEffectText;
         public Text autosaveText;
+        public Text seedString;
 
         public void Update()
         {
             mouseEdgeText.text = map.param.option_edgeScroll == 1 ? "On" : "Off";
             soundEffectText.text = ui.world.audioStore.effectVolume == 0 ? "Off" : "On";
             autosaveText.text = World.autosavePeriod == -1 ? "Off" : "On";
+            seedString.text = "Game Seed: " + map.seed;
         }
 
         public void toggleEdgeScroll()

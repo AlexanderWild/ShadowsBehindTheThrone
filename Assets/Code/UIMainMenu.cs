@@ -11,6 +11,7 @@ namespace Assets.Code
     {
         public Button continueButton;
         public Button saveButton;
+        public Button startStreamlinedButton;
         public Button startButton;
         public Text generateText;
         public World world;
@@ -19,6 +20,7 @@ namespace Assets.Code
         {
             continueButton.gameObject.SetActive(world.map != null);
             saveButton.gameObject.SetActive(world.map != null);
+            startStreamlinedButton.gameObject.SetActive(world.map == null);
             startButton.gameObject.SetActive(world.map == null);
         }
     }
