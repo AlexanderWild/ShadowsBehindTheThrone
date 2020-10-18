@@ -238,33 +238,40 @@ namespace Assets.Code
             //Assign all locations to provinces
             assignProvinces();
 
-            //Try to break up huge land provinces
-            List<Province> newProvinces = new List<Province>();
-            foreach (Province p in provinces)
+            for (int splitRound = 0; splitRound < 0; splitRound++)
             {
-                if (p.locations.Count >= 7)
+                //Try to break up huge land provinces
+                List<Province> newProvinces = new List<Province>();
+                foreach (Province p in provinces)
                 {
-                    Location splitCapital = null;
-                    int c = 0;
-                    foreach (Location loc in p.locations)
+                    if (p.locations.Count >= 7)
                     {
-                        if (loc == p.capital) { continue; }
-                        c += 1;
-                        if (Eleven.random.Next(c) == 0)
+                        Location splitCapital = null;
+                        int c = 0;
+                        foreach (Location loc in p.locations)
                         {
-                            splitCapital = loc;
+                            if (loc == p.capital) { continue; }
+                            c += 1;
+                            if (Eleven.random.Next(c) == 0)
+                            {
+                                splitCapital = loc;
+                            }
                         }
+                        Province np = new Province(splitCapital.hex);
+                        np.index = provinces.Count + newProvinces.Count;
+                        newProvinces.Add(np);
                     }
-                    Province np = new Province(splitCapital.hex);
-                    np.index = provinces.Count + newProvinces.Count;
-                    newProvinces.Add(np);
                 }
-            }
-            if (newProvinces.Count > 0)
-            {
-                World.log("Adding " + newProvinces.Count + " new provinces to break up excess sized ones");
-                provinces.AddRange(newProvinces);
-                assignProvinces();
+                if (newProvinces.Count > 0)
+                {
+                    World.log("Adding " + newProvinces.Count + " new provinces to break up excess sized ones. Round " + splitRound);
+                    provinces.AddRange(newProvinces);
+                    assignProvinces();
+                }
+                else
+                {
+                    break;
+                }
             }
 
             foreach (Province p in provinces)

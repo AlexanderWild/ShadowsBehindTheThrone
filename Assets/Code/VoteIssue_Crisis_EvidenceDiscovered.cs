@@ -14,6 +14,7 @@ namespace Assets.Code
         public static int NO_RESPONSE = 2;
         public static int INVESTIGATOR_HOSTILITY = 3;
         public static int EXPELL_ALL_FOREIGN_AGENTS = 4;
+        public static int LOCKDOWN_PROVINCE = 5;
 
         public VoteIssue_Crisis_EvidenceDiscovered(Society soc,Person proposer,List<Evidence> evidence) : base(soc,proposer)
         {
@@ -36,12 +37,9 @@ namespace Assets.Code
             double u = option.getBaseUtility(p);
 
             double concernLevel = p.threat_agents.threat;//curr 0 to 200
-            concernLevel += 200*p.awareness;//0 to 400
+            concernLevel += (100*p.awareness) + (100*p.map.worldPanic);//0 to 400
             concernLevel /= 4;
-            if (concernLevel-20 > p.map.worldPanic * 100)
-            {
-                concernLevel = (p.map.worldPanic*100) + 20;
-            }
+            concernLevel = Math.Min(concernLevel,(p.map.worldPanic*100) + 20);
 
             concernLevel *= (1 - p.shadow);
             if (p.state == Person.personState.enthralled || p.state == Person.personState.broken) { concernLevel = 0; }
@@ -53,7 +51,7 @@ namespace Assets.Code
             if (option.index == DEFEND_PROVINCE)
             {
                 responseLevelMin = 10;
-                responseLevelMax = 50;
+                responseLevelMax = 100;
 
                 int evidenceFound = 0;
                 foreach (Evidence ev in foundEvidence)
@@ -79,12 +77,11 @@ namespace Assets.Code
                 string add = "";
                 msgs.Add(new ReasonMsg("Liking for nobles in province" + add, localU));
                 u += localU;
-
             }
             if (option.index == NATIONWIDE_SECURITY)
             {
                 responseLevelMin = 10;
-                responseLevelMax = 50;
+                responseLevelMax = 100;
 
                 double localU = World.staticMap.param.utility_evidenceResonseBaseline * (concernLevel / 100);
                 msgs.Add(new ReasonMsg("Base Desirability", localU));
@@ -108,15 +105,6 @@ namespace Assets.Code
                     u += localU;
                 }
             }
-            if (option.index == INVESTIGATOR_HOSTILITY)
-            {
-                responseLevelMin = 25;
-                responseLevelMax = 100;
-
-                double localU = World.staticMap.param.utility_evidenceResonseBaseline * (concernLevel/100);
-                msgs.Add(new ReasonMsg("Base Desirability", localU));
-                u += localU;
-            }
 
             if (option.index == EXPELL_ALL_FOREIGN_AGENTS)
             {
@@ -138,10 +126,6 @@ namespace Assets.Code
                     u += concernLevel;
                 }
             }
-
-            -reset all infiltration levels in provinces
-
-            -promote knight
 
             if (concernLevel > responseLevelMax)
             {
