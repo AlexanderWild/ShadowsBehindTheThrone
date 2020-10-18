@@ -49,6 +49,8 @@ namespace Assets.Code
 
         public void changeLikingForVotes(VoteOption option,VoteIssue issue)
         {
+            if (issue.options.Count < 2) { return; }//No reason to hate someone for voting for the only permitted option
+
             //Everyone affected/concerned about the vote now changes their opinion of all the voters for the winning option
             //depending on how much they care and how much they were affected
             foreach (Person p in society.people)
@@ -71,6 +73,8 @@ namespace Assets.Code
 
         public double getLikingDelta(Person p,VoteOption option,VoteIssue issue)
         {
+            if (issue.options.Count < 2) { return 0; }
+
             //Special case voting
             if (issue is VoteIssue_AssignTitle)
             {

@@ -30,6 +30,7 @@ namespace Assets.Code
         public override double computeUtility(Person voter, VoteOption option,List<ReasonMsg> msgs)
         {
             double u = option.getBaseUtility(voter);
+            ThreatItem greatestThreat = voter.getGreatestThreat();
 
 
             double ourStr = 1 + (voter.society.currentMilitary + (voter.society.maxMilitary / 2));
@@ -45,14 +46,27 @@ namespace Assets.Code
             }
 
             double defUtility = 0;
+            double defGreatestThreat = 0;
             if (voter.society.defensiveTarget != null)
             {
                 //Negative if we are stronger than the one we fear
                 defUtility += (defStr - ourStr) / (ourStr + defStr)*voter.map.param.utility_militaryTargetRelStrengthDefensive;
 
                 if (defUtility < -50) { defUtility = -50; }
+
+                if (greatestThreat != null)
+                {
+                    if (greatestThreat.group != null && greatestThreat.group.currentMilitary > voter.society.currentMilitary)
+                    {
+                        defGreatestThreat = World.staticMap.param.utility_greatestThreatDelta;
+                        defUtility += defGreatestThreat;
+                        if (option.index == 0)
+                        {
+                            msgs.Add(new ReasonMsg("Our greatest threat (" + greatestThreat.group.getName() + ") is stronger than us, we must defend", defGreatestThreat));
+                        }
+                    }
+                }
             }
-            ThreatItem greatestThreat = voter.getGreatestThreat();
             double offUtility = 0;
             double offUtilityStr = 0;
             double offUtilityPersonality = 0;
@@ -116,6 +130,19 @@ namespace Assets.Code
             if (society.data_societalStability < 0.66)
             {
                 introUtilityStability  = - (society.data_societalStability - 1);//0 if stability is 1, increasing to 1 if civil war is imminent, to 2 if every single person is a traitor
+            }
+            double introGreatestThreat = 0;
+            if (greatestThreat != null)
+            {
+                if (greatestThreat.responseCode == ThreatItem.RESPONSE_DARKNESSWITHIN)
+                {
+                    introGreatestThreat = World.staticMap.param.utility_greatestThreatDelta;
+                    introUtility += introGreatestThreat;
+                    if (option.index == 2)
+                    {
+                        msgs.Add(new ReasonMsg("Our greatest threat (" + greatestThreat.getTitle() + ") requires internal security", introGreatestThreat));
+                    }
+                }
             }
             introUtilityStability *= voter.map.param.utility_introversionFromInstability;
             double introFromInnerThreat = voter.threat_enshadowedNobles.threat*voter.map.param.utility_introversionFromSuspicion;

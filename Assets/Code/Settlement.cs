@@ -268,7 +268,18 @@ namespace Assets.Code
                     security += 1;
                     reasons.Add(new ReasonMsg("Army in garrison", 1));
                 }
+
+                foreach (Property pr in location.properties)
+                {
+                    if (pr.proto.securityIncrease != 0)
+                    {
+                        security += pr.proto.securityIncrease;
+                        reasons.Add(new ReasonMsg(pr.proto.name,pr.proto.securityIncrease));
+                    }
+                }
             }
+
+            
             
             return security;
         }

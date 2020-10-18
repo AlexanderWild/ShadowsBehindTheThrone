@@ -52,11 +52,11 @@ relObj_defaultLiking: 0
 relObj_decayRate: 0.97
 combat_prestigeLossFromConquest: 0
 combat_thresholdAttackStrength: 0.25
-combat_lethality: 0.5
+combat_lethality: 0.3
 combat_takeLandThreshold: 1.25
 combat_maxMilitaryCapExponent: 0.82
 combat_defensivePostureDmgMult: 0.666
-war_defaultLength: 12
+war_defaultLength: 16
 minInformationAvailability: 0.2
 utility_econEffect: 0.75
 utility_econEffectOther: 0.05
@@ -86,6 +86,10 @@ utility_prestigeMultForTitle: 1.5
 utility_dismissFromCourt: 2
 utility_fromThreat: 1.8
 utility_greatestThreatDelta: 25
+utility_defendEvidenceProvince: 20
+utility_agentDefendProvinceLikingMult: 0.2
+utility_defendHomelandVSAgents: 20
+utility_extremeismScaling: 2
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -128,6 +132,9 @@ society_prestigeFromVotingFailure: 5
 society_prestigeFromVotingSuccess: -5
 society_dislikeFromFailedProposal: -15
 society_houseLiking: 15
+society_securityBuffDuration: 12
+society_securityBuffMajor: 4
+society_securityBuffMinor: 1
 temporaryThreatDecay: 0.95
 threat_takeLocation: 24
 threat_temporaryDreadDecay: 0.97

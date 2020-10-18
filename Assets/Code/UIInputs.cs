@@ -31,7 +31,7 @@ namespace Assets.Code
             if (world.map.automatic == false) { return; }
 
             float dT = Time.time - lastAutoturn;
-            if ((dT > 1 && Input.GetKey(KeyCode.LeftControl)) || Input.GetKey(KeyCode.LeftAlt)){
+            if ((dT > 0.5 && Input.GetKey(KeyCode.LeftControl)) || Input.GetKey(KeyCode.LeftAlt)){
                 world.bEndTurn();
                 lastAutoturn = Time.time;
             }

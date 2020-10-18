@@ -73,12 +73,12 @@ namespace Assets.Code
 
         public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
         public double combat_thresholdAttackStrength = 0.25;
-        public double combat_lethality = 0.5;//How much of an army is destroyed in a battle at maximum roll against an equivalent force
+        public double combat_lethality = 0.3;//How much of an army is destroyed in a battle at maximum roll against an equivalent force
         public double combat_takeLandThreshold = 1.25;//How much over their strength do you have to be to take some land
         public double combat_maxMilitaryCapExponent = 0.82;//Used to reduce the power of larger nations
         public double combat_defensivePostureDmgMult = 0.666;
 
-        public int war_defaultLength = 12;
+        public int war_defaultLength = 16;
         public double minInformationAvailability = 0.2;
 
         public double utility_econEffect = 0.75;
@@ -109,6 +109,11 @@ namespace Assets.Code
         public double utility_dismissFromCourt = 2;
         public double utility_fromThreat = 1.8;
         public double utility_greatestThreatDelta = 25;
+        public double utility_defendEvidenceProvince = 20;
+        public double utility_agentDefendProvinceLikingMult = 0.2;
+        public double utility_defendHomelandVSAgents = 20;
+        public double utility_evidenceResonseBaseline = 30;
+        public double utility_extremeismScaling = 2;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;
@@ -154,6 +159,9 @@ namespace Assets.Code
         public double society_prestigeFromVotingSuccess = -5;
         public double society_dislikeFromFailedProposal = -15;
         public double society_houseLiking = 15;
+        public double society_securityBuffDuration = 12;
+        public int society_securityBuffMajor = 4;
+        public int society_securityBuffMinor = 1;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;

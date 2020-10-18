@@ -70,10 +70,6 @@ namespace Assets.Code
             return world.textureStore.unit_paladin;
         }
 
-        public override string getName()
-        {
-            return "Paladin";
-        }
 
         public override bool hasSpecialInfo()
         {

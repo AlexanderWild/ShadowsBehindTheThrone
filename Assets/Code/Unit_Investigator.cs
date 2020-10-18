@@ -17,6 +17,9 @@ namespace Assets.Code
         public int victimUses = 0;
         public List<Evidence> evidenceCarried = new List<Evidence>();
 
+        public enum unitState { basic,knight,paladin };
+        public unitState state = unitState.basic;
+
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {
             maxHp = 3;
@@ -43,6 +46,17 @@ namespace Assets.Code
 
         public override void turnTickAI(Map map)
         {
+            foreach (Evidence ev in evidenceCarried)
+            {
+                if (ev.pointsTo != null && ev.pointsTo != this)
+                {
+                    if (hostility.Contains(ev.pointsTo) == false)
+                    {
+                        hostility.Add(ev.pointsTo);
+                    }
+                }
+            }
+
             if (this.location.soc == society)
             {
                 sinceHome = 0;
@@ -108,16 +122,28 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
+            if (state == unitState.knight)
+            {
+                return world.textureStore.unit_lookingGlass;
+            }
             return world.textureStore.unit_lookingGlass;
         }
 
         public override string getTitleM()
         {
-            return "Investigator";
+            if (state == unitState.knight)
+            {
+                return "Knight";
+            }
+                return "Investigator";
         }
 
         public override string getTitleF()
         {
+            if (state == unitState.knight)
+            {
+                return "Knight";
+            }
             return "Investigator";
         }
 
@@ -145,12 +171,16 @@ namespace Assets.Code
 
         public override string specialInfoLong()
         {
-            return "The infiltrator can accuse another agent of being in league with the darkness. This will possibly get them condemned by " +
+            return "Player-owned investigators can accuse another agent of being in league with the darkness. This will possibly get them condemned by " +
                 "the society, and can reduce the risk of their own accusations being believed (to prevent an investigator with evidence against you being effective)";
         }
 
         public override string getDesc()
         {
+            if (state == unitState.knight)
+            {
+                return "Knights are improved investigators, who can find evidence, and are automatically hostile to those the evidence points to.";
+            }
             return "Investigators are agents who wander near their home location searching for evidence of dark powers. They can analyse evidence and recognise both enthralled agents and enthralled nobles.";
         }
     }

@@ -47,8 +47,13 @@ namespace Assets.Code
 
             VoteIssue issue;
 
+
+            //Check for evidence submission crisis
+            issue = checkForCrises();
+            if (issue != null) { return issue; }
+
             //Unlanded titles can be distributed
-            //Assignment of sovreign takes priority over any other voting, in the minds of the lords and ladies
+            //Assignment of sovreign takes priority over any other voting except crises, in the minds of the lords and ladies
             foreach (Title t in society.titles)
             {
                 //Can assign an unassigned title, or hold routine elections
@@ -564,6 +569,106 @@ namespace Assets.Code
                 return forcedVoteOption;
             }
             return bestChoice;
+        }
+
+        private VoteIssue checkForCrises()
+        {
+            if (map.simplified) { return null; }
+
+            VoteIssue replyIssue = null;
+            int c = 0;
+
+            if (society.lastEvidenceSubmission > society.lastEvidenceResponse)
+            {
+                List<Evidence> unprocessedEvidence = new List<Evidence>();
+                foreach (Evidence ev in society.evidenceSubmitted)
+                {
+                    if (society.handledEvidence.Contains(ev)) { continue; }
+                    unprocessedEvidence.Add(ev);
+                }
+
+
+                VoteIssue_Crisis_EvidenceDiscovered issue = new VoteIssue_Crisis_EvidenceDiscovered(society, this, unprocessedEvidence);
+
+                //Every province (even those unaffected) can have its security increased (egotism influenced)
+                HashSet<Province> provinces = new HashSet<Province>();
+                bool hasRaisedSecurity = false;
+                foreach (Location loc in map.locations)
+                {
+                    if (loc.soc == this.society) {
+                        provinces.Add(loc.province);
+
+                        foreach (Property pr in loc.properties)
+                        {
+                            if (pr.proto is Pr_MajorSecurityBoost || pr.proto is Pr_MinorSecurityBoost)
+                            {
+                                hasRaisedSecurity = true;
+                            }
+                        }
+                    }
+                }
+                VoteOption opt;
+                if (!hasRaisedSecurity)
+                {
+                    foreach (Province prv in provinces)
+                    {
+                        opt = new VoteOption();
+                        opt.province = prv;
+                        opt.index = VoteIssue_Crisis_EvidenceDiscovered.DEFEND_PROVINCE;
+                        issue.options.Add(opt);
+                    }
+
+                    opt = new VoteOption();
+                    opt.index = VoteIssue_Crisis_EvidenceDiscovered.NATIONWIDE_SECURITY;
+                    issue.options.Add(opt);
+                }
+
+                opt = new VoteOption();
+                opt.index = VoteIssue_Crisis_EvidenceDiscovered.NO_RESPONSE;
+                issue.options.Add(opt);
+
+
+                bool hostilityPossible = false;
+                foreach (Evidence ev in unprocessedEvidence)
+                {
+                    World.log("Evidence. Discovered by " + ev.discoveredBy.getName() + " points to " + ev.pointsTo.getName() + " discSoc " + ev.discoveredBy.society.getName() + " us " + society.getName());
+                    if (ev.discoveredBy != null && ev.pointsTo != null && ev.discoveredBy.society == society)
+                    {
+                        if (ev.discoveredBy.hostileTo(ev.pointsTo)) { continue; }
+                        hostilityPossible = true;
+                    }
+                }
+                if (hostilityPossible)
+                {
+                    opt = new VoteOption();
+                    opt.index = VoteIssue_Crisis_EvidenceDiscovered.INVESTIGATOR_HOSTILITY;
+                    issue.options.Add(opt);
+                }
+
+                bool existEnemies = false;
+                foreach (Unit u in map.units)
+                {
+                    if (society.enemies.Contains(u) == false && u.society != society)
+                    {
+                        existEnemies = true;
+                    }
+                }
+                if (existEnemies)
+                {
+                    opt = new VoteOption();
+                    opt.index = VoteIssue_Crisis_EvidenceDiscovered.EXPELL_ALL_FOREIGN_AGENTS;
+                    issue.options.Add(opt);
+                }
+
+                //Decide if this is the crisis you're gonna deal with right now
+                c += 1;
+                if (Eleven.random.Next(c) == 0)
+                {
+                    replyIssue = issue;
+                }
+            }
+
+            return replyIssue;
         }
     }
 

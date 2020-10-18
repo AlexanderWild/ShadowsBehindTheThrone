@@ -61,7 +61,9 @@ namespace Assets.Code
                     {
                         Unit_Investigator inv = (Unit_Investigator)unit;
                         inv.evidenceCarried.Add(ev);
+                        ev.discoveredBy = inv;
                     }
+                    ev.locationFound = unit.location;
                     unit.location.evidence.Remove(ev);
                     unit.task = null;
 

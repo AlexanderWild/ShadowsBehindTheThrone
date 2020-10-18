@@ -49,7 +49,9 @@ namespace Assets.Code
         public SocType socType = new SocType_ElectiveMonarchy();
 
         public HashSet<Evidence> evidenceSubmitted = new HashSet<Evidence>();
+        public HashSet<Evidence> handledEvidence = new HashSet<Evidence>();
         public int lastEvidenceSubmission = 0;
+        public int lastEvidenceResponse = 0;
 
         public Society(Map map) : base(map)
         {

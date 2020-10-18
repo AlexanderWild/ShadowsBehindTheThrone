@@ -11,6 +11,8 @@ namespace Assets.Code
         public Unit assignedInvestigator;
         public int rumourCounter;
         public int turnSubmitted;
+        public Location locationFound;
+        public Unit_Investigator discoveredBy;
 
         public Evidence(int turn)
         {

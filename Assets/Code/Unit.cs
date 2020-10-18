@@ -35,7 +35,10 @@ namespace Assets.Code
 
         public virtual void turnTick(Map map)
         {
-            movesTaken = 0;
+            if (task == null || (task is Task_Disrupted == false))
+            {
+                movesTaken = 0;
+            }
             if (hp == 0)
             {
                 if (map.units.Contains(this)) { die(map, "Death of unknown cause."); }

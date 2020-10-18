@@ -17,6 +17,7 @@ namespace Assets.Code
 
         public double milCapAdd;
         public double informationAvailabilityMult = 1;
+        public int securityIncrease = 0;
 
         public Property_Prototype(Map map,string name)
         {
@@ -63,6 +64,14 @@ namespace Assets.Code
             map.globalist.propertyMap.Add(proto.name, proto);
 
             proto = new Pr_ForgottenSecret(map, "Forgotten Secret");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_MajorSecurityBoost(map, "Major Security Boost");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_MinorSecurityBoost(map, "Minor Security Boost");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
         }

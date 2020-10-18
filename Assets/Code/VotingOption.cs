@@ -13,6 +13,7 @@ namespace Assets.Code
         public Person person;
         public Location location;
         public SocialGroup group;
+        public Province province;
         public EconTrait econ_from;
         public EconTrait econ_to;
         public int index = -1;//For stuff which doesn't have a discrete target, such as "Declare war yes/no"
@@ -76,7 +77,7 @@ namespace Assets.Code
                 if (shrt)
                     return new string[] { "Peace", "War" }[index];
                 else
-                    return new string[] { "Maintain Peace","Declare War" }[index];
+                    return new string[] { "Maintain Peace", "Declare War" }[index];
             }
             if (issue is VoteIssue_JudgeSuspect)
             {
@@ -102,9 +103,17 @@ namespace Assets.Code
             if (issue is VoteIssue_LightAlliance && this.group == null)
             {
                 if (shrt)
-                    return "Indenpendence";
+                    return "Independence";
                 else
                     return "Remain Independent";
+            }
+            if (issue is VoteIssue_Crisis_EvidenceDiscovered)
+            {
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.INVESTIGATOR_HOSTILITY) { return "Allow our agents to attack"; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.EXPELL_ALL_FOREIGN_AGENTS) { return "Expell all foreign agents"; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.NATIONWIDE_SECURITY) { return "Nationwide Security Boost"; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.NO_RESPONSE) { return "No Response"; }
+                if (province != null) { return "Secure Province " + province.name; }
             }
 
             if (person != null) { reply += person.getFullName() + " "; }
@@ -114,11 +123,13 @@ namespace Assets.Code
             if (econ_to != null) { reply += econ_to.name + " "; }
             if (index != -1) { reply += issue.getIndexInfo(index) + " "; }
 
+
             return reply;
         }
         public string info()
         {
             string reply = "";
+            if (person != null) { reply += province.name + " "; }
             if (person != null) { reply += person.getFullName() + " "; }
             if (location != null) { reply += location.getName() + " "; }
             if (group != null) { reply += group.getName() + " "; }
