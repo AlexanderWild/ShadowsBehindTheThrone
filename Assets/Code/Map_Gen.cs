@@ -274,6 +274,14 @@ namespace Assets.Code
                 }
             }
 
+            for (int i = 0; i < provinces.Count; i++)
+            {
+                if (provinces[i].index != i)
+                {
+                    throw new Exception("Province indices are incorrect");
+                }
+            }
+
             foreach (Province p in provinces)
             {
                 int c = 0;

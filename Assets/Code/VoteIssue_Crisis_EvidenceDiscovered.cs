@@ -56,20 +56,20 @@ namespace Assets.Code
                 int evidenceFound = 0;
                 foreach (Evidence ev in foundEvidence)
                 {
-                    if (ev.locationFound.province == option.province)
+                    if (ev.locationFound.province.index == option.province)
                     {
                         evidenceFound += 1;
                     }
                 }
 
                 double localU =  World.staticMap.param.utility_defendEvidenceProvince*evidenceFound * (1 - p.shadow);
-                msgs.Add(new ReasonMsg("Amount of evidence found in " + option.province.name + " province", localU));
+                msgs.Add(new ReasonMsg("Amount of evidence found in " + society.map.provinces[option.province].name + " province", localU));
                 u += localU;
 
                 localU = 0;
                 foreach (Person person in society.people)
                 {
-                    if (person.getLocation() != null && person.getLocation().province == option.province)
+                    if (person.getLocation() != null && person.getLocation().province.index == option.province)
                     {
                         localU += p.getRelation(person.index).getLiking() * World.staticMap.param.utility_agentDefendProvinceLikingMult;
                     }
@@ -158,22 +158,22 @@ namespace Assets.Code
 
             if (option.index == DEFEND_PROVINCE)
             {
-                World.log(society.getName() + " implements crisis legislation, increasing security to " + option.province.name);
+                World.log(society.getName() + " implements crisis legislation, increasing security to " + society.map.provinces[option.province].name);
                 foreach (Location loc in society.map.locations)
                 {
-                    if (loc.province == option.province && loc.soc == society)
+                    if (loc.province.index == option.province && loc.soc == society)
                     {
                         Property.addProperty(society.map, loc, "Major Security Boost");
                     }
                 }
-                society.map.addMessage(society.getName() + " raises " + option.province.name + " security level", MsgEvent.LEVEL_ORANGE, false);
+                society.map.addMessage(society.getName() + " raises " + society.map.provinces[option.province].name + " security level", MsgEvent.LEVEL_ORANGE, false);
             }
             if (option.index == NATIONWIDE_SECURITY)
             {
                 World.log(society.getName() + " implements crisis legislation, increasing security nationwide");
                 foreach (Location loc in society.map.locations)
                 {
-                    if (loc.province == option.province && loc.soc == society)
+                    if (loc.province.index == option.province && loc.soc == society)
                     {
                         Property.addProperty(society.map, loc, "Minor Security Boost");
                     }

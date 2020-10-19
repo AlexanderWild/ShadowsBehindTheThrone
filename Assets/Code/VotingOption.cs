@@ -13,7 +13,7 @@ namespace Assets.Code
         public Person person;
         public Location location;
         public SocialGroup group;
-        public Province province;
+        public int province = -1;
         public EconTrait econ_from;
         public EconTrait econ_to;
         public int index = -1;//For stuff which doesn't have a discrete target, such as "Declare war yes/no"
@@ -113,7 +113,7 @@ namespace Assets.Code
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.EXPELL_ALL_FOREIGN_AGENTS) { return "Expell all foreign agents"; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.NATIONWIDE_SECURITY) { return "Nationwide Security Boost"; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.NO_RESPONSE) { return "No Response"; }
-                if (province != null) { return "Secure Province " + province.name; }
+                if (province != -1) { return "Secure Province " + World.staticMap.provinces[province]; }
             }
 
             if (person != null) { reply += person.getFullName() + " "; }
@@ -129,7 +129,7 @@ namespace Assets.Code
         public string info()
         {
             string reply = "";
-            if (person != null) { reply += province.name + " "; }
+            if (province != -1) { reply += World.staticMap.provinces[province] + " "; }
             if (person != null) { reply += person.getFullName() + " "; }
             if (location != null) { reply += location.getName() + " "; }
             if (group != null) { reply += group.getName() + " "; }

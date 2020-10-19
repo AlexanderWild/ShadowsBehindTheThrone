@@ -613,7 +613,7 @@ namespace Assets.Code
                     foreach (Province prv in provinces)
                     {
                         opt = new VoteOption();
-                        opt.province = prv;
+                        opt.province = prv.index;
                         opt.index = VoteIssue_Crisis_EvidenceDiscovered.DEFEND_PROVINCE;
                         issue.options.Add(opt);
                     }
