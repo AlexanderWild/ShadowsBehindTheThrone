@@ -492,6 +492,16 @@ namespace Assets.Code
                 if (GraphicalMap.selectedSelectable is Unit)
                 {
                     canUseAbility = ((Unit)GraphicalMap.selectedSelectable).isEnthralled() && ((Unit)GraphicalMap.selectedSelectable).lastTurnActionTaken != World.staticMap.turn;
+
+                    if (canUseAbility)
+                    {
+                        foreach (Property property in ((Unit)GraphicalMap.selectedSelectable).location.properties){
+                            if (property.proto is Pr_Lockdown)
+                            {
+                                canUseAbility = false;
+                            }
+                        }
+                    }
                 }
 
                 if (master.state == UIMaster.uiState.WORLD)

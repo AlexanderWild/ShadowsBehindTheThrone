@@ -12,6 +12,7 @@ namespace Assets.Code
         
         public int baseCharge = 10;
         public bool decaysOverTime = false;
+        public int prestigeChange = 0;
         public enum stackStyleEnum { NONE,ADD_CHARGE,TO_MAX_CHARGE};
         public stackStyleEnum stackStyle = stackStyleEnum.NONE;
 
@@ -72,6 +73,10 @@ namespace Assets.Code
             map.globalist.propertyMap.Add(proto.name, proto);
 
             proto = new Pr_MinorSecurityBoost(map, "Minor Security Boost");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_Lockdown(map, "Lockdown");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
         }

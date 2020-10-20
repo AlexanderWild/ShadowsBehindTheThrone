@@ -113,7 +113,8 @@ namespace Assets.Code
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.EXPELL_ALL_FOREIGN_AGENTS) { return "Expell all foreign agents"; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.NATIONWIDE_SECURITY) { return "Nationwide Security Boost"; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.NO_RESPONSE) { return "No Response"; }
-                if (province != -1) { return "Secure Province " + World.staticMap.provinces[province]; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.DEFEND_PROVINCE) { return "Secure Province " + World.staticMap.provinces[province].name; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.LOCKDOWN_PROVINCE) { return "Lockdown Province " + World.staticMap.provinces[province].name; }
             }
 
             if (person != null) { reply += person.getFullName() + " "; }

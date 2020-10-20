@@ -592,6 +592,7 @@ namespace Assets.Code
 
                 //Every province (even those unaffected) can have its security increased (egotism influenced)
                 HashSet<Province> provinces = new HashSet<Province>();
+                HashSet<Province> securedProvinces = new HashSet<Province>();
                 bool hasRaisedSecurity = false;
                 foreach (Location loc in map.locations)
                 {
@@ -600,50 +601,19 @@ namespace Assets.Code
 
                         foreach (Property pr in loc.properties)
                         {
-                            if (pr.proto is Pr_MajorSecurityBoost || pr.proto is Pr_MinorSecurityBoost)
+                            if (pr.proto is Pr_MajorSecurityBoost || pr.proto is Pr_MinorSecurityBoost || pr.proto is Pr_Lockdown)
                             {
                                 hasRaisedSecurity = true;
+                                securedProvinces.Add(loc.province);
                             }
                         }
                     }
                 }
                 VoteOption opt;
-                if (!hasRaisedSecurity)
-                {
-                    foreach (Province prv in provinces)
-                    {
-                        opt = new VoteOption();
-                        opt.province = prv.index;
-                        opt.index = VoteIssue_Crisis_EvidenceDiscovered.DEFEND_PROVINCE;
-                        issue.options.Add(opt);
-                    }
-
-                    opt = new VoteOption();
-                    opt.index = VoteIssue_Crisis_EvidenceDiscovered.NATIONWIDE_SECURITY;
-                    issue.options.Add(opt);
-                }
 
                 opt = new VoteOption();
                 opt.index = VoteIssue_Crisis_EvidenceDiscovered.NO_RESPONSE;
                 issue.options.Add(opt);
-
-
-                bool hostilityPossible = false;
-                foreach (Evidence ev in unprocessedEvidence)
-                {
-                    World.log("Evidence. Discovered by " + ev.discoveredBy.getName() + " points to " + ev.pointsTo.getName() + " discSoc " + ev.discoveredBy.society.getName() + " us " + society.getName());
-                    if (ev.discoveredBy != null && ev.pointsTo != null && ev.discoveredBy.society == society)
-                    {
-                        if (ev.discoveredBy.hostileTo(ev.pointsTo)) { continue; }
-                        hostilityPossible = true;
-                    }
-                }
-                if (hostilityPossible)
-                {
-                    opt = new VoteOption();
-                    opt.index = VoteIssue_Crisis_EvidenceDiscovered.INVESTIGATOR_HOSTILITY;
-                    issue.options.Add(opt);
-                }
 
                 bool existEnemies = false;
                 foreach (Unit u in map.units)
@@ -659,6 +629,43 @@ namespace Assets.Code
                     opt.index = VoteIssue_Crisis_EvidenceDiscovered.EXPELL_ALL_FOREIGN_AGENTS;
                     issue.options.Add(opt);
                 }
+
+                if (!hasRaisedSecurity)
+                {
+                    opt = new VoteOption();
+                    opt.index = VoteIssue_Crisis_EvidenceDiscovered.NATIONWIDE_SECURITY;
+                    issue.options.Add(opt);
+
+                }
+
+                foreach (Province prv in provinces)
+                {
+                    if (securedProvinces.Contains(prv) == false)
+                    {
+                        opt = new VoteOption();
+                        opt.province = prv.index;
+                        opt.index = VoteIssue_Crisis_EvidenceDiscovered.DEFEND_PROVINCE;
+                        issue.options.Add(opt);
+
+                        opt = new VoteOption();
+                        opt.province = prv.index;
+                        opt.index = VoteIssue_Crisis_EvidenceDiscovered.LOCKDOWN_PROVINCE;
+                        issue.options.Add(opt);
+                    }
+                }
+
+
+
+                //bool hostilityPossible = false;
+                //foreach (Evidence ev in unprocessedEvidence)
+                //{
+                //    World.log("Evidence. Discovered by " + ev.discoveredBy.getName() + " points to " + ev.pointsTo.getName() + " discSoc " + ev.discoveredBy.society.getName() + " us " + society.getName());
+                //    if (ev.discoveredBy != null && ev.pointsTo != null && ev.discoveredBy.society == society)
+                //    {
+                //        if (ev.discoveredBy.hostileTo(ev.pointsTo)) { continue; }
+                //        hostilityPossible = true;
+                //    }
+                //}
 
                 //Decide if this is the crisis you're gonna deal with right now
                 c += 1;

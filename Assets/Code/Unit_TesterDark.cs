@@ -20,6 +20,10 @@ namespace Assets.Code
         {
             if (this.task != null) { return; }
 
+            if (this.movesTaken != 0) { return; }
+
+
+            this.movesTaken += 1;
             if (this.location.person() != null)
             {
                 if (this.location.settlement.infiltration < World.staticMap.param.ability_unit_spreadShadowInfiltrationReq)

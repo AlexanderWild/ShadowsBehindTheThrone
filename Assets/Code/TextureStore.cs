@@ -31,6 +31,7 @@ namespace Assets.Code
         public Sprite boxImg_thumb;
         public Sprite boxImg_blue;
         public Sprite boxImg_seekerBook;
+        public Sprite boxImg_redDeath;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
@@ -123,6 +124,9 @@ namespace Assets.Code
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;
+        public Sprite property_securityMinor;
+        public Sprite property_securityMajor;
+        public Sprite property_securityLockdown;
 
         public Sprite tutorial1;
         public Sprite tutorial2;

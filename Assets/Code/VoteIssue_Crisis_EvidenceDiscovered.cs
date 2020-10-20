@@ -51,7 +51,7 @@ namespace Assets.Code
             if (option.index == DEFEND_PROVINCE)
             {
                 responseLevelMin = 10;
-                responseLevelMax = 100;
+                responseLevelMax = 40;
 
                 int evidenceFound = 0;
                 foreach (Evidence ev in foundEvidence)
@@ -81,7 +81,7 @@ namespace Assets.Code
             if (option.index == NATIONWIDE_SECURITY)
             {
                 responseLevelMin = 10;
-                responseLevelMax = 100;
+                responseLevelMax = 40;
 
                 double localU = World.staticMap.param.utility_evidenceResonseBaseline * (concernLevel / 100);
                 msgs.Add(new ReasonMsg("Base Desirability", localU));
@@ -125,6 +125,36 @@ namespace Assets.Code
                     msgs.Add(new ReasonMsg("So many potential enemies!", concernLevel));
                     u += concernLevel;
                 }
+            }
+            if (option.index == LOCKDOWN_PROVINCE)
+            {
+                responseLevelMin = 40;
+                responseLevelMax = 100;
+
+                int evidenceFound = 0;
+                foreach (Evidence ev in foundEvidence)
+                {
+                    if (ev.locationFound.province.index == option.province)
+                    {
+                        evidenceFound += 1;
+                    }
+                }
+
+                double localU = World.staticMap.param.utility_defendEvidenceProvince * evidenceFound * (1 - p.shadow);
+                msgs.Add(new ReasonMsg("Amount of evidence found in " + society.map.provinces[option.province].name + " province", localU));
+                u += localU;
+
+                localU = 0;
+                foreach (Person person in society.people)
+                {
+                    if (person.getLocation() != null && person.getLocation().province.index == option.province)
+                    {
+                        localU += p.getRelation(person.index).getLiking() * World.staticMap.param.utility_agentDefendProvinceLikingMult;
+                    }
+                }
+                string add = "";
+                msgs.Add(new ReasonMsg("Liking for nobles in province" + add, localU));
+                u += localU;
             }
 
             if (concernLevel > responseLevelMax)
@@ -221,6 +251,18 @@ namespace Assets.Code
                         }
                     }
                 }
+            }
+            if (option.index == LOCKDOWN_PROVINCE)
+            {
+                World.log(society.getName() + " implements crisis legislation, fully locking down " + society.map.provinces[option.province].name);
+                foreach (Location loc in society.map.locations)
+                {
+                    if (loc.province.index == option.province && loc.soc == society)
+                    {
+                        Property.addProperty(society.map, loc, "Lockdown");
+                    }
+                }
+                society.map.addMessage(society.getName() + " locks down " + society.map.provinces[option.province].name, MsgEvent.LEVEL_ORANGE, false);
             }
         }
 

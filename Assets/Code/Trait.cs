@@ -13,6 +13,7 @@ namespace Assets.Code
         public static int CODE_MILCAP = 4;
         public static int CODE_MILDEF= 5;
         public static int CODE_SABOTAGE = 6;
+        public static int CODE_POLITICS = 7;
 
         public string name;
         public string desc = "DEFAULT DESCRIPTION";

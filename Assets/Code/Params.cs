@@ -110,7 +110,7 @@ namespace Assets.Code
         public double utility_fromThreat = 1.8;
         public double utility_greatestThreatDelta = 25;
         public double utility_defendEvidenceProvince = 20;
-        public double utility_agentDefendProvinceLikingMult = 0.2;
+        public double utility_agentDefendProvinceLikingMult = 0.18;
         public double utility_defendHomelandVSAgents = 20;
         public double utility_evidenceResonseBaseline = 30;
         public double utility_extremeismScaling = 2;
@@ -159,9 +159,11 @@ namespace Assets.Code
         public double society_prestigeFromVotingSuccess = -5;
         public double society_dislikeFromFailedProposal = -15;
         public double society_houseLiking = 15;
-        public double society_securityBuffDuration = 12;
+        public int society_securityBuffDuration = 12;
         public int society_securityBuffMajor = 4;
         public int society_securityBuffMinor = 1;
+        public int society_lockdownPrestigeHit = -10;
+        public int society_lockdownBuffDuration = 12;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;

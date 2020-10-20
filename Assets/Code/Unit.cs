@@ -39,6 +39,23 @@ namespace Assets.Code
             {
                 movesTaken = 0;
             }
+            if (task != null && this.isEnthralled() && (task is Task_Disrupted == false))
+            {
+                bool lockedDown = false;
+                foreach (Property pr in location.properties)
+                {
+                    if (pr.proto is Pr_Lockdown)
+                    {
+                        lockedDown = true;
+                        break;
+                    }
+                }
+                if (lockedDown)
+                {
+                    map.world.prefabStore.popMsg(this.getName() + " has had their task aborted, as the location they are in,  " + this.location.getName() + " is under security lockdown.");
+                    task = null;
+                }
+            }
             if (hp == 0)
             {
                 if (map.units.Contains(this)) { die(map, "Death of unknown cause."); }

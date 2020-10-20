@@ -10,6 +10,7 @@ namespace Assets.Code
             this.decaysOverTime = true;
             this.stackStyle = stackStyleEnum.TO_MAX_CHARGE;
             this.securityIncrease = map.param.society_securityBuffMajor;
+            this.baseCharge = map.param.society_securityBuffDuration;
         }
 
         public override void turnTick(Property p,Location location)
@@ -18,12 +19,12 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
-            return world.textureStore.property_forgottenSecret;
+            return world.textureStore.property_securityMajor;
         }
 
         internal override string getDescription()
         {
-            return "This location has increased its security level in a major way.";
+            return "This location has increased its security level in a major way. Infiltration actions in this area will have far lower effect.";
         }
     }
 }
