@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class Unit_Paladin : Unit
+    public class Unit_Simple_Paladin : Unit
     {
         public Location home;
 
-        public Unit_Paladin(Location loc,SocialGroup soc) : base(loc,soc)
+        public Unit_Simple_Paladin(Location loc,SocialGroup soc) : base(loc,soc)
         {
             maxHp = 7;
             hp = 7;
@@ -54,7 +54,7 @@ namespace Assets.Code
                 if (target != null)
                 {
                     Task_HuntEnthralled taskI = new Task_HuntEnthralled(target);
-                    taskI.turnsLeft = World.staticMap.param.unit_paladin_trackPoints;
+                    taskI.turnsLeft = World.staticMap.param.unit_paladin_trackDuration;
                     task = taskI;
                 }
             }

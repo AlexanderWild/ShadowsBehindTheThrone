@@ -10,6 +10,7 @@ namespace Assets.Code
         public Task_HuntEnthralled(Unit prey)
         {
             this.target = prey;
+            turnsLeft = World.staticMap.param.unit_paladin_trackDuration;
         }
 
         public override string getShort()

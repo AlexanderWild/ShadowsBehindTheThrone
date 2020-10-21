@@ -349,7 +349,8 @@ namespace Assets.Code
         public int units_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
-        public int unit_paladin_trackPoints = 7;
+        public int unit_paladin_trackDuration = 7;
+        public int unit_paladin_promotionDuration = 27;
 
         public int unit_seeker_nReqSecrets = 12;
         public int unit_seeker_nCreatedSecrets = 7;

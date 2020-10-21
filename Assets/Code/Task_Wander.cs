@@ -30,18 +30,33 @@ namespace Assets.Code
             if (unit is Unit_Investigator)
             {
                 Unit_Investigator inv = (Unit_Investigator)unit;
-                if (inv.evidenceCarried.Count > 0)
+                bool unsharedEvidence = false;
+                bool unsharedEvidenceToAny = false;
+                foreach (Evidence ev in inv.evidenceCarried)
                 {
-                    if (inv.location.soc != inv.society)
+                    if (ev.turnSubmitted == 0)
                     {
-                        inv.task = new Task_GoToSocialGroup(inv.society);
-                        return;
+                        unsharedEvidenceToAny = true;
                     }
-                    else
+                    if (unit.location.soc is Society)
                     {
-                        inv.task = new Task_ShareSuspicions();
-                        return;
+                        Society localSoc = (Society)unit.location.soc;
+                        if (localSoc.evidenceSubmitted.Contains(ev) == false)
+                        {
+                            unsharedEvidence = true;
+                        }
                     }
+                }
+                if (unsharedEvidence)
+                {
+                    inv.task = new Task_ShareSuspicions();
+                    return;
+                }
+                else if (unsharedEvidenceToAny)
+                {
+                    //We're clearly not at home, or the previous condition would have triggered
+                    inv.task = new Task_GoToSocialGroup(inv.society);
+                    return;
                 }
             }
             List<Location> neighbours = unit.location.getNeighbours();

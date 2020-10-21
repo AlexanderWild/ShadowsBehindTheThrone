@@ -18,6 +18,8 @@ namespace Assets.Code
 
         public void Update()
         {
+            if (GraphicalMap.world.ui.blocker != null) { return; }//Hold while you can't see the particle
+
             if (scale > 1f)
             {
                 Destroy(this.gameObject);

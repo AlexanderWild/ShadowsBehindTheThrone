@@ -4,11 +4,15 @@
 
 -Maybe they rebuild lost cities too fast
 
+-Combat doesn't occur if two agents are on the same location
+
 	Medium criticality:
 
 -International relationships lens
 
 -Agent power should be affected by difficulty
+
+-Agents should be affected by the security level to a greater degree
 
 -If you have no saves to load it reads "New text" on the scroll view
 

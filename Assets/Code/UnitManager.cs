@@ -21,7 +21,10 @@ namespace Assets.Code
             {
                 checkInvestigators();
                 checkMerchants();
-                checkPaladins();
+                if (map.simplified)
+                {
+                    checkPaladins();
+                }
             }
             if (map.turn % 16 == 0)
             {
@@ -80,11 +83,9 @@ namespace Assets.Code
         }
 
 
-        public void checkPaladins() {
+        public int getTargetPaladins()
+        {
 
-            if (map.param.usePaladins == 0) { return; }
-
-            int nPaladins = 0;
             int targetPaladins = 0;
 
 
@@ -103,12 +104,22 @@ namespace Assets.Code
             {
                 targetPaladins += 1;
             }
+            return targetPaladins;
+        }
+
+        public void checkPaladins() {
+
+            if (map.param.usePaladins == 0) { return; }
+
+            int nPaladins = 0;
+
+            int targetPaladins = getTargetPaladins();
 
             if (targetPaladins > 0) { 
                 bool hasAgents = false;
                 foreach (Unit u in map.units)
                 {
-                    if (u is Unit_Paladin)
+                    if (u is Unit_Simple_Paladin)
                     {
                         nPaladins += 1;
                     }
@@ -162,7 +173,7 @@ namespace Assets.Code
                             map.world.prefabStore.popMsg("A Paladin has arrived in " + l2.getName() + ". A holy warrior, they will hunt down your agents, tracking them across the map. " +
                                 "You can slow them with powers, and they will lose the trail occasionally, but always be aware and cautious of their presence.");
                         }
-                        Unit_Paladin paladin = new Unit_Paladin(l2, map.soc_light);
+                        Unit_Simple_Paladin paladin = new Unit_Simple_Paladin(l2, map.soc_light);
                         paladin.person = new Person(map.soc_light);
                         paladin.person.unit = paladin;
                         paladin.person.traits.Clear();//Can't see traits, best to have them removed

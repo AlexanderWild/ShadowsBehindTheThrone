@@ -9,7 +9,6 @@ namespace Assets.Code
 {
     public class GraphicalUnit : MonoBehaviour
     {
-        public World world;
         public SpriteRenderer unitLayer;
         public SpriteRenderer borderLayer1;
         public SpriteRenderer borderLayer2;
@@ -139,9 +138,9 @@ namespace Assets.Code
             {
                 hpText.text = "" + (int)(unit.getStrength());
             }
-            unitLayer.sprite = unit.getSprite();
             */
 
+            unitLayer.sprite = unit.getSprite(GraphicalMap.world);
             this.hostilityBorder.enabled = false;
             this.hostilityBorder.color = Color.clear;
             if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit)
