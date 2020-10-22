@@ -49,7 +49,7 @@ namespace Assets.Code
 
                 unit.location.person().shadow = Math.Min(1, unit.location.person().shadow + unit.location.map.param.unit_spreadShadowAmount);
 
-                unit.location.map.world.prefabStore.popImgMsg(unit.getName() + " enshadowing " + unit.location.person().getFullName() +
+                unit.location.map.world.prefabStore.popImgMsg(unit.getName() + " finishes enshadowing " + unit.location.person().getFullName() +
                     ", they now are at " + ((int)(100*unit.location.person().shadow)) + "% shadow", unit.location.map.world.wordStore.lookup("ABILITY_UNIT_SPREAD_SHADOW"));
                 unit.task = null;
             }

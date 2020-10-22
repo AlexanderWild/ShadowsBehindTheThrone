@@ -19,10 +19,15 @@ namespace Assets.Code
             e2.weight = amount;
             u.location.evidence.Add(e2);
 
-            doc.corpses += map.param.unit_doctor_lootBodiesAmount;
+            int security = 0;
+            if (u.location.settlement != null) { security = u.location.settlement.getSecurity(new System.Collections.Generic.List<ReasonMsg>()); }
+            int nStolen = map.param.unit_doctor_lootBodiesAmount - security;
+            if (nStolen < 1) { nStolen = 1; }
+            doc.corpses += nStolen;
             if (doc.corpses > doc.maxCorpses) { doc.corpses = doc.maxCorpses; }
 
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " loots the bodies from " + u.location.getName() + ". They have " + doc.corpses + "/" + doc.maxCorpses 
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " loots " + nStolen + " bodies from " + u.location.getName() + " (Maximum is " + map.param.unit_doctor_lootBodiesAmount
+                + " location security is " + security + "). They have " + doc.corpses + "/" + doc.maxCorpses 
                 + " corpses, these should be carried to a corpseroot field before they decay.",
                 u.location.map.world.wordStore.lookup("ABILITY_DOCTOR_ROB_GRAVES"));
 
@@ -61,8 +66,8 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Steals the bodies from the local graveyard, piling them on the cart (" + World.staticMap.param.unit_doctor_lootBodiesAmount  
-                +" bodies). They can be carried to a corpseroot field to grow the army of the dead. Leaves evidence behind."
+            return "Steals the bodies from the local graveyard (" + World.staticMap.param.unit_doctor_lootBodiesAmount  
+                +" bodies MINUS SECURITY LEVEL). They can be carried to a corpseroot field to grow the army of the dead. Leaves evidence behind."
                 + "\n[Requires a human settlement which hasn't been looted recently]";
         }
 

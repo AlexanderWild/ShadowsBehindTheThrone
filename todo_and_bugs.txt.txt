@@ -1,6 +1,7 @@
 	High criticality:
 
 -Leftover graphical properties, by the look of it
+	(couldn't replicate?_
 
 -Maybe they rebuild lost cities too fast
 

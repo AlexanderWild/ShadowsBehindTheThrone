@@ -171,7 +171,7 @@ namespace Assets.Code
                     hostility.Add(paladinTarget);
                 }
                 paladinDuration = map.param.unit_paladin_promotionDuration;
-                map.world.displayMessages = true;
+                //map.world.displayMessages = true;
                 map.world.prefabStore.popMsg(this.getName() + " has found evidence that " + paladinTarget.getName() + " is in league with the darkness," +
                     " and has been granted the powers of the paladin, to hunt them down for a duration. They are currently in " + location.getName() + ".");
 

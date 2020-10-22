@@ -96,31 +96,5 @@ namespace Assets.Code
             this.unitLayer.sprite = p.proto.getSprite(world);
         }
 
-        public void checkData()
-        {
-            /*
-            hpBar.SetActive(unit.isMilitary);
-            if (unit.isMilitary)
-            {
-                hpText.text = "" + (int)(unit.getStrength());
-            }
-            unitLayer.sprite = unit.getSprite();
-            if (unit.enthralled)
-            {
-                borderLayer1.color = Color.black;
-                borderLayer2.color = Color.black;
-            }
-            else if (unit.soc == null || unit.dontDisplayBorder)
-            {
-                borderLayer1.color = Color.clear;
-                borderLayer2.color = Color.clear;
-            }
-            else
-            {
-                borderLayer1.color = unit.soc.color;
-                borderLayer2.color = unit.soc.color2;
-            }
-            */
-        }
     }
 }

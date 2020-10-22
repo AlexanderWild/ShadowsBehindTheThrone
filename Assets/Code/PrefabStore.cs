@@ -26,6 +26,7 @@ namespace Assets.Code
         public GameObject prefabWorldMap;
         public GameObject prefabLinkLine;
         public GameObject prefabMsg;
+        public GameObject prefabMsgTreeBackground;
         public GameObject prefabImgMsg;
         public GameObject prefabVoteMsg;
         public GameObject prefabSlot;
@@ -605,6 +606,17 @@ namespace Assets.Code
             if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabMsg) as GameObject;
+            PopupMsg specific = obj.GetComponent<PopupMsg>();
+            specific.ui = ui;
+            specific.text.text = words;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popMsgTreeBackground(string words)
+        {
+            if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabMsgTreeBackground) as GameObject;
             PopupMsg specific = obj.GetComponent<PopupMsg>();
             specific.ui = ui;
             specific.text.text = words;
