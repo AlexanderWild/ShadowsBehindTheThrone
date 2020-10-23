@@ -16,6 +16,7 @@ namespace Assets.Code
         public UIMidTop uiMidTop;
         public UILeftPrimary uiLeftPrimary;
         public UIVoting uiVoting;
+        public UIMidLower uIMidLower;
         public GameObject endTurnButton;
 
         public List<GameObject> blockerQueue;
@@ -169,6 +170,7 @@ namespace Assets.Code
             else if (state == uiState.WORLD)
             {
                 GraphicalMap.checkData();
+                uIMidLower.checkData();
                 bViewSocietyText.text = "View Society";
                 viewSocietyButton.SetActive(GraphicalMap.selectedHex != null && GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.soc is Society);
             }
@@ -394,6 +396,7 @@ namespace Assets.Code
             uiScrollables.gameObject.SetActive(false);
             uiMidTop.gameObject.SetActive(false);
             uiVoting.gameObject.SetActive(false);
+            uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
 
             GraphicalMap.purge();
@@ -409,6 +412,7 @@ namespace Assets.Code
             uiScrollables.gameObject.SetActive(true);
             uiMidTop.gameObject.SetActive(true);
             uiVoting.gameObject.SetActive(false);
+            uIMidLower.gameObject.SetActive(true);
             hexSelector.SetActive(true);
 
             uiScrollables.viewSocButtonText.text = "View Society";
@@ -427,6 +431,7 @@ namespace Assets.Code
             uiScrollables.gameObject.SetActive(true);
             uiMidTop.gameObject.SetActive(true);
             uiVoting.gameObject.SetActive(false);
+            uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
 
             uiScrollables.viewSocButtonText.text = "View World";
@@ -452,6 +457,7 @@ namespace Assets.Code
             uiScrollables.gameObject.SetActive(false);
             uiMidTop.gameObject.SetActive(false);
             uiVoting.gameObject.SetActive(false);
+            uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
 
 
@@ -471,6 +477,7 @@ namespace Assets.Code
             uiScrollables.gameObject.SetActive(false);
             uiMidTop.gameObject.SetActive(false);
             uiVoting.gameObject.SetActive(true);
+            uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
 
 

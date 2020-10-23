@@ -218,7 +218,7 @@ namespace Assets.Code
         private void printSimplifiedMessage()
         {
             String msg = "Welcome to Shadows Behind the Throne";
-            msg += "\n\nThe game revolves around subtly and covert action. The nations of humankind are powerful, and huge, but slow to react and often self-destructive, due to the political desires of their nobles.";
+            msg += "\n\nThe game revolves around stealth and covert action. The nations of humankind are powerful, and huge, but slow to react and often self-destructive, due to the political desires of their nobles.";
             msg += "\n\nTo get started, use your power to create agents (or select a human one and take them over), then begin your work against your chosen target. " +
             "Infiltrating a few locations is a good first step (the vampire or merchant work well here), even if the agent you used dies, the infiltration level will benefit your other agents.";
             msg += "\n\nIf you wish to use direct attacks on the nations, try to cause civil wars before you begin, for example by enshadowing some nobles, or causing madness, they will turn on each other, giving you an opening.";

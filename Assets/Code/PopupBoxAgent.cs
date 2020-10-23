@@ -116,13 +116,18 @@ namespace Assets.Code
 
                     agent.task = null;
                 }
-                foreach (Ability a in map.overmind.abilities)
+                if (!map.overmind.isFirstEnthralledAgent)
                 {
-                    if (a is Ab_Over_CreateAgent)
+                    foreach (Ability a in map.overmind.powers)
                     {
-                        a.turnLastCast = map.turn;
+                        if (a is Ab_Over_CreateAgent)
+                        {
+                            a.turnLastCast = map.turn;
+                        }
                     }
                 }
+                map.overmind.isFirstEnthralledAgent = false;
+                if (map.param.overmind_singleAbilityPerTurn) { map.overmind.hasTakenAction = true; }
             }
         }
 
