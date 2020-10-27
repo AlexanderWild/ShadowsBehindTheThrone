@@ -1,5 +1,9 @@
 	High criticality:
 
+-Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message
+	state == world
+	Couldn't reproduce
+
 -Leftover graphical properties, by the look of it
 	(couldn't replicate?_
 

@@ -7,6 +7,7 @@ namespace Assets.Code
     {
         public Person person;
         public string reason;
+        public bool votedByNobles;
 
         public KillOrder(Person person, string v)
         {

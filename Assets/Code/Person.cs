@@ -879,6 +879,7 @@ namespace Assets.Code
         }
         public Sprite getImageFore()
         {
+            if (unit != null && unit.definesForeground()) { return unit.getPortraitForeground(); }
             if (imgIndFore == -1)
             {
                 imgIndFore = Eleven.random.Next(map.world.textureStore.layerFore.Count);

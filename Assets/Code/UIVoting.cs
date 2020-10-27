@@ -71,11 +71,29 @@ namespace Assets.Code
             textVotingIssue.text = soc.voteSession.issue.ToString();
             textVotingIssueDesc.text = soc.voteSession.issue.getLargeDesc();
             textProposer.text = "Proposed by: " + soc.voteSession.issue.proposer.getFullName();
-            textProposerVote.text = "Voting For: " + soc.voteSession.issue.proposer.getVote(soc.voteSession).info(soc.voteSession.issue);
-            proposerBack.sprite = soc.voteSession.issue.proposer.getImageBack();
-            proposerMid.sprite = soc.voteSession.issue.proposer.getImageMid();
-            proposerFore.sprite = soc.voteSession.issue.proposer.getImageFore();
-            proposerBorder.sprite = soc.voteSession.issue.proposer.getImageBorder();
+            if (soc.voteSession.issue.proposer != null)
+            {
+                World.log("Proposer: " + soc.voteSession.issue.proposer.getFullName());
+                World.log("Text " + textProposerVote);
+                textProposerVote.text = "Voting For: " + soc.voteSession.issue.proposer.getVote(soc.voteSession).info(soc.voteSession.issue);
+                proposerBack.sprite = soc.voteSession.issue.proposer.getImageBack();
+                proposerMid.sprite = soc.voteSession.issue.proposer.getImageMid();
+                proposerFore.sprite = soc.voteSession.issue.proposer.getImageFore();
+                proposerBorder.sprite = soc.voteSession.issue.proposer.getImageBorder();
+            }
+            else
+            {
+                Person arbitrary = soc.getSovreign();
+                if (arbitrary == null) { arbitrary = soc.people[0]; }
+                if (arbitrary != null) {
+                    textProposerVote.text = "";
+                    proposerBack.sprite = arbitrary.getImageBack();
+                    proposerMid.sprite = arbitrary.getImageMid();
+                    proposerFore.sprite = arbitrary.getImageFore();
+                    proposerBorder.sprite = arbitrary.getImageBorder();
+                }
+
+            }
             foreach (Person p in soc.people){
                 PopVoterBar bar = world.prefabStore.getVoterBar(p);
                 //bar.gameObject.transform.parent = this.gameObject.transform;

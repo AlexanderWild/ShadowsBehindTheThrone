@@ -27,6 +27,7 @@ namespace Assets.Code
         public GameObject prefabLinkLine;
         public GameObject prefabMsg;
         public GameObject prefabMsgTreeBackground;
+        public GameObject prefabPumpkinVictory;
         public GameObject prefabImgMsg;
         public GameObject prefabVoteMsg;
         public GameObject prefabSlot;
@@ -623,6 +624,17 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
+        public void popPumpkinVictory(string words)
+        {
+            if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabPumpkinVictory) as GameObject;
+            PopupPumpkinVictory specific = obj.GetComponent<PopupPumpkinVictory>();
+            specific.ui = ui;
+            specific.text.text = words;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
         public void popAutosave()
         {
             if (world.displayMessages == false) { return; }
@@ -661,13 +673,18 @@ namespace Assets.Code
                 if (q == 0) { specific.img.sprite = ui.world.textureStore.boxImg_blue; }
                 if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
                 if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
-            }else if (img == 1)
+            }
+            else if (img == 1)
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_coins;
             }
             else if (img == 2)
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_seekerBook;
+            }
+            else if (img == 3)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_pumpkin;
             }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);

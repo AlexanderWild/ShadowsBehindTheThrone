@@ -78,12 +78,20 @@ namespace Assets.Code
         {
             return false;
         }
+        public virtual bool definesForeground()
+        {
+            return false;
+        }
 
         public virtual Sprite getPortraitBackground()
         {
             return null;
         }
-        
+        public virtual Sprite getPortraitForeground()
+        {
+            return null;
+        }
+
         public virtual bool hasSpecialInfo()
         {
             return false;

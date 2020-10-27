@@ -41,7 +41,7 @@ namespace Assets.Code
 
         public float ySize()
         {
-            return 180;
+            return 150;
         }
 
         public void setTargetY(float y)
@@ -73,6 +73,7 @@ namespace Assets.Code
                     agent.location.evidence.Add(ev);
 
                     agent.task = null;
+                    GraphicalMap.selectedSelectable = agent;
                 }
 
                 if (index == Ab_Over_CreateAgent.DOCTOR)
@@ -93,6 +94,7 @@ namespace Assets.Code
                     agent.location.evidence.Add(ev);
 
                     agent.task = null;
+                    GraphicalMap.selectedSelectable = agent;
                 }
 
                 if (index == Ab_Over_CreateAgent.SEEKER)
@@ -115,6 +117,29 @@ namespace Assets.Code
                     agent.location.evidence.Add(ev);
 
                     agent.task = null;
+                    GraphicalMap.selectedSelectable = agent;
+                }
+
+                if (index == Ab_Over_CreateAgent.PUMPKIN)
+                {
+                    Unit agent = new Unit_HeadlessHorseman(hex.location, map.soc_dark);
+                    map.world.prefabStore.popImgMsg(
+                        "You draw upon the creatures of darkness, and choose one to serve as your instrument in this world",
+                        "The horseman rides again!",3);
+
+                    agent.person = new Person(map.soc_dark);
+                    agent.person.state = Person.personState.enthralledAgent;
+                    agent.person.unit = agent;
+                    map.units.Add(agent);
+
+
+                    Evidence ev = new Evidence(map.turn);
+                    ev.pointsTo = agent;
+                    ev.weight = 0.66;
+                    agent.location.evidence.Add(ev);
+
+                    agent.task = null;
+                    GraphicalMap.selectedSelectable = agent;
                 }
                 if (!map.overmind.isFirstEnthralledAgent)
                 {

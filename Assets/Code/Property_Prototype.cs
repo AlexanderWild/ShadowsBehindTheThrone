@@ -79,6 +79,10 @@ namespace Assets.Code
             proto = new Pr_Lockdown(map, "Lockdown");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_Pumpkin(map, "Pumpkin");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
         }
 
         internal abstract string getDescription();

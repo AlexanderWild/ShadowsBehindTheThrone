@@ -365,6 +365,7 @@ namespace Assets.Code
         public int unit_vampire_maxBlood = 37;
         public int unit_vampire_drinkReqLiking = 0;
         public double unit_seeker_truthShadow = 0.35;
+        public int unit_headless_pumpkinDur = 9;
 
         public void saveToFile()
         {

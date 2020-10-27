@@ -10,6 +10,7 @@ namespace Assets.Code
         public static int VAMPIRE = 0;
         public static int DOCTOR = 1;
         public static int SEEKER = 2;
+        public static int PUMPKIN = 3;
         public static string DESC_VAMPIRE = "Stealthy infiltrator and corruptor of the aristocracy." +
             "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
             " can travel great distances between their places of feeding and the places where they act. This makes them good infiltrators and political agents, as they can" +
@@ -21,12 +22,32 @@ namespace Assets.Code
         public static string DESC_SEEKER = "The Seeker is compelled to search the world for forgotten secrets about a race of creatures which ruled the world before humanity to gain dark power."
             + "\nThey are weak for most of the game, and may need other agents' help to avoid getting exiled, but after gathering their fragments they can enshadow or destroy entire empires.";
 
+        public static string DESC_PUMPKIN = "The Headless Horseman is the ghost of a noble who was beheaded for a crime they did not commit. They seek vengence for this against the living, by" +
+            " collecting the heads of the living (in the form of pumpkins). They must collect as many as possible before their timer runs out."
+            + "\nUse other agents to create madness in societies, then use the horseman to start trials against innocent (no shadow, not enthralled) nobles who are hated/suspected." +
+            " Use power to swing close votes in the voting screen.";
+
+
         public override void cast(Map map, Hex hex)
         {
             List<int> indices = new List<int>();
             List<string> titles = new List<string>();
             List<string> descs = new List<string>();
             List<Sprite> icons = new List<Sprite>();
+
+
+            bool hasHorseman = false;
+            foreach (Unit u in map.units)
+            {
+                if (u is Unit_HeadlessHorseman) { hasHorseman = true; }
+            }
+            if (!hasHorseman)
+            {
+                indices.Add(PUMPKIN);
+                titles.Add("The Headless Horseman");
+                descs.Add(DESC_PUMPKIN);
+                icons.Add(map.world.textureStore.icon_pumpkin);
+            }
 
             indices.Add(VAMPIRE);
             titles.Add("Vampire");
@@ -42,7 +63,8 @@ namespace Assets.Code
             titles.Add("Seeker");
             descs.Add(DESC_SEEKER);
             icons.Add(map.world.textureStore.icon_seeker);
-            map.world.ui.addBlocker(map.world.prefabStore.getScrollSetAgents(indices,titles,descs,icons).gameObject);
+
+            map.world.ui.addBlocker(map.world.prefabStore.getScrollSetAgents(indices, titles, descs, icons).gameObject);
         }
 
 

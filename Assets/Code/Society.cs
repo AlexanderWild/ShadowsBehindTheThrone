@@ -168,7 +168,29 @@ namespace Assets.Code
             {
                 if (people.Contains(order.person))
                 {
+                    bool makePumpkin = false;
+                    if (order.votedByNobles)
+                    {
+                        foreach (Unit u in map.units)
+                        {
+                            if (u is Unit_HeadlessHorseman)
+                            {
+                                makePumpkin = true;
+                            }
+                        }
+                    }
+                    if (order.person.shadow > 0.3) { makePumpkin = false; }
+                    if (order.person.state != Person.personState.normal && order.person.state != Person.personState.lightbringer) { makePumpkin = false; }
+                    if (makePumpkin)
+                    {
+                        Property.addProperty(map, order.person.getLocation(), "Pumpkin");
+                        map.world.prefabStore.popImgMsg("The society of " + getName() + " has executed " + order.person.getFullName() + "! Their head-pumpkin is now available in " +
+                            order.person.getLocation().getName() + " for the horseman to steal!",
+                            "\"If you take my head, I'll take yours! All of yours!\"", 3);
+                    }
+
                     order.person.die("Executed by " + this.getName() + ". Reason: " + order.reason);
+
                 }
             }
         }

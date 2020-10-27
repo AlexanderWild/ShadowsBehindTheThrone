@@ -20,6 +20,7 @@ namespace Assets.Code
         public Sprite person_back_vampire;
         public Sprite person_back_eyes;
         public Sprite person_back_shadow;
+        public Sprite person_pumpkin;
 
         public Sprite slotKing;
         public Sprite slotDuke;
@@ -32,6 +33,7 @@ namespace Assets.Code
         public Sprite boxImg_blue;
         public Sprite boxImg_seekerBook;
         public Sprite boxImg_redDeath;
+        public Sprite boxImg_pumpkin;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
@@ -86,6 +88,7 @@ namespace Assets.Code
         public Sprite icon_doctor;
         public Sprite icon_seeker;
         public Sprite icon_corpseroot;
+        public Sprite icon_pumpkin;
 
         public Sprite icon_combat;
 
@@ -121,12 +124,14 @@ namespace Assets.Code
         public Sprite unit_fleshmaw;
         public Sprite unit_armyOfDead;
         public Sprite unit_paladin;
+        public Sprite unit_pumpkin;
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;
         public Sprite property_securityMinor;
         public Sprite property_securityMajor;
         public Sprite property_securityLockdown;
+        public Sprite property_pumpkin;
 
         public Sprite tutorial1;
         public Sprite tutorial2;
@@ -147,6 +152,9 @@ namespace Assets.Code
         public Sprite painting_deathAndConflagaration;
         public Sprite painting_monkAndOldWoman;
 
+        public Sprite special_horsemanLayer0;
+        public Sprite special_horsemanLayer1;
+        public Sprite special_horsemanLayer2;
 
         public Dictionary<string, Sprite> sprites;
         public Dictionary<string, Sprite> images;
