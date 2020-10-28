@@ -8,7 +8,7 @@ namespace Assets.Code
     public class VoteIssue_JudgeSuspect : VoteIssue
     {
         public Person target;
-
+        public double reluctanceModifier = 1;
         public VoteIssue_JudgeSuspect(Society soc,Person target,Person proposer) : base(soc,proposer)
         {
             this.target = target;
@@ -46,7 +46,7 @@ namespace Assets.Code
             msgs.Add(new ReasonMsg("Suspicion towards " + target.getFullName(), proKill));
             u += proKill;
 
-            double reluctance = -voter.map.param.utility_killSuspectRelucatance*parityMult;
+            double reluctance = -voter.map.param.utility_killSuspectRelucatance* parityMult * reluctanceModifier;
             msgs.Add(new ReasonMsg("Base reluctance to kill noble", reluctance));
             u += reluctance;
 

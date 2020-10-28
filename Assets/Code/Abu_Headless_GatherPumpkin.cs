@@ -12,6 +12,19 @@ namespace Assets.Code
             Unit_HeadlessHorseman head = (Unit_HeadlessHorseman)u;
             head.heads += 1;
 
+            Property removed = null;
+            foreach (Property pr in u.location.properties)
+            {
+                if (pr.proto is Pr_Pumpkin)
+                {
+                    removed = pr;
+                }
+            }
+            if (removed != null)
+            {
+                u.location.properties.Remove(removed);
+            }
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " has gathered a new pumpkin-head to add to their collection. They now have " + head.heads + ".",
                 u.location.map.world.wordStore.lookup("ABILITY_HEADLESS_GATHER_PUMPKIN"),img:3);
 

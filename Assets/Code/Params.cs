@@ -155,9 +155,9 @@ namespace Assets.Code
         public double society_votingEconHiddenBiasMult = 1.5;
         public int society_billsBetweenLandAssignments = 3;
         public double society_pExpandIntoEmpty = 0.1;
-        public double society_prestigeFromVotingFailure = 5;
-        public double society_prestigeFromVotingSuccess = -5;
-        public double society_dislikeFromFailedProposal = -15;
+        public double society_prestigeFromVotingFailure = 0;
+        public double society_prestigeFromVotingSuccess =  0;
+        public double society_dislikeFromFailedProposal = 0;
         public double society_houseLiking = 15;
         public int society_securityBuffDuration = 12;
         public int society_securityBuffMajor = 4;

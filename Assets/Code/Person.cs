@@ -322,7 +322,7 @@ namespace Assets.Code
         public void processSanity()
         {
             if (madness is Insanity_Sane) {
-                if (sanity <= 0)
+                if (sanity < 1)
                 {
                     goInsane();
                 }

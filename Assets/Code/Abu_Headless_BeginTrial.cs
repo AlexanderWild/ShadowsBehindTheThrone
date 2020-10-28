@@ -23,6 +23,9 @@ namespace Assets.Code
             VoteOption option_1 = new VoteOption();
             option_1.index = 1;
             issue.options.Add(option_1);
+            session.timeRemaining = map.param.society_votingDuration;
+            issue.reluctanceModifier = 0.66;
+
 
             string add = "";
             if (u.location.person().shadow <= 0.3 && u.location.person().state == Person.personState.normal)
@@ -55,7 +58,7 @@ namespace Assets.Code
 
         public override int getCooldown()
         {
-            return 0;
+            return 6;
         }
 
         public override string getDesc()

@@ -29,6 +29,7 @@ namespace Assets.Code
 
             if (unit.location.person().sanity < 1)
             {
+                unit.location.person().sanity = 0;
                 unit.location.map.world.prefabStore.popImgMsg(unit.getName() + " breaks the mind of " + unit.location.person().getFullName() +
          ". They are now driven to madness.",
          unit.location.map.world.wordStore.lookup("ABILITY_VAMP_INSANITY"));

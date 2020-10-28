@@ -5,7 +5,7 @@
 	Couldn't reproduce
 
 -Leftover graphical properties, by the look of it
-	(couldn't replicate?_
+	(couldn't replicate?)
 
 -Maybe they rebuild lost cities too fast
 

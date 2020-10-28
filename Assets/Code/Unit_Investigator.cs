@@ -202,6 +202,7 @@ namespace Assets.Code
         public bool shouldBePaladin(Map map)
         {
             if (location.soc != this.society) { return false; }
+            if (map.simplified) { return false; }
             
             if (map.param.useAwareness == 1)
             {
