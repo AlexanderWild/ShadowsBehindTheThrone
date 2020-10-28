@@ -21,7 +21,7 @@ panic_panicAtFullShadow: 1.75
 panic_canAlly: 0.5
 panic_fromClueFound: 0.015
 panic_paladinSpawn_1: 0.1
-panic_paladinSpawn_2: 0.3
+panic_paladinSpawn_2: 0.4
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -129,9 +129,9 @@ society_introversionStabilityGain: 1.2
 society_votingEconHiddenBiasMult: 1.5
 society_billsBetweenLandAssignments: 3
 society_pExpandIntoEmpty: 0.1
-society_prestigeFromVotingFailure: 5
-society_prestigeFromVotingSuccess: -5
-society_dislikeFromFailedProposal: -15
+society_prestigeFromVotingFailure: 0
+society_prestigeFromVotingSuccess: 0
+society_dislikeFromFailedProposal: 0
 society_houseLiking: 15
 society_securityBuffDuration: 12
 society_securityBuffMajor: 4
@@ -325,3 +325,4 @@ unit_doctor_sowCorpserootCooldown: 5
 unit_vampire_maxBlood: 37
 unit_vampire_drinkReqLiking: 0
 unit_seeker_truthShadow: 0.35
+unit_headless_pumpkinDur: 9

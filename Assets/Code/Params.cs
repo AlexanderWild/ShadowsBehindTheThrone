@@ -35,8 +35,8 @@ namespace Assets.Code
         public double panic_panicAtFullShadow = 1.75;
         public double panic_canAlly = 0.5;
         public double panic_fromClueFound = 0.015;
-        public double panic_paladinSpawn_1 = 0.1;
-        public double panic_paladinSpawn_2 = 0.3;
+        public double panic_paladinSpawn_1 = 0.15;
+        public double panic_paladinSpawn_2 = 0.5;
 
         public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;
