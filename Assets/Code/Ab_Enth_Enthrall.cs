@@ -17,14 +17,22 @@ namespace Assets.Code
             person.state = Person.personState.enthralled;
             map.overmind.enthralled = person;
 
+            map.overmind.availableEnthrallments -= 1;
+            map.overmind.computeEnthralled();
+
+            string addMsg = "\n\nYou have " + map.overmind.availableEnthrallments + " enthrallment uses remaining.You will regain one every " +
+                map.param.overmind_enthrallmentUseRegainPeriod + " turns if you are below maximum.";
+
             map.world.prefabStore.popImgMsg(
                 "You enthrall " + map.overmind.enthralled.getFullName() + ". They are now, until they die, your instrument in this world. Their votes are guided by your hand, and they will"
-                + " act as you command within their society.",
+                + " act as you command within their society."+ addMsg,
                 map.world.wordStore.lookup("ABILITY_ENTHRALL"));
         }
         public override bool castable(Map map, Person person)
         {
             if (map.overmind.enthralled != null) { return false; }
+            if (map.overmind.availableEnthrallments < 1) { return false; }
+            if (map.overmind.nEnthralled >= map.overmind.maxEnthralled) { return false; }
 
             return person.enthrallable();
         }
@@ -51,8 +59,8 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Enthralls a lower-prestige member of a society."
-                + "\n[Only certain low ranked nobles and broken nobles can be enthralled. You may only have one enthralled at a time]";
+            return "Enthralls a lower-prestige member of a society, only certain low ranked nobles and broken nobles can be enthralled."
+                + "\n[You require an enthrallment use, and to not be at your enthralled cap. You may only have one enthralled noble at a time]";
         }
 
         public override string getName()

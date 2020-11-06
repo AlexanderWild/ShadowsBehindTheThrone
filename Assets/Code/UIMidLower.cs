@@ -11,6 +11,7 @@ namespace Assets.Code
         public Text buttonText;
         public World world;
         public Button agentButton;
+        public Text agentCounts;
 
         public int state = 0;
         public static int STATE_ALL_BUSY = 1;
@@ -108,6 +109,9 @@ namespace Assets.Code
                     }
                 }
             }
+            agentCounts.text = "Enthralled: " + world.map.overmind.nEnthralled + "/" + world.map.overmind.maxEnthralled
+                + "\nEnthrallments Available: " + world.map.overmind.availableEnthrallments;
+
             if (agents == 0) { agentButton.gameObject.SetActive(false);state = 0; return; }
 
             agentButton.gameObject.SetActive(true);

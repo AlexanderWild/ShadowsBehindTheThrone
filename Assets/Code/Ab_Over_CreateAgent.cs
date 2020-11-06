@@ -85,12 +85,7 @@ namespace Assets.Code
 
         public override bool castable(Map map, Hex hex)
         {
-            int n = 0;
-            foreach (Unit u in map.units)
-            {
-                if (u.isEnthralled()) { n += 1; }
-            }
-            return hex.location != null && n < map.param.units_maxEnthralled;
+            return hex.location != null && map.overmind.nEnthralled < map.param.overmind_maxEnthralled && map.overmind.availableEnthrallments > 0;
         }
         public override int getCost()
         {
@@ -98,8 +93,9 @@ namespace Assets.Code
         }
         public override string getDesc()
         {
-            return "Create an agent for to use, as long as you are not at your maximum agent count."
-                + "\n[Max " + World.staticMap.param.units_maxEnthralled + "]";
+            return "Create an agent for to use, as long as you are not at your maximum agent count and have at least one enthrallment use available."
+                + "\n[Enthralled under your control: "+ World.staticMap.overmind.nEnthralled + "/" 
+                + World.staticMap.param.overmind_maxEnthralled + " Enthrallment Uses: " + World.staticMap.overmind.availableEnthrallments + "]";
         }
 
         public override string getName()

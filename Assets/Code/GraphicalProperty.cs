@@ -33,14 +33,14 @@ namespace Assets.Code
                 return;
             }
 
-            gameObject.transform.localScale = new Vector3(0.75f * GraphicalMap.scale, 0.75f * GraphicalMap.scale, 1);
+            gameObject.transform.localScale = new Vector3(0.5f * GraphicalMap.scale, 0.5f * GraphicalMap.scale, 1);
 
             Vector3 loc = GraphicalMap.getLoc(location.hex);
 
-            float radius = 0.55f * GraphicalMap.scale;
+            float radius = 0.4f * GraphicalMap.scale;
             if (location.hex == GraphicalMap.selectedHex || property == GraphicalMap.selectedSelectable)
             {
-                radius = 1.1f * GraphicalMap.scale;
+                radius = 0.7f * GraphicalMap.scale;
                 loc = loc + new Vector3(0, 0, -5f);
             }
             else

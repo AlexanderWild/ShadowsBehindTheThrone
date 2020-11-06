@@ -636,6 +636,20 @@ namespace Assets.Code
             }
         }
 
+
+        public void assignElectoralVoters(List<Person> candidates,List<Person> voters,bool allowSelfVote)
+        {
+            foreach (Person p in voters){
+                double bestScore = 0;
+                Person chosenCandidate = null;
+                foreach (Person c in candidates)
+                {
+                    double score = c.prestige*map.param.society_electoralPrestigeWeight;
+                    score += p.getRelation(c).getLiking();
+                }
+            }
+        }
+
         public void debug()
         {
             /*

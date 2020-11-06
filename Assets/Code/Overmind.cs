@@ -21,9 +21,14 @@ namespace Assets.Code
         public double panicFromCluesDiscovered;
         public int nStartingHumanSettlements;
         public bool isFirstEnthralledAgent = true;
+        public int availableEnthrallments = 0;
+        public int nEnthralled = 0;//Set by the UI. Probably not a great thing to have done, but oh well
+        public int maxEnthralled = 3;
+
         public Overmind(Map map)
         {
             this.map = map;
+            maxEnthralled = map.param.overmind_maxEnthralled;
 
             hasEnthrallAbilities = true;
             if (map.agentsOnly == false)
@@ -43,6 +48,19 @@ namespace Assets.Code
                 powers.Add(new Ab_Over_EnthrallAgent());
             }
             //abilities.Add(new Ab_TestAddShadow());
+        }
+
+        public void computeEnthralled()
+        {
+            nEnthralled = 0;
+            if (enthralled != null) { nEnthralled += 1; }
+            foreach (Unit u in map.units)
+            {
+                if (u.isEnthralled())
+                {
+                    nEnthralled += 1;
+                }
+            }
         }
 
         public void addDefaultAbilities()
@@ -209,6 +227,14 @@ namespace Assets.Code
             if (map.automatic)
             {
                 automatic();
+            }
+
+            if (map.turn % map.param.overmind_enthrallmentUseRegainPeriod == 0)
+            {
+                if (availableEnthrallments < map.param.overmind_maxEnthralled)
+                {
+                    availableEnthrallments += 1;
+                }
             }
         }
 

@@ -8,19 +8,17 @@ namespace Assets.Code
     {
         public override void castInner(Map map, Unit other)
         {
-            other.person.state = Person.personState.enthralledAgent;
 
-            string addMsg = "";
-            if (map.overmind.isFirstEnthralledAgent)
-            {
-                map.overmind.isFirstEnthralledAgent = false;
-                this.turnLastCast = 0;
-                addMsg += "\nNo cooldown as this is your first enthralled agent.";
-            }
+            map.overmind.availableEnthrallments -= 1;
+
+            string addMsg = "\n\nYou have " + map.overmind.availableEnthrallments + " enthrallment uses remaining.You will regain one every " + 
+                map.param.overmind_enthrallmentUseRegainPeriod + " turns if you are below maximum.";
+
             map.world.prefabStore.popImgMsg(
-                "You take " + other.getName() + " under your control" + addMsg,
+                "You take " + other.getName() + " under your control. You may vote through them, convince others using their goodwill towards them, and use abilities relating to noble enthralled. " + addMsg,
                 map.world.wordStore.lookup("ABILITY_ENTHRALL_AGENT"));
 
+            other.person.state = Person.personState.enthralledAgent;
             Evidence ev = new Evidence(map.turn);
             ev.pointsTo = other;
             ev.weight = 0.66;
@@ -28,18 +26,21 @@ namespace Assets.Code
 
             other.task = null;
             other.movesTaken += 1;
+            map.overmind.computeEnthralled();
         }
         public override bool castable(Map map, Person person)
         {
             if (person.unit == null) { return false; }
             if (person.state == Person.personState.enthralledAgent) { return false; }
+            if (map.overmind.availableEnthrallments < 1) { return false; }
+            if (map.overmind.nEnthralled >= map.overmind.maxEnthralled) { return false; }
 
             int nOwned = 0;
             foreach (Unit u in map.units)
             {
                 if (u.isEnthralled()) { nOwned += 1; }
             }
-            return nOwned < map.param.units_maxEnthralled;
+            return nOwned < map.param.overmind_maxEnthralled;
         }
 
         public override bool castable(Map map, Unit unit)
@@ -64,8 +65,8 @@ namespace Assets.Code
         }
         public override string getDesc()
         {
-            return "Enthrall an agent to turn it to your control. Places a piece of evidence pointing to the guilt of your new agent.\nDoes not trigger cooldown on first ever agent enthrallment."
-                + "\n[Requires a unit with a character. Max " + World.staticMap.param.units_maxEnthralled + "]";
+            return "Enthrall an agent to turn it to your control. Places a piece of evidence pointing to the guilt of your new agent."
+                + "\n[Requires a unit with a character. Max " + World.staticMap.param.overmind_maxEnthralled + " enthralled. You require an enthrallment use]";
         }
 
         public override string getName()

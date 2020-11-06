@@ -64,6 +64,7 @@ namespace Assets.Code
         public int overmind_maxPower = 24;
         public double overmind_powerRegen = 1.0;
         public bool overmind_singleAbilityPerTurn = true;
+        public int overmind_enthrallmentUseRegainPeriod = 16;
 
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
 
@@ -73,7 +74,8 @@ namespace Assets.Code
 
         public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
         public double combat_thresholdAttackStrength = 0.25;
-        public double combat_lethality = 0.3;//How much of an army is destroyed in a battle at maximum roll against an equivalent force
+        public double combat_lethality = 0.2;
+        public double combat_lethalityDefensive = 0.1;
         public double combat_takeLandThreshold = 1.25;//How much over their strength do you have to be to take some land
         public double combat_maxMilitaryCapExponent = 0.82;//Used to reduce the power of larger nations
         public double combat_defensivePostureDmgMult = 0.666;
@@ -164,6 +166,7 @@ namespace Assets.Code
         public int society_securityBuffMinor = 1;
         public int society_lockdownPrestigeHit = -10;
         public int society_lockdownBuffDuration = 12;
+        public double society_electoralPrestigeWeight = 2;//Comparing prestige to liking. If we want 50 prestige to equal 100 liking, go for 2
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;
@@ -271,7 +274,7 @@ namespace Assets.Code
         public int ability_unit_bloodCostInfiltrate = 7;
         public int ability_unit_bloodCostInsanity = 7;
         public double ability_unit_insanityInfiltrationReq = 0.2;
-        public int ability_enthrallUnitCooldown = 32;
+        public int ability_enthrallUnitCooldown = 0;
         public int ability_createUnitCooldown = 64;
 
         public int ability_unit_falseAccusationCharges = 5;
@@ -346,7 +349,7 @@ namespace Assets.Code
         public int unit_spreadShadowTime = 5;
         public double unit_spreadShadowAmount = 0.6;
         public double unit_spreadShadowEvidence = 0.5; 
-        public int units_maxEnthralled = 2;
+        public int overmind_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackDuration = 7;

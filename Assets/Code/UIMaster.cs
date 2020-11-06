@@ -182,6 +182,7 @@ namespace Assets.Code
             if (state == uiState.BACKGROUND) { return; }
             if (state == uiState.MAIN_MENU) { return; }
 
+            world.map.overmind.computeEnthralled();
             uiLeftPrimary.checkData();
             uiMidTop.checkData();
             uiScrollables.checkData();

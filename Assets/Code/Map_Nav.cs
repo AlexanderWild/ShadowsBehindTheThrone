@@ -311,8 +311,11 @@ namespace Assets.Code
             {
                 if (u != u2 && u.hostileTo(u2))
                 {
+                    double lethality = loc.map.param.combat_lethality;
+                    double lethalityDef = loc.map.param.combat_lethalityDefensive;
+
                     world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
-                    int dmgDone = (int)(u.hp * (0.25 + (Eleven.random.NextDouble() * 0.25)));
+                    int dmgDone = (int)(u.hp * (lethality + (Eleven.random.NextDouble() * lethality)));
                     if (u2.isMilitary)
                     {
                         if (loc.settlement != null && loc.settlement.defensiveStrengthCurrent > 0)
@@ -321,7 +324,16 @@ namespace Assets.Code
                             dmgDone -= (int)ablated;
                             loc.settlement.defensiveStrengthCurrent -= ablated;
                         }
+
+                        int dmgReplied = (int)(u2.hp * (lethalityDef + (Eleven.random.NextDouble() * lethalityDef)));
+                        if (dmgReplied >= u.hp)
+                        {
+                            dmgReplied = u.hp - 1;
+                            if (dmgReplied < 0) { dmgReplied = 0; }
+                        }
+                        u.hp -= dmgReplied;
                     }
+                    
 
                     if (dmgDone < 1) { dmgDone = 1; }
 
@@ -368,7 +380,7 @@ namespace Assets.Code
                         }
                     }
 
-                    if (loc.settlement != null)
+                    if (u.isMilitary && loc.settlement != null)
                     {
                         if (loc.settlement is Set_City)
                         {

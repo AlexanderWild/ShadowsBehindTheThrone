@@ -151,8 +151,7 @@ namespace Assets.Code
                         }
                     }
                 }
-                map.overmind.isFirstEnthralledAgent = false;
-                if (map.param.overmind_singleAbilityPerTurn) { map.overmind.hasTakenAction = true; }
+                map.overmind.availableEnthrallments -= 1;
             }
         }
 

@@ -49,6 +49,7 @@ namespace Assets.Code
             layerBack.sprite = world.textureStore.layerBack[ind];
             layerMid.enabled = false;
             layerFore.enabled = false;
+            border.color = Color.white;
 
             title.text = "";
             subtitle.text = t;
@@ -68,6 +69,10 @@ namespace Assets.Code
             layerMid.sprite  = p.getImageMid();
             layerFore.sprite = p.getImageFore();
 
+            float f = (float)(1 - p.shadow);
+            if (f > 1) { f = 1; }
+            if (f< 0) { f = 0; }
+            border.color = new Color(f, f, f);
             title.text = p.getFullName();
             subtitle.text = (p.title_land == null) ? "" : p.title_land.getName();
 
