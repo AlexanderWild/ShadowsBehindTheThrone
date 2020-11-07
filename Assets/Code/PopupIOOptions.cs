@@ -76,6 +76,7 @@ namespace Assets.Code
                     map.world.audioStore.effectVolume = int.Parse(split[1]);
                     World.autosavePeriod = int.Parse(split[2]);
                     World.autodismissAutosave = int.Parse(split[3]);
+                    map.param.option_useAdvancedGraphics = int.Parse(split[4]);
                 }
             }catch(Exception e)
             {
@@ -94,7 +95,8 @@ namespace Assets.Code
 
         public static void saveState()
         {
-            string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod + "," + World.autodismissAutosave;
+            string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 
+                + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics;
             if (File.Exists("settings.txt"))
             {
                 File.Delete("settings.txt");
