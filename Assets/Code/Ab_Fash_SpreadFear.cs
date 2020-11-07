@@ -13,8 +13,6 @@ namespace Assets.Code
 
             ThreatItem item = hex.location.person().getGreatestThreat();
             if (item == null) { return; }
-
-            double prevThreat = item.threat;
             
             string changes = "";
             foreach (Location loc in hex.location.getNeighbours())

@@ -12,6 +12,7 @@ namespace Assets.Code
     public class Params
     {
         public int option_edgeScroll = 1;
+        public int option_useAdvancedGraphics = 1;
         public int mapGen_sizeX = 32;
         public int mapGen_sizeY = 24;
         public double mapGen_proportionOfMapForHumans = 0.6;

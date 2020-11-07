@@ -238,7 +238,7 @@ namespace Assets.Code
             //Assign all locations to provinces
             assignProvinces();
 
-            for (int splitRound = 0; splitRound < 0; splitRound++)
+            for (int splitRound = 0; splitRound < 3; splitRound++)
             {
                 //Try to break up huge land provinces
                 List<Province> newProvinces = new List<Province>();

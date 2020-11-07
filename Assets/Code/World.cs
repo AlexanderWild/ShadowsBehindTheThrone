@@ -47,6 +47,8 @@ namespace Assets.Code
         public List<God> chosenGods = new List<God>();
         public float lastFrame;
 
+        public static bool advancedEdition = true;
+
         public static LogBox saveLog = new LogBox("saveLog.log");
 
         public void Start()
@@ -92,7 +94,7 @@ namespace Assets.Code
                 Log("Windows! A windows OS");
                 isWindows = true;
                 pathPrefix = "";
-                separator = "/";
+                separator = "\\";
                 string[] decomp = Application.dataPath.Split('/');
                 for (int i = 0; i < decomp.Length - 1; i++)
                 {
@@ -197,6 +199,10 @@ namespace Assets.Code
             map.globalist.buildBasicElements();
             map.gen();
             map.overmind.startedComplete();
+            if (advancedEdition)
+            {
+                map.param.option_useAdvancedGraphics = 1;
+            }
             PopupIOOptions.load(map);
 
 

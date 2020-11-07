@@ -335,9 +335,6 @@ namespace Assets.Code
                         float mult = (float)threat;
                         mult = Mathf.Max(0, mult);
                         mult = Mathf.Min(1, mult);
-                        float r = mult;
-                        float g = mult;
-                        float b = mult;
 
                         //Color color = new Color(r, g, b, 0.8f);
                         Color color = new Color(mult, 0, 0, 0.5f);

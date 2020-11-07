@@ -14,10 +14,13 @@ namespace Assets.Code
         public Button bDismiss;
         public Button bEdgeScroll;
         public Button bSoundEffects;
+        public Button bAdvancedGraphics;
         public UIMaster ui;
         public Text mouseEdgeText;
         public Text soundEffectText;
         public Text autosaveText;
+        public Text advancedGraphicsText;
+
         public Text seedString;
 
         public void Update()
@@ -25,6 +28,16 @@ namespace Assets.Code
             mouseEdgeText.text = map.param.option_edgeScroll == 1 ? "On" : "Off";
             soundEffectText.text = ui.world.audioStore.effectVolume == 0 ? "Off" : "On";
             autosaveText.text = World.autosavePeriod == -1 ? "Off" : "On";
+            if (World.advancedEdition == false)
+            {
+                bAdvancedGraphics.gameObject.SetActive(false);
+                advancedGraphicsText.text = "";
+            }
+            else
+            {
+                advancedGraphicsText.text = map.param.option_useAdvancedGraphics == 1 ? "On" : "Off";
+
+            }
             seedString.text = "Game Seed: " + map.seed;
         }
 
@@ -36,6 +49,18 @@ namespace Assets.Code
         public void toggleSoundEffects()
         {
             ui.world.audioStore.effectVolume = (ui.world.audioStore.effectVolume == 0) ? 1 : 0;
+            ui.world.audioStore.playClickInfo();
+        }
+        public void toggleAdvancedGraphics()
+        {
+            if (ui.world.map.param.option_useAdvancedGraphics == 0 && World.advancedEdition)
+            {
+                ui.world.map.param.option_useAdvancedGraphics = 1;
+            }
+            else
+            {
+                ui.world.map.param.option_useAdvancedGraphics = 0;
+            }
             ui.world.audioStore.playClickInfo();
         }
 

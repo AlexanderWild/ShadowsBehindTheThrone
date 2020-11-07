@@ -34,6 +34,13 @@ namespace Assets.Code
         public int letterWritingCharge = 0;
         public Action action;
 
+        public int imgAdvFace = -1;
+        public int imgAdvEyes = -1;
+        public int imgAdvHair = -1;
+        public int imgAdvMouth = -1;
+        public int imgAdvJewel = -1;
+
+
         public ThreatItem threat_enshadowedNobles;
         public ThreatItem threat_agents;
 
@@ -98,6 +105,26 @@ namespace Assets.Code
                     traits.Add(add);
 
                     if (Eleven.random.Next(2) == 0) { break; }//50% chance to add another trait
+                }
+            }
+
+            if (World.advancedEdition)
+            {
+                if (isMale)
+                {
+                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[0].m_eyes.Count);
+                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[0].m_faces.Count);
+                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[0].m_hair.Count);
+                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[0].m_mouths.Count);
+                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[0].m_jewels.Count);
+                }
+                else
+                {
+                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[0].f_eyes.Count);
+                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[0].f_faces.Count);
+                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[0].f_hair.Count);
+                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[0].f_mouths.Count);
+                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[0].f_jewels.Count);
                 }
             }
         }
@@ -880,6 +907,21 @@ namespace Assets.Code
         public Sprite getImageFore()
         {
             if (unit != null && unit.definesForeground()) { return unit.getPortraitForeground(); }
+            if (World.advancedEdition)
+            {
+                if (state == personState.broken)
+                {
+                    return map.world.textureStore.person_advBroken;
+                }
+                else if (state == personState.enthralled || state == personState.enthralledAgent)
+                {
+                    return map.world.textureStore.person_advEnthralled;
+                }
+                else
+                {
+                    return map.world.textureStore.person_advClear;
+                }
+            }
             if (imgIndFore == -1)
             {
                 imgIndFore = Eleven.random.Next(map.world.textureStore.layerFore.Count);

@@ -30,6 +30,7 @@ namespace Assets.Code
 
         public Text bThreatsText;
         public Button bHighlightEnthrallables;
+        public Button bViewEnthralled;
 
         public enum Tab { People, Places, Votes,Messages, Actions ,War,Threats};
         private Tab currentTab;
@@ -53,6 +54,10 @@ namespace Assets.Code
             if (master.world.map != null && master.world.map.param.overmind_allowDirectEnthralling == 0)
             {
                 bHighlightEnthrallables.gameObject.SetActive(false);
+            }
+            if (master.world.map != null && master.world.map.simplified)
+            {
+                bViewEnthralled.gameObject.SetActive(false);
             }
 
             if (master.world.map != null && master.world.map.overmind != null)

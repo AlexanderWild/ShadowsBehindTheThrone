@@ -217,6 +217,7 @@ namespace Assets.Code
             state = viewState.HIERARCHY;
             resetHidden();
             refreshOffset();
+            world.ui.uiLeftPrimary.uiPerson.setTo(focus);
         }
 
         public static void refreshNeighbor(Person nfocus)
@@ -287,6 +288,7 @@ namespace Assets.Code
             state = viewState.NEIGHBOR;
             resetHidden();
             refreshOffset();
+            world.ui.uiLeftPrimary.uiPerson.setTo(focus);
         }
 
         public static void refreshUnlanded(Person nfocus)

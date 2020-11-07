@@ -21,6 +21,10 @@ namespace Assets.Code
         public Image nationFlag2;
         public Image personBack;
         public Image personMid;
+        public Image personAdvEyes;
+        public Image personAdvMouth;
+        public Image personAdvHair;
+        public Image personAdvJewel;
         public Image personFore;
         public Image personBorder;
         public World world;
@@ -40,6 +44,28 @@ namespace Assets.Code
                 personBack.sprite = unit.person.getImageBack();
                 personMid.sprite = unit.person.getImageMid();
                 personFore.sprite = unit.person.getImageFore();
+                if (World.staticMap.param.option_useAdvancedGraphics == 1)
+                {
+                    Person p = unit.person;
+                    if (p.isMale)
+                    {
+                        personMid.sprite = p.map.world.textureStore.cultures[0].m_faces[p.imgAdvFace];
+                        personAdvEyes.sprite = p.map.world.textureStore.cultures[0].m_eyes[p.imgAdvEyes];
+                        personAdvMouth.sprite = p.map.world.textureStore.cultures[0].m_mouths[p.imgAdvMouth];
+                        personAdvHair.sprite = p.map.world.textureStore.cultures[0].m_hair[p.imgAdvHair];
+                        personAdvJewel.sprite = p.map.world.textureStore.cultures[0].m_jewels[p.imgAdvJewel];
+                    }
+                    else
+                    {
+                        personMid.sprite = p.map.world.textureStore.cultures[0].f_faces[p.imgAdvFace];
+                        personAdvEyes.sprite = p.map.world.textureStore.cultures[0].f_eyes[p.imgAdvEyes];
+                        personAdvMouth.sprite = p.map.world.textureStore.cultures[0].f_mouths[p.imgAdvMouth];
+                        personAdvHair.sprite = p.map.world.textureStore.cultures[0].f_hair[p.imgAdvHair];
+                        personAdvJewel.sprite = p.map.world.textureStore.cultures[0].f_jewels[p.imgAdvJewel];
+                    }
+                    personFore.sprite = p.getImageFore();
+                }
+
                 personFore.color = Color.white;
                 evidenceText.text = "Evidence: " + (int)(100 * unit.person.evidence) + "%";
             }

@@ -21,6 +21,9 @@ namespace Assets.Code
         public Sprite person_back_eyes;
         public Sprite person_back_shadow;
         public Sprite person_pumpkin;
+        public Sprite person_advEnthralled;
+        public Sprite person_advClear;
+        public Sprite person_advBroken;
 
         public Sprite slotKing;
         public Sprite slotDuke;
@@ -160,6 +163,7 @@ namespace Assets.Code
         public Dictionary<string, Sprite> images;
         public List<Sprite> layerFore = new List<Sprite>();
         public List<Sprite> layerBack = new List<Sprite>();
+        public List<GraphicalCulture> cultures = new List<GraphicalCulture>();
 
         public void load()
         {
@@ -222,6 +226,110 @@ namespace Assets.Code
                             //World.log("Image saved as " + subpath);
                             images.Add(subpath, test);
                         }
+                    }
+                }
+            }
+
+            if (World.advancedEdition)
+            {
+                foreach (string s in Directory.GetDirectories(".\\advdata%graphics%cultures".Replace("%", World.separator)))
+                {
+                    if (Directory.Exists(s))
+                    {
+                        World.log("DIRECTORY " + s);
+                        GraphicalCulture cult = new GraphicalCulture();
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "f_eyes"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.f_eyes.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "f_mouths"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.f_mouths.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "f_faces"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.f_faces.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "f_jewels"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.f_jewels.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "f_hair"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.f_hair.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "m_eyes"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.m_eyes.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "m_mouths"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.m_mouths.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "m_faces"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.m_faces.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "m_jewels"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.m_jewels.Add(loadedImg);
+                            }
+                        }
+                        foreach (string fileName in Directory.GetFiles(s + World.separator + "m_hair"))
+                        {
+
+                            if (fileName.EndsWith(".png"))
+                            {
+                                Sprite loadedImg = LoadPNG(fileName);
+                                cult.m_hair.Add(loadedImg);
+                            }
+                        }
+                        World.log("Loaded culture. nFEyes: " + cult.f_eyes.Count);
+                        cultures.Add(cult);
                     }
                 }
             }
@@ -312,6 +420,10 @@ namespace Assets.Code
                 tex = new Texture2D(2, 2);
                 tex.LoadImage(fileData);
                 response = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            }
+            else
+            {
+                World.log("Unable to find: " + filePath);
             }
             return response;
         }

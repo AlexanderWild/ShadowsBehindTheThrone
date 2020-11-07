@@ -10,6 +10,7 @@
 /[Ll]ogs/
 /[Tt]utorial/
 /[Mm]emoryCaptures/
+/advdata/
 /*ompile*
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored

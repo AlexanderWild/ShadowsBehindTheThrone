@@ -14,6 +14,10 @@ namespace Assets.Code
         public Image border;
         public Image layerBack;
         public Image layerMid;
+        public Image layerAdvHair;
+        public Image layerAdvEyes;
+        public Image layerAdvMouth;
+        public Image layerAdvJewel;
         public Image layerFore;
         public Image selectable;
         public Text title;
@@ -49,6 +53,10 @@ namespace Assets.Code
             layerBack.sprite = world.textureStore.layerBack[ind];
             layerMid.enabled = false;
             layerFore.enabled = false;
+            layerAdvEyes.enabled = false;
+            layerAdvMouth.enabled = false;
+            layerAdvHair.enabled = false;
+            layerAdvJewel.enabled = false;
             border.color = Color.white;
 
             title.text = "";
@@ -68,6 +76,29 @@ namespace Assets.Code
             layerBack.sprite = p.getImageBack();
             layerMid.sprite  = p.getImageMid();
             layerFore.sprite = p.getImageFore();
+
+
+            if (World.staticMap.param.option_useAdvancedGraphics == 1)
+            {
+                if (p.isMale)
+                {
+                    layerMid.sprite = p.map.world.textureStore.cultures[0].m_faces[p.imgAdvFace];
+                    layerAdvEyes.sprite = p.map.world.textureStore.cultures[0].m_eyes[p.imgAdvEyes];
+                    layerAdvMouth.sprite = p.map.world.textureStore.cultures[0].m_mouths[p.imgAdvMouth];
+                    layerAdvHair.sprite = p.map.world.textureStore.cultures[0].m_hair[p.imgAdvHair];
+                    layerAdvJewel.sprite = p.map.world.textureStore.cultures[0].m_jewels[p.imgAdvJewel];
+                }
+                else
+                {
+                    layerMid.sprite = p.map.world.textureStore.cultures[0].f_faces[p.imgAdvFace];
+                    layerAdvEyes.sprite = p.map.world.textureStore.cultures[0].f_eyes[p.imgAdvEyes];
+                    layerAdvMouth.sprite = p.map.world.textureStore.cultures[0].f_mouths[p.imgAdvMouth];
+                    layerAdvHair.sprite = p.map.world.textureStore.cultures[0].f_hair[p.imgAdvHair];
+                    layerAdvJewel.sprite = p.map.world.textureStore.cultures[0].f_jewels[p.imgAdvJewel];
+
+                }
+                layerFore.sprite = p.getImageFore();
+            }
 
             float f = (float)(1 - p.shadow);
             if (f > 1) { f = 1; }
@@ -162,7 +193,7 @@ namespace Assets.Code
                     //if (inner != null) { inner.outer = null; }
                     Destroy(this.gameObject);
                 }
-                catch (Exception e)
+                catch
                 {
                     //Do nothing, wait for next turn to try to delete yourself
                 }
