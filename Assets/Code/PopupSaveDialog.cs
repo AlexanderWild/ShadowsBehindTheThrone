@@ -18,7 +18,7 @@ namespace Assets.Code
 
 		public void save()
 		{
-			String name = saveName.text;
+			String name = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator + saveName.text;
 			if (name == "")
 				name = "quicksave";
 

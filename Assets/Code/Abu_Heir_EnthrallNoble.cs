@@ -3,7 +3,7 @@
 
 namespace Assets.Code
 {
-    public class Abu_Base_EnthrallNoble: AbilityUnit
+    public class Abu_Heir_EnthrallNoble: AbilityUnit
     {
 
         public override void castInner(Map map, Unit u)
@@ -28,7 +28,7 @@ namespace Assets.Code
             }
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " brings " + u.location.person().getFullName() + " under your command, enthralling them to your will.",
-                u.location.map.world.wordStore.lookup("ABILITY_UNIT_ENTHRALL_NOBLE"));
+                u.location.map.world.wordStore.lookup("ABILITY_UNIT_ENTHRALL_NOBLE"),4);
         }
         public override bool castable(Map map, Unit u)
         {

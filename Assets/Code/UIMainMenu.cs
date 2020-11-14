@@ -14,14 +14,16 @@ namespace Assets.Code
         public Button startStreamlinedButton;
         public Button startButton;
         public Text generateText;
+        public Text advancedEditionText;
         public World world;
 
         public void Update()
         {
             continueButton.gameObject.SetActive(world.map != null);
             saveButton.gameObject.SetActive(world.map != null);
-            startStreamlinedButton.gameObject.SetActive(world.map == null);
-            startButton.gameObject.SetActive(world.map == null);
+            //startStreamlinedButton.gameObject.SetActive(world.map == null);
+            //startButton.gameObject.SetActive(world.map == null);
+            advancedEditionText.gameObject.SetActive(World.advancedEdition);
         }
     }
 }

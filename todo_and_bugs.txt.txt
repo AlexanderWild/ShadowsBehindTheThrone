@@ -25,8 +25,6 @@
 
 -Units disappear when dismissing a dialog option (only in compiled?)
 
--Heirarchy view doesn't autoscroll to target
-	
 -Traits should affect infiltration difficulty
 
 -For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
@@ -37,13 +35,9 @@
 	Low criticality:
 
 -Location didn't have province
-
--Dark nobles shouldn't hate the defensive stance
-
 -Allow player to vote on all econ reforms available in society
 
 -Two nations named the same thing
--Utilities for assign title are very high (possibly fixed)
 
 	Features:
 	
@@ -58,6 +52,12 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Utilities for assign title are very high (possibly fixed)
+
+-Dark nobles shouldn't hate the defensive stance
+
+-Heirarchy view doesn't autoscroll to target
+	
 -Typo in seeker flavour when beginning secret research
 -When combat kicks you from a region, your task gotta cancel
 

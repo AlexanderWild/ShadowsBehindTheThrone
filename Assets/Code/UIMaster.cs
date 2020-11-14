@@ -123,7 +123,6 @@ namespace Assets.Code
             if (state == uiState.MAIN_MENU)
             {
                 uiMainMenu.continueButton.gameObject.SetActive(World.staticMap != null);
-                uiMainMenu.generateText.gameObject.SetActive(World.staticMap == null);
             }
 
             checkBlockerQueue();

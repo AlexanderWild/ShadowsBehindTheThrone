@@ -48,8 +48,13 @@ namespace Assets.Code
         public float lastFrame;
 
         public static bool advancedEdition = true;
+        public static bool useHorseman = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
+        public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
+        public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
+        public static int versionNumber = 13;
+        public static int subversionNumber = 0;
 
         public void Start()
         {
@@ -57,6 +62,7 @@ namespace Assets.Code
 
             if (Directory.Exists("advdata") == false) { advancedEdition = false; World.log("Setting to standard edition as not advanced data folder was detected"); }
 
+            Log("User folder attempt: " + Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
 
             specificStartup();
             ui.setToMainMenu();
@@ -212,6 +218,7 @@ namespace Assets.Code
             }
 
 
+
             //ui.setToWorld();
             displayMessages = !automatic;
             Log("Got to end of initial startup");
@@ -235,6 +242,11 @@ namespace Assets.Code
             "Infiltrating a few locations is a good first step (the vampire or merchant work well here), even if the agent you used dies, the infiltration level will benefit your other agents.";
             msg += "\n\nIf you wish to use direct attacks on the nations, try to cause civil wars before you begin, for example by enshadowing some nobles, or causing madness, they will turn on each other, giving you an opening.";
             prefabStore.popMsgTreeBackground(msg);
+        }
+
+        public void bUseHorsemanToggle()
+        {
+            useHorseman = !useHorseman;
         }
         /*
         public void startup()
@@ -313,7 +325,7 @@ namespace Assets.Code
             }
             map.burnInComplete = true;
             map.overmind.addDefaultAbilities();
-            chosenGods = null;//Just in case this fucks with something
+            chosenGods.Clear();//Just in case this fucks with something
             ui.setToWorld();
         }
 
@@ -435,13 +447,27 @@ namespace Assets.Code
             }
         }
 
+
+
         public void save(string filename,bool popMsg=true)
         {
             Map rescueMap = World.staticMap;
 
-            if (!hasWritePermission("."))
+            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName;
+            if (Directory.Exists(saveFolder) == false){
+                try
+                {
+                    Directory.CreateDirectory(saveFolder);
+                }catch(Exception e)
+                {
+                    prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.\n\n" + e.Message);
+                    World.autosavePeriod = -1;
+                    return;
+                }
+            }
+            if (!hasWritePermission(saveFolder))
             {
-                prefabStore.popMsg("You don't have write permissions to this folder. Saving cannot function yet without the game being able to write to its directory.");
+                prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
                 World.autosavePeriod = -1;
                 return;
             }
@@ -473,14 +499,18 @@ namespace Assets.Code
 
                 // emit the data via JSON
                 string saveString = fsJsonPrinter.CompressedJson(data);
-                World.Log("Save exit point");
+                World.Log("Save data exit point");
+
+                string catSaveString = "Version;" + World.versionNumber + ";" + World.subversionNumber;
+                catSaveString += saveHeader;
+                catSaveString += saveString;
 
                 if (File.Exists(filename))
                 {
                     World.Log("Overwriting old save: " + filename);
                     File.Delete(filename);
                 }
-                File.WriteAllLines(filename, new string[] { saveString });
+                File.WriteAllLines(filename, new string[] { catSaveString });//Do it all on one line, to avoid faff wrt line endings
 
                 world.map.world = world;
                 staticMap = map;
@@ -550,8 +580,12 @@ namespace Assets.Code
                     map.world = null;
                     map = null;
                 }
-
-                string serializedState = File.ReadAllText(filename);
+                filename = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator + filename;
+                string fullFile = File.ReadAllText(filename);
+                //string serializedState = fullFile.Substring(fullFile.IndexOf("\n"), fullFile.Length);
+                int startIndex = fullFile.IndexOf(saveHeader) + saveHeader.Length;
+                int endIndex = fullFile.Length - startIndex;
+                string serializedState = fullFile.Substring(startIndex,endIndex);
                 fsSerializer _serializer = new fsSerializer();
                 fsData data = fsJsonParser.Parse(serializedState);
                 World.Log("Data parsed");

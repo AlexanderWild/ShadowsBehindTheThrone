@@ -229,7 +229,7 @@ namespace Assets.Code
                 automatic();
             }
 
-            if (map.turn % map.param.overmind_enthrallmentUseRegainPeriod == 0)
+            if (map.turn - map.param.mapGen_burnInSteps % map.param.overmind_enthrallmentUseRegainPeriod == 0)
             {
                 if (availableEnthrallments < map.param.overmind_maxEnthralled)
                 {

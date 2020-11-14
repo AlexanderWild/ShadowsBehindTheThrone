@@ -15,7 +15,11 @@ namespace Assets.Code
             hp = 3;
 
 
-            abilities.Add(new Abu_Base_Recruit());
+            abilities.Add(new Abu_Heir_EnthrallNoble());
+            abilities.Add(new Abu_Heir_BreakNoble());
+            abilities.Add(new Abu_Base_Infiltrate());
+            abilities.Add(new Abu_Base_SocialiseAtCourt());
+            //abilities.Add(new Abu_Base_Recruit());
         }
 
         public override void turnTickInner(Map map)
@@ -43,7 +47,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
-            return world.textureStore.unit_seeker;
+            return world.textureStore.unit_heirophant;
         }
 
         public override bool hasSpecialInfo()

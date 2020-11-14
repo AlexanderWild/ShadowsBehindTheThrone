@@ -24,28 +24,33 @@ namespace Assets.Code
             {
                 try
                 {
-                    var info = new DirectoryInfo(".");
-                    var fileInfo = info.GetFiles();
-                    int maxAutosave = -1;
-                    DateTime oldestAutosaveTime = DateTime.MaxValue;
+                    String folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName;
+                    var info = new DirectoryInfo(folder);
                     int oldestAuto = -1;
-                    foreach (FileInfo file in fileInfo)
+                    int maxAutosave = -1;
+                    if (Directory.Exists(folder))
                     {
-                        if (file.Name.StartsWith("Autosave") && file.Name.EndsWith(".sv"))
-                        {
-                            string[] split = file.Name.Split('_');
-                            if (split.Length == 3)
-                            {
-                                int saveInt = int.Parse(split[1]);
-                                if (saveInt > maxAutosave)
-                                {
-                                    maxAutosave = saveInt;
-                                }
 
-                                if (file.LastWriteTime < oldestAutosaveTime)
+                        var fileInfo = info.GetFiles();
+                        DateTime oldestAutosaveTime = DateTime.MaxValue;
+                        foreach (FileInfo file in fileInfo)
+                        {
+                            if (file.Name.StartsWith("Autosave") && file.Name.EndsWith(".sv"))
+                            {
+                                string[] split = file.Name.Split('_');
+                                if (split.Length == 3)
                                 {
-                                    oldestAutosaveTime = file.LastWriteTime;
-                                    oldestAuto = saveInt;
+                                    int saveInt = int.Parse(split[1]);
+                                    if (saveInt > maxAutosave)
+                                    {
+                                        maxAutosave = saveInt;
+                                    }
+
+                                    if (file.LastWriteTime < oldestAutosaveTime)
+                                    {
+                                        oldestAutosaveTime = file.LastWriteTime;
+                                        oldestAuto = saveInt;
+                                    }
                                 }
                             }
                         }
@@ -63,6 +68,7 @@ namespace Assets.Code
                         filename += (1+maxAutosave) + "_.sv";
                     }
 
+                    filename = folder + World.separator + filename;
                     World.staticMap.world.save(filename,false);
                     text.text = "Game Saved\nSaved as: " + filename;
                 }

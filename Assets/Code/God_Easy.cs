@@ -14,7 +14,7 @@ namespace Assets.Code
             powers.Add(new Ab_Easy_AddLiking());
             powers.Add(new Ab_Easy_ReduceEvidence());
             powers.Add(new Ab_Easy_ReduceSuspicion());
-            powers.Add(new Ab_Easy_ShortMemories());
+            //powers.Add(new Ab_Easy_ShortMemories());
         }
 
 
@@ -28,7 +28,7 @@ namespace Assets.Code
 
         public override string getDescMechanics()
         {
-            return "This Dark Name is designed to provide a more straightforward gameplay. The powers are focused on direct manipulation of social interactions, allowing to you spend power to ascend in society and bend it to your will."
+            return "This Dark Name is designed to provide a more straightforward gameplay in the political sphere. The powers are focused on direct manipulation of social interactions, allowing to you spend power to ascend in society and bend it to your will."
                 + "\n";
         }
 

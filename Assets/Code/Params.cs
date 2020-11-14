@@ -281,6 +281,7 @@ namespace Assets.Code
         public int ability_unit_falseAccusationCharges = 5;
         public double ability_unit_falseAccusationEffect = 0.25;
         public double ability_unit_enthrallNobleReq = 0.9;
+        public double ability_unit_breakNobleReq = 0.75;
         public double ability_unit_spreadShadowInfiltrationReq = 0.5;
         public int ability_unit_spreadShadowMinLiking = 35;
         public double ability_unit_falseEvidenceInfiltration = 0.4;

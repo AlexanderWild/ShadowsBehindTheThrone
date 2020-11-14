@@ -11,6 +11,8 @@ namespace Assets.Code
         public static int DOCTOR = 1;
         public static int SEEKER = 2;
         public static int PUMPKIN = 3;
+        public static int HEIROPHANT = 4;
+
         public static string DESC_VAMPIRE = "Stealthy infiltrator and corruptor of the aristocracy." +
             "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
             " can travel great distances between their places of feeding and the places where they act. This makes them good infiltrators and political agents, as they can" +
@@ -27,6 +29,10 @@ namespace Assets.Code
             + "\nUse other agents to create madness in societies, then use the horseman to start trials against innocent (no shadow, not enthralled) nobles who are hated/suspected." +
             " Use power to swing close votes in the voting screen.";
 
+        public static string DESC_HEIROPHANT = "The Dark Heirophant is the preacher of your blasphemous faith. They convert nobles to your cult, once you have infiltrated their locations."
+            + " They allow you to enthrall a single noble, to act as your political instrument, and can break the souls of other nobles, preventing them from seeing evidence of the darkness," +
+            "and making them your accomplices in your rise to power.";
+
 
         public override void cast(Map map, Hex hex)
         {
@@ -36,17 +42,20 @@ namespace Assets.Code
             List<Sprite> icons = new List<Sprite>();
 
 
-            bool hasHorseman = false;
-            foreach (Unit u in map.units)
+            if (World.useHorseman)
             {
-                if (u is Unit_HeadlessHorseman) { hasHorseman = true; }
-            }
-            if (!hasHorseman)
-            {
-                indices.Add(PUMPKIN);
-                titles.Add("The Headless Horseman");
-                descs.Add(DESC_PUMPKIN);
-                icons.Add(map.world.textureStore.icon_pumpkin);
+                bool hasHorseman = false;
+                foreach (Unit u in map.units)
+                {
+                    if (u is Unit_HeadlessHorseman) { hasHorseman = true; }
+                }
+                if (!hasHorseman)
+                {
+                    indices.Add(PUMPKIN);
+                    titles.Add("The Headless Horseman");
+                    descs.Add(DESC_PUMPKIN);
+                    icons.Add(map.world.textureStore.icon_pumpkin);
+                }
             }
 
             indices.Add(VAMPIRE);
@@ -63,6 +72,14 @@ namespace Assets.Code
             titles.Add("Seeker");
             descs.Add(DESC_SEEKER);
             icons.Add(map.world.textureStore.icon_seeker);
+
+            if (map.simplified == false)
+            {
+                indices.Add(HEIROPHANT);
+                titles.Add("Dark Heirophant");
+                descs.Add(DESC_HEIROPHANT);
+                icons.Add(map.world.textureStore.icon_heirophant);
+            }
 
             map.world.ui.addBlocker(map.world.prefabStore.getScrollSetAgents(indices, titles, descs, icons).gameObject);
         }

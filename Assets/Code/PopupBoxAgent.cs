@@ -141,6 +141,27 @@ namespace Assets.Code
                     agent.task = null;
                     GraphicalMap.selectedSelectable = agent;
                 }
+                if (index == Ab_Over_CreateAgent.HEIROPHANT)
+                {
+                    Unit agent = new Unit_DarkHeirophant(hex.location, map.soc_dark);
+                    map.world.prefabStore.popImgMsg(
+                        "You draw upon the creatures of darkness, and choose one to serve as your instrument in this world",
+                        "The cult begins, its hidden shrines to the dark powers are raised, and await the worshippers.", 4);
+
+                    agent.person = new Person(map.soc_dark);
+                    agent.person.state = Person.personState.enthralledAgent;
+                    agent.person.unit = agent;
+                    map.units.Add(agent);
+
+
+                    Evidence ev = new Evidence(map.turn);
+                    ev.pointsTo = agent;
+                    ev.weight = 0.66;
+                    agent.location.evidence.Add(ev);
+
+                    agent.task = null;
+                    GraphicalMap.selectedSelectable = agent;
+                }
                 if (!map.overmind.isFirstEnthralledAgent)
                 {
                     foreach (Ability a in map.overmind.powers)

@@ -117,6 +117,10 @@ namespace Assets.Code
                     imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[0].m_hair.Count);
                     imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[0].m_mouths.Count);
                     imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[0].m_jewels.Count);
+                    if (Eleven.random.NextDouble() < 0.3)
+                    {
+                        imgAdvJewel = 0;
+                    }
                 }
                 else
                 {
@@ -125,6 +129,10 @@ namespace Assets.Code
                     imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[0].f_hair.Count);
                     imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[0].f_mouths.Count);
                     imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[0].f_jewels.Count);
+                    if (Eleven.random.NextDouble() < 0.3)
+                    {
+                        imgAdvJewel = 0;
+                    }
                 }
             }
         }

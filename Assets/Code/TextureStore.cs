@@ -37,6 +37,7 @@ namespace Assets.Code
         public Sprite boxImg_seekerBook;
         public Sprite boxImg_redDeath;
         public Sprite boxImg_pumpkin;
+        public Sprite boxImg_cult;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
@@ -92,6 +93,7 @@ namespace Assets.Code
         public Sprite icon_seeker;
         public Sprite icon_corpseroot;
         public Sprite icon_pumpkin;
+        public Sprite icon_heirophant;
 
         public Sprite icon_combat;
 
@@ -128,6 +130,7 @@ namespace Assets.Code
         public Sprite unit_armyOfDead;
         public Sprite unit_paladin;
         public Sprite unit_pumpkin;
+        public Sprite unit_heirophant;
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;
@@ -265,6 +268,7 @@ namespace Assets.Code
                                 cult.f_faces.Add(loadedImg);
                             }
                         }
+                        cult.f_jewels.Add(person_advClear);
                         foreach (string fileName in Directory.GetFiles(s + World.separator + "f_jewels"))
                         {
 
@@ -310,6 +314,7 @@ namespace Assets.Code
                                 cult.m_faces.Add(loadedImg);
                             }
                         }
+                        cult.m_jewels.Add(person_advClear);
                         foreach (string fileName in Directory.GetFiles(s + World.separator + "m_jewels"))
                         {
 

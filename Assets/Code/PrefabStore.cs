@@ -326,11 +326,32 @@ namespace Assets.Code
         {
             PopupScrollSet specific = getInnerScrollSet();
 
-            var info = new DirectoryInfo(".");
+            var info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName);
             var fileInfo = info.GetFiles();
             List<FileInfo> files = new List<FileInfo>();
+
             foreach (FileInfo file in fileInfo)
             {
+                //Here we're going to read in the header of the file only (plus a bit more, to account for us shoving more crud into the header at a future time).
+                //Saves loading the whole file just to check version number
+                string[] headerStrings = null;
+                using (FileStream fs = File.OpenRead(file.FullName))
+                {
+                    byte[] b = new byte[1024*2];
+                    UTF8Encoding temp = new UTF8Encoding(true);
+
+                    fs.Read(b, 0, b.Length);//Read out enough to cover the entire header (regardless of how large it eventually gets)
+                    headerStrings = temp.GetString(b).Split('\n');
+                    for (int i = 0; i < headerStrings.Length; i++)
+                    {
+                        World.log("Header " + i + " " + headerStrings[i]);
+                    }
+                    World.log("Read file: " + temp.GetString(b));
+                    fs.Close();
+                }
+
+                if (headerStrings == null) { continue; }
+                if (headerStrings[0] != "Version;" + World.versionNumber + ";" + World.subversionNumber) { continue; }//Old version, don't try to load
                 if (file.Name.EndsWith(".sv")){
                     files.Add(file);
                 }
@@ -685,6 +706,10 @@ namespace Assets.Code
             else if (img == 3)
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_pumpkin;
+            }
+            else if (img == 4)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_cult;
             }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
