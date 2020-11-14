@@ -117,31 +117,36 @@ namespace Assets.Code
                 }
             }
 
-            if (culture != null)
+            if (World.advancedEdition  && culture != null)
             {
-                if (isMale)
+                assignCulture();
+            }
+        }
+
+        public void assignCulture()
+        {
+            if (isMale)
+            {
+                imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_eyes.Count);
+                imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_faces.Count);
+                imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_hair.Count);
+                imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_mouths.Count);
+                imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_jewels.Count);
+                if (Eleven.random.NextDouble() < 0.3)
                 {
-                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_eyes.Count);
-                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_faces.Count);
-                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_hair.Count);
-                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_mouths.Count);
-                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_jewels.Count);
-                    if (Eleven.random.NextDouble() < 0.3)
-                    {
-                        imgAdvJewel = 0;
-                    }
+                    imgAdvJewel = 0;
                 }
-                else
+            }
+            else
+            {
+                imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_eyes.Count);
+                imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_faces.Count);
+                imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_hair.Count);
+                imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_mouths.Count);
+                imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_jewels.Count);
+                if (Eleven.random.NextDouble() < 0.3)
                 {
-                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_eyes.Count);
-                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_faces.Count);
-                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_hair.Count);
-                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_mouths.Count);
-                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_jewels.Count);
-                    if (Eleven.random.NextDouble() < 0.3)
-                    {
-                        imgAdvJewel = 0;
-                    }
+                    imgAdvJewel = 0;
                 }
             }
         }

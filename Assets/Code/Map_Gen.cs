@@ -120,10 +120,10 @@ namespace Assets.Code
             assignLocationNamesAndIndices();
             placeProvinces();
             checkConnectivity();
+            loadCultures();
 
             placeInitialSettlements();
 
-            loadCultures();
 
             //placeMinorSettlements();
 
@@ -148,7 +148,7 @@ namespace Assets.Code
                 List<int[]> locs = new List<int[]>();
                 foreach (Location loc in locations)
                 {
-                    if (loc.soc is Society)
+                    if (loc.isOcean == false)
                     {
                         locs.Add(new int[] { loc.hex.x, loc.hex.y });
                     }
