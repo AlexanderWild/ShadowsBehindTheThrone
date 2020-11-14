@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using FullSerializer;
+using System.IO;
 
 namespace Assets.Code
 {
@@ -122,8 +123,43 @@ namespace Assets.Code
 
             placeInitialSettlements();
 
+            loadCultures();
+
             //placeMinorSettlements();
 
+        }
+
+
+        public void loadCultures()
+        {
+            if (!World.advancedEdition) { return; }
+
+            foreach (string s in Directory.GetDirectories(".\\advdata%cultures".Replace("%", World.separator)))
+            {
+                if (s.Contains("CultureDef") && Directory.Exists(s))
+                {
+                    Culture culture = new Culture();
+                    culture.graphicsIndex = cultures.Count;
+                    cultures.Add(culture);
+                }
+            }
+            if (cultures.Count > 0)
+            {
+                List<int[]> locs = new List<int[]>();
+                foreach (Location loc in locations)
+                {
+                    if (loc.soc is Society)
+                    {
+                        locs.Add(new int[] { loc.hex.x, loc.hex.y });
+                    }
+                }
+
+                double[][] cultureMeans = Kmeans.run(locs, cultures.Count);
+                foreach (Location loc in locations)
+                {
+                    loc.culture = cultures[Kmeans.getClosest(loc.hex.x, loc.hex.y, cultureMeans)];
+                }
+            }
         }
 
         public void placeInitialSettlements()
@@ -205,7 +241,7 @@ namespace Assets.Code
                 }
                 if (loc.soc == null)
                 {
-                    Society soc = new Society(this);
+                    Society soc = new Society(this,loc);
                     soc.setName(loc.shortName);
                     loc.soc = soc;
                     socialGroups.Add(soc);

@@ -38,6 +38,7 @@ namespace Assets.Code
         public Society soc_dark;
         public Society soc_light;
 
+        public List<Culture> cultures = new List<Culture>();
         public List<Person> persons = new List<Person>();
 
         public Dictionary<string, string> compressionMap = new Dictionary<string, string>();
@@ -154,6 +155,49 @@ namespace Assets.Code
             units.Remove(unit);
         }
 
+
+        public Culture sampleCulture(Location loc)
+        {
+            if (cultures.Count == 0) { return null; }
+            if (loc == null) { return cultures[Eleven.random.Next(cultures.Count)]; }
+
+            return loc.culture;
+        }
+
+        public Culture sampleCulture(SocialGroup sg)
+        {
+            if (cultures.Count == 0) { return null; }
+            Location chosen = null;
+            int c1 = 0;
+            int c2 = 0;
+            int c3 = 0;
+            //Select, but with whole load of fallbacks so we at least find something
+            foreach (Location l in locations)
+            {
+                c3 += 1;
+                if (c1 == 0 && c2 == 0 && Eleven.random.Next(c3) == 0)
+                {
+                    chosen = l;
+                }
+                if (l.soc is Society)
+                {
+                    c2 += 1;
+                    if (c1 == 0  && Eleven.random.Next(c2) == 0)
+                    {
+                        chosen = l;
+                    }
+                }
+                if (l.soc  == sg)
+                {
+                    c1 += 1;
+                    if (Eleven.random.Next(c1) == 0)
+                    {
+                        chosen = l;
+                    }
+                }
+            }
+            return sampleCulture(chosen);
+        }
         public void processMapEvents()
         {
             /*

@@ -5,7 +5,7 @@ namespace Assets.Code
 {
     public class SG_AgentLight : Society
     {
-        public SG_AgentLight(Map map) : base(map)
+        public SG_AgentLight(Map map) : base(map,null)
         {
             name = "The Light";
             color = new Color(1f, 1f, 0.7f);

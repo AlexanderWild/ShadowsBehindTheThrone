@@ -235,9 +235,9 @@ namespace Assets.Code
 
             if (World.advancedEdition)
             {
-                foreach (string s in Directory.GetDirectories(".\\advdata%graphics%cultures".Replace("%", World.separator)))
+                foreach (string s in Directory.GetDirectories(".\\advdata%cultures".Replace("%", World.separator)))
                 {
-                    if (Directory.Exists(s))
+                    if (s.Contains("CultureDef") && Directory.Exists(s))
                     {
                         World.log("DIRECTORY " + s);
                         GraphicalCulture cult = new GraphicalCulture();

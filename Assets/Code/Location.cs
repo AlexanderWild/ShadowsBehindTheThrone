@@ -36,6 +36,7 @@ namespace Assets.Code
         //public int turnLastAssigned;
         public Province province;
         public List<Evidence> evidence = new List<Evidence>();
+        public Culture culture;
 
         public Location(Map map, Hex hex,bool isMajor)
         {

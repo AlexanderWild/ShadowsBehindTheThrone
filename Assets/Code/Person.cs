@@ -34,11 +34,11 @@ namespace Assets.Code
         public int letterWritingCharge = 0;
         public Action action;
 
-        public int imgAdvFace = -1;
-        public int imgAdvEyes = -1;
-        public int imgAdvHair = -1;
-        public int imgAdvMouth = -1;
-        public int imgAdvJewel = -1;
+        public int imgAdvFace = 0;
+        public int imgAdvEyes = 0;
+        public int imgAdvHair = 0;
+        public int imgAdvMouth = 0;
+        public int imgAdvJewel = 0;
 
 
         public ThreatItem threat_enshadowedNobles;
@@ -54,6 +54,7 @@ namespace Assets.Code
         public Unit unit;
         public Insanity madness;
         public House house;
+        public Culture culture;
 
         public Person(Society soc,House assignedHouse = null)
         {
@@ -84,6 +85,14 @@ namespace Assets.Code
                 assignedHouse = society.houses[Eleven.random.Next(society.houses.Count)];
             }
             house = assignedHouse;
+            if (house != null)
+            {
+                culture = house.culture;
+            }
+
+            if (culture == null) { 
+                culture = map.sampleCulture(soc);
+            }
 
             //Add permanent threats
             threat_agents = new ThreatItem(map, this);
@@ -108,15 +117,15 @@ namespace Assets.Code
                 }
             }
 
-            if (World.advancedEdition)
+            if (culture != null)
             {
                 if (isMale)
                 {
-                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[0].m_eyes.Count);
-                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[0].m_faces.Count);
-                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[0].m_hair.Count);
-                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[0].m_mouths.Count);
-                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[0].m_jewels.Count);
+                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_eyes.Count);
+                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_faces.Count);
+                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_hair.Count);
+                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_mouths.Count);
+                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].m_jewels.Count);
                     if (Eleven.random.NextDouble() < 0.3)
                     {
                         imgAdvJewel = 0;
@@ -124,11 +133,11 @@ namespace Assets.Code
                 }
                 else
                 {
-                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[0].f_eyes.Count);
-                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[0].f_faces.Count);
-                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[0].f_hair.Count);
-                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[0].f_mouths.Count);
-                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[0].f_jewels.Count);
+                    imgAdvEyes = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_eyes.Count);
+                    imgAdvFace = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_faces.Count);
+                    imgAdvHair = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_hair.Count);
+                    imgAdvMouth = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_mouths.Count);
+                    imgAdvJewel = Eleven.random.Next(map.world.textureStore.cultures[culture.graphicsIndex].f_jewels.Count);
                     if (Eleven.random.NextDouble() < 0.3)
                     {
                         imgAdvJewel = 0;

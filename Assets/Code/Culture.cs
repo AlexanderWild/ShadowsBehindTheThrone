@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Assets.Code
 {
-    public class House
+    public class Culture
     {
-        public string name;
-        public int background;
-        public Culture culture;
+        public int graphicsIndex;
     }
 }

@@ -115,9 +115,10 @@ namespace Assets.Code
                 }
             }
         }
+
         /*
-         * This should be replaced with A* as ASAP as possible
-         */
+* This should be replaced with A* as ASAP as possible
+*/
         public int getStepDist(SocialGroup a, SocialGroup b)
         {
             if (a == b) { return 0; }

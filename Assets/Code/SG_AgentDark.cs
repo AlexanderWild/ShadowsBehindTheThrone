@@ -5,7 +5,7 @@ namespace Assets.Code
 {
     public class SG_AgentDark : Society
     {
-        public SG_AgentDark(Map map) : base(map)
+        public SG_AgentDark(Map map) : base(map,null)
         {
             name = "The Darkness";
             color = Color.black;

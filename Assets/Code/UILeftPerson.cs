@@ -55,19 +55,19 @@ namespace Assets.Code
                 profileBack.sprite = p.getImageBack();
                 if (p.isMale)
                 {
-                    profileMid.sprite = p.map.world.textureStore.cultures[0].m_faces[p.imgAdvFace];
-                    profileAdvEyes.sprite = p.map.world.textureStore.cultures[0].m_eyes[p.imgAdvEyes];
-                    profileAdvMouth.sprite = p.map.world.textureStore.cultures[0].m_mouths[p.imgAdvMouth];
-                    profileAdvHair.sprite = p.map.world.textureStore.cultures[0].m_hair[p.imgAdvHair];
-                    profileAdvJewel.sprite = p.map.world.textureStore.cultures[0].m_jewels[p.imgAdvJewel];
+                    profileMid.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_faces[p.imgAdvFace];
+                    profileAdvEyes.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_eyes[p.imgAdvEyes];
+                    profileAdvMouth.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_mouths[p.imgAdvMouth];
+                    profileAdvHair.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_hair[p.imgAdvHair];
+                    profileAdvJewel.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_jewels[p.imgAdvJewel];
                 }
                 else
                 {
-                    profileMid.sprite = p.map.world.textureStore.cultures[0].f_faces[p.imgAdvFace];
-                    profileAdvEyes.sprite = p.map.world.textureStore.cultures[0].f_eyes[p.imgAdvEyes];
-                    profileAdvMouth.sprite = p.map.world.textureStore.cultures[0].f_mouths[p.imgAdvMouth];
-                    profileAdvHair.sprite = p.map.world.textureStore.cultures[0].f_hair[p.imgAdvHair];
-                    profileAdvJewel.sprite = p.map.world.textureStore.cultures[0].f_jewels[p.imgAdvJewel];
+                    profileMid.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_faces[p.imgAdvFace];
+                    profileAdvEyes.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_eyes[p.imgAdvEyes];
+                    profileAdvMouth.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_mouths[p.imgAdvMouth];
+                    profileAdvHair.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_hair[p.imgAdvHair];
+                    profileAdvJewel.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_jewels[p.imgAdvJewel];
                 }
                 profileFore.sprite = p.getImageFore();
             }

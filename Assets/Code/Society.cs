@@ -53,7 +53,7 @@ namespace Assets.Code
         public int lastEvidenceSubmission = 0;
         public int lastEvidenceResponse = 0;
 
-        public Society(Map map) : base(map)
+        public Society(Map map,Location location) : base(map)
         {
             setName("DEFAULT_SOC_NAME");
             sovreign = new Title_Sovreign(this);
@@ -70,6 +70,7 @@ namespace Assets.Code
                 House house = new House();
                 house.name = TextStore.getName(false);
                 house.background = Eleven.random.Next(World.self.textureStore.layerBack.Count);
+                house.culture = map.sampleCulture(location);
                 houses.Add(house);
             }
         }
@@ -315,7 +316,9 @@ namespace Assets.Code
             for (int k = 0; k < seenProvinces.Count; k++)
             {
                 List<Person> rebels = rebelsByProvince[k];
-                Society rebellion = new Society(map);
+                Location startLocation = null;
+                if (rebels[0].title_land != null) { startLocation = rebels[0].title_land.settlement.location; }
+                Society rebellion = new Society(map, startLocation);
                 map.socialGroups.Add(rebellion);
                 rebellion.setName(seenProvinces[k].name + " rebellion");
                 rebellion.isRebellion = true;
