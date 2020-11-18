@@ -15,6 +15,7 @@ namespace Assets.Code
         public Button startButton;
         public Text generateText;
         public Text advancedEditionText;
+        public Text versionNumberText;
         public World world;
 
         public void Update()
@@ -24,6 +25,7 @@ namespace Assets.Code
             //startStreamlinedButton.gameObject.SetActive(world.map == null);
             //startButton.gameObject.SetActive(world.map == null);
             advancedEditionText.gameObject.SetActive(World.advancedEdition);
+            versionNumberText.text = "Version " + World.versionNumber + "." + World.subversionNumber;
         }
     }
 }

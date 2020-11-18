@@ -65,6 +65,14 @@ namespace Assets.Code
                     }
                     personFore.sprite = p.getImageFore();
                 }
+                else
+                {
+                    personAdvEyes.sprite = world.textureStore.person_advClear;
+                    personAdvMouth.sprite = world.textureStore.person_advClear;
+                    personAdvHair.sprite = world.textureStore.person_advClear;
+                    personAdvJewel.sprite = world.textureStore.person_advClear;
+
+                }
 
                 personFore.color = Color.white;
                 evidenceText.text = "Evidence: " + (int)(100 * unit.person.evidence) + "%";

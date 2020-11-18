@@ -99,6 +99,13 @@ namespace Assets.Code
                 }
                 layerFore.sprite = p.getImageFore();
             }
+            else
+            {
+                layerAdvEyes.sprite = p.map.world.textureStore.person_advClear;
+                layerAdvMouth.sprite = p.map.world.textureStore.person_advClear;
+                layerAdvHair.sprite = p.map.world.textureStore.person_advClear;
+                layerAdvJewel.sprite = p.map.world.textureStore.person_advClear;
+            }
 
             float f = (float)(1 - p.shadow);
             if (f > 1) { f = 1; }

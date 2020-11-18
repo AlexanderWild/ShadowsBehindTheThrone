@@ -461,9 +461,9 @@ namespace Assets.Code
                 if (multFromPrestige > 1) { multFromPrestige = 1; }
                 */
 
-                double likingMult = Math.Max(0, this.getRelation(p).getLiking())/100;
+                double likingMult = Math.Max(0, this.getRelation(p).getLiking()) / 100;
 
-                
+
                 double shadowDelta = p.shadow * likingMult * map.param.person_shadowContagionMult;//You get enshadowed by people you like/trust
                 this.shadow = Math.Min(p.shadow, shadow + shadowDelta);//Don't exceed your donor's shadow
                 if (this.shadow > 1) { this.shadow = 1; }
@@ -472,7 +472,7 @@ namespace Assets.Code
             {
                 //if (society.getSovreign() != null && society.getSovreign().shadow > shadow)
                 //{
-                    shadow += Eleven.random.NextDouble()*map.param.ability_avrgDarkEmpireShadowPerTurn;
+                shadow += Eleven.random.NextDouble() * map.param.ability_avrgDarkEmpireShadowPerTurn;
                 //}
                 if (shadow > 1) { shadow = 1; }
             }
@@ -480,13 +480,21 @@ namespace Assets.Code
             if (state == personState.normal && shadow == 1)
             {
                 this.state = personState.broken;
-                map.turnMessages.Add(new MsgEvent(this.getFullName() + " has been fully enshadowed, their soul can no longer resist the dark", MsgEvent.LEVEL_GREEN,true));
+                map.turnMessages.Add(new MsgEvent(this.getFullName() + " has been fully enshadowed, their soul can no longer resist the dark", MsgEvent.LEVEL_GREEN, true));
             }
             //If you've not broken yet, decay the shadow away
             if (state != personState.broken && state != personState.enthralled)
             {
                 shadow -= map.param.person_shadowDecayPerTurn;
                 if (shadow < 0) { shadow = 0; }
+            }
+
+            if (state == personState.broken || state == personState.enthralled)
+            {
+                if (this.title_land != null)
+                {
+                    this.title_land.settlement.infiltration = 1;
+                }
             }
         }
 
@@ -929,7 +937,7 @@ namespace Assets.Code
         public Sprite getImageFore()
         {
             if (unit != null && unit.definesForeground()) { return unit.getPortraitForeground(); }
-            if (World.advancedEdition)
+            if (World.advancedEdition && map.param.option_useAdvancedGraphics == 1)
             {
                 if (state == personState.broken)
                 {

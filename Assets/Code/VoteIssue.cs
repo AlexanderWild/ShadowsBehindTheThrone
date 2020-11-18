@@ -75,6 +75,7 @@ namespace Assets.Code
         {
             if (issue.options.Count < 2) { return 0; }
 
+
             //Special case voting
             if (issue is VoteIssue_AssignTitle)
             {
@@ -114,6 +115,15 @@ namespace Assets.Code
             if (deltaRel < p.map.param.person_maxLikingLossFromVoteDiscord)
             {
                 deltaRel = p.map.param.person_maxLikingLossFromVoteDiscord;
+            }
+
+            if (deltaRel < 0)
+            {
+                //You can't hate someone for voting the same way you did, that's just nuts.
+                if (option.votesFor.Contains(p))
+                {
+                    deltaRel = 0;
+                }
             }
             return deltaRel;
         }
