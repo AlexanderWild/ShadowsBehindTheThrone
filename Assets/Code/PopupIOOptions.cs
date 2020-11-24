@@ -20,6 +20,7 @@ namespace Assets.Code
         public Text soundEffectText;
         public Text autosaveText;
         public Text advancedGraphicsText;
+        public Text musicVolumeText;
 
         public Text seedString;
 
@@ -66,17 +67,19 @@ namespace Assets.Code
 
         public static void load(Map map)
         {
+            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
             try
             {
-                if (File.Exists("settings.txt"))
+                if (File.Exists(saveFolder + "settings.txt"))
                 {
-                    string data = File.ReadAllText("settings.txt");
+                    string data = File.ReadAllText(saveFolder + "settings.txt");
                     string[] split = data.Split(',');
                     map.param.option_edgeScroll = int.Parse(split[0]);
                     map.world.audioStore.effectVolume = int.Parse(split[1]);
                     World.autosavePeriod = int.Parse(split[2]);
                     World.autodismissAutosave = int.Parse(split[3]);
                     map.param.option_useAdvancedGraphics = int.Parse(split[4]);
+                    map.param.option_musicVolume = int.Parse(split[5]);
                 }
             }catch(Exception e)
             {
@@ -95,13 +98,15 @@ namespace Assets.Code
 
         public static void saveState()
         {
+            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
+
             string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 
-                + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics;
-            if (File.Exists("settings.txt"))
+                + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.staticMap.param.option_musicVolume;
+            if (File.Exists(saveFolder + "settings.txt"))
             {
-                File.Delete("settings.txt");
+                File.Delete(saveFolder + "settings.txt");
             }
-            File.WriteAllText("settings.txt", stateStr);
+            File.WriteAllText(saveFolder + "settings.txt", stateStr);
         }
         public void autosaveToggle()
         {

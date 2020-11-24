@@ -129,6 +129,10 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().evidence = 1;
                 }
+                if (command == "disrupt")
+                {
+                    GraphicalMap.selectedHex.location.person().action = new Act_Disrupted();
+                }
                 if (command == "10 evidence")
                 {
                     GraphicalMap.selectedHex.location.person().evidence += 0.1;

@@ -32,5 +32,9 @@ namespace Assets.Code
             if (path == null || path.Length < 2) { unit.task = null; return; }
             unit.location.map.adjacentMoveTo(unit, path[1]);
         }
+        public override bool isBusy()
+        {
+            return false;
+        }
     }
 }

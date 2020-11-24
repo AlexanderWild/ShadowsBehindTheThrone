@@ -13,6 +13,7 @@ namespace Assets.Code
         public SpriteRenderer borderLayer1;
         public SpriteRenderer borderLayer2;
         public SpriteRenderer hostilityBorder;
+        public SpriteRenderer busyLayer;
         public GameObject hpBar;
         public Text hpText;
         public int lastMapChange = -1;//Tracks if the map has shrunk or moved, so you need to alter your position instantly
@@ -104,6 +105,16 @@ namespace Assets.Code
             {
                 borderLayer1.color = unit.society.color2;
                 borderLayer2.color = unit.society.color;
+            }
+
+            if (unit.task == null || (unit.task.isBusy() == false))
+            {
+                busyLayer.color = Color.clear;
+            }
+            else
+            {
+                float alpha = (float)Math.Abs(Math.Sin(Time.time*2));
+                busyLayer.color = new Color(1, 1, 1, alpha);
             }
         }
 

@@ -14,6 +14,7 @@ namespace Assets.Code
         public SpriteRenderer cloudLayer;
         public SpriteRenderer floraLayer;
         public SpriteRenderer evidenceLayer;
+        public SpriteRenderer busyLayer;
         public SpriteRenderer mask;
         public GameObject flag;
         public PopupNameTag nameTag;
@@ -94,6 +95,16 @@ namespace Assets.Code
                         terrainLayer.color = new Color(1, c, 1);
                     }
                 }
+            }
+
+            if (hex.location == null || hex.location.person() == null || hex.location.person().action == null)
+            {
+                busyLayer.color = Color.clear;
+            }
+            else
+            {
+                float alpha = (float)Math.Abs(Math.Sin(Time.time * 2));
+                busyLayer.color = new Color(1, 1, 1, alpha);
             }
         }
 

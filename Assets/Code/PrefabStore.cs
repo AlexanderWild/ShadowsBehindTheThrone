@@ -566,7 +566,6 @@ namespace Assets.Code
             GameObject obj = Instantiate(prefabGameOptions) as GameObject;
             PopupGameOptions specific = obj.GetComponent<PopupGameOptions>();
             specific.ui = ui;
-            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             specific.seedField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.suspicionGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.awarenessGain.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
@@ -575,7 +574,6 @@ namespace Assets.Code
             specific.sizeXField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.sizeYField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
             specific.historicalField.onEndEdit.AddListener(delegate { specific.onEditEnd(); });
-            specific.bAllOptsOn.onClick.AddListener(delegate { specific.activateAllGameOpts(); });
 
             specific.bEasy.onClick.AddListener(delegate { specific.setEasy(); });
             specific.bMedium.onClick.AddListener(delegate { specific.setMedium(); });

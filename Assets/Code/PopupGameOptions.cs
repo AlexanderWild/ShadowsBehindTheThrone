@@ -26,9 +26,6 @@ namespace Assets.Code
         public Button bEasy;
         public Button bMedium;
         public Button bHard;
-        public Toggle tAwareness;
-        public Toggle tInvestigatorsSee;
-        public Toggle tPaladins;
         public Button bSeedZero;
         public Button bSeedOne;
         public Button bAllOptsOn;
@@ -36,8 +33,9 @@ namespace Assets.Code
         public int difficultySetting = 1;
 
         public bool investigatorsSee = false;
-        public bool useAwareness = false;
-        public bool usePaladins = false;
+        public bool useAwareness = true;
+        public bool usePaladins = true;
+        public bool politicalStart = false;
         public int susGainPercent = 100;
         public int powerGainPercent = 100;
         public int awarenessGainSpeed = 100;
@@ -49,14 +47,16 @@ namespace Assets.Code
         public int nAgents = 2;
         public bool useSimplified = false;
 
-        public void dismiss()
+        public void startGame_Normal()
         {
-            useAwareness = tAwareness.isOn;
-            investigatorsSee = tInvestigatorsSee.isOn;
-            usePaladins = tPaladins.isOn;
-
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed,this);
+        }
+        public void startGame_Political()
+        {
+            politicalStart = true;
+            ui.removeBlocker(this.gameObject);
+            ui.world.bStartGameSeeded(currentSeed, this);
         }
 
         public void startGame_Simplified()
@@ -86,12 +86,7 @@ namespace Assets.Code
             currentSeed = 1;
             setTextFieldsToCurrentValues();
         }
-        public void activateAllGameOpts()
-        {
-            tAwareness.isOn = true;
-            tInvestigatorsSee.isOn = true;
-            tPaladins.isOn = true;
-        }
+
         public void setEasy()
         {
             ui.world.audioStore.playClickInfo();

@@ -31,5 +31,10 @@ namespace Assets.Code
 
             if (unit.location == target) { unit.task = null; return; }
         }
+
+        public override bool isBusy()
+        {
+            return false;
+        }
     }
 }
