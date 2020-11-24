@@ -49,6 +49,7 @@ namespace Assets.Code
 
         public void startGame_Normal()
         {
+            politicalStart = false;
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed,this);
         }

@@ -368,7 +368,8 @@ namespace Assets.Code
             world.audioStore.playClick();
             if (world.map.overmind.enthralled == null)
             {
-                world.prefabStore.popMsg("You have no enthralled currently\n\nYou may enthrall a low-prestige noble (highlighted with flashing purple background) using the \"Enthrall\" power");
+                world.prefabStore.popMsg("You have no enthralled noble currently\n\nInfiltrate a location using your agents (merchants and vampires excell at this) and enthrall the noble using a Heirophant, or, if playing a political game," +
+                    " you may enthrall a low-prestige noble (highlighted with flashing purple background) using the \"Enthrall\" power");
                 return;
             }
             if (state == uiState.SOCIETY)

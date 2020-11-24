@@ -174,6 +174,7 @@ namespace Assets.Code
             param.useAwareness = opts.useAwareness ? 1 : 0;
             param.usePaladins = opts.usePaladins ? 1 : 0;
             param.overmind_maxEnthralled = opts.nAgents;
+            param.overmind_allowDirectEnthralling = opts.politicalStart ? 1:0;
 
             World.log("Opts use awareness " + opts.useAwareness);
 
