@@ -44,7 +44,7 @@ namespace Assets.Code
         public int sizeX = 32;
         public int sizeY = 24;
         public int burnIn = 100;
-        public int nAgents = 2;
+        public int nAgents = 3;
         public bool useSimplified = false;
 
         public void startGame_Normal()
