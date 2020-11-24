@@ -5,6 +5,9 @@ namespace Assets.Code
 {
     public class SG_UnholyFlesh : SocialGroup
     {
+        public enum warStates { ATTACK,DEFEND};
+        public warStates warState = warStates.ATTACK;
+
         public SG_UnholyFlesh(Map map,Location startingLocation) : base(map)
         {
             float colourReducer = 0.25f;

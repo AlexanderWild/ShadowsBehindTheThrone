@@ -17,6 +17,9 @@ namespace Assets.Code
                     if (l.soc.getRel(hex.location.soc).state == DipRel.dipState.war) { continue; }
                     map.declareWar(l.soc, hex.location.soc);
 
+                    SG_UnholyFlesh flesh = (SG_UnholyFlesh)l.soc;
+                    flesh.warState = SG_UnholyFlesh.warStates.ATTACK;
+
                     map.world.prefabStore.popImgMsg(
                         "The unholy flesh suddenly turns hostile, and begins its attack on " + hex.location.soc.getName(),
                         map.world.wordStore.lookup("UNHOLY_FLESH_ATTACK"));

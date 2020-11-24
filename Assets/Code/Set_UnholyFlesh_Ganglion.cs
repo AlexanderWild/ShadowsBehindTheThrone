@@ -31,6 +31,15 @@ namespace Assets.Code
             {
                 h.flora = null;
             }
+
+            if (location.soc is SG_UnholyFlesh)
+            {
+                SG_UnholyFlesh parent = (SG_UnholyFlesh)location.soc;
+                if (parent.warState == SG_UnholyFlesh.warStates.DEFEND)
+                {
+                    defensiveStrengthMax = location.map.param.ability_fleshWithdrawBonus;
+                }
+            }
         }
 
         public override void checkUnitSpawning()
@@ -42,7 +51,8 @@ namespace Assets.Code
 
                 if (this.attachedUnit != null) { throw new Exception(); }
 
-                Unit_Flesh army = new Unit_Flesh(location, location.soc);
+                if (location.soc is SG_UnholyFlesh == false) { return; }
+                Unit_Flesh army = new Unit_Flesh(location, (SG_UnholyFlesh)location.soc);
                 location.map.units.Add(army);
                 army.maxHp = (int)this.getMilitaryCap();
                 this.attachedUnit = army;

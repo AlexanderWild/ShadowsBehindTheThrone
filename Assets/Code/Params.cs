@@ -278,6 +278,7 @@ namespace Assets.Code
         public double ability_unit_insanityInfiltrationReq = 0.2;
         public int ability_enthrallUnitCooldown = 0;
         public int ability_createUnitCooldown = 64;
+        public int ability_fleshWithdrawBonus = 5;
 
         public int ability_unit_falseAccusationCharges = 5;
         public double ability_unit_falseAccusationEffect = 0.25;
