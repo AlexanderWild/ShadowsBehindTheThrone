@@ -47,6 +47,7 @@ namespace Assets.Code
         {
             if (unit.person == null) { return false; }
             if (unit is Unit_Simple_Paladin) { return false; }
+            if (unit is Unit_Investigator && ((Unit_Investigator)unit).state == Unit_Investigator.unitState.paladin) { return false; }
             return castable(map,unit.person);
         }
 

@@ -220,7 +220,6 @@ namespace Assets.Code
             else if (bMessages.isOn) currentTab = Tab.Messages;
             else if (bThreats.isOn) currentTab = Tab.Threats;
             else if (bWars.isOn) currentTab = Tab.War;
-
             checkData();
         }
 
