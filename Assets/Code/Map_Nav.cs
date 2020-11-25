@@ -118,6 +118,7 @@ namespace Assets.Code
 
         /*
 * This should be replaced with A* as ASAP as possible
+* (It never will be)
 */
         public int getStepDist(SocialGroup a, SocialGroup b)
         {
@@ -339,7 +340,7 @@ namespace Assets.Code
                     if (dmgDone < 1) { dmgDone = 1; }
 
                     bool kicked = false;
-                    if (dmgDone > 1 && u2.isEnthralled()) { dmgDone = 1; kicked = true; }
+                    if (dmgDone > 1 && (u2.isMilitary == false)) { dmgDone = 1; kicked = true; }
 
 
                     u2.hp -= dmgDone;
@@ -349,6 +350,10 @@ namespace Assets.Code
                     if (u2.hp <= 0)
                     {
                         u2.die(this,"Attacked by " + u.getName());
+                    }
+                    if (u.hp <= 0)
+                    {
+                        u.die(this, "Took damage attacking " + u2.getName());
                     }
                     else if (kicked)
                     {

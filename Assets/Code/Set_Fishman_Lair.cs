@@ -15,11 +15,14 @@ namespace Assets.Code
 
             militaryCapAdd += 25;
 
+            if (loc.soc is SG_Fishmen)
+            {
 
-            Unit_Fishman army = new Unit_Fishman(location, location.soc);
-            location.map.units.Add(army);
-            army.maxHp = (int)this.getMilitaryCap();
-            this.attachedUnit = army;
+                Unit_Fishman army = new Unit_Fishman(location, (SG_Fishmen)location.soc);
+                location.map.units.Add(army);
+                army.maxHp = (int)this.getMilitaryCap();
+                this.attachedUnit = army;
+            }
         }
 
     public override void checkUnitSpawning()
@@ -31,10 +34,13 @@ namespace Assets.Code
 
             if (this.attachedUnit != null) { throw new Exception(); }
 
-            Unit_Fishman army = new Unit_Fishman(location, location.soc);
-            location.map.units.Add(army);
-            army.maxHp = (int)this.getMilitaryCap();
-            this.attachedUnit = army;
+            if (location.soc is SG_Fishmen)
+            {
+                Unit_Fishman army = new Unit_Fishman(location,(SG_Fishmen) location.soc);
+                location.map.units.Add(army);
+                army.maxHp = (int)this.getMilitaryCap();
+                this.attachedUnit = army;
+            }
         }
     }
 

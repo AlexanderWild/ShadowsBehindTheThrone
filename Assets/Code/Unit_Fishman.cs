@@ -9,12 +9,14 @@ namespace Assets.Code
     public class Unit_Fishman : Unit
     {
         public Location home;
-        
-        public Unit_Fishman(Location loc,SocialGroup soc) : base(loc,soc)
+        public SG_Fishmen parentSG;
+
+        public Unit_Fishman(Location loc,SG_Fishmen soc) : base(loc,soc)
         {
             hp = 1;
             home = loc;
             isMilitary = true;
+            parentSG = soc;
         }
 
         public override void turnTickInner(Map map)
@@ -61,7 +63,33 @@ namespace Assets.Code
             }
         }
 
+
         public void warAI()
+        {
+            if (parentSG.warState == SG_UnholyFlesh.warStates.ATTACK)
+            {
+                warAI_attack();
+            }
+            else
+            {
+                warAI_defend();
+            }
+        }
+        public void warAI_defend()
+        {
+            if (this.location.soc == this.parentSG)
+            {
+                task = null;
+                return;
+            }
+            else
+            {
+                task = new Task_GoToSocialGroup(this.parentSG);
+                return;
+            }
+        }
+
+        public void warAI_attack()
         {
             HashSet<Location> closed = new HashSet<Location>();
             HashSet<Location> open = new HashSet<Location>();

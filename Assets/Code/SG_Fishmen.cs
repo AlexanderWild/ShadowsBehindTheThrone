@@ -5,6 +5,8 @@ namespace Assets.Code
 {
     public class SG_Fishmen : SocialGroup
     {
+        public SG_UnholyFlesh.warStates warState = SG_UnholyFlesh.warStates.ATTACK;
+
         public SG_Fishmen(Map map,Location startingLocation) : base(map)
         {
             float colourReducer = 0.25f;
