@@ -6,6 +6,7 @@ using System.IO;
 using UnityEngine.UI;
 using UnityEngine;
 using FullSerializer;
+using System.Threading;
 
 namespace Assets.Code
 {
@@ -27,6 +28,7 @@ namespace Assets.Code
         public AudioStore audioStore;
         public Camera outerCamera;
         public TextStore wordStore;
+        public UIMusic musicPlayer;
         //public SoundObj soundSource;
 
         public Map map;
@@ -56,9 +58,11 @@ namespace Assets.Code
         public static int versionNumber = 13;
         public static int subversionNumber = 0;
 
+        public static int musicVolume = 100;
+
         public void Start()
         {
-            Screen.SetResolution(1920, 1080, true);
+            //Screen.SetResolution(1920, 1080, true);
 
             if (Directory.Exists("advdata") == false) { advancedEdition = false; World.log("Setting to standard edition as not advanced data folder was detected"); }
 
@@ -66,6 +70,9 @@ namespace Assets.Code
 
             specificStartup();
             ui.setToMainMenu();
+            //Thread t = new Thread(musicPlayer.loadMusic);
+            //t.Start();//Do not fuck me over here, Unity, I'm not feeling like spending a whole day debugging your shit
+            musicPlayer.loadMusic(); //How did I know?
 
             potentialGods.Add(new God_Easy());
             potentialGods.Add(new God_MerchantOfNightmares());
@@ -73,6 +80,7 @@ namespace Assets.Code
             potentialGods.Add(new God_WintersScythe());
             potentialGods.Add(new God_Flesh());
             potentialGods.Add(new God_Omni());
+
         }
 
 

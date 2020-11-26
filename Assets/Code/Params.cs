@@ -13,7 +13,6 @@ namespace Assets.Code
     {
         public int option_edgeScroll = 1;
         public int option_useAdvancedGraphics = 1;
-        public int option_musicVolume = 100;
         public int mapGen_sizeX = 32;
         public int mapGen_sizeY = 24;
         public double mapGen_proportionOfMapForHumans = 0.6;

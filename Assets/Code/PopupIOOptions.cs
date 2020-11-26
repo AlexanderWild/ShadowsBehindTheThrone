@@ -10,6 +10,7 @@ namespace Assets.Code
 {
     public class PopupIOOptions: MonoBehaviour
     {
+        public static bool hasLoadedOpts = false;
         public Map map;
         public Button bDismiss;
         public Button bEdgeScroll;
@@ -79,12 +80,13 @@ namespace Assets.Code
                     World.autosavePeriod = int.Parse(split[2]);
                     World.autodismissAutosave = int.Parse(split[3]);
                     map.param.option_useAdvancedGraphics = int.Parse(split[4]);
-                    map.param.option_musicVolume = int.Parse(split[5]);
+                    World.musicVolume = int.Parse(split[5]);
                 }
             }catch(Exception e)
             {
 
             }
+            hasLoadedOpts = true;
         }
 
         public void dismiss()
@@ -101,7 +103,7 @@ namespace Assets.Code
             string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
 
             string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 
-                + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.staticMap.param.option_musicVolume;
+                + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.musicVolume;
             if (File.Exists(saveFolder + "settings.txt"))
             {
                 File.Delete(saveFolder + "settings.txt");
