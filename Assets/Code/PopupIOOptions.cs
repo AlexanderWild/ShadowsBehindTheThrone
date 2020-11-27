@@ -22,7 +22,7 @@ namespace Assets.Code
         public Text autosaveText;
         public Text advancedGraphicsText;
         public Text musicVolumeText;
-
+        public GameObject musicBlock;
         public Text seedString;
 
         public void Update()
@@ -30,6 +30,7 @@ namespace Assets.Code
             mouseEdgeText.text = map.param.option_edgeScroll == 1 ? "On" : "Off";
             soundEffectText.text = ui.world.audioStore.effectVolume == 0 ? "Off" : "On";
             autosaveText.text = World.autosavePeriod == -1 ? "Off" : "On";
+            musicBlock.SetActive(World.advancedEdition && ui.uiMusic.loadedMusic.Count > 0);
             if (World.advancedEdition == false)
             {
                 bAdvancedGraphics.gameObject.SetActive(false);
@@ -41,6 +42,7 @@ namespace Assets.Code
 
             }
             seedString.text = "Game Seed: " + map.seed;
+            musicVolumeText.text = World.musicVolume + "%";
         }
 
         public void toggleEdgeScroll()
@@ -89,6 +91,38 @@ namespace Assets.Code
             hasLoadedOpts = true;
         }
 
+        public void bMusicMin()
+        {
+            World.musicVolume = 0;
+        }
+        public void bMusicLessLess()
+        {
+            World.musicVolume -= 10;
+            if (World.musicVolume < 0) { World.musicVolume = 0; }
+            if (World.musicVolume > 100) { World.musicVolume = 100; }
+        }
+        public void bMusicLess()
+        {
+            World.musicVolume -= 1;
+            if (World.musicVolume < 0) { World.musicVolume = 0; }
+            if (World.musicVolume > 100) { World.musicVolume = 100; }
+        }
+        public void bMusicMore()
+        {
+            World.musicVolume += 1;
+            if (World.musicVolume < 0) { World.musicVolume = 0; }
+            if (World.musicVolume > 100) { World.musicVolume = 100; }
+        }
+        public void bMusicMoreMore()
+        {
+            World.musicVolume += 10;
+            if (World.musicVolume < 0) { World.musicVolume = 0; }
+            if (World.musicVolume > 100) { World.musicVolume = 100; }
+        }
+        public void bMusicMax()
+        {
+            World.musicVolume = 100;
+        }
         public void dismiss()
         {
             ui.world.audioStore.playClickInfo();

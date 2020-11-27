@@ -610,6 +610,7 @@ namespace Assets.Code
         }
         public void popGameOpts()
         {
+            if (world.ui.blocker != null) { return; }
             if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabIOOpts) as GameObject;

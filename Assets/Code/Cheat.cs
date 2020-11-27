@@ -33,6 +33,10 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().shadow = 1;
                 }
+                if (command == "music")
+                {
+                    map.world.ui.uiMusic.playTest();
+                }
                 if (command == "aware")
                 {
                     GraphicalMap.selectedHex.location.person().awareness = 1;

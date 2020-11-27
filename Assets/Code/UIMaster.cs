@@ -17,6 +17,7 @@ namespace Assets.Code
         public UILeftPrimary uiLeftPrimary;
         public UIVoting uiVoting;
         public UIMidLower uIMidLower;
+        public UIMusic uiMusic;
         public GameObject endTurnButton;
 
         public List<GameObject> blockerQueue;

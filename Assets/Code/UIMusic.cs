@@ -32,8 +32,13 @@ namespace Assets.Code
                         string target = "file://" + dir.FullName + World.separator + filename;
                         World.log(target);
                         WWW www = new WWW(target);//You'd be a fool NOT to treat a local file as if it were a web page
-                        AudioClip clip = www.GetAudioClip(false);
-                        clip.LoadAudioData();
+                        while (!www.isDone)
+                        {
+                            //Wait till whatever the fuck does whatever the fuck
+                        }
+                        AudioClip clip = www.GetAudioClip();
+                        //clip.LoadAudioData();
+                        loadedMusic.Add(clip);
                     }
                 }
             }
@@ -59,14 +64,21 @@ namespace Assets.Code
             }
         }
 
+
+        public void playTest()
+        {
+            source.clip = loadedMusic[0];
+            source.clip = world.audioStore.activateFishmen;
+            source.Play();
+        }
+
         public void Update()
         {
-            source.volume = (100f) / World.musicVolume;
+            source.volume = World.musicVolume/100f;
 
-            //if (!doneLoading) { return; }
+            if (!doneLoading) { return; }
             if (loadedMusic.Count == 0) { return; }
             if (!PopupIOOptions.hasLoadedOpts) { return; }
-            //if (world.ui.state == UIMaster.uiState.MAIN_MENU) { return; }//Don't play off the initial main menu
             if (source.isPlaying) { return; }
             if (World.musicVolume == 0) { return; }
 
@@ -76,7 +88,13 @@ namespace Assets.Code
                 index = 0;
             }
 
-            source.PlayOneShot(loadedMusic[order[index]]);
+            source.clip = loadedMusic[order[index]];
+            source.Play();
+            //source.PlayOneShot(loadedMusic[order[index]]);
+
+            World.log("Playing music. Index " + index + " of " + loadedMusic.Count);
+
+            index += 1;
         }
     }
 }
