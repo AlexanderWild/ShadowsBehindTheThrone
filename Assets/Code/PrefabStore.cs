@@ -30,6 +30,7 @@ namespace Assets.Code
         public GameObject prefabPumpkinVictory;
         public GameObject prefabImgMsg;
         public GameObject prefabVoteMsg;
+        public GameObject prefabCredits;
         public GameObject prefabSlot;
         public GameObject prefabParticleCombat;
         public GameObject prefabAlertPopup;
@@ -630,6 +631,16 @@ namespace Assets.Code
             PopupMsg specific = obj.GetComponent<PopupMsg>();
             specific.ui = ui;
             specific.text.text = words;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popCredits()
+        {
+            //if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabCredits) as GameObject;
+            PopupMsg specific = obj.GetComponent<PopupMsg>();
+            specific.ui = ui;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
