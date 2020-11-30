@@ -24,11 +24,10 @@ namespace Assets.Code
             {
                 try
                 {
-                    String folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName;
-                    var info = new DirectoryInfo(folder);
+                    var info = new DirectoryInfo(World.saveFolder);
                     int oldestAuto = -1;
                     int maxAutosave = -1;
-                    if (Directory.Exists(folder))
+                    if (Directory.Exists(World.saveFolder))
                     {
 
                         var fileInfo = info.GetFiles();
@@ -68,7 +67,7 @@ namespace Assets.Code
                         filename += (1+maxAutosave) + "_.sv";
                     }
 
-                    filename = folder + World.separator + filename;
+                    filename = World.saveFolder + filename;
                     World.staticMap.world.save(filename,false);
                     text.text = "Game Saved\nSaved as: " + filename;
                 }

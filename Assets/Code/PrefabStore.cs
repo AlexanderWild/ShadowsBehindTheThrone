@@ -327,7 +327,7 @@ namespace Assets.Code
         {
             PopupScrollSet specific = getInnerScrollSet();
 
-            var info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName);
+            var info = new DirectoryInfo(World.saveFolder);
             var fileInfo = info.GetFiles();
             List<FileInfo> files = new List<FileInfo>();
 
