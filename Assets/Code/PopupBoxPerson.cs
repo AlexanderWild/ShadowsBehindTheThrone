@@ -15,6 +15,10 @@ namespace Assets.Code
         public Person person;
         public Image layerBack;
         public Image layerMid;
+        public Image layerAdvEyes;
+        public Image layerAdvMouth;
+        public Image layerAdvHair;
+        public Image layerAdvJewel;
         public Image layerFore;
         public Image layerBorder;
         public GameObject mover;
@@ -108,6 +112,37 @@ namespace Assets.Code
             layerBorder.sprite = person.getImageBorder();
             layerFore.sprite = person.getImageFore();
             layerMid.sprite = person.getImageMid();
+
+
+            if (World.staticMap.param.option_useAdvancedGraphics == 1)
+            {
+                Person p = person;
+                if (p.isMale)
+                {
+                    layerMid.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_faces[p.imgAdvFace];
+                    layerAdvEyes.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_eyes[p.imgAdvEyes];
+                    layerAdvMouth.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_mouths[p.imgAdvMouth];
+                    layerAdvHair.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_hair[p.imgAdvHair];
+                    layerAdvJewel.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_jewels[p.imgAdvJewel];
+                }
+                else
+                {
+                    layerMid.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_faces[p.imgAdvFace];
+                    layerAdvEyes.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_eyes[p.imgAdvEyes];
+                    layerAdvMouth.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_mouths[p.imgAdvMouth];
+                    layerAdvHair.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_hair[p.imgAdvHair];
+                    layerAdvJewel.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_jewels[p.imgAdvJewel];
+                }
+                layerFore.sprite = p.getImageFore();
+            }
+            else
+            {
+                layerAdvEyes.sprite = World.staticMap.world.textureStore.person_advClear;
+                layerAdvMouth.sprite = World.staticMap.world.textureStore.person_advClear;
+                layerAdvHair.sprite = World.staticMap.world.textureStore.person_advClear;
+                layerAdvJewel.sprite = World.staticMap.world.textureStore.person_advClear;
+
+            }
         }
     }
 }

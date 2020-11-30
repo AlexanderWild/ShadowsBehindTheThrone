@@ -117,9 +117,9 @@ namespace Assets.Code
             float floraDark = 0.3f + (+0.7f * hex.purity);
             Color colour = new Color(dark, dark, dark);
 
-            if (hex.territoryOf != null && hex.territoryOf.settlement != null && hex.territoryOf.settlement.getCustomTerrain() != null)
+            if (hex.territoryOf != null && hex.territoryOf.settlement != null && hex.territoryOf.settlement.getCustomTerrain(hex) != null)
             {
-                terrainLayer.sprite = hex.territoryOf.settlement.getCustomTerrain();
+                terrainLayer.sprite = hex.territoryOf.settlement.getCustomTerrain(hex);
             }
             else if (hex.terrain == Hex.terrainType.SEA)
             {

@@ -17,9 +17,17 @@ namespace Assets.Code
             defensiveStrengthMax = 20;
         }
 
-        public override Sprite getCustomTerrain()
+        public override Sprite getCustomTerrain(Hex hex)
         {
-            return World.staticMap.world.textureStore.hex_special_flesh;
+            int c = hex.graphicalIndexer % 2;
+            if (c == 0)
+            {
+                return World.staticMap.world.textureStore.hex_special_flesh;
+            }
+            else
+            {
+                return World.staticMap.world.textureStore.hex_special_flesh2;
+            }
         }
 
         public override void turnTick()

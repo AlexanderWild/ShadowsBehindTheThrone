@@ -31,7 +31,7 @@ namespace Assets.Code
             this.location = loc;
         }
 
-        public virtual Sprite getCustomTerrain()
+        public virtual Sprite getCustomTerrain(Hex hex)
         {
             return null;
         }

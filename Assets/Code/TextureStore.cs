@@ -56,6 +56,7 @@ namespace Assets.Code
         public Sprite hex_terrain_mountain;
 
         public Sprite hex_special_flesh;
+        public Sprite hex_special_flesh2;
 
         public Sprite loc_empty;
         public Sprite loc_green;

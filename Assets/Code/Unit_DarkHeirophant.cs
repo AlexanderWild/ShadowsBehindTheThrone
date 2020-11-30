@@ -62,7 +62,7 @@ namespace Assets.Code
 
         public override string specialInfo()
         {
-            return "N/A";
+            return "Enthraller";
         }
 
         public override string specialInfoLong()
