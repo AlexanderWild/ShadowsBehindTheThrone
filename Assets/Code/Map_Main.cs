@@ -111,6 +111,7 @@ namespace Assets.Code
             overmind.turnTick();
             stats.turnTick();
             addEnthralledNextTurnMessages();
+            assignTerrainFromClimate();
         }
         
         public void addMessage(string msg, int level = 1, bool positive = true)

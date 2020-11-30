@@ -33,6 +33,7 @@ namespace Assets.Code
 
         public override bool castable(Map map, Hex hex)
         {
+            if (hex.location == null) { return false; }
             if (hex.location.person() == null) { return false; }
             return castable(map, hex.location.person());
         }

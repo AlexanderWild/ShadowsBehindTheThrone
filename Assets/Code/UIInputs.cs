@@ -39,7 +39,7 @@ namespace Assets.Code
 
         public void hotkeys()
         {
-            if (Input.GetKeyDown(KeyCode.Backspace) && Input.GetKey(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.Backspace) && Input.GetKey(KeyCode.LeftShift))
             {
                 world.ui.uiMidTop.cheatField.gameObject.SetActive(!world.ui.uiMidTop.cheatField.gameObject.activeSelf);
             }
@@ -192,6 +192,14 @@ namespace Assets.Code
                         world.map.masker.mask = MapMaskManager.maskType.TESTING;
                     }
                     GraphicalMap.checkData();
+                }
+            }
+
+            if (world.ui.state == UIMaster.uiState.WORLD && world.ui.blocker == null)
+            {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    world.bEndTurn();
                 }
             }
         }

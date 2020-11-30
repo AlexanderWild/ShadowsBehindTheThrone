@@ -121,6 +121,10 @@ namespace Assets.Code
                     map.assignTerrainFromClimate();
                     map.world.ui.checkData();
                 }
+                if (command == "globalcooling")
+                {
+                    World.cheat_globalCooling = !World.cheat_globalCooling;
+                }
                 if (command == "min sanity")
                 {
                     GraphicalMap.selectedHex.location.person().sanity = 0.01;

@@ -58,6 +58,8 @@ namespace Assets.Code
         public static int versionNumber = 13;
         public static int subversionNumber = 0;
 
+        public static bool cheat_globalCooling = false;
+
         public static int musicVolume = 100;
 
         public void Start()

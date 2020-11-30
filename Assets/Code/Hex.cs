@@ -131,6 +131,10 @@ namespace Assets.Code
             {
                 transientTempDelta += map.param.map_tempTemperatureReversion;
             }
+            if (World.cheat_globalCooling)
+            {
+                transientTempDelta -= 0.01f;
+            }
         }
 
         public override string ToString()
