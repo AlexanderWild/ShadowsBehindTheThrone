@@ -700,10 +700,11 @@ namespace Assets.Code
             specific.textFlavour.text = flavour;
             if (img == 0)
             {
-                int q = Eleven.random.Next(3);
+                int q = Eleven.random.Next(4);
                 if (q == 0) { specific.img.sprite = ui.world.textureStore.boxImg_blue; }
                 if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
                 if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
+                if (q == 3) { specific.img.sprite = ui.world.textureStore.boxImg_moon; }
             }
             else if (img == 1)
             {

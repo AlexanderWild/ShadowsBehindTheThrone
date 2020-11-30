@@ -38,6 +38,7 @@ namespace Assets.Code
         public Sprite boxImg_redDeath;
         public Sprite boxImg_pumpkin;
         public Sprite boxImg_cult;
+        public Sprite boxImg_moon;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
