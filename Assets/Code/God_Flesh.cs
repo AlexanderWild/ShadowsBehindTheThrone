@@ -12,11 +12,11 @@ namespace Assets.Code
 
         public God_Flesh()
         {
+            powers.Add(new Ab_UnholyFlesh_Grow());
             powers.Add(new Ab_UnholyFlesh_Seed());
             powers.Add(new Ab_UnholyFlesh_Screetching());
             powers.Add(new Ab_UnholyFlesh_Attack());
             powers.Add(new Ab_UnholyFlesh_Defend());
-            powers.Add(new Ab_UnholyFlesh_Grow());
             powers.Add(new Ab_UnholyFlesh_Withdraw());
         }
 
