@@ -263,6 +263,7 @@ namespace Assets.Code
                     nStartingHumanSettlements += 1;
                 }
             }
+            availableEnthrallments = 1;
         }
 
         public List<MsgEvent> getThreats()

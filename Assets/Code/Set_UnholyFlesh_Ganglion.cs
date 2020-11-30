@@ -48,6 +48,23 @@ namespace Assets.Code
                     defensiveStrengthMax = location.map.param.ability_fleshWithdrawBonus;
                 }
             }
+
+            if (location.map.automatic)
+            {
+                foreach (Location loc in location.getNeighbours())
+                {
+                    if (loc.settlement == null && loc.isOcean == false && Eleven.random.NextDouble() < 0.05)
+                    {
+                        loc.settlement = new Set_UnholyFlesh_Ganglion(loc);
+                        loc.soc = this.location.soc;
+
+                    }
+                    if (loc.soc != this.location.soc && loc.soc != null && loc.soc.currentMilitary * 1.3 < location.soc.currentMilitary && (location.soc.isAtWar() == false))
+                    {
+                        location.map.declareWar(location.soc, loc.soc);
+                    }
+                }
+            }
         }
 
         public override void checkUnitSpawning()

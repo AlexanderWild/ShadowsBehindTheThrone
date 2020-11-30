@@ -197,7 +197,7 @@ namespace Assets.Code
 
             if (world.ui.state == UIMaster.uiState.WORLD && world.ui.blocker == null)
             {
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.PageDown))
                 {
                     world.bEndTurn();
                 }

@@ -65,6 +65,7 @@ namespace Assets.Code
                     agent.person = new Person(map.soc_dark);
                     agent.person.state = Person.personState.enthralledAgent;
                     agent.person.unit = agent;
+                    agent.person.traits.Clear();
                     map.units.Add(agent);
 
                     Evidence ev = new Evidence(map.turn);
@@ -86,6 +87,7 @@ namespace Assets.Code
                     agent.person = new Person(map.soc_dark);
                     agent.person.state = Person.personState.enthralledAgent;
                     agent.person.unit = agent;
+                    agent.person.traits.Clear();
                     map.units.Add(agent);
 
                     Evidence ev = new Evidence(map.turn);
@@ -107,6 +109,7 @@ namespace Assets.Code
                     agent.person = new Person(map.soc_dark);
                     agent.person.state = Person.personState.enthralledAgent;
                     agent.person.unit = agent;
+                    agent.person.traits.Clear();
                     map.units.Add(agent);
 
                     Unit_Seeker.addForgottenSecrets(map);
@@ -130,6 +133,7 @@ namespace Assets.Code
                     agent.person = new Person(map.soc_dark);
                     agent.person.state = Person.personState.enthralledAgent;
                     agent.person.unit = agent;
+                    agent.person.traits.Clear();
                     map.units.Add(agent);
 
 
@@ -151,6 +155,7 @@ namespace Assets.Code
                     agent.person = new Person(map.soc_dark);
                     agent.person.state = Person.personState.enthralledAgent;
                     agent.person.unit = agent;
+                    agent.person.traits.Clear();
                     map.units.Add(agent);
 
 
