@@ -60,6 +60,8 @@ namespace Assets.Code
 
         public static int musicVolume = 100;
 
+        public static string saveFolder;
+
         public void Start()
         {
             Screen.SetResolution(1920, 1080, true);
@@ -163,6 +165,8 @@ namespace Assets.Code
                     }
                 }
             }
+
+            saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
         }
         public void startup(PopupGameOptions opts)
         {
@@ -456,23 +460,28 @@ namespace Assets.Code
             }
         }
 
-
-
-        public void save(string filename,bool popMsg=true)
-        {
-            Map rescueMap = World.staticMap;
-
-            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName;
-            if (Directory.Exists(saveFolder) == false){
+        public static bool checkSaveFolder() {
+            if (Directory.Exists(saveFolder) == false) {
                 try
                 {
                     Directory.CreateDirectory(saveFolder);
                 }catch(Exception e)
                 {
-                    prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.\n\n" + e.Message);
                     World.autosavePeriod = -1;
-                    return;
+                    return false;
                 }
+            }
+
+            return true;
+        }
+
+        public void save(string filename,bool popMsg=true)
+        {
+            Map rescueMap = World.staticMap;
+
+            if (checkSaveFolder() == false) {
+                prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
+                return;
             }
             if (!hasWritePermission(saveFolder))
             {
@@ -589,7 +598,7 @@ namespace Assets.Code
                     map.world = null;
                     map = null;
                 }
-                filename = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator + filename;
+                filename = saveFolder + filename;
                 string fullFile = File.ReadAllText(filename);
                 //string serializedState = fullFile.Substring(fullFile.IndexOf("\n"), fullFile.Length);
                 int startIndex = fullFile.IndexOf(saveHeader) + saveHeader.Length;

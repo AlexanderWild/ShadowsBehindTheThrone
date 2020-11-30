@@ -70,12 +70,11 @@ namespace Assets.Code
 
         public static void load(Map map)
         {
-            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
             try
             {
-                if (File.Exists(saveFolder + "settings.txt"))
+                if (File.Exists(World.saveFolder + "settings.txt"))
                 {
-                    string data = File.ReadAllText(saveFolder + "settings.txt");
+                    string data = File.ReadAllText(World.saveFolder + "settings.txt");
                     string[] split = data.Split(',');
                     map.param.option_edgeScroll = int.Parse(split[0]);
                     map.world.audioStore.effectVolume = int.Parse(split[1]);
@@ -134,15 +133,17 @@ namespace Assets.Code
 
         public static void saveState()
         {
-            string saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
+            if (World.checkSaveFolder() == false) {
+                World.staticMap.world.prefabStore.popMsg("Unable to write to directory " + World.saveFolder + ". Settings will not persist without folder access.");
+            }
 
             string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 
                 + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.musicVolume;
-            if (File.Exists(saveFolder + "settings.txt"))
+            if (File.Exists(World.saveFolder + "settings.txt"))
             {
-                File.Delete(saveFolder + "settings.txt");
+                File.Delete(World.saveFolder + "settings.txt");
             }
-            File.WriteAllText(saveFolder + "settings.txt", stateStr);
+            File.WriteAllText(World.saveFolder + "settings.txt", stateStr);
         }
         public void autosaveToggle()
         {
