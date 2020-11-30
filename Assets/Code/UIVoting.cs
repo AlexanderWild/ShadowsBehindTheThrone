@@ -20,6 +20,10 @@ namespace Assets.Code
         public Image proposerBorder;
         public Image agentBack;
         public Image agentMid;
+        public Image agentEyes;
+        public Image agentMouth;
+        public Image agentHair;
+        public Image agentJewel;
         public Image agentFore;
         public Image agentBorder;
         public VoteSession sess;
@@ -125,6 +129,39 @@ namespace Assets.Code
                 textAgentName.text = "Interacting without character";
                 textAgentDesc.text = "If you interact with a society with an enthralled noble, or use an agent, you can spend the liking the voters have towards them to sway their votes.";
             }
+
+
+            if (World.staticMap.param.option_useAdvancedGraphics == 1 && agent != null)
+            {
+                Person p = agent;
+                if (p.isMale)
+                {
+                    agentMid.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_faces[p.imgAdvFace];
+                    agentEyes.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_eyes[p.imgAdvEyes];
+                    agentMouth.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_mouths[p.imgAdvMouth];
+                    agentHair.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_hair[p.imgAdvHair];
+                    agentJewel.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].m_jewels[p.imgAdvJewel];
+                }
+                else
+                {
+                    agentMid.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_faces[p.imgAdvFace];
+                    agentEyes.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_eyes[p.imgAdvEyes];
+                    agentMouth.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_mouths[p.imgAdvMouth];
+                    agentHair.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_hair[p.imgAdvHair];
+                    agentJewel.sprite = p.map.world.textureStore.cultures[p.culture.graphicsIndex].f_jewels[p.imgAdvJewel];
+
+                }
+                agentFore.sprite = p.getImageFore();
+            }
+            else
+            {
+                agentEyes.sprite = World.self.textureStore.person_advClear;
+                agentMouth.sprite = World.self.textureStore.person_advClear;
+                agentHair.sprite = World.self.textureStore.person_advClear;
+                agentJewel.sprite = World.self.textureStore.person_advClear;
+            }
+
+
             sess = soc.voteSession;
             checkData();
 
