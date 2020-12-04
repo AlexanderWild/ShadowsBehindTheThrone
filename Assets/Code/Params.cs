@@ -277,7 +277,7 @@ namespace Assets.Code
         public double ability_unit_insanityInfiltrationReq = 0.2;
         public int ability_enthrallUnitCooldown = 0;
         public int ability_createUnitCooldown = 64;
-        public int ability_fleshWithdrawBonus = 5;
+        public int ability_fleshWithdrawBonus = 10;
 
         public int ability_unit_falseAccusationCharges = 5;
         public double ability_unit_falseAccusationEffect = 0.25;
@@ -301,7 +301,7 @@ namespace Assets.Code
         public double trait_unlikable = -15;
         public double trait_hateful = -25;
         public double trait_warmaster = 10;
-        public double trait_defender = 7;
+        public double trait_defender = 10;
         public double trait_badCommander = -10;
         public double trait_incompetent_loss = 5;
         public double trait_competent_gain = 5;

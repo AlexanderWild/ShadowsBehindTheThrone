@@ -23,7 +23,7 @@ namespace Assets.Code
 
             militaryCapAdd += 20;
             militaryRegenAdd = 3;
-            this.defensiveStrengthMax = 15;
+            this.defensiveStrengthMax = 25;
             isHuman = true;
         }
 

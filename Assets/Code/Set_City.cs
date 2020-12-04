@@ -68,8 +68,8 @@ namespace Assets.Code
                 title.titleF = "Countess";
                 title.titleM = "Count";
                 basePrestige = 30;
-                defensiveStrengthMax = 10;
-                militaryRegenAdd = 7;
+                defensiveStrengthMax = 20;
+                militaryRegenAdd = 4;
                 militaryCapAdd = 40;
             }
             else if (level == LEVEL_CITY)
@@ -78,8 +78,8 @@ namespace Assets.Code
                 title.titleF = "Countess";
                 title.titleM = "Count";
                 basePrestige = 25;
-                defensiveStrengthMax = 8;
-                militaryRegenAdd = 5;
+                defensiveStrengthMax = 16;
+                militaryRegenAdd = 3;
                 militaryCapAdd = 30;
             }
             else if (level == LEVEL_TOWN)
@@ -88,8 +88,8 @@ namespace Assets.Code
                 title.titleF = "Mayor";
                 title.titleM = "Mayor";
                 basePrestige = 15;
-                defensiveStrengthMax = 4;
-                militaryRegenAdd = 4;
+                defensiveStrengthMax = 8;
+                militaryRegenAdd = 2;
                 militaryCapAdd = 20;
             }
             else if (level == LEVEL_VILLAGE)
