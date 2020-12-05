@@ -141,15 +141,7 @@ namespace Assets.Code
         public Sprite property_securityLockdown;
         public Sprite property_pumpkin;
 
-        public Sprite tutorial1;
-        public Sprite tutorial2;
-        public Sprite tutorialVoting;
-        public Sprite tutorialA1;
-        public Sprite tutorialA2;
-        public Sprite tutorialA3;
-        public Sprite tutorial3;
-        public Sprite tutorial4;
-        public Sprite tutorial5;
+        public List<Sprite> tutorialImages;
 
         public Sprite cloud_plague;
 

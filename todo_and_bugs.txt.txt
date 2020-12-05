@@ -5,6 +5,9 @@
 	Couldn't reproduce
 
 -Society view has different selected vs highlighted, on first entry
+	(Recheck, maybe resolved)
+	
+-Society view doesn't let you look at the society in the left UI
 
 -Leftover graphical properties, by the look of it
 	(couldn't replicate?)

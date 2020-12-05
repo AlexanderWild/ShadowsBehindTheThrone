@@ -17,42 +17,7 @@ namespace Assets.Code
         public void setTo(int i)
         {
             ui.world.audioStore.playClick();
-            if (i == 0)
-            {
-                img.sprite = ui.world.textureStore.tutorial1;
-            }
-            if (i == 1)
-            {
-                img.sprite = ui.world.textureStore.tutorialA1;
-            }
-            if (i == 2)
-            {
-                img.sprite = ui.world.textureStore.tutorialA2;
-            }
-            if (i == 3)
-            {
-                img.sprite = ui.world.textureStore.tutorialA3;
-            }
-            if (i == 4)
-            {
-                img.sprite = ui.world.textureStore.tutorial2;
-            }
-            if (i == 5)
-            {
-                img.sprite = ui.world.textureStore.tutorialVoting;
-            }
-            if (i == 6)
-            {
-                img.sprite = ui.world.textureStore.tutorial3;
-            }
-            if (i == 7)
-            {
-                img.sprite = ui.world.textureStore.tutorial4;
-            }
-            if (i == 8)
-            {
-                img.sprite = ui.world.textureStore.tutorial5;
-            }
+            img.sprite = ui.world.textureStore.tutorialImages[i];
         }
 
         public void dismiss()
