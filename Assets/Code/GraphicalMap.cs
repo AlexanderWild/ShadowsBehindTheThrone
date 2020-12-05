@@ -123,6 +123,9 @@ namespace Assets.Code
                 loaded.Remove(hex);
                 UIMaster.Destroy(hex.gameObject);
             }
+
+            selectedSelectable = null;
+            selectedHex = null;
         }
 
         public static Vector3 getLoc(GraphicalHex hex)

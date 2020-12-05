@@ -191,8 +191,8 @@ namespace Assets.Code
                 float n2 = pair.Value.Count, j = 0;
                 foreach (GraphicalSlot ds2 in pair.Value)
                 {
-                    exponent = 1;
-                    if (i % 2 == 0) { exponent = 1.6; }
+                    exponent = 0.8;
+                    //if (i % 2 == 0) { exponent = 1.4; }
                     float radius2 = (float)(1.5* Math.Pow(zoom, exponent));
                     float spread  = (n2 > 4) ? 3.5f : 2.5f;
                     float angle2  = (angle - spread / 2) + spread / n2 * (j + 0.5f);
