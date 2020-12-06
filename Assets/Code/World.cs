@@ -49,7 +49,7 @@ namespace Assets.Code
         public List<God> chosenGods = new List<God>();
         public float lastFrame;
 
-        public static bool advancedEdition = true;
+        public static bool advancedEdition = false;
         public static bool useHorseman = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");

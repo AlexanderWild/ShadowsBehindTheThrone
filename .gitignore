@@ -47,6 +47,7 @@ ExportedObj/
 *.VC.db
 
 # Our files
+*.pdf
 *.sv
 *.log
 params.txt

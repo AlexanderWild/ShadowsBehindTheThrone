@@ -229,7 +229,7 @@ namespace Assets.Code
                 automatic();
             }
 
-            if (map.turn - map.param.mapGen_burnInSteps % map.param.overmind_enthrallmentUseRegainPeriod == 0)
+            if (map.burnInComplete && (map.turn - map.param.mapGen_burnInSteps) % map.param.overmind_enthrallmentUseRegainPeriod == 0)
             {
                 if (availableEnthrallments < map.param.overmind_maxEnthralled)
                 {
@@ -263,7 +263,7 @@ namespace Assets.Code
                     nStartingHumanSettlements += 1;
                 }
             }
-            availableEnthrallments = 1;
+            availableEnthrallments = Math.Min(2, map.param.overmind_maxEnthralled);
         }
 
         public List<MsgEvent> getThreats()

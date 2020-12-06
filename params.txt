@@ -1,4 +1,5 @@
 option_edgeScroll: 1
+option_useAdvancedGraphics: 1
 mapGen_sizeX: 32
 mapGen_sizeY: 24
 mapGen_proportionOfMapForHumans: 0.6
@@ -20,8 +21,8 @@ panic_panicAtFullExtinction: 3
 panic_panicAtFullShadow: 1.75
 panic_canAlly: 0.5
 panic_fromClueFound: 0.015
-panic_paladinSpawn_1: 0.1
-panic_paladinSpawn_2: 0.4
+panic_paladinSpawn_1: 0.15
+panic_paladinSpawn_2: 0.5
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -46,13 +47,15 @@ overmind_allowDirectEnthralling: 1
 overmind_maxPower: 24
 overmind_powerRegen: 1
 overmind_singleAbilityPerTurn: True
+overmind_enthrallmentUseRegainPeriod: 16
 econ_multFromBuff: 1.33
 relObj_suspicionLimiterMult: 2.5
 relObj_defaultLiking: 0
 relObj_decayRate: 0.97
 combat_prestigeLossFromConquest: 0
 combat_thresholdAttackStrength: 0.25
-combat_lethality: 0.3
+combat_lethality: 0.2
+combat_lethalityDefensive: 0.1
 combat_takeLandThreshold: 1.25
 combat_maxMilitaryCapExponent: 0.82
 combat_defensivePostureDmgMult: 0.666
@@ -138,6 +141,7 @@ society_securityBuffMajor: 4
 society_securityBuffMinor: 1
 society_lockdownPrestigeHit: -10
 society_lockdownBuffDuration: 12
+society_electoralPrestigeWeight: 2
 temporaryThreatDecay: 0.95
 threat_takeLocation: 24
 threat_temporaryDreadDecay: 0.97
@@ -240,11 +244,13 @@ ability_disruptActionDuration: 7
 ability_unit_bloodCostInfiltrate: 7
 ability_unit_bloodCostInsanity: 7
 ability_unit_insanityInfiltrationReq: 0.2
-ability_enthrallUnitCooldown: 32
+ability_enthrallUnitCooldown: 0
 ability_createUnitCooldown: 64
+ability_fleshWithdrawBonus: 10
 ability_unit_falseAccusationCharges: 5
 ability_unit_falseAccusationEffect: 0.25
 ability_unit_enthrallNobleReq: 0.9
+ability_unit_breakNobleReq: 0.75
 ability_unit_spreadShadowInfiltrationReq: 0.5
 ability_unit_spreadShadowMinLiking: 35
 ability_unit_falseEvidenceInfiltration: 0.4
@@ -260,7 +266,7 @@ trait_charismatic: 15
 trait_unlikable: -15
 trait_hateful: -25
 trait_warmaster: 10
-trait_defender: 7
+trait_defender: 10
 trait_badCommander: -10
 trait_incompetent_loss: 5
 trait_competent_gain: 5
@@ -307,7 +313,7 @@ unit_infiltrateEvidence: 0.35
 unit_spreadShadowTime: 5
 unit_spreadShadowAmount: 0.6
 unit_spreadShadowEvidence: 0.5
-units_maxEnthralled: 2
+overmind_maxEnthralled: 2
 unit_suspicionFromProximity: 0.1
 unit_armyOfDeadMaxHP: 37
 unit_paladin_trackDuration: 7
