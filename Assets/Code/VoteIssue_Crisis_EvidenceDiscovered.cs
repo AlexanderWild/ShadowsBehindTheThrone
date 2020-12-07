@@ -255,14 +255,27 @@ namespace Assets.Code
             if (option.index == LOCKDOWN_PROVINCE)
             {
                 World.log(society.getName() + " implements crisis legislation, fully locking down " + society.map.provinces[option.province].name);
+                Unit enthralledVic = null;
                 foreach (Location loc in society.map.locations)
                 {
                     if (loc.province.index == option.province && loc.soc == society)
                     {
                         Property.addProperty(society.map, loc, "Lockdown");
+                        foreach (Unit u in loc.units)
+                        {
+                            if (u.isEnthralled())
+                            {
+                                enthralledVic = u;
+                            }
+                        }
                     }
                 }
                 society.map.addMessage(society.getName() + " locks down " + society.map.provinces[option.province].name, MsgEvent.LEVEL_ORANGE, false);
+                if (enthralledVic != null)
+                {
+                    society.map.world.prefabStore.popMsg(society.getName() + " has imposed a complete lockdown in the province " + society.map.provinces[option.province].name +
+                        " which impacts your agent " + enthralledVic.getName() + "'s ability to operate until the lockdown is over.");
+                }
             }
         }
 
