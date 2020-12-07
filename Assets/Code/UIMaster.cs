@@ -103,7 +103,7 @@ namespace Assets.Code
 
                 //uiLeftPrimary.unlandedViewButton.gameObject.SetActive(true);
                 uiLeftPrimary.neighborViewButton.gameObject.SetActive(true);
-                uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(true);
+                uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(GraphicalSociety.activeSociety != null && GraphicalSociety.activeSociety.getSovreign() != null);
                 //uiLeftPrimary.dynamicViewButton.gameObject.SetActive(true);
                 endTurnButton.SetActive(false);
 

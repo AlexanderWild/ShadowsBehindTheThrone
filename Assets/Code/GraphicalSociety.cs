@@ -125,8 +125,7 @@ namespace Assets.Code
             clear();
 
             Person ss = activeSociety.getSovreign();
-            //if (ss == null)
-            //    return;
+            if (ss == null) { return; }
 
             focus = (state == viewState.HIERARCHY && nfocus != null) ? nfocus : ss;
 

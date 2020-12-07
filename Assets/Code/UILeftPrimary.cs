@@ -65,6 +65,7 @@ namespace Assets.Code
         public Text powerButtonText;
         public Button abilityButton;
         public Text abilityButtonText;
+        public Button heirarchyViewButton;
 
         public Button unlandedViewButton;
         public Button neighborViewButton;
