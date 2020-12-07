@@ -134,7 +134,7 @@ namespace Assets.Code
         {
             if (!World.advancedEdition) { return; }
 
-            foreach (string s in Directory.GetDirectories(".\\advdata%cultures".Replace("%", World.separator)))
+            foreach (string s in Directory.GetDirectories("advdata%cultures".Replace("%", World.separator)))
             {
                 if (s.Contains("CultureDef") && Directory.Exists(s))
                 {

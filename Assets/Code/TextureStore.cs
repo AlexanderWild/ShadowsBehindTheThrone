@@ -226,14 +226,20 @@ namespace Assets.Code
                     }
                 }
             }
+            loadCulture();
+        }
 
+        public void loadCulture()
+        {
+
+            World.log("Thinking about loading culture textures (" + World.advancedEdition + ")");
             if (World.advancedEdition)
             {
-                foreach (string s in Directory.GetDirectories(".\\advdata%cultures".Replace("%", World.separator)))
+                foreach (string s in Directory.GetDirectories("advdata%cultures".Replace("%", World.separator)))
                 {
+                    World.log("DIRECTORY " + s);
                     if (s.Contains("CultureDef") && Directory.Exists(s))
                     {
-                        World.log("DIRECTORY " + s);
                         GraphicalCulture cult = new GraphicalCulture();
                         foreach (string fileName in Directory.GetFiles(s + World.separator + "f_eyes"))
                         {
@@ -332,8 +338,8 @@ namespace Assets.Code
                     }
                 }
             }
-        }
 
+        }
         public void loadLinux()
         {
             World.log("Logging for Linux texture loading");
@@ -405,6 +411,7 @@ namespace Assets.Code
                     }
                 }
             }
+            loadCulture();
         }
         public static Sprite LoadPNG(string filePath)
         {
