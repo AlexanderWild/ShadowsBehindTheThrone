@@ -5,7 +5,6 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using UnityEngine.Networking.NetworkSystem;
 
 namespace Assets.Code
 {
