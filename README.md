@@ -1,2 +1,2 @@
 # ShadowsBehindTheThrone
-A grand strategy Unity game. Targetting Unity 5.6.7f1
+A grand strategy Unity game. Targetting Unity 2020.1.16f1
