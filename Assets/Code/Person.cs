@@ -205,7 +205,7 @@ namespace Assets.Code
             List<int> possibleActions = new List<int>();
             if (awareness >= map.param.awareness_canInvestigate && map.worldPanic >= map.param.panic_canInvestigate)
             {
-                possibleActions.Add(0);
+                //possibleActions.Add(0); //Removed until they stop spamming this nonsense 24/7
             }
             if (awareness > 0 && awareness < 1 && title_land != null && title_land.settlement is Set_University)
             {

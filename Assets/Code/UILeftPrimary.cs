@@ -99,7 +99,7 @@ namespace Assets.Code
                 {
                     Unit unit = (Unit)GraphicalMap.selectedSelectable;
                     GraphicalMap.selectedHex = unit.location.hex;
-                }else if (GraphicalMap.selectedSelectable is Property)
+                } else if (GraphicalMap.selectedSelectable is Property)
                 {
                     Property pr = (Property)GraphicalMap.selectedSelectable;
                     GraphicalMap.selectedHex = pr.location.hex;
@@ -280,12 +280,12 @@ namespace Assets.Code
             personAwarenssDesc.text = "A person's awareness is how much they have realised about the threat their world faces.\nIt allows them to take actions against the darkenss directly." +
                 "\nSome nobles gain awareness each time you expend power, they can also gain awareness by gaining suspicion as they seen evidence, and can be warned by their fellow nobles, especially neighbours."
                 + "\nAwareness gain can be increased by being in a place of learning, or increased or decreased by traits."
-                +"\n\nThis noble has an awareness rate of " + (int)(100*p.getAwarenessMult()) + "%";
+                + "\n\nThis noble has an awareness rate of " + (int)(100 * p.getAwarenessMult()) + "%";
 
             prestigeDescText.text = "";
             List<string> prestigeReasons = new List<string>();
             p.getTargetPrestige(prestigeReasons);
-            foreach (string s in prestigeReasons){
+            foreach (string s in prestigeReasons) {
                 prestigeDescText.text += "*" + s + "\n";
             }
 
@@ -400,7 +400,7 @@ namespace Assets.Code
                 locNumsBody.text = valuesBody;
                 locNumsNumbers.text = valuesNumbers;
                 locInfoBody.text = bodyText;
-                
+
             }
         }
 
@@ -496,7 +496,7 @@ namespace Assets.Code
 
                     if (canUseAbility)
                     {
-                        foreach (Property property in ((Unit)GraphicalMap.selectedSelectable).location.properties){
+                        foreach (Property property in ((Unit)GraphicalMap.selectedSelectable).location.properties) {
                             if (property.proto is Pr_Lockdown)
                             {
                                 canUseAbility = false;
@@ -606,102 +606,176 @@ namespace Assets.Code
             }
             else if (state == tabState.SOCIETY)
             {
-                screenSociety.SetActive(true);
-                flag1.color = Color.clear;
-                flag2.color = Color.clear;
-                if (hex != null && hex.location != null && hex.location.soc != null)
+                if (master.state == UIMaster.uiState.SOCIETY)
                 {
-                    flag1.color = hex.location.soc.color;
-                    flag2.color = hex.location.soc.color2;
-                    title.text = GraphicalMap.selectedHex.getName();
-                    locText.text = "";
-                    if (GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.soc != null)
-                    {
-                        socTitle.text = GraphicalMap.selectedHex.location.soc.getName();
-                    }
-                    else
-                    {
-                        socTitle.text = "";
-                    }
-                    string bodyText = "";
-                    //bodyText += "Body text for hex " + GraphicalMap.selectedHex.getName();
-                    //bodyText += "\nAttachedTo " + GraphicalMap.selectedHex.territoryOf.hex.getName();
-
-                    if (hex.location.settlement != null && hex.location.settlement.title != null)
-                    {
-                        if (hex.location.settlement.title.heldBy != null)
-                        {
-                            bodyText += "\nTitle held by: " + hex.location.settlement.title.heldBy.getFullName();
-                        }
-                        else
-                        {
-                            bodyText += "\nTitle currently unheld";
-                        }
-                    }
-                    bodyText += "\nSocial group: " + hex.location.soc.getName();
-                    socTypeTitle.text = hex.location.soc.getTypeName();
-                    socTypeDesc.text = hex.location.soc.getTypeDesc();
-                    if (hex.location.soc is Society)
-                    {
-                        Society locSoc = (Society)hex.location.soc;
-
-                        if (locSoc.voteSession != null)
-                        {
-                            bodyText += "\nVoting on: " + locSoc.voteSession.issue.ToString();
-                            bodyText += "\nTurns Remaining: " + locSoc.voteSession.timeRemaining;
-                        }
-
-                        string econEffects = "";
-                        foreach (EconEffect effect in locSoc.econEffects)
-                        {
-                            econEffects += "Econ from " + effect.from.name + " to " + effect.to.name + "\n";
-                        }
-                        socEcon.text = econEffects;
-                        
-
-                        bodyText += "\nMILITARY POSTURE: " + locSoc.posture;
-                        if (locSoc.offensiveTarget != null)
-                        {
-                            bodyText += "\nOffensive: " + locSoc.offensiveTarget.getName();
-                        }
-                        else
-                        {
-                            bodyText += "\nOffensive: None";
-                        }
-                        if (locSoc.defensiveTarget != null)
-                        {
-                            bodyText += "\nDefensive: " + locSoc.defensiveTarget.getName();
-                        }
-                        else
-                        {
-                            bodyText += "\nDefensive: None";
-                        }
-                        bodyText += "\nRebel cap " + locSoc.data_rebelLordsCap;
-                        bodyText += "\nLoyal cap " + locSoc.data_loyalLordsCap;
-                        bodyText += "\nStability: " + (int)(locSoc.data_societalStability * 100) + "%";
-                        if (locSoc.instabilityTurns > 0)
-                        {
-                            bodyText += "\nTURNS TILL CIVIL WAR: " + (locSoc.map.param.society_instablityTillRebellion - locSoc.instabilityTurns);
-                        }
-                    }
-                    body.text = bodyText;
-
-                    string strThreat = "";
-                    List<ReasonMsg> msgs = new List<ReasonMsg>();
-                    double threat = hex.location.soc.getThreat(msgs);
-                    strThreat += "Threat: " + (int)threat;
-                    foreach (ReasonMsg msg in msgs)
-                    {
-                        strThreat += "\n   " + msg.msg + " " + (int)msg.value;
-                    }
-                    socThreat.text = strThreat;
+                    setToSocFromSocScreen();
                 }
                 else
                 {
+                    screenSociety.SetActive(true);
+                    flag1.color = Color.clear;
+                    flag2.color = Color.clear;
+                    if (hex != null && hex.location != null && hex.location.soc != null)
+                    {
+                        flag1.color = hex.location.soc.color;
+                        flag2.color = hex.location.soc.color2;
+                        title.text = GraphicalMap.selectedHex.getName();
+                        locText.text = "";
+                        if (GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.soc != null)
+                        {
+                            socTitle.text = GraphicalMap.selectedHex.location.soc.getName();
+                        }
+                        else
+                        {
+                            socTitle.text = "";
+                        }
+                        string bodyText = "";
+                        //bodyText += "Body text for hex " + GraphicalMap.selectedHex.getName();
+                        //bodyText += "\nAttachedTo " + GraphicalMap.selectedHex.territoryOf.hex.getName();
 
-                    this.setToEmpty();
+                        if (hex.location.settlement != null && hex.location.settlement.title != null)
+                        {
+                            if (hex.location.settlement.title.heldBy != null)
+                            {
+                                bodyText += "\nTitle held by: " + hex.location.settlement.title.heldBy.getFullName();
+                            }
+                            else
+                            {
+                                bodyText += "\nTitle currently unheld";
+                            }
+                        }
+                        bodyText += "\nSocial group: " + hex.location.soc.getName();
+                        socTypeTitle.text = hex.location.soc.getTypeName();
+                        socTypeDesc.text = hex.location.soc.getTypeDesc();
+                        if (hex.location.soc is Society)
+                        {
+                            Society locSoc = (Society)hex.location.soc;
+
+                            if (locSoc.voteSession != null)
+                            {
+                                bodyText += "\nVoting on: " + locSoc.voteSession.issue.ToString();
+                                bodyText += "\nTurns Remaining: " + locSoc.voteSession.timeRemaining;
+                            }
+
+                            string econEffects = "";
+                            foreach (EconEffect effect in locSoc.econEffects)
+                            {
+                                econEffects += "Econ from " + effect.from.name + " to " + effect.to.name + "\n";
+                            }
+                            socEcon.text = econEffects;
+
+
+                            bodyText += "\nMILITARY POSTURE: " + locSoc.posture;
+                            if (locSoc.offensiveTarget != null)
+                            {
+                                bodyText += "\nOffensive: " + locSoc.offensiveTarget.getName();
+                            }
+                            else
+                            {
+                                bodyText += "\nOffensive: None";
+                            }
+                            if (locSoc.defensiveTarget != null)
+                            {
+                                bodyText += "\nDefensive: " + locSoc.defensiveTarget.getName();
+                            }
+                            else
+                            {
+                                bodyText += "\nDefensive: None";
+                            }
+                            bodyText += "\nRebel cap " + locSoc.data_rebelLordsCap;
+                            bodyText += "\nLoyal cap " + locSoc.data_loyalLordsCap;
+                            bodyText += "\nStability: " + (int)(locSoc.data_societalStability * 100) + "%";
+                            if (locSoc.instabilityTurns > 0)
+                            {
+                                bodyText += "\nTURNS TILL CIVIL WAR: " + (locSoc.map.param.society_instablityTillRebellion - locSoc.instabilityTurns);
+                            }
+                        }
+                        body.text = bodyText;
+
+                        string strThreat = "";
+                        List<ReasonMsg> msgs = new List<ReasonMsg>();
+                        double threat = hex.location.soc.getThreat(msgs);
+                        strThreat += "Threat: " + (int)threat;
+                        foreach (ReasonMsg msg in msgs)
+                        {
+                            strThreat += "\n   " + msg.msg + " " + (int)msg.value;
+                        }
+                        socThreat.text = strThreat;
+                    }
+                    else
+                    {
+
+                        this.setToEmpty();
+                    }
                 }
             }
+        }
+
+        public void setToSocFromSocScreen()
+        {
+            Society soc = GraphicalSociety.activeSociety;
+
+            screenSociety.SetActive(true);
+            flag1.color = soc.color;
+            flag2.color = soc.color2;
+            socTitle.text = soc.getName();
+            title.text = soc.getName();
+            locText.text = "";
+            string bodyText = "";
+
+            bodyText += "\nSocial group: " + soc.getName();
+            socTypeTitle.text = soc.getTypeName();
+            socTypeDesc.text = soc.getTypeDesc();
+
+            if (soc.voteSession != null)
+            {
+                bodyText += "\nVoting on: " + soc.voteSession.issue.ToString();
+                bodyText += "\nTurns Remaining: " + soc.voteSession.timeRemaining;
+            }
+
+            string econEffects = "";
+            foreach (EconEffect effect in soc.econEffects)
+            {
+                econEffects += "Econ from " + effect.from.name + " to " + effect.to.name + "\n";
+            }
+            socEcon.text = econEffects;
+
+
+            bodyText += "\nMILITARY POSTURE: " + soc.posture;
+            if (soc.offensiveTarget != null)
+            {
+                bodyText += "\nOffensive: " + soc.offensiveTarget.getName();
+            }
+            else
+            {
+                bodyText += "\nOffensive: None";
+            }
+            if (soc.defensiveTarget != null)
+            {
+                bodyText += "\nDefensive: " + soc.defensiveTarget.getName();
+            }
+            else
+            {
+                bodyText += "\nDefensive: None";
+            }
+            bodyText += "\nRebel cap " + soc.data_rebelLordsCap;
+            bodyText += "\nLoyal cap " + soc.data_loyalLordsCap;
+            bodyText += "\nStability: " + (int)(soc.data_societalStability * 100) + "%";
+            if (soc.instabilityTurns > 0)
+            {
+                bodyText += "\nTURNS TILL CIVIL WAR: " + (soc.map.param.society_instablityTillRebellion - soc.instabilityTurns);
+            }
+            body.text = bodyText;
+
+            string strThreat = "";
+            List<ReasonMsg> msgs = new List<ReasonMsg>();
+            double threat = soc.getThreat(msgs);
+            strThreat += "Threat: " + (int)threat;
+            foreach (ReasonMsg msg in msgs)
+            {
+                strThreat += "\n   " + msg.msg + " " + (int)msg.value;
+            }
+            socThreat.text = strThreat;
         }
     }
 }

@@ -18,9 +18,39 @@ namespace Assets.Code
 
         public override void turnTickInner(Map map)
         {
-            if (this.task != null) { return; }
 
             if (this.movesTaken != 0) { return; }
+            if (this.task is Task_GoToLocation) { return; }//Already moving or fleeing
+
+
+            bool shouldFlee = false;
+            if (this.location.soc != null && this.location.soc.hostileTo(this))
+            {
+                shouldFlee = true;
+            }
+            if (!shouldFlee)
+            {
+                foreach (Unit u in location.units)
+                {
+                    if (u.hostileTo(this)) { shouldFlee = true; break; }
+                }
+            }
+            if (!shouldFlee)
+            {
+                foreach (Location l2 in location.getNeighbours())
+                {
+                    if (shouldFlee) { break; }
+                    foreach (Unit u in l2.units)
+                    {
+                        if (u.hostileTo(this)) { shouldFlee = true; break; }
+                    }
+                }
+            }
+            if (shouldFlee)
+            {
+                flee(map);
+            }
+            if (this.task != null) { return; }
 
 
             this.movesTaken += 1;
@@ -28,10 +58,23 @@ namespace Assets.Code
             {
                 if (this.location.settlement.infiltration < World.staticMap.param.ability_unit_spreadShadowInfiltrationReq)
                 {
-                    this.task = new Task_Infiltrate();
-                    return;
+                    bool lockedDown = false;
+                    foreach (Property p in location.properties)
+                    {
+                        if (p.proto is Pr_Lockdown)
+                        {
+                            lockedDown = true;
+                            break;
+                        }
+                    }
+                    if (location.settlement.security >= 5) { lockedDown = true; }
+                    if (!lockedDown)
+                    {
+                        this.task = new Task_Infiltrate();
+                        return;
+                    }
                 }
-                if (this.location.person().shadow < 1)
+                else if (this.location.person().shadow < 1)
                 {
                     this.task = new Task_SpreadShadow();
                     return;
@@ -49,10 +92,20 @@ namespace Assets.Code
                 if (loc.person() != null && loc.soc is Society && loc.person().shadow < 1)
                 {
                     bool good = true;
-                    //foreach (Unit u in loc.units)
-                    //{
-                    //    if (u is Unit_TesterDark) { good = false;break; }
-                    //}
+                    foreach (Unit u in loc.units)
+                    {
+                        if (u.hostileTo(this)) { good = false;break; }
+                    }
+                    if (loc.settlement.security >= 5) { good = false; }
+                    if (good)
+                    {
+                        foreach (Property pr in loc.properties)
+                        {
+                            if (pr.proto is Pr_Lockdown) { good = false; break; }
+                            if (pr.proto is Pr_MajorSecurityBoost) { good = false; break; }
+                        }
+                    }
+
                     if (good)
                     {
                         double dist = Math.Abs(loc.hex.x - this.location.hex.x) + Math.Abs(loc.hex.y - this.location.hex.y);
@@ -69,6 +122,40 @@ namespace Assets.Code
             {
                 task = new Task_GoToLocation(target);
             }
+        }
+
+        public void flee(Map map)
+        {
+            double bestDist = 0;
+            Location target = null;
+            foreach (Location l2 in map.locations)
+            {
+                bool safe = true;
+                if (l2.soc == null  || l2.soc.hostileTo(this)) {continue; }
+                foreach (Unit u in l2.units)
+                {
+                    if (u.hostileTo(this)) { safe = false;break; }
+                }
+                if (!safe) { continue; }
+                foreach (Location l3 in l2.getNeighbours())
+                {
+                    if (!safe) { break; }
+                    foreach (Unit u in l3.units)
+                    {
+                        if (u.hostileTo(this)) { safe = false;break; }
+                    }
+                }
+                if (!safe) { continue; }
+
+                //Evaluated as safe. Flee option
+                double dist = map.getDist(this.location, l2);
+                if (dist < bestDist || target == null)
+                {
+                    target = l2;
+                    bestDist = dist;
+                }
+            }
+            task = new Task_GoToLocation(target);
         }
 
         public override bool checkForDisband(Map map)

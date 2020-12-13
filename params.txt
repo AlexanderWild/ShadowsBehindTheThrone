@@ -18,9 +18,9 @@ panic_letterWritingToAllLevel: 0.25
 panic_researchAtUniWithoutAwareness: 0.35
 panic_cleanseSoulLevel: 0.25
 panic_panicAtFullExtinction: 3
-panic_panicAtFullShadow: 1.75
+panic_panicAtFullShadow: 1.4
 panic_canAlly: 0.5
-panic_fromClueFound: 0.015
+panic_fromClueFound: 0.01
 panic_paladinSpawn_1: 0.15
 panic_paladinSpawn_2: 0.5
 awareness_canProposeLightAlliance: 1

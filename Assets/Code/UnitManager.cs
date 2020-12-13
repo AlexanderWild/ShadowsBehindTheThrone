@@ -78,7 +78,7 @@ namespace Assets.Code
 
                 agent.task = null;
 
-                //GraphicalMap.panTo(spawn.hex.x, spawn.hex.y);
+                GraphicalMap.panTo(spawn.hex.x, spawn.hex.y);
             }
         }
 

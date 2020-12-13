@@ -26,16 +26,16 @@ namespace Assets.Code
         public int usePaladins = 0;
 
         public double panic_panicPerPower = 0.0025;
-        public double panic_dropPerTurn = 0.001;
+        public double panic_dropPerTurn = 0.003;
         public double panic_canInvestigate = 0.1;
         public double panic_letterWritingLevel = 0.15;
         public double panic_letterWritingToAllLevel = 0.25;
         public double panic_researchAtUniWithoutAwareness = 0.35;
         public double panic_cleanseSoulLevel = 0.25;
         public double panic_panicAtFullExtinction = 3;
-        public double panic_panicAtFullShadow = 1.75;
+        public double panic_panicAtFullShadow = 1.4;
         public double panic_canAlly = 0.5;
-        public double panic_fromClueFound = 0.015;
+        public double panic_fromClueFound = 0.01;
         public double panic_paladinSpawn_1 = 0.15;
         public double panic_paladinSpawn_2 = 0.5;
 
