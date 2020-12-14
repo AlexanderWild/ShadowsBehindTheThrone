@@ -25,6 +25,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Doctor_LegalRemoval());
             abilities.Add(new Abu_Doctor_LootBattlefield());
             abilities.Add(new Abu_Doctor_WarAgainstLife());
+            abilities.Add(new Abu_Base_Recruit());
         }
 
         public override void turnTickInner(Map map)

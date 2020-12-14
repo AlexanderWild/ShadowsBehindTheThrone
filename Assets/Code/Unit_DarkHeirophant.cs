@@ -19,7 +19,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Heir_BreakNoble());
             abilities.Add(new Abu_Base_Infiltrate());
             abilities.Add(new Abu_Base_SocialiseAtCourt());
-            //abilities.Add(new Abu_Base_Recruit());
+            abilities.Add(new Abu_Base_Recruit());
         }
 
         public override void turnTickInner(Map map)

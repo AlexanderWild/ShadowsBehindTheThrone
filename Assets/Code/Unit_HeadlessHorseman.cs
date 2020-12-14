@@ -20,6 +20,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Headless_GatherPumpkin());
             abilities.Add(new Abu_Headless_BeginTrial());
             abilities.Add(new Abu_Headless_AlterInsanity());
+            abilities.Add(new Abu_Base_Recruit());
         }
 
         public override void turnTickInner(Map map)

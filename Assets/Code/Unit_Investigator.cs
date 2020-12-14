@@ -34,7 +34,6 @@ namespace Assets.Code
             abilities.Add(new Abu_Base_SocialiseAtCourt());
             abilities.Add(new Abu_Base_PleadCase());
             abilities.Add(new Abu_Base_Recruit());
-            abilities.Add(new Abu_Base_RecruitOutlaws());
             //abilities.Add(new Abu_Base_Disrupt());
             //if (loc.map.simplified == false)
             //{

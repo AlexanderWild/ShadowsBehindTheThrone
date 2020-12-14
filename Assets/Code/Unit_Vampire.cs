@@ -24,6 +24,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Vamp_Infiltrate());
             abilities.Add(new Abu_Vamp_Insanity());
             abilities.Add(new Abu_Base_SpreadShadow());
+            abilities.Add(new Abu_Base_Recruit());
         }
 
         public override void turnTickInner(Map map)

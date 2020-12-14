@@ -21,7 +21,6 @@ namespace Assets.Code
         {
             if (u.hp == u.maxHp) { return false; }
             if (u.location.settlement == null) { return false; }
-            if (u.location.soc != u.society) { return false; }
             if (u.location.soc is Society == false) { return false; }
             return true;
         }
@@ -45,7 +44,7 @@ namespace Assets.Code
         public override string getDesc()
         {
             return "Recruits from the local population, replenishing the forces of this agent (+1HP)"
-                + "\n[Requires a human settlement from the agent's society]";
+                + "\n[Requires a human settlement in a society]";
         }
 
         public override string getName()
