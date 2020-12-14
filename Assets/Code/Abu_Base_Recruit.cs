@@ -47,6 +47,10 @@ namespace Assets.Code
                 + "\n[Requires a human settlement in a society]";
         }
 
+        public override string specialCost()
+        {
+            return "No Evidence";
+        }
         public override string getName()
         {
             return "Recruit";

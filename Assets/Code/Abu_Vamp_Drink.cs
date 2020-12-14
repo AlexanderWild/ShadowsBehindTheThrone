@@ -12,7 +12,7 @@ namespace Assets.Code
 
             vamp.blood = vamp.maxBlood;
 
-            double amount = 0.25;
+            double amount = map.param.unit_minorEvidence;
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;
             e2.weight = amount;
@@ -47,9 +47,14 @@ namespace Assets.Code
             return 0;
         }
 
+        public override string specialCost()
+        {
+            return "Minor Evidence";
+        }
+
         public override string getDesc()
         {
-            return "Drinks the blood of the living, filling up the vampire's blood reserves. Leaves behind evidence."
+            return "Drinks the blood of the living, filling up the vampire's blood reserves. Leaves behind minor evidence."
                 + "\n[Requires a location with a noble who trusts the vampire (liking no lower than " + World.staticMap.param.unit_vampire_drinkReqLiking + ")]";
         }
 

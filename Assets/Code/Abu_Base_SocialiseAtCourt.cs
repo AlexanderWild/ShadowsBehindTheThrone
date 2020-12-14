@@ -38,6 +38,10 @@ namespace Assets.Code
             return 0;
         }
 
+        public override string specialCost()
+        {
+            return "No Evidence";
+        }
         public override string getDesc()
         {
             return "Begins a " + World.staticMap.param.unit_socialiseAtCourtTime + " turn task which will improve noble's liking for the agent by up to " 

@@ -12,7 +12,7 @@ namespace Assets.Code
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " beings darkening the soul of " + u.location.person().getFullName() + "." +
                 " This will take " + map.param.unit_spreadShadowTime + " turns, after which " + u.location.person().getFullName() + "'s shadow will increase by "
-                + (int)(100*map.param.unit_spreadShadowAmount) + "%. This will leave " + ((int)(100*World.staticMap.param.unit_spreadShadowEvidence))+ "  evidence.",
+                + (int)(100*map.param.unit_spreadShadowAmount) + "%. This will leave " + ((int)(100*World.staticMap.param.unit_majorEvidence))+ "  evidence.",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_SPREAD_SHADOW"));
 
         }
@@ -42,10 +42,15 @@ namespace Assets.Code
             return 0;
         }
 
+        public override string specialCost()
+        {
+            return "Major Evidence";
+        }
+
         public override string getDesc()
         {
             return "Increases the shadow of a noble by " 
-                + (int)(100*World.staticMap.param.unit_spreadShadowAmount) +  "%. Leaves " + ((int)(100*World.staticMap.param.unit_spreadShadowEvidence))+ "  evidence."
+                + (int)(100*World.staticMap.param.unit_spreadShadowAmount) +  "%. Leaves " + ((int)(100*World.staticMap.param.unit_majorEvidence))+ "  evidence."
                 + "\n[Requires a noble with infiltration above " + (int)(100*World.staticMap.param.ability_unit_spreadShadowInfiltrationReq) + "%]";
         }
 

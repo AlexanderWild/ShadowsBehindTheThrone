@@ -56,7 +56,7 @@ namespace Assets.Code
                 {
                     Evidence e = new Evidence(unit.location.map.turn);
                     e.pointsTo = unit;
-                    e.weight = unit.location.map.param.unit_seeker_uncoverEvidence;
+                    e.weight = unit.location.map.param.unit_minorEvidence;
                     unit.location.evidence.Add(e);
                 }
             }

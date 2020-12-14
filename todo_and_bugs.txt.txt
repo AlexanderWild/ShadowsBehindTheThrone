@@ -4,6 +4,8 @@
 	state == world
 	Couldn't reproduce
 
+-Check all abilities work on minor/major evidence terminology
+
 -Society view has different selected vs highlighted, on first entry
 	(Recheck, maybe resolved)
 	

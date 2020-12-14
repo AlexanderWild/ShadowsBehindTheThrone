@@ -22,6 +22,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Merch_SpendWealth());
             abilities.Add(new Abu_Base_PleadCase());
             abilities.Add(new Abu_Base_Recruit());
+            abilities.Add(new Abu_Base_ChangeIdentity());
             //abilities.Add(new Abu_Base_Disrupt());
             abilities.Add(new Abu_Base_SpreadShadow());
         }

@@ -349,21 +349,22 @@ namespace Assets.Code
         public double unit_infiltrateAmount = 1.35;
         public double unit_divisorOffset = 2;
         public double unit_infiltrateEvidence = 0.35;
+        public double unit_majorEvidence = 0.35;
+        public double unit_minorEvidence = 0.15;
         public int unit_spreadShadowTime = 5;
         public double unit_spreadShadowAmount = 0.6;
-        public double unit_spreadShadowEvidence = 0.5; 
         public int overmind_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackDuration = 6;
         public int unit_paladin_promotionDuration = 27;
+        public int unit_newIdentityTime = 10;
 
         public int unit_seeker_nReqSecrets = 12;
         public int unit_seeker_nCreatedSecrets = 7;
         public int unit_seeker_uncoverTime = 5;
         public double unit_seeker_libraryInfiltrationReq = 0.15;
         public double unit_vamp_infiltrateAmount = 1.6;
-        public double unit_seeker_uncoverEvidence = 0.2;
         public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 10;
         public int unit_doctor_emptyGravesDuration = 16;

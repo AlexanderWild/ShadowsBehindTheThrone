@@ -46,10 +46,15 @@ namespace Assets.Code
         {
             return 0;
         }
+        public override string specialCost()
+        {
+            return "Minor Evidence";
+        }
+
 
         public override string getDesc()
         {
-            return "Uncovers a forgotten secret, adding one to your total discovered. Leaves evidence behind."
+            return "Uncovers a forgotten secret, adding one to your total discovered. Leaves minor evidence behind."
                 + "\n[Requires a Forgotten Secret at your location]";
         }
 

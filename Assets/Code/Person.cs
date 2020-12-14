@@ -10,6 +10,7 @@ namespace Assets.Code
     {
         public int index = 0;
         public string firstName;
+        public string lastName;
         public bool isMale = Eleven.random.Next(2) == 0;
         public List<Title> titles = new List<Title>();
         public TitleLanded title_land;
@@ -766,6 +767,9 @@ namespace Assets.Code
             if (house != null && society.socType.usesHouses())
             {
                 add += " " + house.name;
+            }else if (lastName != null)
+            {
+                add += " " + lastName;
             }
             return getTitles() + " " + firstName + add;
         }
@@ -788,6 +792,14 @@ namespace Assets.Code
             relations.Add(other, rel);
 
             return rel;
+        }
+
+        public void purgeRelObj(int other)
+        {
+            if (relations.ContainsKey(other))
+            {
+                relations.Remove(other);
+            }
         }
 
         public string getTitles()

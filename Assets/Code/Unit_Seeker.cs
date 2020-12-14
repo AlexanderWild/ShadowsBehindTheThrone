@@ -26,6 +26,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Seeker_UncoverSecret());
             abilities.Add(new Abu_Seeker_ChangeDirection());
             abilities.Add(new Abu_Base_Recruit());
+            abilities.Add(new Abu_Base_ChangeIdentity());
         }
 
         public override void turnTickInner(Map map)
