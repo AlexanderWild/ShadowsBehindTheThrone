@@ -348,7 +348,6 @@ namespace Assets.Code
         public int unit_infiltrateTime = 6;
         public double unit_infiltrateAmount = 1.35;
         public double unit_divisorOffset = 2;
-        public double unit_infiltrateEvidence = 0.35;
         public double unit_majorEvidence = 0.35;
         public double unit_minorEvidence = 0.15;
         public int unit_spreadShadowTime = 5;

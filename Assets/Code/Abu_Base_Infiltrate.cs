@@ -12,7 +12,7 @@ namespace Assets.Code
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins infiltrating "+ u.location.person().getFullName() + ". If successful your infiltration level will increase by " + 
                 (int)(100*Task_Infiltrate.getEffectiveness(u)) + "%." +
-                " Security will reduce the amount of infiltration gained, and " + (int)(100*World.staticMap.param.unit_infiltrateEvidence) + "% evidence will be left behind."
+                " Security will reduce the amount of infiltration gained, and " + (int)(100*World.staticMap.param.unit_majorEvidence) + "% evidence will be left behind."
                 + " If the noble likes your agent this infiltration will be more effective, but will reduce if they dislike them.",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_INFILTRATE"));
 
@@ -39,6 +39,10 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return 0;
+        }
+        public override string specialCost()
+        {
+            return "Major Evidence";
         }
 
         public override string getDesc()

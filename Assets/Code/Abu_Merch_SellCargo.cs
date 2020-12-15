@@ -42,6 +42,10 @@ namespace Assets.Code
             return 0;
         }
 
+        public override string specialCost()
+        {
+            return " ";
+        }
         public override string getDesc()
         {
             return "Begins selling your cargo. Profit is generated per turn, with more profit from foreign nations, as well as larger metropoles/cities/towns"

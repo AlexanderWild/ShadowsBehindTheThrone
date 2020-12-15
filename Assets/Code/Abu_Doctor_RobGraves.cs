@@ -13,7 +13,7 @@ namespace Assets.Code
             Property.addProperty(map, u.location, "Empty Graves");
 
 
-            double amount = 0.1;
+            double amount = map.param.unit_minorEvidence;
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;
             e2.weight = amount;
@@ -57,6 +57,11 @@ namespace Assets.Code
         public override int getCost()
         {
             return 0;
+        }
+
+        public override string specialCost()
+        {
+            return "Minor Evidence";
         }
 
         public override int getCooldown()

@@ -59,6 +59,10 @@ namespace Assets.Code
         {
             return 0;
         }
+        public override string specialCost()
+        {
+            return "1 Secret";
+        }
 
         public override string getDesc()
         {

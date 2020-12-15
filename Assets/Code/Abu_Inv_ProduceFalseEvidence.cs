@@ -53,6 +53,11 @@ namespace Assets.Code
             return 0;
         }
 
+        public override string specialCost()
+        {
+            return " ";
+        }
+
         public override string getDesc()
         {
             return "Secretly gather items which can be used to accuse another agent (a unit with a named character), using your false accusation ability."

@@ -49,7 +49,7 @@ namespace Assets.Code
 
         public override string specialCost()
         {
-            return "No Evidence";
+            return " ";
         }
         public override string getName()
         {

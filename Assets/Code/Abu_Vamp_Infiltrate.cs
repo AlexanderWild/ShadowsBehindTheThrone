@@ -36,7 +36,7 @@ namespace Assets.Code
 
         public override string specialCost()
         {
-            return World.staticMap.param.ability_unit_bloodCostInfiltrate + " blood\nNo Evidence";
+            return World.staticMap.param.ability_unit_bloodCostInfiltrate + " blood";
         }
         public override int getCost()
         {

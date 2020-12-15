@@ -37,6 +37,11 @@ namespace Assets.Code
             return 0;
         }
 
+        public override string specialCost()
+        {
+            return " ";
+        }
+
         public override string getDesc()
         {
             return "Begins a " + World.staticMap.param.unit_pleadCaseTime + " turn task which will halve the suspicion of the local nobles towards all your enthralled or broken agents and nobles."

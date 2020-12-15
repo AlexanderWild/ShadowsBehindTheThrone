@@ -8,7 +8,7 @@ namespace Assets.Code
 
         public override void castInner(Map map, Unit u)
         {
-            double amount = 1;
+            double amount = map.param.unit_majorEvidence;
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;
             e2.weight = amount;
@@ -51,6 +51,11 @@ namespace Assets.Code
         public override int getCooldown()
         {
             return 0;
+        }
+
+        public override string specialCost()
+        {
+            return "Major Evidence";
         }
 
         public override string getDesc()

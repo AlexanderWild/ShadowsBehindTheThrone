@@ -11,7 +11,7 @@ namespace Assets.Code
 
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;
-            e2.weight = 0.25;
+            e2.weight = u.location.map.param.unit_minorEvidence;
             u.location.evidence.Add(e2);
 
             u.location.person().evidence += 0.1;
@@ -44,10 +44,14 @@ namespace Assets.Code
         {
             return World.staticMap.param.unit_falseEvidenceCooldown;
         }
+        public override string specialCost()
+        {
+            return "Minor Evidence";
+        }
 
         public override string getDesc()
         {
-            return "Increases the evidence on a noble by 10%. Places findable evidence against your investigator (25%)"
+            return "Increases the evidence on a noble by 10%."
                 + "\n[Requires infiltration above " + (int)(100*World.staticMap.param.ability_unit_falseEvidenceInfiltration) + "%]";
         }
 
