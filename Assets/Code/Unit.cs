@@ -109,13 +109,14 @@ namespace Assets.Code
             return Color.white;
         }
 
-        public virtual bool hostileTo (Unit other)
+        public virtual bool hostileTo (Unit other,bool allowRecursion=true)
         {
             if (this == other) { return false; }
             if (this.society.hostileTo(other))
             {
                 return true;
             }
+            if (allowRecursion && other.hostileTo(this,false)){ return true; }
             return hostility.Contains(other);
         }
 

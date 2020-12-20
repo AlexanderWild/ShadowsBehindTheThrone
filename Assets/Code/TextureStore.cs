@@ -133,6 +133,7 @@ namespace Assets.Code
         public Sprite unit_paladin;
         public Sprite unit_pumpkin;
         public Sprite unit_heirophant;
+        public Sprite unit_knight;
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;

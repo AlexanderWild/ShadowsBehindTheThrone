@@ -634,6 +634,17 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
+        public void popMsgAgent(Unit actor, Unit target,string words)
+        {
+            //if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabMsg) as GameObject;
+            PopupMsg specific = obj.GetComponent<PopupMsg>();
+            specific.ui = ui;
+            specific.text.text = words;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
         public void popCredits()
         {
             //if (world.displayMessages == false) { return; }

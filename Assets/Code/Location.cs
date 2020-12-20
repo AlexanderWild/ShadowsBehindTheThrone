@@ -157,7 +157,7 @@ namespace Assets.Code
                             e.assignedInvestigator = null;//Disrupted
                         }
                     }
-                    if (e.assignedInvestigator == null)
+                    if (e.assignedInvestigator == null && e.pointsTo != null && e.pointsTo.person != null)
                     {
                         e.rumourCounter += 1;
                         if (e.rumourCounter > 2)
@@ -171,6 +171,7 @@ namespace Assets.Code
                                     u is Unit_Investigator &&
                                     u.person != null &&
                                     u.person.state != Person.personState.enthralledAgent &&
+                                    u.person.getRelation(e.pointsTo.person).suspicion > 0 &&
                                     u.task is Task_Wander &&
                                     u.location.evidence.Count == 0)
                                 {
@@ -187,7 +188,8 @@ namespace Assets.Code
                             {
                                 e.assignedInvestigator = bestU;
                                 bestU.task = new Task_GoToClue(this);
-                                map.world.prefabStore.popMsg(bestU.getName() + " has learnt of evidence in " + this.getName() + " and is travelling to investigate.");
+                                map.world.prefabStore.popMsgAgent(bestU,e.pointsTo,bestU.getName() + " has learnt of evidence in " + this.getName() + " and is travelling to investigate." +
+                                    " They recognised the methods of " + e.pointsTo.getName() + ", whom they were already suspicious of.");
                             }
                         }
                     }

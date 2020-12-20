@@ -49,6 +49,7 @@ namespace Assets.Code
 
         public override void turnTickAI(Map map)
         {
+            checkHostilityGain();
             if (state == unitState.basic)
             {
                 turnTickAI_Investigator(map);
@@ -59,6 +60,28 @@ namespace Assets.Code
             }
         }
 
+
+        public void checkHostilityGain()
+        {
+            foreach (RelObj rel in person.relations.Values)
+            {
+                if (rel.suspicion >= 1)
+                {
+                    Person p = person.map.persons[rel.them];
+                    if (p == person) { throw new Exception("Badly implemented lookup"); }
+                    if (p.unit != null)
+                    {
+                        //We're suspicious of this unit
+                        if (hostility.Contains(p.unit) == false)
+                        {
+                            //We should become hostile to them, as we are now certain that they are evil
+                            person.map.world.prefabStore.popMsgAgent(this, p.unit, this.getName() + " has become hostile to " + p.unit.getName());
+                            hostility.Add(p.unit);
+                        }
+                    }
+                }
+            }
+        }
         public void turnTickAI_Paladin(Map map)
         {
             paladinDuration -= 1;
@@ -127,7 +150,7 @@ namespace Assets.Code
             {
                 foreach (Unit u in location.units)
                 {
-                    if (u.isEnthralled())
+                    if (u.isEnthralled() && u.person != null && this.person.getRelation(u.person).suspicion > 0)
                     {
                         if (this.person != null && u.person != null)
                         {
@@ -249,7 +272,7 @@ namespace Assets.Code
         {
             if (state == unitState.knight)
             {
-                return world.textureStore.unit_lookingGlass;
+                return world.textureStore.unit_knight;
             }
             if (state == unitState.paladin)
             {
