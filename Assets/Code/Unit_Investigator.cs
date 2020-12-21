@@ -20,7 +20,7 @@ namespace Assets.Code
         public List<Unit> huntableSuspects = new List<Unit>();
         public int paladinDuration = 0;
 
-        public enum unitState { basic,knight,paladin };
+        public enum unitState { basic,witchhunter,paladin };
         public unitState state = unitState.basic;
 
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
@@ -268,9 +268,104 @@ namespace Assets.Code
         }
 
 
+        public static double getSwitchUtility(Person person,Unit_Investigator swappable,unitState hypo)
+        {
+            double value = 0;
+
+            double worstMilitaryFear = 0;
+            foreach (ThreatItem item in person.threatEvaluations)
+            {
+                if (item.responseCode == ThreatItem.RESPONSE_MILITARY)
+                {
+                    if (item.threat > worstMilitaryFear) { worstMilitaryFear = item.threat; }
+                }
+            }
+            double[] weights = new double[] { person.threat_agents.threat, worstMilitaryFear };
+            double[] currentAllocation = new double[2];
+            double[] futureAllocation = new double[2];
+
+            int specialisationWeight = 3;
+            foreach (Unit u in person.map.units)
+            {
+                if (u.society == person.society && u is Unit_Investigator)
+                {
+                    Unit_Investigator existing = (Unit_Investigator)u;
+                    if (existing.state == unitState.basic)
+                    {
+                        //Basic covers all jobs
+                        for (int i = 0; i < currentAllocation.Length; i++)
+                        {
+                            currentAllocation[i] += 1;
+                            if (u != swappable)
+                            {
+                                futureAllocation[i] += 1;
+                            }
+                        }
+                    }
+                    else if (existing.state == unitState.witchhunter || existing.state == unitState.paladin)
+                    {
+                        currentAllocation[0] += specialisationWeight;
+                        if (u != swappable)
+                        {
+                            futureAllocation[0] += specialisationWeight;
+                        }
+                    }
+                }
+            }
+            //What would the future state look like if this agent swapped?
+            if (hypo == unitState.basic)
+            {
+                for (int i = 0; i < currentAllocation.Length; i++)
+                {
+                   futureAllocation[i] += 1;
+                }
+            }else if (hypo == unitState.paladin || hypo == unitState.witchhunter)
+            {
+                futureAllocation[0] += specialisationWeight;
+            }
+
+            double normA = 0;
+            double normB = 0;
+            double normC = 0;
+            for (int i = 0; i < currentAllocation.Length; i++)
+            {
+                normA += currentAllocation[i];
+                normB += weights[i];
+                normC += futureAllocation[i];
+            }
+            for (int i = 0; i < currentAllocation.Length; i++)
+            {
+                if (normA != 0) { currentAllocation[i] /= normA; }
+                if (normB != 0) { weights[i] /= normB; }
+                if (normC != 0) { futureAllocation[i] /= normC; }
+            }
+
+            //We now want to ask if swapping gets us closer to ideal distribution
+            //Squared Euclidean metric
+            double presentDistance = 0;
+            double futureDistance = 0;
+            //string msgCur = "";
+            //string msgFuture = "";
+            //string msgWeights = "";
+            for (int i = 0; i < futureAllocation.Length; i++)
+            {
+                //msgFuture += Eleven.toFixedLen(futureAllocation[i], 4) + " ";
+                //msgCur += Eleven.toFixedLen(currentAllocation[i], 4) + " ";
+                //msgWeights += Eleven.toFixedLen(weights[i], 4) + " ";
+                //World.log("Swap hypothesis " + i + " " + currentAllocation[i] + " " + futureAllocation[i]);
+                presentDistance += (currentAllocation[i] - weights[i]) * (currentAllocation[i] - weights[i]);
+                futureDistance += (futureAllocation[i] - weights[i]) * (futureAllocation[i] - weights[i]);
+            }
+            //World.log("Threat weights: " + msgWeights);
+            //World.log("Hypotheatical : " + msgFuture + " dist " + Eleven.toFixedLen(futureDistance, 5));
+            //World.log("Current       : " + msgCur + " dist " + Eleven.toFixedLen(presentDistance,5));
+
+            return presentDistance - futureDistance;//We want to minimise the distance. If swapping moves us closer then futureDist is smaller than present dist, so this becomes positive
+        }
+
         public override Sprite getSprite(World world)
         {
-            if (state == unitState.knight)
+            if (state == unitState.witchhunter)
             {
                 return world.textureStore.unit_knight;
             }
@@ -283,7 +378,7 @@ namespace Assets.Code
 
         public override string getTitleM()
         {
-            if (state == unitState.knight)
+            if (state == unitState.witchhunter)
             {
                 return "Knight";
             }
@@ -296,7 +391,7 @@ namespace Assets.Code
 
         public override string getTitleF()
         {
-            if (state == unitState.knight)
+            if (state == unitState.witchhunter)
             {
                 return "Knight";
             }

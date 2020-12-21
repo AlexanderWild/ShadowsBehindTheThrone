@@ -117,6 +117,7 @@ namespace Assets.Code
         public double utility_defendHomelandVSAgents = 20;
         public double utility_evidenceResonseBaseline = 30;
         public double utility_extremeismScaling = 2;
+        public double utility_swapAgentRolesMult = 75;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;

@@ -16,6 +16,8 @@ namespace Assets.Code
         public int province = -1;
         public EconTrait econ_from;
         public EconTrait econ_to;
+        public Unit unit;
+        public Unit_Investigator.unitState agentRole;
         public int index = -1;//For stuff which doesn't have a discrete target, such as "Declare war yes/no"
 
         public SavableMap_Person_Double randomUtility = new SavableMap_Person_Double();
@@ -115,6 +117,7 @@ namespace Assets.Code
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.NO_RESPONSE) { return "No Response"; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.DEFEND_PROVINCE) { return "Secure Province " + World.staticMap.provinces[province].name; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.LOCKDOWN_PROVINCE) { return "Lockdown Province " + World.staticMap.provinces[province].name; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_WITCHHUNTER) { return "Make " + unit.getName() + " a WitchHunter"; }
             }
 
             if (person != null) { reply += person.getFullName() + " "; }
