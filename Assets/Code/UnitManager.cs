@@ -26,10 +26,7 @@ namespace Assets.Code
                     checkPaladins();
                 }
             }
-            if (map.turn % 16 == 0)
-            {
                 checkAutomatic();
-            }
         }
 
         public void checkAutomatic()
@@ -37,19 +34,18 @@ namespace Assets.Code
             if (map.automatic == false) { return; }
             if (map.burnInComplete == false) { return; }
 
-            int targetDarks = 3;
-
             int presentDarks = 0;
             foreach (Unit u in map.units)
             {
-                if (u is Unit_TesterDark)
+                if (u.isEnthralled())
                 {
                     presentDarks += 1;
                 }
             }
 
-            if (presentDarks < targetDarks)
+            if (presentDarks < map.param.overmind_maxEnthralled && map.overmind.availableEnthrallments > 0)
             {
+                map.overmind.availableEnthrallments -= 1;
                 World.log("Spawning tester dark at turn " + map.turn);
                 Location spawn = null;
                 foreach (Unit u in map.units)

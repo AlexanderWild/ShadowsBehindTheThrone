@@ -146,6 +146,17 @@ namespace Assets.Code
             {
                 if (u.isDead) { continue; }
                 u.turnTick(this);
+
+                //Combat action against unit on own square
+                foreach (Unit u2 in u.location.units)
+                {
+                    if (u.hostileTo(u2))
+                    {
+                        if (u == u2) { throw new Exception(u.getName() + " was self-hostile"); }
+                        combatAction(u, u2, u.location);
+                        break;
+                    }
+                }
             }
 
             unitManager.turnTick();

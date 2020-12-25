@@ -658,23 +658,17 @@ namespace Assets.Code
                     if (unit is Unit_Investigator && unit.society == society)
                     {
                         Unit_Investigator inv = (Unit_Investigator)unit;
-                        if (inv.state == Unit_Investigator.unitState.witchhunter || inv.state == Unit_Investigator.unitState.paladin)
+                        if (inv.state == Unit_Investigator.unitState.investigator || inv.state == Unit_Investigator.unitState.paladin)
                         {
                             //Already in offensive anti-agent state, no need to intefere
                         }
-                        else if  (inv.state == Unit_Investigator.unitState.basic)//Could upgrade to knight if they've got a target
+                        else if  (inv.state == Unit_Investigator.unitState.basic)//Could upgrade to investigator if they've got a target
                         {
-                            //foreach (Unit other in inv.hostility)
-                            //{
-                            //    if (other.isMilitary == false)
-                            //    {
-                                    opt = new VoteOption();
-                                    opt.unit = unit;
-                            opt.agentRole = Unit_Investigator.unitState.witchhunter;
-                                    opt.index = VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_WITCHHUNTER;
-                                    issue.options.Add(opt);
-                            //    }
-                            //}
+                            opt = new VoteOption();
+                            opt.unit = unit;
+                            opt.agentRole = Unit_Investigator.unitState.investigator;
+                            opt.index = VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_INVESTIGATOR;
+                            issue.options.Add(opt);
                         }
                     }
                 }

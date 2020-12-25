@@ -22,8 +22,13 @@ namespace Assets.Code
             if (unit.hp == unit.maxHp) { unit.task = null;return; }
             if (unit.society != unit.location.soc) { unit.task = null; return; }
 
-            unit.hp += 2;
-            if (unit.hp > unit.maxHp) { unit.hp = unit.maxHp; }
+            //Only heal 0.5 per turn, so attacking agents actually outpace healing
+            if (unit.location.map.turn % 2 == 0)
+            {
+                unit.hp += 1;
+            }
+
+            if (unit.hp > unit.maxHp) { unit.hp = unit.maxHp; unit.task = null; return; }
         }
     }
 }

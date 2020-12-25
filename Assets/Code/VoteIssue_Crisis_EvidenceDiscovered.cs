@@ -15,7 +15,7 @@ namespace Assets.Code
         public static int INVESTIGATOR_HOSTILITY = 3;
         public static int EXPELL_ALL_FOREIGN_AGENTS = 4;
         public static int LOCKDOWN_PROVINCE = 5;
-        public static int AGENT_TO_WITCHHUNTER = 6;
+        public static int AGENT_TO_INVESTIGATOR = 6;
 
         public VoteIssue_Crisis_EvidenceDiscovered(Society soc,Person proposer,List<Evidence> evidence) : base(soc,proposer)
         {
@@ -157,12 +157,12 @@ namespace Assets.Code
                 msgs.Add(new ReasonMsg("Liking for nobles in province" + add, localU));
                 u += localU;
             }
-            if (option.index == AGENT_TO_WITCHHUNTER)
+            if (option.index == AGENT_TO_INVESTIGATOR)
             {
                 responseLevelMin = 0;
                 responseLevelMax = 100;
 
-                double localU = Unit_Investigator.getSwitchUtility(p,(Unit_Investigator)option.unit, Unit_Investigator.unitState.witchhunter);
+                double localU = Unit_Investigator.getSwitchUtility(p,(Unit_Investigator)option.unit, Unit_Investigator.unitState.investigator);
                 localU *= p.map.param.utility_swapAgentRolesMult;
                 msgs.Add(new ReasonMsg("Balance of agent skills vs balance of threats", localU));
                 u += concernLevel;
@@ -289,11 +289,11 @@ namespace Assets.Code
                 }
             }
 
-            if (option.index == AGENT_TO_WITCHHUNTER)
+            if (option.index == AGENT_TO_INVESTIGATOR)
             {
-                World.self.prefabStore.popMsgAgent(option.unit, option.unit, "Trying to promote to knight");
+                World.self.prefabStore.popMsgAgent(option.unit, option.unit, "Trying to promote to investigator");
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
-                inv.state = Unit_Investigator.unitState.witchhunter;
+                inv.state = Unit_Investigator.unitState.investigator;
             }
         }
 

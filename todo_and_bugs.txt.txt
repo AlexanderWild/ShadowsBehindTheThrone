@@ -4,19 +4,14 @@
 	state == world
 	Couldn't reproduce
 
--Check all abilities work on minor/major evidence terminology
-
--Society view has different selected vs highlighted, on first entry
-	(Recheck, maybe resolved)
-	
--Society view doesn't let you look at the society in the left UI
-
 -Leftover graphical properties, by the look of it
 	(couldn't replicate?)
 
 -Maybe they rebuild lost cities too fast
 
--Combat doesn't occur if two agents are on the same location
+-Add scrolling to voting and ability menues
+
+-Fishmen need an ability to get the cult to raise infiltration level
 
 	Medium criticality:
 
@@ -24,11 +19,10 @@
 
 -Agent power should be affected by difficulty
 
--Agents should be affected by the security level to a greater degree
-
 -If you have no saves to load it reads "New text" on the scroll view
 
 -Units disappear when dismissing a dialog option (only in compiled?)
+	(Not seen in some time)
 
 -Traits should affect infiltration difficulty
 
@@ -57,6 +51,17 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+
+-Agents should be affected by the security level to a greater degree
+
+-Society view has different selected vs highlighted, on first entry
+	(Recheck, maybe resolved)
+	
+-Society view doesn't let you look at the society in the left UI
+
+-Check all abilities work on minor/major evidence terminology
+
+-Combat doesn't occur if two agents are on the same location
 -Utilities for assign title are very high (possibly fixed)
 
 -Dark nobles shouldn't hate the defensive stance

@@ -20,13 +20,13 @@ namespace Assets.Code
         public List<Unit> huntableSuspects = new List<Unit>();
         public int paladinDuration = 0;
 
-        public enum unitState { basic,witchhunter,paladin };
+        public enum unitState { basic,investigator,paladin };
         public unitState state = unitState.basic;
 
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
         {
-            maxHp = 3;
-            hp = 3;
+            maxHp = 5;
+            hp = 2;
             abilities.Add(new Abu_Inv_FalseAccusation());
             abilities.Add(new Abu_Inv_ProduceFalseEvidence());
             abilities.Add(new Abu_Inv_Incriminate());
@@ -49,8 +49,14 @@ namespace Assets.Code
 
         public override void turnTickAI(Map map)
         {
+            checkSocietyPresence();
             checkHostilityGain();
+            if (checkRetreat()) { return; }
             if (state == unitState.basic)
+            {
+                turnTickAI_Basic(map);
+            }
+            if (state == unitState.investigator)
             {
                 turnTickAI_Investigator(map);
             }
@@ -60,6 +66,56 @@ namespace Assets.Code
             }
         }
 
+        public void checkSocietyPresence()
+        {
+            if (parentLocation.soc != this.society && parentLocation.soc is Society) { this.society = parentLocation.soc; }
+        }
+
+        public bool checkRetreat()
+        {
+            if (this.task  is Task_GoToSocialGroup || task is Task_Resupply)
+            {
+                task.turnTick(this);
+                return true;
+            }
+
+            if (hp <= (maxHp / 2) + 1 && hp < maxHp)
+            {
+                //Damaged beyond safety margins, retreat advised
+                if (this.location.soc == this.society)
+                {
+                    if (this.task is Task_Resupply)
+                    {
+                        return true;
+                    }
+                    else if (this.task is Task_Disrupted)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        this.task = new Task_Resupply();
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (this.task is Task_GoToSocialGroup)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        this.task = new Task_GoToSocialGroup(society);
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public void checkHostilityGain()
         {
@@ -88,7 +144,7 @@ namespace Assets.Code
             if (map.units.Contains(paladinTarget) == false)
             {
                 this.task = null;
-                this.state = unitState.basic;
+                this.state = unitState.investigator;
                 map.world.prefabStore.popMsg(this.getName() + " has completed their quest to hunt down " + paladinTarget.getName() + ", and can now return to their normal duties.");
                 return;
 
@@ -96,7 +152,7 @@ namespace Assets.Code
             if (paladinDuration <= 0)
             {
                 this.task = null;
-                this.state = unitState.basic;
+                this.state = unitState.investigator;
                 map.world.prefabStore.popMsg(this.getName() + " has run out of supplies to pursue " + paladinTarget.getName() + " and must end their quest.");
                 return;
             }
@@ -125,20 +181,10 @@ namespace Assets.Code
             if (this.location.soc == society)
             {
                 sinceHome = 0;
-                /*
-                if (person != null && location.person() != null && location.person().state != Person.personState.broken){
-                    foreach (RelObj rel in person.relations.Values)
-                    {
-                        double them = location.person().getRelation(rel.them).suspicion;
-                        double me = rel.suspicion;
-                        if (me > them)
-                        {
-                            map.addMessage(this.getName() + " warns " + location.person().getFullName() + " about " + rel.them.getFullName(),MsgEvent.LEVEL_ORANGE,false);
-                            location.person().getRelation(rel.them).suspicion = me;
-                        }
-                    }
+                if (this.hp < maxHp && task == null && location.settlement != null)
+                {
+                    task = new Task_Resupply();
                 }
-                */
             }
             else
             {
@@ -186,16 +232,15 @@ namespace Assets.Code
                 }
 
                 task = new Task_HuntEnthralled_Investigator(this,target);
+                paladinTarget = target;
                 state = unitState.paladin;
                 lastTurnPromoted = map.turn;
-                paladinTarget = target;
                 if (hostility.Contains(paladinTarget) == false)
                 {
                     hostility.Add(paladinTarget);
                 }
                 paladinDuration = map.param.unit_paladin_promotionDuration;
-                //map.world.displayMessages = true;
-                map.world.prefabStore.popMsg(this.getName() + " has found evidence that " + paladinTarget.getName() + " is in league with the darkness," +
+                map.world.prefabStore.popMsgAgent(this, target, this.getName() + " has found evidence that " + paladinTarget.getName() + " is in league with the darkness," +
                     " and has been granted the powers of the paladin, to hunt them down for a duration. They are currently in " + location.getName() + ".");
 
                 //Update your graphic
@@ -222,26 +267,61 @@ namespace Assets.Code
             task.turnTick(this);
         }
 
+        public void turnTickAI_Basic(Map map)
+        {
+            foreach (Evidence ev in evidenceCarried)
+            {
+                if (ev.pointsTo != null && ev.pointsTo != this)
+                {
+                    if (huntableSuspects.Contains(ev.pointsTo) == false)
+                    {
+                        huntableSuspects.Add(ev.pointsTo);
+                    }
+                }
+            }
+
+            if (this.location.soc == society)
+            {
+                sinceHome = 0;
+                if (this.hp < maxHp && task == null && location.settlement != null)
+                {
+                    task = new Task_Resupply();
+                }
+            }
+            else
+            {
+                sinceHome += 1;
+            }
+
+
+            if (task != null)
+            {
+                task.turnTick(this);
+                return;
+            }
+
+            else if (location.evidence.Count > 0)
+            {
+                task = new Task_Investigate();
+            }
+            else if (sinceHome > wanderDur)
+            {
+                task = new Task_GoToSocialGroup(society);
+            }
+            else
+            {
+                task = new Task_Wander();
+            }
+
+
+            task.turnTick(this);
+        }
+
         public bool shouldBePaladin(Map map)
         {
             if (location.soc != this.society) { return false; }
             if (map.simplified) { return false; }
-            if (map.automatic) { return false; }
-            
-            if (map.param.useAwareness == 1)
-            {
-                //Person sponsor = null;
-                //Society soc = (Society)society;
-                //foreach (Person p in soc.people)
-                //{
-                //    if (p.awareness > 0)
-                //    {
-                //        sponsor = p;
-                //        break;
-                //    }
-                //}
-                //if (sponsor == null) { return false; }
-            }
+            //if (map.automatic) { return false; }
 
             int nPaladins = 0;
             foreach (Unit u in map.units)
@@ -302,7 +382,7 @@ namespace Assets.Code
                             }
                         }
                     }
-                    else if (existing.state == unitState.witchhunter || existing.state == unitState.paladin)
+                    else if (existing.state == unitState.investigator || existing.state == unitState.paladin)
                     {
                         currentAllocation[0] += specialisationWeight;
                         if (u != swappable)
@@ -319,7 +399,7 @@ namespace Assets.Code
                 {
                    futureAllocation[i] += 1;
                 }
-            }else if (hypo == unitState.paladin || hypo == unitState.witchhunter)
+            }else if (hypo == unitState.paladin || hypo == unitState.investigator)
             {
                 futureAllocation[0] += specialisationWeight;
             }
@@ -365,9 +445,13 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
-            if (state == unitState.witchhunter)
+            if (state == unitState.basic)
             {
-                return world.textureStore.unit_knight;
+                return world.textureStore.unit_default;
+            }
+            if (state == unitState.investigator)
+            {
+                return world.textureStore.unit_lookingGlass;
             }
             if (state == unitState.paladin)
             {
@@ -378,9 +462,13 @@ namespace Assets.Code
 
         public override string getTitleM()
         {
-            if (state == unitState.witchhunter)
+            if (state == unitState.basic)
             {
-                return "Knight";
+                return "Agent";
+            }
+            if (state == unitState.investigator)
+            {
+                return "Investigator";
             }
             if (state == unitState.paladin)
             {
@@ -391,9 +479,13 @@ namespace Assets.Code
 
         public override string getTitleF()
         {
-            if (state == unitState.witchhunter)
+            if (state == unitState.basic)
             {
-                return "Knight";
+                return "Agent";
+            }
+            if (state == unitState.investigator)
+            {
+                return "Investigator";
             }
             if (state == unitState.paladin)
             {
@@ -432,6 +524,10 @@ namespace Assets.Code
 
         public override string getDesc()
         {
+            if (state == unitState.investigator)
+            {
+                return "Investigators are agents who wander near their home location searching for evidence of dark powers. They can analyse evidence and recognise both enthralled agents and enthralled nobles.";
+            }
             if (state == unitState.paladin)
             {
                 return "Paladins are promoted investigators, who are sent to hunt down the person they have evidence against.";

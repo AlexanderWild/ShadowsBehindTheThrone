@@ -313,102 +313,130 @@ namespace Assets.Code
             {
                 if (u != u2 && u.hostileTo(u2))
                 {
-                    double lethality = loc.map.param.combat_lethality;
-                    double lethalityDef = loc.map.param.combat_lethalityDefensive;
-
-                    world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
-                    int dmgDone = (int)(u.hp * (lethality + (Eleven.random.NextDouble() * lethality)));
-                    if (u2.isMilitary)
-                    {
-                        if (loc.settlement != null && loc.settlement.defensiveStrengthCurrent > 0)
-                        {
-                            double ablated = Math.Min(loc.settlement.defensiveStrengthCurrent,dmgDone / 2d);
-                            dmgDone -= (int)ablated;
-                            loc.settlement.defensiveStrengthCurrent -= ablated;
-                        }
-
-                        int dmgReplied = (int)(u2.hp * (lethalityDef + (Eleven.random.NextDouble() * lethalityDef)));
-                        if (dmgReplied >= u.hp)
-                        {
-                            dmgReplied = u.hp - 1;
-                            if (dmgReplied < 0) { dmgReplied = 0; }
-                        }
-                        u.hp -= dmgReplied;
-                    }
-                    
-
-                    if (dmgDone < 1) { dmgDone = 1; }
-
-                    bool kicked = false;
-                    if (dmgDone > 1 && (u2.isMilitary == false)) { dmgDone = 1; kicked = true; }
-
-
-                    u2.hp -= dmgDone;
-                    if (u2.isEnthralled()) {
-                        world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
-                    }
-                    if (u2.hp <= 0)
-                    {
-                        u2.die(this,"Attacked by " + u.getName());
-                    }
-                    if (u.hp <= 0)
-                    {
-                        u.die(this, "Took damage attacking " + u2.getName());
-                    }
-                    else if (kicked)
-                    {
-                        int c = 0;
-                        Location kickedTo = null;
-                        foreach (Location l2 in u2.location.getNeighbours())
-                        {
-                            bool bad = false;
-                            foreach (Unit u3 in l2.units)
-                            {
-                                if (u3.hostileTo(u2) || u2.hostileTo(u3)) { bad = true;break; }
-                            }
-                            if (!bad)
-                            {
-                                c += 1;
-                                if (Eleven.random.Next(c) == 0)
-                                {
-                                    kickedTo = l2;
-                                }
-                            }
-                        }
-                        if (kickedTo != null)
-                        {
-                            u2.task = null;
-                            adjacentMoveTo(u2, kickedTo);
-                            if (u2.isEnthralled())
-                            {
-                                world.prefabStore.popMsg(u2.getName() + " is forced to retreat, and is now in " + u2.location.getName());
-                            }
-                        }
-                    }
-
-                    if (u.isMilitary && loc.settlement != null)
-                    {
-                        if (loc.settlement is Set_City)
-                        {
-                            Set_City city = (Set_City)loc.settlement;
-                            city.infrastructure *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
-                            city.population *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
-                            if (city.infrastructure < 1) { city.infrastructure = 1; }
-                            if (city.population < 1) { city.population = 1; }
-                        }
-                    }
-
-                    if (u.isMilitary && u2.isMilitary && u.society is Society && u2.society is Society)
-                    {
-                        Property.addProperty(this, loc, "Recent Human Battle");
-                    }
-
+                    combatAction(u, u2, loc);
                     return;
                 }
             }
             u.location.units.Remove(u);
             loc.units.Add(u);
             u.location = loc;
+        }
+
+        public void combatAction(Unit u, Unit u2, Location loc)
+        {
+            if (u.isMilitary == false && u2.isMilitary == false && u.isEnthralled() && u2.society == loc.soc)
+            {
+                //Enthralled attacking an agent in their homeland
+                //Can be defended by military units locally stationned
+                Unit defender = null;
+                if (loc.settlement != null && loc.settlement.embeddedUnit != null)
+                {
+                    defender = loc.settlement.embeddedUnit;
+                }
+                foreach (Unit u3 in loc.units)
+                {
+                    if (u3.isMilitary && u3.society == u2.society)
+                    {
+                        defender = u3;
+                    }
+                }
+                if (defender != null)
+                {
+                    loc.map.world.prefabStore.popMsg("You agent cannot attack " + u2.getName() + " as they are defended the military unit present (" + defender.getName() + ")");
+                    return;
+                }
+            }
+
+            double lethality = loc.map.param.combat_lethality;
+            double lethalityDef = loc.map.param.combat_lethalityDefensive;
+
+            world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
+            int dmgDone = (int)(u.hp * (lethality + (Eleven.random.NextDouble() * lethality)));
+            if (u2.isMilitary)
+            {
+                if (loc.settlement != null && loc.settlement.defensiveStrengthCurrent > 0 && u2.society == loc.soc)
+                {
+                    double ablated = Math.Min(loc.settlement.defensiveStrengthCurrent, dmgDone / 2d);
+                    dmgDone -= (int)ablated;
+                    loc.settlement.defensiveStrengthCurrent -= ablated;
+                }
+
+                int dmgReplied = (int)(u2.hp * (lethalityDef + (Eleven.random.NextDouble() * lethalityDef)));
+                if (dmgReplied >= u.hp)
+                {
+                    dmgReplied = u.hp - 1;
+                    if (dmgReplied < 0) { dmgReplied = 0; }
+                }
+                u.hp -= dmgReplied;
+            }
+
+
+            if (dmgDone < 1) { dmgDone = 1; }
+
+            bool kicked = false;
+            if (dmgDone > 1 && (u2.isMilitary == false)) { dmgDone = 1; kicked = true; }
+
+
+            u2.hp -= dmgDone;
+            if (u2.isEnthralled())
+            {
+                world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
+            }
+            if (u2.hp <= 0)
+            {
+                u2.die(this, "Attacked by " + u.getName());
+            }
+            if (u.hp <= 0)
+            {
+                u.die(this, "Took damage attacking " + u2.getName());
+            }
+            else if (kicked)
+            {
+                int c = 0;
+                Location kickedTo = null;
+                foreach (Location l2 in u2.location.getNeighbours())
+                {
+                    bool bad = false;
+                    foreach (Unit u3 in l2.units)
+                    {
+                        if (u3.hostileTo(u2) || u2.hostileTo(u3)) { bad = true; break; }
+                    }
+                    if (!bad)
+                    {
+                        c += 1;
+                        if (Eleven.random.Next(c) == 0)
+                        {
+                            kickedTo = l2;
+                        }
+                    }
+                }
+                if (kickedTo != null)
+                {
+                    u2.task = null;
+                    adjacentMoveTo(u2, kickedTo);
+                    if (u2.isEnthralled())
+                    {
+                        world.prefabStore.popMsg(u2.getName() + " is forced to retreat, and is now in " + u2.location.getName());
+                    }
+                }
+            }
+
+            if (u.isMilitary && loc.settlement != null)
+            {
+                if (loc.settlement is Set_City)
+                {
+                    Set_City city = (Set_City)loc.settlement;
+                    city.infrastructure *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
+                    city.population *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
+                    if (city.infrastructure < 1) { city.infrastructure = 1; }
+                    if (city.population < 1) { city.population = 1; }
+                }
+            }
+
+            if (u.isMilitary && u2.isMilitary && u.society is Society && u2.society is Society)
+            {
+                Property.addProperty(this, loc, "Recent Human Battle");
+            }
         }
 
         public void recomputeInformationAvailability(SocialGroup sg)

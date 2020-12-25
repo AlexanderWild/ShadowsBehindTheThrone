@@ -26,6 +26,7 @@ namespace Assets.Code
         public GameObject prefabWorldMap;
         public GameObject prefabLinkLine;
         public GameObject prefabMsg;
+        public GameObject prefabMsgAgents;
         public GameObject prefabMsgTreeBackground;
         public GameObject prefabPumpkinVictory;
         public GameObject prefabImgMsg;
@@ -638,11 +639,16 @@ namespace Assets.Code
         {
             //if (world.displayMessages == false) { return; }
 
-            GameObject obj = Instantiate(prefabMsg) as GameObject;
-            PopupMsg specific = obj.GetComponent<PopupMsg>();
+            GameObject obj = Instantiate(prefabMsgAgents) as GameObject;
+            PopupMsgAgents specific = obj.GetComponent<PopupMsgAgents>();
             specific.ui = ui;
+            specific.setTo(actor, target);
             specific.text.text = words;
+            specific.agentA = actor;
+            specific.agentB = target;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bDismissAgentA.onClick.AddListener(delegate { specific.dismissAgentA(); });
+            specific.bDismissAgentB.onClick.AddListener(delegate { specific.dismissAgentB(); });
             ui.addBlocker(specific.gameObject);
         }
         public void popCredits()
