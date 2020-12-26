@@ -117,9 +117,9 @@ namespace Assets.Code
         }
 
         /*
-* This should be replaced with A* as ASAP as possible
-* (It never will be)
-*/
+        * This should be replaced with A* as ASAP as possible
+        * (It never will be)
+        */
         public int getStepDist(SocialGroup a, SocialGroup b)
         {
             if (a == b) { return 0; }
@@ -311,10 +311,25 @@ namespace Assets.Code
         {
             foreach (Unit u2 in loc.units)
             {
-                if (u != u2 && u.hostileTo(u2))
+                if (u2.isMilitary)
                 {
-                    combatAction(u, u2, loc);
-                    return;
+                    if (u != u2 && u.hostileTo(u2))
+                    {
+                        combatAction(u, u2, loc);
+                        return;
+                    }
+                }
+            }
+            //Check agent combat after military unit combat
+            foreach (Unit u2 in loc.units)
+            {
+                if (!u2.isMilitary)
+                {
+                    if (u != u2 && u.hostileTo(u2))
+                    {
+                        combatAction(u, u2, loc);
+                        return;
+                    }
                 }
             }
             u.location.units.Remove(u);
@@ -349,6 +364,44 @@ namespace Assets.Code
 
             double lethality = loc.map.param.combat_lethality;
             double lethalityDef = loc.map.param.combat_lethalityDefensive;
+
+            bool hadAttackBonus = false;
+            foreach (Unit bonusU in u.location.units)
+            {
+                if (bonusU.society == u.society && bonusU is Unit_Investigator && bonusU.task is Task_SupportMilitary)
+                {
+                    if (((Unit_Investigator)bonusU).state == Unit_Investigator.unitState.knight)
+                    {
+                        lethality *= param.unit_knightCombatBonus;
+                        hadAttackBonus = true;
+                        break;
+                    }
+                    if (((Unit_Investigator)bonusU).state == Unit_Investigator.unitState.basic)
+                    {
+                        lethality *= param.unit_agentCombatBonus;
+                        hadAttackBonus = true;
+                        break;
+                    }
+                }
+            }
+            foreach (Unit bonusU in u2.location.units)
+            {
+                if (bonusU.society == u2.society && bonusU is Unit_Investigator && bonusU.task is Task_SupportMilitary)
+                {
+                    if (((Unit_Investigator)bonusU).state == Unit_Investigator.unitState.knight)
+                    {
+                        lethalityDef *= param.unit_knightCombatBonus;
+                        hadAttackBonus = true;
+                        break;
+                    }
+                    if (((Unit_Investigator)bonusU).state == Unit_Investigator.unitState.basic)
+                    {
+                        lethalityDef *= param.unit_agentCombatBonus;
+                        hadAttackBonus = true;
+                        break;
+                    }
+                }
+            }
 
             world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
             int dmgDone = (int)(u.hp * (lethality + (Eleven.random.NextDouble() * lethality)));

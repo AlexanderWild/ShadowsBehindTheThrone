@@ -87,7 +87,6 @@ namespace Assets.Code
             processKillOrders();
             processStability();
             checkTitles();
-            processWarExpansion();
             processTerritoryExchanges();
             processVoting();
             checkPopulation();//Add people last, so new people don't suddenly arrive and act before the player can see them
@@ -617,26 +616,6 @@ namespace Assets.Code
                                 }
                             }
                             loc.soc = null;
-                        }
-                    }
-                }
-            }
-        }
-        //Check to see if you need to build outposts to reach an enemy you're at war with
-        public void processWarExpansion()
-        {
-            List<SocialGroup> neighbours = this.getNeighbours();
-            foreach (DipRel rel in getAllRelations())
-            {
-                if (rel.state == DipRel.dipState.war && rel.war.att == this)
-                {
-                    if (neighbours.Contains(rel.other(this)) == false)
-                    {
-                        //We need to build an outpost towards them
-                        Location[] pathTo = map.getEmptyPathTo(this, rel.other(this));
-                        if (pathTo != null && pathTo.Length > 1 && pathTo[1].soc == null)
-                        {
-                            pathTo[1].soc = this;
                         }
                     }
                 }

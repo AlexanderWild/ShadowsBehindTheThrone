@@ -13,7 +13,7 @@ namespace Assets.Code
         public int turnSubmitted;
         public Location locationFound;
         public Unit_Investigator discoveredBy;
-
+        public bool reportedToSociety = false;
         public Evidence(int turn)
         {
             turnDropped = turn;

@@ -333,7 +333,7 @@ namespace Assets.Code
 
         public double unit_recruitEvidence = 0.1;
         public int unit_investigatorsSeeEnthralled = 1;
-        public double unit_investigatorsPerProvince = 0.5;
+        public double unit_investigatorsPerProvince = 0.75;
         public int unit_falseEvidenceCooldown = 8;
         public int unit_disruptDuration = 5;
         public int unit_disruptCooldown = 10;
@@ -373,6 +373,8 @@ namespace Assets.Code
         public int unit_vampire_drinkReqLiking = 0;
         public double unit_seeker_truthShadow = 0.35;
         public int unit_headless_pumpkinDur = 9;
+        public double unit_knightCombatBonus = 1.5;
+        public double unit_agentCombatBonus = 1.25;
 
         public void saveToFile()
         {

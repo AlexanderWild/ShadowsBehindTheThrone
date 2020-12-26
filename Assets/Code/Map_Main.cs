@@ -381,28 +381,6 @@ namespace Assets.Code
             }
         }
 
-        private bool checkDefensiveAttackHold(SocialGroup sg)
-        {
-            if (sg is Society == false) { return false; }
-            Society soc = (Society)sg;
-            if (soc.posture != Society.militaryPosture.defensive) { return false; }
-            if (soc.defensiveTarget == null) { return false; }
-            return soc.currentMilitary < soc.defensiveTarget.currentMilitary * 1.5;//If you completely overwhelm them attack, but otherwise hide
-        }
-
-        private double computeDefensiveBonuses(double dmg,SocialGroup att,SocialGroup def)
-        {
-            if (def is Society)
-            {
-                Society defender = (Society)def;
-                if (defender.posture == Society.militaryPosture.defensive && defender.defensiveTarget == att)
-                {
-                    dmg *= param.combat_defensivePostureDmgMult;
-                }
-            }
-            return dmg;
-        }
-
         public void takeLocationFromOther(SocialGroup att,SocialGroup def,Location taken)
         {
             World.log(att.getName() + " takes " + taken.getName() + " from " + def.getName());
@@ -537,6 +515,41 @@ namespace Assets.Code
                         loc.units.Add(loc.settlement.embeddedUnit);
                         units.Add(loc.settlement.embeddedUnit);
                         loc.settlement.embeddedUnit = null;
+                    }
+                }
+            }
+
+            if (att is Society)
+            {
+                Society sAtt = (Society)att;
+                sAtt.crisisWarLong = "We are at war, attacking " + def.getName() + ". We can discuss how to deploy our forces.";
+                sAtt.crisisWarShort = "Crisis: At War";
+                //Get the agents moving early, or they'll stick around doing whatever nonsense they previously were
+                foreach (Unit u in units)
+                {
+                    if (u.society == def &&
+                        u is Unit_Investigator &&
+                        (((Unit_Investigator)u).state == Unit_Investigator.unitState.basic || ((Unit_Investigator)u).state == Unit_Investigator.unitState.knight)
+                        && (u.task is Task_Disrupted == false))
+                    {
+                        u.task = new Task_DefendHomeland();
+                    }
+                }
+            }
+            if (def is Society)
+            {
+                Society sDef = (Society)def;
+                sDef.crisisWarLong = att.getName() + " has attacked us, and we are at war. We must respond to this crisis.";
+                sDef.crisisWarShort = "Crisis: At War";
+                //Get the agents moving early, or they'll stick around doing whatever nonsense they previously were
+                foreach (Unit u in units)
+                {
+                    if (u.society == def &&
+                        u is Unit_Investigator &&
+                        (((Unit_Investigator)u).state == Unit_Investigator.unitState.basic || ((Unit_Investigator)u).state == Unit_Investigator.unitState.knight)
+                        && (u.task is Task_Disrupted == false))
+                    {
+                        u.task = new Task_DefendHomeland();
                     }
                 }
             }

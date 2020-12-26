@@ -64,6 +64,10 @@ namespace Assets.Code
             {
                 turnTickAI_Paladin(map);
             }
+            if (state == unitState.knight)
+            {
+                turnTickAI_Knight(map);
+            }
         }
 
         public void checkSocietyPresence()
@@ -131,7 +135,8 @@ namespace Assets.Code
                         if (hostility.Contains(p.unit) == false)
                         {
                             //We should become hostile to them, as we are now certain that they are evil
-                            person.map.world.prefabStore.popMsgAgent(this, p.unit, this.getName() + " has become hostile to " + p.unit.getName());
+                            person.map.world.prefabStore.popMsgAgent(this, p.unit, this.getName() + " has gathered enough evidence to conclude that " + p.unit.getName()
+                                + " is certainly in league with the darkness. They will now attack them if given the opportunity, and may possibly take Paladin oaths to hunt them down.");
                             hostility.Add(p.unit);
                         }
                     }
@@ -163,6 +168,17 @@ namespace Assets.Code
             }
 
             task.turnTick(this);
+        }
+        public void turnTickAI_Knight(Map map)
+        {
+            if (task == null && society.isAtWar())
+            {
+                task = new Task_SupportMilitary();
+            }
+            if (task != null)
+            {
+                task.turnTick(this);
+            }
         }
 
         public void turnTickAI_Investigator(Map map)
@@ -299,7 +315,10 @@ namespace Assets.Code
                 task.turnTick(this);
                 return;
             }
-
+            else if (society.isAtWar())
+            {
+                task = new Task_SupportMilitary();
+            }
             else if (location.evidence.Count > 0)
             {
                 task = new Task_Investigate();
@@ -361,12 +380,7 @@ namespace Assets.Code
                 }
             }
             double[] weights = new double[] { person.threat_agents.threat, worstMilitaryFear };
-            //Avoids excessive specialisation
-            for (int i = 0; i < weights.Length; i++)
-            {
-                weights[i] += 0.2;
-            }
-
+            weights[0] += 50;//Try to keep at least some people watching the criminal situation
             double[] currentAllocation = new double[2];
             double[] futureAllocation = new double[2];
 
@@ -460,6 +474,15 @@ namespace Assets.Code
             //World.log("Current       : " + msgCur + " dist " + Eleven.toFixedLen(presentDistance,5));
 
             return presentDistance - futureDistance;//We want to minimise the distance. If swapping moves us closer then futureDist is smaller than present dist, so this becomes positive
+        }
+
+        public void changeState(unitState neo)
+        {
+            state = neo;
+            if (task is Task_Disrupted == false)
+            {
+                task = null;
+            }
         }
 
         public override Sprite getSprite(World world)
@@ -562,6 +585,14 @@ namespace Assets.Code
             if (state == unitState.paladin)
             {
                 return "Paladins are promoted investigators, who are sent to hunt down the person they have evidence against.";
+            }
+            if (state == unitState.basic)
+            {
+                return "Standard Agents are able to perform most tasks, but less well than specialists. They can be promoted to specialists by their societies in times of need.";
+            }
+            if (state == unitState.knight)
+            {
+                return "Knights are military specialists, who give bonuses to military units in their location.";
             }
             return "Investigators are agents who wander near their home location searching for evidence of dark powers. They can analyse evidence and recognise both enthralled agents and enthralled nobles.";
         }

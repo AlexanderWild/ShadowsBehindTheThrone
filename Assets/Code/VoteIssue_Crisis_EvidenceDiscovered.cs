@@ -302,15 +302,18 @@ namespace Assets.Code
 
             if (option.index == AGENT_TO_INVESTIGATOR)
             {
-                World.self.prefabStore.popMsgAgent(option.unit, option.unit, "Trying to promote to investigator");
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
                 inv.state = Unit_Investigator.unitState.investigator;
+                World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Investigator, by the nobles of " + option.unit.society.getName() +
+                    " in response to external threats. Investigators are experts at combatting your agents. They can recognise evidence and spot your agents if they are in the same location.");
             }
             if (option.index == AGENT_TO_BASIC)
             {
-                World.self.prefabStore.popMsgAgent(option.unit, option.unit, "Trying to demote");
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
                 inv.state = Unit_Investigator.unitState.basic;
+                World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Agent, by the nobles of " + option.unit.society.getName() +
+                    " in response to external threats. Standard agents are general-purpose units. They can investigate your agents' evidence, and can assist in wars. They can be promoted "
+                    + " to specalists by vote.");
             }
         }
 

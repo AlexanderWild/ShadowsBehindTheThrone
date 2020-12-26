@@ -157,12 +157,27 @@ namespace Assets.Code
                             e.assignedInvestigator = null;//Disrupted
                         }
                     }
-                    if (e.assignedInvestigator == null && e.pointsTo != null && e.pointsTo.person != null)
+                    e.rumourCounter += 1;
+                    if (e.rumourCounter > 4)
                     {
-                        e.rumourCounter += 1;
-                        if (e.rumourCounter > 2)
+                        e.rumourCounter = 0;
+                        if (!e.reportedToSociety)//Evidence self-submits to the local society, to allow folks without investigators to have a chance
                         {
-                            e.rumourCounter = 0;
+                            Society socSoc = (Society)soc;
+                            socSoc.evidenceSubmitted.Add(e);
+                            socSoc.lastEvidenceSubmission = map.turn;
+                            e.turnSubmitted = map.turn;
+                            e.locationFound = this;
+
+                            double deltaFear = World.staticMap.param.threat_evidencePresented;
+                            if (socSoc.isDarkEmpire == false)
+                            {
+                                socSoc.dread_agents_evidenceFound += deltaFear;
+                            }
+                        }
+                        e.reportedToSociety = true;
+                        if (e.assignedInvestigator == null && e.pointsTo != null && e.pointsTo.person != null)
+                        {
                             double minDist = 0;
                             Unit bestU = null;
                             foreach (Unit u in map.units)
