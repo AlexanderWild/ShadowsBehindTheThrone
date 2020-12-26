@@ -262,10 +262,10 @@ namespace Assets.Code
                     string strDef = "";
                     if (hex.location.settlement != null && hex.location.settlement.embeddedUnit != null)
                     {
-                        strDef += hex.location.settlement.embeddedUnit.hp + "/" + hex.location.settlement.embeddedUnit.maxHp ;
+                        strDef += (int)hex.location.settlement.embeddedUnit.hp + "/" + (int)hex.location.settlement.embeddedUnit.maxHp ;
                     }
 
-                    strDef += " (" + hex.location.soc.currentMilitary + "/" + hex.location.soc.maxMilitary + ")";
+                    strDef += " (" + (int)hex.location.soc.currentMilitary + "/" + (int)hex.location.soc.maxMilitary + ")";
                     if (hex.location.getMaxMilitaryDefence() > 0)
                     {
                         strDef += " +DEF " + (int)(hex.location.getMilitaryDefence()+0.5) + "/" + (int)(0.5+hex.location.getMaxMilitaryDefence());

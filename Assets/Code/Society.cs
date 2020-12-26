@@ -53,6 +53,10 @@ namespace Assets.Code
         public int lastEvidenceSubmission = 0;
         public int lastEvidenceResponse = 0;
 
+        //These are flags for the AI, which will automatically trigger a response if it finds these set
+        public string crisisWarShort = null;
+        public string crisisWarLong = null;
+
         public Society(Map map,Location location) : base(map)
         {
             setName("DEFAULT_SOC_NAME");

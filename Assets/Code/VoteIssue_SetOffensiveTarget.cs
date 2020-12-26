@@ -169,6 +169,13 @@ namespace Assets.Code
             base.implement(option);
             society.offensiveTarget = option.group;
             society.lastOffensiveTargetSetting = society.map.turn;
+
+            if (option.group is Society)
+            {
+                Society vic = (Society)option.group;
+                vic.crisisWarShort = "Crisis: War Threatens";
+                vic.crisisWarLong = society.getName() + " has set our society as their offensive target, a probable prelude to invasion. We must prepare outselves for war.";
+            }
         }
         public override bool stillValid(Map map)
         {

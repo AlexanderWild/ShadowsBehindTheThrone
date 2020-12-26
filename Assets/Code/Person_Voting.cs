@@ -670,6 +670,15 @@ namespace Assets.Code
                             opt.index = VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_INVESTIGATOR;
                             issue.options.Add(opt);
                         }
+                        else
+                        {
+                            opt = new VoteOption();
+                            opt.unit = unit;
+                            opt.agentRole = Unit_Investigator.unitState.basic;
+                            opt.index = VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_BASIC;
+                            issue.options.Add(opt);
+
+                        }
                     }
                 }
 
@@ -692,6 +701,56 @@ namespace Assets.Code
                 {
                     replyIssue = issue;
                 }
+            }
+            if (society.crisisWarShort != null)
+            {
+                VoteIssue_Crisis_WarThreatens issue = new VoteIssue_Crisis_WarThreatens(society, this,society.crisisWarShort,society.crisisWarLong);
+                VoteOption opt;
+
+                opt = new VoteOption();
+                opt.index = VoteIssue_Crisis_WarThreatens.NO_RESPONSE;
+                issue.options.Add(opt);
+
+                foreach (Unit unit in map.units)
+                {
+                    if (unit is Unit_Investigator && unit.society == society)
+                    {
+                        Unit_Investigator inv = (Unit_Investigator)unit;
+                        if (inv.state == Unit_Investigator.unitState.knight || inv.state == Unit_Investigator.unitState.paladin)
+                        {
+                            //Already doing something useful, ignore these
+                        }
+                        else if (inv.state == Unit_Investigator.unitState.basic)//Could upgrade to knight
+                        {
+                            opt = new VoteOption();
+                            opt.unit = unit;
+                            opt.agentRole = Unit_Investigator.unitState.knight;
+                            opt.index = VoteIssue_Crisis_WarThreatens.AGENT_TO_KNIGHT;
+                            issue.options.Add(opt);
+                        }
+                        else
+                        {
+                            opt = new VoteOption();
+                            opt.unit = unit;
+                            opt.agentRole = Unit_Investigator.unitState.basic;
+                            opt.index = VoteIssue_Crisis_WarThreatens.AGENT_TO_BASIC;
+                            issue.options.Add(opt);
+
+                        }
+                    }
+                }
+
+
+                //Decide if this is the crisis you're gonna deal with right now
+                if (issue.options.Count > 1)
+                {
+                    c += 1;
+                    if (Eleven.random.Next(c) == 0)
+                    {
+                        replyIssue = issue;
+                    }
+                }
+
             }
 
             return replyIssue;

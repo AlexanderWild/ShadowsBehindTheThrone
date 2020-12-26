@@ -20,7 +20,7 @@ namespace Assets.Code
         public List<Unit> huntableSuspects = new List<Unit>();
         public int paladinDuration = 0;
 
-        public enum unitState { basic,investigator,paladin };
+        public enum unitState { basic,investigator,paladin,knight };
         public unitState state = unitState.basic;
 
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
@@ -361,6 +361,12 @@ namespace Assets.Code
                 }
             }
             double[] weights = new double[] { person.threat_agents.threat, worstMilitaryFear };
+            //Avoids excessive specialisation
+            for (int i = 0; i < weights.Length; i++)
+            {
+                weights[i] += 0.2;
+            }
+
             double[] currentAllocation = new double[2];
             double[] futureAllocation = new double[2];
 
@@ -390,6 +396,14 @@ namespace Assets.Code
                             futureAllocation[0] += specialisationWeight;
                         }
                     }
+                    else if (existing.state == unitState.knight)
+                    {
+                        currentAllocation[1] += specialisationWeight;
+                        if (u != swappable)
+                        {
+                            futureAllocation[1] += specialisationWeight;
+                        }
+                    }
                 }
             }
             //What would the future state look like if this agent swapped?
@@ -399,9 +413,14 @@ namespace Assets.Code
                 {
                    futureAllocation[i] += 1;
                 }
-            }else if (hypo == unitState.paladin || hypo == unitState.investigator)
+            }
+            else if (hypo == unitState.paladin || hypo == unitState.investigator)
             {
                 futureAllocation[0] += specialisationWeight;
+            }
+            else if (hypo == unitState.knight)
+            {
+                futureAllocation[1] += specialisationWeight;
             }
 
             double normA = 0;
@@ -457,6 +476,10 @@ namespace Assets.Code
             {
                 return world.textureStore.unit_paladin;
             }
+            if (state == unitState.knight)
+            {
+                return world.textureStore.unit_knight;
+            }
             return world.textureStore.unit_lookingGlass;
         }
 
@@ -474,6 +497,10 @@ namespace Assets.Code
             {
                 return "Paladin";
             }
+            if (state == unitState.knight)
+            {
+                return "Sir";
+            }
             return "Investigator";
         }
 
@@ -490,6 +517,10 @@ namespace Assets.Code
             if (state == unitState.paladin)
             {
                 return "Paladin";
+            }
+            if (state == unitState.knight)
+            {
+                return "Sir";
             }
             return "Investigator";
         }

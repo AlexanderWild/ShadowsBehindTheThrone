@@ -38,6 +38,7 @@ namespace Assets.Code
 
         public void setTo(Unit agentA,Unit agentB)
         {
+            if (agentA == null || agentB == null) { throw new Exception("Agent was null"); }
             agentATitle.text = agentA.getName();
             agentBTitle.text = agentB.getName();
             agentAIcon.sprite = agentA.getSprite(agentA.location.map.world);

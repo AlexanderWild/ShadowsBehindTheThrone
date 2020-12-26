@@ -117,7 +117,14 @@ namespace Assets.Code
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.NO_RESPONSE) { return "No Response"; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.DEFEND_PROVINCE) { return "Secure Province " + World.staticMap.provinces[province].name; }
                 if (index == VoteIssue_Crisis_EvidenceDiscovered.LOCKDOWN_PROVINCE) { return "Lockdown Province " + World.staticMap.provinces[province].name; }
-                if (index == VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_INVESTIGATOR) { return "Make " + unit.getName() + " a WitchHunter"; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_INVESTIGATOR) { return "Make " + unit.getName() + " an Investigator"; }
+                if (index == VoteIssue_Crisis_EvidenceDiscovered.AGENT_TO_BASIC) { return "Make " + unit.getName() + " an Agent"; }
+            }
+            if (issue is VoteIssue_Crisis_WarThreatens)
+            {
+                if (index == VoteIssue_Crisis_WarThreatens.NO_RESPONSE) { return "No Response"; }
+                if (index == VoteIssue_Crisis_WarThreatens.AGENT_TO_KNIGHT) { return "Make " + unit.getName() + " a Knight"; }
+                if (index == VoteIssue_Crisis_WarThreatens.AGENT_TO_BASIC) { return "Make " + unit.getName() + " an Agent"; }
             }
 
             if (person != null) { reply += person.getFullName() + " "; }
