@@ -34,6 +34,7 @@ namespace Assets.Code
         public double awareness;
         public int letterWritingCharge = 0;
         public Action action;
+        public bool watched = false;
 
         public int imgAdvFace = 0;
         public int imgAdvEyes = 0;
@@ -976,6 +977,13 @@ namespace Assets.Code
             if (this.titles.Count > 0) { return map.world.textureStore.slotDuke; }
             if (this.title_land != null) { return map.world.textureStore.slotCount; }
             return map.world.textureStore.slotBasic;
+        }
+
+        public bool isWatched()
+        {
+            if (watched) { return true; }
+            if (this.state == personState.enthralledAgent || state == personState.enthralled) { return true; }
+            return false;
         }
     }
 }

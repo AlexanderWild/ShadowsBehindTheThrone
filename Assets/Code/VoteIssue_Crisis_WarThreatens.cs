@@ -69,17 +69,23 @@ namespace Assets.Code
             if (option.index == AGENT_TO_KNIGHT)
             {
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
-                inv.state = Unit_Investigator.unitState.knight;
-                World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Knight, by the nobles of " + option.unit.society.getName()+
+                inv.changeState(Unit_Investigator.unitState.knight);
+                if (inv.person.isWatched())
+                {
+                    World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Knight, by the nobles of " + option.unit.society.getName() +
                     " in response to external threats. Knights are combat specialists, who grant bonuses to nearby military units' damage (both attacking and defending).");
+                }
             }
             if (option.index == AGENT_TO_BASIC)
             {
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
-                inv.state = Unit_Investigator.unitState.basic;
-                World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Agent, by the nobles of " + option.unit.society.getName() +
+                inv.changeState(Unit_Investigator.unitState.basic);
+                if (inv.person.isWatched())
+                {
+                    World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Agent, by the nobles of " + option.unit.society.getName() +
                     " in response to external threats. Standard agents are general-purpose units. They can investigate your agents' evidence, and can assist in wars. They can be promoted "
                     + " to specalists by vote.");
+                }
             }
         }
 

@@ -127,6 +127,7 @@ namespace Assets.Code
             {
                 if (rel.suspicion >= 1)
                 {
+                    person.watched = true;
                     Person p = person.map.persons[rel.them];
                     if (p == person) { throw new Exception("Badly implemented lookup"); }
                     if (p.unit != null)
@@ -134,9 +135,11 @@ namespace Assets.Code
                         //We're suspicious of this unit
                         if (hostility.Contains(p.unit) == false)
                         {
+                            string add = "";
+                            if (state != unitState.investigator) { add = " if they become an investigator"; }
                             //We should become hostile to them, as we are now certain that they are evil
                             person.map.world.prefabStore.popMsgAgent(this, p.unit, this.getName() + " has gathered enough evidence to conclude that " + p.unit.getName()
-                                + " is certainly in league with the darkness. They will now attack them if given the opportunity, and may possibly take Paladin oaths to hunt them down.");
+                                + " is certainly in league with the darkness. They will now attack them if given the opportunity, and may possibly take Paladin oaths to hunt them down" +add+".");
                             hostility.Add(p.unit);
                         }
                     }
@@ -483,13 +486,18 @@ namespace Assets.Code
             {
                 task = null;
             }
+
+            if (person != null && neo == unitState.investigator || neo == unitState.paladin)
+            {
+                person.watched = true;
+            }
         }
 
         public override Sprite getSprite(World world)
         {
             if (state == unitState.basic)
             {
-                return world.textureStore.unit_default;
+                return world.textureStore.unit_basicAgent;
             }
             if (state == unitState.investigator)
             {

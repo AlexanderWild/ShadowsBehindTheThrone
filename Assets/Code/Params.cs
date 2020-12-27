@@ -65,7 +65,7 @@ namespace Assets.Code
         public int overmind_maxPower = 24;
         public double overmind_powerRegen = 1.0;
         public bool overmind_singleAbilityPerTurn = true;
-        public int overmind_enthrallmentUseRegainPeriod = 16;
+        public int overmind_enthrallmentUseRegainPeriod = 32;
 
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
 
@@ -333,7 +333,7 @@ namespace Assets.Code
 
         public double unit_recruitEvidence = 0.1;
         public int unit_investigatorsSeeEnthralled = 1;
-        public double unit_investigatorsPerProvince = 0.75;
+        public double unit_investigatorsPerProvince = 0.62;
         public int unit_falseEvidenceCooldown = 8;
         public int unit_disruptDuration = 5;
         public int unit_disruptCooldown = 10;

@@ -47,7 +47,7 @@ overmind_allowDirectEnthralling: 1
 overmind_maxPower: 24
 overmind_powerRegen: 1
 overmind_singleAbilityPerTurn: True
-overmind_enthrallmentUseRegainPeriod: 16
+overmind_enthrallmentUseRegainPeriod: 32
 econ_multFromBuff: 1.33
 relObj_suspicionLimiterMult: 2.5
 relObj_defaultLiking: 0
@@ -94,6 +94,7 @@ utility_agentDefendProvinceLikingMult: 0.18
 utility_defendHomelandVSAgents: 20
 utility_evidenceResonseBaseline: 30
 utility_extremeismScaling: 2
+utility_swapAgentRolesMult: 75
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -293,7 +294,7 @@ voting_powerToSwitchPerU: 0.2
 voting_likingToSwitchPerU: 0.25
 unit_recruitEvidence: 0.1
 unit_investigatorsSeeEnthralled: 1
-unit_investigatorsPerProvince: 0.5
+unit_investigatorsPerProvince: 0.62
 unit_falseEvidenceCooldown: 8
 unit_disruptDuration: 5
 unit_disruptCooldown: 10
@@ -309,7 +310,6 @@ unit_pleadCaseTime: 3
 unit_infiltrateTime: 6
 unit_infiltrateAmount: 1.35
 unit_divisorOffset: 2
-unit_infiltrateEvidence: 0.35
 unit_majorEvidence: 0.35
 unit_minorEvidence: 0.15
 unit_spreadShadowTime: 5
@@ -333,3 +333,5 @@ unit_vampire_maxBlood: 37
 unit_vampire_drinkReqLiking: 0
 unit_seeker_truthShadow: 0.35
 unit_headless_pumpkinDur: 9
+unit_knightCombatBonus: 1.5
+unit_agentCombatBonus: 1.25

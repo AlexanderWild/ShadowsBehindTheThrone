@@ -162,11 +162,26 @@ namespace Assets.Code
             {
                 responseLevelMin = 0;
                 responseLevelMax = 100;
+                Unit_Investigator inv = (Unit_Investigator)option.unit;
 
                 double localU = Unit_Investigator.getSwitchUtility(p,(Unit_Investigator)option.unit, Unit_Investigator.unitState.investigator);
                 localU *= p.map.param.utility_swapAgentRolesMult;
                 msgs.Add(new ReasonMsg("Balance of agent skills vs balance of threats", localU));
                 u += localU;
+                bool hasSuspicions = false;
+                foreach (RelObj rel in inv.person.relations.Values)
+                {
+                    if (rel.suspicion > 0 && inv.location.map.persons[rel.them].unit != null && inv.location.map.units.Contains(inv.location.map.persons[rel.them].unit))
+                    {
+                        hasSuspicions = true;
+                    }
+                }
+                if (hasSuspicions)
+                {
+                    localU = 12;
+                    msgs.Add(new ReasonMsg("Has a suspect", localU));
+                    u += localU;
+                }
             }
             if (option.index == AGENT_TO_BASIC)
             {
@@ -303,17 +318,20 @@ namespace Assets.Code
             if (option.index == AGENT_TO_INVESTIGATOR)
             {
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
-                inv.state = Unit_Investigator.unitState.investigator;
+                inv.changeState(Unit_Investigator.unitState.investigator);
                 World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Investigator, by the nobles of " + option.unit.society.getName() +
                     " in response to external threats. Investigators are experts at combatting your agents. They can recognise evidence and spot your agents if they are in the same location.");
             }
             if (option.index == AGENT_TO_BASIC)
             {
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
-                inv.state = Unit_Investigator.unitState.basic;
-                World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Agent, by the nobles of " + option.unit.society.getName() +
-                    " in response to external threats. Standard agents are general-purpose units. They can investigate your agents' evidence, and can assist in wars. They can be promoted "
-                    + " to specalists by vote.");
+                inv.changeState(Unit_Investigator.unitState.basic);
+                if (inv.person.isWatched())
+                {
+                    World.self.prefabStore.popMsgAgent(option.unit, option.unit, option.unit.getName() + " has been assigned the role of Agent, by the nobles of " + option.unit.society.getName() +
+                        " in response to external threats. Standard agents are general-purpose units. They can investigate your agents' evidence, and can assist in wars. They can be promoted "
+                        + " to specalists by vote.");
+                }
             }
         }
 

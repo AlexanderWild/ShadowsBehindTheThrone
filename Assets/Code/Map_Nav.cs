@@ -435,6 +435,10 @@ namespace Assets.Code
             {
                 world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
             }
+            if (u.isEnthralled() && u2 is Unit_Investigator && u.person != null && u2.person != null)
+            {
+                u2.person.getRelation(u.person).suspicion = 1;
+            }
             if (u2.hp <= 0)
             {
                 u2.die(this, "Attacked by " + u.getName());
