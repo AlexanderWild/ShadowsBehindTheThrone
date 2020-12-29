@@ -637,7 +637,7 @@ namespace Assets.Code
         }
         public void popMsgAgent(Unit actor, Unit target,string words)
         {
-            //if (world.displayMessages == false) { return; }
+            if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabMsgAgents) as GameObject;
             PopupMsgAgents specific = obj.GetComponent<PopupMsgAgents>();

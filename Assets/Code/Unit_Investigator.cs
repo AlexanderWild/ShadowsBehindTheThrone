@@ -19,6 +19,7 @@ namespace Assets.Code
         public List<Evidence> evidenceCarried = new List<Evidence>();
         public List<Unit> huntableSuspects = new List<Unit>();
         public int paladinDuration = 0;
+        public int turnLastChangedRole;
 
         public enum unitState { basic,investigator,paladin,knight };
         public unitState state = unitState.basic;
@@ -41,6 +42,8 @@ namespace Assets.Code
             //    abilities.Add(new Abu_Base_EnthrallNoble());
             //}
             abilities.Add(new Abu_Base_SpreadShadow());
+
+            turnLastChangedRole = loc.map.turn;
         }
 
         public override void turnTickInner(Map map)
@@ -491,6 +494,12 @@ namespace Assets.Code
             {
                 person.watched = true;
             }
+            turnLastChangedRole = location.map.turn;
+        }
+
+        public bool canPromote()
+        {
+            return World.staticMap.param.unit_promoteCooldown < World.staticMap.turn - turnLastChangedRole;
         }
 
         public override Sprite getSprite(World world)

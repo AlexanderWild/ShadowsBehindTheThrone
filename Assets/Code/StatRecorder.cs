@@ -26,8 +26,6 @@ namespace Assets.Code
             snapshot.day = map.turn;
             snapshots.Add(snapshot);
 
-            float pop = 0;
-
             if (prevColours == null)
             {
                 prevColours = new float[map.sizeX][][];

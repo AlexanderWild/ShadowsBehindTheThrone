@@ -658,6 +658,7 @@ namespace Assets.Code
                     if (unit is Unit_Investigator && unit.society == society)
                     {
                         Unit_Investigator inv = (Unit_Investigator)unit;
+                        if (inv.canPromote() == false) { continue; }
                         if (inv.state == Unit_Investigator.unitState.investigator || inv.state == Unit_Investigator.unitState.paladin)
                         {
                             //Already in offensive anti-agent state, no need to intefere
@@ -716,6 +717,7 @@ namespace Assets.Code
                     if (unit is Unit_Investigator && unit.society == society)
                     {
                         Unit_Investigator inv = (Unit_Investigator)unit;
+                        if (inv.canPromote() == false) { continue; }
                         if (inv.state == Unit_Investigator.unitState.knight || inv.state == Unit_Investigator.unitState.paladin)
                         {
                             //Already doing something useful, ignore these

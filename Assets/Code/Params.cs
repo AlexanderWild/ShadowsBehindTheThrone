@@ -333,7 +333,7 @@ namespace Assets.Code
 
         public double unit_recruitEvidence = 0.1;
         public int unit_investigatorsSeeEnthralled = 1;
-        public double unit_investigatorsPerProvince = 0.62;
+        public double unit_investigatorsPerProvince = 0.5;
         public int unit_falseEvidenceCooldown = 8;
         public int unit_disruptDuration = 5;
         public int unit_disruptCooldown = 10;
@@ -359,6 +359,7 @@ namespace Assets.Code
         public int unit_paladin_trackDuration = 6;
         public int unit_paladin_promotionDuration = 27;
         public int unit_newIdentityTime = 10;
+        public int unit_promoteCooldown = 32;
 
         public int unit_seeker_nReqSecrets = 12;
         public int unit_seeker_nCreatedSecrets = 7;

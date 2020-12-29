@@ -294,7 +294,7 @@ voting_powerToSwitchPerU: 0.2
 voting_likingToSwitchPerU: 0.25
 unit_recruitEvidence: 0.1
 unit_investigatorsSeeEnthralled: 1
-unit_investigatorsPerProvince: 0.62
+unit_investigatorsPerProvince: 0.5
 unit_falseEvidenceCooldown: 8
 unit_disruptDuration: 5
 unit_disruptCooldown: 10
@@ -320,6 +320,7 @@ unit_armyOfDeadMaxHP: 37
 unit_paladin_trackDuration: 6
 unit_paladin_promotionDuration: 27
 unit_newIdentityTime: 10
+unit_promoteCooldown: 32
 unit_seeker_nReqSecrets: 12
 unit_seeker_nCreatedSecrets: 7
 unit_seeker_uncoverTime: 5
