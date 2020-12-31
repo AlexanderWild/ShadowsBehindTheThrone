@@ -177,9 +177,10 @@ namespace Assets.Code
             if (society.isDark()) { positive = false; }
             map.addMessage(this.getName() + " dies! " + v, MsgEvent.LEVEL_GREEN, positive);
 
-            if (this.isEnthralled())
+            if (this.person != null && person.isWatched())
             {
-                map.world.prefabStore.popMsg(this.getName() + " dies!\n" + v);
+                //map.world.prefabStore.popMsg(this.getName() + " dies!\n" + v);
+                map.world.prefabStore.popMsgAgentDeath(this, this.getName() + " dies!\n" + v);
             }
         }
 

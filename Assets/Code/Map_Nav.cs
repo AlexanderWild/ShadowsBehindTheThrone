@@ -433,7 +433,8 @@ namespace Assets.Code
             u2.hp -= dmgDone;
             if (u2.isEnthralled())
             {
-                world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
+                world.prefabStore.popMsgAgent(u, u2, u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
+                    //world.prefabStore.popMsg(u.getName() + " attacks " + u2.getName() + ", inflicting " + dmgDone + " HP damage!");
             }
             if (u.isEnthralled() && u2 is Unit_Investigator && u.person != null && u2.person != null)
             {
@@ -473,7 +474,8 @@ namespace Assets.Code
                     adjacentMoveTo(u2, kickedTo);
                     if (u2.isEnthralled())
                     {
-                        world.prefabStore.popMsg(u2.getName() + " is forced to retreat, and is now in " + u2.location.getName());
+                        world.prefabStore.popMsgAgent(u, u2, u2.getName() + " is forced to retreat, and is now in " + u2.location.getName());
+                        //world.prefabStore.popMsg(u2.getName() + " is forced to retreat, and is now in " + u2.location.getName());
                     }
                 }
             }

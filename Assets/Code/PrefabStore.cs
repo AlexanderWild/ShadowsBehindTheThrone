@@ -27,6 +27,7 @@ namespace Assets.Code
         public GameObject prefabLinkLine;
         public GameObject prefabMsg;
         public GameObject prefabMsgAgents;
+        public GameObject prefabMsgAgentsDeath;
         public GameObject prefabMsgTreeBackground;
         public GameObject prefabPumpkinVictory;
         public GameObject prefabImgMsg;
@@ -637,7 +638,7 @@ namespace Assets.Code
         }
         public void popMsgAgent(Unit actor, Unit target,string words)
         {
-            if (world.displayMessages == false) { return; }
+            //if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabMsgAgents) as GameObject;
             PopupMsgAgents specific = obj.GetComponent<PopupMsgAgents>();
@@ -649,6 +650,20 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             specific.bDismissAgentA.onClick.AddListener(delegate { specific.dismissAgentA(); });
             specific.bDismissAgentB.onClick.AddListener(delegate { specific.dismissAgentB(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popMsgAgentDeath(Unit actor, string words)
+        {
+            //if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabMsgAgentsDeath) as GameObject;
+            PopupMsgAgentsDeath specific = obj.GetComponent<PopupMsgAgentsDeath>();
+            specific.ui = ui;
+            specific.setTo(actor);
+            specific.text.text = words;
+            specific.agentA = actor;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bDismissAgentA.onClick.AddListener(delegate { specific.dismissAgentA(); });
             ui.addBlocker(specific.gameObject);
         }
         public void popCredits()
