@@ -18,10 +18,6 @@ namespace Assets.Code
             this.location = loc;
         }
 
-        public virtual void endProperty(Location l)
-        {
-        }
-
         public static Property addProperty(Map map, Location location, string name)
         {
             if (map.globalist.propertyMap.ContainsKey(name) == false)

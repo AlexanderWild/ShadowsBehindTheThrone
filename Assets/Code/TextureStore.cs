@@ -96,6 +96,7 @@ namespace Assets.Code
         public Sprite icon_corpseroot;
         public Sprite icon_pumpkin;
         public Sprite icon_heirophant;
+        public Sprite icon_redDeath;
 
         public Sprite icon_combat;
 
@@ -135,6 +136,7 @@ namespace Assets.Code
         public Sprite unit_heirophant;
         public Sprite unit_knight;
         public Sprite unit_basicAgent;
+        public Sprite unit_redDeath;
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;
@@ -142,6 +144,8 @@ namespace Assets.Code
         public Sprite property_securityMajor;
         public Sprite property_securityLockdown;
         public Sprite property_pumpkin;
+        public Sprite property_redPlague;
+        public Sprite property_redPlagueImmunity;
 
         public List<Sprite> tutorialImages;
 

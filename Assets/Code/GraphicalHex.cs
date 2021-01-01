@@ -205,7 +205,7 @@ namespace Assets.Code
                 {
                     nameTag = world.prefabStore.getNameTag(hex.location.name, Color.white);
                     nameTag.gameObject.transform.SetParent(transform);
-                    nameTag.gameObject.transform.localPosition = new Vector3(0, -0.5f, -3.02f);
+                    nameTag.gameObject.transform.localPosition = new Vector3(0, -0.6f, -3.02f);
                     nameTag.gameObject.transform.localScale = new Vector3(0.015f, 0.015f, 1);//This is apparently their default scale
                 }
                 else
@@ -250,7 +250,7 @@ namespace Assets.Code
                     {
                         defenceTag = world.prefabStore.getNameTag(hex.location.name, Color.white);
                         defenceTag.gameObject.transform.SetParent(transform);
-                        defenceTag.gameObject.transform.localPosition = new Vector3(0, -0.75f, -3.02f);
+                        defenceTag.gameObject.transform.localPosition = new Vector3(0, -0.85f, -3.02f);
                         defenceTag.gameObject.transform.localScale = new Vector3(0.015f, 0.015f, 1);//This is apparently their default scale
                     }
                     else

@@ -169,6 +169,8 @@ namespace Assets.Code
         public int society_lockdownPrestigeHit = -10;
         public int society_lockdownBuffDuration = 12;
         public double society_electoralPrestigeWeight = 2;//Comparing prestige to liking. If we want 50 prestige to equal 100 liking, go for 2
+        public int society_prestigeFromPlagueRedDeath = -10;
+        public int society_crisis_plagueCrisisCooldown = 16;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;
@@ -376,6 +378,10 @@ namespace Assets.Code
         public int unit_headless_pumpkinDur = 9;
         public double unit_knightCombatBonus = 1.5;
         public double unit_agentCombatBonus = 1.25;
+
+        public int unit_rd_redDeathPlagueDur = 10;
+        public double unit_rd_redDeathPlaguePSpread = 0.2;
+        public int unit_rd_redDeathPlagueImmunityDur = 10;
 
         public void saveToFile()
         {

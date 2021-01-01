@@ -9,22 +9,23 @@ namespace Assets.Code
     public abstract class Property_Prototype
     {
         public string name;
-        
+
         public int baseCharge = 10;
         public bool decaysOverTime = false;
         public int prestigeChange = 0;
-        public enum stackStyleEnum { NONE,ADD_CHARGE,TO_MAX_CHARGE};
+        public enum stackStyleEnum { NONE, ADD_CHARGE, TO_MAX_CHARGE };
         public stackStyleEnum stackStyle = stackStyleEnum.NONE;
 
         public double milCapAdd;
         public double informationAvailabilityMult = 1;
         public int securityIncrease = 0;
+        public double plagueThreat = 0;
 
-        public Property_Prototype(Map map,string name)
+        public Property_Prototype(Map map, string name)
         {
             this.name = name;
         }
-        public virtual void turnTick(Property p,Location location)
+        public virtual void turnTick(Property p, Location location)
         {
         }
 
@@ -32,7 +33,7 @@ namespace Assets.Code
 
         public static void loadProperties(Map map)
         {
-            Property_Prototype proto = new Pr_MilitaryAid(map,"Military Aid");
+            Property_Prototype proto = new Pr_MilitaryAid(map, "Military Aid");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
 
@@ -83,8 +84,20 @@ namespace Assets.Code
             proto = new Pr_Pumpkin(map, "Pumpkin");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_RedDeath(map, "Red Death");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_RedDeathImmunity(map, "Red Death Immunity");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
         }
 
         internal abstract string getDescription();
+
+        public virtual void endProperty(Location location, Property p)
+        {
+        }
     }
 }

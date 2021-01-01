@@ -16,6 +16,7 @@ namespace Assets.Code
         public SavableMap_SG_DipRel relations = new SavableMap_SG_DipRel();
         public DipRel selfRel;
         public List<Location> lastTurnLocs = new List<Location>();
+        public List<SocialGroup> lastTurnNeighbours = new List<SocialGroup>();
 
         public double threat_mult = 0;
         public double maxMilitary;
@@ -159,6 +160,7 @@ namespace Assets.Code
                     lastTurnLocs.Add(loc);
                 }
             }
+            lastTurnNeighbours = this.getNeighbours();
         }
 
         public virtual double getThreat(List<ReasonMsg> reasons)

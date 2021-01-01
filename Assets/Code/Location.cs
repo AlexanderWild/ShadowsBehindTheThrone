@@ -54,16 +54,6 @@ namespace Assets.Code
                 (float)Eleven.random.NextDouble(),
                 0.5f);
         }
-
-        public double getInformationAvailability()
-        {
-            double mult = 1;
-            foreach (Property p in properties)
-            {
-                mult *= p.proto.informationAvailabilityMult;
-            }
-            return inherentInformationAvailability;
-        }
         
 
         public string getName()
@@ -131,6 +121,15 @@ namespace Assets.Code
                 reply.Add(link.other(this));
             }
             return reply;
+        }
+
+        public bool isNeighbour(Location l2)
+        {
+            foreach (Link link in links)
+            {
+                if (link.other(this) == l2) { return true; }
+            }
+            return false;
         }
 
         public void turnTick()
@@ -262,7 +261,7 @@ namespace Assets.Code
             foreach (Property p in rems)
             {
                 properties.Remove(p);
-                p.endProperty(this);
+                p.proto.endProperty(this,p);
             }
         }
         public void addPropertyInternally(Property p)

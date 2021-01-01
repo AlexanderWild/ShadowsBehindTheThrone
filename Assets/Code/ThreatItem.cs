@@ -14,13 +14,14 @@ namespace Assets.Code
         public double threat;
         public List<ReasonMsg> reasons = new List<ReasonMsg>();
 
-        public enum formTypes { NONE, HOSTILE_NATION,ENSHADOWED_NOBLES, AGENTS }
+        public enum formTypes { NONE, HOSTILE_NATION,ENSHADOWED_NOBLES, AGENTS,PLAGUE }
         public formTypes form = formTypes.HOSTILE_NATION;
 
         public int responseCode = RESPONSE_MILITARY;
         public static int RESPONSE_DARKNESSWITHIN = 0;
         public static int RESPONSE_MILITARY = 1;
-        public static string[] responseNames = new string[] { "Introspection","Military"};
+        public static int RESPONSE_SPECIAL = 2;
+        public static string[] responseNames = new string[] { "Introspection","Military","Special"};
         
         public double threatBeforeTemporaryDread;
 
@@ -91,6 +92,10 @@ namespace Assets.Code
                 if (form == formTypes.AGENTS)
                 {
                     return "Dark Agents";
+                }
+                if (form == formTypes.PLAGUE)
+                {
+                    return "Plague";
                 }
                 return "UNKNOWN";
             }else

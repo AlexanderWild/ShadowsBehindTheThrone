@@ -38,6 +38,7 @@ namespace Assets.Code
                     delta = Math.Min(delta, person.awareness - chosenTarget.awareness);//Can't exceed your own awareness
                     chosenTarget.awareness += delta;
                     person.map.addMessage(person.getFullName() + " writes to " + chosenTarget.getFullName() + " to warn them. " + (int)(delta * 100) + " awareness gained", MsgEvent.LEVEL_ORANGE, false);
+                    person.lastLetterTurn = person.map.turn;
 
                 }
                 person.action = null;

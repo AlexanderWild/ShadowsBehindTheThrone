@@ -95,6 +95,10 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().goInsane();
                 }
+                if (command == "redDeath")
+                {
+                    Property.addProperty(GraphicalMap.map, GraphicalMap.selectedHex.location, "Red Death");
+                }
                 if (command == "hot")
                 {
                     for (int i = 0; i < map.tempMap.Length; i++)

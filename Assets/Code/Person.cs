@@ -35,6 +35,7 @@ namespace Assets.Code
         public int letterWritingCharge = 0;
         public Action action;
         public bool watched = false;
+        public int lastLetterTurn = 0;
 
         public int imgAdvFace = 0;
         public int imgAdvEyes = 0;
@@ -45,6 +46,7 @@ namespace Assets.Code
 
         public ThreatItem threat_enshadowedNobles;
         public ThreatItem threat_agents;
+        public ThreatItem threat_plague;
 
         public double politics_militarism;
 
@@ -106,6 +108,11 @@ namespace Assets.Code
             threat_enshadowedNobles.form = ThreatItem.formTypes.ENSHADOWED_NOBLES;
             threat_enshadowedNobles.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
             threatEvaluations.Add(threat_enshadowedNobles);
+
+            threat_plague = new ThreatItem(map, this);
+            threat_plague.form = ThreatItem.formTypes.PLAGUE;
+            threat_plague.responseCode = ThreatItem.RESPONSE_SPECIAL;
+            threatEvaluations.Add(threat_plague);
 
             if (!map.simplified)
             {
@@ -217,11 +224,11 @@ namespace Assets.Code
             {
                 possibleActions.Add(1);
             }
-            if (map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel)
+            if (map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel && map.turn - lastLetterTurn > map.param.awareness_letterWritingInterval)
             {
                 possibleActions.Add(2);
             }
-            if (map.worldPanic >= map.param.panic_letterWritingToAllLevel && awareness >= map.param.awareness_letterWritingLevel)
+            if (map.worldPanic >= map.param.panic_letterWritingToAllLevel && awareness >= map.param.awareness_letterWritingLevel && map.turn - lastLetterTurn > map.param.awareness_letterWritingInterval)
             {
                 possibleActions.Add(3);
             }
@@ -239,7 +246,7 @@ namespace Assets.Code
                 case 0: { action = new Act_Investigate(); break; }
                 case 1: { action = new Act_Research(); break; }
                 case 2: { action = new Act_LetterToFriend(); break; }
-                case 3: { action = new Act_LetterToFriend(); break; }
+                case 3: { action = new Act_LetterToAny(); break; }
                 case 4: { action = new Act_CleanseSoul(); break; }
             }
         }
@@ -567,6 +574,66 @@ namespace Assets.Code
                         double mult = 1 - shadow;
                         item.threat += mult * society.dread_agents_evidenceFound;
                         item.reasons.Add(new ReasonMsg("Evidence found (+" + (int)(mult*society.dread_agents_evidenceFound) + ")",(mult*society.dread_agents_evidenceFound)));
+                    }
+                    if (item.form == ThreatItem.formTypes.PLAGUE)
+                    {
+                        double u = 0;
+                        double socU = 0;
+                        double neighbourU = 0;
+                        double worldU = 0;
+                        item.threat = 0;
+                        foreach (Location l2 in map.locations)
+                        {
+                            if (l2 == this.getLocation())
+                            {
+                                foreach (Property pr in l2.properties)
+                                {
+                                    u = pr.proto.plagueThreat * 8; ;
+                                    item.threat += u;
+                                    if (pr.proto.plagueThreat > 0) {
+                                        item.reasons.Add(new ReasonMsg("Plague present in my settlement (+" + (int)(u) + ")", (int)(u)));
+                                    }
+                                }
+                            }
+                            else if (l2.isNeighbour(this.getLocation()))
+                            {
+                                foreach (Property pr in l2.properties)
+                                {
+                                    neighbourU += pr.proto.plagueThreat * 5;
+                                }
+                            }
+                            else if (l2.soc == this.society)
+                            {
+                                foreach (Property pr in l2.properties)
+                                {
+                                    socU += pr.proto.plagueThreat * 2;
+                                }
+                            }
+                            else if (this.society.lastTurnNeighbours.Contains(l2.soc))
+                            {
+                                foreach (Property pr in l2.properties)
+                                {
+                                    worldU += pr.proto.plagueThreat * 0.75;
+                                }
+                            }
+                        }
+                        if (neighbourU > 0)
+                        {
+                            item.threat += neighbourU;
+                            item.reasons.Add(new ReasonMsg("Plagues in neighbouring settlements (+" + (int)(neighbourU) + ")", (int)(neighbourU)));
+                        }
+                        if (socU > 0)
+                        {
+                            item.threat += socU;
+                            item.reasons.Add(new ReasonMsg("Plagues in our lands (+" + (int)(socU) + ")", (int)(socU)));
+                        }
+                        if (worldU > 0)
+                        {
+                            item.threat += worldU;
+                            item.reasons.Add(new ReasonMsg("Neighbouring nation plagues (+" + (int)(worldU) + ")", (int)(worldU)));
+                        }
+                        if (item.threat > 200) { item.threat = 200; }
+                        if (item.threat < 0) { item.threat = 0; }
                     }
                 }
                 else

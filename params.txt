@@ -143,6 +143,7 @@ society_securityBuffMinor: 1
 society_lockdownPrestigeHit: -10
 society_lockdownBuffDuration: 12
 society_electoralPrestigeWeight: 2
+society_prestigeFromPlagueRedDeath: -10
 temporaryThreatDecay: 0.95
 threat_takeLocation: 24
 threat_temporaryDreadDecay: 0.97
@@ -336,3 +337,6 @@ unit_seeker_truthShadow: 0.35
 unit_headless_pumpkinDur: 9
 unit_knightCombatBonus: 1.5
 unit_agentCombatBonus: 1.25
+unit_rd_redDeathPlagueDur: 10
+unit_rd_redDeathPlaguePSpread: 0.2
+unit_rd_redDeathPlagueImmunityDur: 10

@@ -34,6 +34,8 @@ namespace Assets.Code
             if (map.automatic == false) { return; }
             if (map.burnInComplete == false) { return; }
 
+            if ("c".Contains("c")) { return; }
+
             int presentDarks = 0;
             foreach (Unit u in map.units)
             {
