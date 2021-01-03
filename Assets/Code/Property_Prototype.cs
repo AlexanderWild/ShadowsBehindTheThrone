@@ -20,6 +20,7 @@ namespace Assets.Code
         public double informationAvailabilityMult = 1;
         public int securityIncrease = 0;
         public double plagueThreat = 0;
+        public bool isDisease = false;
 
         public Property_Prototype(Map map, string name)
         {
@@ -87,6 +88,7 @@ namespace Assets.Code
 
             proto = new Pr_RedDeath(map, "Red Death");
             map.globalist.allProperties.Add(proto);
+            proto.isDisease = true;
             map.globalist.propertyMap.Add(proto.name, proto);
 
             proto = new Pr_RedDeathImmunity(map, "Red Death Immunity");

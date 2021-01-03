@@ -137,6 +137,7 @@ namespace Assets.Code
         public Sprite unit_knight;
         public Sprite unit_basicAgent;
         public Sprite unit_redDeath;
+        public Sprite unit_apothecarian;
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;

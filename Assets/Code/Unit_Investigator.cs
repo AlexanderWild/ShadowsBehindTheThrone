@@ -21,7 +21,7 @@ namespace Assets.Code
         public int paladinDuration = 0;
         public int turnLastChangedRole;
 
-        public enum unitState { basic,investigator,paladin,knight };
+        public enum unitState { basic,investigator,paladin,knight ,medic};
         public unitState state = unitState.basic;
 
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
@@ -70,6 +70,10 @@ namespace Assets.Code
             if (state == unitState.knight)
             {
                 turnTickAI_Knight(map);
+            }
+            if (state == unitState.medic)
+            {
+                turnTickAI_Medic(map);
             }
         }
 
@@ -180,6 +184,72 @@ namespace Assets.Code
             if (task == null && society.isAtWar())
             {
                 task = new Task_SupportMilitary();
+            }
+            if (task != null)
+            {
+                task.turnTick(this);
+            }
+        }
+        public void turnTickAI_Medic(Map map)
+        {
+            if (task == null)
+            {
+                bool onDisease = false;
+                foreach (Property pr in location.properties)
+                {
+                    if (pr.proto.isDisease)
+                    {
+                        onDisease = true;
+                        break;
+                    }
+                }
+                if (onDisease)
+                {
+                    task = new Task_TreatDisease();
+                    return;
+                }
+
+                double dist = 0;
+                Location plagueLoc = null;
+                foreach (Location loc in map.locations)
+                {
+                    if (loc.soc == null || loc.soc.hostileTo(this)) { continue; }
+
+                    bool hasDisease = false;
+                    foreach (Property pr in loc.properties)
+                    {
+                        if (pr.proto.isDisease)
+                        {
+                            hasDisease = true;
+                            break;
+                        }
+                    }
+                    if (!hasDisease) { continue; }
+                    double d = map.getDist(loc.hex, location.hex);
+                    if (plagueLoc == null)
+                    {
+                        plagueLoc = loc;
+                        dist = d;
+                    }
+                    else if (plagueLoc.soc != this.society && loc.soc == this.society)
+                    {
+                        plagueLoc = loc;
+                        dist = d;
+                    }
+                    else if (plagueLoc.soc == this.society && loc.soc != this.society)
+                    {
+                        //Don't switch to prefer a foreign location
+                    }
+                    else if (d < dist)
+                    {
+                        dist = d;
+                        plagueLoc = loc;
+                    }
+                }
+                if (plagueLoc != null)
+                {
+                    task = new Task_GoToLocation(plagueLoc);
+                }
             }
             if (task != null)
             {
@@ -315,6 +385,22 @@ namespace Assets.Code
                 sinceHome += 1;
             }
 
+            if (task == null || task is Task_Wander)
+            {
+                bool onDisease = false;
+                foreach (Property pr in location.properties)
+                {
+                    if (pr.proto.isDisease)
+                    {
+                        onDisease = true;
+                        break;
+                    }
+                }
+                if (onDisease)
+                {
+                    task = new Task_TreatDisease();
+                }
+            }
 
             if (task != null)
             {
@@ -385,10 +471,10 @@ namespace Assets.Code
                     if (item.threat > worstMilitaryFear) { worstMilitaryFear = item.threat; }
                 }
             }
-            double[] weights = new double[] { person.threat_agents.threat, worstMilitaryFear };
+            double[] weights = new double[] { person.threat_agents.threat, worstMilitaryFear,person.threat_plague.threat };
             weights[0] += 50;//Try to keep at least some people watching the criminal situation
-            double[] currentAllocation = new double[2];
-            double[] futureAllocation = new double[2];
+            double[] currentAllocation = new double[3];
+            double[] futureAllocation = new double[3];
 
             int specialisationWeight = 3;
             foreach (Unit u in person.map.units)
@@ -424,6 +510,14 @@ namespace Assets.Code
                             futureAllocation[1] += specialisationWeight;
                         }
                     }
+                    else if (existing.state == unitState.medic)
+                    {
+                        currentAllocation[2] += specialisationWeight;
+                        if (u != swappable)
+                        {
+                            futureAllocation[2] += specialisationWeight;
+                        }
+                    }
                 }
             }
             //What would the future state look like if this agent swapped?
@@ -441,6 +535,10 @@ namespace Assets.Code
             else if (hypo == unitState.knight)
             {
                 futureAllocation[1] += specialisationWeight;
+            }
+            else if (hypo == unitState.medic)
+            {
+                futureAllocation[2] += specialisationWeight;
             }
 
             double normA = 0;
@@ -520,6 +618,10 @@ namespace Assets.Code
             {
                 return world.textureStore.unit_knight;
             }
+            if (state == unitState.medic)
+            {
+                return world.textureStore.unit_apothecarian;
+            }
             return world.textureStore.unit_lookingGlass;
         }
 
@@ -541,6 +643,10 @@ namespace Assets.Code
             {
                 return "Sir";
             }
+            if (state == unitState.medic)
+            {
+                return "Apothecarian";
+            }
             return "Investigator";
         }
 
@@ -561,6 +667,10 @@ namespace Assets.Code
             if (state == unitState.knight)
             {
                 return "Sir";
+            }
+            if (state == unitState.medic)
+            {
+                return "Apothecarian";
             }
             return "Investigator";
         }
@@ -610,6 +720,10 @@ namespace Assets.Code
             if (state == unitState.knight)
             {
                 return "Knights are military specialists, who give bonuses to military units in their location.";
+            }
+            if (state == unitState.medic)
+            {
+                return "Apothecarians are excellent medical agents, specialised in treating plagues.";
             }
             return "Investigators are agents who wander near their home location searching for evidence of dark powers. They can analyse evidence and recognise both enthralled agents and enthralled nobles.";
         }

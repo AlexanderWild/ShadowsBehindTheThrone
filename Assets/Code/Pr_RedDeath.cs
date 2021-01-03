@@ -41,9 +41,11 @@ namespace Assets.Code
                     {
                         Property.addProperty(World.staticMap, l2, "Red Death");
                         Society soc = (Society)l2.soc;
-                        if (location.turnLastTaken - soc.lastPlagueCrisis > location.map.param.society_crisis_plagueCrisisCooldown)
+                        if (location.map.turn - soc.lastPlagueCrisis > location.map.param.society_crisis_plagueCrisisCooldown)
                         {
-                            soc.crisisPlague = "The Red Death plague is spreading in our lands";
+                            soc.crisisPlague = "The Red Death Plague";
+                            soc.crisisPlagueLong = "The Red Death plague is spreading in our lands, we must deal with this new crisis. We can deploy our army to help the crisis," +
+                                " at the cost of military power, either by quarantine or helping treat patients, or we could deploy our agents to assist.";
                             soc.lastPlagueCrisis = location.map.turn;
                         }
                     }
