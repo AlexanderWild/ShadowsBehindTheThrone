@@ -16,6 +16,7 @@ namespace Assets.Code
 	{
 		public static bool apiShutdown = false;
 
+		public static bool shouldStoreStats = false;
 		public static bool s_EverInitialized = false;
 
 		public enum achievement_key { VICTORY };
@@ -186,6 +187,7 @@ namespace Assets.Code
 			if (!apiShutdown && s_EverInitialized)
 			{
 				SteamUserStats.SetAchievement(achievementKeys[(int)key]);
+				shouldStoreStats = true;
 			}
 		}
 		public static void reset_all_achievements()
@@ -216,9 +218,15 @@ namespace Assets.Code
             {
 				return;
             }
+			if (shouldStoreStats)
+			{
+				shouldStoreStats = false;
+				SteamUserStats.StoreStats();
+			}
 
-			// Run Steam client callbacks
-			SteamAPI.RunCallbacks();
+			//ANW actually do not do this, dunno where this code even came from
+			//// Run Steam client callbacks
+			//SteamAPI.RunCallbacks();
 		}
 	}
 }
