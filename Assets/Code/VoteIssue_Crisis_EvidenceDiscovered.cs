@@ -79,6 +79,25 @@ namespace Assets.Code
                 string add = "";
                 msgs.Add(new ReasonMsg("Liking for nobles in province" + add, localU));
                 u += localU;
+
+                if (p.getLocation().province.index != option.province)
+                {
+                    localU = p.getSelfInterest() * p.threat_agents.threat * World.staticMap.param.utility_selfInterestFromThreat;
+                    if (localU != 0)
+                    {
+                        msgs.Add(new ReasonMsg("Does not help me personally", localU));
+                        u += localU;
+                    }
+                }
+                else
+                {
+                    localU = -1*p.getSelfInterest() * p.threat_agents.threat * World.staticMap.param.utility_selfInterestFromThreat;
+                    if (localU != 0)
+                    {
+                        msgs.Add(new ReasonMsg("Helps me personally", localU));
+                        u += localU;
+                    }
+                }
             }
             if (option.index == NATIONWIDE_SECURITY)
             {
@@ -88,6 +107,13 @@ namespace Assets.Code
                 double localU = World.staticMap.param.utility_evidenceResonseBaseline * (concernLevel / 100);
                 msgs.Add(new ReasonMsg("Base Desirability", localU));
                 u += localU;
+
+                localU = p.getSelfInterest() * p.threat_agents.threat * World.staticMap.param.utility_selfInterestFromThreat/2;
+                if (localU != 0)
+                {
+                    msgs.Add(new ReasonMsg("Doesn't maximise my provinces' defences", localU));
+                    u += localU;
+                }
             }
             if (option.index == NO_RESPONSE)
             {
@@ -154,9 +180,28 @@ namespace Assets.Code
                         localU += p.getRelation(person.index).getLiking() * World.staticMap.param.utility_agentDefendProvinceLikingMult;
                     }
                 }
-                string add = "";
+                string add = "" +(int)(localU);
                 msgs.Add(new ReasonMsg("Liking for nobles in province" + add, localU));
                 u += localU;
+
+                if (p.getLocation().province.index != option.province)
+                {
+                    localU = p.getSelfInterest() * p.threat_agents.threat * World.staticMap.param.utility_selfInterestFromThreat;
+                    if (localU != 0)
+                    {
+                        msgs.Add(new ReasonMsg("Does not help me personally", localU));
+                        u += localU;
+                    }
+                }
+                else
+                {
+                    localU = -1 * p.getSelfInterest() * p.threat_agents.threat * World.staticMap.param.utility_selfInterestFromThreat;
+                    if (localU != 0)
+                    {
+                        msgs.Add(new ReasonMsg("Helps me personally", localU));
+                        u += localU;
+                    }
+                }
             }
             if (option.index == AGENT_TO_INVESTIGATOR)
             {

@@ -27,6 +27,11 @@ namespace Assets.Code
         public virtual double getAwarenessMult() { return 1; }
         public int groupCode;
 
+        public virtual double getMilitarism() { return 0; }
         public virtual void turnTick(Person p) { }
+
+        //0 to 1
+        public virtual double getSelfInterest() { return 0; }
+
     }
 }

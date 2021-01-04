@@ -97,7 +97,6 @@ namespace Assets.Code
                 abilities.Add(new Ab_Soc_ProvincialSentiments());
                 //abilities.Add(new Ab_Soc_SwitchVote());
                 abilities.Add(new Ab_Soc_ShareTruth());
-                abilities.Add(new Ab_Soc_BoostMilitarism());
 
                 if (map.param.useAwareness == 1)
                 {
@@ -398,6 +397,10 @@ namespace Assets.Code
             victoryAchieved = true;
             World.log("VICTORY DETECTED");
             map.world.prefabStore.popVictoryBox();
+            if (SteamManager.s_instance != null && (SteamManager.apiShutdown == false))
+            {
+                SteamManager.unlockAchievement(SteamManager.achievement_key.VICTORY);
+            }
         }
 
         public void processEnthralled()

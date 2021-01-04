@@ -14,9 +14,21 @@ namespace Assets.Code
         }
         public override void castInner(Map map, Person person)
         {
-            person.politics_militarism = 1;
+            for (int i = 0; i < person.traits.Count; i++)
+            {
+                if (person.traits[i].groupCode == Trait.CODE_POLITICS)
+                {
+                    foreach (Trait t in map.globalist.allTraits)
+                    {
+                        if (t is Trait_Political_Warlike)
+                        {
+                            person.traits[i] = t;
+                        }
+                    }
+                }
+            }
 
-            string msgs = "You exploit the terror of " + person.getFullName() + ", causing them to become violent and cruel, as an attempt to defend themselves.";
+            string msgs = "You exploit the terror of " + person.getFullName() + ", causing them to become violent and cruel, as an attempt to defend themselves. They now have the political trait 'Warlike'";
             map.world.prefabStore.popImgMsg(
                 msgs,
                 map.world.wordStore.lookup("ABILITY_CALL_TO_VIOLENCE"));

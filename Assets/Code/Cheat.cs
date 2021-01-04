@@ -91,6 +91,10 @@ namespace Assets.Code
                         p.getRelation(map.overmind.enthralled).addLiking(100, "Cheat love", map.turn);
                     }
                 }
+                if (command == "resetSteamAchievements")
+                {
+                    SteamManager.reset_all_achievements();
+                }
                 if (command == "insanity")
                 {
                     GraphicalMap.selectedHex.location.person().goInsane();

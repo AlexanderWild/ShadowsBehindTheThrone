@@ -46,7 +46,7 @@ namespace Assets.Code
         public ThreatItem threat_enshadowedNobles;
         public ThreatItem threat_agents;
 
-        public double politics_militarism;
+        //public double politics_militarism;
 
         public int investigationLastTurn = 0;
         public enum personState { normal,enthralled,broken,lightbringer,enthralledAgent};
@@ -75,11 +75,11 @@ namespace Assets.Code
                 log = new LogBox(this);
             }
 
-            politics_militarism = Math.Pow(Eleven.random.NextDouble(), 2);//Bias towards 0
-            //Chance of pacifism
-            if (Eleven.random.NextDouble() < 0.33) {
-                politics_militarism *= -1;
-            }
+            //politics_militarism = Math.Pow(Eleven.random.NextDouble(), 2);//Bias towards 0
+            ////Chance of pacifism
+            //if (Eleven.random.NextDouble() < 0.33) {
+            //    politics_militarism *= -1;
+            //}
 
 
             if (assignedHouse == null)
@@ -109,7 +109,10 @@ namespace Assets.Code
 
             if (!map.simplified)
             {
-                for (int i = 0; i < 3; i++)
+
+                traits.Add(map.globalist.getTrait_Political(this));
+
+                for (int i = 0; i < 2; i++)
                 {
                     Trait add = map.globalist.getTrait(this);
                     if (add == null) { break; }
@@ -837,19 +840,39 @@ namespace Assets.Code
             }
         }
 
-        public string getMilitarismInfo()
+        //public string getMilitarismInfo()
+        //{
+        //    int m = (int)(100*politics_militarism) + 100;
+        //    if (m <= 40)
+        //        return "Very Pacifist";
+        //    else if (m <= 80)
+        //        return "Somewhat Pacifist";
+        //    else if (m <= 120)
+        //        return "No Tendency";
+        //    else if (m <= 160)
+        //        return "Somewhat Walike";
+        //    else
+        //        return "Very Warlike";
+        //}
+
+        public double getMilitarism()
         {
-            int m = (int)(100*politics_militarism) + 100;
-            if (m <= 40)
-                return "Very Pacifist";
-            else if (m <= 80)
-                return "Somewhat Pacifist";
-            else if (m <= 120)
-                return "No Tendency";
-            else if (m <= 160)
-                return "Somewhat Walike";
-            else
-                return "Very Warlike";
+            double v = 0;
+            foreach (Trait t in traits)
+            {
+                v += t.getMilitarism();
+            }
+            return v;
+        }
+        public double getSelfInterest()
+        {
+            double v = 0;
+            foreach (Trait t in traits)
+            {
+                v += t.getSelfInterest();
+            }
+            return v;
+
         }
 
         public void die(string v)

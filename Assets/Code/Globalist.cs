@@ -41,6 +41,11 @@ namespace Assets.Code
             allTraits.Add(new Trait_Defender());
             allTraits.Add(new Trait_IncompetentFollower());
             allTraits.Add(new Trait_CompetentFollower());
+
+            allTraits.Add(new Trait_Political_Corrupt());
+            allTraits.Add(new Trait_Political_Warlike());
+            allTraits.Add(new Trait_Political_Pacifist());
+            allTraits.Add(new Trait_Political_Honorable());
         }
 
         public Trait getTrait(Person person)
@@ -55,6 +60,23 @@ namespace Assets.Code
                     if (t2.groupCode == t.groupCode) { allowed = false;break; }
                 }
                 if (allowed)
+                {
+                    c += 1;
+                    if (Eleven.random.Next(c) == 0)
+                    {
+                        response = t;
+                    }
+                }
+            }
+            return response;
+        }
+        public Trait getTrait_Political(Person person)
+        {
+            int c = 0;
+            Trait response = null;
+            foreach (Trait t in allTraits)
+            {
+                if (t.groupCode == Trait.CODE_POLITICS)
                 {
                     c += 1;
                     if (Eleven.random.Next(c) == 0)

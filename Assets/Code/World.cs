@@ -55,7 +55,7 @@ namespace Assets.Code
         public static LogBox saveLog = new LogBox("saveLog.log");
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
         public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
-        public static int versionNumber = 14;
+        public static int versionNumber = 15;
         public static int subversionNumber = 0;
 
         public static bool cheat_globalCooling = false;
@@ -317,6 +317,11 @@ namespace Assets.Code
 
         public void bQuit()
         {
+            if (SteamManager.s_EverInitialized)
+            {
+                SteamManager.shutdownSteamAPI();
+            }
+
             Application.Quit();
         }
         public void bViewPlayback()

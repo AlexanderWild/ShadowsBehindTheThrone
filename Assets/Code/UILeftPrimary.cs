@@ -228,10 +228,6 @@ namespace Assets.Code
             }
             prestigeText.text = "Prestige: " + (int)(p.prestige) + "\nPrestige Moving towards: " + (int)(p.getTargetPrestige(null));
             personShadowAndEvidenceVals.text = (int)(p.shadow * 100) + "%\n" + (int)(p.evidence * 100) + "%";
-            // bodyText += "\nShadow: " + (int)(p.shadow * 100) + "%";
-            //bodyText += "\nEvidence: " + (int)(p.evidence * 100) + "%";
-            bodyText += "\nMilitarism: " + (int)(p.politics_militarism * 100) + "%";
-            bodyText += " (" + p.getMilitarismInfo() + ")";
 
             bodyText += "\n";
 

@@ -14,9 +14,17 @@ namespace Assets.Code
 	[DisallowMultipleComponent]
 	public class SteamManager : MonoBehaviour
 	{
-		protected static bool s_EverInitialized = false;
+		public static bool apiShutdown = false;
 
-		protected static SteamManager s_instance;
+		public static bool s_EverInitialized = false;
+
+		public enum achievement_key { VICTORY };
+		public static string[] achievementKeys = new string[]
+		{
+			"VICTORY"
+		};
+
+		public static SteamManager s_instance;
 		protected static SteamManager Instance
 		{
 			get
@@ -124,7 +132,6 @@ namespace Assets.Code
 			if (!m_bInitialized)
 			{
 				Debug.LogError("[Steamworks.NET] SteamAPI_Init() failed. Refer to Valve's documentation or the comment above this line for more information.", this);
-
 				return;
 			}
 
@@ -171,7 +178,32 @@ namespace Assets.Code
 				return;
 			}
 
-			SteamAPI.Shutdown();
+			shutdownSteamAPI();
+		}
+
+		public static void unlockAchievement(achievement_key key)
+        {
+			if (!apiShutdown && s_EverInitialized)
+			{
+				SteamUserStats.SetAchievement(achievementKeys[(int)key]);
+			}
+		}
+		public static void reset_all_achievements()
+		{
+			if (!apiShutdown && s_EverInitialized)
+			{
+				SteamUserStats.ResetAllStats(true);
+			}
+		}
+
+		public static void shutdownSteamAPI()
+		{
+			if (!apiShutdown)
+			{
+				apiShutdown = true;
+				SteamAPI.Shutdown();
+				World.log("Steam shutdown call issued");
+			}
 		}
 
 		protected virtual void Update()
@@ -180,6 +212,10 @@ namespace Assets.Code
 			{
 				return;
 			}
+			if (apiShutdown)
+            {
+				return;
+            }
 
 			// Run Steam client callbacks
 			SteamAPI.RunCallbacks();
