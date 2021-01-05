@@ -395,12 +395,9 @@ namespace Assets.Code
         public void victory()
         {
             victoryAchieved = true;
+            AchievementManager.unlockAchievement(SteamManager.achievement_key.VICTORY);
             World.log("VICTORY DETECTED");
             map.world.prefabStore.popVictoryBox();
-            if (SteamManager.s_instance != null && (SteamManager.apiShutdown == false))
-            {
-                SteamManager.unlockAchievement(SteamManager.achievement_key.VICTORY);
-            }
         }
 
         public void processEnthralled()

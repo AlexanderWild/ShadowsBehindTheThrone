@@ -85,6 +85,8 @@ namespace Assets.Code
             potentialGods.Add(new God_Flesh());
             potentialGods.Add(new God_Omni());
 
+            AchievementManager.setup();
+
         }
 
 

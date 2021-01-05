@@ -25,10 +25,21 @@ namespace Assets.Code
 
             Unit_Vampire vampire = (Unit_Vampire)unit;
 
+            bool wasInsane = unit.location.person().sanity == 0;
             unit.location.person().sanity -= 1;
 
             if (unit.location.person().sanity < 1)
             {
+                if (!wasInsane)
+                {
+                    if (unit.location.person().society.sovreign.heldBy == unit.location.person())
+                    {
+                        if (unit.location.person().society.getLevel() > 0)
+                        {
+                            AchievementManager.unlockAchievement(SteamManager.achievement_key.ROYAL_BLOOD);
+                        }
+                    }
+                }
                 unit.location.person().sanity = 0;
                 unit.location.map.world.prefabStore.popImgMsg(unit.getName() + " breaks the mind of " + unit.location.person().getFullName() +
          ". They are now driven to madness.",

@@ -19,10 +19,13 @@ namespace Assets.Code
 		public static bool shouldStoreStats = false;
 		public static bool s_EverInitialized = false;
 
-		public enum achievement_key { VICTORY };
+		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY };
 		public static string[] achievementKeys = new string[]
 		{
-			"VICTORY"
+			"VICTORY",
+			"FIRST_AGENT",
+			"ROYAL_BLOOD",
+			"FLESH_VICTORY",
 		};
 
 		public static SteamManager s_instance;
@@ -160,6 +163,9 @@ namespace Assets.Code
 				m_SteamAPIWarningMessageHook = new SteamAPIWarningMessageHook_t(SteamAPIDebugTextHook);
 				SteamClient.SetWarningMessageHook(m_SteamAPIWarningMessageHook);
 			}
+
+			//// Run Steam client callbacks
+			SteamAPI.RunCallbacks();
 		}
 
 		// OnApplicationQuit gets called too early to shutdown the SteamAPI.
@@ -223,10 +229,6 @@ namespace Assets.Code
 				shouldStoreStats = false;
 				SteamUserStats.StoreStats();
 			}
-
-			//ANW actually do not do this, dunno where this code even came from
-			//// Run Steam client callbacks
-			//SteamAPI.RunCallbacks();
 		}
 	}
 }

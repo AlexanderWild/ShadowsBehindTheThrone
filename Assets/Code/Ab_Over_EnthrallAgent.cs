@@ -27,6 +27,8 @@ namespace Assets.Code
             other.task = null;
             other.movesTaken += 1;
             map.overmind.computeEnthralled();
+
+            AchievementManager.unlockAchievement(SteamManager.achievement_key.FIRST_AGENT);
         }
         public override bool castable(Map map, Person person)
         {

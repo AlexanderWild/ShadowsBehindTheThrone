@@ -94,6 +94,7 @@ namespace Assets.Code
                 if (command == "resetSteamAchievements")
                 {
                     SteamManager.reset_all_achievements();
+                    World.staticMap.world.prefabStore.popMsg("All steam achievements reset");
                 }
                 if (command == "insanity")
                 {

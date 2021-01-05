@@ -95,6 +95,21 @@ namespace Assets.Code
             log();
         }
 
+        public int getLevel()
+        {
+            if (people.Count > World.staticMap.param.society_nPeopleForEmpire)
+            {
+                return 2;
+            }
+            else if (people.Count > World.staticMap.param.society_nPeopleForKingdom)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
         public override string getTypeName()
         {
             return socType.getName();
