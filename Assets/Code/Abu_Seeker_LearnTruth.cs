@@ -15,6 +15,8 @@ namespace Assets.Code
 
             seeker.knowsTruth = true;
 
+            AchievementManager.unlockAchievement(SteamManager.achievement_key.LEARN_THE_TRUTH);
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " pieces together the truth, from the secrets they have found, and gains dark power from the revelation.",
                 u.location.map.world.wordStore.lookup("ABILITY_SEEKER_LEARN_TRUTH"), img: 2);
 

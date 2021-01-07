@@ -27,6 +27,7 @@ namespace Assets.Code
             other.task = null;
             other.movesTaken += 1;
             map.overmind.computeEnthralled();
+            map.hasEnthralledAnAgent = true;
 
             AchievementManager.unlockAchievement(SteamManager.achievement_key.FIRST_AGENT);
         }

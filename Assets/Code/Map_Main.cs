@@ -33,6 +33,7 @@ namespace Assets.Code
         public bool simplified = false;
         public bool agentsOnly = true;
         public bool automatic = false;
+        public bool hasEnthralledAnAgent = false;
         public long seed;
 
         public Society soc_dark;

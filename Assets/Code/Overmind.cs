@@ -398,6 +398,11 @@ namespace Assets.Code
             AchievementManager.unlockAchievement(SteamManager.achievement_key.VICTORY);
             World.log("VICTORY DETECTED");
             map.world.prefabStore.popVictoryBox();
+
+            if (!map.hasEnthralledAnAgent)
+            {
+                AchievementManager.unlockAchievement(SteamManager.achievement_key.POLITICS_ONLY);
+            }
         }
 
         public void processEnthralled()
