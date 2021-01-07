@@ -11,6 +11,9 @@ namespace Assets.Code
             Task_SellCargo task = new Task_SellCargo();
             u.task = task;
 
+            Unit_Merchant merchant = (Unit_Merchant)u;
+            merchant.hasSoldCargo = true;
+
             float profit = task.getSaleValue(u.society, u.location);
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins selling cargo, generating wealth. Every turn they will sell 10% of their cargo, with a proft of " +((int)(100 * profit))
                 + "%. Metropoles, cities and towns give greater profit, and selling in your home nation generates less than selling in foreign lands."

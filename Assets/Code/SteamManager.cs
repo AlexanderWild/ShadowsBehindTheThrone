@@ -19,7 +19,7 @@ namespace Assets.Code
 		public static bool shouldStoreStats = false;
 		public static bool s_EverInitialized = false;
 
-		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH };
+		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH, MERCANTILISM };
 		public static string[] achievementKeys = new string[]
 		{
 			"VICTORY",
@@ -29,6 +29,7 @@ namespace Assets.Code
 			"POLITICS_ONLY",
 			"CULT_GROWS",
 			"LEARN_THE_TRUTH",
+			"MERCANTILISM",
 		};
 
 		public static SteamManager s_instance;

@@ -10,6 +10,9 @@ namespace Assets.Code
         {
             u.task = new Task_LoadCargo();
 
+            Unit_Merchant merchant = (Unit_Merchant)u;
+            merchant.hasLoadedCargo = true;
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins loading cargo, ready to be sold for profit in distant towns.",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_LOAD_CARGO"),1);
 
