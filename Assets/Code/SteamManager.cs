@@ -107,6 +107,12 @@ namespace Assets.Code
 				Debug.LogError("[Steamworks.NET] DllCheck Test returned false, One or more of the Steamworks binaries seems to be the wrong version.", this);
 			}
 
+			//Steam API must only run in compiled mode, or it doesn't close properly, causing all manner of issues
+			if (Application.isEditor)
+            {
+				return;
+            }
+
 			try
 			{
 				// If Steam is not running or the game wasn't started through Steam, SteamAPI_RestartAppIfNecessary starts the

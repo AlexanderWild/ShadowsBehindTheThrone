@@ -428,7 +428,7 @@ namespace Assets.Code
                     }
                     else
                     {
-                        lord.die("Killed by " + att.getName() + " when " + taken.getName() + " fell");
+                        lord.die("Killed by " + att.getName() + " when " + taken.getName() + " fell",true);
                     }
                 }
             }

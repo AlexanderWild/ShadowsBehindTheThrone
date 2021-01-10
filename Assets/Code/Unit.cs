@@ -170,7 +170,7 @@ namespace Assets.Code
             }
             if (person != null)
             {
-                person.die(v);
+                person.die(v,false);
             }
             disband(map, null);
             bool positive = person == null || person.state != Person.personState.enthralledAgent;

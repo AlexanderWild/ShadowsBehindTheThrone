@@ -136,7 +136,7 @@ namespace Assets.Code
                 }
                 if (command == "die")
                 {
-                    GraphicalMap.selectedHex.location.person().die("Killed by console");
+                    GraphicalMap.selectedHex.location.person().die("Killed by console",true);
                 }
                 if (command == "evidence")
                 {

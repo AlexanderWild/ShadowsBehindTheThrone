@@ -208,7 +208,7 @@ namespace Assets.Code
                             "\"If you take my head, I'll take yours! All of yours!\"", 3);
                     }
 
-                    order.person.die("Executed by " + this.getName() + ". Reason: " + order.reason);
+                    order.person.die("Executed by " + this.getName() + ". Reason: " + order.reason,true);
 
                 }
             }

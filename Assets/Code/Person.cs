@@ -880,7 +880,7 @@ namespace Assets.Code
 
         }
 
-        public void die(string v)
+        public void die(string v,bool printMsg)
         {
             double priority = 0;
             bool benefit = true;
@@ -906,13 +906,17 @@ namespace Assets.Code
             }
             map.turnMessages.Add(new MsgEvent(this.getFullName() + " dies! " + v, priority, benefit));
 
-            if (state == personState.enthralled)
+            if (printMsg)
             {
-                map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "\n\nTheir death is not the end, you may enthrall a new noble, and continue your work through a new vessel.");
-            }else if (society.hasEnthralled())
-            {
-                map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "");
+                if (state == personState.enthralled)
+                {
+                    map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "\n\nTheir death is not the end, you may enthrall a new noble, and continue your work through a new vessel.");
+                }
+                else if (society.hasEnthralled())
+                {
+                    map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "");
 
+                }
             }
 
             removeFromGame(v);
