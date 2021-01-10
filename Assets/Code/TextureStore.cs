@@ -152,6 +152,7 @@ namespace Assets.Code
         public Sprite painting_monasteryRuins;
         public Sprite painting_deathAndGravedigger;
         public Sprite painting_ettyStorm;
+        public Sprite painting_fishermenAtSea;
         public Sprite painting_deathAndConflagaration;
         public Sprite painting_monkAndOldWoman;
 
