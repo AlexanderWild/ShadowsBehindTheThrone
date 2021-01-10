@@ -36,6 +36,10 @@ namespace Assets.Code
         }
         public override Sprite getSprite()
         {
+            if (title != null && title.heldBy != null && title.heldBy.shadow > 0.5)
+            {
+                return location.map.world.textureStore.loc_minor_church_dark;
+            }
             return location.map.world.textureStore.loc_minor_church;
         }
     }
