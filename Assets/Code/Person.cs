@@ -486,6 +486,11 @@ namespace Assets.Code
             {
                 this.state = personState.broken;
                 map.turnMessages.Add(new MsgEvent(this.getFullName() + " has been fully enshadowed, their soul can no longer resist the dark", MsgEvent.LEVEL_GREEN, true));
+                if (!map.hasBrokenSoul)
+                {
+                    AchievementManager.unlockAchievement(SteamManager.achievement_key.BROKEN_SOUL);
+                    map.hasBrokenSoul = true;
+                }
             }
             //If you've not broken yet, decay the shadow away
             if (state != personState.broken && state != personState.enthralled)

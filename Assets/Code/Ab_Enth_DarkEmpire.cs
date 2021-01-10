@@ -16,6 +16,8 @@ namespace Assets.Code
             map.overmind.enthralled.society.isDarkEmpire = true;
             map.overmind.enthralled.society.threat_mult += map.param.ability_darkEmpireThreatMultGain;
             map.overmind.enthralled.evidence = 1;
+
+            AchievementManager.unlockAchievement(SteamManager.achievement_key.DARK_EMPIRE);
         }
 
         public override bool castable(Map map, Hex hex)

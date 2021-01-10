@@ -19,7 +19,7 @@ namespace Assets.Code
 		public static bool shouldStoreStats = false;
 		public static bool s_EverInitialized = false;
 
-		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH, MERCANTILISM };
+		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH, MERCANTILISM,DARK_EMPIRE, BROKEN_SOUL };
 		public static string[] achievementKeys = new string[]
 		{
 			"VICTORY",
@@ -30,6 +30,8 @@ namespace Assets.Code
 			"CULT_GROWS",
 			"LEARN_THE_TRUTH",
 			"MERCANTILISM",
+			"DARK_EMPIRE",
+			"BROKEN_SOUL",
 		};
 
 		public static SteamManager s_instance;
@@ -194,6 +196,7 @@ namespace Assets.Code
 
 		public static void unlockAchievement(achievement_key key)
         {
+			if (World.staticMap == null || World.staticMap.automatic) { return; }//Can't unlock achievements in automatic play mode
 			if (!apiShutdown && s_EverInitialized)
 			{
 				SteamUserStats.SetAchievement(achievementKeys[(int)key]);

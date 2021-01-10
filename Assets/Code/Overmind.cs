@@ -403,19 +403,6 @@ namespace Assets.Code
             {
                 AchievementManager.unlockAchievement(SteamManager.achievement_key.POLITICS_ONLY);
             }
-
-            int nMerchants = 0;
-            foreach (Unit u in map.units)
-            {
-                if (u.isEnthralled() && u is Unit_Merchant)
-                {
-                    nMerchants += 1;
-                }
-            }
-            if (nMerchants == maxEnthralled)
-            {
-                AchievementManager.unlockAchievement(SteamManager.achievement_key.MERCANTILISM);
-            }
         }
 
         public void processEnthralled()
