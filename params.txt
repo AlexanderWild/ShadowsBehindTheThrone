@@ -94,7 +94,8 @@ utility_agentDefendProvinceLikingMult: 0.18
 utility_defendHomelandVSAgents: 20
 utility_evidenceResonseBaseline: 30
 utility_extremeismScaling: 2
-utility_swapAgentRolesMult: 75
+utility_swapAgentRolesMult: 100
+utility_selfInterestFromThreat: -0.5
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30

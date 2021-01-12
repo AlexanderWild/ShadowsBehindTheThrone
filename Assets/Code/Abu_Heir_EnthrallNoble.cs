@@ -19,6 +19,8 @@ namespace Assets.Code
             {
                 u.location.person().state = Person.personState.enthralled;
                 map.overmind.enthralled = u.location.person();
+
+                AchievementManager.unlockAchievement(SteamManager.achievement_key.CULT_GROWS);
             }
             else
             {

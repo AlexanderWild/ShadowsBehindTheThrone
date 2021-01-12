@@ -178,6 +178,9 @@ namespace Assets.Code
                     }
                 }
                 map.overmind.availableEnthrallments -= 1;
+                map.hasEnthralledAnAgent = true;
+
+                AchievementManager.unlockAchievement(SteamManager.achievement_key.FIRST_AGENT);
             }
         }
 

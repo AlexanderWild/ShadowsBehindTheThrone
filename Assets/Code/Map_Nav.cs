@@ -440,13 +440,14 @@ namespace Assets.Code
             {
                 u2.person.getRelation(u.person).suspicion = 1;
             }
-            if (u2.hp <= 0)
-            {
-                u2.die(this, "Attacked by " + u.getName());
-            }
             if (u.hp <= 0)
             {
                 u.die(this, "Took damage attacking " + u2.getName());
+            }
+
+            if (u2.hp <= 0)
+            {
+                u2.die(this, "Attacked by " + u.getName());
             }
             else if (kicked)
             {

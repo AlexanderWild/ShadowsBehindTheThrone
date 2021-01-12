@@ -48,7 +48,7 @@ namespace Assets.Code
         public ThreatItem threat_agents;
         public ThreatItem threat_plague;
 
-        public double politics_militarism;
+        //public double politics_militarism;
 
         public int investigationLastTurn = 0;
         public enum personState { normal,enthralled,broken,lightbringer,enthralledAgent};
@@ -77,11 +77,11 @@ namespace Assets.Code
                 log = new LogBox(this);
             }
 
-            politics_militarism = Math.Pow(Eleven.random.NextDouble(), 2);//Bias towards 0
-            //Chance of pacifism
-            if (Eleven.random.NextDouble() < 0.33) {
-                politics_militarism *= -1;
-            }
+            //politics_militarism = Math.Pow(Eleven.random.NextDouble(), 2);//Bias towards 0
+            ////Chance of pacifism
+            //if (Eleven.random.NextDouble() < 0.33) {
+            //    politics_militarism *= -1;
+            //}
 
 
             if (assignedHouse == null)
@@ -116,7 +116,10 @@ namespace Assets.Code
 
             if (!map.simplified)
             {
-                for (int i = 0; i < 3; i++)
+
+                traits.Add(map.globalist.getTrait_Political(this));
+
+                for (int i = 0; i < 2; i++)
                 {
                     Trait add = map.globalist.getTrait(this);
                     if (add == null) { break; }
@@ -490,6 +493,11 @@ namespace Assets.Code
             {
                 this.state = personState.broken;
                 map.turnMessages.Add(new MsgEvent(this.getFullName() + " has been fully enshadowed, their soul can no longer resist the dark", MsgEvent.LEVEL_GREEN, true));
+                if (!map.hasBrokenSoul)
+                {
+                    AchievementManager.unlockAchievement(SteamManager.achievement_key.BROKEN_SOUL);
+                    map.hasBrokenSoul = true;
+                }
             }
             //If you've not broken yet, decay the shadow away
             if (state != personState.broken && state != personState.enthralled)
@@ -904,22 +912,42 @@ namespace Assets.Code
             }
         }
 
-        public string getMilitarismInfo()
+        //public string getMilitarismInfo()
+        //{
+        //    int m = (int)(100*politics_militarism) + 100;
+        //    if (m <= 40)
+        //        return "Very Pacifist";
+        //    else if (m <= 80)
+        //        return "Somewhat Pacifist";
+        //    else if (m <= 120)
+        //        return "No Tendency";
+        //    else if (m <= 160)
+        //        return "Somewhat Walike";
+        //    else
+        //        return "Very Warlike";
+        //}
+
+        public double getMilitarism()
         {
-            int m = (int)(100*politics_militarism) + 100;
-            if (m <= 40)
-                return "Very Pacifist";
-            else if (m <= 80)
-                return "Somewhat Pacifist";
-            else if (m <= 120)
-                return "No Tendency";
-            else if (m <= 160)
-                return "Somewhat Walike";
-            else
-                return "Very Warlike";
+            double v = 0;
+            foreach (Trait t in traits)
+            {
+                v += t.getMilitarism();
+            }
+            return v;
+        }
+        public double getSelfInterest()
+        {
+            double v = 0;
+            foreach (Trait t in traits)
+            {
+                v += t.getSelfInterest();
+            }
+            return v;
+
         }
 
-        public void die(string v)
+        public void die(string v,bool printMsg)
         {
             double priority = 0;
             bool benefit = true;
@@ -945,13 +973,17 @@ namespace Assets.Code
             }
             map.turnMessages.Add(new MsgEvent(this.getFullName() + " dies! " + v, priority, benefit));
 
-            if (state == personState.enthralled)
+            if (printMsg)
             {
-                map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "\n\nTheir death is not the end, you may enthrall a new noble, and continue your work through a new vessel.");
-            }else if (society.hasEnthralled())
-            {
-                map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "");
+                if (state == personState.enthralled)
+                {
+                    map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "\n\nTheir death is not the end, you may enthrall a new noble, and continue your work through a new vessel.");
+                }
+                else if (society.hasEnthralled())
+                {
+                    map.world.prefabStore.popMsg(this.getFullName() + " has died: " + v + "");
 
+                }
             }
 
             removeFromGame(v);

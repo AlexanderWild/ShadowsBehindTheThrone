@@ -33,6 +33,8 @@ namespace Assets.Code
         public bool simplified = false;
         public bool agentsOnly = true;
         public bool automatic = false;
+        public bool hasEnthralledAnAgent = false;
+        public bool hasBrokenSoul = false;
         public long seed;
 
         public Society soc_dark;
@@ -426,7 +428,7 @@ namespace Assets.Code
                     }
                     else
                     {
-                        lord.die("Killed by " + att.getName() + " when " + taken.getName() + " fell");
+                        lord.die("Killed by " + att.getName() + " when " + taken.getName() + " fell",true);
                     }
                 }
             }

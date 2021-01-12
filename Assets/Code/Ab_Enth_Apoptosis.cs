@@ -13,7 +13,7 @@ namespace Assets.Code
             map.world.prefabStore.popImgMsg(
                 "You discard your worthless vessel, " + map.overmind.enthralled.getFullName() + ".",
                 map.world.wordStore.lookup("ABILITY_APOPTOSIS"));
-            hex.location.person().die("Walked into the night and never returned");
+            hex.location.person().die("Walked into the night and never returned",true);
         }
         public override void castInner(Map map, Person person)
         {
@@ -22,7 +22,7 @@ namespace Assets.Code
             map.world.prefabStore.popImgMsg(
                 "You discard your worthless vessel, " + map.overmind.enthralled.getFullName() + ".",
                 map.world.wordStore.lookup("ABILITY_APOPTOSIS"));
-            person.die("Walked into the night and never returned");
+            person.die("Walked into the night and never returned",true);
         }
 
         public override bool castable(Map map, Person person)

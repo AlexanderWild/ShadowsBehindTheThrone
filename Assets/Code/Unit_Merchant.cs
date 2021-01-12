@@ -10,7 +10,9 @@ namespace Assets.Code
     {
         public int cash = 0;
         public int cargo = 0;
-
+        public bool hasLoadedCargo = false;
+        public bool hasSoldCargo = false;
+        public bool hasSpendWealth = false;
 
         public Unit_Merchant(Location loc,Society soc) : base(loc,soc)
         {

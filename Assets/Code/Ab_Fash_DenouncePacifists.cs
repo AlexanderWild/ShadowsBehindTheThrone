@@ -29,7 +29,7 @@ namespace Assets.Code
                     {
                         if (p2 == p) { continue; }
                         if (p2.state == Person.personState.enthralled) { continue; }
-                        if (p2.politics_militarism < 0)
+                        if (p2.getMilitarism() < 0)
                         {
                             p.getRelation(p2).addLiking(map.param.ability_denouncePacisfistsLiking, "Pacifists expose us to danger", map.turn);
                         }

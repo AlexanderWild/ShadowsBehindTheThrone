@@ -43,12 +43,12 @@ namespace Assets.Code
 
         public override string getCredits()
         {
-            return "William Etty, The Storm, 1830";
+            return "Joseph Mallord William Turner, Fishermen At Sea, 1796";
         }
 
         public override Sprite getGodBackground(World world)
         {
-            return world.textureStore.painting_ettyStorm;
+            return world.textureStore.painting_fishermenAtSea;
         }
 
         public override List<Ability> getUniquePowers()

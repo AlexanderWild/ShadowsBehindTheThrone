@@ -91,6 +91,11 @@ namespace Assets.Code
                         p.getRelation(map.overmind.enthralled).addLiking(100, "Cheat love", map.turn);
                     }
                 }
+                if (command == "resetSteamAchievements")
+                {
+                    SteamManager.reset_all_achievements();
+                    World.staticMap.world.prefabStore.popMsg("All steam achievements reset");
+                }
                 if (command == "insanity")
                 {
                     GraphicalMap.selectedHex.location.person().goInsane();
@@ -135,7 +140,7 @@ namespace Assets.Code
                 }
                 if (command == "die")
                 {
-                    GraphicalMap.selectedHex.location.person().die("Killed by console");
+                    GraphicalMap.selectedHex.location.person().die("Killed by console",true);
                 }
                 if (command == "evidence")
                 {

@@ -33,7 +33,30 @@ namespace Assets.Code
 
             if (location.soc != null && this.society.getRel(location.soc).state == DipRel.dipState.war)
             {
+                int nHumanSettlementsPrior = 0;
+                foreach (Location loc in map.locations)
+                {
+                    if (loc.soc != null && loc.settlement != null && (loc.settlement is Set_Ruins == false) && (loc.settlement is Set_CityRuins == false) && loc.soc is Society)
+                    {
+                        nHumanSettlementsPrior += 1;
+                    }
+                }
+
                 location.map.takeLocationFromOther(society, location.soc, location);
+
+                int nHumanSettlements = 0;
+                foreach (Location loc in map.locations)
+                {
+                    if (loc.soc != null && loc.settlement != null && (loc.settlement is Set_Ruins == false) && (loc.settlement is Set_CityRuins == false) && loc.soc is Society)
+                    {
+                        nHumanSettlements += 1;
+                    }
+                }
+
+                if (nHumanSettlementsPrior > 0 && nHumanSettlements == 0)
+                {
+                    AchievementManager.unlockAchievement(SteamManager.achievement_key.FLESH_VICTORY);
+                }
             }
         }
 

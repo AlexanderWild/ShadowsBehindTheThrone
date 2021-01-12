@@ -117,7 +117,7 @@ namespace Assets.Code
                     u += localU;
                 }
 
-                localU = voter.politics_militarism * -100;
+                localU = voter.getMilitarism() * -100;
                 msgs.Add(new ReasonMsg("Militarism of " + voter.getFullName(), localU));
                 u += localU;
             }
@@ -149,14 +149,14 @@ namespace Assets.Code
                     //{
                     //    if (soc.getCapital().hex.getHabilitability() > 0.5)
                     //    {
-                            localU = society.map.param.utility_militaryTargetExpansion * Math.Max(0, voter.politics_militarism);
+                            localU = society.map.param.utility_militaryTargetExpansion * Math.Max(0, voter.getMilitarism());
                             msgs.Add(new ReasonMsg("Expand our holdings", localU));
                             u += localU;
                     //    }
                     //}
                 }
 
-                localU = voter.politics_militarism * 100;
+                localU = voter.getMilitarism() * 100;
                 msgs.Add(new ReasonMsg("Militarism of " + voter.getFullName(), localU));
                 u += localU;
 

@@ -10,7 +10,14 @@ namespace Assets.Code
         {
             Task_SpendWealth task = new Task_SpendWealth();
             u.task = task;
-            
+
+            Unit_Merchant merchant = (Unit_Merchant)u;
+            merchant.hasSpendWealth = true;
+            if (merchant.hasSpendWealth && merchant.hasSoldCargo && merchant.hasLoadedCargo)
+            {
+                AchievementManager.unlockAchievement(SteamManager.achievement_key.MERCANTILISM);
+            }
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins spending their wealth, in lavish banquets, gifts and fine silks. They enjoy the company of the local noble, who" +
                 " benefits from increased taxes and excellent festivals. The economy booms, to be spent on swords or favours."
                 , u.location.map.world.wordStore.lookup("ABILITY_UNIT_SPEND_WEALTH"), 1);

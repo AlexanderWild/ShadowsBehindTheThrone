@@ -81,7 +81,7 @@ namespace Assets.Code
                 {
                     offUtilityStr = Math.Min(offUtilityStr, voter.map.param.utility_militaryTargetRelStrengthOffensive);//Capped to prevent insanity snowballing
                 }
-                offUtilityPersonality += voter.politics_militarism * voter.map.param.utility_militarism;
+                offUtilityPersonality += voter.getMilitarism() * voter.map.param.utility_militarism;
                 
                 //We want to expand into territory we already partially own
                 bool hasOurTerritory = false;
