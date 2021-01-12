@@ -18,6 +18,8 @@ namespace Assets.Code
         public List<Location> lastTurnLocs = new List<Location>();
         public List<SocialGroup> lastTurnNeighbours = new List<SocialGroup>();
 
+        public List<string> history = new List<string>();
+
         public double threat_mult = 0;
         public double maxMilitary;
         public double currentMilitary;
@@ -38,6 +40,8 @@ namespace Assets.Code
             DipRel rel = new DipRel(map, this, this);
             selfRel = rel;
             relations.Add(this, rel);
+
+            addHistory("We came into existence");
         }
 
         public static Color getViableColor()
@@ -55,6 +59,16 @@ namespace Assets.Code
             }
         }
 
+
+        public void addHistory(string msg)
+        {
+            string add = "";
+            if (!map.burnInComplete)
+            {
+                add = "(WorldGen) ";
+            }
+            history.Add(add + "Turn " + map.turn + ": " + msg);
+        }
         public virtual string getTypeName() { return "Generic Group"; }
         public virtual string getTypeDesc() { return "This group has no associated information."; }
 

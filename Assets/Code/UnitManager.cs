@@ -34,8 +34,14 @@ namespace Assets.Code
             if (map.automatic == false) { return; }
             if (map.burnInComplete == false) { return; }
 
-            if ("c".Contains("c")) { return; }
+            if (map.automaticMode == 0)
+            {
+                checkTestDark();
+            }
+        }
 
+        public void checkTestDark()
+        {
             int presentDarks = 0;
             foreach (Unit u in map.units)
             {
@@ -79,7 +85,6 @@ namespace Assets.Code
                 GraphicalMap.panTo(spawn.hex.x, spawn.hex.y);
             }
         }
-
 
         public int getTargetPaladins()
         {

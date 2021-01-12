@@ -6,11 +6,8 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class Set_City : Settlement
+    public class Set_City : SettlementHuman
     {
-        public int infrastructure;
-        public int population;
-
         public static int LEVEL_METROPOLE = 5;
         public static int LEVEL_CITY = 4;
         public static int LEVEL_TOWN = 3;
@@ -112,13 +109,14 @@ namespace Assets.Code
             }
         }
 
-        public int getMaxPopulation()
+        public override int getMaxPopulation()
         {
-            int maxPop = (int)Math.Ceiling(0.1 + ((location.hex.getHabilitability()-location.map.param.mapGen_minHabitabilityForHumans) * location.map.param.city_popMaxPerHabilitability));
+            double multiplier = location.map.param.city_popMaxPerHabilitability;
             if (location.isCoastal)
             {
-                maxPop += 10;
+                multiplier = location.map.param.city_popMaxPerHabilitabilityCoastal;
             }
+            int maxPop = (int)Math.Ceiling(0.1 + ((location.hex.getHabilitability()-location.map.param.mapGen_minHabitabilityForHumans) * multiplier));
             return maxPop;
         }
         public void statsTurnTick()
@@ -205,29 +203,6 @@ namespace Assets.Code
             World.log("Damage received " + deltaP + " " + deltaI);
             population = Math.Max(1,population-deltaP);
             infrastructure = Math.Max(1, infrastructure - deltaI);
-
-        }
-
-        internal string getStatsDesc()
-        {
-            string reply = "";
-            reply += "Population Level:";
-            reply += "\nPopulation Maximum:";
-            reply += "\nInfrastructure:";
-            //reply += "\nDevelopment Level: " + Eleven.toFixedLen(getLevel(), 9);
-
-            return reply;
-        }
-
-        public string getStatsValues()
-        {
-            string reply = "";
-            reply += population;
-            reply += "\n" + getMaxPopulation();
-            reply += "\n" + infrastructure;
-            //reply += "\nDevelopment Level: " + Eleven.toFixedLen(getLevel(), 9);
-
-            return reply;
 
         }
     }

@@ -316,6 +316,7 @@ namespace Assets.Code
         public double trait_aware_awarenessMult = 1.5;
 
         public double city_popMaxPerHabilitability = 100;
+        public double city_popMaxPerHabilitabilityCoastal = 150;
         public double city_popDmg = 5;
         public double city_infraDmg = 5;
 

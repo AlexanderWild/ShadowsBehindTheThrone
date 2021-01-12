@@ -33,6 +33,7 @@ namespace Assets.Code
         public bool simplified = false;
         public bool agentsOnly = true;
         public bool automatic = false;
+        public int automaticMode = 0;
         public bool hasEnthralledAnAgent = false;
         public bool hasBrokenSoul = false;
         public long seed;
@@ -492,6 +493,9 @@ namespace Assets.Code
 
             rel.war = null;
             rel.state = DipRel.dipState.none;
+
+            rel.a.addHistory("Now at peace with " + rel.b.getName());
+            rel.b.addHistory("Now at peace with " + rel.a.getName());
         }
 
         public void declareWar(SocialGroup att,SocialGroup def)
@@ -538,6 +542,7 @@ namespace Assets.Code
                     }
                 }
             }
+            att.addHistory("We declared war on " + def.getName());
             if (def is Society)
             {
                 Society sDef = (Society)def;
@@ -555,6 +560,7 @@ namespace Assets.Code
                     }
                 }
             }
+            def.addHistory(att.getName() + " declared war on us");
         }
     }
 }

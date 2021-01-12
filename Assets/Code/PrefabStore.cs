@@ -48,6 +48,7 @@ namespace Assets.Code
         public GameObject saveBox;
         public GameObject popScrollVoteIssue;
         public GameObject popAgentBox;
+        public GameObject popScrollingTextBox;
         public GameObject xBoxDate;
         public GameObject xBoxThreat;
         public GameObject xScrollSet;
@@ -196,6 +197,31 @@ namespace Assets.Code
                 PopupBoxAgent box = getAgentBox(indices[i], icons[i], titles[i], bodies[i]);
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
                 specific.scrollables.Add(box);
+            }
+
+            return specific;
+        }
+        public PopupScrollSet getScrollSetText(List<string> items,bool invertOrder)
+        {
+            PopupScrollSet specific = getInnerScrollSet();
+
+            if (!invertOrder)
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    PopupBoxText box = getScrollingTextBox(items[i]);
+                    box.gameObject.transform.SetParent(specific.gameObject.transform);
+                    specific.scrollables.Add(box);
+                }
+            }
+            else
+            {
+                for (int i = items.Count-1; i >= 0 ; i--)
+                {
+                    PopupBoxText box = getScrollingTextBox(items[i]);
+                    box.gameObject.transform.SetParent(specific.gameObject.transform);
+                    specific.scrollables.Add(box);
+                }
             }
 
             return specific;
@@ -398,6 +424,13 @@ namespace Assets.Code
             GameObject obj = Instantiate(popAgentBox) as GameObject;
             PopupBoxAgent msg = obj.GetComponent<PopupBoxAgent>();
             msg.setTo(index, title, body, icon);
+            return msg;
+        }
+        private PopupBoxText getScrollingTextBox(string body)
+        {
+            GameObject obj = Instantiate(popScrollingTextBox) as GameObject;
+            PopupBoxText msg = obj.GetComponent<PopupBoxText>();
+            msg.setTo(body);
             return msg;
         }
 

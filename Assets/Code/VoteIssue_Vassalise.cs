@@ -109,7 +109,7 @@ namespace Assets.Code
                 {
                     World.log(society.getName() + " VASSALISES UNDER " + target.getName());
                     society.map.turnMessages.Add(new MsgEvent(society.getName() + " vassalises under " + target.getName() + ", transferring all lands and landed nobles.",MsgEvent.LEVEL_RED,true));
-                    
+
                     foreach (Location loc in trans)
                     {
                         receiever.map.takeLocationFromOther(receiever, society, loc);
@@ -118,6 +118,7 @@ namespace Assets.Code
                             loc.settlement.embeddedUnit.society = target;
                         }
                     }
+                    receiever.addHistory("We absorbed " + society.getName() + ", as they vassalised under us. Took " + trans.Count + " locations.");
                 }
             }
         }

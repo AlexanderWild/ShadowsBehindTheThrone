@@ -298,6 +298,12 @@ namespace Assets.Code
             }
         }
 
+        public void bViewHistory()
+        {
+            if (GraphicalMap.selectedHex == null || GraphicalMap.selectedHex.location == null || GraphicalMap.selectedHex.location.soc == null) { return; }
+
+            master.addBlocker(master.world.prefabStore.getScrollSetText(GraphicalMap.selectedHex.location.soc.history,true).gameObject);
+        }
         public void showLocationInfo()
         {
             if (GraphicalMap.selectedHex == null || GraphicalMap.selectedHex.location == null)

@@ -119,6 +119,10 @@ namespace Assets.Code
                     title.heldBy.titles.Remove(title);
                     title.heldBy = null;
                 }
+                if (title == society.sovreign)
+                {
+                    society.addHistory(title.getName() + " title now held by " + option.person.getFullName());
+                }
             }
 
             //Clear all titles, assign this new one
@@ -145,6 +149,7 @@ namespace Assets.Code
             World.log(option.person.getFullName() + " has been granted the title of " + title.getName());
             title.heldBy = option.person;
             option.person.titles.Add(title);
+
         }
         public override bool stillValid(Map map)
         {

@@ -278,8 +278,8 @@ namespace Assets.Code
 
                 ds.upperRightText.text  = "liking for center: " + from.ToString("N0") + "%";
                 ds.upperRightText.text += "\nliking from center: " + to.ToString("N0") + "%";
-                ds.lowerRightText.text  = "suspicion for center: " + rfrom.suspicion.ToString("N0") + "%";
-                ds.lowerRightText.text += "\nsuspicion from center: " + rto.suspicion.ToString("N0") + "%";
+                ds.lowerRightText.text  = "suspicion for center: " + (100*rfrom.suspicion).ToString("N0") + "%";
+                ds.lowerRightText.text += "\nsuspicion from center: " + (100*rto.suspicion).ToString("N0") + "%";
 
                 i += 1;
             }
