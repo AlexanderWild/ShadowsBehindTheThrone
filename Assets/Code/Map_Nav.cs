@@ -483,14 +483,15 @@ namespace Assets.Code
 
             if (u.isMilitary && loc.settlement != null)
             {
-                if (loc.settlement is Set_City)
-                {
-                    Set_City city = (Set_City)loc.settlement;
-                    city.infrastructure *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
-                    city.population *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
-                    if (city.infrastructure < 1) { city.infrastructure = 1; }
-                    if (city.population < 1) { city.population = 1; }
-                }
+                //if (loc.settlement is Set_City)
+                //{
+                //    Set_City city = (Set_City)loc.settlement;
+                //    //city.infrastructure *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
+                //    city.population *= (int)((Eleven.random.NextDouble() * 0.25) + 0.7);//0.05 to 0.3 dmg
+                //    //if (city.infrastructure < 1) { city.infrastructure = 1; }
+                //    if (city.population < 1) { city.population = 1; }
+                //}
+                loc.settlement.takeAssault(u.society, loc.soc, dmgDone);
             }
 
             if (u.isMilitary && u2.isMilitary && u.society is Society && u2.society is Society)

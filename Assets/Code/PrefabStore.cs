@@ -201,7 +201,7 @@ namespace Assets.Code
 
             return specific;
         }
-        public PopupScrollSet getScrollSetText(List<string> items,bool invertOrder)
+        public PopupScrollSet getScrollSetText(List<string> items,bool invertOrder,SelectClickReceiver receiver=null)
         {
             PopupScrollSet specific = getInnerScrollSet();
 
@@ -211,6 +211,7 @@ namespace Assets.Code
                 {
                     PopupBoxText box = getScrollingTextBox(items[i]);
                     box.gameObject.transform.SetParent(specific.gameObject.transform);
+                    box.clickReceiver = receiver;
                     specific.scrollables.Add(box);
                 }
             }
@@ -220,6 +221,7 @@ namespace Assets.Code
                 {
                     PopupBoxText box = getScrollingTextBox(items[i]);
                     box.gameObject.transform.SetParent(specific.gameObject.transform);
+                    box.clickReceiver = receiver;
                     specific.scrollables.Add(box);
                 }
             }

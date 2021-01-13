@@ -14,6 +14,7 @@ namespace Assets.Code
         public float targetY;
         public bool usable = true;
         public Image background;
+        public SelectClickReceiver clickReceiver;
 
         public void Update()
         {
@@ -50,6 +51,10 @@ namespace Assets.Code
             if (map.overmind.enthralled != null)
             {
                 map.world.audioStore.playActivate();
+                if (clickReceiver != null)
+                {
+                    clickReceiver.selectableClicked(title.text);
+                }
             }
         }
 

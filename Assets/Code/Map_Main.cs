@@ -410,6 +410,10 @@ namespace Assets.Code
                 {
                     taken.settlement = null;//Burn it down
                 }
+                else if (taken.settlement is Set_Ruins)
+                {
+                    //Nothing to do if you take ruins
+                }
                 else if (taken.settlement.title != null && taken.settlement.title.heldBy != null)
                 {
                     Person lord = taken.settlement.title.heldBy;

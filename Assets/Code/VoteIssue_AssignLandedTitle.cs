@@ -117,6 +117,10 @@ namespace Assets.Code
         public override void implement(VoteOption option)
         {
             if (society.people.Contains(option.person) == false) { World.log("Invalid option. Person cannot hold title."); return; }
+            if (title.settlement == null) { return; }
+            if (title.settlement.location.settlement != title.settlement) { return; }//It was removed before we arrived
+
+
             base.implement(option);
             if (title.heldBy == option.person)
             {

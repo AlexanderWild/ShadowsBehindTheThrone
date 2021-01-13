@@ -382,10 +382,10 @@ namespace Assets.Code
                         }
                     }
                     locFlavour.text = loc.settlement.getFlavour();
-                    if (loc.settlement is Set_City)
+                    if (loc.settlement is SettlementHuman)
                     {
-                        valuesBody += "\n" + ((Set_City)loc.settlement).getStatsDesc();
-                        valuesNumbers += "\n" + ((Set_City)loc.settlement).getStatsValues();
+                        valuesBody += "\n" + ((SettlementHuman)loc.settlement).getStatsDesc();
+                        valuesNumbers += "\n" + ((SettlementHuman)loc.settlement).getStatsValues();
                     }
 
                     if (hex.location.settlement.embeddedUnit != null)

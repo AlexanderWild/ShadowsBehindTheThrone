@@ -399,6 +399,8 @@ namespace Assets.Code
                 if (onDisease)
                 {
                     task = new Task_TreatDisease();
+                    task.turnTick(this);
+                    return;
                 }
             }
 

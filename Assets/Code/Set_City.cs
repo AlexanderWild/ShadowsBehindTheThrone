@@ -27,19 +27,19 @@ namespace Assets.Code
 
         public int getLevel()
         {
-            if (infrastructure >= World.staticMap.param.city_level_metropole)
+            if (population >= World.staticMap.param.city_level_metropole)
             {
                 return LEVEL_METROPOLE;
             }
-            else if (infrastructure >= World.staticMap.param.city_level_city)
+            else if (population >= World.staticMap.param.city_level_city)
             {
                 return LEVEL_CITY;
             }
-            else if (infrastructure >= World.staticMap.param.city_level_town)
+            else if (population >= World.staticMap.param.city_level_town)
             {
                 return LEVEL_TOWN;
             }
-            else if (infrastructure >= World.staticMap.param.city_level_village)
+            else if (population >= World.staticMap.param.city_level_village)
             {
                 return LEVEL_VILLAGE;
             }
@@ -49,14 +49,12 @@ namespace Assets.Code
             }
         }
 
-        public override void turnTick()
+        public override void humanTurnTick()
         {
-            base.turnTick();
-            statsTurnTick();
-            assignOutcomeValues();
+            assignValuesFromPopulation();
         }
 
-        private void assignOutcomeValues()
+        private void assignValuesFromPopulation()
         {
             int level = getLevel();
             if (level == LEVEL_METROPOLE)
@@ -119,23 +117,6 @@ namespace Assets.Code
             int maxPop = (int)Math.Ceiling(0.1 + ((location.hex.getHabilitability()-location.map.param.mapGen_minHabitabilityForHumans) * multiplier));
             return maxPop;
         }
-        public void statsTurnTick()
-        {
-            if (population < getMaxPopulation())
-            {
-                population += 1;
-            }
-
-            if (infrastructure < population)
-            {
-                infrastructure += 1;
-            }
-        }
-
-        public double production()
-        {
-            return Math.Min(population, infrastructure);
-        }
 
         public override string getFlavour()
         {
@@ -152,23 +133,23 @@ namespace Assets.Code
             }
             return location.map.world.wordStore.lookup("SET_FARM");
         }
-        public override void fallIntoRuin()
-        {
-            //We're abandonning this location due to inhospitability
-            if (title.heldBy != null && title.heldBy.title_land == title)
-            {
-                location.map.addMessage(title.heldBy.getFullName() + " is losing their title, as " + this.name + " is being abandoned.",
-                    title.heldBy.state == Person.personState.enthralled ? MsgEvent.LEVEL_RED : MsgEvent.LEVEL_ORANGE,
-                    title.heldBy.state == Person.personState.enthralled ? false : true);
-                title.heldBy.title_land = null;
-            }
-            location.map.addMessage(this.name + " is no longer able to sustain human life, and is falling into ruin.");
-            Set_CityRuins ruins = new Set_CityRuins(location);
-            location.settlement = ruins;
-            location.settlement.name = "Ruins of " + location.shortName;
-            ruins.infrastructure = this.infrastructure;
-            ruins.initialInfrastructure = this.infrastructure;
-        }
+        //public override void fallIntoRuin()
+        //{
+        //    //We're abandonning this location due to inhospitability
+        //    if (title.heldBy != null && title.heldBy.title_land == title)
+        //    {
+        //        location.map.addMessage(title.heldBy.getFullName() + " is losing their title, as " + this.name + " is being abandoned.",
+        //            title.heldBy.state == Person.personState.enthralled ? MsgEvent.LEVEL_RED : MsgEvent.LEVEL_ORANGE,
+        //            title.heldBy.state == Person.personState.enthralled ? false : true);
+        //        title.heldBy.title_land = null;
+        //    }
+        //    location.map.addMessage(this.name + " is no longer able to sustain human life, and is falling into ruin.");
+        //    Set_CityRuins ruins = new Set_CityRuins(location);
+        //    location.settlement = ruins;
+        //    location.settlement.name = "Ruins of " + location.shortName;
+        //    ruins.infrastructure = this.population;
+        //    ruins.initialInfrastructure = this.population;
+        //}
 
         public override Sprite getSprite()
         {
@@ -186,24 +167,6 @@ namespace Assets.Code
                 return location.map.world.textureStore.loc_town;
             }
             return location.map.world.textureStore.loc_minor_farm;
-        }
-
-        public void takeMilitaryHit()
-        {
-            population -= (int)(Eleven.random.NextDouble() * location.map.param.city_popDmg);
-            if (population == 0) { population = 0; }
-            infrastructure -= (int)(Eleven.random.NextDouble() * location.map.param.city_infraDmg);
-            if (infrastructure == 0) { infrastructure = 0; }
-        }
-
-        internal override void takeAssault(SocialGroup sg, SocialGroup defender, double theirLosses)
-        {
-            int deltaP = Eleven.random.Next(location.map.param.combat_popDamageMax + 1);
-            int deltaI = Eleven.random.Next(location.map.param.combat_infraDamageMax + 1);
-            World.log("Damage received " + deltaP + " " + deltaI);
-            population = Math.Max(1,population-deltaP);
-            infrastructure = Math.Max(1, infrastructure - deltaI);
-
         }
     }
 }

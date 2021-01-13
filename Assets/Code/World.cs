@@ -55,7 +55,7 @@ namespace Assets.Code
         public static LogBox saveLog = new LogBox("saveLog.log");
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
         public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
-        public static int versionNumber = 15;
+        public static int versionNumber = 16;
         public static int subversionNumber = 0;
 
         public static bool cheat_globalCooling = false;

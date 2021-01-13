@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class Set_Fort : Settlement
+    public class Set_Fort : SettlementHuman
     {
         public Set_Fort(Location loc) : base(loc)
         {
@@ -27,6 +27,9 @@ namespace Assets.Code
             isHuman = true;
         }
 
+        public override void humanTurnTick()
+        {
+        }
 
         public override string getFlavour()
         {

@@ -257,7 +257,7 @@ namespace Assets.Code
         {
             foreach (Location loc in map.locations)
             {
-                if (loc.soc is Society && loc.settlement != null)
+                if (loc.soc is Society && loc.settlement != null && loc.settlement.isHuman)//Note we don't count ruins, as they will quickly be lost
                 {
                     nStartingHumanSettlements += 1;
                 }

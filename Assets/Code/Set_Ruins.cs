@@ -26,6 +26,7 @@ namespace Assets.Code
                 {
                     this.location.settlement = null;
                     this.location.map.addMessage(this.name + " finally crumble into nothing.", MsgEvent.LEVEL_GRAY);
+                    World.log("Clean ruin ending");
                 }
             }
         }

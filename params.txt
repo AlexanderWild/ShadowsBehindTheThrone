@@ -29,7 +29,7 @@ awarenessBaseWeighting: 1
 awareness_cleanseSoulLevel: 0.3
 awarenessUniversityBonusMult: 2
 awareness_letterWritingLevel: 0.25
-awareness_letterWritingInterval: 4
+awareness_letterWritingInterval: 8
 awareness_letterWritingAwarenessGain: 0.35
 awarenessInvestigationDetectMult: 4
 awareness_increasePerCost: 0.015
@@ -280,6 +280,8 @@ trait_basic_desirability: 30
 trait_basic_undesirability: -30
 trait_aware_awarenessMult: 1.5
 city_popMaxPerHabilitability: 100
+city_popMaxPerHabilitabilityCoastal: 150
+city_popMaxPerHabilitabilityMinor: 50
 city_popDmg: 5
 city_infraDmg: 5
 city_level_metropole: 90
@@ -288,7 +290,7 @@ city_level_town: 40
 city_level_village: 20
 temporaryThreatConversion: 0.01
 war_battleDeadDur: 4
-combat_popDamageMax: 10
+combat_popDamageMax: 8
 combat_infraDamageMax: 10
 voting_maxLocationsForVassalisation: 7
 voting_powerToSwitchMin: 4
@@ -324,6 +326,8 @@ unit_paladin_trackDuration: 6
 unit_paladin_promotionDuration: 27
 unit_newIdentityTime: 10
 unit_promoteCooldown: 32
+unit_establishNewSettlementTime: 8
+unit_merchantChanceToExpandIntoNeighbouring: 0.25
 unit_seeker_nReqSecrets: 12
 unit_seeker_nCreatedSecrets: 7
 unit_seeker_uncoverTime: 5

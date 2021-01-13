@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class Set_Abbey : Settlement
+    public class Set_Abbey : SettlementHuman
     {
         public Set_Abbey(Location loc) : base(loc)
         {
@@ -28,6 +28,9 @@ namespace Assets.Code
             militaryCapAdd += 15;
             militaryRegenAdd = 7;
             isHuman = true;
+        }
+        public override void humanTurnTick()
+        {
         }
 
         public override string getFlavour()

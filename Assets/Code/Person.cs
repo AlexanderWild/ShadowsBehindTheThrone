@@ -227,13 +227,41 @@ namespace Assets.Code
             {
                 possibleActions.Add(1);
             }
-            if (map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel && map.turn - lastLetterTurn > map.param.awareness_letterWritingInterval)
+            if (title_land != null && map.worldPanic >= map.param.panic_letterWritingLevel && awareness >= map.param.awareness_letterWritingLevel && map.turn - lastLetterTurn > map.param.awareness_letterWritingInterval)
             {
-                possibleActions.Add(2);
+                bool validTarget = false;
+                foreach (Location loc in title_land.settlement.location.getNeighbours())
+                {
+                    foreach (Location l2 in loc.getNeighbours())
+                    {
+                        if (l2.person() != null && l2.person().awareness < 1)
+                        {
+                            validTarget = true;
+                        }
+                    }
+                }
+                if (validTarget)
+                {
+                    possibleActions.Add(2);
+                }
             }
-            if (map.worldPanic >= map.param.panic_letterWritingToAllLevel && awareness >= map.param.awareness_letterWritingLevel && map.turn - lastLetterTurn > map.param.awareness_letterWritingInterval)
+            if (title_land != null && map.worldPanic >= map.param.panic_letterWritingToAllLevel && awareness >= map.param.awareness_letterWritingLevel && map.turn - lastLetterTurn > map.param.awareness_letterWritingInterval)
             {
-                possibleActions.Add(3);
+                bool validTarget = false;
+                foreach (Location loc in title_land.settlement.location.getNeighbours())
+                {
+                    foreach (Location l2 in loc.getNeighbours())
+                    {
+                        if (l2.person() != null && l2.person().awareness < 1)
+                        {
+                            validTarget = true;
+                        }
+                    }
+                }
+                if (validTarget)
+                {
+                    possibleActions.Add(3);
+                }
             }
             if (shadow > 0 && map.worldPanic >= map.param.panic_cleanseSoulLevel && awareness >= map.param.awareness_cleanseSoulLevel)
             {

@@ -207,8 +207,6 @@ namespace Assets.Code
                 {
                     Set_City city = new Set_City(loc);
                     loc.settlement = city;
-                    city.population = city.getMaxPopulation();
-                    city.infrastructure = city.population;
                 }else
                 {
                     int q = 0;
@@ -231,6 +229,7 @@ namespace Assets.Code
                         loc.settlement = new Set_Fort(loc);
                     }
                 }
+                ((SettlementHuman)loc.settlement).population = ((SettlementHuman)loc.settlement).getMaxPopulation();
 
                 foreach (Location l2 in locations)
                 {

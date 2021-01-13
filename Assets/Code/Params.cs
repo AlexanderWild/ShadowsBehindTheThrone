@@ -45,7 +45,7 @@ namespace Assets.Code
         public double awareness_cleanseSoulLevel = 0.3;
         public double awarenessUniversityBonusMult = 2;
         public double awareness_letterWritingLevel = 0.25;
-        public int awareness_letterWritingInterval = 4;
+        public int awareness_letterWritingInterval = 8;
         public double awareness_letterWritingAwarenessGain = 0.35;
         public double awarenessInvestigationDetectMult = 4;
         public double awareness_increasePerCost = 0.015;
@@ -317,7 +317,7 @@ namespace Assets.Code
 
         public double city_popMaxPerHabilitability = 100;
         public double city_popMaxPerHabilitabilityCoastal = 150;
-        public double city_popDmg = 5;
+        public double city_popMaxPerHabilitabilityMinor = 50;
         public double city_infraDmg = 5;
 
         public int city_level_metropole = 90;
@@ -326,7 +326,7 @@ namespace Assets.Code
         public int city_level_village = 20;
         public double temporaryThreatConversion = 0.01;
         public int war_battleDeadDur = 4;
-        public int combat_popDamageMax = 10;
+        public int combat_popDamageMax = 5;
         public int combat_infraDamageMax = 10;
 
         public int voting_maxLocationsForVassalisation = 7;
@@ -364,6 +364,8 @@ namespace Assets.Code
         public int unit_paladin_promotionDuration = 27;
         public int unit_newIdentityTime = 10;
         public int unit_promoteCooldown = 32;
+        public int unit_establishNewSettlementTime = 8;
+        public double unit_merchantChanceToExpandIntoNeighbouring = 0.25;
 
         public int unit_seeker_nReqSecrets = 12;
         public int unit_seeker_nCreatedSecrets = 7;

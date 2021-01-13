@@ -46,6 +46,35 @@ namespace Assets.Code
                 return;
             }
 
+            if (location.settlement == null && location.isForSocieties && location.soc == null && location.hex.getHabilitability() > map.param.mapGen_minHabitabilityForHumans)
+            {
+                task = new Task_EstablishNewSettlement();
+                task.turnTick(this);
+                return;
+            }
+            if (Eleven.random.NextDouble() < map.param.unit_merchantChanceToExpandIntoNeighbouring)
+            {
+                int c = 0;
+                Location target = null;
+                //foreach (Location loc in society.lastTurnLocs)
+                //{
+                    foreach (Location l2 in map.locations)
+                    {
+                        if (l2.settlement == null && l2.isForSocieties && l2.soc == null && l2.hex.getHabilitability() > map.param.mapGen_minHabitabilityForHumans)
+                        {
+                            c += 1;
+                            if (Eleven.random.Next(c) == 0)
+                            {
+                                target = l2;
+                            }
+                        }
+                    }
+                //}
+                task = new Task_GoToLocation(target);
+                task.turnTick(this);
+                return;
+            }
+
             if (this.cash >= 50)
             {
                 if (location.soc == society)
