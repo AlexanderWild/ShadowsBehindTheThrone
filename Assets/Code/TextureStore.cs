@@ -61,6 +61,7 @@ namespace Assets.Code
         public Sprite loc_empty;
         public Sprite loc_green;
         public Sprite loc_city_roman;
+        public Sprite loc_city_roman_dark;
         public Sprite loc_city_light;
         public Sprite loc_city_metropole;
         public Sprite loc_minor_green;
@@ -70,6 +71,7 @@ namespace Assets.Code
         public Sprite loc_minor_emptyOcean;
         public Sprite loc_minor_ritualCircle;
         public Sprite loc_minor_fort;
+        public Sprite loc_minor_fort_dark;
         public Sprite loc_minor_university;
         public Sprite loc_minor_church;
         public Sprite loc_minor_church_dark;

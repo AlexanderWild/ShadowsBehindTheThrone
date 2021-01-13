@@ -24,6 +24,12 @@ namespace Assets.Code
             base.turnTick(p, location);
 
             
+            if (location.settlement != null && location.settlement is SettlementHuman)
+            {
+                SettlementHuman set = (SettlementHuman)location.settlement;
+                set.population -= 1;
+            }
+
             foreach (Location l2 in location.getNeighbours())
             {
                 if (l2.settlement != null && l2.settlement.isHuman && l2.soc != null && l2.soc is Society)

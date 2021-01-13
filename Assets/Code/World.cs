@@ -223,7 +223,6 @@ namespace Assets.Code
             map.world = this;
             map.globalist.buildBasicElements();
             map.gen();
-            map.overmind.startedComplete();
             if (advancedEdition)
             {
                 map.param.option_useAdvancedGraphics = 1;
@@ -349,6 +348,7 @@ namespace Assets.Code
             map.overmind.addDefaultAbilities();
             chosenGods.Clear();//Just in case this fucks with something
             ui.setToWorld();
+            map.overmind.startedComplete();
         }
 
         public void bContinue()

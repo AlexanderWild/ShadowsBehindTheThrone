@@ -263,6 +263,7 @@ namespace Assets.Code
                 }
             }
             availableEnthrallments = Math.Min(2, map.param.overmind_maxEnthralled);
+            World.log("Human settlements computed. n: " + nStartingHumanSettlements);
         }
 
         public List<MsgEvent> getThreats()

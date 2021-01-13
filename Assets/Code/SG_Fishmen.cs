@@ -7,6 +7,8 @@ namespace Assets.Code
     {
         public SG_UnholyFlesh.warStates warState = SG_UnholyFlesh.warStates.ATTACK;
 
+        public bool hasAttacked = false;
+
         public SG_Fishmen(Map map,Location startingLocation) : base(map)
         {
             float colourReducer = 0.25f;
@@ -31,7 +33,7 @@ namespace Assets.Code
         }
         public override string getTypeDesc()
         {
-            return "A race of aquatic life-forms. They grow by expanding their undersea cities, then corrupting humans to join them as armies. They remain partially hidden (reduced threat) " +
+            return "A race of aquatic life-forms. They grow by expanding their undersea cities, then corrupting humans to join them as armies. Is considered lower threat by most nobles " +
                 "until they attack the human forces. They can affect coastal cities if they neighbour them to harm the nobles therein.";
         }
 
@@ -81,8 +83,13 @@ namespace Assets.Code
             
             if (taken.settlement != null)
             {
+                if (taken.person() != null)
+                {
+                    taken.person().die("Killed by DeepOnes as they overran " + taken.getName(),true);
+                }
                 //taken.settlement = new Set_UnholyFlesh_Ganglion(taken);
-                taken.settlement = new Set_Ruins(taken);
+                //taken.settlement = new Set_Ruins(taken);
+                taken.settlement.fallIntoRuin();
             }
         }
     }

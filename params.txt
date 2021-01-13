@@ -13,8 +13,8 @@ usePaladins: 0
 panic_panicPerPower: 0.0025
 panic_dropPerTurn: 0.003
 panic_canInvestigate: 0.1
-panic_letterWritingLevel: 0.15
-panic_letterWritingToAllLevel: 0.25
+panic_letterWritingLevel: 0.25
+panic_letterWritingToAllLevel: 0.35
 panic_researchAtUniWithoutAwareness: 0.35
 panic_cleanseSoulLevel: 0.25
 panic_panicAtFullExtinction: 3
@@ -29,7 +29,7 @@ awarenessBaseWeighting: 1
 awareness_cleanseSoulLevel: 0.3
 awarenessUniversityBonusMult: 2
 awareness_letterWritingLevel: 0.25
-awareness_letterWritingInterval: 8
+awareness_letterWritingInterval: 12
 awareness_letterWritingAwarenessGain: 0.35
 awarenessInvestigationDetectMult: 4
 awareness_increasePerCost: 0.015
@@ -282,7 +282,6 @@ trait_aware_awarenessMult: 1.5
 city_popMaxPerHabilitability: 100
 city_popMaxPerHabilitabilityCoastal: 150
 city_popMaxPerHabilitabilityMinor: 50
-city_popDmg: 5
 city_infraDmg: 5
 city_level_metropole: 90
 city_level_city: 60
@@ -290,7 +289,7 @@ city_level_town: 40
 city_level_village: 20
 temporaryThreatConversion: 0.01
 war_battleDeadDur: 4
-combat_popDamageMax: 8
+combat_popDamageMax: 5
 combat_infraDamageMax: 10
 voting_maxLocationsForVassalisation: 7
 voting_powerToSwitchMin: 4

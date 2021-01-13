@@ -18,6 +18,8 @@ namespace Assets.Code
                     map.declareWar(l.soc, hex.location.soc);
                     l.soc.threat_mult = map.param.dark_evilThreatMult;
                     l.soc.setName("Deep Ones");
+                    SG_Fishmen deepOnes = (SG_Fishmen)l.soc;
+                    deepOnes.hasAttacked = true;
                     map.world.prefabStore.popImgMsg(
                         "The Deep Ones rise from the ocean and begin war on " + hex.location.soc.getName() + ". They are now revealed to the world.",
                         map.world.wordStore.lookup("ABILITY_FISHMAN_WAR"));

@@ -37,6 +37,10 @@ namespace Assets.Code
         }
         public override Sprite getSprite()
         {
+            if (title.heldBy != null && title.heldBy.shadow > 0.5)
+            {
+                return location.map.world.textureStore.loc_minor_fort_dark;
+            }
             return location.map.world.textureStore.loc_minor_fort;
         }
     }

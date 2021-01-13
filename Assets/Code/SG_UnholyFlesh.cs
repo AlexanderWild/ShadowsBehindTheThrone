@@ -73,6 +73,10 @@ namespace Assets.Code
             
             if (taken.settlement != null)
             {
+                if (taken.person() != null)
+                {
+                    taken.person().die("Devoured by the Unholy Flesh as it overran " + taken.getName(), true);
+                }
                 taken.settlement = new Set_UnholyFlesh_Ganglion(taken);
             }
         }

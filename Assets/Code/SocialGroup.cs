@@ -27,7 +27,7 @@ namespace Assets.Code
         public int lastBattle;
         public bool cachedGone;
         public double temporaryThreat;
-        public double permanentThreat;
+        //public double permanentThreat;
 
         public SocialGroup(Map map)
         {
@@ -163,7 +163,7 @@ namespace Assets.Code
         public virtual void turnTick()
         {
             temporaryThreat *= map.param.temporaryThreatDecay;
-            permanentThreat += temporaryThreat * map.param.temporaryThreatConversion;
+            //permanentThreat += temporaryThreat * map.param.temporaryThreatConversion;
             computeMilitaryCap();
 
             lastTurnLocs.Clear();
@@ -216,12 +216,12 @@ namespace Assets.Code
                 msg = new ReasonMsg("Temporary Threat", temporaryThreat);
                 reasons.Add(msg);
             }
-            threat += permanentThreat;
-            if (reasons != null)
-            {
-                msg = new ReasonMsg("Permanent Threat", permanentThreat);
-                reasons.Add(msg);
-            }
+            //threat += permanentThreat;
+            //if (reasons != null)
+            //{
+            //    msg = new ReasonMsg("Permanent Threat", permanentThreat);
+            //    reasons.Add(msg);
+            //}
             return threat;
         }
         

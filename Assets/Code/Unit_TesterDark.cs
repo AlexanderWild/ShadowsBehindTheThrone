@@ -84,6 +84,8 @@ namespace Assets.Code
             //We're not starting a new task, so this location is bad. Onwards to greener pastures
             Location target = null;
             double bestDist = -1;
+            int c = 0;
+            Location safeHarbor = null;
             foreach (Location loc in map.locations)
             {
                 if (loc == this.location) { continue; }
@@ -110,17 +112,50 @@ namespace Assets.Code
                     {
                         double dist = Math.Abs(loc.hex.x - this.location.hex.x) + Math.Abs(loc.hex.y - this.location.hex.y);
                         //dist *= Eleven.random.NextDouble();
-                        if (dist < bestDist || bestDist == -1)
+                        double score = (loc.person().prestige + 5)/ (dist + 1);
+                        //score *= Eleven.random.NextDouble() * Eleven.random.NextDouble();
+                        //if (dist < bestDist || bestDist == -1)
+                        //{
+                        //    bestDist = dist;
+                        //    target = loc;
+                        //}
+                        if (score > bestDist || bestDist == -1)
                         {
-                            bestDist = dist;
+                            bestDist = score;
                             target = loc;
                         }
+                    }
+                }
+
+                if (loc.soc is Society)
+                {
+                    c += 1;
+                    if (Eleven.random.Next(c) == 0)
+                    {
+                        safeHarbor = loc;
                     }
                 }
             }
             if (target != null)
             {
                 task = new Task_GoToLocation(target);
+            }
+            else
+            {
+                //We're unable to find anywhere to infiltrate. Probably banned from everywhere else. Do we have safe harbor? Can we change our name?
+                if (location.soc is Society && location.soc.hostileTo(this) == false)
+                {
+                    //In a safe harbor, swap out now
+                    task = new Task_ChangeIdentity();
+                }
+                else if (safeHarbor != null)
+                {
+                    task = new Task_GoToLocation(safeHarbor);
+                }
+                else
+                {
+                    die(map, "Was no further use"); ;
+                }
             }
         }
 

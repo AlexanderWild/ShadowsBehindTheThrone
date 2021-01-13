@@ -28,8 +28,8 @@ namespace Assets.Code
         public double panic_panicPerPower = 0.0025;
         public double panic_dropPerTurn = 0.003;
         public double panic_canInvestigate = 0.1;
-        public double panic_letterWritingLevel = 0.15;
-        public double panic_letterWritingToAllLevel = 0.25;
+        public double panic_letterWritingLevel = 0.25;
+        public double panic_letterWritingToAllLevel = 0.35;
         public double panic_researchAtUniWithoutAwareness = 0.35;
         public double panic_cleanseSoulLevel = 0.25;
         public double panic_panicAtFullExtinction = 3;
@@ -45,7 +45,7 @@ namespace Assets.Code
         public double awareness_cleanseSoulLevel = 0.3;
         public double awarenessUniversityBonusMult = 2;
         public double awareness_letterWritingLevel = 0.25;
-        public int awareness_letterWritingInterval = 8;
+        public int awareness_letterWritingInterval = 12;
         public double awareness_letterWritingAwarenessGain = 0.35;
         public double awarenessInvestigationDetectMult = 4;
         public double awareness_increasePerCost = 0.015;

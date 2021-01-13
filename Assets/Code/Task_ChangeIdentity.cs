@@ -10,7 +10,7 @@ namespace Assets.Code
 
         public override string getShort()
         {
-            return "Adopting New Identity";
+            return "Adopting New Identity " + dur + "/" + World.staticMap.param.unit_newIdentityTime;
         }
         public override string getLong()
         {
