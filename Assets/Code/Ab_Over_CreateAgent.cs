@@ -12,6 +12,7 @@ namespace Assets.Code
         public static int SEEKER = 2;
         public static int PUMPKIN = 3;
         public static int HEIROPHANT = 4;
+        public static int REDDEATH = 5;
 
         public static string DESC_VAMPIRE = "Stealthy infiltrator and corruptor of the aristocracy." +
             "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
@@ -32,6 +33,9 @@ namespace Assets.Code
         public static string DESC_HEIROPHANT = "The Dark Heirophant is the preacher of your blasphemous faith. They convert nobles to your cult, once you have infiltrated their locations."
             + " They allow you to enthrall a single noble, to act as your political instrument, and can break the souls of other nobles, preventing them from seeing evidence of the darkness," +
             "and making them your accomplices in your rise to power.";
+
+        public static string DESC_REDDEATH = "The Masque of the Red Death is a spirit of the dread disease. The disease will slowly eradicate human settlements by decreasing their population," +
+            "but it is possible the nobles' panic and selfishness will harm them more than the disease ever could, as they squabble over who and where to protect, and over limited cures.";
 
 
         public override void cast(Map map, Hex hex)
@@ -72,6 +76,19 @@ namespace Assets.Code
             titles.Add("Seeker");
             descs.Add(DESC_SEEKER);
             icons.Add(map.world.textureStore.icon_seeker);
+
+            bool hasRedDeath = false;
+            foreach (Unit u in map.units)
+            {
+                if (u is Unit_RedDeath) { hasRedDeath = true;break; }
+            }
+            if (!hasRedDeath)
+            {
+                indices.Add(REDDEATH);
+                titles.Add("Masque of the Red Death");
+                descs.Add(DESC_REDDEATH);
+                icons.Add(map.world.textureStore.icon_redDeath);
+            }
 
             if (map.simplified == false)
             {

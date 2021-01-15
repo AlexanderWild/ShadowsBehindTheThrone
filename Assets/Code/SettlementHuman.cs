@@ -29,7 +29,19 @@ namespace Assets.Code
         {
             if (population < getMaxPopulation())
             {
-                population += 1;
+                bool infected = false;
+                foreach (Property pr in location.properties)
+                {
+                    if (pr.proto.isDisease)
+                    {
+                        infected = true;
+                        break;
+                    }
+                }
+                if (!infected)
+                {
+                    population += 1;
+                }
             }
 
             //if (infrastructure < population)

@@ -28,6 +28,15 @@ namespace Assets.Code
             {
                 SettlementHuman set = (SettlementHuman)location.settlement;
                 set.population -= 1;
+                if (set.population <= 0)
+                {
+                    location.map.addMessage(set.location.getName() + " has been eradicated by the Red Death", MsgEvent.LEVEL_RED, true);
+                    if (set.title != null && set.title.heldBy != null)
+                    {
+                        set.title.heldBy.die("Died of the Red Death", true);
+                    }
+                    set.fallIntoRuin();
+                }
             }
 
             foreach (Location l2 in location.getNeighbours())
