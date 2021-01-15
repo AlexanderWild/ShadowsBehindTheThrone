@@ -207,6 +207,18 @@ namespace Assets.Code
 
         public void scaling()
         {
+            //Anyone who wants to read can just pull this value and see if it has changed since they last polled
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                scrollwheelTracking += 1;
+                //World.log("mouse wheel pos");
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                scrollwheelTracking -= 1;
+                //World.log("mouse wheel neg");
+            }
+            
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 if (EventSystem.current.currentSelectedGameObject != null)
@@ -250,18 +262,6 @@ namespace Assets.Code
                         GraphicalSociety.refresh(GraphicalSociety.focus);
                     }
                 }
-            }
-
-            //Anyone who wants to read can just pull this value and see if it has changed since they last polled
-            if (Input.GetAxis("Mouse ScrollWheel") > 0)
-            {
-                scrollwheelTracking += 1;
-                //World.log("mouse wheel pos");
-            }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0)
-            {
-                scrollwheelTracking -= 1;
-                //World.log("mouse wheel neg");
             }
         }
         public void scrollKeys()
