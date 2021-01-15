@@ -10,6 +10,7 @@ mapGen_burnInSteps: 150
 map_tempTemperatureReversion: 0.002
 useAwareness: 1
 usePaladins: 0
+flashEnthrallables: True
 panic_panicPerPower: 0.0025
 panic_dropPerTurn: 0.003
 panic_canInvestigate: 0.1
@@ -42,12 +43,12 @@ action_investigateTurns: 7
 action_cleanseSoulTurns: 7
 action_cleanseSoulAmount: 0.1
 action_investigateEvidence: 0.25
-flashEnthrallables: True
 overmind_allowDirectEnthralling: 1
 overmind_maxPower: 24
 overmind_powerRegen: 1
 overmind_singleAbilityPerTurn: True
 overmind_enthrallmentUseRegainPeriod: 32
+overmind_maxEnthralled: 2
 econ_multFromBuff: 1.33
 relObj_suspicionLimiterMult: 2.5
 relObj_defaultLiking: 0
@@ -212,6 +213,7 @@ ability_sharedGloryAmount: 5
 ability_auraOfLunacyEvidence: 14
 ability_auraOfLunacyHit: 7
 ability_auraOfLunacyCost: 7
+ability_fishmanInfiltrate: 0.02
 ability_fishmanHauntingSongCost: 7
 ability_fishmanHauntingSongHit: 5
 ability_fishmanHauntingAbyssalSirensCost: 14
@@ -318,7 +320,6 @@ unit_majorEvidence: 0.35
 unit_minorEvidence: 0.15
 unit_spreadShadowTime: 5
 unit_spreadShadowAmount: 0.6
-overmind_maxEnthralled: 2
 unit_suspicionFromProximity: 0.1
 unit_armyOfDeadMaxHP: 37
 unit_paladin_trackDuration: 6
@@ -327,6 +328,7 @@ unit_newIdentityTime: 10
 unit_promoteCooldown: 32
 unit_establishNewSettlementTime: 8
 unit_merchantChanceToExpandIntoNeighbouring: 0.25
+unit_merchantsPerCity: 0.125
 unit_seeker_nReqSecrets: 12
 unit_seeker_nCreatedSecrets: 7
 unit_seeker_uncoverTime: 5

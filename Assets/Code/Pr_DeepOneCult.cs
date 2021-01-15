@@ -52,6 +52,9 @@ namespace Assets.Code
                     }
                 }
             }
+
+            location.settlement.infiltration += location.map.param.ability_fishmanInfiltrate;
+            if (location.settlement.infiltration > 1) { location.settlement.infiltration = 1; }
         }
 
         public override Sprite getSprite(World world)
@@ -62,7 +65,7 @@ namespace Assets.Code
         internal override string getDescription()
         {
             return "The people in this area are drawn to the sea. Fishermen report constant song, drawing them towards the deep. Slowly resupplies your Deep One raiders with military force, but adds temporary threat"
-                + " to this colony, and causes the local noble (if there is one) to dread the Deep Ones (adding dread to the noble's threat estimates).";
+                + " to this colony, and causes the local noble (if there is one) to dread the Deep Ones (adding dread to the noble's threat estimates). Adds infiltration to this location slowly.";
         }
     }
 }

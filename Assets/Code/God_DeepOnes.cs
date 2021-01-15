@@ -32,7 +32,7 @@ namespace Assets.Code
         {
             return "This Name revolves around the Deep Ones, a race of beings made by corrupting humans and drawing them beneath the waves. They build up colonies near human settlements, use" +
                 " their siren songs to convert humans to their cult, then assault the land when the surface dwellers are weakened by internal conflict. They are powerful against costal nations," +
-                " by both launching miliary attacks and by driving coastal nobles insane." +
+                " by starting cults which can infiltrate their settlements, driving coastal nobles insane or launching full military attacks on their lands." +
                 "\n\nDeep One colonies start hidden, reducing the threat perceived by nobles, but you must still keep an eye on the dread you accumulate and temporary threat, lest you be attacked before you are ready.";
         }
 

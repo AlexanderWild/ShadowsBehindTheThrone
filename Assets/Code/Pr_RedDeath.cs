@@ -50,8 +50,8 @@ namespace Assets.Code
                         if (location.map.turn - soc.lastPlagueCrisis > location.map.param.society_crisis_plagueCrisisCooldown)
                         {
                             soc.crisisPlague = "The Red Death Plague";
-                            soc.crisisPlagueLong = "The Red Death plague is spreading in our lands, we must deal with this new crisis. We can deploy our army to help the crisis," +
-                                " at the cost of military power, either by quarantine or helping treat patients, or we could deploy our agents to assist.";
+                            soc.crisisPlagueLong = "The Red Death plague is spreading in our lands, we must deal with this new crisis. " +
+                                "We can either quarantine the disased settlements, treat infected patients, or we could deploy our agents as disease curing specialists.";
                             soc.lastPlagueCrisis = location.map.turn;
                         }
                     }

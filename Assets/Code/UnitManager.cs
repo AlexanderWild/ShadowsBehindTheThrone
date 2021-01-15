@@ -197,7 +197,7 @@ namespace Assets.Code
                     n += 1;
                 }
             }
-            if (n < 5)
+            if (n < map.data_nSocietyLocations*map.param.unit_merchantsPerCity)
             {
                 int c = 0;
                 Location chosen = null;

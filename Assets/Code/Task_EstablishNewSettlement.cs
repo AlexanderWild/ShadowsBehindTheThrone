@@ -19,6 +19,12 @@ namespace Assets.Code
 
         public override void turnTick(Unit unit)
         {
+            if (unit.location.settlement != null)
+            {
+                unit.task = null;
+                return;
+            }
+
             dur += 1;
             if (dur >= unit.location.map.param.unit_establishNewSettlementTime)
             {

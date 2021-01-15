@@ -24,6 +24,7 @@ namespace Assets.Code
 
         public int useAwareness = 1;
         public int usePaladins = 0;
+        public bool flashEnthrallables = true;
 
         public double panic_panicPerPower = 0.0025;
         public double panic_dropPerTurn = 0.003;
@@ -60,12 +61,12 @@ namespace Assets.Code
         public double action_cleanseSoulAmount = 0.1;
         public double action_investigateEvidence = 0.25;
 
-        public bool flashEnthrallables = true;
         public int overmind_allowDirectEnthralling = 1;
         public int overmind_maxPower = 24;
         public double overmind_powerRegen = 1.0;
         public bool overmind_singleAbilityPerTurn = true;
         public int overmind_enthrallmentUseRegainPeriod = 32;
+        public int overmind_maxEnthralled = 2;
 
         public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
 
@@ -243,6 +244,7 @@ namespace Assets.Code
         public int ability_auraOfLunacyEvidence = 14;
         public int ability_auraOfLunacyHit = 7;
         public int ability_auraOfLunacyCost = 7;
+        public double ability_fishmanInfiltrate = 0.02;
         public int ability_fishmanHauntingSongCost = 7;
         public int ability_fishmanHauntingSongHit = 5;
         public int ability_fishmanHauntingAbyssalSirensCost = 14;
@@ -357,7 +359,6 @@ namespace Assets.Code
         public double unit_minorEvidence = 0.15;
         public int unit_spreadShadowTime = 5;
         public double unit_spreadShadowAmount = 0.6;
-        public int overmind_maxEnthralled = 2;
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackDuration = 6;
@@ -366,6 +367,8 @@ namespace Assets.Code
         public int unit_promoteCooldown = 32;
         public int unit_establishNewSettlementTime = 8;
         public double unit_merchantChanceToExpandIntoNeighbouring = 0.25;
+        public double unit_merchantsPerCity = 0.125;
+
 
         public int unit_seeker_nReqSecrets = 12;
         public int unit_seeker_nCreatedSecrets = 7;

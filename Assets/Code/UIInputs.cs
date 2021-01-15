@@ -15,6 +15,7 @@ namespace Assets.Code
         public float scrollSpeed = 0.4f;
         public float socScrollSpeed = 0.3f;
         public float lastAutoturn = 0;
+        public long scrollwheelTracking = 0;
 
         public void Update()
         {
@@ -214,7 +215,7 @@ namespace Assets.Code
                 }
             }
 
-            if (world.ui.state == UIMaster.uiState.WORLD)
+            if (world.ui.state == UIMaster.uiState.WORLD && world.ui.blocker == null)
             {
                 if (Input.GetKeyDown("z") || Input.GetAxis("Mouse ScrollWheel") > 0)
                 {
@@ -231,7 +232,7 @@ namespace Assets.Code
                     GraphicalMap.checkData();
                 }
             }
-            if (world.ui.state == UIMaster.uiState.SOCIETY)
+            if (world.ui.state == UIMaster.uiState.SOCIETY && world.ui.blocker == null)
             {
                 if (Input.GetKeyDown("z") || Input.GetAxis("Mouse ScrollWheel") > 0)
                 {
@@ -249,6 +250,18 @@ namespace Assets.Code
                         GraphicalSociety.refresh(GraphicalSociety.focus);
                     }
                 }
+            }
+
+            //Anyone who wants to read can just pull this value and see if it has changed since they last polled
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
+                scrollwheelTracking += 1;
+                //World.log("mouse wheel pos");
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
+                scrollwheelTracking -= 1;
+                //World.log("mouse wheel neg");
             }
         }
         public void scrollKeys()

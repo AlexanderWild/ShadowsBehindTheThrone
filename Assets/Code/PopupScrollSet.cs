@@ -20,10 +20,25 @@ namespace Assets.Code
         public List<PopupScrollable> scrollables = new List<PopupScrollable>();
         public int index;
         public int setToIndex = -1;
+        bool firstScrollCheck = true;
+        public long lastScrollPos = 0;
 
         public void Update()
         {
             if (scrollables.Count == 0) { return; }
+
+            if (!firstScrollCheck)
+            {
+                if (ui.uiInputs.scrollwheelTracking > lastScrollPos)
+                {
+                    bNext();
+                }else if (ui.uiInputs.scrollwheelTracking < lastScrollPos)
+                {
+                    bPrev();
+                }
+            }
+            firstScrollCheck = false;
+            lastScrollPos = ui.uiInputs.scrollwheelTracking;
 
             float scaling = (Camera.main.pixelHeight*1f)/600;
             float yStep = scrollables[0].ySize()*scaling;

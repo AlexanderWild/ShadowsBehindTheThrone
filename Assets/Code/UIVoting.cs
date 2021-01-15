@@ -47,6 +47,8 @@ namespace Assets.Code
         public float offset = 0;
         public float offsetPerItem = -65;
 
+        public long lastPos = 0;
+        bool firstScrollCheck = true;
         public void Update()
         {
             if (world.ui.state != UIMaster.uiState.VOTING)
@@ -65,7 +67,39 @@ namespace Assets.Code
             }
             switchEnthralled.gameObject.SetActive(voterBars[0].voter.state == Person.personState.enthralled);
 
-            
+            if (!firstScrollCheck)
+            {
+                if (Input.mousePosition.x > Screen.width / 2)
+                {
+                    if (world.ui.uiInputs.scrollwheelTracking != lastPos)
+                    {
+                        if (world.ui.uiInputs.scrollwheelTracking > lastPos)
+                        {
+                            bOptNext();
+                        }
+                        else
+                        {
+                            bOptPrev();
+                        }
+                    }
+                }
+                else
+                {
+                    if (world.ui.uiInputs.scrollwheelTracking != lastPos)
+                    {
+                        if (world.ui.uiInputs.scrollwheelTracking > lastPos)
+                        {
+                            bVotingNext();
+                        }
+                        else
+                        {
+                            bVotingPrev();
+                        }
+                    }
+                }
+            }
+            firstScrollCheck = false;
+            lastPos = world.ui.uiInputs.scrollwheelTracking;
         }
 
         public void populate(Society soc,Person agent)

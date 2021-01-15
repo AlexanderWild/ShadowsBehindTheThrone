@@ -12,7 +12,8 @@ namespace Assets.Code
             Property.addProperty(map, hex.location, "Cult of the Deep");
             World.log("Properties: " + hex.location.properties.Count);
 
-            map.world.prefabStore.popImgMsg("You call to the land, starting a cult in " + hex.location.getName() + ". Humans will slowly convert and join your Deep One Forces, but the rest will fear them.",
+            map.world.prefabStore.popImgMsg("You call to the land, starting a cult in " + hex.location.getName() + ". " +
+                "Humans will slowly convert and join your Deep One Forces, but the rest will fear them. Those which are present allow you to gain access to the settlement, as they yield to your dark will, increasing infiltration.",
                 map.world.wordStore.lookup("ABILITY_FISHMAN_CALL"));
         }
 
@@ -44,7 +45,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Begins a deep one cult, which will slowly turn people in a human settlement into Deep Ones, adding to the Deep Ones' military might. Adds temporary threat to the Deep Ones and causes local noble to fear them."
+            return "Begins a deep one cult, which will slowly turn people in a human settlement into Deep Ones, adding to the Deep Ones' military might and increasing infiltration slowly. Causes local noble to fear them."
                 + "\n[Requires human settlement adjacent to a Deep One location]";
         }
 
