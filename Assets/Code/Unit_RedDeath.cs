@@ -15,6 +15,7 @@ namespace Assets.Code
             maxHp = 5;
             hp = 5;
 
+            abilities.Add(new Abu_Red_Origin());
             abilities.Add(new Abu_Base_Recruit());
             abilities.Add(new Abu_Base_ChangeIdentity());
         }

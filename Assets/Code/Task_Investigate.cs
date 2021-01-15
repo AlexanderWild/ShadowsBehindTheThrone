@@ -71,17 +71,37 @@ namespace Assets.Code
                     if (unit.location.map.overmind.panicFromCluesDiscovered > 1) { unit.location.map.overmind.panicFromCluesDiscovered = 1; }
 
 
-                    if (unit.location.person() != null)
+                    //If we're already at maximum suspicion we can now begin pursuing them
+                    if (unit is Unit_Investigator)
                     {
-                        Person noble = unit.location.person();
-                        foreach (RelObj rel in unit.person.relations.Values)
+                        Unit_Investigator inv = (Unit_Investigator)unit;
+                        if (inv.state == Unit_Investigator.unitState.investigator)
                         {
-                            ////Goes negative if they suspect more than we do, reaches 1.0 if we suspect 1.0 and they suspect 0.0
-                            // if ((rel.suspicion - noble.getRelation(rel.them).suspicion) > Eleven.random.NextDouble())
-                            if ((rel.suspicion > noble.getRelation(rel.them).suspicion * 1.1))
+                            if (ev.pointsTo != null && ev.pointsTo.person != null && inv.person.getRelation(ev.pointsTo.person).suspicion >= 1)
                             {
-                                unit.task = new Task_ShareSuspicions();
-                                return;
+                                Task_HuntEnthralled_InvState task = new Task_HuntEnthralled_InvState(inv, ev.pointsTo);
+                                inv.task = task;
+                                unit.location.map.world.prefabStore.popMsgAgent(inv, ev.pointsTo,
+                                    inv.getName() + " has found evidence left by " + ev.pointsTo.getName() + ", and because they are an investigator who is 100% suspicious of " + ev.pointsTo.getName()
+                                    + ", is able to use these clues to determine the location of " + ev.pointsTo.getName() + ", and will begin to chase them for " + task.turnsLeft + " turns.");
+                            }
+                        }
+                    }
+
+                    if (unit.task == null)
+                    {
+                        if (unit.location.person() != null)
+                        {
+                            Person noble = unit.location.person();
+                            foreach (RelObj rel in unit.person.relations.Values)
+                            {
+                                ////Goes negative if they suspect more than we do, reaches 1.0 if we suspect 1.0 and they suspect 0.0
+                                // if ((rel.suspicion - noble.getRelation(rel.them).suspicion) > Eleven.random.NextDouble())
+                                if ((rel.suspicion > noble.getRelation(rel.them).suspicion * 1.1))
+                                {
+                                    unit.task = new Task_ShareSuspicions();
+                                    return;
+                                }
                             }
                         }
                     }

@@ -77,10 +77,19 @@ namespace Assets.Code
             descs.Add(DESC_SEEKER);
             icons.Add(map.world.textureStore.icon_seeker);
 
+            if (map.simplified == false)
+            {
+                indices.Add(HEIROPHANT);
+                titles.Add("Dark Heirophant");
+                descs.Add(DESC_HEIROPHANT);
+                icons.Add(map.world.textureStore.icon_heirophant);
+            }
+
+
             bool hasRedDeath = false;
             foreach (Unit u in map.units)
             {
-                if (u is Unit_RedDeath) { hasRedDeath = true;break; }
+                if (u is Unit_RedDeath) { hasRedDeath = true; break; }
             }
             if (!hasRedDeath)
             {
@@ -88,14 +97,6 @@ namespace Assets.Code
                 titles.Add("Masque of the Red Death");
                 descs.Add(DESC_REDDEATH);
                 icons.Add(map.world.textureStore.icon_redDeath);
-            }
-
-            if (map.simplified == false)
-            {
-                indices.Add(HEIROPHANT);
-                titles.Add("Dark Heirophant");
-                descs.Add(DESC_HEIROPHANT);
-                icons.Add(map.world.textureStore.icon_heirophant);
             }
 
             map.world.ui.addBlocker(map.world.prefabStore.getScrollSetAgents(indices, titles, descs, icons).gameObject);

@@ -174,7 +174,7 @@ namespace Assets.Code
 
             if (task == null)
             {
-                task = new Task_HuntEnthralled_Investigator(this,paladinTarget);
+                task = new Task_HuntEnthralled_PaladinState(this,paladinTarget);
             }
 
             task.turnTick(this);
@@ -323,7 +323,7 @@ namespace Assets.Code
                     }
                 }
 
-                task = new Task_HuntEnthralled_Investigator(this,target);
+                task = new Task_HuntEnthralled_PaladinState(this,target);
                 paladinTarget = target;
                 state = unitState.paladin;
                 lastTurnPromoted = map.turn;

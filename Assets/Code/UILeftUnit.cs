@@ -75,7 +75,6 @@ namespace Assets.Code
                 }
 
                 personFore.color = Color.white;
-                evidenceText.text = "Evidence: " + (int)(100 * unit.person.evidence) + "%";
             }
 
             if (unit.isEnthralled())
@@ -123,6 +122,21 @@ namespace Assets.Code
             world.ui.addBlocker(world.prefabStore.getScrollSetRelations(rels).gameObject);
         }
 
+        public void bSetAsHostile()
+        {
+            if (GraphicalMap.selectedSelectable == null || GraphicalMap.selectedSelectable is Unit == false) { return; }
+            Unit u = (Unit)GraphicalMap.selectedSelectable;
+            u.flaggedAsEnthralledHostile = !u.flaggedAsEnthralledHostile;
+            if (u.flaggedAsEnthralledHostile)
+            {
+                world.prefabStore.popMsgAgent(u, u, "All your enthralled units will now automatically attack " + u.getName() + " if they enter into the same location.");
+            }
+            else
+            {
+                world.prefabStore.popMsgAgent(u, u, "Your enthralled agents will only attack " + u.getName() + " if " + u.getName() + " is hostile to them.");
+            }
+            GraphicalMap.checkData();
+        }
         public void clearPerson()
         {
             personBack.sprite = world.textureStore.icon_mask;

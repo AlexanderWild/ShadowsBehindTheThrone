@@ -292,6 +292,7 @@ namespace Assets.Code
         public double ability_unit_spreadShadowInfiltrationReq = 0.5;
         public int ability_unit_spreadShadowMinLiking = 35;
         public double ability_unit_falseEvidenceInfiltration = 0.4;
+        public int ability_redDeath_originCooldown = 32;
 
 
         public double insanity_sanityRegen = 0.1;
@@ -362,6 +363,7 @@ namespace Assets.Code
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackDuration = 6;
+        public int unit_inv_trackDuration = 6;
         public int unit_paladin_promotionDuration = 27;
         public int unit_newIdentityTime = 10;
         public int unit_promoteCooldown = 32;
@@ -387,7 +389,7 @@ namespace Assets.Code
         public double unit_agentCombatBonus = 1.25;
 
         public int unit_rd_redDeathPlagueDur = 16;
-        public double unit_rd_redDeathPlaguePSpread = 0.1;
+        public double unit_rd_redDeathPlaguePSpread = 0.075;
         public int unit_rd_redDeathPlagueImmunityDur = 16;
 
         public void saveToFile()

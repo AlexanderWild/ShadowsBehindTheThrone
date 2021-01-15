@@ -23,7 +23,7 @@ namespace Assets.Code
         public bool isDead = false;
         public List<Ability> abilities = new List<Ability>();
         public List<Ability> powers = new List<Ability>();
-
+        public bool flaggedAsEnthralledHostile = false;
         public List<Unit> hostility = new List<Unit>();
 
         public Unit(Location loc,SocialGroup soc)
@@ -116,6 +116,7 @@ namespace Assets.Code
             {
                 return true;
             }
+            if (this.isEnthralled() && other.flaggedAsEnthralledHostile) { return true; }
             if (allowRecursion && other.hostileTo(this,false)){ return true; }
             return hostility.Contains(other);
         }

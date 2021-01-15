@@ -260,6 +260,7 @@ ability_unit_breakNobleReq: 0.75
 ability_unit_spreadShadowInfiltrationReq: 0.5
 ability_unit_spreadShadowMinLiking: 35
 ability_unit_falseEvidenceInfiltration: 0.4
+ability_redDeath_originCooldown: 32
 insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10
@@ -345,5 +346,5 @@ unit_headless_pumpkinDur: 9
 unit_knightCombatBonus: 1.5
 unit_agentCombatBonus: 1.25
 unit_rd_redDeathPlagueDur: 16
-unit_rd_redDeathPlaguePSpread: 0.1
+unit_rd_redDeathPlaguePSpread: 0.075
 unit_rd_redDeathPlagueImmunityDur: 16

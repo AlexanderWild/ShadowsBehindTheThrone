@@ -787,6 +787,10 @@ namespace Assets.Code
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_cult;
             }
+            else if (img == 5)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_redDeath;
+            }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
