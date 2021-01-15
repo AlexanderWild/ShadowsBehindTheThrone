@@ -11,6 +11,7 @@ namespace Assets.Code
     {
         public World world;
         public Person inner;
+        public Image textBackground;
         public Image border;
         public Image layerBack;
         public Image layerMid;
@@ -207,6 +208,78 @@ namespace Assets.Code
             }
         }
 
+        public void checkData()
+        {
+            if (GraphicalSociety.state == GraphicalSociety.viewState.HIERARCHY)
+            {
+                bool shouldDarken = false;
+                if (GraphicalSociety.focus != null && this.inner != null)
+                {
+                    if (GraphicalSociety.focus == GraphicalSociety.activeSociety.getSovreign() || this.inner == GraphicalSociety.activeSociety.getSovreign())
+                    {
+                        //No darken needed
+                    }
+                    else if (this.inner.getLocation() != null && GraphicalSociety.focus.getLocation() != null)
+                    {
+                        if (this.inner.getLocation().province != GraphicalSociety.focus.getLocation().province)
+                        {
+                            shouldDarken = true;
+                        }
+                    }
+                }
+                if (shouldDarken)
+                {
+                    Color darken = new Color(0.5f, 0.5f, 0.5f, 0.25f);
+                    layerBack.color = darken;
+                    if (inner != null)
+                    {
+                        float f = (float)(1 - inner.shadow);
+                        f /= 2;
+                        if (f > 1) { f = 1; }
+                        if (f < 0) { f = 0; }
+                        border.color = new Color(f, f, f,0.25f);
+                    }
+                    else
+                    {
+                        border.color = darken;
+                    }
+                    title.color = new Color(1, 1, 0, 0.25f);
+                    subtitle.color = new Color(1, 1, 1, 0.25f);
+                    textBackground.color = new Color(0,0,0,0.25f);
+                    layerBack.color = darken;
+                    layerMid.color = darken;
+                    layerAdvHair.color = darken;
+                    layerAdvEyes.color = darken;
+                    layerAdvMouth.color = darken;
+                    layerAdvJewel.color = darken;
+                    layerFore.color = darken;
+    }
+                else
+                {
+                    if (inner != null)
+                    {
+                        float f = (float)(1 - inner.shadow);
+                        if (f > 1) { f = 1; }
+                        if (f < 0) { f = 0; }
+                        border.color = new Color(f, f, f);
+                    }
+                    else
+                    {
+                        border.color = Color.white;
+                    }
+                    title.color = new Color(1, 1, 0,1f);
+                    subtitle.color = new Color(1, 1, 1, 1f);
+                    textBackground.color = new Color(0, 0, 0, 0.75f);
+                    layerBack.color = Color.white;
+                    layerMid.color = Color.white;
+                    layerAdvHair.color = Color.white;
+                    layerAdvEyes.color = Color.white;
+                    layerAdvMouth.color = Color.white;
+                    layerAdvJewel.color = Color.white;
+                    layerFore.color = Color.white;
+                }
+            }
+        }
         /*
         public void setTo(Society soc,Person core)
         {

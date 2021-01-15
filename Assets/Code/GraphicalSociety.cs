@@ -193,7 +193,8 @@ namespace Assets.Code
                     exponent = 0.8;
                     //if (i % 2 == 0) { exponent = 1.4; }
                     float radius2 = (float)(1.5* Math.Pow(zoom, exponent));
-                    float spread  = (n2 > 4) ? 3.5f : 2.5f;
+                    //float spread  = (n2 > 4) ? 3.5f : 2.5f;
+                    float spread = 4;
                     float angle2  = (angle - spread / 2) + spread / n2 * (j + 0.5f);
 
                     float x2 = Mathf.Cos(angle2) * radius2 + x;
@@ -385,11 +386,20 @@ namespace Assets.Code
                 case viewState.NEIGHBOR: refreshNeighbor(pf); break;
                 case viewState.DYNAMIC: refreshDynamic(pf); break;
             }
+            checkData();
         }
 
         public static void showHover(Person p)
         {
             //
+        }
+
+        public static void checkData()
+        {
+            foreach (GraphicalSlot slot in loadedSlots)
+            {
+                slot.checkData();
+            }
         }
 
         public static void purge()
