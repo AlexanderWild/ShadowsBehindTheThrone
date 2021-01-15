@@ -70,7 +70,9 @@ namespace Assets.Code
             base.implement(option);
             if (option.index == 1)
             {
-                society.map.world.prefabStore.popMsg(society.getName() + " Found " + target.getName() + " guilty and condemned them. Their agents can now attack " + target.getName() + "," +
+                //society.map.world.prefabStore.popMsg(society.getName() + " Found " + target.getName() + " guilty and condemned them. Their agents can now attack " + target.getName() + "," +
+                //    " and " + target.getName() + " will take damage each turn they are in the nation's borders.");
+                society.map.world.prefabStore.popMsgAgent(target, target, society.getName() + " Found " + target.getName() + " guilty and condemned them. Their agents can now attack " + target.getName() + "," +
                     " and " + target.getName() + " will take damage each turn they are in the nation's borders.");
                 society.enemies.Add(target);
             }

@@ -103,13 +103,19 @@ namespace Assets.Code
         public void dismissAgentA()
         {
             GraphicalMap.panTo(agentA.location.hex.x, agentA.location.hex.y);
-            GraphicalMap.selectedSelectable = agentA;
+            if (agentA.location.units.Contains(agentA))
+            {
+                GraphicalMap.selectedSelectable = agentA;
+            }
             ui.removeBlocker(this.gameObject);
         }
         public void dismissAgentB()
         {
             GraphicalMap.panTo(agentB.location.hex.x, agentB.location.hex.y);
-            GraphicalMap.selectedSelectable = agentB;
+            if (agentB.location.units.Contains(agentB))
+            {
+                GraphicalMap.selectedSelectable = agentB;
+            }
             ui.removeBlocker(this.gameObject);
         }
         public void dismiss()
