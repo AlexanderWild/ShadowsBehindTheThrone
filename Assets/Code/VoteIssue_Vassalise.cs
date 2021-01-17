@@ -118,7 +118,7 @@ namespace Assets.Code
                             loc.settlement.embeddedUnit.society = target;
                         }
                     }
-                    receiever.addHistory("We absorbed " + society.getName() + ", as they vassalised under us. Took " + trans.Count + " locations.");
+                    receiever.addHistory("#GRN_We absorbed " + society.getName() + ", as they vassalised under us. Took " + trans.Count + " locations.");
                 }
             }
         }

@@ -174,6 +174,7 @@ namespace Assets.Code
             profileAdvJewel.enabled = false;
             personTitle.text = "No Person Selected";
             personVoting.text = "";
+            voteSharePrediction.text = "";
         }
     }
 }

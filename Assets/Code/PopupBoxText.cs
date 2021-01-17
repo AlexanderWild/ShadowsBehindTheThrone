@@ -25,15 +25,40 @@ namespace Assets.Code
                 delta *= 0.075f;
             }
             mover.transform.Translate(delta);
-
-            if (selectable() == false)
-            {
-                background.color = new Color(1, 1, 1, 0.5f);
-            }
         }
 
         public void setTo(string text)
         {
+            if (text[0] == '#')
+            {
+                float r = 1;
+                float g = 1;
+                float b = 1;
+                float a = 1;
+                if (text.Substring(0,4) == "#GLD")
+                {
+                    r = 1;
+                    g = 1;
+                    b = 0;
+                }
+                if (text.Substring(0, 4) == "#GRN")
+                {
+                    r = 0;
+                    g = 0.75f;
+                    b = 0;
+                }
+                if (text.Substring(0, 4) == "#RED")
+                {
+                    r = 0.75f;
+                    g = 0;
+                    b = 0;
+                }
+                if (text[4] == 'T') { a = 0.65f; }
+                background.color = new Color(1, 1, 1, a);
+                text = text.Substring(5);
+
+                title.color = new Color(r, g, b, a);
+            }
             title.text = text;
         }
 
@@ -75,8 +100,7 @@ namespace Assets.Code
 
         public bool selectable()
         {
-            //What an incredible line of code, so maintainable, well freaking done very good
-            return title.text.Contains("(WorldGen)") == false;
+            return true;
         }
     }
 }

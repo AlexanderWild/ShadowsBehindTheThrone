@@ -218,19 +218,13 @@ namespace Assets.Code
         {
             uiPerson.setTo(p);
 
-            string bodyText = "";
-            if (p.getDirectSuperiorIfAny() != null)
-            {
-                bodyText += "\nDirect Superior: " + p.getDirectSuperiorIfAny().getFullName();
-            }
-            else
-            {
-                bodyText += "\nDirect Superior: None";
-            }
+            //I'm sure there was a reason why this info assignment done in two separate classes
+            //And I'm sure the reason is 'I was too lazy to do a full migration and left it till later'
+            //As I am doing now
+
             prestigeText.text = "Prestige: " + (int)(p.prestige) + "\nPrestige Moving towards: " + (int)(p.getTargetPrestige(null));
             personShadowAndEvidenceVals.text = (int)(p.shadow * 100) + "%\n" + (int)(p.evidence * 100) + "%";
 
-            bodyText += "\n";
 
             personAwarenss.text = (int)(p.awareness * 100) + "%";
             if (p.action == null)
@@ -246,9 +240,17 @@ namespace Assets.Code
                 actionDesc.text = "\n\n" + p.action.getLong();
             }
 
-
-            bodyText += "\n";
-
+            string bodyText = "";
+            //if (p.getDirectSuperiorIfAny() != null)
+            //{
+            //    bodyText += "\nDirect Superior: " + p.getDirectSuperiorIfAny().getFullName();
+            //}
+            //else
+            //{
+            //    bodyText += "\nDirect Superior: None";
+            //}
+            //bodyText += "\n";
+            //bodyText += "\n";
             ThreatItem threat = p.getGreatestThreat();
             if (threat != null)
             {

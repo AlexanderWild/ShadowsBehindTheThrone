@@ -121,7 +121,7 @@ namespace Assets.Code
                 }
                 if (title == society.sovreign)
                 {
-                    society.addHistory(title.getName() + " title now held by " + option.person.getFullName());
+                    society.addHistory("#GLD_" + title.getName() + " title now held by " + option.person.getFullName());
                 }
             }
 

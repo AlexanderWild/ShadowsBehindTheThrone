@@ -62,11 +62,21 @@ namespace Assets.Code
 
         public void addHistory(string msg)
         {
-            string add = "";
+            string add;
+            if (msg[0] == '#')
+            {
+                add = msg.Substring(0, 5);
+                msg = msg.Substring(5);
+            }
+            else
+            {
+                add = "#WHT_";
+            }
             if (!map.burnInComplete)
             {
-                add = "(WorldGen) ";
+                add = add.Substring(0, 4) + "T";
             }
+            
             history.Add(add + "Turn " + map.turn + ": " + msg);
         }
         public virtual string getTypeName() { return "Generic Group"; }
@@ -259,6 +269,9 @@ namespace Assets.Code
         public virtual void takeLocationFromOther(SocialGroup def, Location taken)
         {
             this.temporaryThreat += map.param.threat_takeLocation;
+
+            addHistory("#GRN_We have taken " + taken.getName() + " from " + def.getName());
+            def.addHistory("#RED_We have lost " + taken.getName() + " to " + this.getName());
         }
 
         public virtual bool isDark()
