@@ -682,10 +682,6 @@ namespace Assets.Code
 
         public void processVoting()
         {
-            if (socType.periodicElection())
-            {
-                computeElectoral();
-            }
             if (voteSession == null)
             {
                 if (voteCooldown > 0) { voteCooldown -= 1; return; }
@@ -801,70 +797,6 @@ namespace Assets.Code
                 }
                 voteSession = null;
             }
-        }
-
-        public void computeElectoral()
-        {
-            List<Person> electors = new List<Person>();
-            foreach (Title t in titles)
-            {
-                if (t is Title_ProvinceRuler)
-                {
-                    if (t.heldBy != null)
-                    {
-                        electors.Add(t.heldBy);
-                    }
-                }
-            }
-            if (this.getSovreign() != null) { electors.Add(this.getSovreign()); }
-
-            electionID = Eleven.random.Next();//Can't use turncount, lest a character swap societies can get confused
-            if (electors.Count == 0)
-            {
-                return;
-            }
-
-            double sumPrestige = 0;
-            double[] prestigesFor = new double[electors.Count];
-            for (int i = 0; i < electors.Count; i++)
-            {
-                Person p = electors[i];
-                prestigesFor[i] += Math.Max(0, p.prestige);
-                sumPrestige += Math.Max(0, p.prestige);
-                p.electoralID = electionID;
-
-                Person recipient = p.assignElectoralVote(electors);
-                p.electoralRecipient = recipient;
-                for (int j = 0; j < electors.Count; j++)
-                {
-                    if (electors[j] == recipient)
-                    {
-                        prestigesFor[j] += Math.Max(0, p.prestige/2);
-                        sumPrestige += Math.Max(0, p.prestige/2);
-                    }
-                }
-            }
-
-            double highest = 0;
-            Person winner = null;
-            for (int i = 0; i < electors.Count; i++)
-            {
-                if (prestigesFor[i] > highest || winner == null)
-                {
-                    winner = electors[i];
-                    highest = prestigesFor[i];
-                }
-                if (sumPrestige > 0)
-                {
-                    electors[i].electoralWeight = prestigesFor[i] / sumPrestige;
-                }
-                else
-                {
-                    electors[i].electoralWeight = 0;
-                }
-                electors[i].electoralWinner = false;
-            }
-            if (winner != null) { winner.electoralWinner = true; }
         }
 
         public void checkTitles()

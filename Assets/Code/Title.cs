@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Assets.Code{
     public abstract class Title
@@ -19,5 +20,10 @@ namespace Assets.Code{
         public virtual void turnTick() { }
         public abstract string getName();
         public abstract double getPrestige();
+
+        public virtual List<Person> getEligibleHolders(Society soc)
+        {
+            return soc.people;
+        }
     }
 }

@@ -24,8 +24,7 @@ namespace Assets.Code
         public Text personAwarenssDesc;
         public Text personShadowAndEvidenceVals;
         public Text personVoting;
-        public Text electoralVote;
-        public Button voteDescElectoral;
+        public Text voteSharePrediction;
 
         public void setTo(Person p)
         {
@@ -112,30 +111,55 @@ namespace Assets.Code
                 personVoting.text = "Not voting";
             }
 
-            string text = "";
-            if (p.electoralID == soc.electionID && p.electoralID != 0)
+            voteSharePrediction.text = ""; 
+            if (p.society.socType.periodicElection())
             {
-                if (p.electoralRecipient != null)
+                Title possibleOpt = null;
+                Title_Sovreign sov = new Title_Sovreign(p.society);
+                if (sov.getEligibleHolders(p.society).Contains(p))
                 {
-                    text = "Voting: " + p.electoralRecipient.getFullName();
-                    
-                }
-                text += "\nVotes Received: " + (int)(p.electoralWeight*100) +"%";
-                if (p.electoralWinner)
-                {
-                    electoralVote.color = new Color(0, 0.75f, 0);
+                    possibleOpt = sov;
                 }
                 else
                 {
-                    electoralVote.color = new Color(0.75f, 0.5f, 0.5f);
+                    Title_ProvinceRuler prov = new Title_ProvinceRuler(p.society, p.getLocation().province);
+                    if (prov.getEligibleHolders(p.society).Contains(p)) { possibleOpt = prov; }
                 }
-                voteDescElectoral.gameObject.SetActive(true);
+                if (possibleOpt != null) 
+                {
+                    VoteIssue_AssignTitle hypothetical = new VoteIssue_AssignTitle(p.society,p,possibleOpt);
+                    foreach (Person p2 in possibleOpt.getEligibleHolders(p.society))
+                    {
+                        VoteOption opt = new VoteOption();
+                        opt.person = p2;
+                        hypothetical.options.Add(opt);
+                    }
+                    VoteSession sess = new VoteSession();
+                    sess.issue = hypothetical;
+                    sess.assignVoters();
+                    double total = 0;
+                    double mine = 0;
+                    double highest = 0;
+                    foreach (VoteOption opt in hypothetical.options)
+                    {
+                        total += opt.votingWeight;
+                        if (opt.person == p) { mine = opt.votingWeight; }
+                        if (opt.votingWeight > highest) { highest = opt.votingWeight; }
+                    }
+                    if (total > 0)
+                    {
+                        if (mine == highest)
+                        {
+                            voteSharePrediction.color = new Color(0, 0.75f, 0);
+                        }
+                        else
+                        {
+                            voteSharePrediction.color = new Color(1, 0.5f, 0.5f);
+                        }
+                        voteSharePrediction.text = possibleOpt.getName() + "\nPredicted Vote Share: " + (int)(100 * mine / total) + "%";
+                    }
+                }
             }
-            else
-            {
-                voteDescElectoral.gameObject.SetActive(false);
-            }
-            electoralVote.text = text;
         }
 
         public void setToNull()

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Assets.Code{
     public class Title_ProvinceRuler : Title
@@ -23,6 +24,21 @@ namespace Assets.Code{
         public override double getPrestige()
         {
             return society.map.param.society_dukePrestige;
+        }
+
+        public override List<Person> getEligibleHolders(Society soc)
+        {
+            List<Person> candidates = new List<Person>();
+            //Nobles holding land in region are eligible
+            foreach (Person p in society.people)
+            {
+                if (p == society.getSovreign()) { continue; }
+                if (p.title_land != null && p.title_land.settlement.location.province == province)
+                {
+                    candidates.Add(p);
+                }
+            }
+            return candidates;
         }
     }
 }

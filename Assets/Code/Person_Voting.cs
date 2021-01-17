@@ -30,22 +30,6 @@ namespace Assets.Code
             }
         }
 
-        public Person assignElectoralVote(List<Person> candidates)
-        {
-            double highest = 0;
-            Person chosen = null;
-            foreach (Person p in candidates)
-            {
-                if (p == this) { continue; }
-                if (chosen == null || getRelation(p).getLiking() > highest)
-                {
-                    highest = getRelation(p).getLiking();
-                    chosen = p;
-                }
-            }
-            return chosen;
-        }
-
         public VoteIssue proposeVotingIssue()
         {
             double bestU = 25;
@@ -93,42 +77,21 @@ namespace Assets.Code
 
                 if (t is Title_Sovreign)
                 {
-                    if (society.titles.Count == 1)
+                    List<Person> candidates = t.getEligibleHolders(society);
+                    foreach (Person p in candidates)
                     {
-                        //Everyone is eligible
-                        foreach (Person p in society.people)
-                        {
-                            VoteOption opt = new VoteOption();
-                            opt.person = p;
-                            issue.options.Add(opt);
-                        }
-                    }
-                    else
-                    {
-                        //Only provincial rulers are elligible
-                        foreach (Person p in society.people)
-                        {
-                            if (p.titles.Count > 0)
-                            {
-                                VoteOption opt = new VoteOption();
-                                opt.person = p;
-                                issue.options.Add(opt);
-                            }
-                        }
+                        VoteOption opt = new VoteOption();
+                        opt.person = p;
+                        issue.options.Add(opt);
                     }
                 }else if (t is Title_ProvinceRuler)
                 {
-                    Title_ProvinceRuler t2 = (Title_ProvinceRuler)t;
-                    //Nobles holding land in region are eligible
-                    foreach (Person p in society.people)
+                    List<Person> candidates = t.getEligibleHolders(society);
+                    foreach (Person p in candidates)
                     {
-                        if (p == society.getSovreign()) { continue; }
-                        if (p.title_land != null && p.title_land.settlement.location.province == t2.province)
-                        {
-                            VoteOption opt = new VoteOption();
-                            opt.person = p;
-                            issue.options.Add(opt);
-                        }
+                        VoteOption opt = new VoteOption();
+                        opt.person = p;
+                        issue.options.Add(opt);
                     }
                 }
                 if (issue.options.Count == 0) { continue; }

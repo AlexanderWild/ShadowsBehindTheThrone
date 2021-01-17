@@ -12,7 +12,6 @@ namespace Assets.Code
         public World world;
         public Person inner;
         public Image textBackground;
-        public Image voteBackground;
         public Image border;
         public Image layerBack;
         public Image layerMid;
@@ -27,7 +26,6 @@ namespace Assets.Code
         public Text upperRightText;
         public Text lowerRightText;
         public GameObject popupBox;
-        public Text electoralWeight;
         public LineRenderer line;
 
         public Color goodColor;
@@ -130,25 +128,6 @@ namespace Assets.Code
             else
             {
                 border.sprite = p.map.world.textureStore.slotBasic;
-            }
-
-            if (inner == null || inner.electoralID != inner.society.electionID || inner.electoralID == 0 || (!inner.society.socType.periodicElection())) {
-
-                electoralWeight.color = Color.clear;
-                voteBackground.color = Color.clear;
-            }
-            else
-            {
-                electoralWeight.text = (int)(100 * inner.electoralWeight) + "%";
-                voteBackground.color = new Color(0, 0, 0, 0.75f);
-                if (inner.electoralWinner)
-                {
-                    electoralWeight.color = new Color(0, 0.75f, 0);
-                }
-                else
-                {
-                    electoralWeight.color = new Color(0.75f, 0.5f, 0.5f);
-                }
             }
         }
 
@@ -301,38 +280,6 @@ namespace Assets.Code
                 layerAdvMouth.color = Color.white;
                 layerAdvJewel.color = Color.white;
                 layerFore.color = Color.white;
-            }
-            if (inner == null || inner.electoralID == 0 || inner.society.electionID != inner.electoralID)
-            {
-                electoralWeight.color = Color.clear;
-                voteBackground.color = Color.clear;
-            }
-            else
-            {
-                if (shouldDarken)
-                {
-                    voteBackground.color = new Color(0, 0, 0, 0.25f);
-                    if (inner.electoralWinner)
-                    {
-                        electoralWeight.color = new Color(0, 0.75f, 0, 0.25f);
-                    }
-                    else
-                    {
-                        electoralWeight.color = new Color(0.75f, 0.5f, 0.5f, 0.25f);
-                    }
-                }
-                else
-                {
-                    voteBackground.color = new Color(0, 0, 0, 0.75f);
-                    if (inner.electoralWinner)
-                    {
-                        electoralWeight.color = new Color(0, 0.75f, 0);
-                    }
-                    else
-                    {
-                        electoralWeight.color = new Color(0.75f, 0.5f, 0.5f);
-                    }
-                }
             }
         }
         /*
