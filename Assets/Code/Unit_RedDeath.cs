@@ -12,10 +12,11 @@ namespace Assets.Code
         
         public Unit_RedDeath(Location loc,SocialGroup soc) : base(loc,soc)
         {
-            maxHp = 5;
-            hp = 5;
+            maxHp = 4;
+            hp = 4;
 
             abilities.Add(new Abu_Red_Origin());
+            abilities.Add(new Abu_Red_Outbreak());
             abilities.Add(new Abu_Base_Recruit());
             abilities.Add(new Abu_Base_ChangeIdentity());
         }

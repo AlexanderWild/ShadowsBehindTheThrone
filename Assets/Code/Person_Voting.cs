@@ -10,6 +10,10 @@ namespace Assets.Code
     {
         public VoteSession forcedVoteSession;
         public VoteOption forcedVoteOption;
+        public int electoralID = 0;
+        public double electoralWeight;//How much of the vote we're winning
+        public bool electoralWinner = false;
+        public Person electoralRecipient = null;
 
         public void logVote(VoteIssue issue)
         {
@@ -24,6 +28,22 @@ namespace Assets.Code
                     log.takeLine(line);
                 }
             }
+        }
+
+        public Person assignElectoralVote(List<Person> candidates)
+        {
+            double highest = 0;
+            Person chosen = null;
+            foreach (Person p in candidates)
+            {
+                if (p == this) { continue; }
+                if (chosen == null || getRelation(p).getLiking() > highest)
+                {
+                    highest = getRelation(p).getLiking();
+                    chosen = p;
+                }
+            }
+            return chosen;
         }
 
         public VoteIssue proposeVotingIssue()
@@ -160,7 +180,6 @@ namespace Assets.Code
                         //if (map.turn - loc.turnLastAssigned  < Params.society_minTimeBetweenLocReassignments) { continue; }
                         issue = new VoteIssue_AssignLandedTitle(society, this, loc.settlement.title);
                         // if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
-                        //Everyone is eligible
                         foreach (Person p in society.people)
                         {
                             if (p.title_land != loc.settlement.title && p.title_land != null) { continue; }//Again, to prevent constant shuffling

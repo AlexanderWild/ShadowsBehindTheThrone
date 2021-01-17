@@ -11,7 +11,7 @@ namespace Assets.Code
             Property.addProperty(map, u.location, "Red Death");
             u.location.map.world.prefabStore.popImgMsg("The first victim of this wave of the Red Death is in " + u.location.getName() + "."
                 + " The disease will spread between cities (unless quarantined or immune), and will decrease the city's population by 1 per turn.",
-                u.location.map.world.wordStore.lookup("ABILITY_RED_DEATH_ORIGIN"));
+                u.location.map.world.wordStore.lookup("ABILITY_RED_DEATH_ORIGIN"),5);
 
             double amount = map.param.unit_majorEvidence;
             Evidence e2 = new Evidence(map.turn);

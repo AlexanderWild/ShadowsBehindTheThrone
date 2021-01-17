@@ -79,7 +79,7 @@ namespace Assets.Code
                 powers.Add(new Ab_Enth_Apoptosis());
                 powers.Add(new Ab_Over_DisruptAgent());
                 powers.Add(new Ab_Over_DelayVote());
-                powers.Add(new Ab_Over_CancelVote());
+                //powers.Add(new Ab_Over_CancelVote());
                 //powers.Add(new Ab_Over_InformationBlackout());
                 powers.Add(new Ab_Over_SowDissent());
                 powers.Add(new Ab_Over_UncannyGlamour());

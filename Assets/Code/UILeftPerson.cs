@@ -24,6 +24,8 @@ namespace Assets.Code
         public Text personAwarenssDesc;
         public Text personShadowAndEvidenceVals;
         public Text personVoting;
+        public Text electoralVote;
+        public Button voteDescElectoral;
 
         public void setTo(Person p)
         {
@@ -109,6 +111,31 @@ namespace Assets.Code
             {
                 personVoting.text = "Not voting";
             }
+
+            string text = "";
+            if (p.electoralID == soc.electionID && p.electoralID != 0)
+            {
+                if (p.electoralRecipient != null)
+                {
+                    text = "Voting: " + p.electoralRecipient.getFullName();
+                    
+                }
+                text += "\nVotes Received: " + (int)(p.electoralWeight*100) +"%";
+                if (p.electoralWinner)
+                {
+                    electoralVote.color = new Color(0, 0.75f, 0);
+                }
+                else
+                {
+                    electoralVote.color = new Color(0.75f, 0.5f, 0.5f);
+                }
+                voteDescElectoral.gameObject.SetActive(true);
+            }
+            else
+            {
+                voteDescElectoral.gameObject.SetActive(false);
+            }
+            electoralVote.text = text;
         }
 
         public void setToNull()

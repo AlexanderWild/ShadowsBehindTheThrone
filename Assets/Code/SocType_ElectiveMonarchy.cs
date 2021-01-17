@@ -26,7 +26,8 @@ namespace Assets.Code
 
         public override int getNDukesMax()
         {
-            return World.staticMap.param.society_maxDukes;
+            //return World.staticMap.param.society_maxDukes;
+            return 27;
         }
         public override bool usesHouses()
         {

@@ -23,7 +23,8 @@ namespace Assets.Code
             if (unit is Unit_Merchant == false) { unit.task = null;return; }
             if (unit.society is Society == false) { unit.task = null; return; }
             if (unit.location.settlement == null) { unit.task = null; return; }
-            
+            if (unit.location.soc == null) { unit.task = null; return; }
+
             Unit_Merchant merchant = (Unit_Merchant)unit;
             if (merchant.cash <= 0) { unit.task = null; return; }
 

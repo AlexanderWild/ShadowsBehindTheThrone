@@ -12,6 +12,7 @@ namespace Assets.Code
         public World world;
         public Person inner;
         public Image textBackground;
+        public Image voteBackground;
         public Image border;
         public Image layerBack;
         public Image layerMid;
@@ -26,8 +27,7 @@ namespace Assets.Code
         public Text upperRightText;
         public Text lowerRightText;
         public GameObject popupBox;
-        public Text riseBox;
-        public Text fallBox;
+        public Text electoralWeight;
         public LineRenderer line;
 
         public Color goodColor;
@@ -131,6 +131,25 @@ namespace Assets.Code
             {
                 border.sprite = p.map.world.textureStore.slotBasic;
             }
+
+            if (inner == null || inner.electoralID != inner.society.electionID || inner.electoralID == 0 || (!inner.society.socType.periodicElection())) {
+
+                electoralWeight.color = Color.clear;
+                voteBackground.color = Color.clear;
+            }
+            else
+            {
+                electoralWeight.text = (int)(100 * inner.electoralWeight) + "%";
+                voteBackground.color = new Color(0, 0, 0, 0.75f);
+                if (inner.electoralWinner)
+                {
+                    electoralWeight.color = new Color(0, 0.75f, 0);
+                }
+                else
+                {
+                    electoralWeight.color = new Color(0.75f, 0.5f, 0.5f);
+                }
+            }
         }
 
         public void recenter()
@@ -210,9 +229,9 @@ namespace Assets.Code
 
         public void checkData()
         {
+            bool shouldDarken = false;
             if (GraphicalSociety.state == GraphicalSociety.viewState.HIERARCHY)
             {
-                bool shouldDarken = false;
                 if (GraphicalSociety.focus != null && this.inner != null)
                 {
                     if (GraphicalSociety.focus == GraphicalSociety.activeSociety.getSovreign() || this.inner == GraphicalSociety.activeSociety.getSovreign())
@@ -227,56 +246,92 @@ namespace Assets.Code
                         }
                     }
                 }
-                if (shouldDarken)
+            }
+            else
+            {
+                shouldDarken = false;
+            }
+            if (shouldDarken)
+            {
+                Color darken = new Color(0.5f, 0.5f, 0.5f, 0.25f);
+                layerBack.color = darken;
+                if (inner != null)
                 {
-                    Color darken = new Color(0.5f, 0.5f, 0.5f, 0.25f);
-                    layerBack.color = darken;
-                    if (inner != null)
-                    {
-                        float f = (float)(1 - inner.shadow);
-                        f /= 2;
-                        if (f > 1) { f = 1; }
-                        if (f < 0) { f = 0; }
-                        border.color = new Color(f, f, f,0.25f);
-                    }
-                    else
-                    {
-                        border.color = darken;
-                    }
-                    title.color = new Color(1, 1, 0, 0.25f);
-                    subtitle.color = new Color(1, 1, 1, 0.25f);
-                    textBackground.color = new Color(0,0,0,0.25f);
-                    layerBack.color = darken;
-                    layerMid.color = darken;
-                    layerAdvHair.color = darken;
-                    layerAdvEyes.color = darken;
-                    layerAdvMouth.color = darken;
-                    layerAdvJewel.color = darken;
-                    layerFore.color = darken;
-    }
+                    float f = (float)(1 - inner.shadow);
+                    f /= 2;
+                    if (f > 1) { f = 1; }
+                    if (f < 0) { f = 0; }
+                    border.color = new Color(f, f, f, 0.25f);
+                }
                 else
                 {
-                    if (inner != null)
+                    border.color = darken;
+                }
+                title.color = new Color(1, 1, 0, 0.25f);
+                subtitle.color = new Color(1, 1, 1, 0.25f);
+                textBackground.color = new Color(0, 0, 0, 0.25f);
+                layerBack.color = darken;
+                layerMid.color = darken;
+                layerAdvHair.color = darken;
+                layerAdvEyes.color = darken;
+                layerAdvMouth.color = darken;
+                layerAdvJewel.color = darken;
+                layerFore.color = darken;
+            }
+            else
+            {
+                if (inner != null)
+                {
+                    float f = (float)(1 - inner.shadow);
+                    if (f > 1) { f = 1; }
+                    if (f < 0) { f = 0; }
+                    border.color = new Color(f, f, f);
+                }
+                else
+                {
+                    border.color = Color.white;
+                }
+                title.color = new Color(1, 1, 0, 1f);
+                subtitle.color = new Color(1, 1, 1, 1f);
+                textBackground.color = new Color(0, 0, 0, 0.75f);
+                layerBack.color = Color.white;
+                layerMid.color = Color.white;
+                layerAdvHair.color = Color.white;
+                layerAdvEyes.color = Color.white;
+                layerAdvMouth.color = Color.white;
+                layerAdvJewel.color = Color.white;
+                layerFore.color = Color.white;
+            }
+            if (inner == null || inner.electoralID == 0 || inner.society.electionID != inner.electoralID)
+            {
+                electoralWeight.color = Color.clear;
+                voteBackground.color = Color.clear;
+            }
+            else
+            {
+                if (shouldDarken)
+                {
+                    voteBackground.color = new Color(0, 0, 0, 0.25f);
+                    if (inner.electoralWinner)
                     {
-                        float f = (float)(1 - inner.shadow);
-                        if (f > 1) { f = 1; }
-                        if (f < 0) { f = 0; }
-                        border.color = new Color(f, f, f);
+                        electoralWeight.color = new Color(0, 0.75f, 0, 0.25f);
                     }
                     else
                     {
-                        border.color = Color.white;
+                        electoralWeight.color = new Color(0.75f, 0.5f, 0.5f, 0.25f);
                     }
-                    title.color = new Color(1, 1, 0,1f);
-                    subtitle.color = new Color(1, 1, 1, 1f);
-                    textBackground.color = new Color(0, 0, 0, 0.75f);
-                    layerBack.color = Color.white;
-                    layerMid.color = Color.white;
-                    layerAdvHair.color = Color.white;
-                    layerAdvEyes.color = Color.white;
-                    layerAdvMouth.color = Color.white;
-                    layerAdvJewel.color = Color.white;
-                    layerFore.color = Color.white;
+                }
+                else
+                {
+                    voteBackground.color = new Color(0, 0, 0, 0.75f);
+                    if (inner.electoralWinner)
+                    {
+                        electoralWeight.color = new Color(0, 0.75f, 0);
+                    }
+                    else
+                    {
+                        electoralWeight.color = new Color(0.75f, 0.5f, 0.5f);
+                    }
                 }
             }
         }

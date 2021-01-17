@@ -13,7 +13,7 @@ namespace Assets.Code
 
         public List<TitleLanded> unclaimedTitles = new List<TitleLanded>();
 
-        public enum militaryPosture { introverted,defensive,offensive};
+        public enum militaryPosture { introverted, defensive, offensive };
         public militaryPosture posture = militaryPosture.introverted;
         public SocialGroup defensiveTarget;
         public SocialGroup offensiveTarget;
@@ -45,6 +45,7 @@ namespace Assets.Code
 
         public double dread_agents_evidenceFound = 0;
         public int lastOffensiveTargetSetting;
+        public int electionID = 0;//Used by characters to check if they're still using valid data
 
         public SocType socType = new SocType_ElectiveMonarchy();
 
@@ -60,7 +61,7 @@ namespace Assets.Code
         public string crisisPlague = null;
         public string crisisPlagueLong = null;
 
-        public Society(Map map,Location location) : base(map)
+        public Society(Map map, Location location) : base(map)
         {
             setName("DEFAULT_SOC_NAME");
             sovreign = new Title_Sovreign(this);
@@ -211,7 +212,7 @@ namespace Assets.Code
                             "\"If you take my head, I'll take yours! All of yours!\"", 3);
                     }
 
-                    order.person.die("Executed by " + this.getName() + ". Reason: " + order.reason,true);
+                    order.person.die("Executed by " + this.getName() + ". Reason: " + order.reason, true);
 
                 }
             }
@@ -235,7 +236,7 @@ namespace Assets.Code
                 {
                     isRebel = p.rebellingFrom == p.society;
                 }
-                if (p.society.getSovreign() == p) {isRebel = false; }
+                if (p.society.getSovreign() == p) { isRebel = false; }
                 if (isRebel)
                 {
                     data_rebelLordsCap += p.title_land.settlement.getMilitaryCap();
@@ -281,7 +282,7 @@ namespace Assets.Code
                         level = MsgEvent.LEVEL_RED;
                     }
                     map.addMessage(this.getName() + " is unstable, as too many powerful nobles oppose the sovreign. " + turnsTillCivilWar + " turns till civil war.",
-                        level,goodThing);
+                        level, goodThing);
                 }
             }
             else
@@ -407,7 +408,7 @@ namespace Assets.Code
                 bool hasTo = false;
                 foreach (Location loc in map.locations)
                 {
-                    if (loc.soc == this && loc.settlement != null && loc.settlement.econTraits().Contains(effect.from)){ hasFrom = true; break; }
+                    if (loc.soc == this && loc.settlement != null && loc.settlement.econTraits().Contains(effect.from)) { hasFrom = true; break; }
                 }
                 if (hasFrom == false) { effect.durationLeft = 0; }//No longer valid
                 else
@@ -421,7 +422,7 @@ namespace Assets.Code
                 if (effect.durationLeft > 0)
                 {
                     effect.durationLeft -= 1;
-                    }
+                }
                 if (effect.durationLeft == 0) { rems.Add(effect); }
             }
             foreach (EconEffect effect in rems)
@@ -493,7 +494,7 @@ namespace Assets.Code
                 computeCapital();
                 return capital;
             }
-            if (capital.settlement == null) { computeCapital();return capital; }
+            if (capital.settlement == null) { computeCapital(); return capital; }
             if (capital.soc != this) { computeCapital(); }
             return capital;
         }
@@ -504,7 +505,7 @@ namespace Assets.Code
             {
                 if (this.getSovreign().title_land != null)
                 {
-                    capital =  this.getSovreign().title_land.settlement.location;
+                    capital = this.getSovreign().title_land.settlement.location;
                     return;
                 }
             }
@@ -587,7 +588,7 @@ namespace Assets.Code
                 //                for (int i = 0; i < weights.Length; i++) { roll += weights[i]; }
                 //                roll *= Eleven.random.NextDouble();
                 //                for (int i = 0; i < weights.Length; i++) { roll -= weights[i]; if (roll <= 0) { q = i; break; } }
-                                
+
                 //                if (q == 0)
                 //                {
                 //                    loc.settlement = new Set_Abbey(loc);
@@ -681,6 +682,10 @@ namespace Assets.Code
 
         public void processVoting()
         {
+            if (socType.periodicElection())
+            {
+                computeElectoral();
+            }
             if (voteSession == null)
             {
                 if (voteCooldown > 0) { voteCooldown -= 1; return; }
@@ -707,7 +712,7 @@ namespace Assets.Code
                 {
                     proposer.lastVoteProposalTurn = map.turn;
                     VoteIssue issue = proposer.proposeVotingIssue();
-                    if (issue == null) {return; }
+                    if (issue == null) { return; }
 
                     bool positive = true;
                     int priority = (this.hasEnthralled()) ? 1 : 3;
@@ -763,7 +768,7 @@ namespace Assets.Code
                         topVote = option.votingWeight;
                     }
 
-                    voteSession.issue.changeLikingForVotes(option,voteSession.issue);
+                    voteSession.issue.changeLikingForVotes(option, voteSession.issue);
                 }
 
                 if (World.logging && logbox != null) { logbox.takeLine("End voting on " + voteSession.issue.ToString()); }
@@ -781,7 +786,7 @@ namespace Assets.Code
 
                     string strTitle = "Vote Concluded on " + voteSession.issue.ToString();
                     string strSubtitle = "Outcome: " + winner.info(voteSession.issue);
-                    map.world.prefabStore.popVoteMsg(strTitle,strSubtitle,voteSession.issue.getLargeDesc());
+                    map.world.prefabStore.popVoteMsg(strTitle, strSubtitle, voteSession.issue.getLargeDesc());
                     //map.world.prefabStore.popImgMsg(str, "Voting concluded. Issue: " + voteSession.issue.getLargeDesc());
                 }
 
@@ -796,6 +801,70 @@ namespace Assets.Code
                 }
                 voteSession = null;
             }
+        }
+
+        public void computeElectoral()
+        {
+            List<Person> electors = new List<Person>();
+            foreach (Title t in titles)
+            {
+                if (t is Title_ProvinceRuler)
+                {
+                    if (t.heldBy != null)
+                    {
+                        electors.Add(t.heldBy);
+                    }
+                }
+            }
+            if (this.getSovreign() != null) { electors.Add(this.getSovreign()); }
+
+            electionID = Eleven.random.Next();//Can't use turncount, lest a character swap societies can get confused
+            if (electors.Count == 0)
+            {
+                return;
+            }
+
+            double sumPrestige = 0;
+            double[] prestigesFor = new double[electors.Count];
+            for (int i = 0; i < electors.Count; i++)
+            {
+                Person p = electors[i];
+                prestigesFor[i] += Math.Max(0, p.prestige);
+                sumPrestige += Math.Max(0, p.prestige);
+                p.electoralID = electionID;
+
+                Person recipient = p.assignElectoralVote(electors);
+                p.electoralRecipient = recipient;
+                for (int j = 0; j < electors.Count; j++)
+                {
+                    if (electors[j] == recipient)
+                    {
+                        prestigesFor[j] += Math.Max(0, p.prestige/2);
+                        sumPrestige += Math.Max(0, p.prestige/2);
+                    }
+                }
+            }
+
+            double highest = 0;
+            Person winner = null;
+            for (int i = 0; i < electors.Count; i++)
+            {
+                if (prestigesFor[i] > highest || winner == null)
+                {
+                    winner = electors[i];
+                    highest = prestigesFor[i];
+                }
+                if (sumPrestige > 0)
+                {
+                    electors[i].electoralWeight = prestigesFor[i] / sumPrestige;
+                }
+                else
+                {
+                    electors[i].electoralWeight = 0;
+                }
+                electors[i].electoralWinner = false;
+            }
+            if (winner != null) { winner.electoralWinner = true; }
         }
 
         public void checkTitles()
@@ -893,7 +962,6 @@ namespace Assets.Code
                     }
                 }
             }
-
 
             data_nProvinceRulers = 0;
             foreach (Title t in titles)
