@@ -198,7 +198,15 @@ namespace Assets.Code
                 VoteOption opt;
 
                 opt = new VoteOption();
-                opt.index = VoteIssue_Crisis_WarThreatens.NO_RESPONSE;
+                opt.index = VoteIssue_Crisis_Plague.NO_RESPONSE;
+                issue.options.Add(opt);
+
+                opt = new VoteOption();
+                opt.index = VoteIssue_Crisis_Plague.QUARANTINE;
+                issue.options.Add(opt);
+
+                opt = new VoteOption();
+                opt.index = VoteIssue_Crisis_Plague.TREATMENT;
                 issue.options.Add(opt);
 
                 foreach (Unit unit in map.units)

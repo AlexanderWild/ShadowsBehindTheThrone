@@ -23,7 +23,12 @@ namespace Assets.Code
         {
             base.turnTick(p, location);
 
-            
+            bool underQuarantine = false;
+            foreach (Property p2 in location.properties)
+            {
+                if (p2.proto is Pr_Quarantine) { underQuarantine = true;break; }
+            }
+
             if (location.settlement != null && location.settlement is SettlementHuman)
             {
                 SettlementHuman set = (SettlementHuman)location.settlement;
@@ -52,7 +57,9 @@ namespace Assets.Code
                             break;
                         }
                     }
-                    if (canApply && Eleven.random.NextDouble() < World.staticMap.param.unit_rd_redDeathPlaguePSpread)
+                    double pSpread = World.staticMap.param.unit_rd_redDeathPlaguePSpread;
+                    if (underQuarantine) { pSpread /= 2; }
+                    if (canApply && Eleven.random.NextDouble() < pSpread)
                     {
                         Property.addProperty(World.staticMap, l2, "Red Death");
                         Society soc = (Society)l2.soc;

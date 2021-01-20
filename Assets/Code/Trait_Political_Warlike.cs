@@ -21,7 +21,7 @@ namespace Assets.Code
         }
         public override double getSelfInterest()
         {
-            return 0.25;
+            return 0.35;
         }
     }
 }

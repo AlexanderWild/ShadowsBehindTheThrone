@@ -150,6 +150,8 @@ namespace Assets.Code
         public Sprite property_pumpkin;
         public Sprite property_redPlague;
         public Sprite property_redPlagueImmunity;
+        public Sprite property_quarantine;
+        public Sprite property_medicalAid;
 
         public List<Sprite> tutorialImages;
 

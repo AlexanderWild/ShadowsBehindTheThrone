@@ -348,6 +348,6 @@ unit_seeker_truthShadow: 0.35
 unit_headless_pumpkinDur: 9
 unit_knightCombatBonus: 1.5
 unit_agentCombatBonus: 1.25
-unit_rd_redDeathPlagueDur: 15
+unit_rd_redDeathPlagueDur: 20
 unit_rd_redDeathPlaguePSpread: 0.05
 unit_rd_redDeathPlagueImmunityDur: 16

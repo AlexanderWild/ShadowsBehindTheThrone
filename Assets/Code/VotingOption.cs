@@ -131,6 +131,8 @@ namespace Assets.Code
                 if (index == VoteIssue_Crisis_Plague.NO_RESPONSE) { return "No Response"; }
                 if (index == VoteIssue_Crisis_Plague.AGENT_TO_MEDIC) { return "Make " + unit.getName() + " an Apothecarian"; }
                 if (index == VoteIssue_Crisis_Plague.AGENT_TO_BASIC) { return "Make " + unit.getName() + " an Agent"; }
+                if (index == VoteIssue_Crisis_Plague.QUARANTINE) { return "Quarantine"; }
+                if (index == VoteIssue_Crisis_Plague.TREATMENT) { return "Medical Aid to Infected Areas"; }
             }
 
             if (person != null) { reply += person.getFullName() + " "; }

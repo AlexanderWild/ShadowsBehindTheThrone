@@ -121,6 +121,7 @@ namespace Assets.Code
         public double utility_extremeismScaling = 2;
         public double utility_swapAgentRolesMult = 100;
         public double utility_selfInterestFromThreat = -0.5;
+        public double utility_plagueResponseMultPerRiskItem = 0.5;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;
@@ -167,6 +168,8 @@ namespace Assets.Code
         public double society_dislikeFromFailedProposal = 0;
         public double society_houseLiking = 15;
         public int society_securityBuffDuration = 12;
+        public int society_quarantineDuration = 12;
+        public int society_medAidDuration = 12;
         public int society_securityBuffMajor = 4;
         public int society_securityBuffMinor = 1;
         public int society_lockdownPrestigeHit = -10;
@@ -390,7 +393,7 @@ namespace Assets.Code
         public double unit_knightCombatBonus = 1.5;
         public double unit_agentCombatBonus = 1.25;
 
-        public int unit_rd_redDeathPlagueDur = 15;
+        public int unit_rd_redDeathPlagueDur = 20;
         public double unit_rd_redDeathPlaguePSpread = 0.05;
         public int unit_rd_redDeathPlagueImmunityDur = 16;
 

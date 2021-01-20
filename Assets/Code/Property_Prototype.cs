@@ -95,6 +95,14 @@ namespace Assets.Code
             proto = new Pr_RedDeathImmunity(map, "Red Death Immunity");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_Quarantine(map, "Quarantine");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_MedicalAid(map, "Medical Aid");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
         }
 
         internal abstract string getDescription();

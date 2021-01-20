@@ -27,7 +27,7 @@ namespace Assets.Code
 
         public void statsTurnTick()
         {
-            if (population < getMaxPopulation())
+            if (location.map.turn % 2 == 0 && population < getMaxPopulation())
             {
                 bool infected = false;
                 foreach (Property pr in location.properties)
