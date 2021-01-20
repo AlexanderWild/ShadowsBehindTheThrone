@@ -143,7 +143,6 @@ namespace Assets.Code
             personFore.sprite = null;
             personMid.sprite = null;
             personFore.color = new Color(0, 0.1f, 0);
-            evidenceText.text = "No Evidence";
         }
 
         public void setToNull()

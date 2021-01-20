@@ -15,6 +15,7 @@ namespace Assets.Code
             this.baseCharge = map.param.unit_rd_redDeathPlagueImmunityDur;
             this.decaysOverTime = true;
             this.stackStyle = stackStyleEnum.TO_MAX_CHARGE;
+            this.isImmunity = true;
         }
 
         public override Sprite getSprite(World world)

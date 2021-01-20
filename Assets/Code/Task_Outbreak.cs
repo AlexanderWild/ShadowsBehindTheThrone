@@ -37,6 +37,17 @@ namespace Assets.Code
                     unit.location.map.world.wordStore.lookup("ABILITY_RED_OUTBREAK"),5);
                 unit.task = null;
 
+                List<Property> rems = new List<Property>();
+                foreach (Property pr in unit.location.properties)
+                {
+                    if (pr.proto.isImmunity) { rems.Add(pr); }
+                }
+                foreach (Property pr in rems)
+                {
+                    pr.proto.endProperty(unit.location, pr);
+                    unit.location.properties.Remove(pr);
+                }
+
                 Society soc = (Society)unit.location.soc;
                 soc.crisisPlague = "Plagues are spreading";
                 soc.crisisPlagueLong = "Diseases are spreading throughout our lands, carried by some unknown ghastly apparition";

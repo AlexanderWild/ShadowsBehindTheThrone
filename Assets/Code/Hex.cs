@@ -93,6 +93,8 @@ namespace Assets.Code
             float dist = Math.Abs(basic);//1 to 1
             dist /= 0.8f;
             float hab = 1 - dist;
+            if (this.location != null && this.location.isCoastal) { hab += (float)map.param.map_coastalHabBonus; }
+            if (hab > 1) { hab = 1; }
             if (hab < 0) { hab = 0; }
             return hab;
         }

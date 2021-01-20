@@ -21,6 +21,7 @@ namespace Assets.Code
         public int securityIncrease = 0;
         public double plagueThreat = 0;
         public bool isDisease = false;
+        public bool isImmunity = false;
 
         public Property_Prototype(Map map, string name)
         {

@@ -26,10 +26,10 @@ namespace Assets.Code
             u.task = task;
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " begins spreading disease within " + u.location.getName() + "."
-                + " Once they complete this task, they will spread disease from neighbouring locations to this one. This bypasses immunity.",
+                + " Once they complete this task, they will spread disease from neighbouring locations to this one. This removes all immunity.",
                 u.location.map.world.wordStore.lookup("ABILITY_RED_OUTBREAK"),5);
-
         }
+
         public override bool castable(Map map, Unit u)
         {
             if (u.location.settlement == null) { return false; }

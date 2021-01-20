@@ -53,7 +53,10 @@ namespace Assets.Code
         public virtual int getMaxPopulation()
         {
             double multiplier = location.map.param.city_popMaxPerHabilitabilityMinor;
+            if (this is Set_City) { multiplier = location.map.param.city_popMaxPerHabilitability; }
             int maxPop = (int)Math.Ceiling(0.1 + ((location.hex.getHabilitability() - location.map.param.mapGen_minHabitabilityForHumans) * multiplier));
+            maxPop += location.map.param.city_popMin;
+            //if (maxPop < location.map.param.city_popMin) { maxPop = location.map.param.city_popMin; }
             return maxPop;
         }
 

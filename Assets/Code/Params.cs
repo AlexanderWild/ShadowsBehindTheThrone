@@ -21,6 +21,7 @@ namespace Assets.Code
         public int mapGen_maxBrushSize = 5;
         public int mapGen_burnInSteps = 150;
         public float map_tempTemperatureReversion = 0.002f;
+        public double map_coastalHabBonus = 0.1;
 
         public int useAwareness = 1;
         public int usePaladins = 0;
@@ -172,13 +173,14 @@ namespace Assets.Code
         public int society_lockdownBuffDuration = 12;
         public double society_electoralPrestigeWeight = 2;//Comparing prestige to liking. If we want 50 prestige to equal 100 liking, go for 2
         public int society_prestigeFromPlagueRedDeath = -10;
-        public int society_crisis_plagueCrisisCooldown = 12;
+        public int society_crisis_plagueCrisisCooldown = 8;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;
         public double threat_temporaryDreadDecay = 0.97;
         public double threat_evidencePresented = 25;
         public double threat_agentFearDecayPerTurn = 2;
+        public int threat_smallSettlementVsDisease = 50;
         public double victory_targetEnshadowmentAvrg = 0.75;
 
         public double dark_evilThreatMult = 2;
@@ -318,15 +320,15 @@ namespace Assets.Code
         public double trait_basic_undesirability = -30;
         public double trait_aware_awarenessMult = 1.5;
 
-        public double city_popMaxPerHabilitability = 100;
-        public double city_popMaxPerHabilitabilityCoastal = 150;
-        public double city_popMaxPerHabilitabilityMinor = 50;
+        public double city_popMaxPerHabilitability = 50;
+        public double city_popMaxPerHabilitabilityMinor = 25;
         public double city_infraDmg = 5;
 
-        public int city_level_metropole = 90;
-        public int city_level_city = 60;
-        public int city_level_town = 40;
-        public int city_level_village = 20;
+        public int city_level_metropole = 50;
+        public int city_level_city = 35;
+        public int city_level_town = 25;
+        public int city_level_village = 18;
+        public int city_popMin = 16;
         public double temporaryThreatConversion = 0.01;
         public int war_battleDeadDur = 4;
         public int combat_popDamageMax = 5;
@@ -388,8 +390,8 @@ namespace Assets.Code
         public double unit_knightCombatBonus = 1.5;
         public double unit_agentCombatBonus = 1.25;
 
-        public int unit_rd_redDeathPlagueDur = 16;
-        public double unit_rd_redDeathPlaguePSpread = 0.075;
+        public int unit_rd_redDeathPlagueDur = 15;
+        public double unit_rd_redDeathPlaguePSpread = 0.05;
         public int unit_rd_redDeathPlagueImmunityDur = 16;
 
         public void saveToFile()

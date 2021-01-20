@@ -13,6 +13,13 @@ namespace Assets.Code
                 + " The disease will spread between cities (unless quarantined or immune), and will decrease the city's population by 1 per turn.",
                 u.location.map.world.wordStore.lookup("ABILITY_RED_DEATH_ORIGIN"),5);
 
+            if (u.location.soc != null && u.location.soc is Society)
+            {
+                Society soc = (Society)u.location.soc;
+                soc.crisisPlague = "Plagues have appeared in our lands";
+                soc.crisisPlagueLong = "Diseases are spreading throughout our lands, carried by some unknown ghastly apparition";
+            }
+
             double amount = map.param.unit_majorEvidence;
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;

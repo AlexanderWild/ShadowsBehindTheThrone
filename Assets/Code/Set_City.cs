@@ -107,16 +107,17 @@ namespace Assets.Code
             }
         }
 
-        public override int getMaxPopulation()
-        {
-            double multiplier = location.map.param.city_popMaxPerHabilitability;
-            if (location.isCoastal)
-            {
-                multiplier = location.map.param.city_popMaxPerHabilitabilityCoastal;
-            }
-            int maxPop = (int)Math.Ceiling(0.1 + ((location.hex.getHabilitability()-location.map.param.mapGen_minHabitabilityForHumans) * multiplier));
-            return maxPop;
-        }
+        //public override int getMaxPopulation()
+        //{
+        //    double multiplier = location.map.param.city_popMaxPerHabilitability;
+        //    if (location.isCoastal)
+        //    {
+        //        multiplier = location.map.param.city_popMaxPerHabilitabilityCoastal;
+        //    }
+        //    int maxPop = (int)Math.Ceiling(0.1 + ((location.hex.getHabilitability()-location.map.param.mapGen_minHabitabilityForHumans) * multiplier));
+        //    if (maxPop < location.map.param.city_popMin) { maxPop = location.map.param.city_popMin; }
+        //    return maxPop;
+        //}
 
         public override string getFlavour()
         {

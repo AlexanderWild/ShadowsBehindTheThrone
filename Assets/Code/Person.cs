@@ -668,6 +668,17 @@ namespace Assets.Code
                             item.threat += worldU;
                             item.reasons.Add(new ReasonMsg("Neighbouring nation plagues (+" + (int)(worldU) + ")", (int)(worldU)));
                         }
+
+                        if (this.getLocation() != null && this.getLocation().settlement is SettlementHuman)
+                        {
+                            int settlementSize = ((SettlementHuman)this.getLocation().settlement).population;
+                            if (item.threat > 0 && settlementSize <= map.param.unit_rd_redDeathPlagueDur)
+                            {
+                                item.threat += map.param.threat_smallSettlementVsDisease;
+                                item.reasons.Add(new ReasonMsg("My small settlement could easily be wiped out by plague (+" 
+                                    + (int)(map.param.threat_smallSettlementVsDisease) + ")", (int)(map.param.threat_smallSettlementVsDisease)));
+                            }
+                        }
                         if (item.threat > 200) { item.threat = 200; }
                         if (item.threat < 0) { item.threat = 0; }
                     }

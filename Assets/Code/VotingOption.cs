@@ -126,6 +126,12 @@ namespace Assets.Code
                 if (index == VoteIssue_Crisis_WarThreatens.AGENT_TO_KNIGHT) { return "Make " + unit.getName() + " a Knight"; }
                 if (index == VoteIssue_Crisis_WarThreatens.AGENT_TO_BASIC) { return "Make " + unit.getName() + " an Agent"; }
             }
+            if (issue is VoteIssue_Crisis_Plague)
+            {
+                if (index == VoteIssue_Crisis_Plague.NO_RESPONSE) { return "No Response"; }
+                if (index == VoteIssue_Crisis_Plague.AGENT_TO_MEDIC) { return "Make " + unit.getName() + " an Apothecarian"; }
+                if (index == VoteIssue_Crisis_Plague.AGENT_TO_BASIC) { return "Make " + unit.getName() + " an Agent"; }
+            }
 
             if (person != null) { reply += person.getFullName() + " "; }
             if (location != null) { reply += location.getName() + " "; }
