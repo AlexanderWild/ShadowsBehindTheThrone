@@ -468,7 +468,7 @@ namespace Assets.Code
             double worstMilitaryFear = 0;
             foreach (ThreatItem item in person.threatEvaluations)
             {
-                if (item.responseCode == ThreatItem.RESPONSE_MILITARY)
+                if (item.group != null)
                 {
                     if (item.threat > worstMilitaryFear) { worstMilitaryFear = item.threat; }
                 }

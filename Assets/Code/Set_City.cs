@@ -62,7 +62,7 @@ namespace Assets.Code
                 name = "Metropole of " + location.shortName;
                 title.titleF = "Countess";
                 title.titleM = "Count";
-                basePrestige = 30;
+                basePrestige = 25;
                 defensiveStrengthMax = 20;
                 militaryRegenAdd = 4;
                 militaryCapAdd = 40;
@@ -72,7 +72,7 @@ namespace Assets.Code
                 name = "City of " + location.shortName;
                 title.titleF = "Countess";
                 title.titleM = "Count";
-                basePrestige = 25;
+                basePrestige = 20;
                 defensiveStrengthMax = 16;
                 militaryRegenAdd = 3;
                 militaryCapAdd = 30;

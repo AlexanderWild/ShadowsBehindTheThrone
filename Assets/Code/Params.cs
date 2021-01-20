@@ -69,7 +69,7 @@ namespace Assets.Code
         public int overmind_enthrallmentUseRegainPeriod = 32;
         public int overmind_maxEnthralled = 2;
 
-        public double econ_multFromBuff = 1.33;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
+        public double econ_multFromBuff = 1.2;//How much to mult/div by if a society rules in favour or against a given economic trait being priviledged/penalised
 
         public double relObj_suspicionLimiterMult = 2.5;
         public double relObj_defaultLiking = 0;
@@ -122,6 +122,7 @@ namespace Assets.Code
         public double utility_swapAgentRolesMult = 100;
         public double utility_selfInterestFromThreat = -0.5;
         public double utility_plagueResponseMultPerRiskItem = 0.5;
+        public double utility_singleUseCure = 0.66;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;
@@ -326,12 +327,12 @@ namespace Assets.Code
         public double city_popMaxPerHabilitability = 50;
         public double city_popMaxPerHabilitabilityMinor = 25;
         public double city_infraDmg = 5;
-
-        public int city_level_metropole = 50;
+        public int city_level_metropole = 45;
         public int city_level_city = 35;
         public int city_level_town = 25;
         public int city_level_village = 18;
-        public int city_popMin = 16;
+        public int city_popMin = 12;
+
         public double temporaryThreatConversion = 0.01;
         public int war_battleDeadDur = 4;
         public int combat_popDamageMax = 5;
@@ -396,7 +397,8 @@ namespace Assets.Code
         public int unit_rd_redDeathPlagueDur = 20;
         public double unit_rd_redDeathPlaguePSpread = 0.05;
         public int unit_rd_redDeathPlagueImmunityDur = 16;
-
+        public int unit_rd_redDeathMilCapHit = -10;
+        public int ability_redDeath_cureCooldown = 8;
         public void saveToFile()
         {
             StreamWriter writer = new StreamWriter("params.txt");

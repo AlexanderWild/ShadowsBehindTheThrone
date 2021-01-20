@@ -16,12 +16,6 @@ namespace Assets.Code
 
         public enum formTypes { NONE, HOSTILE_NATION,ENSHADOWED_NOBLES, AGENTS,PLAGUE }
         public formTypes form = formTypes.HOSTILE_NATION;
-
-        public int responseCode = RESPONSE_MILITARY;
-        public static int RESPONSE_DARKNESSWITHIN = 0;
-        public static int RESPONSE_MILITARY = 1;
-        public static int RESPONSE_SPECIAL = 2;
-        public static string[] responseNames = new string[] { "Introspection","Military","Special"};
         
         public double threatBeforeTemporaryDread;
 

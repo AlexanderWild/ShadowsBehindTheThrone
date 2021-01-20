@@ -17,6 +17,7 @@ namespace Assets.Code
             this.stackStyle = stackStyleEnum.TO_MAX_CHARGE;
             this.prestigeChange = map.param.society_prestigeFromPlagueRedDeath;
             this.plagueThreat = 8;
+            this.milCapAdd = map.param.unit_rd_redDeathMilCapHit;
         }
 
         public override void turnTick(Property p, Location location)
@@ -87,7 +88,8 @@ namespace Assets.Code
 
         internal override string getDescription()
         {
-            return "Red death";
+            return "The disease known as the Red death is present in this settlement. The population will decrease by 1 each turn (the settlement will fall if it reaches 0), and the " +
+                "military unit supported by this settlement has reduced maximum HP.";
         }
     }
 }

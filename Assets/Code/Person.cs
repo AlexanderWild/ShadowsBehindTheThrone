@@ -101,17 +101,14 @@ namespace Assets.Code
             //Add permanent threats
             threat_agents = new ThreatItem(map, this);
             threat_agents.form = ThreatItem.formTypes.AGENTS;
-            threat_agents.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
             threatEvaluations.Add(threat_agents);
 
             threat_enshadowedNobles = new ThreatItem(map, this);
             threat_enshadowedNobles.form = ThreatItem.formTypes.ENSHADOWED_NOBLES;
-            threat_enshadowedNobles.responseCode = ThreatItem.RESPONSE_DARKNESSWITHIN;
             threatEvaluations.Add(threat_enshadowedNobles);
 
             threat_plague = new ThreatItem(map, this);
             threat_plague.form = ThreatItem.formTypes.PLAGUE;
-            threat_plague.responseCode = ThreatItem.RESPONSE_SPECIAL;
             threatEvaluations.Add(threat_plague);
 
             if (!map.simplified)

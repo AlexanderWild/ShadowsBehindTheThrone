@@ -134,7 +134,7 @@ namespace Assets.Code
             double introGreatestThreat = 0;
             if (greatestThreat != null)
             {
-                if (greatestThreat.responseCode == ThreatItem.RESPONSE_DARKNESSWITHIN)
+                if (greatestThreat.form == ThreatItem.formTypes.AGENTS || greatestThreat.form == ThreatItem.formTypes.ENSHADOWED_NOBLES)
                 {
                     introGreatestThreat = World.staticMap.param.utility_greatestThreatDelta;
                     introUtility += introGreatestThreat;

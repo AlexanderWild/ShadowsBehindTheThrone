@@ -25,7 +25,7 @@ namespace Assets.Code
 
         internal override string getDescription()
         {
-            return "Red death immune";
+            return "This location is Red death immune. The disease cannot spread here by normal means (but you may still be able to transmit it here yourself).";
         }
     }
 }

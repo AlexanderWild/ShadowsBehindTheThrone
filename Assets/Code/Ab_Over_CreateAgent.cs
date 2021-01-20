@@ -35,7 +35,8 @@ namespace Assets.Code
             "and making them your accomplices in your rise to power.";
 
         public static string DESC_REDDEATH = "The Masque of the Red Death is a spirit of the dread disease. The disease will slowly eradicate human settlements by decreasing their population," +
-            "but it is possible the nobles' panic and selfishness will harm them more than the disease ever could, as they squabble over who and where to protect, and over limited cures.";
+            " and cripples any army which relied on the infected settlements for support, leaving the nations weakened in the face of outside threats. If played as a political tool, however, " +
+            " it is possible the nobles' panic and selfishness will harm them more than the disease ever could, as they squabble over who and where to protect, and over limited cures.";
 
 
         public override void cast(Map map, Hex hex)

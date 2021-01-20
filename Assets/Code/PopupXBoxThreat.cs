@@ -54,7 +54,6 @@ namespace Assets.Code
                 }
 
                 t += "\nTotal Threat: " + (int)(item.threat);
-                t += "\n\nResponse: " + ThreatItem.responseNames[item.responseCode];
 
                 mainText.text = t;
             }else

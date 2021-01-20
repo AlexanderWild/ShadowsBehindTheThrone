@@ -39,11 +39,11 @@ namespace Assets.Code
         public double getMilitaryCap()
         {
             double cap = militaryCapAdd;
+            bool wasNonZero = cap > 0;
             foreach (Property p in location.properties)
             {
                 cap += p.proto.milCapAdd;
             }
-            bool wasNonZero = cap > 0;
             if (title != null && title.heldBy != null)
             {
                 foreach (Trait trait in title.heldBy.traits)
@@ -147,6 +147,7 @@ namespace Assets.Code
             if (attachedUnit != null)
             {
                 attachedUnit.maxHp = (int)(this.getMilitaryCap());
+                if (attachedUnit.hp > attachedUnit.maxHp) { attachedUnit.hp = attachedUnit.maxHp; }
             }
             //Reset the values to what the society demands (accomodate trait changes and buffs and suchlikes)
             if (embeddedUnit != null && location.soc is Society)
