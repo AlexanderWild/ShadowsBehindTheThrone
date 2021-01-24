@@ -18,6 +18,7 @@ namespace Assets.Code
             abilities.Add(new Abu_Red_Origin());
             abilities.Add(new Abu_Red_Outbreak());
             abilities.Add(new Abu_Red_SingleUseCure());
+            abilities.Add(new Abu_Red_LethalStrain());
             abilities.Add(new Abu_Base_Recruit());
             abilities.Add(new Abu_Base_ChangeIdentity());
         }
