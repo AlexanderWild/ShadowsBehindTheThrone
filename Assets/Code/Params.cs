@@ -260,9 +260,12 @@ namespace Assets.Code
         public double ability_provincialSentimentLikingChangeNegative = -20;
         public int ability_provincialSentimentLikingChangeCooldown = 20;
         public double ability_coldAsDeathTempChange = -0.15;
+        public double ability_iceBloodTempChange = -0.25;
         public double ability_deathOfTheSunTempChange = -0.003;
         public int ability_coldAsDeathCost = 5;
         public int ability_coldAsDeathCooldown = 10;
+        public int ability_iceBloodCost = 10;
+        public int ability_iceBloodCooldown = 5;
         public int ability_deathOfTheSunCost = 0;
         public int ability_deathOfTheSunCooldown = 10;
         public double ability_denounceLeaderLikingMult = 0.5;

@@ -137,6 +137,8 @@ namespace Assets.Code
             {
                 transientTempDelta -= 0.01f;
             }
+
+            map.data_globalTempSum += getTemperature();
         }
 
         public override string ToString()

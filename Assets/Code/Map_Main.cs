@@ -26,6 +26,8 @@ namespace Assets.Code
         public List<Unit> units = new List<Unit>();
         public double data_avrgEnshadowment;
         public int data_nSocietyLocations;
+        public double data_globalTempSum = 0;
+        public double data_globalTempInitial = 0;
         public UnitManager unitManager;
         public double worldPanic;
         public int personIndexCount = 0;

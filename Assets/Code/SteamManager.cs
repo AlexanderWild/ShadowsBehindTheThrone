@@ -19,7 +19,7 @@ namespace Assets.Code
 		public static bool shouldStoreStats = false;
 		public static bool s_EverInitialized = false;
 
-		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH, MERCANTILISM,DARK_EMPIRE, BROKEN_SOUL };
+		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH, MERCANTILISM,DARK_EMPIRE, BROKEN_SOUL,WORLD_UNDER_ICE };
 		public static string[] achievementKeys = new string[]
 		{
 			"VICTORY",
@@ -32,7 +32,9 @@ namespace Assets.Code
 			"MERCANTILISM",
 			"DARK_EMPIRE",
 			"BROKEN_SOUL",
+			"WORLD_UNDER_ICE",
 		};
+		public static bool[] hasAchieved;
 
 		public static SteamManager s_instance;
 		protected static SteamManager Instance
@@ -153,6 +155,8 @@ namespace Assets.Code
 
 			s_EverInitialized = true;
 			World.log("Steamworks Awake method returned successfully");
+
+			hasAchieved = new bool[achievementKeys.Length];
 		}
 
 		// This should only ever get called on first load and after an Assembly reload, You should never Disable the Steamworks Manager yourself.
@@ -205,6 +209,8 @@ namespace Assets.Code
 			if (World.staticMap == null || World.staticMap.automatic) { return; }//Can't unlock achievements in automatic play mode
 			if (!apiShutdown && s_EverInitialized)
 			{
+				if (hasAchieved[(int)key]) { return; }
+				hasAchieved[(int)key] = true;
 				SteamUserStats.SetAchievement(achievementKeys[(int)key]);
 				shouldStoreStats = true;
 			}

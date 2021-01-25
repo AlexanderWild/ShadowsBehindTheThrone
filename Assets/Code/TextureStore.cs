@@ -92,6 +92,7 @@ namespace Assets.Code
         public Sprite icon_eyes;
         public Sprite icon_moon;
         public Sprite icon_fog;
+        public Sprite icon_snow;
         public Sprite icon_vampire;
         public Sprite icon_coins;
         public Sprite icon_doctor;

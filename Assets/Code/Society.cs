@@ -570,56 +570,6 @@ namespace Assets.Code
             //Expansion can only happen at peace time
             if (!hasWar)
             {
-                //foreach (Location loc in map.locations)
-                //{
-                //    if (loc.soc == this)
-                //    {
-                //        if (loc.isForSocieties && loc.settlement == null && loc.isForSocieties && loc.hex.getHabilitability() >= map.param.mapGen_minHabitabilityForHumans)
-                //        {
-                //            if (loc.isMajor)
-                //            {
-                //                loc.settlement = new Set_City(loc);
-                //            }
-                //            else
-                //            {
-                //                int q = 0;
-                //                double[] weights = new double[] { 2, 1, 2 };
-                //                double roll = 0;
-                //                for (int i = 0; i < weights.Length; i++) { roll += weights[i]; }
-                //                roll *= Eleven.random.NextDouble();
-                //                for (int i = 0; i < weights.Length; i++) { roll -= weights[i]; if (roll <= 0) { q = i; break; } }
-
-                //                if (q == 0)
-                //                {
-                //                    loc.settlement = new Set_Abbey(loc);
-                //                }
-                //                else if (q == 1)
-                //                {
-                //                    loc.settlement = new Set_University(loc);
-                //                }
-                //                else
-                //                {
-                //                    loc.settlement = new Set_Fort(loc);
-                //                }
-                //            }
-                //        }
-                //    }
-                //    else
-                //    {
-                //        //Expand into lost territory
-                //        foreach (Location l2 in loc.getNeighbours())
-                //        {
-                //            if (l2.soc == null && l2.isForSocieties && l2.hex.getHabilitability() > map.param.mapGen_minHabitabilityForHumans)
-                //            {
-                //                if (Eleven.random.NextDouble() < map.param.society_pExpandIntoEmpty)
-                //                {
-                //                    l2.soc = this;
-                //                }
-                //            }
-                //        }
-                //    }
-                //}
-
                 //Drop your naval/desert presence
                 foreach (Location loc in map.locations)
                 {

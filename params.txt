@@ -229,9 +229,12 @@ ability_provincialSentimentLikingChangePositive: 10
 ability_provincialSentimentLikingChangeNegative: -20
 ability_provincialSentimentLikingChangeCooldown: 20
 ability_coldAsDeathTempChange: -0.15
+ability_iceBloodTempChange: -0.25
 ability_deathOfTheSunTempChange: -0.003
 ability_coldAsDeathCost: 5
 ability_coldAsDeathCooldown: 10
+ability_iceBloodCost: 10
+ability_iceBloodCooldown: 5
 ability_deathOfTheSunCost: 0
 ability_deathOfTheSunCooldown: 10
 ability_denounceLeaderLikingMult: 0.5

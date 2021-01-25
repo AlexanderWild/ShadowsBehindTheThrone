@@ -84,7 +84,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(Map map)
         {
-            return map.world.textureStore.icon_fog;
+            return map.world.textureStore.icon_snow;
         }
     }
 }

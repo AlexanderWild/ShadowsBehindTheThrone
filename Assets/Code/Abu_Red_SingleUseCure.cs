@@ -10,7 +10,8 @@ namespace Assets.Code
         public override void castInner(Map map, Unit u)
         {
             Property.addProperty(map, u.location, "Red Death");
-            u.location.map.world.prefabStore.popImgMsg("SINGLE USE DESC.",
+            u.location.map.world.prefabStore.popImgMsg("The nobles of " + u.location.soc.getName() + " are now faced with a terrible choice. One, and only one, noble with the disease can be cure. But who to choose?" +
+                " They must vote on who is saved, giving you ample room to cause conflict and resentment, especially if the nobles are corrupt.",
                 u.location.map.world.wordStore.lookup("ABILITY_RED_SINGLE_USE_CURE"), 5);
 
             if (u.location.soc != null && u.location.soc is Society)

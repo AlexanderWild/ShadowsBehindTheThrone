@@ -235,6 +235,12 @@ namespace Assets.Code
                     availableEnthrallments += 1;
                 }
             }
+
+            if (map.data_globalTempSum <= map.data_globalTempInitial / 2)
+            {
+                SteamManager.unlockAchievement(SteamManager.achievement_key.WORLD_UNDER_ICE);
+            }
+            map.data_globalTempSum = 0;
         }
 
         public void automatic()
@@ -260,6 +266,13 @@ namespace Assets.Code
                 if (loc.soc is Society && loc.settlement != null && loc.settlement.isHuman)//Note we don't count ruins, as they will quickly be lost
                 {
                     nStartingHumanSettlements += 1;
+                }
+            }
+            foreach (Hex[] hexRow in map.grid)
+            {
+                foreach (Hex hex in hexRow)
+                {
+                    map.data_globalTempInitial += hex.getTemperature();
                 }
             }
             availableEnthrallments = Math.Min(2, map.param.overmind_maxEnthralled);
