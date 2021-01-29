@@ -115,15 +115,21 @@ namespace Assets.Code
             if (p.society.socType.periodicElection())
             {
                 Title possibleOpt = null;
-                Title_Sovreign sov = new Title_Sovreign(p.society);
-                if (sov.getEligibleHolders(p.society).Contains(p))
+                foreach (Title t in soc.titles)
                 {
-                    possibleOpt = sov;
-                }
-                else
-                {
-                    Title_ProvinceRuler prov = new Title_ProvinceRuler(p.society, p.getLocation().province);
-                    if (prov.getEligibleHolders(p.society).Contains(p)) { possibleOpt = prov; }
+                    if (t is Title_Sovreign)
+                    {
+                        if (t.getEligibleHolders(p.society).Contains(p))
+                        {
+                            possibleOpt = t;
+                        }
+                    }else if (t is Title_ProvinceRuler && possibleOpt == null)
+                    {
+                        if (t.getEligibleHolders(p.society).Contains(p))
+                        {
+                            possibleOpt = t;
+                        }
+                    }
                 }
                 if (possibleOpt != null) 
                 {

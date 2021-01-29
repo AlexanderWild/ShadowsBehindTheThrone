@@ -177,7 +177,7 @@ namespace Assets.Code
         public int society_lockdownBuffDuration = 12;
         public double society_electoralPrestigeWeight = 2;//Comparing prestige to liking. If we want 50 prestige to equal 100 liking, go for 2
         public int society_prestigeFromPlagueRedDeath = -10;
-        public int society_crisis_plagueCrisisCooldown = 8;
+        public int society_crisis_plagueCrisisCooldown = 10;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 24;
@@ -192,7 +192,7 @@ namespace Assets.Code
         public double dark_fishmanStartingThreatMult = -0.25;
 
         public int ability_enthrallUnitCost = 0;
-        public int ability_disruptAgentCost = 10;
+        public int ability_disruptAgentCost = 8;
 
         public int ability_uncannyGlamourEvidence = 10;
         public int ability_uncannyGlamourGain = 15;
@@ -379,6 +379,7 @@ namespace Assets.Code
         public int unit_establishNewSettlementTime = 8;
         public double unit_merchantChanceToExpandIntoNeighbouring = 0.25;
         public double unit_merchantsPerCity = 0.125;
+        public int unit_merchant_corruptGoldCost = 35;
 
 
         public int unit_seeker_nReqSecrets = 12;

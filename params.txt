@@ -151,7 +151,7 @@ society_lockdownPrestigeHit: -10
 society_lockdownBuffDuration: 12
 society_electoralPrestigeWeight: 2
 society_prestigeFromPlagueRedDeath: -10
-society_crisis_plagueCrisisCooldown: 8
+society_crisis_plagueCrisisCooldown: 10
 temporaryThreatDecay: 0.95
 threat_takeLocation: 24
 threat_temporaryDreadDecay: 0.97
@@ -163,7 +163,7 @@ dark_evilThreatMult: 2
 dark_fleshThreatMult: 2
 dark_fishmanStartingThreatMult: -0.25
 ability_enthrallUnitCost: 0
-ability_disruptAgentCost: 10
+ability_disruptAgentCost: 8
 ability_uncannyGlamourEvidence: 10
 ability_uncannyGlamourGain: 15
 ability_uncannyGlamourCost: 10
@@ -340,6 +340,7 @@ unit_promoteCooldown: 32
 unit_establishNewSettlementTime: 8
 unit_merchantChanceToExpandIntoNeighbouring: 0.25
 unit_merchantsPerCity: 0.125
+unit_merchant_corruptGoldCost: 35
 unit_seeker_nReqSecrets: 12
 unit_seeker_nCreatedSecrets: 7
 unit_seeker_uncoverTime: 5

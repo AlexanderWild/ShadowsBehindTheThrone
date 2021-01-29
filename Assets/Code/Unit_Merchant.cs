@@ -19,6 +19,7 @@ namespace Assets.Code
             maxHp = 2;
             hp = 2;
             abilities.Add(new Abu_Base_Infiltrate());
+            abilities.Add(new Abu_Merch_CorruptNoble());
             abilities.Add(new Abu_Merch_LoadCargo());
             abilities.Add(new Abu_Merch_SellCargo());
             abilities.Add(new Abu_Merch_SpendWealth());
