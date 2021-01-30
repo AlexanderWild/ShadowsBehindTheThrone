@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Assets.Code
         public World world;
         public AudioSource source;
         public AudioClip playing;
+        public AudioClip titleTheme;
         public List<AudioClip> loadedMusic = new List<AudioClip>();
         public int[] order;
         public int index;
@@ -38,7 +40,10 @@ namespace Assets.Code
                         }
                         AudioClip clip = www.GetAudioClip();
                         //clip.LoadAudioData();
-                        loadedMusic.Add(clip);
+                        if (filename.Contains("TITLE.wav"))
+                            titleTheme = clip;
+                        else
+                            loadedMusic.Add(clip);
                     }
                 }
             }
@@ -72,9 +77,36 @@ namespace Assets.Code
             source.Play();
         }
 
+        public void playTheme()
+        {
+            source.clip = titleTheme;
+            source.Play();
+        }
+
+        private static IEnumerator fadeSource(AudioSource s, float seconds)
+        {
+            float start = s.volume;
+
+            float max = seconds / Time.deltaTime;
+            for (float n = 0f; n <= max; n += 1f)
+            {
+                s.volume = Mathf.Lerp(start, 0, n / max);
+                yield return null;
+            }
+
+            s.Stop();
+            s.clip = null;
+        }
+
+        public void stopTheme()
+        {
+            StartCoroutine(fadeSource(source, 2f));
+        }
+
         public void Update()
         {
-            source.volume = World.musicVolume/100f;
+            if (source.clip != titleTheme)
+                source.volume = World.musicVolume/100f;
 
             if (!doneLoading) { return; }
             if (loadedMusic.Count == 0) { return; }

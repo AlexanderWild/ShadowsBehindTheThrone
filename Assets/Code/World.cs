@@ -86,7 +86,7 @@ namespace Assets.Code
             potentialGods.Add(new God_Omni());
 
             AchievementManager.setup();
-
+            musicPlayer.playTheme();
         }
 
 
@@ -243,6 +243,8 @@ namespace Assets.Code
             ui.setToVoting();
             ui.setToWorld();
             //bQuicksave();
+
+            musicPlayer.stopTheme();
 
             if (map.simplified)
             {
