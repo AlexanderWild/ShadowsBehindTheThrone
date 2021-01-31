@@ -40,7 +40,7 @@ namespace Assets.Code
                         }
                         AudioClip clip = www.GetAudioClip();
                         //clip.LoadAudioData();
-                        if (filename.Contains("TITLE.wav"))
+                        if (filename.Contains("TITLE.ogg"))
                             titleTheme = clip;
                         else
                             loadedMusic.Add(clip);
