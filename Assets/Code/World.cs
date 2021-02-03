@@ -56,7 +56,7 @@ namespace Assets.Code
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
         public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
         public static int versionNumber = 16;
-        public static int subversionNumber = 1;
+        public static int subversionNumber = 2;
 
         public static bool cheat_globalCooling = false;
 
