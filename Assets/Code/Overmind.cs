@@ -124,19 +124,14 @@ namespace Assets.Code
             reasons.Add(new ReasonMsg("Evidence Discovered", panicFromCluesDiscovered * 100));
 
             double nHumans = map.data_nSocietyLocations;
-            if (nStartingHumanSettlements == 0)
+            if (nStartingHumanSettlements > 0)
             {
-                throw new Exception("Zero human starting settlements were recorded at map start, world panic cannot be computed.");
+                double extinction = (nStartingHumanSettlements - nHumans) / nStartingHumanSettlements;
+                extinction *= map.param.panic_panicAtFullExtinction;
+                if (extinction < 0) { extinction = 0; }//In the off chance they reclaim something
+                panic += extinction;
+                reasons.Add(new ReasonMsg("Lost Settlements", extinction * 100));
             }
-            if (nStartingHumanSettlements < 0)
-            {
-                throw new Exception("FEWER THAN ZERO human starting settlements were recorded at map start, world panic cannot be computed. Anomaly.");
-            }
-            double extinction = (nStartingHumanSettlements - nHumans)/nStartingHumanSettlements;
-            extinction *= map.param.panic_panicAtFullExtinction;
-            if (extinction < 0) { extinction = 0; }//In the off chance they reclaim something
-            panic += extinction;
-            reasons.Add(new ReasonMsg("Lost Settlements", extinction*100));
 
             if (panic > 1) { panic = 1; }
             if (panic < 0) { panic = 0; }
