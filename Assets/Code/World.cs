@@ -49,7 +49,7 @@ namespace Assets.Code
         public List<God> chosenGods = new List<God>();
         public float lastFrame;
 
-        public static bool advancedEdition = true;
+        public static bool advancedEdition = false;
         public static bool useHorseman = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
@@ -176,7 +176,7 @@ namespace Assets.Code
         {
             Log("Called startup");
             Params param = new Params();
-            param.loadFromFile();
+            //param.loadFromFile();
 
             //Apply the choices the user made in the choice screen
             param.overmind_powerRegen *= opts.powerGainPercent / 100f;
@@ -228,7 +228,7 @@ namespace Assets.Code
             {
                 map.param.option_useAdvancedGraphics = 1;
             }
-            PopupIOOptions.load(map);
+            //PopupIOOptions.load(map);
             if (!advancedEdition)//Force it down, even if the IO options deceive you, if you are not actually the advanced edition
             {
                 map.param.option_useAdvancedGraphics = 0;
@@ -492,7 +492,7 @@ namespace Assets.Code
             Map rescueMap = World.staticMap;
 
             if (checkSaveFolder() == false) {
-                prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
+                prefabStore.popMsg("Unable to locate directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
                 return;
             }
             if (!hasWritePermission(saveFolder))
