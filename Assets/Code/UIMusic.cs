@@ -110,7 +110,7 @@ namespace Assets.Code
 
             if (!doneLoading) { return; }
             if (loadedMusic.Count == 0) { return; }
-            //if (!PopupIOOptions.hasLoadedOpts) { return; }
+            if (!PopupIOOptions.hasLoadedOpts) { return; }
             if (source.isPlaying) { return; }
             if (World.musicVolume == 0) { return; }
 

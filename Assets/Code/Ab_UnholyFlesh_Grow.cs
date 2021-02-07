@@ -49,7 +49,7 @@ namespace Assets.Code
 
         public override int getCost()
         {
-            return 5;
+            return World.staticMap.param.ability_fleshGrowCost;
         }
 
         public override string getDesc()

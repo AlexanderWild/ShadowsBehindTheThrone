@@ -228,6 +228,8 @@ namespace Assets.Code
         public int ability_fleshScreamThreatAdd = 10;
         public int ability_fleshScreamCost = 7;
         public int ability_fleshScreamSanity = 4;
+        public int ability_fleshGrowCost = 5;
+        public int ability_fleshSeedCost = 12;
         public int ability_informationBlackoutCost = 4;
         public int ability_informationBlackoutDuration = 15;
         public int ability_FishmanCultDuration = 15;

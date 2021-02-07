@@ -711,7 +711,7 @@ namespace Assets.Code
         }
         public void popMsgTreeBackground(string words)
         {
-            if (world.displayMessages == false) { return; }
+            //if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabMsgTreeBackground) as GameObject;
             PopupMsg specific = obj.GetComponent<PopupMsg>();

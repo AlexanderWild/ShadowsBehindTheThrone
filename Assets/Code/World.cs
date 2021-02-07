@@ -49,7 +49,7 @@ namespace Assets.Code
         public List<God> chosenGods = new List<God>();
         public float lastFrame;
 
-        public static bool advancedEdition = false;
+        public static bool advancedEdition = true;
         public static bool useHorseman = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
@@ -228,7 +228,7 @@ namespace Assets.Code
             {
                 map.param.option_useAdvancedGraphics = 1;
             }
-            //PopupIOOptions.load(map);
+            PopupIOOptions.load(map);
             if (!advancedEdition)//Force it down, even if the IO options deceive you, if you are not actually the advanced edition
             {
                 map.param.option_useAdvancedGraphics = 0;
@@ -250,6 +250,10 @@ namespace Assets.Code
             if (map.simplified)
             {
                 printSimplifiedMessage();
+            }
+            else if (map.automatic)
+            {
+                map.overmind.autoAI.popAIModeMessage();
             }
         }
 

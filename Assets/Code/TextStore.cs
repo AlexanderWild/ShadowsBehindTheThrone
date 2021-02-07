@@ -139,6 +139,7 @@ namespace Assets.Code
 
         public void load()
         {
+            World.log("Loading text");
             loadFlavour();
             string[] markovFood = System.IO.File.ReadAllLines(".\\data\\words\\chineseCities.txt");
             string[] markovFood2 = System.IO.File.ReadAllLines(".\\data\\words\\frenchCities.txt");

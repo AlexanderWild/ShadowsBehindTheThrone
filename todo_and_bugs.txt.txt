@@ -1,5 +1,9 @@
 	High criticality:
 
+-WASD isn't WASD on all keyboards, nerd. Get a keybinding thingy
+
+-Some guy wants an anim speed setting
+
 -Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message
 	state == world
 	Couldn't reproduce
@@ -7,11 +11,6 @@
 -Leftover graphical properties, by the look of it
 	(couldn't replicate?)
 
--Maybe they rebuild lost cities too fast
-
--Add scrolling to voting and ability menues
-
--Fishmen need an ability to get the cult to raise infiltration level
 
 	Medium criticality:
 
@@ -26,9 +25,6 @@
 
 -Traits should affect infiltration difficulty
 
--For whatever reaeson when a war against deep ones ended they ruins changed hands to a human civ on the other side of the map
-	Repeated. Unsure of cause
-	
 
 
 	Low criticality:
