@@ -11,7 +11,7 @@ namespace Assets.Code
         public Overmind overmind;
         public Map map;
 
-        public enum aiMode { TESTDARK, FLESH };
+        public enum aiMode { TESTDARK, FLESH,FLESH_ONLY };
 
         public aiMode currentMode = aiMode.TESTDARK;
 
@@ -28,6 +28,10 @@ namespace Assets.Code
                 ai_testDark();
             }
             if (currentMode == aiMode.FLESH)
+            {
+                ai_testFlesh();
+            }
+            if (currentMode == aiMode.FLESH_ONLY)
             {
                 ai_testFlesh();
             }
@@ -145,6 +149,10 @@ namespace Assets.Code
                 {
                     agent_Flesh();
                 }
+                else if (currentMode == aiMode.FLESH_ONLY)
+                {
+                    //No agents, only kill
+                }
             }
         }
 
@@ -235,6 +243,7 @@ namespace Assets.Code
             List<string> msgs = new List<string>();
             msgs.Add("Standard");
             msgs.Add("Flesh");
+            msgs.Add("Flesh Only");
             overmind.map.world.ui.addBlocker(overmind.map.world.prefabStore.getScrollSetText(msgs, false, this).gameObject);
         }
 
@@ -242,6 +251,7 @@ namespace Assets.Code
         {
             if (text == "Standard") { currentMode = aiMode.TESTDARK; }
             if (text == "Flesh") { currentMode = aiMode.FLESH; }
+            if (text == "Flesh Only") { currentMode = aiMode.FLESH_ONLY; }
             World.log("AI mode is set to " + currentMode);
 
             map.world.prefabStore.popMsgTreeBackground("Welcome to the automatic testing interface. This allows games to be played automatically, with both the human and the dark sides played "

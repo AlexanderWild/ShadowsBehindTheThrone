@@ -180,7 +180,7 @@ namespace Assets.Code
         public int society_crisis_plagueCrisisCooldown = 10;
 
         public double temporaryThreatDecay = 0.95;
-        public double threat_takeLocation = 24;
+        public double threat_takeLocation = 56;
         public double threat_temporaryDreadDecay = 0.97;
         public double threat_evidencePresented = 25;
         public double threat_agentFearDecayPerTurn = 2;
@@ -382,6 +382,7 @@ namespace Assets.Code
         public double unit_merchantChanceToExpandIntoNeighbouring = 0.25;
         public double unit_merchantsPerCity = 0.125;
         public int unit_merchant_corruptGoldCost = 35;
+        public double unit_armyHPMult = 1;
 
 
         public int unit_seeker_nReqSecrets = 12;
@@ -399,6 +400,7 @@ namespace Assets.Code
         public int unit_headless_pumpkinDur = 9;
         public double unit_knightCombatBonus = 1.5;
         public double unit_agentCombatBonus = 1.25;
+        public double flesh_armyStrength = 12;
 
         public int unit_rd_redDeathPlagueDur = 20;
         public double unit_rd_redDeathPlaguePSpread = 0.05;

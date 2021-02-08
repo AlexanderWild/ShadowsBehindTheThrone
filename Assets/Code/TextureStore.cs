@@ -165,6 +165,7 @@ namespace Assets.Code
         public Sprite painting_fishermenAtSea;
         public Sprite painting_deathAndConflagaration;
         public Sprite painting_monkAndOldWoman;
+        public Sprite painting_processionInTheFog;
 
         public Sprite special_horsemanLayer0;
         public Sprite special_horsemanLayer1;

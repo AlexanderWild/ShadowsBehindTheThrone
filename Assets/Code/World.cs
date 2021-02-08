@@ -55,8 +55,8 @@ namespace Assets.Code
         public static LogBox saveLog = new LogBox("saveLog.log");
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
         public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
-        public static int versionNumber = 16;
-        public static int subversionNumber = 2;
+        public static int versionNumber = 17;
+        public static int subversionNumber = 0;
 
         public static bool cheat_globalCooling = false;
 
@@ -191,6 +191,7 @@ namespace Assets.Code
             param.usePaladins = opts.usePaladins ? 1 : 0;
             param.overmind_maxEnthralled = opts.nAgents;
             param.overmind_allowDirectEnthralling = opts.politicalStart ? 1:0;
+            param.unit_armyHPMult = opts.armyHPMult/100d;
 
             World.log("Opts use awareness " + opts.useAwareness);
 

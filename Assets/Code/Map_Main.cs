@@ -26,6 +26,8 @@ namespace Assets.Code
         public List<Unit> units = new List<Unit>();
         public double data_avrgEnshadowment;
         public int data_nSocietyLocations;
+        public double data_awarenessSum;
+        public int awarenessReportings;//We're populating by people's turn ticks, so we need to count how many
         public double data_globalTempSum = 0;
         public double data_globalTempInitial = 0;
         public UnitManager unitManager;
@@ -85,6 +87,7 @@ namespace Assets.Code
 
             processUnits();
             processWars();
+            processAwareness();
             //processMapEvents();
 
 
@@ -119,6 +122,71 @@ namespace Assets.Code
             assignTerrainFromClimate();
         }
         
+
+        public void processAwareness()
+        {
+            if (param.useAwareness != 1) { return; }
+            if (awarenessReportings > 0) { data_awarenessSum /= awarenessReportings; }
+
+            double targetAwareness = worldPanic;
+            targetAwareness = Math.Pow(targetAwareness, 2);//Square it, such that it reaches 100% at 100%, but dawdles before then
+            if (data_awarenessSum < targetAwareness)
+            {
+                if (turn % 7 == 0)
+                {
+                    int c = 0;
+                    Person target = null;
+                    foreach (Location loc in locations)
+                    {
+                        if (loc.soc is Society && loc.person() != null && loc.settlement != null && loc.settlement is Set_University && loc.person().state == Person.personState.normal)
+                        {
+                            if (loc.person().awareness < 1)
+                            {
+                                c += 1;
+                                if (Eleven.random.Next(c) == 0)
+                                {
+                                    target = loc.person();
+                                }
+                            }
+                        }
+                    }
+                    if (target != null)
+                    {
+                        target.awareness = 1;
+                        addMessage(target.getFullName() + " has gained awareness, having studied the signs", MsgEvent.LEVEL_ORANGE, false);
+                    }
+                }
+                else
+                {
+                    double sumGain = 0;
+                    foreach (Location loc in locations)
+                    {
+                        if (loc.person() != null && loc.person().state == Person.personState.normal && loc.person().awareness > 0)
+                        {
+                            foreach (Location l2 in loc.getNeighbours())
+                            {
+                                if (l2.person() != null && l2.person().state == Person.personState.normal && l2.person().awareness < loc.person().awareness)
+                                {
+                                    double maxGain = loc.person().awareness - l2.person().awareness;
+                                    maxGain *= 1 - l2.person().shadow;
+                                    double prev = l2.person().awareness;
+                                    l2.person().nextTurnawareness = l2.person().awareness + (maxGain * Eleven.random.NextDouble());
+                                    if (l2.person().nextTurnawareness > 1) { l2.person().nextTurnawareness = 1; }//Should be impossible, but best not risk it
+                                    sumGain += l2.person().nextTurnawareness - prev;
+                                }
+                            }
+                        }
+                    }
+                    if (sumGain > 0.9)
+                    {
+                        addMessage("Awareness of the dark grows", MsgEvent.LEVEL_ORANGE, false);
+                    }
+                }
+            }
+            data_awarenessSum = 0;
+            awarenessReportings = 0;
+        }
+
         public void addMessage(string msg, int level = 1, bool positive = true)
         {
             turnMessages.Add(new MsgEvent(msg, level, positive));

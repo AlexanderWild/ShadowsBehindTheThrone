@@ -12,7 +12,7 @@ namespace Assets.Code
 
         public Unit_Army(Location loc,SocialGroup soc) : base(loc,soc)
         {
-            maxHp = 20;
+            maxHp = (int)(20 * loc.map.param.unit_armyHPMult);
             hp = 1;
             home = loc;
             isMilitary = true;

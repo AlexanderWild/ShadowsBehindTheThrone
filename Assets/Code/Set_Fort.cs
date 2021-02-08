@@ -21,7 +21,7 @@ namespace Assets.Code
             }
 
 
-            militaryCapAdd += 20;
+            militaryCapAdd += 20 * location.map.param.unit_armyHPMult;
             militaryRegenAdd = 3;
             this.defensiveStrengthMax = 25;
             isHuman = true;

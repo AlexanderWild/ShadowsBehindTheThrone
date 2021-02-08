@@ -45,6 +45,7 @@ namespace Assets.Code
         public int sizeY = 24;
         public int burnIn = 100;
         public int nAgents = 3;
+        public int armyHPMult = 100;
         public bool useSimplified = false;
 
         public void startGame_Normal()

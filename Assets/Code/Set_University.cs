@@ -28,7 +28,7 @@ namespace Assets.Code
             }
 
 
-            militaryCapAdd += 10;
+            militaryCapAdd += 10 * location.map.param.unit_armyHPMult;
             militaryRegenAdd = 2;
             isHuman = true;
         }

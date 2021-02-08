@@ -32,6 +32,7 @@ namespace Assets.Code
         public double sanity = 0;
         public List<Trait> traits = new List<Trait>();
         public double awareness;
+        public double nextTurnawareness;
         public int letterWritingCharge = 0;
         public Action action;
         public bool watched = false;
@@ -194,9 +195,12 @@ namespace Assets.Code
             processEnshadowment();
             computeAwareness();
             computeSuspicionGain();
-            processActions();
+            //processActions();
             processThreats();
             processSanity();
+
+            map.data_awarenessSum += this.awareness;
+            map.awarenessReportings += 1;
         }
 
         public void processActions()
@@ -284,6 +288,11 @@ namespace Assets.Code
             if (map.param.useAwareness != 1) { return; }
             if (this.state == personState.enthralled || this.state == personState.broken) { this.awareness = 0;this.action = null; return; }
 
+            if (nextTurnawareness != 0)
+            {
+                awareness = nextTurnawareness;
+                nextTurnawareness = 0;
+            }
             if (awareness > 0 && awareness < 1)
             {
                 awareness -= map.param.awareness_decay;
