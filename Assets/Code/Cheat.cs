@@ -104,6 +104,10 @@ namespace Assets.Code
                 {
                     Property.addProperty(GraphicalMap.map, GraphicalMap.selectedHex.location, "Red Death");
                 }
+                if (command == "fogSource")
+                {
+                    Property.addProperty(GraphicalMap.map, GraphicalMap.selectedHex.location, "Well of Fog");
+                }
                 if (command == "hot")
                 {
                     for (int i = 0; i < map.tempMap.Length; i++)

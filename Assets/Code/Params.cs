@@ -176,7 +176,7 @@ namespace Assets.Code
         public int society_lockdownPrestigeHit = -10;
         public int society_lockdownBuffDuration = 12;
         public double society_electoralPrestigeWeight = 2;//Comparing prestige to liking. If we want 50 prestige to equal 100 liking, go for 2
-        public int society_prestigeFromPlagueRedDeath = -10;
+        public int society_prestigeFromPlagueRedDeath = 0;
         public int society_crisis_plagueCrisisCooldown = 10;
 
         public double temporaryThreatDecay = 0.95;
@@ -190,6 +190,7 @@ namespace Assets.Code
         public double dark_evilThreatMult = 2;
         public double dark_fleshThreatMult = 2;
         public double dark_fishmanStartingThreatMult = -0.25;
+
 
         public int ability_enthrallUnitCost = 0;
         public int ability_disruptAgentCost = 8;
@@ -304,7 +305,12 @@ namespace Assets.Code
         public int ability_unit_spreadShadowMinLiking = 35;
         public double ability_unit_falseEvidenceInfiltration = 0.4;
         public int ability_redDeath_originCooldown = 32;
+        public int ability_redDeath_cureCooldown = 8;
 
+        public int ability_fog_wellOfFog = 8;
+        public int ability_fog_trapDuration = 16;
+        public int ability_fog_trapCost = 3;
+        public int fog_securityDecrease = -3;
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;
@@ -406,7 +412,7 @@ namespace Assets.Code
         public double unit_rd_redDeathPlaguePSpread = 0.05;
         public int unit_rd_redDeathPlagueImmunityDur = 16;
         public int unit_rd_redDeathMilCapHit = -10;
-        public int ability_redDeath_cureCooldown = 8;
+
         public void saveToFile()
         {
             StreamWriter writer = new StreamWriter("params.txt");

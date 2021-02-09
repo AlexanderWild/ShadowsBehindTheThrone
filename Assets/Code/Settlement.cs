@@ -278,8 +278,16 @@ namespace Assets.Code
                         reasons.Add(new ReasonMsg(pr.proto.name,pr.proto.securityIncrease));
                     }
                 }
+
+                if (location.hex.cloud != null && location.hex.cloud is Cloud_Fog)
+                {
+                    security += location.map.param.fog_securityDecrease;
+                    reasons.Add(new ReasonMsg("Lost in the Fog", location.map.param.fog_securityDecrease));
+                }
             }
 
+
+            if (security < 1) { security = 1; }
             
             
             return security;

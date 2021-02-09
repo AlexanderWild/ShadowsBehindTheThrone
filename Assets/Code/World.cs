@@ -79,6 +79,7 @@ namespace Assets.Code
             musicPlayer.loadMusic(); //How did I know?
 
             potentialGods.Add(new God_Easy());
+            potentialGods.Add(new God_Fog());
             potentialGods.Add(new God_MerchantOfNightmares());
             potentialGods.Add(new God_Flesh());
             potentialGods.Add(new God_WintersScythe());

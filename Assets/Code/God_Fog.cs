@@ -12,10 +12,8 @@ namespace Assets.Code
 
         public God_Fog()
         {
-            powers.Add(new Ab_Easy_AddLiking());
-            powers.Add(new Ab_Easy_ReduceEvidence());
-            powers.Add(new Ab_Easy_ReduceSuspicion());
-            //powers.Add(new Ab_Easy_ShortMemories());
+            powers.Add(new Ab_Fog_WellOfFog());
+            powers.Add(new Ab_Fog_TrapFog());
         }
 
 

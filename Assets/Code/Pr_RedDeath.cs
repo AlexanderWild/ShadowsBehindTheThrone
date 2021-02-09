@@ -18,6 +18,7 @@ namespace Assets.Code
             this.prestigeChange = map.param.society_prestigeFromPlagueRedDeath;
             this.plagueThreat = 8;
             this.milCapAdd = map.param.unit_rd_redDeathMilCapHit;
+            this.isDisease = true;
         }
 
         public override void turnTick(Property p, Location location)

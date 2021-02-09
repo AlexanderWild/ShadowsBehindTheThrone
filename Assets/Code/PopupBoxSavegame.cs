@@ -29,10 +29,15 @@ namespace Assets.Code
             mover.transform.Translate(delta);
         }
 
-        public void setTo(FileInfo info)
+        public void setTo(FileInfo info,string versionID)
         {
             option = info;
             title.text = info.Name;
+            if (versionID != null)
+            {
+                title.text += "\n[This saved game is from a different version, and may not load correctly. (" + versionID + ")]";
+                background.color = new Color(1, 1, 1, 0.5f);
+            }
             body.text = "Saved on: " + info.LastWriteTime;
         }
 

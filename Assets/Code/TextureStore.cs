@@ -157,6 +157,7 @@ namespace Assets.Code
         public List<Sprite> tutorialImages;
 
         public Sprite cloud_plague;
+        public Sprite cloud_fog;
 
         public Sprite painting_nightMoon;
         public Sprite painting_monasteryRuins;

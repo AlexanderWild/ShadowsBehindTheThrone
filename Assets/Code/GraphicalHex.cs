@@ -322,6 +322,15 @@ namespace Assets.Code
             {
                 floraLayer.enabled = false;
             }
+            if (hex.cloud != null)
+            {
+                cloudLayer.enabled = true;
+                cloudLayer.sprite = hex.cloud.getSprite();
+            }
+            else
+            {
+                cloudLayer.enabled = false;
+            }
 
             for (int i = 0; i < 6; i++)
             {
