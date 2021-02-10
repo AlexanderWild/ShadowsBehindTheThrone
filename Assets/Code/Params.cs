@@ -404,7 +404,7 @@ namespace Assets.Code
         public int ability_redDeath_cureCooldown = 8;
         public void saveToFile()
         {
-            StreamWriter writer = new StreamWriter("params.txt");
+            StreamWriter writer = new StreamWriter(".\\params.txt");
 
             FieldInfo[] fields = this.GetType().GetFields();
             for (int i = 0; i != fields.Length; ++i)
@@ -419,17 +419,26 @@ namespace Assets.Code
 
         public void loadFromFile()
         {
-            string[] fields = System.IO.File.ReadAllLines("params.txt");
+            string[] fields;
+            try
+            {
+                fields = System.IO.File.ReadAllLines(".\\params.txt");
+            }
+            catch (Exception e)
+            {
+                World.log("poop");
+                return;
+            }
+
             for (int i = 0; i != fields.Length; ++i)
             {
-                string[] parts = fields[i].Split(':');
-                if (parts.Length != 2) { continue; }
+                try {
+                    string[] parts = fields[i].Split(':');
+                    if (parts.Length != 2) { continue; }
 
-                FieldInfo field = this.GetType().GetField(parts[0].Trim());
-                if (field == null) { continue; }
+                    FieldInfo field = this.GetType().GetField(parts[0].Trim());
+                    if (field == null) { continue; }
 
-                try
-                {
                     if (field.FieldType == typeof(int))
                     {
                         int value = int.Parse(parts[1].Trim());
