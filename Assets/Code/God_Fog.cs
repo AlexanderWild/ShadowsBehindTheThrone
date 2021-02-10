@@ -19,16 +19,14 @@ namespace Assets.Code
 
         public override string getDescFlavour()
         {
-            return "Every prey creatures knows its fate from the moment it is born. Its life exists as food for another, and ten thousand eyes watch its every movement, a thousand jaws salivating expectantly." +
-                " Its life will be a constant battle to postpone what it knows will eventually come. One day, it will be too tired, too slow or too weak. That day may come at any moment, even in its prime."
-                + "\n\nRegardless of the prey's actions, there is the inevitable fate,the guarantee, the promise. The promise of teeth."
-                + "\n\nAgainst a dark power such as yourself, the race of humans know themselves to be prey.";
+            return "\"The fog spills out across the nations, flowing from the cities, somehow our sins made manifest. It blots out the sun. The light which remains is pale, and sickly. Whatever warmth sunlight once had, it no longer holds now."
+                + "\nWorse, shape moves in the fog. They hide in its white cloak, and act with co-ordination and purpose. The fog makes it nearly impossible to find them, and prevent whatever vile conspiracy they are engaged in.\"";
         }
 
         public override string getDescMechanics()
         {
-            return "This Dark Name is designed to provide a more straightforward gameplay in the political sphere. The powers are focused on direct manipulation of social interactions, allowing to you spend power to ascend in society and bend it to your will."
-                + "\n";
+            return "This Name allows you to generate a sea of fog, emerging from the nobles under your shadow. Any enthralled, broken or enshadowed noble can be used to add to the sea. Within the fog, your agents and nobles operate better."
+                + "\nSecurity is reduced, and your agents do not take damage from being exiled in locations inside the fog. Nobles will take longer to become suspicious of other nobles with evidence, if these are inside the fog.";
         }
 
         public override string getName()

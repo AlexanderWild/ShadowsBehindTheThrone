@@ -782,6 +782,7 @@ namespace Assets.Code
                 if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
                 if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
                 if (q == 3) { specific.img.sprite = ui.world.textureStore.boxImg_moon; }
+                if (q == 4) { specific.img.sprite = ui.world.textureStore.boxImg_fog; }
             }
             else if (img == 1)
             {

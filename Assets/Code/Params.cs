@@ -307,10 +307,11 @@ namespace Assets.Code
         public int ability_redDeath_originCooldown = 32;
         public int ability_redDeath_cureCooldown = 8;
 
-        public int ability_fog_wellOfFog = 8;
+        public int ability_fog_wellOfFogCost = 8;
         public int ability_fog_trapDuration = 16;
         public int ability_fog_trapCost = 3;
         public int fog_securityDecrease = -3;
+        public double fog_suspicionIncreaseMult = 0.3;
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;

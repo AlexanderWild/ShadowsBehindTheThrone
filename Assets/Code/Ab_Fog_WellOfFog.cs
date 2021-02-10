@@ -26,7 +26,7 @@ namespace Assets.Code
 
         public override int getCost()
         {
-            return World.staticMap.param.ability_fog_wellOfFog;
+            return World.staticMap.param.ability_fog_wellOfFogCost;
         }
 
         public override int getCooldown()

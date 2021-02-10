@@ -39,6 +39,7 @@ namespace Assets.Code
         public Sprite boxImg_pumpkin;
         public Sprite boxImg_cult;
         public Sprite boxImg_moon;
+        public Sprite boxImg_fog;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
@@ -153,6 +154,7 @@ namespace Assets.Code
         public Sprite property_redPlagueImmunity;
         public Sprite property_quarantine;
         public Sprite property_medicalAid;
+        public Sprite property_fog;
 
         public List<Sprite> tutorialImages;
 

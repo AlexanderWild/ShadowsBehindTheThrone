@@ -14,6 +14,7 @@ namespace Assets.Code
         public InputField awarenessGain;
         public InputField agentCount;
         public InputField investigatorPercentField;
+        public InputField armyStrengthField;
         public InputField seedField;
         public InputField sizeXField;
         public InputField sizeYField;
@@ -98,6 +99,7 @@ namespace Assets.Code
             powerGainPercent = 150;
             awarenessGainSpeed = 50;
             investigatorCount = 50;
+            armyHPMult = 75;
             setTextFieldsToCurrentValues();
         }
 
@@ -110,6 +112,7 @@ namespace Assets.Code
             powerGainPercent = 100;
             awarenessGainSpeed = 100;
             investigatorCount = 100;
+            armyHPMult = 100;
             setTextFieldsToCurrentValues();
         }
         public void setHard()
@@ -121,6 +124,7 @@ namespace Assets.Code
             powerGainPercent = 50;
             awarenessGainSpeed = 150;
             investigatorCount = 150;
+            armyHPMult = 150;
             setTextFieldsToCurrentValues();
         }
         public void setTextFieldsToCurrentValues()
@@ -132,6 +136,7 @@ namespace Assets.Code
                 powerGain.text = "" + powerGainPercent;
                 awarenessGain.text = "" + awarenessGainSpeed;
                 investigatorPercentField.text = "" + investigatorCount;
+                armyStrengthField.text = "" + armyHPMult;
             }
             seedField.text = "" + currentSeed;
             sizeXField.text = "" + sizeX;
@@ -177,6 +182,15 @@ namespace Assets.Code
                 if (val >= 0 && val < 1000)
                 {
                     powerGainPercent = val;
+                }
+            }
+            catch (Exception e) { }
+            try
+            {
+                int val = int.Parse(armyStrengthField.text);
+                if (val >= 10 && val < 1000)
+                {
+                    armyHPMult = val;
                 }
             }
             catch (Exception e) { }

@@ -49,7 +49,7 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
-            return world.textureStore.property_redPlague;
+            return world.textureStore.property_fog;
         }
 
         internal override string getDescription()
