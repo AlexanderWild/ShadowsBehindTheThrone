@@ -137,6 +137,21 @@ namespace Assets.Code
             }
             GraphicalMap.checkData();
         }
+        public void bWatch()
+        {
+            if (GraphicalMap.selectedSelectable == null || GraphicalMap.selectedSelectable is Unit == false) { return; }
+            Unit u = (Unit)GraphicalMap.selectedSelectable;
+            if (u.person != null)
+            {
+                u.person.watched = true;
+                world.prefabStore.popMsgAgent(u, u, u.getName() + " is now flagged as `watched'. You will receive updates on key events regarding them (such as promotions and death).");
+            }
+            else
+            {
+                world.prefabStore.popMsg(u.getName() + " cannot be set to be watched as it is a generic unit, it is not an agent.");
+            }
+            GraphicalMap.checkData();
+        }
         public void clearPerson()
         {
             personBack.sprite = world.textureStore.icon_mask;

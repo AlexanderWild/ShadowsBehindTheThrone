@@ -73,13 +73,10 @@ namespace Assets.Code
         }
         public void clicked(Map map)
         {
-            if (map.overmind.enthralled != null)
+            map.world.audioStore.playActivate();
+            if (clickReceiver != null)
             {
-                map.world.audioStore.playActivate();
-                if (clickReceiver != null)
-                {
-                    clickReceiver.selectableClicked(title.text);
-                }
+                clickReceiver.selectableClicked(title.text);
             }
         }
 

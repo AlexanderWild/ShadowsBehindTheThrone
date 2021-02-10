@@ -77,7 +77,8 @@ namespace Assets.Code
                 {
                     taken.person().die("Devoured by the Unholy Flesh as it overran " + taken.getName(), true);
                 }
-                taken.settlement = new Set_UnholyFlesh_Ganglion(taken);
+                //taken.settlement = new Set_UnholyFlesh_Ganglion(taken);
+                taken.settlement.fallIntoRuin();
             }
         }
     }

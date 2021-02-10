@@ -548,6 +548,7 @@ namespace Assets.Code
 
             if (this.forcedVoteSession == voteSession)
             {
+                World.log("Forced voting");
                 return forcedVoteOption;
             }
             return bestChoice;

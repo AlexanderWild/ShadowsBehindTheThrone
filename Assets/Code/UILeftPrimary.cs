@@ -381,7 +381,9 @@ namespace Assets.Code
                         securityDescText.text = "Security Level: " + sec;
                         foreach (ReasonMsg msg in reasons)
                         {
-                            securityDescText.text += "\n+" + (int)(msg.value) + " from " + msg.msg;
+                            string sign = "+";
+                            if (msg.value < 0) { sign = ""; }
+                            securityDescText.text += "\n" + sign + (int)(msg.value) + " from " + msg.msg;
                         }
                     }
                     locFlavour.text = loc.settlement.getFlavour();

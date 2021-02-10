@@ -360,6 +360,7 @@ namespace Assets.Code
             var info = new DirectoryInfo(World.saveFolder);
             var fileInfo = info.GetFiles();
             List<FileInfo> files = new List<FileInfo>();
+            List<string> versionNumber = new List<string>();
 
             foreach (FileInfo file in fileInfo)
             {
@@ -382,17 +383,28 @@ namespace Assets.Code
                 }
 
                 if (headerStrings == null) { continue; }
-                if (headerStrings[0] != "Version;" + World.versionNumber + ";" + World.subversionNumber) { continue; }//Old version, don't try to load
+                if (headerStrings[0] != "Version;" + World.versionNumber + ";" + World.subversionNumber) { versionNumber.Add(""+ headerStrings[0]); }//Old version, don't try to load
+                else { versionNumber.Add(null); }
                 if (file.Name.EndsWith(".sv")){
                     files.Add(file);
                 }
             }
             if (files.Count > 0)
             {
-                foreach (FileInfo file in files)
+                //Give 'em the loadable ones first, then the rest of the garbage
+                for (int i=0;i<files.Count;i++)
                 {
+                    if (versionNumber[i] != null) { continue; }
                     var saveBox = getSaveBox();
-                    saveBox.setTo(file);
+                    saveBox.setTo(files[i],versionNumber[i]);
+                    saveBox.gameObject.transform.SetParent(specific.gameObject.transform);
+                    specific.scrollables.Add(saveBox);
+                }
+                for (int i = 0; i < files.Count; i++)
+                {
+                    if (versionNumber[i] == null) { continue; }
+                    var saveBox = getSaveBox();
+                    saveBox.setTo(files[i], versionNumber[i]);
                     saveBox.gameObject.transform.SetParent(specific.gameObject.transform);
                     specific.scrollables.Add(saveBox);
                 }
@@ -711,7 +723,7 @@ namespace Assets.Code
         }
         public void popMsgTreeBackground(string words)
         {
-            if (world.displayMessages == false) { return; }
+            //if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabMsgTreeBackground) as GameObject;
             PopupMsg specific = obj.GetComponent<PopupMsg>();
@@ -790,6 +802,10 @@ namespace Assets.Code
             else if (img == 5)
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_redDeath;
+            }
+            else if (img == 6)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_fog;
             }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);

@@ -62,7 +62,7 @@ namespace Assets.Code
             }
             for (int i = 0; i < order.Length; i++)
             {
-                int q = Eleven.random.Next(order.Length);
+                int q = Eleven.unseededRandom.Next(order.Length);
                 int held = order[q];
                 order[q] = order[i];
                 order[i] = held;

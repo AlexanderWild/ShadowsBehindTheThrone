@@ -176,11 +176,11 @@ namespace Assets.Code
         public int society_lockdownPrestigeHit = -10;
         public int society_lockdownBuffDuration = 12;
         public double society_electoralPrestigeWeight = 2;//Comparing prestige to liking. If we want 50 prestige to equal 100 liking, go for 2
-        public int society_prestigeFromPlagueRedDeath = -10;
-        public int society_crisis_plagueCrisisCooldown = 8;
+        public int society_prestigeFromPlagueRedDeath = 0;
+        public int society_crisis_plagueCrisisCooldown = 10;
 
         public double temporaryThreatDecay = 0.95;
-        public double threat_takeLocation = 24;
+        public double threat_takeLocation = 56;
         public double threat_temporaryDreadDecay = 0.97;
         public double threat_evidencePresented = 25;
         public double threat_agentFearDecayPerTurn = 2;
@@ -191,8 +191,9 @@ namespace Assets.Code
         public double dark_fleshThreatMult = 2;
         public double dark_fishmanStartingThreatMult = -0.25;
 
+
         public int ability_enthrallUnitCost = 0;
-        public int ability_disruptAgentCost = 10;
+        public int ability_disruptAgentCost = 8;
 
         public int ability_uncannyGlamourEvidence = 10;
         public int ability_uncannyGlamourGain = 15;
@@ -228,6 +229,8 @@ namespace Assets.Code
         public int ability_fleshScreamThreatAdd = 10;
         public int ability_fleshScreamCost = 7;
         public int ability_fleshScreamSanity = 4;
+        public int ability_fleshGrowCost = 5;
+        public int ability_fleshSeedCost = 12;
         public int ability_informationBlackoutCost = 4;
         public int ability_informationBlackoutDuration = 15;
         public int ability_FishmanCultDuration = 15;
@@ -302,7 +305,13 @@ namespace Assets.Code
         public int ability_unit_spreadShadowMinLiking = 35;
         public double ability_unit_falseEvidenceInfiltration = 0.4;
         public int ability_redDeath_originCooldown = 32;
+        public int ability_redDeath_cureCooldown = 8;
 
+        public int ability_fog_wellOfFogCost = 8;
+        public int ability_fog_trapDuration = 16;
+        public int ability_fog_trapCost = 3;
+        public int fog_securityDecrease = -3;
+        public double fog_suspicionIncreaseMult = 0.3;
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;
@@ -379,6 +388,8 @@ namespace Assets.Code
         public int unit_establishNewSettlementTime = 8;
         public double unit_merchantChanceToExpandIntoNeighbouring = 0.25;
         public double unit_merchantsPerCity = 0.125;
+        public int unit_merchant_corruptGoldCost = 35;
+        public double unit_armyHPMult = 1;
 
 
         public int unit_seeker_nReqSecrets = 12;
@@ -396,12 +407,13 @@ namespace Assets.Code
         public int unit_headless_pumpkinDur = 9;
         public double unit_knightCombatBonus = 1.5;
         public double unit_agentCombatBonus = 1.25;
+        public double flesh_armyStrength = 12;
 
         public int unit_rd_redDeathPlagueDur = 20;
         public double unit_rd_redDeathPlaguePSpread = 0.05;
         public int unit_rd_redDeathPlagueImmunityDur = 16;
         public int unit_rd_redDeathMilCapHit = -10;
-        public int ability_redDeath_cureCooldown = 8;
+
         public void saveToFile()
         {
             StreamWriter writer = new StreamWriter(".\\params.txt");

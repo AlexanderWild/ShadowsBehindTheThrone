@@ -14,7 +14,7 @@ namespace Assets.Code
             name = "Unholy Ganglion";
 
 
-            militaryCapAdd += 15;
+            militaryCapAdd += loc.map.param.flesh_armyStrength;
             militaryRegenAdd = 3;
         }
 

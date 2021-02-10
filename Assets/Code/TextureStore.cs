@@ -39,6 +39,7 @@ namespace Assets.Code
         public Sprite boxImg_pumpkin;
         public Sprite boxImg_cult;
         public Sprite boxImg_moon;
+        public Sprite boxImg_fog;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
@@ -153,10 +154,12 @@ namespace Assets.Code
         public Sprite property_redPlagueImmunity;
         public Sprite property_quarantine;
         public Sprite property_medicalAid;
+        public Sprite property_fog;
 
         public List<Sprite> tutorialImages;
 
         public Sprite cloud_plague;
+        public Sprite[] cloud_fog;
 
         public Sprite painting_nightMoon;
         public Sprite painting_monasteryRuins;
@@ -165,6 +168,7 @@ namespace Assets.Code
         public Sprite painting_fishermenAtSea;
         public Sprite painting_deathAndConflagaration;
         public Sprite painting_monkAndOldWoman;
+        public Sprite painting_processionInTheFog;
 
         public Sprite special_horsemanLayer0;
         public Sprite special_horsemanLayer1;

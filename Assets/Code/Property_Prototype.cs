@@ -103,6 +103,14 @@ namespace Assets.Code
             proto = new Pr_MedicalAid(map, "Medical Aid");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_Fog_Source(map, "Well of Fog");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_Fog_Pinned(map, "Trapped Fog");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
         }
 
         internal abstract string getDescription();

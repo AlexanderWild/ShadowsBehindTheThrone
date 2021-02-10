@@ -104,7 +104,6 @@ namespace Assets.Code
                 }
             }
 
-
             assignTerrainFromClimate();
             setLandmassIDs();
             placeLocations();
@@ -117,13 +116,17 @@ namespace Assets.Code
             addLargeForests();
             addSmallForests();
             assignTerrainFromClimate();
+            World.log("SeedSampling 2: " + Eleven.random.Next());//Stable to here
             assignLocationNamesAndIndices();
+            World.log("SeedSampling 2b: " + Eleven.random.Next());//Unstable here
             placeProvinces();
+            World.log("SeedSampling 3: " + Eleven.random.Next());//Unstable here
             checkConnectivity();
             loadCultures();
 
             placeInitialSettlements();
 
+            World.log("SeedSampling end: " + Eleven.random.Next());
 
             //placeMinorSettlements();
 

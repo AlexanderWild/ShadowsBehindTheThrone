@@ -8,6 +8,7 @@ namespace Assets.Code
     public class Eleven
     {
         public static Random random = new Random();
+        public static Random unseededRandom = new Random();
 
 
         public static string putCommas(double d)

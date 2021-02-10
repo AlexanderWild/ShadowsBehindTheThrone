@@ -55,7 +55,7 @@ namespace Assets.Code
         public static LogBox saveLog = new LogBox("saveLog.log");
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
         public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
-        public static int versionNumber = 16;
+        public static int versionNumber = 17;
         public static int subversionNumber = 0;
 
         public static bool cheat_globalCooling = false;
@@ -79,6 +79,7 @@ namespace Assets.Code
             musicPlayer.loadMusic(); //How did I know?
 
             potentialGods.Add(new God_Easy());
+            potentialGods.Add(new God_Fog());
             potentialGods.Add(new God_MerchantOfNightmares());
             potentialGods.Add(new God_Flesh());
             potentialGods.Add(new God_WintersScythe());
@@ -176,7 +177,7 @@ namespace Assets.Code
         {
             Log("Called startup");
             Params param = new Params();
-            param.loadFromFile();
+            //param.loadFromFile();
 
             //Apply the choices the user made in the choice screen
             param.overmind_powerRegen *= opts.powerGainPercent / 100f;
@@ -191,6 +192,7 @@ namespace Assets.Code
             param.usePaladins = opts.usePaladins ? 1 : 0;
             param.overmind_maxEnthralled = opts.nAgents;
             param.overmind_allowDirectEnthralling = opts.politicalStart ? 1:0;
+            param.unit_armyHPMult = opts.armyHPMult/100d;
 
             World.log("Opts use awareness " + opts.useAwareness);
 
@@ -222,6 +224,7 @@ namespace Assets.Code
             staticMap = map;
             map.world = this;
             map.globalist.buildBasicElements();
+            Eleven.random = new System.Random(opts.currentSeed);
             map.gen();
             if (advancedEdition)
             {
@@ -249,6 +252,10 @@ namespace Assets.Code
             if (map.simplified)
             {
                 printSimplifiedMessage();
+            }
+            else if (map.automatic)
+            {
+                map.overmind.autoAI.popAIModeMessage();
             }
         }
 
@@ -491,7 +498,7 @@ namespace Assets.Code
             Map rescueMap = World.staticMap;
 
             if (checkSaveFolder() == false) {
-                prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
+                prefabStore.popMsg("Unable to locate directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
                 return;
             }
             if (!hasWritePermission(saveFolder))

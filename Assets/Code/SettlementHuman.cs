@@ -43,6 +43,10 @@ namespace Assets.Code
                     population += 1;
                 }
             }
+            else if (population > getMaxPopulation())
+            {
+                population = getMaxPopulation();
+            }
 
             //if (infrastructure < population)
             //{

@@ -251,6 +251,7 @@ namespace Assets.Code
         {
             if (location.soc != null && location.soc.hostileTo(this))
             {
+                if (location.hex.cloud != null && location.hex.cloud is Cloud_Fog) { return false; }//Can't take damage while in the fog
                 this.hp -= 1;
                 map.world.prefabStore.particleCombat(location.hex, location.hex);
                 if (this.isEnthralled())

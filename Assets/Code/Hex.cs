@@ -18,6 +18,7 @@ namespace Assets.Code
         public terrainType terrain;
         public Location territoryOf;
         public Flora flora;
+        public Cloud cloud;
 
         public float purity = 1;
 
@@ -136,6 +137,10 @@ namespace Assets.Code
             if (World.cheat_globalCooling)
             {
                 transientTempDelta -= 0.01f;
+            }
+            if (cloud != null)
+            {
+                cloud.turnTick(this);
             }
 
             map.data_globalTempSum += getTemperature();

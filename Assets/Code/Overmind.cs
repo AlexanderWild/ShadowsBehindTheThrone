@@ -24,12 +24,13 @@ namespace Assets.Code
         public int availableEnthrallments = 0;
         public int nEnthralled = 0;//Set by the UI. Probably not a great thing to have done, but oh well
         public int maxEnthralled = 3;
+        public Overmind_Automatic autoAI;
 
         public Overmind(Map map)
         {
             this.map = map;
             maxEnthralled = map.param.overmind_maxEnthralled;
-
+            autoAI = new Overmind_Automatic(this);
             hasEnthrallAbilities = true;
             if (map.agentsOnly == false)
             {
@@ -124,13 +125,17 @@ namespace Assets.Code
             reasons.Add(new ReasonMsg("Evidence Discovered", panicFromCluesDiscovered * 100));
 
             double nHumans = map.data_nSocietyLocations;
-            double extinction = (nStartingHumanSettlements - nHumans)/nStartingHumanSettlements;
-            extinction *= map.param.panic_panicAtFullExtinction;
-            if (extinction < 0) { extinction = 0; }//In the off chance they reclaim something
-            panic += extinction;
-            reasons.Add(new ReasonMsg("Lost Settlements", extinction*100));
+            if (nStartingHumanSettlements > 0)
+            {
+                double extinction = (nStartingHumanSettlements - nHumans) / nStartingHumanSettlements;
+                extinction *= map.param.panic_panicAtFullExtinction;
+                if (extinction < 0) { extinction = 0; }//In the off chance they reclaim something
+                panic += extinction;
+                reasons.Add(new ReasonMsg("Lost Settlements", extinction * 100));
+            }
 
             if (panic > 1) { panic = 1; }
+            if (panic < 0) { panic = 0; }
             return panic;
         }
         public void increasePanicFromPower(int cost, Ability ability)
@@ -225,7 +230,7 @@ namespace Assets.Code
 
             if (map.automatic)
             {
-                automatic();
+                autoAI.turnTick();
             }
 
             if (map.burnInComplete && (map.turn - map.param.mapGen_burnInSteps) % map.param.overmind_enthrallmentUseRegainPeriod == 0)
@@ -243,21 +248,6 @@ namespace Assets.Code
             map.data_globalTempSum = 0;
         }
 
-        public void automatic()
-        {
-            if (this.power > 0)
-            {
-                foreach (Unit u in map.units)
-                {
-                    if (u is Unit_Investigator && u.task is Task_Investigate)
-                    {
-                        u.task = new Task_Disrupted();
-                        power -= map.param.ability_disruptAgentCost;
-                        break;
-                    }
-                }
-            }
-        }
 
         public void startedComplete()
         {
