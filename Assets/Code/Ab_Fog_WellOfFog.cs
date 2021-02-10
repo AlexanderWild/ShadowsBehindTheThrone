@@ -12,6 +12,11 @@ namespace Assets.Code
             if (!castable(map, hex)) { return; }
 
             Property.addProperty(map, hex.location, "Well of Fog");
+
+            map.world.prefabStore.popImgMsg(
+                "This location is now a source of fog. Fog will pour out from here, as long as the noble remains under your influence. Fog decreases locations' security, " +
+                "allows your agents to operate in areas they were exiled from and slows the rate at which nobles become suspicious.",
+                map.world.wordStore.lookup("FOG_WELL_OF_FOG"),6);
         }
 
         public override bool castable(Map map, Hex hex)

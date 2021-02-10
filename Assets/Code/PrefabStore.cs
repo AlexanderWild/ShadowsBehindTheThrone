@@ -782,7 +782,6 @@ namespace Assets.Code
                 if (q == 1) { specific.img.sprite = ui.world.textureStore.boxImg_thumb; }
                 if (q == 2) { specific.img.sprite = ui.world.textureStore.boxImg_ship; }
                 if (q == 3) { specific.img.sprite = ui.world.textureStore.boxImg_moon; }
-                if (q == 4) { specific.img.sprite = ui.world.textureStore.boxImg_fog; }
             }
             else if (img == 1)
             {
@@ -803,6 +802,10 @@ namespace Assets.Code
             else if (img == 5)
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_redDeath;
+            }
+            else if (img == 6)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_fog;
             }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);

@@ -12,6 +12,10 @@ namespace Assets.Code
             if (!castable(map, hex)) { return; }
 
             Property.addProperty(map, hex.location, "Trapped Fog");
+
+            map.world.prefabStore.popImgMsg(
+                "The fog will remain in this location for a while, keeping this location available for your agents and nobles to benefit from it, without risk of it being swept away by the winds.",
+                map.world.wordStore.lookup("FOG_TRAP_FOG"),6);
         }
 
         public override bool castable(Map map, Hex hex)
