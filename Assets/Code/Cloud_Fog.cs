@@ -11,9 +11,11 @@ namespace Assets.Code
     {
         public int age = 0;
         public static int maxAge = 5;
+        public int randID = Eleven.random.Next();
+
         public override Sprite getSprite()
         {
-            return World.self.textureStore.cloud_fog;
+            return World.self.textureStore.cloud_fog[randID % World.self.textureStore.cloud_fog.Length];
         }
 
         public override void turnTick(Hex hex)
