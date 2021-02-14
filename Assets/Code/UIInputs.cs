@@ -17,9 +17,13 @@ namespace Assets.Code
         public float lastAutoturn = 0;
         public long scrollwheelTracking = 0;
 
+        public bool disable = false;
+
         public void Update()
         {
             if (world.map == null) { return; }
+            if (disable) { return; }
+            
             mouseClicks();
             scrollKeys();
             scaling();
@@ -68,12 +72,12 @@ namespace Assets.Code
 
             if (world.ui.state == UIMaster.uiState.WORLD || world.ui.state == UIMaster.uiState.BACKGROUND)
             {
-                if (Input.GetKey(KeyCode.Alpha0))
+                if (UIKeybinds.getKey(UIKeybinds.Action.MASK_CLEAR_MASKS))
                 {
                     world.map.masker.mask = MapMaskManager.maskType.NONE;
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha1))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_NATION))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.NATION)
                     {
@@ -86,7 +90,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_PROVINCE))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.PROVINCE)
                     {
@@ -98,7 +102,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha3))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_VOTE_EFFECT))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.VOTE_EFFECT)
                     {
@@ -110,7 +114,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha4))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_INFILTRATION))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.INFILTRATION)
                     {
@@ -122,7 +126,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha5))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_MY_LIKING))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.LIKING_ME)
                     {
@@ -134,7 +138,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha6))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_THEIR_LIKING))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.LIKING_THEM)
                     {
@@ -146,7 +150,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha7))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_AWARENESS))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.AWARENESS)
                     {
@@ -158,7 +162,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha8))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_MY_SUSPICION))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.SUSPICION)
                     {
@@ -170,7 +174,7 @@ namespace Assets.Code
                     }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown(KeyCode.Alpha9))
+                else if (UIKeybinds.getKey(UIKeybinds.Action.MASK_THEIR_SUSPICION))
                 {
                     if (world.map.masker.mask == MapMaskManager.maskType.SUSPICION_FROM)
                     {
@@ -229,14 +233,14 @@ namespace Assets.Code
 
             if (world.ui.state == UIMaster.uiState.WORLD && world.ui.blocker == null)
             {
-                if (Input.GetKeyDown("z") || Input.GetAxis("Mouse ScrollWheel") > 0)
+                if (UIKeybinds.getKey(UIKeybinds.Action.ZOOM_IN) || Input.GetAxis("Mouse ScrollWheel") > 0)
                 {
                     GraphicalMap.lastMapChange += 1;
                     GraphicalMap.scale = GraphicalMap.scale * 1.1f;
                     if (GraphicalMap.scale > GraphicalMap.maxScale) { GraphicalMap.scale = GraphicalMap.maxScale; }
                     GraphicalMap.checkData();
                 }
-                else if (Input.GetKeyDown("x") || Input.GetAxis("Mouse ScrollWheel") < 0)
+                else if (UIKeybinds.getKey(UIKeybinds.Action.ZOOM_OUT) || Input.GetAxis("Mouse ScrollWheel") < 0)
                 {
                     GraphicalMap.lastMapChange += 1;
                     GraphicalMap.scale = GraphicalMap.scale / 1.1f;
@@ -246,7 +250,7 @@ namespace Assets.Code
             }
             if (world.ui.state == UIMaster.uiState.SOCIETY && world.ui.blocker == null)
             {
-                if (Input.GetKeyDown("z") || Input.GetAxis("Mouse ScrollWheel") > 0)
+                if (UIKeybinds.getKey(UIKeybinds.Action.ZOOM_IN) || Input.GetAxis("Mouse ScrollWheel") > 0)
                 {
                     if (GraphicalSociety.focus != null)
                     {
@@ -254,7 +258,7 @@ namespace Assets.Code
                         GraphicalSociety.refresh(GraphicalSociety.focus);
                     }
                 }
-                else if (Input.GetKeyDown("x") || Input.GetAxis("Mouse ScrollWheel") < 0)
+                else if (UIKeybinds.getKey(UIKeybinds.Action.ZOOM_OUT) || Input.GetAxis("Mouse ScrollWheel") < 0)
                 {
                     if (GraphicalSociety.focus != null && GraphicalSociety.zoom > 1)
                     {
@@ -299,7 +303,7 @@ namespace Assets.Code
                     if (GraphicalMap.x < 0) { GraphicalMap.x = 0; }
                 }
             }
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            if (UIKeybinds.getKey(UIKeybinds.Action.PAN_UP, true))
             {
                 if (world.ui.state == UIMaster.uiState.SOCIETY) {
                     if (GraphicalSociety.focus != null)
@@ -316,7 +320,7 @@ namespace Assets.Code
                     if (GraphicalMap.y < 0) { GraphicalMap.y = 0; }
                 }
             }
-            else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            else if (UIKeybinds.getKey(UIKeybinds.Action.PAN_DOWN, true))
             {
                 if (world.ui.state == UIMaster.uiState.SOCIETY)
                 {
@@ -334,7 +338,7 @@ namespace Assets.Code
                     if (GraphicalMap.y > world.map.sy) { GraphicalMap.y = world.map.sy; }
                 }
             }
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (UIKeybinds.getKey(UIKeybinds.Action.PAN_LEFT, true))
             {
                 if (world.ui.state == UIMaster.uiState.SOCIETY)
                 {
@@ -354,7 +358,7 @@ namespace Assets.Code
 
                 }
             }
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            else if (UIKeybinds.getKey(UIKeybinds.Action.PAN_RIGHT, true))
             {
                 if (world.ui.state == UIMaster.uiState.SOCIETY)
                 {

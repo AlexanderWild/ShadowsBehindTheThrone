@@ -39,6 +39,7 @@ namespace Assets.Code
         public GameObject prefabVote;
         public GameObject prefabVoteReasons;
         public GameObject prefabIOOpts;
+        public GameObject prefabKeybinds;
         public GameObject scrollSet;
         public GameObject menuBox;
         public GameObject menuIconicBox;
@@ -668,9 +669,20 @@ namespace Assets.Code
             specific.ui = ui;
             specific.map = ui.world.map;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bKeybinds.onClick.AddListener(delegate { popKeybinds(); });
             specific.bEdgeScroll.onClick.AddListener(delegate { specific.toggleEdgeScroll(); });
             specific.bSoundEffects.onClick.AddListener(delegate { specific.toggleSoundEffects(); });
             ui.addBlocker(specific.gameObject);
+        }
+        public void popKeybinds()
+        {
+            GameObject obj = Instantiate(prefabKeybinds) as GameObject;
+            PopupKeybinds specific = obj.GetComponent<PopupKeybinds>();
+            specific.ui = ui;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+
+            ui.uiInputs.disable = true;
+            ui.addBlockerOverride(specific.gameObject);
         }
         public void popMsg(string words)
         {

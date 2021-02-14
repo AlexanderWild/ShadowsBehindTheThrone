@@ -13,6 +13,7 @@ namespace Assets.Code
         public static bool hasLoadedOpts = false;
         public Map map;
         public Button bDismiss;
+        public Button bKeybinds;
         public Button bEdgeScroll;
         public Button bSoundEffects;
         public Button bAdvancedGraphics;

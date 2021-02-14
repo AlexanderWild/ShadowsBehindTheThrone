@@ -647,6 +647,16 @@ namespace Assets.Code
             checkData();
         }
 
+        public void addBlockerOverride(GameObject block)
+        {
+            if (blocker != null)
+            {
+                blockerQueue.Insert(0, blocker);
+            }
+
+            blocker = block;
+            checkData();
+        }
 
         public void bTutorial()
         {
