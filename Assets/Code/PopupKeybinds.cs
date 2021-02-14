@@ -91,8 +91,6 @@ namespace Assets.Code
         {
             ui.world.audioStore.playClickInfo();
 
-            //saveState();
-
 			ui.uiInputs.disable = false;
             ui.removeBlocker(this.gameObject);
         }

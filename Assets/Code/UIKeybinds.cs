@@ -58,5 +58,48 @@ namespace Assets.Code
 			else
 				return Input.GetKeyDown(mappings[a]);
 		}
+
+		public static string saveToString()
+		{
+			string result = "";
+			foreach (var pair in mappings)
+			{
+				if (!String.IsNullOrEmpty(result)) { result += ","; }
+				result += pair.Key.ToString() + "=" + pair.Value.ToString();
+			}
+
+			return result;
+		}
+
+		public static void loadFromString(string s)
+		{
+			Dictionary<Action, KeyCode> loadedMappings = new Dictionary<Action, KeyCode>();
+			foreach (var map in s.Split(','))
+			{
+				try
+				{
+					string[] parts = map.Split('=');
+					Action  a = (Action)Enum.Parse(typeof(Action), parts[0]);
+					KeyCode c = (KeyCode)Enum.Parse(typeof(KeyCode), parts[1]);
+
+					loadedMappings.Add(a, c);
+				}
+				catch (Exception e)
+				{
+					continue;
+				}
+			}
+
+			// Add any missing keybinds before setting to the result.
+			foreach (var pair in mappings)
+			{
+				if (!loadedMappings.ContainsKey(pair.Key))
+				{
+					loadedMappings.Add(pair.Key, pair.Value);
+				}
+			}
+
+			mappings = loadedMappings;
+		}
 	}
 }

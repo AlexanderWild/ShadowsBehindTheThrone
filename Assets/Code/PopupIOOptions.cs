@@ -75,18 +75,24 @@ namespace Assets.Code
             {
                 if (File.Exists(World.saveFolder + "settings.txt"))
                 {
-                    string data = File.ReadAllText(World.saveFolder + "settings.txt");
-                    string[] split = data.Split(',');
+                    string[] data = File.ReadAllLines(World.saveFolder + "settings.txt");
+
+                    string[] split = data[0].Split(',');
                     map.param.option_edgeScroll = int.Parse(split[0]);
                     map.world.audioStore.effectVolume = int.Parse(split[1]);
                     World.autosavePeriod = int.Parse(split[2]);
                     World.autodismissAutosave = int.Parse(split[3]);
                     map.param.option_useAdvancedGraphics = int.Parse(split[4]);
                     World.musicVolume = int.Parse(split[5]);
+
+                    if (data.Length > 1 && !String.IsNullOrWhiteSpace(data[1]))
+                    {
+                        UIKeybinds.loadFromString(data[1]);
+                    }
                 }
             }catch(Exception e)
             {
-
+                //
             }
             hasLoadedOpts = true;
         }
@@ -140,6 +146,8 @@ namespace Assets.Code
 
             string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 
                 + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.musicVolume;
+            stateStr += Environment.NewLine + UIKeybinds.saveToString();
+
             if (File.Exists(World.saveFolder + "settings.txt"))
             {
                 File.Delete(World.saveFolder + "settings.txt");
