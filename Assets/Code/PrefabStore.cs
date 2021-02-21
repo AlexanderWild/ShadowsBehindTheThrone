@@ -72,6 +72,7 @@ namespace Assets.Code
         public GameObject prefabPopOptBar;
         public GameObject prefabAutosave;
         public GameObject prefabSaveName;
+        public GameObject prefabLightbringerDiag;
 
         public PopOptBar getVoteOptBar(VoteOption opt,VoteSession sess)
         {
@@ -835,6 +836,19 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
+        public void popLightbringerMsg(Society society)
+        {
+            //if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabLightbringerDiag) as GameObject;
+            PopupLightbringer specific = obj.GetComponent<PopupLightbringer>();
+            specific.ui = ui;
+            specific.populate(society);
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bDismissGoto.onClick.AddListener(delegate { specific.dismissGoto(); });
+            ui.addBlocker(specific.gameObject);
+        }
+
 
         internal GraphicalUnit getGraphicalUnit(Map map, Unit p)
         {

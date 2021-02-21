@@ -25,6 +25,7 @@ panic_canAlly: 0.5
 panic_fromClueFound: 0.01
 panic_paladinSpawn_1: 0.15
 panic_paladinSpawn_2: 0.5
+panic_lightbringerRitualPermitted: 0.25
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -37,6 +38,7 @@ awarenessInvestigationDetectMult: 4
 awareness_increasePerCost: 0.015
 awareness_canInvestigate: 0.1
 awareness_decay: 0.002
+awareness_turnsForLightRitual: 49
 action_research_expectedAwarenessPerTurn: 0.15
 action_research_pSanityHit: 0.5
 action_letterWritingTurns: 5
@@ -100,6 +102,8 @@ utility_swapAgentRolesMult: 100
 utility_selfInterestFromThreat: -0.5
 utility_plagueResponseMultPerRiskItem: 0.5
 utility_singleUseCure: 0.66
+utility_lightbringerRitual: 150
+utility_lightbringerRitualReluctance: -50
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -150,10 +154,10 @@ society_securityBuffMinor: 1
 society_lockdownPrestigeHit: -10
 society_lockdownBuffDuration: 12
 society_electoralPrestigeWeight: 2
-society_prestigeFromPlagueRedDeath: -10
+society_prestigeFromPlagueRedDeath: 0
 society_crisis_plagueCrisisCooldown: 10
 temporaryThreatDecay: 0.95
-threat_takeLocation: 24
+threat_takeLocation: 56
 threat_temporaryDreadDecay: 0.97
 threat_evidencePresented: 25
 threat_agentFearDecayPerTurn: 2
@@ -197,6 +201,8 @@ ability_shortMemoriesCost: 5
 ability_fleshScreamThreatAdd: 10
 ability_fleshScreamCost: 7
 ability_fleshScreamSanity: 4
+ability_fleshGrowCost: 5
+ability_fleshSeedCost: 12
 ability_informationBlackoutCost: 4
 ability_informationBlackoutDuration: 15
 ability_FishmanCultDuration: 15
@@ -270,6 +276,12 @@ ability_unit_spreadShadowInfiltrationReq: 0.5
 ability_unit_spreadShadowMinLiking: 35
 ability_unit_falseEvidenceInfiltration: 0.4
 ability_redDeath_originCooldown: 32
+ability_redDeath_cureCooldown: 8
+ability_fog_wellOfFogCost: 8
+ability_fog_trapDuration: 16
+ability_fog_trapCost: 3
+fog_securityDecrease: -3
+fog_suspicionIncreaseMult: 0.3
 insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10
@@ -341,6 +353,7 @@ unit_establishNewSettlementTime: 8
 unit_merchantChanceToExpandIntoNeighbouring: 0.25
 unit_merchantsPerCity: 0.125
 unit_merchant_corruptGoldCost: 35
+unit_armyHPMult: 1
 unit_seeker_nReqSecrets: 12
 unit_seeker_nCreatedSecrets: 7
 unit_seeker_uncoverTime: 5
@@ -356,8 +369,8 @@ unit_seeker_truthShadow: 0.35
 unit_headless_pumpkinDur: 9
 unit_knightCombatBonus: 1.5
 unit_agentCombatBonus: 1.25
+flesh_armyStrength: 12
 unit_rd_redDeathPlagueDur: 20
 unit_rd_redDeathPlaguePSpread: 0.05
 unit_rd_redDeathPlagueImmunityDur: 16
 unit_rd_redDeathMilCapHit: -10
-ability_redDeath_cureCooldown: 8

@@ -26,6 +26,12 @@ namespace Assets.Code
         public int maxEnthralled = 3;
         public Overmind_Automatic autoAI;
 
+        public int lightRitualProgress = 0;
+        public Society lightbringerCasters;
+        public bool firstLightbringer = true;
+        public List<Location> lightbringerLocations = new List<Location>();
+        public Location lightbringerCapital = null;
+
         public Overmind(Map map)
         {
             this.map = map;
@@ -246,8 +252,24 @@ namespace Assets.Code
                 SteamManager.unlockAchievement(SteamManager.achievement_key.WORLD_UNDER_ICE);
             }
             map.data_globalTempSum = 0;
+            computeLightbringer();
         }
 
+        public void computeLightbringer()
+        {
+            if (lightbringerCasters != null && lightbringerCasters.isGone())
+            {
+                lightRitualProgress = 0;
+                lightbringerCasters = null;
+                return;
+            }
+
+            lightRitualProgress += 1;
+            if (lightRitualProgress == 0)
+            {
+
+            }
+        }
 
         public void startedComplete()
         {
@@ -407,6 +429,19 @@ namespace Assets.Code
             {
                 AchievementManager.unlockAchievement(SteamManager.achievement_key.POLITICS_ONLY);
             }
+        }
+
+        public int computeLightbringerHeldLocations()
+        {
+            int n = 0;
+            foreach (Location loc in lightbringerLocations)
+            {
+                if (loc.person() != null && loc.person().state == Person.personState.normal && loc.person().shadow < 0.5)
+                {
+                    n += 1;
+                }
+            }
+            return n;
         }
 
         public void processEnthralled()

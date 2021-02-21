@@ -113,6 +113,11 @@ namespace Assets.Code
                         double dist = Math.Abs(loc.hex.x - this.location.hex.x) + Math.Abs(loc.hex.y - this.location.hex.y);
                         //dist *= Eleven.random.NextDouble();
                         double score = (loc.person().prestige + 5)/ (dist + 1);
+
+                        if (loc.map.overmind.lightbringerLocations.Contains(loc))
+                        {
+                            score *= 25;
+                        }
                         //score *= Eleven.random.NextDouble() * Eleven.random.NextDouble();
                         //if (dist < bestDist || bestDist == -1)
                         //{

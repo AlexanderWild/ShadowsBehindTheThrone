@@ -40,6 +40,7 @@ namespace Assets.Code
         public double panic_fromClueFound = 0.01;
         public double panic_paladinSpawn_1 = 0.15;
         public double panic_paladinSpawn_2 = 0.5;
+        public double panic_lightbringerRitualPermitted = 0.25;
 
         public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;
@@ -53,6 +54,8 @@ namespace Assets.Code
         public double awareness_increasePerCost = 0.015;
         public double awareness_canInvestigate = 0.1;
         public double awareness_decay = 0.002;
+        public int awareness_turnsForLightRitual = 49;
+        public int awareness_minLocsForLightbringer = 4;
 
         public double action_research_expectedAwarenessPerTurn = 0.15;
         public double action_research_pSanityHit = 0.5;
@@ -123,6 +126,8 @@ namespace Assets.Code
         public double utility_selfInterestFromThreat = -0.5;
         public double utility_plagueResponseMultPerRiskItem = 0.5;
         public double utility_singleUseCure = 0.66;
+        public double utility_lightbringerRitual = 150;
+        public double utility_lightbringerRitualReluctance = -50;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;

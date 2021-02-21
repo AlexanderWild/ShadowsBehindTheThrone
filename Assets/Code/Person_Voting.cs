@@ -56,6 +56,9 @@ namespace Assets.Code
             issue = checkForCrises();
             if (issue != null) { return issue; }
 
+            issue = checkLightbringer();
+            if (issue != null) { return issue; }
+
             //Unlanded titles can be distributed
             //Assignment of sovreign takes priority over any other voting except crises, in the minds of the lords and ladies
             foreach (Title t in society.titles)
@@ -421,7 +424,8 @@ namespace Assets.Code
                             }
                         }
                     }
-                    if (map.param.useAwareness == 1 && map.worldPanic >= map.param.panic_canAlly && this.awareness >= map.param.awareness_canProposeLightAlliance)
+                    if (map.param.useAwareness == 1 && map.worldPanic >= map.param.panic_canAlly && this.awareness >= map.param.awareness_canProposeLightAlliance
+                        && this.society != map.overmind.lightbringerCasters)
                     {
                         issue = new VoteIssue_LightAlliance(society, null, this);
                         VoteOption option_0 = new VoteOption();
@@ -552,6 +556,52 @@ namespace Assets.Code
                 return forcedVoteOption;
             }
             return bestChoice;
+        }
+
+        public VoteIssue checkLightbringer()
+        {
+            if (map.worldPanic < map.param.panic_lightbringerRitualPermitted)
+            {
+                return null;
+            }
+            if (map.overmind.lightbringerCasters != null) { return null; }
+
+            int nLibraries = 0;
+            int nTemples = 0;
+            foreach (Location loc in map.locations)
+            {
+                if (loc.soc == this.society)
+                {
+                    if (loc.settlement is Set_Abbey)
+                    {
+                        nTemples += 1;
+                    }else if (loc.settlement is Set_University)
+                    {
+                        nLibraries += 1;
+                    }
+                }
+            }
+            if (nTemples < map.param.awareness_minLocsForLightbringer && nLibraries < map.param.awareness_minLocsForLightbringer) { return null; }
+
+            VoteIssue_LightbringerRitualStart issue = new VoteIssue_LightbringerRitualStart(society,  this);
+            VoteOption option_0 = new VoteOption();
+            option_0.index = 0;
+            issue.options.Add(option_0);
+
+            VoteOption option_1 = new VoteOption();
+            option_1.index = 1;
+            issue.options.Add(option_1);
+
+            //if (lastProposedIssue != null && lastProposedIssue.GetType() == issue.GetType()) { break; }//Already seen this proposal, most likely. Make another or skip
+            //Random factor to prevent them all rushing a singular voting choice
+            double localU = issue.computeUtility(this, option_0, new List<ReasonMsg>()) * Eleven.random.NextDouble();
+            World.log("Lightbringer here " + localU);
+            if (localU > 0)
+            {
+                return issue;
+            }
+
+            return null;
         }
     }
 

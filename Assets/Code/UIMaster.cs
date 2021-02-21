@@ -19,6 +19,7 @@ namespace Assets.Code
         public UIMidLower uIMidLower;
         public UIMusic uiMusic;
         public UIInputs uiInputs;
+        public UITopLight uiTopLight;
         public GameObject endTurnButton;
 
         public List<GameObject> blockerQueue;
@@ -92,6 +93,7 @@ namespace Assets.Code
                     uiLeftPrimary.maskBody.text = "";
                 }
 
+                uiTopLight.gameObject.SetActive(true);
                 //uiLeftPrimary.unlandedViewButton.gameObject.SetActive(false);
                 uiLeftPrimary.neighborViewButton.gameObject.SetActive(false);
                 uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(false);
@@ -104,6 +106,7 @@ namespace Assets.Code
                 uiLeftPrimary.titleTextDarkener.enabled = true;
                 uiLeftPrimary.bodyTextDarkener.enabled = false;
 
+                uiTopLight.gameObject.SetActive(false);
                 //uiLeftPrimary.unlandedViewButton.gameObject.SetActive(true);
                 uiLeftPrimary.neighborViewButton.gameObject.SetActive(true);
                 uiLeftPrimary.hierarchyViewButton.gameObject.SetActive(GraphicalSociety.activeSociety != null && GraphicalSociety.activeSociety.getSovreign() != null);
@@ -176,6 +179,7 @@ namespace Assets.Code
                 uIMidLower.checkData();
                 bViewSocietyText.text = "View Society";
                 viewSocietyButton.SetActive(GraphicalMap.selectedHex != null && GraphicalMap.selectedHex.location != null && GraphicalMap.selectedHex.location.soc is Society);
+                uiTopLight.checkData();
             }
             else
             {
@@ -403,6 +407,7 @@ namespace Assets.Code
             uiVoting.gameObject.SetActive(false);
             uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
+            uiTopLight.gameObject.SetActive(false);
 
             GraphicalMap.purge();
             GraphicalSociety.purge();
@@ -419,6 +424,7 @@ namespace Assets.Code
             uiVoting.gameObject.SetActive(false);
             uIMidLower.gameObject.SetActive(true);
             hexSelector.SetActive(true);
+            uiTopLight.gameObject.SetActive(false);
 
             uiScrollables.viewSocButtonText.text = "View Society";
 
@@ -438,6 +444,7 @@ namespace Assets.Code
             uiVoting.gameObject.SetActive(false);
             uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
+            uiTopLight.gameObject.SetActive(true);
 
             uiScrollables.viewSocButtonText.text = "View World";
 
@@ -464,6 +471,7 @@ namespace Assets.Code
             uiVoting.gameObject.SetActive(false);
             uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
+            uiTopLight.gameObject.SetActive(false);
 
 
             if (World.staticMap != null)
@@ -484,6 +492,7 @@ namespace Assets.Code
             uiVoting.gameObject.SetActive(true);
             uIMidLower.gameObject.SetActive(false);
             hexSelector.SetActive(false);
+            uiTopLight.gameObject.SetActive(false);
 
 
             if (World.staticMap != null)

@@ -114,6 +114,13 @@ namespace Assets.Code
                         //dist *= Eleven.random.NextDouble();
                         double score = (loc.person().prestige + 5)/ (dist + 1);
                         score /= (1 + loc.settlement.security);
+
+
+                        if (loc.map.overmind.lightbringerLocations.Contains(loc))
+                        {
+                            score *= 25;
+                        }
+
                         //score *= Eleven.random.NextDouble() * Eleven.random.NextDouble();
                         //if (dist < bestDist || bestDist == -1)
                         //{

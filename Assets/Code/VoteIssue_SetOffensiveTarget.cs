@@ -167,10 +167,11 @@ namespace Assets.Code
         public override void implement(VoteOption option)
         {
             base.implement(option);
+            SocialGroup prev = society.offensiveTarget;
             society.offensiveTarget = option.group;
             society.lastOffensiveTargetSetting = society.map.turn;
 
-            if (option.group is Society)
+            if (option.group is Society && prev != option.group)
             {
                 Society vic = (Society)option.group;
                 vic.crisisWarShort = "Crisis: War Threatens";
