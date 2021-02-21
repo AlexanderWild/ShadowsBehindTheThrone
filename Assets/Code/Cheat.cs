@@ -176,6 +176,10 @@ namespace Assets.Code
                 {
                     World.staticMap.overmind.victory();
                 }
+                if (command == "course")
+                {
+                    World.staticMap.world.prefabStore.popEndgameCyclic();
+                }
                 if (command == "worm")
                 {
                     SG_WormHive add = new SG_WormHive(map, GraphicalMap.selectedHex.location);

@@ -63,6 +63,7 @@ namespace Assets.Code
         public GameObject pfbGraphicalProperty;
         public GameObject mapMsg;
         public GameObject prefabVictoryBox;
+        public GameObject prefabEndGameCyclic;
         public GameObject popTutorial;
         public GameObject prefabPersonPortrait;
         public GameObject prefabGameOptions;
@@ -895,6 +896,16 @@ namespace Assets.Code
 
             GameObject obj = Instantiate(prefabVictoryBox) as GameObject;
             PopupVictory specific = obj.GetComponent<PopupVictory>();
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.ui = ui;
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popEndgameCyclic()
+        {
+            if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabEndGameCyclic) as GameObject;
+            PopupEndgameCyclic specific = obj.GetComponent<PopupEndgameCyclic>();
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             specific.ui = ui;
             ui.addBlocker(specific.gameObject);
