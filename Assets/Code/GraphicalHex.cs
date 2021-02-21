@@ -97,7 +97,7 @@ namespace Assets.Code
                 }
             }
 
-            if (hex.location == null && hex.map.overmind != null && hex.map.overmind.lightbringerLocations.Contains(hex.location))
+            if (hex.location != null && hex.map.overmind != null && hex.map.overmind.lightbringerLocations.Contains(hex.location))
             {
                 float alpha = (float)Math.Abs(Math.Sin(Time.time * 2));
                 busyLayer.color = new Color(1, 1, 1, alpha);
