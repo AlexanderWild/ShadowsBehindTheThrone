@@ -9,7 +9,7 @@ mapGen_maxBrushSize: 5
 mapGen_burnInSteps: 150
 map_tempTemperatureReversion: 0.002
 map_coastalHabBonus: 0.1
-useLightbringer: 0
+useLightbringer: 1
 useAwareness: 1
 usePaladins: 0
 flashEnthrallables: True
@@ -284,6 +284,8 @@ ability_fog_trapDuration: 16
 ability_fog_trapCost: 3
 fog_securityDecrease: -3
 fog_suspicionIncreaseMult: 0.3
+ability_fog_convocationCost: 1
+ability_fog_convocationCooldown: 8
 insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10

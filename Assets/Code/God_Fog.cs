@@ -14,6 +14,7 @@ namespace Assets.Code
         {
             powers.Add(new Ab_Fog_WellOfFog());
             powers.Add(new Ab_Fog_TrapFog());
+            powers.Add(new Ab_Fog_Convocation());
         }
 
 
@@ -26,7 +27,7 @@ namespace Assets.Code
         public override string getDescMechanics()
         {
             return "This Name allows you to generate a sea of fog, emerging from the nobles under your shadow. Any enthralled, broken or enshadowed noble can be used to add to the sea. Within the fog, your agents and nobles operate better."
-                + "\nSecurity is reduced, and your agents do not take damage from being exiled in locations inside the fog. Nobles will take longer to become suspicious of other nobles with evidence, if these are inside the fog.";
+                + "\nSpecifically: security is reduced, and your agents do not take damage from being exiled in locations inside the fog. Nobles will take longer to become suspicious of other nobles with evidence, if these are inside the fog.";
         }
 
         public override string getName()

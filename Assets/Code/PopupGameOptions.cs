@@ -19,6 +19,7 @@ namespace Assets.Code
         public InputField sizeXField;
         public InputField sizeYField;
         public InputField historicalField;
+        public Toggle tLightbringer;
         public Button bDismiss;
         public UIMaster ui;
 
@@ -48,16 +49,19 @@ namespace Assets.Code
         public int nAgents = 3;
         public int armyHPMult = 100;
         public bool useSimplified = false;
+        public bool allowLightbringer = false;
 
         public void startGame_Normal()
         {
             politicalStart = false;
+            allowLightbringer = tLightbringer.isOn;
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed,this);
         }
         public void startGame_Political()
         {
             politicalStart = true;
+            allowLightbringer = tLightbringer.isOn;
             ui.removeBlocker(this.gameObject);
             ui.world.bStartGameSeeded(currentSeed, this);
         }
@@ -68,6 +72,7 @@ namespace Assets.Code
             investigatorsSee = false;
             useAwareness = false;
             usePaladins = false;
+            allowLightbringer = false;
 
             World.log("Start streamlined");
             ui.removeBlocker(this.gameObject);
@@ -76,7 +81,8 @@ namespace Assets.Code
 
         public void toggleOption()
         {
-            ui.world.audioStore.playClickInfo();
+            //ui.world.audioStore.playClickInfo();
+            allowLightbringer = tLightbringer.isOn;
         }
 
         public void setSeed0()

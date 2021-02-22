@@ -56,7 +56,7 @@ namespace Assets.Code
         public double awareness_canInvestigate = 0.1;
         public double awareness_decay = 0.002;
         public int awareness_turnsForLightRitual = 49;
-        public int awareness_minLocsForLightbringer = 4;
+        public int awareness_minLocsForLightbringer = 3;
 
         public double action_research_expectedAwarenessPerTurn = 0.15;
         public double action_research_pSanityHit = 0.5;
@@ -318,6 +318,8 @@ namespace Assets.Code
         public int ability_fog_trapCost = 3;
         public int fog_securityDecrease = -3;
         public double fog_suspicionIncreaseMult = 0.3;
+        public int ability_fog_convocationCost = 1;
+        public int ability_fog_convocationCooldown = 8;
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;

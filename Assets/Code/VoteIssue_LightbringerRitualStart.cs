@@ -89,6 +89,29 @@ namespace Assets.Code
         public override void implement(VoteOption option)
         {
             base.implement(option);
+
+            int nLibraries = 0;
+            int nTemples = 0;
+            foreach (Location loc in society.map.locations)
+            {
+                if (loc.soc == this.society)
+                {
+                    if (loc.settlement is Set_Abbey)
+                    {
+                        nTemples += 1;
+                    }
+                    else if (loc.settlement is Set_University)
+                    {
+                        nLibraries += 1;
+                    }
+                }
+            }
+
+            //Abort
+            if (nTemples < society.map.param.awareness_minLocsForLightbringer && nLibraries < society.map.param.awareness_minLocsForLightbringer) {
+                society.map.world.prefabStore.popMsg(society.getName() + " fails to begin the Lightbringer Ritual, despite having voted for it, as they have lost too many ritual locations before the vote ended.");
+                return; }
+
             if (option.index == 0)
             {
                 Overmind overmind = society.map.overmind;
@@ -100,7 +123,7 @@ namespace Assets.Code
                     overmind.lightbringerCapital = society.getCapital();
 
                     int nUniversities = 0;
-                    int nTemples = 0;
+                    nTemples = 0;
                     List<Location> unis = new List<Location>();
                     List<Location> temples = new List<Location>();
                     foreach (Location loc in overmind.map.locations)

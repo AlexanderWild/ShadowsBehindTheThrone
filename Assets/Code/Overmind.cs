@@ -260,6 +260,7 @@ namespace Assets.Code
         {
             if (lightbringerCasters != null && lightbringerCasters.isGone())
             {
+                map.world.prefabStore.popMsg("The Lightbringer Ritual is interrupted and ruined, as the society which was casting it, " + lightbringerCasters.getName() + " is gone. You are safe for now.");
                 lightRitualProgress = 0;
                 lightbringerCasters = null;
                 lightbringerLocations.Clear();
@@ -271,10 +272,23 @@ namespace Assets.Code
                 if (lightRitualProgress >= map.param.awareness_turnsForLightRitual)
                 {
                     //We're done
-                    lightRitualProgress = 0;
-                    lightbringerCasters = null;
-                    lightbringerLocations.Clear();
-                    defeat();
+                    int nHeld = this.computeLightbringerHeldLocations();
+                    if (nHeld >= lightbringerLocations.Count / 2d)
+                    {
+                        lightRitualProgress = 0;
+                        lightbringerCasters = null;
+                        lightbringerLocations.Clear();
+                        defeat();
+                    }
+                    else
+                    {
+                        map.world.prefabStore.popMsg("You have averted the effects of this Lightbringer Ritual, as the society known as " + lightbringerCasters.getName() + " does not hold sufficient "
+                            + "ritual locations when casting ended.");
+                        lightRitualProgress = 0;
+                        lightbringerCasters = null;
+                        lightbringerLocations.Clear();
+                    }
+
                 }
             }
         }

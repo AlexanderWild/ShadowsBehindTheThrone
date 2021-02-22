@@ -566,6 +566,7 @@ namespace Assets.Code
                 return null;
             }
             if (map.overmind.lightbringerCasters != null) { return null; }
+            if (map.param.useLightbringer == 0) { return null; }
 
             int nLibraries = 0;
             int nTemples = 0;
