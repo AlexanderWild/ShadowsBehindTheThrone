@@ -63,6 +63,7 @@ namespace Assets.Code
         public GameObject pfbGraphicalProperty;
         public GameObject mapMsg;
         public GameObject prefabVictoryBox;
+        public GameObject prefabDefeatBox;
         public GameObject prefabEndGameCyclic;
         public GameObject popTutorial;
         public GameObject prefabPersonPortrait;
@@ -900,13 +901,24 @@ namespace Assets.Code
             specific.ui = ui;
             ui.addBlocker(specific.gameObject);
         }
+        public void popDefeatBox()
+        {
+            //if (world.displayMessages == false) { return; }
+
+            GameObject obj = Instantiate(prefabDefeatBox) as GameObject;
+            PopupVictory specific = obj.GetComponent<PopupVictory>();
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.ui = ui;
+            ui.addBlocker(specific.gameObject);
+        }
         public void popEndgameCyclic()
         {
-            if (world.displayMessages == false) { return; }
+            //if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabEndGameCyclic) as GameObject;
             PopupEndgameCyclic specific = obj.GetComponent<PopupEndgameCyclic>();
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bDismissNextAge.onClick.AddListener(delegate { specific.dismissToNextAge(); });
             specific.ui = ui;
             ui.addBlocker(specific.gameObject);
         }

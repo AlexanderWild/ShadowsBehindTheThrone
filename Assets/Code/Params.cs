@@ -23,6 +23,7 @@ namespace Assets.Code
         public float map_tempTemperatureReversion = 0.002f;
         public double map_coastalHabBonus = 0.1;
 
+        public int useLightbringer = 0;
         public int useAwareness = 1;
         public int usePaladins = 0;
         public bool flashEnthrallables = true;
@@ -40,7 +41,7 @@ namespace Assets.Code
         public double panic_fromClueFound = 0.01;
         public double panic_paladinSpawn_1 = 0.15;
         public double panic_paladinSpawn_2 = 0.5;
-        public double panic_lightbringerRitualPermitted = 0.25;
+        public double panic_lightbringerRitualPermitted = 0.75;
 
         public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;
@@ -63,7 +64,7 @@ namespace Assets.Code
         public int action_investigateTurns = 7;
         public int action_cleanseSoulTurns = 7;
         public double action_cleanseSoulAmount = 0.1;
-        public double action_investigateEvidence = 0.25;
+        public double action_investigateEvidence = 0.2;
 
         public int overmind_allowDirectEnthralling = 1;
         public int overmind_maxPower = 24;
@@ -135,7 +136,7 @@ namespace Assets.Code
         public double person_prestigeDeltaPerTurn = 0.5;
         public double person_threatMult = 100;
         public double person_defaultPrestige = 5;
-        public double person_evidencePerShadow = 0.02;
+        public double person_evidencePerShadow = 0.015;
         public double person_evidenceExponent = 1.5;
         public double person_evidenceReduceEnthralled = 0.45;
         public double person_suspicionPerEvidence = 0.1;

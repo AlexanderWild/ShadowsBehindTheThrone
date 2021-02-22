@@ -301,7 +301,7 @@ namespace Assets.Code
         public virtual void fallIntoRuin()
         {
             //We're abandonning this location due to inhospitability
-            if (title.heldBy != null && title.heldBy.title_land == title)
+            if (title != null && title.heldBy != null && title.heldBy.title_land == title)
             {
                 location.map.addMessage(title.heldBy.getFullName() + " is losing their title, as " + this.name + " is being abandoned.",
                     title.heldBy.state == Person.personState.enthralled ? MsgEvent.LEVEL_RED : MsgEvent.LEVEL_ORANGE,

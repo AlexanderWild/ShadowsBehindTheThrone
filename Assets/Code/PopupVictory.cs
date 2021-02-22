@@ -18,7 +18,8 @@ namespace Assets.Code
             ui.world.audioStore.playClick();
             
             ui.removeBlocker(this.gameObject);
-            ui.addBlocker(ui.world.prefabStore.getPlayback(ui.world,ui.world.map).gameObject);
+            //ui.addBlocker(ui.world.prefabStore.getPlayback(ui.world,ui.world.map).gameObject);
+            ui.world.prefabStore.popEndgameCyclic();
         }
     }
 }

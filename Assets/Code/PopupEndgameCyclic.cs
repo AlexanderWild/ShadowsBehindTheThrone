@@ -10,6 +10,7 @@ namespace Assets.Code
     public class PopupEndgameCyclic: MonoBehaviour
     {
         public Button bDismiss;
+        public Button bDismissNextAge;
         public UIMaster ui;
         public Image[] images;
         public int index;
@@ -25,6 +26,17 @@ namespace Assets.Code
             ui.addBlocker(ui.world.prefabStore.getPlayback(ui.world,ui.world.map).gameObject);
         }
 
+        public void dismissToNextAge()
+        {
+            ui.world.audioStore.playClick();
+
+            World.log("Progressing to next age");
+
+            World.staticMap.overmind.progressToNextAge();
+
+            ui.removeBlocker(this.gameObject);
+        }
+
         public void Update()
         {
             float switchFrames = 30;
@@ -33,7 +45,7 @@ namespace Assets.Code
                 time = Time.time;
             }
             float delta = Time.time - time;
-            if (delta > 9)
+            if (delta > 5)
             {
                 switchCounter = (int)switchFrames;
                 prevIndex = index;
@@ -54,7 +66,6 @@ namespace Assets.Code
                 images[prevIndex].color = new Color(1,1,1,1-alpha);
                 images[index].color = new Color(1, 1, 1, alpha);
                 switchCounter -= 1;
-                World.log("Switch " + switchCounter);
             }
             else
             {

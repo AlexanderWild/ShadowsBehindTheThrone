@@ -560,6 +560,7 @@ namespace Assets.Code
 
         public VoteIssue checkLightbringer()
         {
+            if (!map.burnInComplete) { return null; }
             if (map.worldPanic < map.param.panic_lightbringerRitualPermitted)
             {
                 return null;

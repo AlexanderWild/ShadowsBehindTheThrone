@@ -9,6 +9,7 @@ mapGen_maxBrushSize: 5
 mapGen_burnInSteps: 150
 map_tempTemperatureReversion: 0.002
 map_coastalHabBonus: 0.1
+useLightbringer: 0
 useAwareness: 1
 usePaladins: 0
 flashEnthrallables: True
@@ -25,7 +26,7 @@ panic_canAlly: 0.5
 panic_fromClueFound: 0.01
 panic_paladinSpawn_1: 0.15
 panic_paladinSpawn_2: 0.5
-panic_lightbringerRitualPermitted: 0.25
+panic_lightbringerRitualPermitted: 0.75
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -39,13 +40,14 @@ awareness_increasePerCost: 0.015
 awareness_canInvestigate: 0.1
 awareness_decay: 0.002
 awareness_turnsForLightRitual: 49
+awareness_minLocsForLightbringer: 4
 action_research_expectedAwarenessPerTurn: 0.15
 action_research_pSanityHit: 0.5
 action_letterWritingTurns: 5
 action_investigateTurns: 7
 action_cleanseSoulTurns: 7
 action_cleanseSoulAmount: 0.1
-action_investigateEvidence: 0.25
+action_investigateEvidence: 0.2
 overmind_allowDirectEnthralling: 1
 overmind_maxPower: 24
 overmind_powerRegen: 1
@@ -110,7 +112,7 @@ person_maxLikingLossFromVoteDiscord: -30
 person_prestigeDeltaPerTurn: 0.5
 person_threatMult: 100
 person_defaultPrestige: 5
-person_evidencePerShadow: 0.02
+person_evidencePerShadow: 0.015
 person_evidenceExponent: 1.5
 person_evidenceReduceEnthralled: 0.45
 person_suspicionPerEvidence: 0.1

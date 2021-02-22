@@ -26,7 +26,7 @@ namespace Assets.Code
             }
 
             dur += 1;
-            if (dur >= unit.location.map.param.unit_establishNewSettlementTime)
+            if (dur >= unit.location.map.param.unit_establishNewSettlementTime || (!unit.location.map.burnInComplete))
             {
                 unit.task = null;
 

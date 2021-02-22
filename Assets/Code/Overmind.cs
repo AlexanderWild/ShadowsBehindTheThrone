@@ -15,7 +15,7 @@ namespace Assets.Code
         public List<God> namesChosen = new List<God>();
         public Map map;
         public Person enthralled;
-        public bool victoryAchieved = false;
+        public bool endOfGameAchieved = false;
         public bool hasEnthrallAbilities = false;
         public double panicFromPowerUse;
         public double panicFromCluesDiscovered;
@@ -121,11 +121,11 @@ namespace Assets.Code
         {
             double panic = 0;
             panic += panicFromPowerUse;
-            reasons.Add(new ReasonMsg("Power use", panic*100));
+            reasons.Add(new ReasonMsg("Power use", panic * 100));
 
-            double shadow = map.data_avrgEnshadowment*map.param.panic_panicAtFullShadow;
+            double shadow = map.data_avrgEnshadowment * map.param.panic_panicAtFullShadow;
             panic += shadow;
-            reasons.Add(new ReasonMsg("World Shadow", shadow*100));
+            reasons.Add(new ReasonMsg("World Shadow", shadow * 100));
 
             panic += panicFromCluesDiscovered;
             reasons.Add(new ReasonMsg("Evidence Discovered", panicFromCluesDiscovered * 100));
@@ -186,13 +186,14 @@ namespace Assets.Code
                 }
             }
 
-            if (detector != null) {
+            if (detector != null)
+            {
                 double gain = cost * map.param.awareness_increasePerCost * map.param.awareness_master_speed;
                 gain *= detector.getAwarenessMult();
                 detector.awareness += gain;
                 if (detector.awareness > 1) { detector.awareness = 1; }
                 map.turnMessages.Add(new MsgEvent(detector.getFullName() + " has noticed a sign of dark power. Gains " + (int)(100 * gain) + " awareness", MsgEvent.LEVEL_RED, false));
-             }
+            }
 
             map.worldPanic = this.computeWorldPanic(new List<ReasonMsg>());
         }
@@ -216,7 +217,7 @@ namespace Assets.Code
             int nHumanSettlements = 0;
             foreach (Location loc in map.locations)
             {
-                if (loc.person() != null) { sum += loc.person().shadow;count += 1; }
+                if (loc.person() != null) { sum += loc.person().shadow; count += 1; }
                 if (loc.soc != null && loc.settlement != null && (loc.settlement is Set_Ruins == false) && (loc.settlement is Set_CityRuins == false) && loc.soc is Society)
                 {
                     nHumanSettlements += 1;
@@ -224,7 +225,7 @@ namespace Assets.Code
             }
             if (count == 0) { map.data_avrgEnshadowment = 0; }
             else { map.data_avrgEnshadowment = sum / count; }
-            if ((!victoryAchieved) && map.data_avrgEnshadowment > map.param.victory_targetEnshadowmentAvrg)
+            if ((!endOfGameAchieved) && map.data_avrgEnshadowment > map.param.victory_targetEnshadowmentAvrg)
             {
                 victory();
             }
@@ -261,18 +262,26 @@ namespace Assets.Code
             {
                 lightRitualProgress = 0;
                 lightbringerCasters = null;
+                lightbringerLocations.Clear();
                 return;
             }
-
-            lightRitualProgress += 1;
-            if (lightRitualProgress == 0)
+            if (lightbringerCasters != null)
             {
-
+                lightRitualProgress += 1;
+                if (lightRitualProgress >= map.param.awareness_turnsForLightRitual)
+                {
+                    //We're done
+                    lightRitualProgress = 0;
+                    lightbringerCasters = null;
+                    lightbringerLocations.Clear();
+                    defeat();
+                }
             }
         }
 
         public void startedComplete()
         {
+            nStartingHumanSettlements = 0;
             foreach (Location loc in map.locations)
             {
                 if (loc.soc is Society && loc.settlement != null && loc.settlement.isHuman)//Note we don't count ruins, as they will quickly be lost
@@ -280,6 +289,7 @@ namespace Assets.Code
                     nStartingHumanSettlements += 1;
                 }
             }
+            map.data_globalTempInitial = 0;
             foreach (Hex[] hexRow in map.grid)
             {
                 foreach (Hex hex in hexRow)
@@ -289,6 +299,150 @@ namespace Assets.Code
             }
             availableEnthrallments = Math.Min(2, map.param.overmind_maxEnthralled);
             World.log("Human settlements computed. n: " + nStartingHumanSettlements);
+        }
+
+        public void progressToNextAge()
+        {
+            map.automatic = false;
+            map.world.displayMessages = false;
+            map.burnInComplete = false;
+            panicFromCluesDiscovered = 0;
+            panicFromPowerUse = 0;
+            List<Location> monsters = new List<Location>();
+            foreach (Location loc in map.locations)
+            {
+                if (loc.soc != null && loc.soc.isDark() && (loc.soc is Society == false))
+                {
+                    monsters.Add(loc);
+                }
+            }
+            lightbringerCasters = null;
+            lightRitualProgress = 0;
+            lightbringerLocations.Clear();
+            while (monsters.Count > 3)
+            {
+                int q = Eleven.random.Next(monsters.Count);
+                Location loc = monsters[q];
+                loc.soc = null;
+                if (loc.settlement != null)
+                {
+                    loc.settlement = null;
+                }
+                monsters.RemoveAt(q);
+            }
+            int lastIndexPerson = 0;
+            foreach (SocialGroup sg in map.socialGroups)
+            {
+                if (sg is Society)
+                {
+                    Society soc = (Society)sg;
+                    foreach (Person p in soc.people)
+                    {
+                        lastIndexPerson = Math.Max(p.index, lastIndexPerson);
+                    }
+                }
+            }
+            if (enthralled != null)
+            {
+                enthralled.die("Died as the age changed", false);
+            }
+
+            int burnTurns = 300;
+            for (int i = 0; i < burnTurns; i++)
+            {
+                map.turnTick();
+
+                if (i % 25 == 0)
+                {
+                    bool hasHumanity = false;
+                    foreach (Location loc in map.locations)
+                    {
+                        if (loc.isOcean) { continue; }
+                        if (loc.soc is Society && loc.settlement is SettlementHuman)
+                        {
+                            hasHumanity = true;
+                        }
+                    }
+                    if (!hasHumanity)
+                    {
+                        foreach (Location loc in map.locations)
+                        {
+                            if (loc.isOcean) { continue; }
+                            if (loc.hex.getHabilitability() > map.param.mapGen_minHabitabilityForHumans && loc.isMajor)
+                            {
+                                loc.settlement = new Set_City(loc);
+
+                                Society soc = new Society(map, loc);
+                                soc.setName(loc.shortName);
+                                loc.soc = soc;
+                                map.socialGroups.Add(soc);
+                            }
+                        }
+                    }
+
+                    if (map.data_avrgEnshadowment > 0.1)
+                    {
+                        foreach (SocialGroup sg in map.socialGroups)
+                        {
+                            if (sg is Society)
+                            {
+                                Society soc = (Society)sg;
+                                List<Person> dead = new List<Person>();
+                                foreach (Person p in soc.people)
+                                {
+                                    if (p.state == Person.personState.broken && Eleven.random.Next(2) == 0)
+                                    {
+                                        dead.Add(p);
+                                    }else if (p.shadow > 0 && Eleven.random.Next(2) == 0)
+                                    {
+                                        p.shadow = 0;
+                                    }
+                                }
+                                foreach (Person p in dead)
+                                {
+                                    p.die("Died of old age", false);
+                                }
+                            }
+                        }
+                    }
+                }
+                foreach (SocialGroup sg in map.socialGroups)
+                {
+                    if (sg is Society)
+                    {
+                        Society soc = (Society)sg;
+                        List<Person> dead = new List<Person>();
+                        foreach (Person p in soc.people)
+                        {
+                            if (p.index <= lastIndexPerson)
+                            {
+                                if (p.index % 100 == i)
+                                {
+                                    dead.Add(p);
+                                }
+                            }
+                        }
+                        foreach (Person p in dead)
+                        {
+                            p.die("Died of old age", false);
+                        }
+                    }
+                }
+
+                if (i == burnTurns / 2)
+                {
+                    List<Unit> units = new List<Unit>();
+                    units.AddRange(map.units);
+                    foreach (Unit u in units)
+                    {
+                        u.die(map,"Old age");
+                    }
+                }
+            }
+            map.burnInComplete = true;
+            map.world.displayMessages = true;
+            startedComplete();
+            endOfGameAchieved = false;
         }
 
         public List<MsgEvent> getThreats()
@@ -333,7 +487,7 @@ namespace Assets.Code
                     {
                         if (p.state == Person.personState.enthralled || p.state == Person.personState.broken) { continue; }
 
-                        for (int i=0;i<agents.Count;i++)
+                        for (int i = 0; i < agents.Count; i++)
                         {
                             Unit u = agents[i];
                             if (u.person != null)
@@ -415,12 +569,12 @@ namespace Assets.Code
                 }
             }
 
-                return reply;
+            return reply;
         }
 
         public void victory()
         {
-            victoryAchieved = true;
+            endOfGameAchieved = true;
             AchievementManager.unlockAchievement(SteamManager.achievement_key.VICTORY);
             World.log("VICTORY DETECTED");
             map.world.prefabStore.popVictoryBox();
@@ -429,6 +583,12 @@ namespace Assets.Code
             {
                 AchievementManager.unlockAchievement(SteamManager.achievement_key.POLITICS_ONLY);
             }
+        }
+        public void defeat()
+        {
+            endOfGameAchieved = true;
+            World.log("DEFEAT DETECTED");
+            map.world.prefabStore.popDefeatBox();
         }
 
         public int computeLightbringerHeldLocations()

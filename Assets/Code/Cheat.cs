@@ -14,7 +14,7 @@ namespace Assets.Code
             World.log("cheat command registered: " + command);
 
 
-            try
+            //try
             {
                 if (command == "power")
                 {
@@ -166,6 +166,10 @@ namespace Assets.Code
                 {
                     World.staticMap.overmind.hasTakenAction = false;
                 }
+                if (command == "nextAge")
+                {
+                    World.staticMap.overmind.progressToNextAge();
+                }
                 if (command == "unit")
                 {
                     Unit u = new Unit_Investigator(GraphicalMap.selectedHex.location,(Society)GraphicalMap.selectedHex.location.soc);
@@ -175,6 +179,10 @@ namespace Assets.Code
                 if (command == "victory")
                 {
                     World.staticMap.overmind.victory();
+                }
+                if (command == "defeat")
+                {
+                    World.staticMap.overmind.defeat();
                 }
                 if (command == "course")
                 {
@@ -207,10 +215,10 @@ namespace Assets.Code
                 }
                 map.world.ui.checkData();
             }
-            catch(Exception e)
-            {
-                World.log(e.Message);
-            }
+            //catch(Exception e)
+            //{
+            //    World.log(e.Message);
+            //}
         }
     }
 }

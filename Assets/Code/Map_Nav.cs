@@ -403,7 +403,10 @@ namespace Assets.Code
                 }
             }
 
-            world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
+            if (burnInComplete)
+            {
+                world.prefabStore.particleCombat(u.location.hex, u2.location.hex);
+            }
             int dmgDone = (int)(u.hp * (lethality + (Eleven.random.NextDouble() * lethality)));
             if (u2.isMilitary)
             {

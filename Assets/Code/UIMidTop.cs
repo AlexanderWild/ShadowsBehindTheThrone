@@ -79,6 +79,11 @@ namespace Assets.Code
             desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_canAlly)) +
                 "% Nobles with awareness " + ((int)(100 * master.world.map.param.awareness_canProposeLightAlliance)) + "% can propose an alliance against the darkness with other nations.";
 
+            if (master.world.map.param.useLightbringer != 0)
+            {
+                desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_lightbringerRitualPermitted)) +
+                    "% Nobles with high awareness can propose to perform the Lightbringer Ritual, which can drive back the Darkness and defeat you.";
+            }
 
 
 
