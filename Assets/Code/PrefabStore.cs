@@ -76,11 +76,11 @@ namespace Assets.Code
         public GameObject prefabSaveName;
         public GameObject prefabLightbringerDiag;
 
-        public PopOptBar getVoteOptBar(VoteOption opt,VoteSession sess)
+        public PopOptBar getVoteOptBar(VoteOption opt, VoteSession sess)
         {
             GameObject obj = Instantiate(prefabPopOptBar) as GameObject;
             PopOptBar part = obj.GetComponent<PopOptBar>();
-            part.setTo(opt,sess);
+            part.setTo(opt, sess);
             return part;
         }
         public PopVoterBar getVoterBar(Person p)
@@ -91,7 +91,7 @@ namespace Assets.Code
             return part;
         }
 
-        public void particleCombat(Hex a,Hex b)
+        public void particleCombat(Hex a, Hex b)
         {
             if (a.outer == null || b.outer == null) { return; }//No need to make invisible particles
 
@@ -192,11 +192,11 @@ namespace Assets.Code
             return specific;
         }
 
-        public PopupScrollSet getScrollSetAgents(List<int> indices,List<string> titles,List<string> bodies,List<Sprite> icons)
+        public PopupScrollSet getScrollSetAgents(List<int> indices, List<string> titles, List<string> bodies, List<Sprite> icons)
         {
             PopupScrollSet specific = getInnerScrollSet();
 
-            for (int i = 0;i < bodies.Count;i++)
+            for (int i = 0; i < bodies.Count; i++)
             {
                 PopupBoxAgent box = getAgentBox(indices[i], icons[i], titles[i], bodies[i]);
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
@@ -205,7 +205,7 @@ namespace Assets.Code
 
             return specific;
         }
-        public PopupScrollSet getScrollSetText(List<string> items,bool invertOrder,SelectClickReceiver receiver=null)
+        public PopupScrollSet getScrollSetText(List<string> items, bool invertOrder, SelectClickReceiver receiver = null)
         {
             PopupScrollSet specific = getInnerScrollSet();
 
@@ -221,7 +221,7 @@ namespace Assets.Code
             }
             else
             {
-                for (int i = items.Count-1; i >= 0 ; i--)
+                for (int i = items.Count - 1; i >= 0; i--)
                 {
                     PopupBoxText box = getScrollingTextBox(items[i]);
                     box.gameObject.transform.SetParent(specific.gameObject.transform);
@@ -308,7 +308,7 @@ namespace Assets.Code
         {
             GameObject obj = Instantiate(xBoxGodSelect) as GameObject;
             PopupXBoxGodSelectMsg specific = obj.GetComponent<PopupXBoxGodSelectMsg>();
-            specific.setTo(ui.world,item);
+            specific.setTo(ui.world, item);
 
             return specific;
         }
@@ -344,13 +344,13 @@ namespace Assets.Code
             return specific;
         }
 
-        public PopupScrollSet getScrollSet(Ab_Soc_ProposeVote ab,Society soc,List<VoteIssue> issues)
+        public PopupScrollSet getScrollSet(Ab_Soc_ProposeVote ab, Society soc, List<VoteIssue> issues)
         {
             PopupScrollSet specific = getInnerScrollSet();
 
             foreach (VoteIssue issue in issues)
             {
-                PopupBoxVoteIssue box = getVoteIssueBox(ab,soc,issue);
+                PopupBoxVoteIssue box = getVoteIssueBox(ab, soc, issue);
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
                 specific.scrollables.Add(box);
             }
@@ -368,39 +368,40 @@ namespace Assets.Code
 
             foreach (FileInfo file in fileInfo)
             {
-                //Here we're going to read in the header of the file only (plus a bit more, to account for us shoving more crud into the header at a future time).
-                //Saves loading the whole file just to check version number
-                string[] headerStrings = null;
-                using (FileStream fs = File.OpenRead(file.FullName))
+                if (file.Name.EndsWith(".sv"))
                 {
-                    byte[] b = new byte[1024*2];
-                    UTF8Encoding temp = new UTF8Encoding(true);
-
-                    fs.Read(b, 0, b.Length);//Read out enough to cover the entire header (regardless of how large it eventually gets)
-                    headerStrings = temp.GetString(b).Split('\n');
-                    for (int i = 0; i < headerStrings.Length; i++)
+                    //Here we're going to read in the header of the file only (plus a bit more, to account for us shoving more crud into the header at a future time).
+                    //Saves loading the whole file just to check version number
+                    string[] headerStrings = null;
+                    using (FileStream fs = File.OpenRead(file.FullName))
                     {
-                        World.log("Header " + i + " " + headerStrings[i]);
-                    }
-                    World.log("Read file: " + temp.GetString(b));
-                    fs.Close();
-                }
+                        byte[] b = new byte[1024 * 2];
+                        UTF8Encoding temp = new UTF8Encoding(true);
 
-                if (headerStrings == null) { continue; }
-                if (headerStrings[0] != "Version;" + World.versionNumber + ";" + World.subversionNumber) { versionNumber.Add(""+ headerStrings[0]); }//Old version, don't try to load
-                else { versionNumber.Add(null); }
-                if (file.Name.EndsWith(".sv")){
+                        fs.Read(b, 0, b.Length);//Read out enough to cover the entire header (regardless of how large it eventually gets)
+                        headerStrings = temp.GetString(b).Split('\n');
+                        for (int i = 0; i < headerStrings.Length; i++)
+                        {
+                            World.log("Header " + i + " " + headerStrings[i]);
+                        }
+                        World.log("Read file: " + temp.GetString(b));
+                        fs.Close();
+                    }
+
+                    if (headerStrings == null) { continue; }
+                    if (headerStrings[0] != "Version;" + World.versionNumber + ";" + World.subversionNumber) { versionNumber.Add("" + headerStrings[0]); }//Old version, don't try to load
+                    else { versionNumber.Add(null); }
                     files.Add(file);
                 }
             }
             if (files.Count > 0)
             {
                 //Give 'em the loadable ones first, then the rest of the garbage
-                for (int i=0;i<files.Count;i++)
+                for (int i = 0; i < files.Count; i++)
                 {
                     if (versionNumber[i] != null) { continue; }
                     var saveBox = getSaveBox();
-                    saveBox.setTo(files[i],versionNumber[i]);
+                    saveBox.setTo(files[i], versionNumber[i]);
                     saveBox.gameObject.transform.SetParent(specific.gameObject.transform);
                     specific.scrollables.Add(saveBox);
                 }
@@ -413,7 +414,8 @@ namespace Assets.Code
                     specific.scrollables.Add(saveBox);
                 }
             }
-            else { 
+            else
+            {
                 popMsg("No save games found to load");
             }
 
@@ -430,14 +432,14 @@ namespace Assets.Code
             return msg;
         }
 
-        private PopupBoxVoteIssue getVoteIssueBox(Ab_Soc_ProposeVote ab,Society soc, VoteIssue issue)
+        private PopupBoxVoteIssue getVoteIssueBox(Ab_Soc_ProposeVote ab, Society soc, VoteIssue issue)
         {
             GameObject obj = Instantiate(popScrollVoteIssue) as GameObject;
             PopupBoxVoteIssue msg = obj.GetComponent<PopupBoxVoteIssue>();
-            msg.setTo(ab,soc, issue);
+            msg.setTo(ab, soc, issue);
             return msg;
         }
-        private PopupBoxAgent getAgentBox(int index,Sprite icon,string title,string body)
+        private PopupBoxAgent getAgentBox(int index, Sprite icon, string title, string body)
         {
             GameObject obj = Instantiate(popAgentBox) as GameObject;
             PopupBoxAgent msg = obj.GetComponent<PopupBoxAgent>();
@@ -455,14 +457,14 @@ namespace Assets.Code
         public PopupScrollSet getScrollSetRelations(List<RelObj> rels)
         {
             PopupScrollSet specific = getInnerScrollSet();
-            
+
             foreach (RelObj rel in rels)
             {
                 PopupBoxPerson box = getPersonBox();
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
                 specific.scrollables.Add(box);
                 box.setTo(World.staticMap.persons[rel.them]);
-                box.body.text = "Liking: " + (int)rel.getLiking() + "\nSuspicion: " + (int)(rel.suspicion*100) + "%";
+                box.body.text = "Liking: " + (int)rel.getLiking() + "\nSuspicion: " + (int)(rel.suspicion * 100) + "%";
                 float scale = (float)rel.getLiking();
                 if (scale > 1) { scale = 1; }
                 else if (scale < -1) { scale = -1; }
@@ -533,7 +535,7 @@ namespace Assets.Code
 
             foreach (Ability b in abilities)
             {
-                PopupBoxAbility box = getAbilityBox(b,hex);
+                PopupBoxAbility box = getAbilityBox(b, hex);
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
                 specific.scrollables.Add(box);
             }
@@ -546,25 +548,25 @@ namespace Assets.Code
 
             return specific;
         }
-        public PopupScrollSet getScrollSet(VoteSession sess,List<VoteOption> votes)
+        public PopupScrollSet getScrollSet(VoteSession sess, List<VoteOption> votes)
         {
             PopupScrollSet specific = getInnerScrollSet();
 
             sess.assignVoters();
             foreach (VoteOption b in votes)
             {
-                PopupBoxVote box = getVoteBox(sess,b);
+                PopupBoxVote box = getVoteBox(sess, b);
                 box.gameObject.transform.SetParent(specific.gameObject.transform);
                 specific.scrollables.Add(box);
             }
 
             return specific;
         }
-        public PopupBoxVote getVoteBox(VoteSession sess,VoteOption option)
+        public PopupBoxVote getVoteBox(VoteSession sess, VoteOption option)
         {
             GameObject obj = Instantiate(voteBox) as GameObject;
             PopupBoxVote specific = obj.GetComponent<PopupBoxVote>();
-            specific.setTo(sess,option);
+            specific.setTo(sess, option);
 
             return specific;
         }
@@ -591,11 +593,11 @@ namespace Assets.Code
 
             return specific;
         }
-        public PopupBoxAbility getAbilityBox(Ability a,Hex hex)
+        public PopupBoxAbility getAbilityBox(Ability a, Hex hex)
         {
             GameObject obj = Instantiate(abilityBox) as GameObject;
             PopupBoxAbility specific = obj.GetComponent<PopupBoxAbility>();
-            specific.setTo(a,hex);
+            specific.setTo(a, hex);
 
             return specific;
         }
@@ -698,7 +700,7 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
-        public void popMsgAgent(Unit actor, Unit target,string words)
+        public void popMsgAgent(Unit actor, Unit target, string words)
         {
             if (world.displayMessages == false) { return; }
 
@@ -772,7 +774,7 @@ namespace Assets.Code
         }
         public void popSaveName()
         {
-            if (world.displayMessages == false) { return; }
+            //if (world.displayMessages == false) { return; }
 
             GameObject obj = Instantiate(prefabSaveName) as GameObject;
             PopupSaveDialog specific = obj.GetComponent<PopupSaveDialog>();
@@ -781,7 +783,7 @@ namespace Assets.Code
             specific.bCancel.onClick.AddListener(delegate { specific.cancel(); });
             ui.addBlocker(specific.gameObject);
         }
-        public void popImgMsg(string body,string flavour,int img=0)
+        public void popImgMsg(string body, string flavour, int img = 0)
         {
             if (world.displayMessages == false) { return; }
 
@@ -825,7 +827,7 @@ namespace Assets.Code
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }
-        public void popVoteMsg(string title,string subtitle,string body)
+        public void popVoteMsg(string title, string subtitle, string body)
         {
             if (world.displayMessages == false) { return; }
 
@@ -865,7 +867,7 @@ namespace Assets.Code
         {
             GameObject obj = Instantiate(graphicalProperty) as GameObject;
             GraphicalProperty property = obj.GetComponent<GraphicalProperty>();
-            property.setTo(p,world);
+            property.setTo(p, world);
             return property;
         }
 

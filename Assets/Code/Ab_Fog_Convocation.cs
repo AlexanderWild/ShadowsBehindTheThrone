@@ -56,7 +56,7 @@ namespace Assets.Code
 
         public override int getCooldown()
         {
-            return World.staticMap.param.ability_fog_convocationCost;
+            return World.staticMap.param.ability_fog_convocationCooldown;
         }
 
         public override string getDesc()

@@ -319,7 +319,7 @@ namespace Assets.Code
         public int fog_securityDecrease = -3;
         public double fog_suspicionIncreaseMult = 0.3;
         public int ability_fog_convocationCost = 1;
-        public int ability_fog_convocationCooldown = 8;
+        public int ability_fog_convocationCooldown = 6;
 
         public double insanity_sanityRegen = 0.1;
         public int insanity_nParanoiaTargets = 4;
