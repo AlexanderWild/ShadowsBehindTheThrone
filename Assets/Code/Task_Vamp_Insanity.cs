@@ -32,7 +32,7 @@ namespace Assets.Code
             {
                 if (!wasInsane)
                 {
-                    if (unit.location.person().society.sovreign.heldBy == unit.location.person())
+                    if (unit.location.person().society.sovereign.heldBy == unit.location.person())
                     {
                         if (unit.location.person().society.getLevel() > 0)
                         {

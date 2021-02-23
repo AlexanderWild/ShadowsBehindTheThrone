@@ -39,7 +39,7 @@ namespace Assets.Code
         public static void setup(Society soc)
         {
             activeSociety = soc;
-            //Person ss = activeSociety.getSovreign();
+            //Person ss = activeSociety.getSovereign();
 
             foreach (Person p in activeSociety.people)
             {
@@ -124,7 +124,7 @@ namespace Assets.Code
         {
             clear();
 
-            Person ss = activeSociety.getSovreign();
+            Person ss = activeSociety.getSovereign();
             if (ss == null) { return; }
 
             focus = (state == viewState.HIERARCHY && nfocus != null) ? nfocus : ss;
@@ -224,7 +224,7 @@ namespace Assets.Code
         {
             clear();
 
-            focus = (nfocus != null) ? nfocus : activeSociety.getSovreign();
+            focus = (nfocus != null) ? nfocus : activeSociety.getSovereign();
             if (state != viewState.NEIGHBOR)
                 originalFocus = focus;
 
@@ -295,7 +295,7 @@ namespace Assets.Code
         {
             clear();
 
-            focus = (nfocus != null) ? nfocus : activeSociety.getSovreign();
+            focus = (nfocus != null) ? nfocus : activeSociety.getSovereign();
             if (state != viewState.UNLANDED)
                 originalFocus = focus;
 

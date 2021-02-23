@@ -16,18 +16,18 @@ namespace Assets.Code
 
         public override void castInner(Map map, Person other)
         {
-            other.getRelation(other.society.getSovreign()).addLiking(map.param.ability_sowDissentLikingChange, "Dissent sown", map.turn);
+            other.getRelation(other.society.getSovereign()).addLiking(map.param.ability_sowDissentLikingChange, "Dissent sown", map.turn);
 
 
             map.world.prefabStore.popImgMsg(
-                other.getFullName() + " gains dislike for their sovreign, " + other.society.getSovreign().getFullName() + ".",
+                other.getFullName() + " gains dislike for their sovereign, " + other.society.getSovereign().getFullName() + ".",
                 map.world.wordStore.lookup("ABILITY_SOW_DISSENT"));
         }
         public override bool castable(Map map, Person person)
         {
             if (person.state == Person.personState.enthralled) { return false; }
-            if (person.society.getSovreign() == null) { return false; }
-            if (person == person.society.getSovreign()) { return false; }
+            if (person.society.getSovereign() == null) { return false; }
+            if (person == person.society.getSovereign()) { return false; }
             return true;
         }
 
@@ -43,8 +43,8 @@ namespace Assets.Code
         }
         public override string getDesc()
         {
-            return "Causes a noble to gain " + World.staticMap.param.ability_sowDissentLikingChange + " disliking for their sovreign."
-                + "\n[Requires a noble with a sovreign]";
+            return "Causes a noble to gain " + World.staticMap.param.ability_sowDissentLikingChange + " disliking for their sovereign."
+                + "\n[Requires a noble with a sovereign]";
         }
 
         public override string getName()

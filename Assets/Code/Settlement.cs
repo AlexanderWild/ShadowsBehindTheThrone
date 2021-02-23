@@ -199,22 +199,22 @@ namespace Assets.Code
                 Society soc = (Society)location.soc;
                 if (this.title != null && title.heldBy != null)
                 {
-                    if (title.heldBy.society.getSovreign() == title.heldBy)
+                    if (title.heldBy.society.getSovereign() == title.heldBy)
                     {
                         if (soc.people.Count >= location.map.param.society_nPeopleForEmpire)
                         {
                             security += 7;
-                            reasons.Add(new ReasonMsg("Major Sovreign", 7));
+                            reasons.Add(new ReasonMsg("Major Sovereign", 7));
                         }
                         else if (soc.people.Count >= location.map.param.society_nPeopleForKingdom)
                         {
                             security += 4;
-                            reasons.Add(new ReasonMsg("Sovreign", 4));
+                            reasons.Add(new ReasonMsg("Sovereign", 4));
                         }
                         else
                         {
                             security += 2;
-                            reasons.Add(new ReasonMsg("Minor Sovreign", 2));
+                            reasons.Add(new ReasonMsg("Minor Sovereign", 2));
                         }
                     }
                     else

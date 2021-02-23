@@ -23,7 +23,7 @@ namespace Assets.Code
         public override bool castable(Map map, Hex hex)
         {
             if (map.overmind.enthralled == null) { return false; }
-            if (map.overmind.enthralled.society.getSovreign() != map.overmind.enthralled) { return false; }
+            if (map.overmind.enthralled.society.getSovereign() != map.overmind.enthralled) { return false; }
             if (map.overmind.enthralled.society.isDarkEmpire) { return false; }
             return true;
 
@@ -37,7 +37,7 @@ namespace Assets.Code
         public override string getDesc()
         {
             return "Declares your society for the dark, devoting it to the cause. All nobles will begin to gain shadow per turn, regardless of liking. Your nation will have higher threat to other nobles."
-                + "\n[Requires an enthralled which is sovreign of a society]";
+                + "\n[Requires an enthralled which is sovereign of a society]";
         }
 
         public override string getName()

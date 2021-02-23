@@ -60,13 +60,13 @@ namespace Assets.Code
             if (issue != null) { return issue; }
 
             //Unlanded titles can be distributed
-            //Assignment of sovreign takes priority over any other voting except crises, in the minds of the lords and ladies
+            //Assignment of sovereign takes priority over any other voting except crises, in the minds of the lords and ladies
             foreach (Title t in society.titles)
             {
                 //Can assign an unassigned title, or hold routine elections
                 bool canHold = t.heldBy == null || (map.turn - t.turnLastAssigned >= map.param.society_minTimeBetweenTitleReassignments);
                 //You can hold emergency elections in the event of upcoming civil war
-                //if (society.data_societalStability < 0 && t == society.sovreign) { canHold = true; }
+                //if (society.data_societalStability < 0 && t == society.sovereign) { canHold = true; }
                 
                 //Can't hold elections if your society doesn't allow it
                 if (t.heldBy != null && (!society.socType.periodicElection()))
@@ -78,7 +78,7 @@ namespace Assets.Code
 
                 issue = new VoteIssue_AssignTitle(society, this, t);
 
-                if (t is Title_Sovreign)
+                if (t is Title_Sovereign)
                 {
                     List<Person> candidates = t.getEligibleHolders(society);
                     foreach (Person p in candidates)
@@ -102,7 +102,7 @@ namespace Assets.Code
                 {
                     //Random factor to prevent them all rushing a singular voting choice
                     double localU = issue.computeUtility(this, opt, new List<ReasonMsg>()) * Eleven.random.NextDouble();
-                    if (localU > bestU || (t == society.sovreign && t.heldBy == null))//Note we force them to vote on a sovereign if there is none
+                    if (localU > bestU || (t == society.sovereign && t.heldBy == null))//Note we force them to vote on a sovereign if there is none
                     {
                         bestU = localU;
                         bestIssue = issue;
@@ -112,7 +112,7 @@ namespace Assets.Code
                 logVote(issue);
             }
 
-            if (society.getSovreign() != null)
+            if (society.getSovereign() != null)
             {
                 int oldestAssignment = 100000000;
                 Location bestAssignable = null;

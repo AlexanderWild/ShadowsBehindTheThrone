@@ -20,7 +20,7 @@ namespace Assets.Code
         public override bool castable(Map map, Hex hex)
         {
             if (map.overmind.enthralled == null) { return false; }
-            if (map.overmind.enthralled == map.overmind.enthralled.society.getSovreign()) { return false; }
+            if (map.overmind.enthralled == map.overmind.enthralled.society.getSovereign()) { return false; }
                 if (map.overmind.enthralled.rebellingFrom != map.overmind.enthralled.society) { return false; }
 
             return true;
@@ -37,7 +37,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Tells your enthralled to join the loyalists and support the current sovreign, opposing any rebel nobles who may start a civil war to break away from your society."
+            return "Tells your enthralled to join the loyalists and support the current sovereign, opposing any rebel nobles who may start a civil war to break away from your society."
            
                 + "\n[Requires an enthralled noble who is set to rebelling]";
         }

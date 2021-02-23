@@ -39,7 +39,7 @@ namespace Assets.Code
             profileAdvHair.enabled = true;
             profileAdvJewel.enabled = true;
             profileBorder.sprite = null;
-            if (p.society.getSovreign() == p) { profileBorder.sprite = p.map.world.textureStore.slotKing; }
+            if (p.society.getSovereign() == p) { profileBorder.sprite = p.map.world.textureStore.slotKing; }
             else if (p.titles.Count > 0) { profileBorder.sprite = p.map.world.textureStore.slotDuke; }
             else { profileBorder.sprite = p.map.world.textureStore.slotCount; }
 
@@ -117,7 +117,7 @@ namespace Assets.Code
                 Title possibleOpt = null;
                 foreach (Title t in soc.titles)
                 {
-                    if (t is Title_Sovreign)
+                    if (t is Title_Sovereign)
                     {
                         if (t.getEligibleHolders(p.society).Contains(p))
                         {

@@ -359,13 +359,13 @@ namespace Assets.Code
             {
                 if (t is Title_ProvinceRuler)
                 {
-                    return this.society.getSovreign();
+                    return this.society.getSovereign();
                 }
             }
             //Am not a duke
             foreach (Title t in society.titles)
             {
-                if (t is Title_Sovreign)
+                if (t is Title_Sovereign)
                 {
                     return null;
                 }
@@ -377,14 +377,14 @@ namespace Assets.Code
                     }
                 }
             }
-            //Am neither duke nor sovreign, nor do I live in a duke's province
-            return society.getSovreign();
+            //Am neither duke nor sovereign, nor do I live in a duke's province
+            return society.getSovereign();
         }
         public Person getDirectSuperiorIfAny()
         {
-            if (this == society.getSovreign()) { return null; }
-            if (this.title_land == null) { return society.getSovreign(); }
-            //if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovreign(); }
+            if (this == society.getSovereign()) { return null; }
+            if (this.title_land == null) { return society.getSovereign(); }
+            //if (society.getCapital() != null && society.getCapital().province == this.getLocation().province) { return society.getSovereign(); }
             foreach (Title t in society.titles)
             {
                 if (t is Title_ProvinceRuler)
@@ -393,7 +393,7 @@ namespace Assets.Code
                     if (t2.province == this.getLocation().province)
                     {
                         if (t2.heldBy == this)
-                            return society.getSovreign();
+                            return society.getSovereign();
                         else
                             return t2.heldBy;
                     }
@@ -504,7 +504,7 @@ namespace Assets.Code
 
                 /*
                 double basePrestige = 100;
-                if (society.getSovreign() != null) { basePrestige = society.getSovreign().prestige; }
+                if (society.getSovereign() != null) { basePrestige = society.getSovereign().prestige; }
                 if (basePrestige < 10) { basePrestige = 10; }
                 double multFromPrestige = p.prestige / basePrestige;
                 if (multFromPrestige < 0) { multFromPrestige = 0; }
@@ -520,7 +520,7 @@ namespace Assets.Code
             }
             if (society.isDarkEmpire)
             {
-                //if (society.getSovreign() != null && society.getSovreign().shadow > shadow)
+                //if (society.getSovereign() != null && society.getSovereign().shadow > shadow)
                 //{
                 shadow += Eleven.random.NextDouble() * map.param.ability_avrgDarkEmpireShadowPerTurn;
                 //}
@@ -1121,7 +1121,7 @@ namespace Assets.Code
         }
         public Sprite getImageBorder()
         {
-            if (this == this.society.getSovreign()) { return map.world.textureStore.slotKing; }
+            if (this == this.society.getSovereign()) { return map.world.textureStore.slotKing; }
             if (this.titles.Count > 0) { return map.world.textureStore.slotDuke; }
             if (this.title_land != null) { return map.world.textureStore.slotCount; }
             return map.world.textureStore.slotBasic;

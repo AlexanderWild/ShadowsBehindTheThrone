@@ -113,7 +113,7 @@ namespace Assets.Code
             title.text = p.getFullName();
             subtitle.text = (p.title_land == null) ? "" : p.title_land.getName();
 
-            if (p.society.getSovreign() == p)
+            if (p.society.getSovereign() == p)
             {
                 border.sprite = p.map.world.textureStore.slotKing;
             }
@@ -213,7 +213,7 @@ namespace Assets.Code
             {
                 if (GraphicalSociety.focus != null && this.inner != null)
                 {
-                    if (GraphicalSociety.focus == GraphicalSociety.activeSociety.getSovreign() || this.inner == GraphicalSociety.activeSociety.getSovreign())
+                    if (GraphicalSociety.focus == GraphicalSociety.activeSociety.getSovereign() || this.inner == GraphicalSociety.activeSociety.getSovereign())
                     {
                         //No darken needed
                     }

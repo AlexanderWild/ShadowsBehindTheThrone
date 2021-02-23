@@ -25,7 +25,7 @@ namespace Assets.Code
         internal override string getDescription()
         {
             return "This location is sending military aid, decreasing its military cap by " + (int)this.milCapAdd + "."
-                + "\nThis will reduce this nation in war, and reduce the ability of this location to rebel against their sovreign.";
+                + "\nThis will reduce this nation in war, and reduce the ability of this location to rebel against their sovereign.";
         }
     }
 }

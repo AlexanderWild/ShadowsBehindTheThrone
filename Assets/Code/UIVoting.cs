@@ -121,7 +121,7 @@ namespace Assets.Code
             }
             else
             {
-                Person arbitrary = soc.getSovreign();
+                Person arbitrary = soc.getSovereign();
                 if (arbitrary == null) { arbitrary = soc.people[0]; }
                 if (arbitrary != null) {
                     textProposerVote.text = "";

@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 namespace Assets.Code{
-    public class Title_Sovreign : Title
+    public class Title_Sovereign : Title
     {
-        public Title_Sovreign(Society soc):base(soc)
+        public Title_Sovereign(Society soc):base(soc)
         {
             nameM = "King";
             nameF = "Queen";
@@ -33,11 +33,11 @@ namespace Assets.Code{
         }
         public override string getName()
         {
-            return "Sovreignty of " + society.getName();
+            return "Sovereignty of " + society.getName();
         }
         public override double getPrestige()
         {
-            return society.map.param.society_sovreignPrestige;
+            return society.map.param.society_sovereignPrestige;
         }
 
         public override List<Person> getEligibleHolders(Society soc)
@@ -59,7 +59,7 @@ namespace Assets.Code{
                     bool hasElevatedTitle = false;
                     foreach (Title t in p.titles)
                     {
-                        if (t is Title_ProvinceRuler || t is Title_Sovreign)
+                        if (t is Title_ProvinceRuler || t is Title_Sovereign)
                         {
                             hasElevatedTitle = true;
                         }

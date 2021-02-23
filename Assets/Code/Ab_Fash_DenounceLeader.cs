@@ -22,7 +22,7 @@ namespace Assets.Code
             if (item == null) { return; }
 
             Society soc = person.society;
-            Person sov = soc.getSovreign();
+            Person sov = soc.getSovereign();
             if (sov == null) { return; }
             int nAffected = 0;
             double totalV = 0;
@@ -73,8 +73,8 @@ namespace Assets.Code
         public override bool castable(Map map, Person person)
         {
             
-            if (person.society.getSovreign() == null) { return false; }
-            if (person == person.society.getSovreign()) { return false; }
+            if (person.society.getSovereign() == null) { return false; }
+            if (person == person.society.getSovereign()) { return false; }
             if (person.state == Person.personState.enthralled) { return false; }
 
             return true;
@@ -99,8 +99,8 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Select a person. All people in this society grow dislike of their sovreign if the sovreign fears this person's fear less than they do."
-                + "\n[Requires a person who is neither sovreign nor enthralled]";
+            return "Select a person. All people in this society grow dislike of their sovereign if the sovereign fears this person's fear less than they do."
+                + "\n[Requires a person who is neither sovereign nor enthralled]";
         }
 
         public override string getName()

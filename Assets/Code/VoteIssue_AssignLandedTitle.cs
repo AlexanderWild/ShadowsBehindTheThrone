@@ -64,7 +64,7 @@ namespace Assets.Code
                 u += localU;
             }
 
-            if (option.person != voter.society.getSovreign() && voter != option.person)
+            if (option.person != voter.society.getSovereign() && voter != option.person)
             {
                 Person wouldBeSuperior = title.settlement.location.getSuperiorInSociety(voter.society);
                 Person currentSuperior = option.person.getDirectSuperiorIfAny();

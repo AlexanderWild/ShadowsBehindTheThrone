@@ -22,7 +22,7 @@ namespace Assets.Code
         public override bool castable(Map map, Hex hex)
         {
             if (map.overmind.enthralled == null) { return false; }
-            if (map.overmind.enthralled == map.overmind.enthralled.society.getSovreign()) { return false; }
+            if (map.overmind.enthralled == map.overmind.enthralled.society.getSovereign()) { return false; }
             if (map.overmind.enthralled.rebellingFrom == map.overmind.enthralled.society) { return false; }
 
             return true;
@@ -39,7 +39,7 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Tells your enthralled to join the disatisfied nobles. If sufficient nobles (with sufficient total military cap) are opposed to their sovreign they will join a rebellion and start a civil war."
+            return "Tells your enthralled to join the disatisfied nobles. If sufficient nobles (with sufficient total military cap) are opposed to their sovereign they will join a rebellion and start a civil war."
            
                 + "\n[Requires an enthralled noble who is not already set to rebelling]";
         }

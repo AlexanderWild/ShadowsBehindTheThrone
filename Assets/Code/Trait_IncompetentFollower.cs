@@ -11,7 +11,7 @@ namespace Assets.Code
         {
             name = "Incompetent Follower";
 
-            desc = "This character reduces their direct superior's prestige, if they have one. (The ruler of their province, either duke or sovreign)";
+            desc = "This character reduces their direct superior's prestige, if they have one. (The ruler of their province, either duke or sovereign)";
             groupCode = Trait.CODE_SABOTAGE;
         }
 

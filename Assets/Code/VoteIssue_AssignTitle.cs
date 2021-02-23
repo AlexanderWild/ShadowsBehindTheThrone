@@ -103,7 +103,7 @@ namespace Assets.Code
             if (society.people.Contains(option.person) == false) { World.log("Invalid option. Person cannot hold title."); return; }
             base.implement(option);
 
-            society.turnSovreignAssigned = society.map.turn;
+            society.turnSovereignAssigned = society.map.turn;
             title.turnLastAssigned = society.map.turn;
 
             Person incumbent = title.heldBy;
@@ -119,7 +119,7 @@ namespace Assets.Code
                     title.heldBy.titles.Remove(title);
                     title.heldBy = null;
                 }
-                if (title == society.sovreign)
+                if (title == society.sovereign)
                 {
                     society.addHistory("#GLD_" + title.getName() + " title now held by " + option.person.getFullName());
                 }

@@ -8,7 +8,7 @@ namespace Assets.Code
     public class Society : SocialGroup
     {
         public List<Person> people = new List<Person>();
-        public Title sovreign;
+        public Title sovereign;
         public List<Title> titles = new List<Title>();
 
         public List<TitleLanded> unclaimedTitles = new List<TitleLanded>();
@@ -31,7 +31,7 @@ namespace Assets.Code
         public double data_loyalLordsCap;
         public double data_rebelLordsCap;
         public int turnsNotInOffensiveStance;
-        public int turnSovreignAssigned = -1;
+        public int turnSovereignAssigned = -1;
 
         public bool needsToDecreasePopulation = false;
         public bool isDarkEmpire = false;
@@ -64,8 +64,8 @@ namespace Assets.Code
         public Society(Map map, Location location) : base(map)
         {
             setName("DEFAULT_SOC_NAME");
-            sovreign = new Title_Sovreign(this);
-            titles.Add(sovreign);
+            sovereign = new Title_Sovereign(this);
+            titles.Add(sovereign);
             econEffects = new List<EconEffect>();
 
             if (map.simplified)
@@ -164,7 +164,7 @@ namespace Assets.Code
 
         public void checkAssertions()
         {
-            if (titles.Count == 0) { throw new Exception("Sovreign title not present"); }
+            if (titles.Count == 0) { throw new Exception("Sovereign title not present"); }
         }
 
         public override bool hostileTo(Unit u)
@@ -221,7 +221,7 @@ namespace Assets.Code
         {
             data_loyalLordsCap = 0;
             data_rebelLordsCap = 0;
-            if (getSovreign() == null)
+            if (getSovereign() == null)
             {
                 instabilityTurns = 0;
                 return;
@@ -231,12 +231,12 @@ namespace Assets.Code
             foreach (Person p in people)
             {
                 if (p.title_land == null) { continue; }
-                bool isRebel = p.getRelation(getSovreign()).getLiking() <= map.param.society_rebelLikingThreshold;
+                bool isRebel = p.getRelation(getSovereign()).getLiking() <= map.param.society_rebelLikingThreshold;
                 if (p.state == Person.personState.enthralled)
                 {
                     isRebel = p.rebellingFrom == p.society;
                 }
-                if (p.society.getSovreign() == p) { isRebel = false; }
+                if (p.society.getSovereign() == p) { isRebel = false; }
                 if (isRebel)
                 {
                     data_rebelLordsCap += p.title_land.settlement.getMilitaryCap();
@@ -281,7 +281,7 @@ namespace Assets.Code
                         goodThing = false;
                         level = MsgEvent.LEVEL_RED;
                     }
-                    map.addMessage(this.getName() + " is unstable, as too many powerful nobles oppose the sovreign. " + turnsTillCivilWar + " turns till civil war.",
+                    map.addMessage(this.getName() + " is unstable, as too many powerful nobles oppose the sovereign. " + turnsTillCivilWar + " turns till civil war.",
                         level, goodThing);
                 }
             }
@@ -293,7 +293,7 @@ namespace Assets.Code
 
         public void triggerCivilWar(List<Person> rebelsTotal)
         {
-            World.log(this.getName() + " falls into civil war as " + rebelsTotal.Count + " out of " + people.Count + " nobles declare rebellion against " + getSovreign().getFullName());
+            World.log(this.getName() + " falls into civil war as " + rebelsTotal.Count + " out of " + people.Count + " nobles declare rebellion against " + getSovereign().getFullName());
 
             int level = MsgEvent.LEVEL_ORANGE;
             bool goodThing = true;
@@ -302,7 +302,7 @@ namespace Assets.Code
                 goodThing = false;
                 level = MsgEvent.LEVEL_RED;
             }
-            map.addMessage(this.getName() + " falls into civil war! Provinces declare war on the sovreign's loyal forces.",
+            map.addMessage(this.getName() + " falls into civil war! Provinces declare war on the sovereign's loyal forces.",
                 level, goodThing);
             this.posture = militaryPosture.offensive;//Flip to offensive to recapture lost territory
 
@@ -379,15 +379,15 @@ namespace Assets.Code
                     this.currentMilitary = this.currentMilitary * proportionalStrength;
                 }
 
-                if (getSovreign() != null)
+                if (getSovereign() != null)
                 {
-                    KillOrder killSovreign = new KillOrder(getSovreign(), "Rebellion against tyranny");
-                    rebellion.killOrders.Add(killSovreign);
+                    KillOrder killSovereign = new KillOrder(getSovereign(), "Rebellion against tyranny");
+                    rebellion.killOrders.Add(killSovereign);
                 }
 
                 foreach (Person p in rebels)
                 {
-                    KillOrder killRebel = new KillOrder(p, "Rebelled against sovreign");
+                    KillOrder killRebel = new KillOrder(p, "Rebelled against sovereign");
                     this.killOrders.Add(killRebel);
 
                 }
@@ -468,7 +468,7 @@ namespace Assets.Code
             }
             else if (this.people.Count > map.param.society_nPeopleForKingdom)
             {
-                if (this.getSovreign() == null || this.getSovreign().isMale)
+                if (this.getSovereign() == null || this.getSovereign().isMale)
                 {
                     return "Kingdom of " + basic;
                 }
@@ -501,11 +501,11 @@ namespace Assets.Code
 
         public void computeCapital()
         {
-            if (this.getSovreign() != null)
+            if (this.getSovereign() != null)
             {
-                if (this.getSovreign().title_land != null)
+                if (this.getSovereign().title_land != null)
                 {
-                    capital = this.getSovreign().title_land.settlement.location;
+                    capital = this.getSovereign().title_land.settlement.location;
                     return;
                 }
             }
@@ -922,9 +922,9 @@ namespace Assets.Code
             */
         }
 
-        public Person getSovreign()
+        public Person getSovereign()
         {
-            return sovreign.heldBy;
+            return sovereign.heldBy;
         }
         public void log(String msg)
         {

@@ -101,7 +101,7 @@ namespace Assets.Code
 
         public Person getSuperiorInSociety(Society society)
         {
-            if (society.getCapital() != null && society.getCapital().province == this.province) { return society.getSovreign(); }
+            if (society.getCapital() != null && society.getCapital().province == this.province) { return society.getSovereign(); }
             foreach (Title t in society.titles)
             {
                 if (t is Title_ProvinceRuler)

@@ -26,7 +26,7 @@ namespace Assets.Code
         {
             return "This location is receiving military aid, increasing its military cap by " + (int)this.milCapAdd + "."
                 + "\nThis will aid a nation in war, once the forces increase to match this new cap, and "
-                + "will also allow nobles to rebel against their sovreign with greater strength.";
+                + "will also allow nobles to rebel against their sovereign with greater strength.";
         }
     }
 }

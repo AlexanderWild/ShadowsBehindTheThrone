@@ -158,7 +158,7 @@ namespace Assets.Code
         public int society_instablityTillRebellion = 12;
         public int society_rebelLikingThreshold = -25;
         public int society_zeitDuration = 3;
-        public double society_sovreignPrestige = 20;
+        public double society_sovereignPrestige = 20;
         public double society_dukePrestige = 10;
         public double society_threatMultFromOffensivePosture = 0.5;
         public int society_minTimeBetweenLocReassignments = 40;

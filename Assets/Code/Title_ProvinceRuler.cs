@@ -32,7 +32,7 @@ namespace Assets.Code{
             //Nobles holding land in region are eligible
             foreach (Person p in society.people)
             {
-                if (p == society.getSovreign()) { continue; }
+                if (p == society.getSovereign()) { continue; }
                 if (p.title_land != null && p.title_land.settlement.location.province == province)
                 {
                     candidates.Add(p);
