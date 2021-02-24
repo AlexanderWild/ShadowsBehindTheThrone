@@ -64,14 +64,15 @@ namespace Assets.Code
         }
         public void bSelect()
         {
+            try
+            {
+                ui.removeBlocker(this.gameObject);
+            }
+            catch (Exception e) { }
             if (scrollables.Count > 0)
             {
                 scrollables[index].clicked(ui.world.map);
             }
-            try
-            {
-                ui.removeBlocker(this.gameObject);
-            }catch(Exception e) { }
         }
         public void bNext()
         {

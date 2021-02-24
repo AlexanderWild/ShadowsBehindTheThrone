@@ -1,6 +1,5 @@
 	High criticality:
 
--WASD isn't WASD on all keyboards, nerd. Get a keybinding thingy
 
 -Some guy wants an anim speed setting
 
@@ -8,11 +7,11 @@
 	state == world
 	Couldn't reproduce
 
--Leftover graphical properties, by the look of it
-	(couldn't replicate?)
 
 
 	Medium criticality:
+
+-ABILITY_RECRUIT has no flavour text
 
 -International relationships lens
 
@@ -47,6 +46,10 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-WASD isn't WASD on all keyboards, nerd. Get a keybinding thingy
+
+-Leftover graphical properties, by the look of it
+	(couldn't replicate?)
 
 -Agents should be affected by the security level to a greater degree
 

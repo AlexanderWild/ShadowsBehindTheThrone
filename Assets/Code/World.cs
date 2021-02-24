@@ -49,7 +49,7 @@ namespace Assets.Code
         public List<God> chosenGods = new List<God>();
         public float lastFrame;
 
-        public static bool advancedEdition = true;
+        public static bool advancedEdition = false;
         public static bool useHorseman = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
@@ -66,7 +66,7 @@ namespace Assets.Code
 
         public void Start()
         {
-            Screen.SetResolution(1920, 1080, true);
+            //Screen.SetResolution(1920, 1080, true);
 
             if (Directory.Exists("advdata") == false) { advancedEdition = false; World.log("Setting to standard edition as not advanced data folder was detected"); }
 
