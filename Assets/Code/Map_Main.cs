@@ -66,7 +66,7 @@ namespace Assets.Code
         public void turnTick()
         {
             turn += 1;
-            World.log("Turn " + turn);
+            //World.log("Turn " + turn);
 
             lastTurnTime = UnityEngine.Time.fixedTime;
             turnMessages.Clear();

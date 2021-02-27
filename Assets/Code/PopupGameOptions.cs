@@ -56,14 +56,14 @@ namespace Assets.Code
             politicalStart = false;
             allowLightbringer = tLightbringer.isOn;
             ui.removeBlocker(this.gameObject);
-            ui.world.bStartGameSeeded(currentSeed,this);
+            ui.world.bStartGame(currentSeed,this);
         }
         public void startGame_Political()
         {
             politicalStart = true;
             allowLightbringer = tLightbringer.isOn;
             ui.removeBlocker(this.gameObject);
-            ui.world.bStartGameSeeded(currentSeed, this);
+            ui.world.bStartGame(currentSeed, this);
         }
 
         public void startGame_Simplified()
@@ -76,7 +76,7 @@ namespace Assets.Code
 
             World.log("Start streamlined");
             ui.removeBlocker(this.gameObject);
-            ui.world.bStartGameSeeded(currentSeed, this);
+            ui.world.bStartGame(currentSeed, this);
         }
 
         public void toggleOption()

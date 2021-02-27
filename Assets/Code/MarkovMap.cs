@@ -7,6 +7,9 @@ namespace Assets.Code
 {
     public class MarkovModel
     {
+        public HashSet<string> usedCityNames = new HashSet<string>();
+        public HashSet<string> usedLocNames = new HashSet<string>();
+
         public double[] p0 = new double[26];
         public double[] sum0 = new double[26];
         public double count0;
@@ -33,6 +36,7 @@ namespace Assets.Code
 
         public void buildModel(string[] words)
         {
+            World.log("Building word model");
             foreach (string word in words)
             {
                 if (word.Length < 3) { continue; }
@@ -106,6 +110,7 @@ namespace Assets.Code
 
         public string getWord()
         {
+            int seedStore = Eleven.random.Next();
             int letter = 0;
             double roll = Eleven.random.NextDouble();
             for (int i = 0; i < 26; i++)
@@ -141,6 +146,7 @@ namespace Assets.Code
                     word += alpha[letter];
                 }
             }
+            Eleven.random = new System.Random(seedStore);//A hack because this model was failing to store the values correctly
             return word;
         }
 

@@ -100,7 +100,8 @@ namespace Assets.Code
 
         public override void implement(VoteOption option)
         {
-            if (society.people.Contains(option.person) == false) { World.log("Invalid option. Person cannot hold title."); return; }
+            if (society.people.Contains(option.person) == false) { //World.log("Invalid option. Person cannot hold title.");
+                return; }
             base.implement(option);
 
             society.turnSovereignAssigned = society.map.turn;
@@ -109,13 +110,13 @@ namespace Assets.Code
             Person incumbent = title.heldBy;
             if (title.heldBy == option.person)
             {
-                World.log("Title: " + title.getName() + " remains held by " + option.person.getFullName());
+                //World.log("Title: " + title.getName() + " remains held by " + option.person.getFullName());
             }
             else {
                 //Title already has a person
                 if (title.heldBy != null)
                 {
-                    World.log(title.heldBy.getFullName() + " is losing title " + title.getName());
+                    //World.log(title.heldBy.getFullName() + " is losing title " + title.getName());
                     title.heldBy.titles.Remove(title);
                     title.heldBy = null;
                 }
@@ -146,7 +147,7 @@ namespace Assets.Code
                 }
             }
             option.person.titles.Clear();
-            World.log(option.person.getFullName() + " has been granted the title of " + title.getName());
+            //World.log(option.person.getFullName() + " has been granted the title of " + title.getName());
             title.heldBy = option.person;
             option.person.titles.Add(title);
 

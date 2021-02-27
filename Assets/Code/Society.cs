@@ -879,14 +879,14 @@ namespace Assets.Code
                 {
                     Person sponsor = people[Eleven.random.Next(people.Count)];
                     Person p = new Person(this);
-                    log(p.getFullName() + " has risen to note in the society of " + this.getName() + ", invited by " + sponsor.getFullName());
+                    //log(p.getFullName() + " has risen to note in the society of " + this.getName() + ", invited by " + sponsor.getFullName());
                     people.Add(p);
                     p.shadow = sponsor.shadow;
                 }
                 else
                 {
                     Person p = new Person(this);
-                    log(p.getFullName() + " has risen to note in the society of " + this.getName());
+                    //log(p.getFullName() + " has risen to note in the society of " + this.getName());
                     people.Add(p);
                 }
             }

@@ -17,8 +17,6 @@ namespace Assets.Code
         public static MarkovModel model;
         public static MarkovModel amerimodel;
         public static MarkovModel frenchModel;
-        public static HashSet<string> usedCityNames = new HashSet<string>();
-        public static HashSet<string> usedLocNames = new HashSet<string>();
         
         public static HashSet<string> verboten = new HashSet<string>();
 
@@ -80,11 +78,11 @@ namespace Assets.Code
                     //World.Log("Caught verboten word: " + reply);
                     continue;
                 }
-                if (usedCityNames.Contains(reply))
+                if (model.usedCityNames.Contains(reply))
                 {
                     continue;
                 }
-                usedCityNames.Add(reply);
+                model.usedCityNames.Add(reply);
                 return reply;
             }
             return model.capFirst(model.getWord());
@@ -100,11 +98,11 @@ namespace Assets.Code
                     //World.Log("Caught verboten word: " + reply);
                     continue;
                 }
-                if (usedLocNames.Contains(reply))
+                if (frenchModel.usedLocNames.Contains(reply))
                 {
                     continue;
                 }
-                usedLocNames.Add(reply);
+                frenchModel.usedLocNames.Add(reply);
                 return reply;
             }
             return model.capFirst(model.getWord());

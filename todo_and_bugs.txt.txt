@@ -1,6 +1,8 @@
 	High criticality:
 
-
+-Vampire tooltip says they can travel long distances.
+	-Travel as bats as an ability, or return to crypt, or whatever works flavour-wise
+	
 -Some guy wants an anim speed setting
 
 -Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message

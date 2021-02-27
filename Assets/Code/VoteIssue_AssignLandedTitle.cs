@@ -116,7 +116,8 @@ namespace Assets.Code
 
         public override void implement(VoteOption option)
         {
-            if (society.people.Contains(option.person) == false) { World.log("Invalid option. Person cannot hold title."); return; }
+            if (society.people.Contains(option.person) == false) { //World.log("Invalid option. Person cannot hold title.");
+                return; }
             if (title.settlement == null) { return; }
             if (title.settlement.location.settlement != title.settlement) { return; }//It was removed before we arrived
 
@@ -124,7 +125,7 @@ namespace Assets.Code
             base.implement(option);
             if (title.heldBy == option.person)
             {
-                World.log("Title: " + title.getName() + " remains held by " + option.person.getFullName());
+                //World.log("Title: " + title.getName() + " remains held by " + option.person.getFullName());
             }
 
 
@@ -134,17 +135,17 @@ namespace Assets.Code
                 TitleLanded prev = option.person.title_land;
                 prev.heldBy = null;
                 option.person.title_land = null;
-                World.log(prev.getName() + " has lost its lord as they have been reassigned");
+                //World.log(prev.getName() + " has lost its lord as they have been reassigned");
             }
             //Title already has a person
             if (title.heldBy != null)
             {
-                World.log(title.heldBy.getFullName() + " is losing title " + title.getName());
+                //World.log(title.heldBy.getFullName() + " is losing title " + title.getName());
                 title.heldBy.title_land = null;
                 title.heldBy = null;
             }
 
-            World.log(option.person.getFullName() + " has been granted the title of " + title.getName());
+            //World.log(option.person.getFullName() + " has been granted the title of " + title.getName());
             title.heldBy = option.person;
             title.settlement.infiltration = 0;
             option.person.title_land = title;

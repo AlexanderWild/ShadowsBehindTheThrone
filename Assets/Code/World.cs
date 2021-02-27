@@ -49,7 +49,7 @@ namespace Assets.Code
         public List<God> chosenGods = new List<God>();
         public float lastFrame;
 
-        public static bool advancedEdition = false;
+        public static bool advancedEdition = true;
         public static bool useHorseman = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
@@ -176,6 +176,8 @@ namespace Assets.Code
         public void startup(PopupGameOptions opts)
         {
             Log("Called startup");
+            specificStartup();//Will overwrite a bunch of stuff, this is by design to keep seeds valid
+
             Params param = new Params();
             //param.loadFromFile();
 
@@ -340,7 +342,7 @@ namespace Assets.Code
             audioStore.playClick();
             ui.addBlocker(prefabStore.getPlayback(this, map).gameObject);
         }
-        public void bStartGameSeeded(int seed, PopupGameOptions opts)
+        public void bStartGame(int seed, PopupGameOptions opts)
         {
             audioStore.playActivate();
 
