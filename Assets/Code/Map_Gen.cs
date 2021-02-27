@@ -116,14 +116,8 @@ namespace Assets.Code
             addLargeForests();
             addSmallForests();
             assignTerrainFromClimate();
-            int seedStore = Eleven.random.Next();
-            World.log("SeedSampling 2: " + Eleven.random.Next());//Stable to here
             assignLocationNamesAndIndices();
-            World.log("SeedSampling 2b: " + Eleven.random.Next());//Unstable here
-            World.log("SeedSampling stored seed: " + seedStore);
-            Eleven.random = new System.Random(seedStore);//Okay, get this incredible hack. Can't figure out why the language model breaks down, so instead we jump the seed across the gap
             placeProvinces();
-            World.log("SeedSampling 3: " + Eleven.random.Next());//Unstable here
             checkConnectivity();
             loadCultures();
 
@@ -277,9 +271,7 @@ namespace Assets.Code
             }
 
             //Assign all locations to provinces
-            World.log("Seed sample 3b " + Eleven.random.Next());
             assignProvinces();
-            World.log("Seed sample 3c " + Eleven.random.Next());
 
             for (int splitRound = 0; splitRound < 3; splitRound++)
             {
@@ -316,7 +308,6 @@ namespace Assets.Code
                     break;
                 }
             }
-            World.log("Seed sample 3d " + Eleven.random.Next());
 
             for (int i = 0; i < provinces.Count; i++)
             {
@@ -326,7 +317,6 @@ namespace Assets.Code
                 }
             }
 
-            World.log("Seed sample 3d2 " + Eleven.random.Next());
             foreach (Province p in provinces)
             {
                 int c = 0;
@@ -370,7 +360,6 @@ namespace Assets.Code
                 }
             }
 
-            World.log("Seed sample 3e " + Eleven.random.Next());
 
             //We want the proportions to be almost exactly identical between all resources, but still randomised
             List<Province> duplicateProvinces = new List<Province>();
@@ -386,7 +375,6 @@ namespace Assets.Code
                 duplicateProvinces[n] = value;
             }
 
-            World.log("Seed sample 3f " + Eleven.random.Next());
             //Assign the econ type which is currently used by the fewest humans
             while (duplicateProvinces.Count > 0)
             {

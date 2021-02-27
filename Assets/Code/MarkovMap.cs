@@ -110,7 +110,6 @@ namespace Assets.Code
 
         public string getWord()
         {
-            int seedStore = Eleven.random.Next();
             int letter = 0;
             double roll = Eleven.random.NextDouble();
             for (int i = 0; i < 26; i++)
@@ -146,7 +145,6 @@ namespace Assets.Code
                     word += alpha[letter];
                 }
             }
-            Eleven.random = new System.Random(seedStore);//A hack because this model was failing to store the values correctly
             return word;
         }
 
