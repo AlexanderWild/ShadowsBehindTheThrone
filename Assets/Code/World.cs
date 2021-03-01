@@ -176,7 +176,6 @@ namespace Assets.Code
         public void startup(PopupGameOptions opts)
         {
             Log("Called startup");
-            specificStartup();//Will overwrite a bunch of stuff, this is by design to keep seeds valid
 
             Params param = new Params();
             //param.loadFromFile();

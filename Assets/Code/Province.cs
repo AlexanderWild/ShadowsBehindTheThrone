@@ -9,8 +9,8 @@ namespace Assets.Code
     {
         public Hex coreHex;
         public string name;
-        public List<Location> locations = new List<Location>();
-        public Location capital;
+        public List<int> locations = new List<int>();
+        public int capital = -1;
         public List<EconTrait> econTraits = new List<EconTrait>();
         public bool isSea = false;
 

@@ -8,7 +8,7 @@ namespace Assets.Code
 {
     public abstract class Unit
     {
-        public Person person;
+        public int personID;
         public Location parentLocation;
         public Location location;
         public GraphicalUnit outer;
@@ -26,11 +26,16 @@ namespace Assets.Code
         public bool flaggedAsEnthralledHostile = false;
         public List<Unit> hostility = new List<Unit>();
 
-        public Unit(Location loc,SocialGroup soc)
+        public Unit(Location loc, SocialGroup soc)
         {
             this.location = loc;
             this.society = soc;
             loc.units.Add(this);
+        }
+
+        public Person person {
+            get { return location.map.persons[personID]; }
+            set { personID = value.index; }
         }
 
         public virtual void turnTick(Map map)

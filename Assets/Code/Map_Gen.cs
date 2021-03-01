@@ -283,9 +283,10 @@ namespace Assets.Code
                     {
                         Location splitCapital = null;
                         int c = 0;
-                        foreach (Location loc in p.locations)
+                        foreach (int locI in p.locations)
                         {
-                            if (loc == p.capital) { continue; }
+                            Location loc = locations[locI];
+                            if (locI == p.capital) { continue; }
                             c += 1;
                             if (Eleven.random.Next(c) == 0)
                             {
@@ -320,28 +321,29 @@ namespace Assets.Code
             foreach (Province p in provinces)
             {
                 int c = 0;
-                foreach (Location l in p.locations)
+                foreach (int locI in p.locations)
                 {
+                    Location l = locations[locI];
                     l.province = p;
                     if (l.isMajor)
                     {
                         c += 1;
                         if (Eleven.random.Next(c) == 0)
                         {
-                            p.capital = l;
+                            p.capital = l.index;
                         }
                     }
                 }
-                if (p.capital != null)
+                if (p.capital != -1)
                 {
                     if (landmass[p.coreHex.x][p.coreHex.y])
                     {
-                        p.name = p.capital.shortName + " province";
+                        p.name = locations[p.capital].shortName + " province";
                         p.isSea = false;
                     }
                     else
                     {
-                        p.name = p.capital.shortName + " sea";
+                        p.name = locations[p.capital].shortName + " sea";
                         p.isSea = true;
                     }
                 }
@@ -435,7 +437,7 @@ namespace Assets.Code
                 }
                 if (grid[i][j].location != null)
                 {
-                    grid[i][j].province.locations.Add(grid[i][j].location);
+                    grid[i][j].province.locations.Add(grid[i][j].location.index);
                 }
                 if (loc.province == null)
                 {

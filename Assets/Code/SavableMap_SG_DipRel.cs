@@ -7,13 +7,13 @@ namespace Assets.Code
 {
     public class SavableMap_SG_DipRel
     {
-        public List<SocialGroup> keys = new List<SocialGroup>();
+        public List<double> keys = new List<double>();
         public List<DipRel> values = new List<DipRel>();
 
         public DipRel lookup(SocialGroup key){
             for (int i = 0; i < keys.Count; i++)
             {
-                if (keys[i].Equals(key))
+                if (keys[i].Equals(key.randID))
                 {
                     return values[i];
                 }
@@ -33,20 +33,20 @@ namespace Assets.Code
         }
         public void add(SocialGroup key, DipRel value)
         {
-            keys.Add(key);
+            keys.Add(key.randID);
             values.Add(value);
         }
 
         public bool ContainsKey(SocialGroup key)
         {
-            return keys.Contains(key);
+            return keys.Contains(key.randID);
         }
 
         internal void set(SocialGroup key, DipRel value)
         {
             for (int i = 0; i < keys.Count; i++)
             {
-                if (keys[i].Equals(key))
+                if (keys[i].Equals(key.randID))
                 {
                     values[i] = value;
                     return;

@@ -323,20 +323,20 @@ namespace Assets.Code
         public void compressForSave()
         {
             compressionMap.Clear();
-            foreach (SocialGroup sg in socialGroups)
-            {
-                if (sg is Society)
-                {
-                    Society soc = (Society)sg;
-                    foreach (Person p in soc.people)
-                    {
-                        compressPerson(p);
-                    }
-                }
-            }
+            //foreach (SocialGroup sg in socialGroups)
+            //{
+            //    if (sg is Society)
+            //    {
+            //        Society soc = (Society)sg;
+            //        foreach (Person p in soc.people)
+            //        {
+            //            compressPerson(p);
+            //        }
+            //    }
+            //}
             foreach (Unit u in units)
             {
-                if (u.person != null) { compressPerson(u.person); }
+                //if (u.person != null) { compressPerson(u.person); }
             }
             foreach (Location loc in locations)
             {
@@ -346,15 +346,25 @@ namespace Assets.Code
                     loc.savedLinks.Add(l.other(loc).index);
                 }
                 loc.links.Clear();
+                loc.distanceToTarget.Clear();
+                foreach (Hex h in loc.territory)
+                {
+                    loc.territoryStore.Add(new int[] { h.x, h.y });
+                }
+                loc.territory.Clear();
             }
 
             for (int i = 0; i < persons.Count; i++)
             {
-                if (persons[i] == null) { continue; }
-                if (persons[i].unit == null && (persons[i].society.people.Contains(persons[i]) == false))
-                {
-                    persons[i] = null;
-                }
+                //    if (persons[i] == null) { continue; }
+                //    if (persons[i].unit == null && (persons[i].society.people.Contains(persons[i]) == false))
+                //    {
+                //        persons[i] = null;
+                //    }
+                //    else
+                //    {
+                compressPerson(persons[i]);
+                //}
             }
         }
 
@@ -389,6 +399,14 @@ namespace Assets.Code
             {
                 p.relations.Remove(rel.them);
             }
+            foreach (ThreatItem item in p.threatEvaluations)
+            {
+                if (item.group != null)
+                {
+                    item.groupRandID = item.group.randID;
+                    item.group = null;
+                }
+            }
         }
 
         public void decompressFromSave()
@@ -399,22 +417,21 @@ namespace Assets.Code
                 string val = compressionMap[key];
                 invertedDictionary[val] = key;
             }
-            foreach (SocialGroup sg in socialGroups)
-            {
-                if (sg is Society)
-                {
-                    Society soc = (Society)sg;
-                    foreach (Person p in soc.people)
-                    {
-                        decompressPerson(invertedDictionary,p);
-                    }
-                }
-            }
-            foreach (Unit u in units)
-            {
-                if (u.person != null) { decompressPerson(invertedDictionary,u.person); }
-            }
-            compressionMap.Clear();
+            //foreach (SocialGroup sg in socialGroups)
+            //{
+            //    if (sg is Society)
+            //    {
+            //        Society soc = (Society)sg;
+            //        foreach (Person p in soc.people)
+            //        {
+            //            decompressPerson(invertedDictionary,p);
+            //        }
+            //    }
+            //}
+            //foreach (Unit u in units)
+            //{
+            //    if (u.person != null) { decompressPerson(invertedDictionary,u.person); }
+            //}
 
             foreach (Location loc in locations)
             {
@@ -427,10 +444,28 @@ namespace Assets.Code
                         locations[i].links.Add(link);
                     }
                 }
+                foreach (int[] coord in loc.territoryStore)
+                {
+                    loc.territory.Add(grid[coord[0]][coord[1]]);
+                }
             }
+            for (int i = 0; i < persons.Count; i++)
+            {
+                if (persons[i] == null) { continue; }
+                //if (persons[i].unit == null && (persons[i].society.people.Contains(persons[i]) == false))
+                //{
+                //    persons[i].t
+                //    persons[i] = null;
+                //}
+                //else
+                //{
+                    decompressPerson(invertedDictionary,persons[i]);
+                //}
+            }
+            compressionMap.Clear();
         }
 
-        public void decompressPerson(Dictionary<string, string> invertedDictionary,Person p)
+        public void decompressPerson(Dictionary<string, string> invertedDictionary, Person p)
         {
             foreach (int other in p.relations.Keys)
             {
@@ -445,6 +480,29 @@ namespace Assets.Code
                 rel.them = other;
             }
 
+            List<ThreatItem> removedItems = new List<ThreatItem>();
+            foreach (ThreatItem item in p.threatEvaluations)
+            {
+                if (item.groupRandID != 0)
+                {
+                    foreach (SocialGroup sg in socialGroups)
+                    {
+                        if (sg.randID == item.groupRandID)
+                        {
+                            item.group = sg;
+                        }
+                    }
+                    if (item.group == null)
+                    {
+                        removedItems.Add(item);
+                        //world.prefabStore.popMsg("Unable to rebind threat item group", true);
+                    }
+                }
+            }
+            foreach (ThreatItem item in removedItems)
+            {
+                p.threatEvaluations.Remove(item);
+            }
         }
         public void processWars()
         {
@@ -571,15 +629,23 @@ namespace Assets.Code
 
         private void declarePeace(DipRel rel)
         {
-            World.log("Peace breaks out between " + rel.a.getName() + " and " + rel.b.getName());
+            World.log("Peace breaks out between " + rel.nameA + " and " + rel.nameB);
 
             turnMessages.Add(new MsgEvent("The war between " + rel.war.att.getName() + " and " + rel.war.def.getName() + " winds down", MsgEvent.LEVEL_YELLOW, false));
 
             rel.war = null;
             rel.state = DipRel.dipState.none;
 
-            rel.a.addHistory("Now at peace with " + rel.b.getName());
-            rel.b.addHistory("Now at peace with " + rel.a.getName());
+            SocialGroup a = rel.getA();
+            SocialGroup b = rel.getB();
+            if (a != null)
+            {
+                a.addHistory("Now at peace with " + rel.nameB);
+            }
+            if (b != null)
+            {
+                b.addHistory("Now at peace with " + rel.nameA);
+            }
         }
 
         public void declareWar(SocialGroup att,SocialGroup def)

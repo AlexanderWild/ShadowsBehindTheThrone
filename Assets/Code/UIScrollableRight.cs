@@ -84,7 +84,7 @@ namespace Assets.Code
                 {
                     foreach (DipRel rel in sg.relations.values)
                     {
-                        if (rel.other(sg).isGone() == false && rel.war != null)
+                        if (rel.other(sg) == null || rel.other(sg).isGone() == false && rel.war != null)
                         {
                             wars.Add(rel.war);
                         }

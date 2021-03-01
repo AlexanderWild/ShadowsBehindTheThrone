@@ -13,6 +13,8 @@ namespace Assets.Code
         public Color color;
         public Color color2;
 
+        public double randID;
+
         public SavableMap_SG_DipRel relations = new SavableMap_SG_DipRel();
         public DipRel selfRel;
         public List<Location> lastTurnLocs = new List<Location>();
@@ -35,6 +37,7 @@ namespace Assets.Code
             color = getViableColor();
             color2 = getViableColor();
             name = "SocialGroup";
+            randID = Eleven.random.NextDouble();
 
             //Self-diplomacy
             DipRel rel = new DipRel(map, this, this);

@@ -592,10 +592,16 @@ namespace Assets.Code
         public void computeThreats()
         {
             //Actually do the evaluations here
+            List<ThreatItem> rems = new List<ThreatItem>();
             foreach (ThreatItem item in threatEvaluations)
             {
                 item.threat = 0;
                 item.reasons.Clear();
+                if (item.group != null && (map.socialGroups.Contains(item.group) == false))
+                {
+                    rems.Add(item);
+                    continue;
+                }
                 if (item.group == null)
                 {
                     if (item.form == ThreatItem.formTypes.ENSHADOWED_NOBLES)
@@ -802,6 +808,10 @@ namespace Assets.Code
 
                 if (item.threat < 0) { item.threat = 0; }
                 if (item.threat > 200) { item.threat = 200; }
+            }
+            foreach (ThreatItem item in rems)
+            {
+                threatEvaluations.Remove(item);
             }
             threatEvaluations.Sort();
         }

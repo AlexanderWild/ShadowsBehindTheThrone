@@ -382,7 +382,7 @@ namespace Assets.Code
                         headerStrings = temp.GetString(b).Split('\n');
                         for (int i = 0; i < headerStrings.Length; i++)
                         {
-                            World.log("Header " + i + " " + headerStrings[i]);
+                            //World.log("Header " + i + " " + headerStrings[i]);
                         }
                         World.log("Read file: " + temp.GetString(b));
                         fs.Close();

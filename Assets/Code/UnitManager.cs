@@ -160,8 +160,9 @@ namespace Assets.Code
                 {
                     foreach (Province p in map.provinces)
                     {
-                        foreach (Location loc in p.locations)
+                        foreach (int locI in p.locations)
                         {
+                            Location loc = map.locations[locI];
                             if (loc.soc is Society && loc.settlement != null && loc.settlement.isHuman)
                             {
                                 c += 1;
@@ -216,8 +217,9 @@ namespace Assets.Code
                 {
                     if (investigatedProvinces.Contains(p)) { continue; }
 
-                    foreach (Location loc in p.locations)
+                    foreach (int locI in p.locations)
                     {
+                        Location loc = map.locations[locI];
                         if (loc.soc is Society && loc.settlement != null && loc.settlement.isHuman)
                         {
                             c += 1;
@@ -233,8 +235,9 @@ namespace Assets.Code
                 {
                     foreach (Province p in inhabitedProvinces)
                     {
-                        foreach (Location loc in p.locations)
+                        foreach (int locI in p.locations)
                         {
+                            Location loc = map.locations[locI];
                             if (loc.soc is Society && loc.settlement != null && loc.settlement.isHuman)
                             {
                                 c += 1;

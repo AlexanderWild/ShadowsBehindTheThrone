@@ -15,6 +15,7 @@ namespace Assets.Code
         public SocialGroup soc;
         public Settlement settlement;
         public HashSet<Hex> territory = new HashSet<Hex>();
+        public List<int[]> territoryStore = new List<int[]>();
         public Color territoryColor;
         public List<Link> links = new List<Link>();
         public List<int> savedLinks = new List<int>();

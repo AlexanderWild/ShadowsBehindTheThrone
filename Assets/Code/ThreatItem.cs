@@ -8,6 +8,7 @@ namespace Assets.Code
     public class ThreatItem : IComparable<ThreatItem>
     {
         public SocialGroup group;
+        public double groupRandID;
         public Map map;
         public Person p;
         public double temporaryDread;
