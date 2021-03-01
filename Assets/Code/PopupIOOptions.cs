@@ -141,7 +141,7 @@ namespace Assets.Code
         public static void saveState()
         {
             if (World.checkSaveFolder() == false) {
-                World.staticMap.world.prefabStore.popMsg("Unable to write to directory " + World.saveFolder + ". Settings will not persist without folder access.");
+                World.staticMap.world.prefabStore.popMsg("Unable to write to directory " + World.saveFolder + ". Settings will not persist without folder access.",true);
             }
 
             string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 

@@ -134,6 +134,7 @@ namespace Assets.Code
 
         public void turnTick()
         {
+            if (map.locations[index] != this) { throw new Exception("Assertion failed: locations not consistent"); }
             if (settlement != null)
             {
                 settlement.turnTick();

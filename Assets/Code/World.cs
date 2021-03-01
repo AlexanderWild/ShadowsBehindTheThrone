@@ -55,7 +55,7 @@ namespace Assets.Code
         public static LogBox saveLog = new LogBox("saveLog.log");
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
         public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
-        public static int versionNumber = 17;
+        public static int versionNumber = 18;
         public static int subversionNumber = 0;
 
         public static bool cheat_globalCooling = false;
@@ -501,12 +501,12 @@ namespace Assets.Code
             Map rescueMap = World.staticMap;
 
             if (checkSaveFolder() == false) {
-                prefabStore.popMsg("Unable to locate directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
+                prefabStore.popMsg("Unable to locate directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.",true);
                 return;
             }
             if (!hasWritePermission(saveFolder))
             {
-                prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.");
+                prefabStore.popMsg("Unable to write to directory " + saveFolder + ". Saving cannot proceed without folder access. Aborting save.",true);
                 World.autosavePeriod = -1;
                 return;
             }
@@ -557,7 +557,7 @@ namespace Assets.Code
 
                 if (popMsg)
                 {
-                    world.prefabStore.popMsg("Game saved as: " + filename);
+                    world.prefabStore.popMsg("Game saved as: " + filename,true);
                 }
 
                 //// step 1: parse the JSON data
@@ -571,8 +571,8 @@ namespace Assets.Code
             {
                 World.log(e.Message);
                 World.log(e.StackTrace);
-                prefabStore.popMsg("Failure to save");
-                prefabStore.popMsg("Exception: " + e.StackTrace);
+                prefabStore.popMsg("Failure to save",true);
+                prefabStore.popMsg("Exception: " + e.StackTrace,true);
 
                 map = rescueMap;
                 map.world = this;
@@ -641,7 +641,7 @@ namespace Assets.Code
                 //GraphicalMap.checkData();
                 //graphicalMap.loadArea(0, 0);
                 map.decompressFromSave();
-                prefabStore.popMsg("Loaded file: " + filename);
+                prefabStore.popMsg("Loaded file: " + filename,true);
                 World.Log("reached end of loading code");
                 // prefabStore.popMsg("Load may well have succeeded.");
             }
@@ -649,13 +649,13 @@ namespace Assets.Code
             {
                 Debug.Log(e);
                 World.log(e.StackTrace);
-                prefabStore.popMsg("Exception: " + e.StackTrace);
+                prefabStore.popMsg("Exception: " + e.StackTrace,true);
             }
             catch (Exception e2)
             {
                 Debug.Log(e2);
                 World.log(e2.StackTrace);
-                prefabStore.popMsg("Exception: " + e2.StackTrace);
+                prefabStore.popMsg("Exception: " + e2.StackTrace,true);
             }
         }
     }

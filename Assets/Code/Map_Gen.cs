@@ -81,7 +81,7 @@ namespace Assets.Code
             sizeX = sx;
             sizeY = sy;
 
-
+            Location.indexCounter = 0;
             landmass = new bool[sx][];
             for (int i = 0; i < sx; i++) { landmass[i] = new bool[sy]; }
             drawLandmass_islands();

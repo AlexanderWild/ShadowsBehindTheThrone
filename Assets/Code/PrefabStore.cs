@@ -416,7 +416,7 @@ namespace Assets.Code
             }
             else
             {
-                popMsg("No save games found to load");
+                popMsg("No save games found to load",true);
             }
 
             ui.addBlocker(specific.gameObject);
@@ -689,9 +689,9 @@ namespace Assets.Code
             ui.uiInputs.disable = true;
             ui.addBlockerOverride(specific.gameObject);
         }
-        public void popMsg(string words)
+        public void popMsg(string words,bool force=false)
         {
-            if (world.displayMessages == false) { return; }
+            if (!force && (world.displayMessages == false)) { return; }
 
             GameObject obj = Instantiate(prefabMsg) as GameObject;
             PopupMsg specific = obj.GetComponent<PopupMsg>();
