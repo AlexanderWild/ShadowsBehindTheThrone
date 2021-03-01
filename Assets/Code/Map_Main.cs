@@ -347,6 +347,15 @@ namespace Assets.Code
                 }
                 loc.links.Clear();
             }
+
+            for (int i = 0; i < persons.Count; i++)
+            {
+                if (persons[i] == null) { continue; }
+                if (persons[i].unit == null && (persons[i].society.people.Contains(persons[i]) == false))
+                {
+                    persons[i] = null;
+                }
+            }
         }
 
         public void compressPerson(Person p)
@@ -356,6 +365,7 @@ namespace Assets.Code
             foreach (RelObj rel in p.relations.Values)
             {
                 Person them = persons[rel.them];
+                if (them == null) { return; }
                 if (
                     Math.Abs(rel.getLiking()) < 10 &&
                     rel.suspicion < 0.1 &&

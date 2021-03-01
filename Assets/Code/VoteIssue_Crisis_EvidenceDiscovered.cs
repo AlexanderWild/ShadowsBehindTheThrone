@@ -216,6 +216,7 @@ namespace Assets.Code
                 bool hasSuspicions = false;
                 foreach (RelObj rel in inv.person.relations.Values)
                 {
+                    if (inv.location.map.persons[rel.them] == null) { continue; }
                     if (rel.suspicion > 0 && inv.location.map.persons[rel.them].unit != null && inv.location.map.units.Contains(inv.location.map.persons[rel.them].unit))
                     {
                         hasSuspicions = true;

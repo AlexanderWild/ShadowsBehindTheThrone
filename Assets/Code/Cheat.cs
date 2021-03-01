@@ -29,6 +29,10 @@ namespace Assets.Code
                 {
                     //map.world.load("testSave.sv");
                 }
+                if (command == "silence")
+                {
+                    World.self.displayMessages = !World.self.displayMessages;
+                }
                 if (command == "shadow")
                 {
                     GraphicalMap.selectedHex.location.person().shadow = 1;

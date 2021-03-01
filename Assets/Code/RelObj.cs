@@ -46,6 +46,7 @@ namespace Assets.Code
         public static double getLikingModifiers(Person me,int themIndex,List<ReasonMsg> reasons)
         {
             Person them = World.staticMap.persons[themIndex];
+            if (them == null) { return 0;}
             double u = 0;
 
             if (me.society.socType.usesHouses() && (me.house == them.house))

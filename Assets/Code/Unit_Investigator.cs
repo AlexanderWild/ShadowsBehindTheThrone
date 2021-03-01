@@ -136,6 +136,7 @@ namespace Assets.Code
                 {
                     person.watched = true;
                     Person p = person.map.persons[rel.them];
+                    if (p == null) { continue; }
                     if (p == person) { throw new Exception("Badly implemented lookup"); }
                     if (p.unit != null)
                     {
