@@ -84,15 +84,19 @@ namespace Assets.Code
                 {
                     foreach (DipRel rel in sg.relations.values)
                     {
-                        if (rel.other(sg) == null || rel.other(sg).isGone() == false && rel.war != null)
+                        if (rel.war != null && (rel.other(sg) != null && rel.other(sg).isGone() == false))
                         {
                             wars.Add(rel.war);
                         }
+                        //if ((rel.other(sg) == null || rel.other(sg).isGone() == false) && rel.war != null)
+                        //{
+                        //}
                     }
                 }
                 foreach (War war in wars)
                 {
                     GameObject sp = Instantiate(master.world.prefabStore.prefabPersonPortrait, listContent);
+                    World.log("War before setinfo " + war);
                     sp.GetComponent<Portrait>().SetInfo(war);
                 }
             }

@@ -30,7 +30,9 @@ namespace Assets.Code
         public bool beneficial;
         public string msg;
 
-        public MsgEvent(string v, double u,bool positive)
+        public Hex hex;
+
+        public MsgEvent(string v, double u,bool positive,Hex targetHex=null)
         {
             this.msg = v;
             if (u < 0)
@@ -41,6 +43,7 @@ namespace Assets.Code
                 this.priority = u + (Eleven.random.NextDouble() * 0.001); // Skew for stable sort
             }
             this.beneficial = positive;
+            hex = targetHex;
         }
 
         public int CompareTo(MsgEvent other)

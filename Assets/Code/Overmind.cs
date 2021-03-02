@@ -471,11 +471,11 @@ namespace Assets.Code
                 {
                     if (u.task is Task_Investigate)
                     {
-                        reply.Add(new MsgEvent(u.getName() + " is investigating evidence at " + u.location.getName(), MsgEvent.LEVEL_ORANGE, false));
+                        reply.Add(new MsgEvent(u.getName() + " is investigating evidence at " + u.location.getName(), MsgEvent.LEVEL_ORANGE, false,u.location.hex));
                     }
                     else if (u.task is Task_ShareSuspicions)
                     {
-                        reply.Add(new MsgEvent(u.getName() + " is warning the noble at " + u.location.getName(), MsgEvent.LEVEL_ORANGE, false));
+                        reply.Add(new MsgEvent(u.getName() + " is warning the noble at " + u.location.getName(), MsgEvent.LEVEL_ORANGE, false,u.location.hex));
 
                     }
                 }

@@ -8,13 +8,23 @@ namespace Assets.Code
     public class MonoMapMsg : MonoBehaviour
     {
         public Text info;
-        
+        public Button button;
+
+        public Hex targetHex;
         public Image background;
         
+        public void onClick()
+        {
+            if (targetHex != null)
+            {
+                GraphicalMap.panTo(targetHex.x, targetHex.y);
+            }
+        }
 
         public void SetInfo(MsgEvent v)
         {
             info.text = v.msg;
+            targetHex = v.hex;
 
             int priority = (int)(v.priority);
             if (priority == MsgEvent.LEVEL_BLUE)

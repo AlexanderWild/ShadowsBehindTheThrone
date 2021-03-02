@@ -44,6 +44,8 @@ namespace Assets.Code
 
         public void SetInfo(War war)
         {
+            if (war == null) { throw new System.Exception("war is null"); }
+            if (war.att == null) { throw new System.Exception("Attacker is null"); }
             foreground.sprite = war.att.map.world.textureStore.icon_shield;
             foreground.enabled = true;
             midground.enabled = false;
