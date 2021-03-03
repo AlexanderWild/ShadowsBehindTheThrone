@@ -142,7 +142,7 @@ namespace Assets.Code
                     }
                     if (t.society.hasEnthralled())
                     {
-                        t.society.map.addMessage("Title: " + t.getName() + " is now reassigned");
+                        t.society.map.addMessage("Title: " + t.getName() + " is now reassigned",1,false,t.society.getCapitalHex());
                     }
                 }
             }

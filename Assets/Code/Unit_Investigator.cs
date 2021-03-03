@@ -294,7 +294,7 @@ namespace Assets.Code
                         if (this.person != null && u.person != null)
                         {
                             this.person.getRelation(u.person).suspicion = Math.Min(1, this.person.getRelation(u.person).suspicion + map.param.unit_suspicionFromProximity);
-                            map.addMessage(this.getName() + " has gained suspicion of " + u.getName(), MsgEvent.LEVEL_ORANGE, false);
+                            map.addMessage(this.getName() + " has gained suspicion of " + u.getName(), MsgEvent.LEVEL_ORANGE, false,location.hex);
                         }
                     }
                 }

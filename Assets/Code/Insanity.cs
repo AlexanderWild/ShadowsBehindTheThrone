@@ -36,7 +36,7 @@ namespace Assets.Code
                 victim.getRelation(p).addLiking(-30, "Lashed out in madess", p.map.turn);
                 if (p.society.hasEnthralled())
                 {
-                    p.map.addMessage(p.getFullName() + " lashes out against " + victim.getFullName() + " in madness", MsgEvent.LEVEL_DARK_GREEN, p.state != Person.personState.enthralled);
+                    p.map.addMessage(p.getFullName() + " lashes out against " + victim.getFullName() + " in madness", MsgEvent.LEVEL_DARK_GREEN, p.state != Person.personState.enthralled,p.getLocation().hex);
                 }
             }
         }

@@ -97,7 +97,7 @@ namespace Assets.Code
                     loc.soc = receiver;
                     SettlementHuman set = (SettlementHuman)loc.settlement;
                     set.population = 1;//Start at the start
-                    loc.map.addMessage(loc.soc.getName() + " expands, add new settlement: " + loc.getName(), MsgEvent.LEVEL_RED, false);
+                    loc.map.addMessage(loc.soc.getName() + " expands, add new settlement: " + loc.getName(), MsgEvent.LEVEL_RED, false,loc.hex);
                 }
             }
         }

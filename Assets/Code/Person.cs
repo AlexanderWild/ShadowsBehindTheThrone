@@ -436,7 +436,7 @@ namespace Assets.Code
         {
             int q = Eleven.random.Next(map.globalist.allInsanities.Count);
             madness = map.globalist.allInsanities[q];
-            map.addMessage(this.getFullName() + " has gone insane, and is now " + madness.name,MsgEvent.LEVEL_DARK_GREEN2,true);
+            map.addMessage(this.getFullName() + " has gone insane, and is now " + madness.name,MsgEvent.LEVEL_DARK_GREEN2,true,this.getLocation().hex);
         }
 
         private void computeSuspicionGain()
@@ -480,7 +480,9 @@ namespace Assets.Code
             {
                 return this.title_land.settlement.location;
             }
-            return this.society.getCapital();
+            Location loc =  this.society.getCapital();
+            if (loc != null) { return loc; }
+            return map.locations[0];
         }
 
         private void processEnshadowment()
@@ -530,7 +532,7 @@ namespace Assets.Code
             if (state == personState.normal && shadow == 1)
             {
                 this.state = personState.broken;
-                map.turnMessages.Add(new MsgEvent(this.getFullName() + " has been fully enshadowed, their soul can no longer resist the dark", MsgEvent.LEVEL_GREEN, true));
+                map.turnMessages.Add(new MsgEvent(this.getFullName() + " has been fully enshadowed, their soul can no longer resist the dark", MsgEvent.LEVEL_GREEN, true,getLocation().hex));
                 if (!map.hasBrokenSoul)
                 {
                     AchievementManager.unlockAchievement(SteamManager.achievement_key.BROKEN_SOUL);
@@ -1030,7 +1032,7 @@ namespace Assets.Code
                 benefit = true;
                 priority = MsgEvent.LEVEL_DARK_GREEN;
             }
-            map.turnMessages.Add(new MsgEvent(this.getFullName() + " dies! " + v, priority, benefit));
+            map.turnMessages.Add(new MsgEvent(this.getFullName() + " dies! " + v, priority, benefit,getLocation().hex));
 
             if (printMsg)
             {

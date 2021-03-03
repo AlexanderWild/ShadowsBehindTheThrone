@@ -26,7 +26,7 @@ namespace Assets.Code
             int priority = (society.hasEnthralled()) ? 1 : 3;
             string msg = society.getName() + ": chose " + option.info(this) + " for " + this.ToString();
 
-            World.staticMap.addMessage(msg, priority, positive);
+            World.staticMap.addMessage(msg, priority, positive,society.getCapitalHex());
 
             bool proposerPassed = false;
             foreach (Person p in option.votesFor)

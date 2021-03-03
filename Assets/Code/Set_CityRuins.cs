@@ -27,7 +27,7 @@ namespace Assets.Code
             else
             {
                 this.location.settlement = null;
-                this.location.map.addMessage(this.name + " finally crumble into nothing.", MsgEvent.LEVEL_GRAY);
+                this.location.map.addMessage(this.name + " finally crumble into nothing.", MsgEvent.LEVEL_GRAY,true,location.hex);
             }
         }
 

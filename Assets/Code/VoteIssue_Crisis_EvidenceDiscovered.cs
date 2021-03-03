@@ -279,7 +279,7 @@ namespace Assets.Code
                         Property.addProperty(society.map, loc, "Major Security Boost");
                     }
                 }
-                society.map.addMessage(society.getName() + " raises " + society.map.provinces[option.province].name + " security level", MsgEvent.LEVEL_ORANGE, false);
+                society.map.addMessage(society.getName() + " raises " + society.map.provinces[option.province].name + " security level", MsgEvent.LEVEL_ORANGE, false,society.map.provinces[option.province].coreHex);
             }
             if (option.index == NATIONWIDE_SECURITY)
             {
@@ -291,7 +291,7 @@ namespace Assets.Code
                         Property.addProperty(society.map, loc, "Minor Security Boost");
                     }
                 }
-                society.map.addMessage(society.getName() + " raises its security level nationwide", MsgEvent.LEVEL_ORANGE, false);
+                society.map.addMessage(society.getName() + " raises its security level nationwide", MsgEvent.LEVEL_ORANGE, false,society.getCapitalHex());
             }
             if (option.index == NO_RESPONSE)
             {
@@ -317,7 +317,7 @@ namespace Assets.Code
                         " All your existing agents will now be attacked on sight if they enter or are in its lands. New agents will still be acceptable.");
                 }
                 World.log(society.getName() + " implements crisis legislation, expelling all foreign agents");
-                society.map.addMessage(society.getName() + " outlaws all foreign agents", MsgEvent.LEVEL_RED, false);
+                society.map.addMessage(society.getName() + " outlaws all foreign agents", MsgEvent.LEVEL_RED, false,society.getCapitalHex());
             }
             if (option.index == INVESTIGATOR_HOSTILITY)
             {
@@ -353,7 +353,7 @@ namespace Assets.Code
                         }
                     }
                 }
-                society.map.addMessage(society.getName() + " locks down " + society.map.provinces[option.province].name, MsgEvent.LEVEL_ORANGE, false);
+                society.map.addMessage(society.getName() + " locks down " + society.map.provinces[option.province].name, MsgEvent.LEVEL_ORANGE, false, society.map.provinces[option.province].coreHex);
                 if (enthralledVic != null)
                 {
                     society.map.world.prefabStore.popMsg(society.getName() + " has imposed a complete lockdown in the province " + society.map.provinces[option.province].name +

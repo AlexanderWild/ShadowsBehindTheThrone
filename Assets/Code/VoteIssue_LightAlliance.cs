@@ -103,7 +103,7 @@ namespace Assets.Code
                 if (canVassalise)
                 {
                     World.log(society.getName() + " ALLIES UNDER " + receiver.getName());
-                    society.map.turnMessages.Add(new MsgEvent(society.getName() + " forms alliance under " + receiver.getName() + ", transferring all lands and landed nobles.",MsgEvent.LEVEL_RED,true));
+                    society.map.turnMessages.Add(new MsgEvent(society.getName() + " forms alliance under " + receiver.getName() + ", transferring all lands and landed nobles.",MsgEvent.LEVEL_RED,true,receiver.getCapitalHex()));
                     
                     foreach (Location loc in trans)
                     {

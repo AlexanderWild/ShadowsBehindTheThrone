@@ -521,7 +521,7 @@ namespace Assets.Code
                             VoteIssue_CondemnAgent issue = (VoteIssue_CondemnAgent)soc.voteSession.issue;
                             if (issue.target.isEnthralled())
                             {
-                                reply.Add(new MsgEvent(soc.getName() + " is voting to condemn " + issue.target.getName(), MsgEvent.LEVEL_RED, false));
+                                reply.Add(new MsgEvent(soc.getName() + " is voting to condemn " + issue.target.getName(), MsgEvent.LEVEL_RED, false,issue.target.location.hex));
                             }
                         }
                     }
@@ -539,19 +539,24 @@ namespace Assets.Code
                         if (s2 is Society)
                         {
                             Society soc = (Society)s2;
+                            Hex hex = null;
+                            if (soc.capital != null) { hex = soc.capital.hex; }
                             if (soc.offensiveTarget == sg)
                             {
                                 if (soc.posture == Society.militaryPosture.offensive)
                                 {
-                                    reply.Add(new MsgEvent(soc.getName() + " is offensive and targetting " + sg.getName(), MsgEvent.LEVEL_RED, false));
+                                    int level = MsgEvent.LEVEL_RED;
+                                    if (soc.currentMilitary < sg.currentMilitary * 0.75) { level = MsgEvent.LEVEL_ORANGE; }
+                                    if (soc.currentMilitary < sg.currentMilitary * 0.25) { level = MsgEvent.LEVEL_YELLOW; }
+                                    reply.Add(new MsgEvent(soc.getName() + " is offensive and targetting " + sg.getName(), MsgEvent.LEVEL_RED, false, hex));
                                     if (soc.voteSession != null && soc.voteSession.issue is VoteIssue_DeclareWar)
                                     {
-                                        reply.Add(new MsgEvent(soc.getName() + " is voting to declare war on " + sg.getName(), MsgEvent.LEVEL_RED, false));
+                                        reply.Add(new MsgEvent(soc.getName() + " is voting to declare war on " + sg.getName(), MsgEvent.LEVEL_RED, false, hex));
                                     }
                                 }
                                 else
                                 {
-                                    reply.Add(new MsgEvent(soc.getName() + " is targetting " + sg.getName(), MsgEvent.LEVEL_ORANGE, false));
+                                    reply.Add(new MsgEvent(soc.getName() + " is targetting " + sg.getName(), MsgEvent.LEVEL_ORANGE, false, hex));
                                 }
                             }
                             else
@@ -567,7 +572,7 @@ namespace Assets.Code
                                 }
                                 if (nThreat > 0)
                                 {
-                                    reply.Add(new MsgEvent(nThreat + " nobles from " + soc.getName() + " consider " + sg.getName() + " their greatest threat", MsgEvent.LEVEL_YELLOW, false));
+                                    reply.Add(new MsgEvent(nThreat + " nobles from " + soc.getName() + " consider " + sg.getName() + " their greatest threat", MsgEvent.LEVEL_YELLOW, false,hex));
                                 }
                             }
                         }

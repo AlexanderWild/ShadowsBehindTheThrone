@@ -308,7 +308,7 @@ namespace Assets.Code
                     title.heldBy.state == Person.personState.enthralled ? false : true);
                 title.heldBy.title_land = null;
             }
-            location.map.addMessage(this.name + " is no longer able to sustain human life, and is falling into ruin.");
+            location.map.addMessage(this.name + " is no longer able to sustain human life, and is falling into ruin.",MsgEvent.LEVEL_GREEN,true,location.hex);
             Set_Ruins ruins = new Set_Ruins(location);
             location.settlement = ruins;
             location.settlement.name = "Ruins of " + location.shortName;

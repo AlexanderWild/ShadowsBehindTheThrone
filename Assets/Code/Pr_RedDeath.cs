@@ -37,7 +37,7 @@ namespace Assets.Code
                 set.population -= 1;
                 if (set.population <= 0)
                 {
-                    location.map.addMessage(set.location.getName() + " has been eradicated by the Red Death", MsgEvent.LEVEL_RED, true);
+                    location.map.addMessage(set.location.getName() + " has been eradicated by the Red Death", MsgEvent.LEVEL_RED, true,location.hex);
                     if (set.title != null && set.title.heldBy != null)
                     {
                         set.title.heldBy.die("Died of the Red Death", true);

@@ -281,8 +281,10 @@ namespace Assets.Code
                         goodThing = false;
                         level = MsgEvent.LEVEL_RED;
                     }
+                    Hex hex = null;
+                    if (getCapital() != null) { hex = getCapital().hex; }
                     map.addMessage(this.getName() + " is unstable, as too many powerful nobles oppose the sovereign. " + turnsTillCivilWar + " turns till civil war.",
-                        level, goodThing);
+                        level, goodThing,hex);
                 }
             }
             else
@@ -302,8 +304,10 @@ namespace Assets.Code
                 goodThing = false;
                 level = MsgEvent.LEVEL_RED;
             }
+            Hex hex = null;
+            if (getCapital() != null) { hex = getCapital().hex; }
             map.addMessage(this.getName() + " falls into civil war! Provinces declare war on the sovereign's loyal forces.",
-                level, goodThing);
+                level, goodThing,hex);
             this.posture = militaryPosture.offensive;//Flip to offensive to recapture lost territory
 
             List<Province> seenProvinces = new List<Province>();
@@ -630,6 +634,13 @@ namespace Assets.Code
             */
         }
 
+        public Hex getCapitalHex()
+        {
+            Location loc = getCapital();
+            if (loc != null) { return loc.hex; }
+            return null;
+        }
+
         public void processVoting()
         {
             if (voteSession == null)
@@ -664,7 +675,7 @@ namespace Assets.Code
                     int priority = (this.hasEnthralled()) ? 1 : 3;
                     string msg = this.getName() + " now voting on " + issue.ToString();
 
-                    World.staticMap.addMessage(msg, priority, positive);
+                    World.staticMap.addMessage(msg, priority, positive, getCapitalHex());
 
                     //Otherwise, on with voting for this new thing
                     voteSession = new VoteSession();
@@ -810,7 +821,7 @@ namespace Assets.Code
                 {
                     if (map.overmind.enthralled != null && t.heldBy.society == map.overmind.enthralled.society)
                     {
-                        map.addMessage(t.heldBy.getFullName() + " loses provincial rule over " + t.province.name + " due to loss of territory.",MsgEvent.LEVEL_RED,false);
+                        map.addMessage(t.heldBy.getFullName() + " loses provincial rule over " + t.province.name + " due to loss of territory.",MsgEvent.LEVEL_RED,false, t.province.coreHex);
                     }
                     
                     t.heldBy.titles.Remove(t);
@@ -839,7 +850,7 @@ namespace Assets.Code
 
                         if (map.overmind.enthralled != null && this == map.overmind.enthralled.society)
                         {
-                            map.addMessage(this.getName() + " adds a new provincial ruler title, for " + title.province.name, MsgEvent.LEVEL_GREEN, false);
+                            map.addMessage(this.getName() + " adds a new provincial ruler title, for " + title.province.name, MsgEvent.LEVEL_GREEN, false,title.province.coreHex);
                         }
                     }
                 }

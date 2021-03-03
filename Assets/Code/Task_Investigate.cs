@@ -44,7 +44,7 @@ namespace Assets.Code
                             unit.hostility.Add(ev.pointsTo);
                         }
 
-                        unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsTo.getName(), MsgEvent.LEVEL_ORANGE, false);
+                        unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsTo.getName(), MsgEvent.LEVEL_ORANGE, false,unit.location.hex);
                     }
                     else if (ev.pointsToPerson != null)
                     {
@@ -53,7 +53,7 @@ namespace Assets.Code
                             unit.person.getRelation(ev.pointsToPerson).suspicion = System.Math.Min(1, unit.person.getRelation(ev.pointsToPerson).suspicion + ev.weight);
                         }
 
-                        unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsToPerson.getFullName(), MsgEvent.LEVEL_ORANGE, false);
+                        unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsToPerson.getFullName(), MsgEvent.LEVEL_ORANGE, false,unit.location.hex);
                     }
 
 

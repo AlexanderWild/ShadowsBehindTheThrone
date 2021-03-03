@@ -153,7 +153,7 @@ namespace Assets.Code
                     if (target != null)
                     {
                         target.awareness = 1;
-                        addMessage(target.getFullName() + " has gained awareness, having studied the signs", MsgEvent.LEVEL_ORANGE, false);
+                        addMessage(target.getFullName() + " has gained awareness, having studied the signs", MsgEvent.LEVEL_ORANGE, false,target.getLocation().hex);
                     }
                 }
                 else
@@ -187,9 +187,9 @@ namespace Assets.Code
             awarenessReportings = 0;
         }
 
-        public void addMessage(string msg, int level = 1, bool positive = true)
+        public void addMessage(string msg, int level = 1, bool positive = true,Hex hex = null)
         {
-            turnMessages.Add(new MsgEvent(msg, level, positive));
+            turnMessages.Add(new MsgEvent(msg, level, positive,hex));
         }
 
         public void addEnthralledNextTurnMessages()
@@ -206,7 +206,13 @@ namespace Assets.Code
                 if (overmind.enthralled.society.voteSession != null)
                 {
                     string msg = "Vote in session: " + overmind.enthralled.society.voteSession.issue.ToString();
-                    turnMessages.Add(new MsgEvent(msg, MsgEvent.LEVEL_GREEN, true));
+                    Location loc = overmind.enthralled.getLocation();
+                    Hex hex = null;
+                    if (loc != null)
+                    {
+                        hex = loc.hex;
+                    }
+                    turnMessages.Add(new MsgEvent(msg, MsgEvent.LEVEL_GREEN, true,hex));
                 }
             }
         }
@@ -540,7 +546,7 @@ namespace Assets.Code
             }
 
 
-            turnMessages.Add(new MsgEvent(att.getName() + " takes " + taken.getName() + " from " + def.getName(), priority,benefit));
+            turnMessages.Add(new MsgEvent(att.getName() + " takes " + taken.getName() + " from " + def.getName(), priority,benefit,taken.hex));
 
             if (taken.settlement != null)
             {
@@ -655,7 +661,11 @@ namespace Assets.Code
             bool good = false;
             if (att.hasEnthralled()) { good = true;priority = MsgEvent.LEVEL_GREEN; }
             if (def.hasEnthralled()) { priority = MsgEvent.LEVEL_RED; }
-            turnMessages.Add(new MsgEvent(att.getName() + " launches an offensive against " + def.getName(),priority,good));
+            Location attLoc = null;
+            foreach (Location loc in locations) { if (loc.soc == att) { attLoc = loc; } }
+            Hex focusHex = null;
+            if (attLoc != null) { focusHex = attLoc.hex; }
+            turnMessages.Add(new MsgEvent(att.getName() + " launches an offensive against " + def.getName(),priority,good,focusHex));
 
             att.getRel(def).state = DipRel.dipState.war;
             att.getRel(def).war = new War(this,att, def);

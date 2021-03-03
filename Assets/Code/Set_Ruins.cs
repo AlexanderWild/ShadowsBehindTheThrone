@@ -25,7 +25,7 @@ namespace Assets.Code
                 if (stochasticAge > 10)
                 {
                     this.location.settlement = null;
-                    this.location.map.addMessage(this.name + " finally crumble into nothing.", MsgEvent.LEVEL_GRAY);
+                    this.location.map.addMessage(this.name + " finally crumble into nothing.", MsgEvent.LEVEL_GRAY,true,location.hex);
                     World.log("Clean ruin ending");
                 }
             }

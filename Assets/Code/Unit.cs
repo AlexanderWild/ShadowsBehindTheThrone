@@ -144,7 +144,7 @@ namespace Assets.Code
                     if (this.society != parentLocation.soc)
                     {
                         this.society = parentLocation.soc;
-                        map.addMessage(this.getName() + " switches society to " + this.society.getName(), MsgEvent.LEVEL_GRAY, false);
+                        map.addMessage(this.getName() + " switches society to " + this.society.getName(), MsgEvent.LEVEL_GRAY, false,location.hex);
                     }
                 }
                 return false;
@@ -181,7 +181,7 @@ namespace Assets.Code
             disband(map, null);
             bool positive = person == null || person.state != Person.personState.enthralledAgent;
             if (society.isDark()) { positive = false; }
-            map.addMessage(this.getName() + " dies! " + v, MsgEvent.LEVEL_GREEN, positive);
+            map.addMessage(this.getName() + " dies! " + v, MsgEvent.LEVEL_GREEN, positive,location.hex);
 
             if (this.person != null && person.isWatched())
             {
@@ -202,7 +202,7 @@ namespace Assets.Code
             if (msg != null)
             {
                 bool positive = person == null || person.state != Person.personState.enthralledAgent;
-                map.addMessage(msg, MsgEvent.LEVEL_GREEN, positive);
+                map.addMessage(msg, MsgEvent.LEVEL_GREEN, positive,location.hex);
 
                 if (this.isEnthralled())
                 {

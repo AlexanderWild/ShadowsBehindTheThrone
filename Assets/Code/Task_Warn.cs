@@ -41,7 +41,7 @@ namespace Assets.Code
                         if (me > them)
                         {
                             Person themP = World.staticMap.persons[rel.them];
-                            unit.location.map.addMessage(unit.getName() + " warns " + unit.location.person().getFullName() + " about " + themP.getFullName(), MsgEvent.LEVEL_ORANGE, false);
+                            unit.location.map.addMessage(unit.getName() + " warns " + unit.location.person().getFullName() + " about " + themP.getFullName(), MsgEvent.LEVEL_ORANGE, false,unit.location.hex);
                             unit.location.person().getRelation(rel.them).suspicion += gain;
                         }
                     }
@@ -71,7 +71,7 @@ namespace Assets.Code
                     }
                     if (submitted)
                     {
-                        unit.location.map.addMessage(unit.getName() + " presents evidence to " + soc.getName(), MsgEvent.LEVEL_ORANGE, false);
+                        unit.location.map.addMessage(unit.getName() + " presents evidence to " + soc.getName(), MsgEvent.LEVEL_ORANGE, false,unit.location.hex);
                     }
                 }
                 unit.task = null;
