@@ -11,9 +11,11 @@ namespace Assets.Code
         public Overmind overmind;
         public Map map;
 
-        public enum aiMode { TESTDARK, FLESH,FLESH_ONLY ,FOG};
+        public enum aiMode { TESTDARK, FLESH,FLESH_ONLY ,FOG,COLD};
 
         public aiMode currentMode = aiMode.TESTDARK;
+
+        public List<Ability> automatedAbilities = new List<Ability>();
 
         public Overmind_Automatic(Overmind overmind)
         {
@@ -38,6 +40,10 @@ namespace Assets.Code
             if (currentMode == aiMode.FOG)
             {
                 ai_testFog();
+            }
+            if (currentMode == aiMode.COLD)
+            {
+                ai_testCold();
             }
         }
 
@@ -194,6 +200,58 @@ namespace Assets.Code
                 }
             }
         }
+
+        public void ai_testCold()
+        {
+            if (automatedAbilities.Count == 0)
+            {
+                foreach (Ability a in new God_WintersScythe().getUniquePowers())
+                {
+                    if (a is Ab_Ice_IceBlood) { continue; }//Basically throwing away your gains if you don't know what you're doing. Which the AI doesn't
+                    automatedAbilities.Add(a);
+                }
+            }
+            if (overmind.power > 0)
+            {
+                Location target = null;
+                int c = 0;
+                Ability chosen = null;
+                foreach (Ability a in automatedAbilities)
+                {
+                    if (map.turn - a.turnLastCast <= a.getCooldown()) { continue; }
+                    if (overmind.power < a.getCost()) { continue; }
+                    foreach (Location loc in map.locations)
+                    {
+                        if (a.castable(map, loc.hex))
+                        {
+                            c += 1;
+                            if (Eleven.random.Next(c) == 0)
+                            {
+                                target = loc;
+                                chosen = a;
+                            }
+                        }
+                    }
+                }
+                if (chosen != null)
+                {
+                    chosen.cast(map, target.hex);
+                }
+            }
+            //Only spend reserve power on this boondoggle
+            if (overmind.power > map.param.overmind_maxPower * 0.66)
+            {
+                foreach (Unit u in overmind.map.units)
+                {
+                    if (u is Unit_Investigator && u.task is Task_Investigate)
+                    {
+                        u.task = new Task_Disrupted();
+                        overmind.power -= overmind.map.param.ability_disruptAgentCost;
+                        break;
+                    }
+                }
+            }
+        }
         public void checkSpawnAgent()
         {
             int presentDarks = 0;
@@ -222,6 +280,10 @@ namespace Assets.Code
                 else if (currentMode == aiMode.FOG)
                 {
                     agent_Fog();
+                }
+                else if (currentMode == aiMode.COLD)
+                {
+                    agent_Standard();
                 }
             }
         }
@@ -341,6 +403,7 @@ namespace Assets.Code
             msgs.Add("Flesh");
             msgs.Add("Flesh Only");
             msgs.Add("Fog");
+            msgs.Add("Cold");
             overmind.map.world.ui.addBlocker(overmind.map.world.prefabStore.getScrollSetText(msgs, false, this).gameObject);
         }
 
@@ -350,6 +413,7 @@ namespace Assets.Code
             if (text == "Flesh") { currentMode = aiMode.FLESH; }
             if (text == "Flesh Only") { currentMode = aiMode.FLESH_ONLY; }
             if (text == "Fog") { currentMode = aiMode.FOG; }
+            if (text == "Cold") { currentMode = aiMode.COLD; }
             World.log("AI mode is set to " + currentMode);
 
             map.world.prefabStore.popMsgTreeBackground("Welcome to the automatic testing interface. This allows games to be played automatically, with both the human and the dark sides played "

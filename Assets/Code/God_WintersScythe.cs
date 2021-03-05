@@ -12,6 +12,7 @@ namespace Assets.Code
 
         public God_WintersScythe()
         {
+            powers.Add(new Ab_Ice_RunawayCatastrophe());
             powers.Add(new Ab_Ice_DeathOfTheSun());
             powers.Add(new Ab_Ice_ColdAsDeath());
             powers.Add(new Ab_Ice_IceBlood());

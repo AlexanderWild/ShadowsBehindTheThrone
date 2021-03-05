@@ -9,7 +9,7 @@
 	state == world
 	Couldn't reproduce
 
-
+-Add flag colours to event messages and wars
 
 	Medium criticality:
 

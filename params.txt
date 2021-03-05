@@ -9,7 +9,7 @@ mapGen_maxBrushSize: 5
 mapGen_burnInSteps: 150
 map_tempTemperatureReversion: 0.002
 map_coastalHabBonus: 0.1
-useLightbringer: 1
+useLightbringer: 0
 useAwareness: 1
 usePaladins: 0
 flashEnthrallables: True
@@ -40,7 +40,7 @@ awareness_increasePerCost: 0.015
 awareness_canInvestigate: 0.1
 awareness_decay: 0.002
 awareness_turnsForLightRitual: 49
-awareness_minLocsForLightbringer: 4
+awareness_minLocsForLightbringer: 3
 action_research_expectedAwarenessPerTurn: 0.15
 action_research_pSanityHit: 0.5
 action_letterWritingTurns: 5
@@ -132,7 +132,7 @@ society_votingDuration: 1
 society_instablityTillRebellion: 12
 society_rebelLikingThreshold: -25
 society_zeitDuration: 3
-society_sovreignPrestige: 20
+society_sovereignPrestige: 20
 society_dukePrestige: 10
 society_threatMultFromOffensivePosture: 0.5
 society_minTimeBetweenLocReassignments: 40
@@ -244,6 +244,10 @@ ability_coldAsDeathCooldown: 10
 ability_iceBloodCost: 10
 ability_iceBloodCooldown: 5
 ability_deathOfTheSunCost: 0
+ability_runawayCatastropheCost: 10
+ability_runawayCatastropheCooldown: 10
+ability_runawayCatastrophyTempChange: -0.05
+ability_runawayCatastropheRequirement: -0.3
 ability_deathOfTheSunCooldown: 10
 ability_denounceLeaderLikingMult: 0.5
 ability_denounceLeaderMax: 35
@@ -285,7 +289,7 @@ ability_fog_trapCost: 3
 fog_securityDecrease: -3
 fog_suspicionIncreaseMult: 0.3
 ability_fog_convocationCost: 1
-ability_fog_convocationCooldown: 8
+ability_fog_convocationCooldown: 6
 insanity_sanityRegen: 0.1
 insanity_nParanoiaTargets: 4
 insanity_relHit: -10

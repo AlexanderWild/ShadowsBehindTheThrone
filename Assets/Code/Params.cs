@@ -276,6 +276,10 @@ namespace Assets.Code
         public int ability_iceBloodCost = 10;
         public int ability_iceBloodCooldown = 5;
         public int ability_deathOfTheSunCost = 0;
+        public int ability_runawayCatastropheCost = 5;
+        public int ability_runawayCatastropheCooldown = 10;
+        public double ability_runawayCatastrophyTempChange = -0.05;
+        public double ability_runawayCatastropheRequirement = -0.3;
         public int ability_deathOfTheSunCooldown = 10;
         public double ability_denounceLeaderLikingMult = 0.5;
         public double ability_denounceLeaderMax = 35;
