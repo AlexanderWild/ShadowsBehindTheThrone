@@ -41,13 +41,20 @@ namespace Assets.Code
             if (hex.location == null) { return false; }
             float sum = 0;
             int div = 0;
-            foreach (Hex[] row in map.grid)
+            //foreach (Hex[] row in map.grid)
+            //{
+            //    foreach (Hex h in row)
+            //    {
+            //        div += 1;
+            //        sum += h.transientTempDelta;
+            //    }
+            //}
+
+            foreach (Location loc in World.staticMap.locations)
             {
-                foreach (Hex h in row)
-                {
-                    div += 1;
-                    sum += h.transientTempDelta;
-                }
+                if (loc.isOcean) { continue; }
+                div += 1;
+                sum += loc.hex.transientTempDelta;
             }
             if (div > 0) { sum /= div; }
             return sum < World.staticMap.param.ability_runawayCatastropheRequirement;
@@ -67,13 +74,20 @@ namespace Assets.Code
         {
             int div = 0;
             float sum = 0;
-            foreach (Hex[] row in World.staticMap.grid)
+            //foreach (Hex[] row in World.staticMap.grid)
+            //{
+            //    foreach (Hex h in row)
+            //    {
+            //        if (h.terrain == Hex.terrainType.SEA) { continue; }
+            //        div += 1;
+            //        sum += h.transientTempDelta;
+            //    }
+            //}
+            foreach (Location loc in World.staticMap.locations)
             {
-                foreach (Hex h in row)
-                {
-                    div += 1;
-                    sum += h.transientTempDelta;
-                }
+                if (loc.isOcean) { continue; }
+                div += 1;
+                sum += loc.hex.transientTempDelta;
             }
             if (div > 0) { sum /= div; }
 

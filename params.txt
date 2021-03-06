@@ -7,7 +7,7 @@ mapGen_minHabitabilityForHumans: 0.15
 mapGen_stepsPerIsland: 12
 mapGen_maxBrushSize: 5
 mapGen_burnInSteps: 150
-map_tempTemperatureReversion: 0.002
+map_tempTemperatureReversion: 0.00100000004749745
 map_coastalHabBonus: 0.1
 useLightbringer: 0
 useAwareness: 1
@@ -244,10 +244,10 @@ ability_coldAsDeathCooldown: 10
 ability_iceBloodCost: 10
 ability_iceBloodCooldown: 5
 ability_deathOfTheSunCost: 0
-ability_runawayCatastropheCost: 10
+ability_runawayCatastropheCost: 5
 ability_runawayCatastropheCooldown: 10
 ability_runawayCatastrophyTempChange: -0.05
-ability_runawayCatastropheRequirement: -0.3
+ability_runawayCatastropheRequirement: -0.12
 ability_deathOfTheSunCooldown: 10
 ability_denounceLeaderLikingMult: 0.5
 ability_denounceLeaderMax: 35

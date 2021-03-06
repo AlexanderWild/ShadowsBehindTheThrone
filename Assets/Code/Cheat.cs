@@ -127,12 +127,19 @@ namespace Assets.Code
                 }
                 if (command == "cold")
                 {
-                    for (int i = 0; i < map.tempMap.Length; i++)
+                    //for (int i = 0; i < map.tempMap.Length; i++)
+                    //{
+                    //    for (int j = 0; j < map.tempMap[0].Length; j++)
+                    //    {
+                    //        map.tempMap[i][j] -= 0.1f;
+                    //        if (map.tempMap[i][j] < 0) { map.tempMap[i][j] = 0; }
+                    //    }
+                    //}
+                    foreach (Hex[] row in map.grid)
                     {
-                        for (int j = 0; j < map.tempMap[0].Length; j++)
+                        foreach (Hex h in row)
                         {
-                            map.tempMap[i][j] -= 0.1f;
-                            if (map.tempMap[i][j] < 0) { map.tempMap[i][j] = 0; }
+                            h.transientTempDelta -= 0.1f;
                         }
                     }
                     map.assignTerrainFromClimate();

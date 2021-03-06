@@ -119,9 +119,18 @@ namespace Assets.Code
             List<Location> reply = new List<Location>();
             foreach (Link link in links)
             {
+                if (link.disabled) { continue; }
                 reply.Add(link.other(this));
             }
             return reply;
+        }
+
+        public void recomputeLinkDisabling()
+        {
+            foreach (Link link in links)
+            {
+                link.disabled = false;
+            }
         }
 
         public bool isNeighbour(Location l2)
@@ -229,6 +238,8 @@ namespace Assets.Code
             //A horrific hack, because units were, for whatever reason, getting left behind in locations
             //They called "disband", removed themselves from the main unit list, and even checked to ensure they were gone. For whatever reason, either they were not or they were re-added later
             //Bad times, can't fix, sad times
+            //
+            //Might have been fixed a while ago, I realise. Feel free to try removing this and seeing what it does. Or changing it to an assert
             if (needDeletion)
             {
                 List<Unit> rems = new List<Unit>();
@@ -244,6 +255,8 @@ namespace Assets.Code
                     units.Remove(u);
                 }
             }
+
+            recomputeLinkDisabling();
         }
 
         public void checkPropertiesEndOfTurn()

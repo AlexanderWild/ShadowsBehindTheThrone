@@ -123,16 +123,18 @@ namespace Assets.Code
                 newPurity /= neighbours.Count;
                 purity = (purity + newPurity) / 2;
             }
-            if (Math.Abs(transientTempDelta) < map.param.map_tempTemperatureReversion)
+            float reversion = (float)map.param.map_tempTemperatureReversion;
+            if (map.burnInComplete == false) { reversion *= 10; }
+            if (Math.Abs(transientTempDelta) < reversion)
             {
                 transientTempDelta = 0;
             }else if (transientTempDelta > 0)
             {
-                transientTempDelta -= map.param.map_tempTemperatureReversion;
+                transientTempDelta -= reversion;
             }
             else
             {
-                transientTempDelta += map.param.map_tempTemperatureReversion;
+                transientTempDelta += reversion;
             }
             if (World.cheat_globalCooling)
             {

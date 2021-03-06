@@ -9,7 +9,7 @@ namespace Assets.Code
     {
         public Location a;
         public Location b;
-
+        public bool disabled = false;
         public Link(Location la, Location lb)
         {
             a = la;

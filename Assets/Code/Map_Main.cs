@@ -454,6 +454,7 @@ namespace Assets.Code
                 {
                     loc.territory.Add(grid[coord[0]][coord[1]]);
                 }
+                loc.recomputeLinkDisabling();
             }
             for (int i = 0; i < persons.Count; i++)
             {

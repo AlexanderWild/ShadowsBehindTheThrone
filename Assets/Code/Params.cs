@@ -20,7 +20,7 @@ namespace Assets.Code
         public int mapGen_stepsPerIsland = 12;
         public int mapGen_maxBrushSize = 5;
         public int mapGen_burnInSteps = 150;
-        public float map_tempTemperatureReversion = 0.002f;
+        public double map_tempTemperatureReversion = 0.001f;
         public double map_coastalHabBonus = 0.1;
 
         public int useLightbringer = 0;
@@ -279,7 +279,7 @@ namespace Assets.Code
         public int ability_runawayCatastropheCost = 5;
         public int ability_runawayCatastropheCooldown = 10;
         public double ability_runawayCatastrophyTempChange = -0.05;
-        public double ability_runawayCatastropheRequirement = -0.3;
+        public double ability_runawayCatastropheRequirement = -0.12;
         public int ability_deathOfTheSunCooldown = 10;
         public double ability_denounceLeaderLikingMult = 0.5;
         public double ability_denounceLeaderMax = 35;
