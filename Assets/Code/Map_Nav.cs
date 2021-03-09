@@ -737,12 +737,13 @@ namespace Assets.Code
 
         public List<Location> getNeighbours(Location loc)
         {
-            List<Location> reply = new List<Location>();
-            foreach (Link l in loc.links)
-            {
-                reply.Add(l.other(loc));
-            }
-            return reply;
+            //List<Location> reply = new List<Location>();
+            //foreach (Link l in loc.links)
+            //{
+            //    reply.Add(l.other(loc));
+            //}
+            //return reply;
+            return loc.getNeighbours();
         }
         public List<SocialGroup> getNeighbours(SocialGroup group)
         {

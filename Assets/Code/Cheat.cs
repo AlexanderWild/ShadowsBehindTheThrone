@@ -157,6 +157,21 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().die("Killed by console",true);
                 }
+                if (command == "civilWar")
+                {
+                    List<Person> rebels = new List<Person>();
+                    Society soc = (Society)GraphicalMap.selectedHex.location.soc;
+                    int c = 0;
+                    foreach (Person p in soc.people)
+                    {
+                        if (p.title_land == null) { continue; }
+                        if (p.getLocation().province != soc.getCapital().province)
+                        {
+                            rebels.Add(p);
+                        }
+                    }
+                    soc.triggerCivilWar(rebels);
+                }
                 if (command == "evidence")
                 {
                     GraphicalMap.selectedHex.location.person().evidence = 1;

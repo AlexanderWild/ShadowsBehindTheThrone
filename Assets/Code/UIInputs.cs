@@ -60,6 +60,11 @@ namespace Assets.Code
             }
             else if (Input.GetKeyDown(KeyCode.Q))
             {
+                //try
+                //{
+                //    Property.addProperty(World.staticMap, GraphicalMap.selectedHex.location, "Blizzard");
+                //}
+                //catch  { }
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {

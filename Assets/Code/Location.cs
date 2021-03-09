@@ -127,9 +127,38 @@ namespace Assets.Code
 
         public void recomputeLinkDisabling()
         {
+            bool underBlizzard = false;
+            foreach (Property pr in properties)
+            {
+                if (pr.proto is Pr_Blizzard) { underBlizzard = true;break; }
+            }
+            int nDisabled = 0;
             foreach (Link link in links)
             {
                 link.disabled = false;
+
+                if (underBlizzard) { 
+                    foreach (Property pr in link.other(this).properties)
+                    {
+                        if (pr.proto is Pr_Blizzard) {
+                            //Make sure you're not completely isolating this node
+                            int nOtherDisabled = 0;
+                            foreach (Link l2 in link.other(this).links)
+                            {
+                                if (l2.disabled) { nOtherDisabled += 1; }
+                            }
+                            if (nOtherDisabled < link.other(this).links.Count-1)
+                            {
+                                link.disabled = true;
+                            }
+                        }
+                    }
+                }
+                if (link.disabled) { nDisabled += 1; }
+            }
+            if (nDisabled == links.Count)
+            {
+                links[0].disabled = false;
             }
         }
 

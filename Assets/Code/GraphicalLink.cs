@@ -27,9 +27,11 @@ namespace Assets.Code
             points[1].z = -0.06f;
             lineRenderer.SetPositions(points);
 
+            float a = 1f;
+            if (link.disabled) { a = 0.2f; }
 
-            lineRenderer.startColor = new Color(0.7f, 0.7f, 0.7f);
-            lineRenderer.endColor = new Color(0.7f, 0.7f, 0.7f);
+            lineRenderer.startColor = new Color(0.7f, 0.7f, 0.7f,a);
+            lineRenderer.endColor = new Color(0.7f, 0.7f, 0.7f,a);
             combatIcon.sprite = null;
             if (link.a.soc != null && link.b.soc != null)
             {
@@ -44,8 +46,8 @@ namespace Assets.Code
                 {
                     combatIcon.enabled = true;
                     combatIcon.sprite = link.a.hex.map.world.textureStore.icon_combat;
-                    lineRenderer.startColor = Color.red;
-                    lineRenderer.endColor = Color.red;
+                    lineRenderer.startColor = new Color(1,0,0,a);
+                    lineRenderer.endColor = new Color(1,0,0,a);
                 }
                 else
                 {

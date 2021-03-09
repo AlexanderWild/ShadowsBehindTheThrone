@@ -155,6 +155,7 @@ namespace Assets.Code
         public Sprite property_quarantine;
         public Sprite property_medicalAid;
         public Sprite property_fog;
+        public Sprite property_blizzard;
 
         public List<Sprite> tutorialImages;
 

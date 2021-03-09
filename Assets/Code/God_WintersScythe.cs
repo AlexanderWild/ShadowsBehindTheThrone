@@ -16,6 +16,7 @@ namespace Assets.Code
             powers.Add(new Ab_Ice_DeathOfTheSun());
             powers.Add(new Ab_Ice_ColdAsDeath());
             powers.Add(new Ab_Ice_IceBlood());
+            powers.Add(new Ab_Ice_Blizzard());
         }
 
 

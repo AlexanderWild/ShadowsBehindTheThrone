@@ -111,6 +111,10 @@ namespace Assets.Code
             proto = new Pr_Fog_Pinned(map, "Trapped Fog");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_Blizzard(map, "Blizzard");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
         }
 
         internal abstract string getDescription();
