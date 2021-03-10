@@ -194,7 +194,7 @@ namespace Assets.Code
                 agentHair.sprite = World.self.textureStore.person_advClear;
                 agentJewel.sprite = World.self.textureStore.person_advClear;
             }
-
+            lastPos = World.self.ui.uiInputs.scrollwheelTracking;
 
             sess = soc.voteSession;
             checkData();
