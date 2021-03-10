@@ -338,6 +338,35 @@ namespace Assets.Code
                     }
                 }
             }
+
+            if (this == map.overmind.enthralled)
+            {
+                foreach (Unit u in map.units)
+                {
+                    if (u is Unit_Saviour)
+                    {
+                        Unit_Saviour sav = (Unit_Saviour)u;
+                        if (sav.linkedFates)
+                        {
+                            double saviourAdd = 0;
+                            foreach (Person p2 in society.people)
+                            {
+                                if (p2 == this) { continue; }
+                                saviourAdd += p2.getRelation(u.person).getLiking() / 66;
+                            }
+                            if (saviourAdd != 0)
+                            {
+                                if (reasons != null)
+                                {
+                                    reasons.Add("Association with " + u.getName() + " " + (int)(saviourAdd));
+                                }
+                                prestige += saviourAdd;
+                            }
+                        }
+                    }
+                }
+            }
+
             if (prestige < 0) { prestige = 0; }
             return prestige;
         }

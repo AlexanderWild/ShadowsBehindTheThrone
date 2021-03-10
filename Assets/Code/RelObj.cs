@@ -127,7 +127,14 @@ namespace Assets.Code
             List<RelEvent> rems = new List<RelEvent>();
             foreach (RelEvent ev in events)
             {
-                ev.amount *= me.map.param.relObj_decayRate;
+                if (ev.slowDecay)
+                {
+                    ev.amount *= me.map.param.relObj_decayRateSlow;
+                }
+                else
+                {
+                    ev.amount *= me.map.param.relObj_decayRate;
+                }
                 if (Math.Abs(ev.amount) < 2) { rems.Add(ev); }
             }
             foreach (RelEvent ev in rems)
@@ -136,7 +143,7 @@ namespace Assets.Code
             }
         }
 
-        public void addLiking(double v,string reason,int turn,int stackStyle=STACK_NONE)
+        public void addLiking(double v,string reason,int turn,int stackStyle=STACK_NONE,bool slowDecay=false)
         {
             if (isSelf) { return; }//No events for self
 
@@ -147,6 +154,7 @@ namespace Assets.Code
                 ev.amount = v;
                 ev.reason = reason;
                 ev.turn = turn;
+                ev.slowDecay = slowDecay;
                 events.AddLast(ev);
             }
             else
@@ -168,10 +176,12 @@ namespace Assets.Code
                     ev.amount = v;
                     ev.reason = reason;
                     ev.turn = turn;
+                    ev.slowDecay = slowDecay;
                     events.AddLast(ev);
                 }
                 else
                 {
+                    prev.slowDecay = slowDecay;
                     if (stackStyle == STACK_REPLACE)
                     {
                         prev.turn = turn;

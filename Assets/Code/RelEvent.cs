@@ -9,6 +9,7 @@ namespace Assets.Code
         public string reason;
         public double amount;
         public int turn;
+        public bool slowDecay = false;
 
         public int CompareTo(RelEvent other)
         {

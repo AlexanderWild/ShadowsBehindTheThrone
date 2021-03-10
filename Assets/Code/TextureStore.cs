@@ -40,6 +40,7 @@ namespace Assets.Code
         public Sprite boxImg_cult;
         public Sprite boxImg_moon;
         public Sprite boxImg_fog;
+        public Sprite boxImg_saviour;
 
         public Sprite hex_base;
         public Sprite hex_simplified;
@@ -102,6 +103,7 @@ namespace Assets.Code
         public Sprite icon_pumpkin;
         public Sprite icon_heirophant;
         public Sprite icon_redDeath;
+        public Sprite icon_saviour;
 
         public Sprite icon_combat;
 
@@ -143,6 +145,7 @@ namespace Assets.Code
         public Sprite unit_basicAgent;
         public Sprite unit_redDeath;
         public Sprite unit_apothecarian;
+        public Sprite unit_saviour;
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;

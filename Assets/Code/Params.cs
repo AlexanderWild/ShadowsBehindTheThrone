@@ -78,6 +78,7 @@ namespace Assets.Code
         public double relObj_suspicionLimiterMult = 2.5;
         public double relObj_defaultLiking = 0;
         public double relObj_decayRate = 0.97;
+        public double relObj_decayRateSlow = 0.99;
 
         public double combat_prestigeLossFromConquest = 0.0;//multiplier on captured lords' prestige
         public double combat_thresholdAttackStrength = 0.25;
@@ -413,7 +414,7 @@ namespace Assets.Code
         public double unit_seeker_libraryInfiltrationReq = 0.15;
         public double unit_vamp_infiltrateAmount = 1.6;
         public double unit_doctor_legalInfiltrationReq = 0.1;
-        public int unit_doctor_lootBodiesAmount = 10;
+        public int unit_doctor_lootBodiesAmount = 7;
         public int unit_doctor_emptyGravesDuration = 16;
         public int unit_doctor_sowCorpserootCooldown = 5;
         public int unit_vampire_maxBlood = 37;

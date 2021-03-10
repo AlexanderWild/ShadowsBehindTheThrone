@@ -825,6 +825,10 @@ namespace Assets.Code
             {
                 specific.img.sprite = ui.world.textureStore.boxImg_fog;
             }
+            else if (img == 7)
+            {
+                specific.img.sprite = ui.world.textureStore.boxImg_saviour;
+            }
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }

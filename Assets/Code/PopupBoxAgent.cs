@@ -190,6 +190,53 @@ namespace Assets.Code
                     agent.task = null;
                     GraphicalMap.selectedSelectable = agent;
                 }
+                if (index == Ab_Over_CreateAgent.REDDEATH)
+                {
+                    Unit agent = new Unit_RedDeath(hex.location, map.soc_dark);
+                    map.world.prefabStore.popImgMsg(
+                        "You draw upon the creatures of darkness, and choose one to serve as your instrument in this world",
+                        "The Masque of the Red Death arises, the spirit of the terrible disease. It will spread where the Masque goes, and terrifies commoner and noble alike.",
+                        5);
+
+                    agent.person = new Person(map.soc_dark);
+                    agent.person.state = Person.personState.enthralledAgent;
+                    agent.person.unit = agent;
+                    agent.person.traits.Clear();
+                    map.units.Add(agent);
+
+
+                    Evidence ev = new Evidence(map.turn);
+                    ev.pointsTo = agent;
+                    ev.weight = 0.66;
+                    agent.location.evidence.Add(ev);
+
+                    agent.task = null;
+                    GraphicalMap.selectedSelectable = agent;
+                }
+                if (index == Ab_Over_CreateAgent.SAVIOUR)
+                {
+                    Unit agent = new Unit_Saviour(hex.location, map.soc_dark);
+                    map.world.prefabStore.popImgMsg(
+                        "You draw upon the creatures of darkness, and choose one to serve as your instrument in this world",
+                        "The Saviour is designed to sabotage one of your strategies to allow another. They can save a small nation you are invading, to make all nobles in the society and in neighbouring settlements adore The Saviour (at the cost of your military)," +
+                        "or to cure a disease to also gain liking. Once support is gained, they can exploit it, by influencing votes, by infiltrating effectively, or by granting prestige to your enthralled noble.",
+                        7);
+
+                    agent.person = new Person(map.soc_dark);
+                    agent.person.state = Person.personState.enthralledAgent;
+                    agent.person.unit = agent;
+                    agent.person.traits.Clear();
+                    map.units.Add(agent);
+
+
+                    Evidence ev = new Evidence(map.turn);
+                    ev.pointsTo = agent;
+                    ev.weight = 0.66;
+                    agent.location.evidence.Add(ev);
+
+                    agent.task = null;
+                    GraphicalMap.selectedSelectable = agent;
+                }
                 if (!map.overmind.isFirstEnthralledAgent)
                 {
                     foreach (Ability a in map.overmind.powers)

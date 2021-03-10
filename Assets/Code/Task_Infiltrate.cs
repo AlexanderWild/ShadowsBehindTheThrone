@@ -28,7 +28,8 @@ namespace Assets.Code
             liking /= 100;
             if (liking > 0)
             {
-                value *= (liking + 1);//Double effect on max liking
+                liking *= 2;
+                value *= (liking + 1);//Triple effect on max liking
             }
             else
             {
@@ -36,6 +37,7 @@ namespace Assets.Code
                 value *= (1 + (liking * 0.9));//10% effect on min liking
             }
 
+            if (value > 1) { value = 1; }
             return value;
         }
 

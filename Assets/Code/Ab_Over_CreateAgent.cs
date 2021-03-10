@@ -13,6 +13,7 @@ namespace Assets.Code
         public static int PUMPKIN = 3;
         public static int HEIROPHANT = 4;
         public static int REDDEATH = 5;
+        public static int SAVIOUR = 6;
 
         public static string DESC_VAMPIRE = "Stealthy infiltrator and corruptor of the aristocracy." +
             "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
@@ -37,6 +38,8 @@ namespace Assets.Code
         public static string DESC_REDDEATH = "The Masque of the Red Death is a spirit of the dread disease. The disease will slowly eradicate human settlements by decreasing their population," +
             " and cripples any army which relied on the infected settlements for support, leaving the nations weakened in the face of outside threats. If played as a political tool, however, " +
             " it is possible the nobles' panic and selfishness will harm them more than the disease ever could, as they squabble over who and where to protect, and over limited cures.";
+
+        public static string DESC_SAVIOUR = "Saviour desc";
 
 
         public override void cast(Map map, Hex hex)
@@ -99,6 +102,12 @@ namespace Assets.Code
                 descs.Add(DESC_REDDEATH);
                 icons.Add(map.world.textureStore.icon_redDeath);
             }
+
+
+            indices.Add(SAVIOUR);
+            titles.Add("Saviour");
+            descs.Add(DESC_SAVIOUR);
+            icons.Add(map.world.textureStore.icon_saviour);
 
             map.world.ui.addBlocker(map.world.prefabStore.getScrollSetAgents(indices, titles, descs, icons).gameObject);
         }
