@@ -17,8 +17,11 @@ namespace Assets.Code
             hp = 5;
 
             abilities.Add(new Abu_Save_Invasion());
+            abilities.Add(new Abu_Save_CureDisease());
+            abilities.Add(new Abu_Save_LinkFates());
             abilities.Add(new Abu_Base_Infiltrate());
             abilities.Add(new Abu_Base_Recruit());
+            abilities.Add(new Abu_Base_SocialiseAtCourt());
             abilities.Add(new Abu_Base_ChangeIdentity());
         }
 

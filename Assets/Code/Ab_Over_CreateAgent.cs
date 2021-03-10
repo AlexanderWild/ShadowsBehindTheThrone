@@ -39,7 +39,9 @@ namespace Assets.Code
             " and cripples any army which relied on the infected settlements for support, leaving the nations weakened in the face of outside threats. If played as a political tool, however, " +
             " it is possible the nobles' panic and selfishness will harm them more than the disease ever could, as they squabble over who and where to protect, and over limited cures.";
 
-        public static string DESC_SAVIOUR = "Saviour desc";
+        public static string DESC_SAVIOUR = "The Saviour is an agent who `saves' the human nations from disasters of your own creation. If forces under your control are winning a war against a human" +
+            " nation, The Saviour can cause the humans to win the war instead, earning them the trust and adoration of all nobles in that land and nobles neighbouring that land. They can also cure diseases" +
+            " rapidly, winning over nobles who feared disease. This liking can be used to boost your enthralled noble's prestige, to influence politics or to greatly boost infiltration effectiveness.";
 
 
         public override void cast(Map map, Hex hex)

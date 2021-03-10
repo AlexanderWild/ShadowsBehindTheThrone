@@ -190,29 +190,6 @@ namespace Assets.Code
                     agent.task = null;
                     GraphicalMap.selectedSelectable = agent;
                 }
-                if (index == Ab_Over_CreateAgent.REDDEATH)
-                {
-                    Unit agent = new Unit_RedDeath(hex.location, map.soc_dark);
-                    map.world.prefabStore.popImgMsg(
-                        "You draw upon the creatures of darkness, and choose one to serve as your instrument in this world",
-                        "The Masque of the Red Death arises, the spirit of the terrible disease. It will spread where the Masque goes, and terrifies commoner and noble alike.",
-                        5);
-
-                    agent.person = new Person(map.soc_dark);
-                    agent.person.state = Person.personState.enthralledAgent;
-                    agent.person.unit = agent;
-                    agent.person.traits.Clear();
-                    map.units.Add(agent);
-
-
-                    Evidence ev = new Evidence(map.turn);
-                    ev.pointsTo = agent;
-                    ev.weight = 0.66;
-                    agent.location.evidence.Add(ev);
-
-                    agent.task = null;
-                    GraphicalMap.selectedSelectable = agent;
-                }
                 if (index == Ab_Over_CreateAgent.SAVIOUR)
                 {
                     Unit agent = new Unit_Saviour(hex.location, map.soc_dark);

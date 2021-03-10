@@ -89,6 +89,11 @@ namespace Assets.Code
             }
             soc.posture = Society.militaryPosture.offensive;//Flip to assault mode to ruin the dark forces
 
+            Evidence e2 = new Evidence(map.turn);
+            e2.pointsTo = u;
+            e2.weight = u.location.map.param.unit_majorEvidence;
+            u.location.evidence.Add(e2);
+
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " saves " + soc.getName() + " from invasion by " + enemy.getName()+ "."
                 + "\nNobles within the nation, and those adjacent to it gain liking for " + soc.getName() + ". " + targets.Count + " nobles affected. " + rems.Count + " units killed."
                 + soc.getName() + " will now wage this war with renewed vigour, driving back their dark enemy",
@@ -140,7 +145,7 @@ namespace Assets.Code
 
         public override string specialCost()
         {
-            return " ";
+            return "Major Evidence";
         }
         public override string getDesc()
         {
