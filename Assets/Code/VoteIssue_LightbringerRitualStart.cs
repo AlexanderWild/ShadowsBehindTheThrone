@@ -130,8 +130,8 @@ namespace Assets.Code
                     {
                         if (loc.soc == society)
                         {
-                            if (loc.settlement is Set_University) { nUniversities += 1; unis.Add(loc); }
-                            if (loc.settlement is Set_Abbey) { nTemples += 1; temples.Add(loc); }
+                            if (loc.settlement is Set_University && nUniversities < society.map.param.awareness_lightbringerMaxLocs) { nUniversities += 1; unis.Add(loc); }
+                            if (loc.settlement is Set_Abbey && nTemples < society.map.param.awareness_lightbringerMaxLocs) { nTemples += 1; temples.Add(loc); }
                         }
                     }
                     if (nUniversities > nTemples || (nTemples == nUniversities && (Eleven.random.Next(2) == 0)))

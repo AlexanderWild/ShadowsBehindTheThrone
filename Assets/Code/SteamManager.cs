@@ -19,7 +19,8 @@ namespace Assets.Code
 		public static bool shouldStoreStats = false;
 		public static bool s_EverInitialized = false;
 
-		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH, MERCANTILISM,DARK_EMPIRE, BROKEN_SOUL,WORLD_UNDER_ICE };
+		public enum achievement_key { VICTORY ,FIRST_AGENT,ROYAL_BLOOD, FLESH_VICTORY,POLITICS_ONLY,CULT_GROWS, LEARN_THE_TRUTH, MERCANTILISM,DARK_EMPIRE, BROKEN_SOUL,WORLD_UNDER_ICE,
+		SAVIOUR};
 		public static string[] achievementKeys = new string[]
 		{
 			"VICTORY",
@@ -33,6 +34,7 @@ namespace Assets.Code
 			"DARK_EMPIRE",
 			"BROKEN_SOUL",
 			"WORLD_UNDER_ICE",
+			"SAVIOUR",
 		};
 		public static bool[] hasAchieved;
 

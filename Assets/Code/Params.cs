@@ -57,6 +57,7 @@ namespace Assets.Code
         public double awareness_decay = 0.002;
         public int awareness_turnsForLightRitual = 49;
         public int awareness_minLocsForLightbringer = 3;
+        public int awareness_lightbringerMaxLocs = 5;
 
         public double action_research_expectedAwarenessPerTurn = 0.15;
         public double action_research_pSanityHit = 0.5;

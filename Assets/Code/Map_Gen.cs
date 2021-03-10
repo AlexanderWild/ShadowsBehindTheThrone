@@ -617,7 +617,9 @@ namespace Assets.Code
 
         public void placeOceanLocations()
         {
-            foreach (Location location in majorLocations)
+            List<Location> landlocs = new List<Location>();
+            landlocs.AddRange(locations);
+            foreach (Location location in landlocs)
             {
                 int c = 0;
                 Hex opt = null;
@@ -705,10 +707,10 @@ namespace Assets.Code
                 if (landmass[loc.hex.x][loc.hex.y]) { continue; }
 
                 int nLinks = param_nLinksDefault;
-                if (loc.isMajor)
-                {
+                //if (loc.isMajor)
+                //{
                     nLinks += 1;
-                }
+                //}
                 for (int i = 0; i < nLinks; i++)
                 {
                     double minDist = -1;
@@ -1166,7 +1168,7 @@ namespace Assets.Code
 
         public void placeAmphibPoints()
         {
-            foreach (Location set in majorLocations)
+            foreach (Location set in locations)
             {
                 Hex lighthouse = null;
                 foreach (Hex hex in getNeighbours(set.hex))

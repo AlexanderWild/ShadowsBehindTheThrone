@@ -35,6 +35,7 @@ namespace Assets.Code
 
                 HashSet<Person> targets = new HashSet<Person>();
             foreach (Person p in soc.people) { targets.Add(p); }
+            int nSaved = 0;
             foreach (Location loc in map.locations)
             {
                 if (loc.soc == soc)
@@ -47,7 +48,12 @@ namespace Assets.Code
                                 targets.Add(l2.person()); }
                         }
                     }
+                    nSaved += 1;
                 }
+            }
+            if (nSaved >= 10)
+            {
+                AchievementManager.unlockAchievement(SteamManager.achievement_key.SAVIOUR);
             }
 
             foreach (Person p in targets)
