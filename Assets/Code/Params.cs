@@ -131,6 +131,7 @@ namespace Assets.Code
         public double utility_singleUseCure = 0.66;
         public double utility_lightbringerRitual = 150;
         public double utility_lightbringerRitualReluctance = -50;
+        public double utility_corruptHatesInquisitor = -75;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;
@@ -189,10 +190,11 @@ namespace Assets.Code
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 56;
-        public double threat_temporaryDreadDecay = 0.97;
+        public double threat_temporaryDreadDecay = 0.98;
         public double threat_evidencePresented = 25;
         public double threat_agentFearDecayPerTurn = 2;
         public int threat_smallSettlementVsDisease = 50;
+        public double threat_dreadFromNobleInvestigation = 66;
         public double victory_targetEnshadowmentAvrg = 0.75;
 
         public double dark_evilThreatMult = 2;
@@ -382,7 +384,7 @@ namespace Assets.Code
         public double unit_targetUnitsPerLoc = 0.1;
         public int unit_investigateTime = 3;
         public int unit_investigateNobleTime = 3;
-        public double unit_investigateNobleEvidenceGain = 0.15;
+        public double unit_investigateNobleEvidenceGain = 0.3;
         public int unit_investigateNobleCooldown = 16;
         public int unit_shareSuspicionTime = 1;
         public int unit_socialiseAtCourtTime = 3;

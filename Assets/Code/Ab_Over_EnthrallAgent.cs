@@ -29,6 +29,12 @@ namespace Assets.Code
             map.overmind.computeEnthralled();
             map.hasEnthralledAnAgent = true;
 
+            if (other is Unit_Investigator)
+            {
+                Unit_Investigator inv = (Unit_Investigator)other;
+                inv.state = Unit_Investigator.unitState.basic;
+            }
+
             AchievementManager.unlockAchievement(SteamManager.achievement_key.FIRST_AGENT);
         }
         public override bool castable(Map map, Person person)

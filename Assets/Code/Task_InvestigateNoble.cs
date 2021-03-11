@@ -36,11 +36,52 @@ namespace Assets.Code
                     person.evidence = 1;
                 }
 
-                if (person.state == Person.personState.enthralled)
+                if (person.state == Person.personState.enthralled || person.state == Person.personState.broken)
                 {
-                    unit.location.map.world.prefabStore.popMsg(unit.getName() + " has investigated " + person.getFullName() + ", as they suspected they were under the influence of dark powers." +
+                    unit.location.map.world.prefabStore.popMsgAgent(unit,unit,unit.getName() + " has investigated " + person.getFullName() + ", as they suspected they were under the influence of dark powers." +
                         " Their investigation has caused " + person.getFullName() + " to gain " + ((int)(unit.location.map.param.unit_investigateNobleEvidenceGain * 100))
                         + "% evidence, and they are now at " + ((int)(person.evidence * 100)) + "%.");
+                }
+                else
+                {
+                    bool isCorrupt = false;
+                    foreach (Trait t in person.traits)
+                    {
+                        if (t is Trait_Political_Corrupt)
+                        {
+                            isCorrupt = true;
+                        }
+                    }
+                    if (isCorrupt)
+                    {
+                        person.prestige *= 0.33;
+                        unit.location.map.world.prefabStore.popMsgAgent(unit,unit,unit.getName() + " has investigated " + person.getFullName() + " and discovered that while they are not broken or enthralled, they "
+                            + "are politically corrupt. They have exposed this to the other nobles, causing " + person.getFullName() + " to lose prestige, and be forced to change their ways.");
+
+                        for (int i = 0; i < person.traits.Count; i++)
+                        {
+                            int c = 0;
+                            if (person.traits[i].groupCode == Trait.CODE_POLITICS)
+                            {
+                                foreach (Trait t in person.map.globalist.allTraits)
+                                {
+                                    if (t.groupCode != Trait.CODE_POLITICS) { continue; }
+                                    if (t is Trait_Political_Corrupt)
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        c += 1;
+                                        if (Eleven.random.Next(c) == 0)
+                                        {
+                                            person.traits[i] = t;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 person.investigationLastTurn = unit.location.map.turn;

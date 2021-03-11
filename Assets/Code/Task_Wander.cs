@@ -117,7 +117,7 @@ namespace Assets.Code
                     }
                 }
 
-                if (noble.state == Person.personState.enthralled)
+                if (noble.state == Person.personState.enthralled || noble.state == Person.personState.broken)
                 {
                     bool alreadyInv = false;
                     foreach (Unit u2 in unit.location.units)
@@ -130,11 +130,18 @@ namespace Assets.Code
                     }
                     if ((!alreadyInv) && unit.location.map.turn - noble.investigationLastTurn > unit.location.map.param.unit_investigateNobleCooldown)
                     {
-                        unit.location.map.world.prefabStore.popMsg(unit.getName() + " is beginning an investigation regarding " + noble.getFullName() + ", as they suspected they were under the influence of dark powers." +
-                            " If their investigation ends, " +  noble.getFullName() + " will gain " + ((int)(unit.location.map.param.unit_investigateNobleEvidenceGain * 100))
-                            + "% evidence. This task can be disrupted to prevent the evidence being generated, or the evidence can be given away to other friendly nobles.");
+                        //unit.location.map.world.prefabStore.popMsg(unit.getName() + " is beginning an investigation regarding " + noble.getFullName() + ", as they suspected they were under the influence of dark powers." +
+                        //    " If their investigation ends, " +  noble.getFullName() + " will gain " + ((int)(unit.location.map.param.unit_investigateNobleEvidenceGain * 100))
+                        //    + "% evidence. This task can be disrupted to prevent the evidence being generated, or the evidence can be given away to other friendly nobles.");
 
-                        unit.task = new Task_InvestigateNoble();
+                        unit.location.map.world.prefabStore.popMsgAgent(unit, unit, unit.getName() + " has detected something is wrong with the nobles in " + noble.society.getName() + ", and is "
+                            + "investigating to see if the shadow has influence. If this task completes they will warn nobles that there may exist enthralled or broken nobles in their midst," +
+                            " although who the enshadowed noble is will not yet be known.");
+
+
+                        noble.investigationLastTurn = unit.location.map.turn;
+
+                        unit.task = new Task_InvestigateNobleBasic();
                         return;
                     }
                 }

@@ -157,6 +157,11 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().die("Killed by console",true);
                 }
+                if (command == "inquisitor")
+                {
+                    Unit_Investigator inv = (Unit_Investigator)GraphicalMap.selectedSelectable;
+                    inv.changeState(Unit_Investigator.unitState.inquisitor);
+                }
                 if (command == "civilWar")
                 {
                     List<Person> rebels = new List<Person>();

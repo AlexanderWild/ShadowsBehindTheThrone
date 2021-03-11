@@ -478,6 +478,32 @@ namespace Assets.Code
                         reply.Add(new MsgEvent(u.getName() + " is warning the noble at " + u.location.getName(), MsgEvent.LEVEL_ORANGE, false,u.location.hex));
 
                     }
+                    else if (u.task is Task_InvestigateNoble)
+                    {
+                        if (u.location.person() != null)
+                        {
+                            int level = MsgEvent.LEVEL_ORANGE;
+                            if (u.location.person().state == Person.personState.enthralled)
+                            {
+                                level = MsgEvent.LEVEL_RED;
+                            }
+                            reply.Add(new MsgEvent(u.getName() + " is investigating the noble at " + u.location.getName(),level , false, u.location.hex));
+
+                        }
+                    }
+                    else if (u.task is Task_InvestigateNobleBasic)
+                    {
+                        if (u.location.person() != null)
+                        {
+                            int level = MsgEvent.LEVEL_YELLOW;
+                            if (u.location.person().state == Person.personState.enthralled)
+                            {
+                                level = MsgEvent.LEVEL_ORANGE;
+                            }
+                            reply.Add(new MsgEvent(u.getName() + " is investigating the noble at " + u.location.getName(), level, false, u.location.hex));
+
+                        }
+                    }
                 }
             }
             int[] suspicions = new int[agents.Count];

@@ -140,6 +140,61 @@ namespace Assets.Code
                     replyIssue = issue;
                 }
             }
+
+            if (society.crisisNobles)
+            {
+                List<Evidence> unprocessedEvidence = new List<Evidence>();
+                foreach (Evidence ev in society.evidenceSubmitted)
+                {
+                    if (society.handledEvidence.Contains(ev)) { continue; }
+                    unprocessedEvidence.Add(ev);
+                }
+
+
+                VoteIssue_Crisis_EnshadowedNobles issue = new VoteIssue_Crisis_EnshadowedNobles(society, this, unprocessedEvidence);
+
+                VoteOption opt;
+
+                opt = new VoteOption();
+                opt.index = VoteIssue_Crisis_EnshadowedNobles.NO_RESPONSE;
+                issue.options.Add(opt);
+
+                foreach (Unit unit in map.units)
+                {
+                    if (unit is Unit_Investigator && unit.society == society)
+                    {
+                        Unit_Investigator inv = (Unit_Investigator)unit;
+                        if (inv.canPromote() == false) { continue; }
+                        if (inv.state == Unit_Investigator.unitState.investigator || inv.state == Unit_Investigator.unitState.paladin)
+                        {
+                            //Already in offensive anti-agent state, no need to intefere
+                        }
+                        else if (inv.state == Unit_Investigator.unitState.basic)//Could upgrade to investigator if they've got a target
+                        {
+                            opt = new VoteOption();
+                            opt.unit = unit;
+                            opt.agentRole = Unit_Investigator.unitState.investigator;
+                            opt.index = VoteIssue_Crisis_EnshadowedNobles.AGENT_TO_INQUISITOR;
+                            issue.options.Add(opt);
+                        }
+                        else
+                        {
+                            opt = new VoteOption();
+                            opt.unit = unit;
+                            opt.agentRole = Unit_Investigator.unitState.basic;
+                            opt.index = VoteIssue_Crisis_EnshadowedNobles.AGENT_TO_BASIC;
+                            issue.options.Add(opt);
+
+                        }
+                    }
+                }
+
+                c += 1;
+                if (Eleven.random.Next(c) == 0)
+                {
+                    replyIssue = issue;
+                }
+            }
             if (society.crisisWarShort != null)
             {
                 VoteIssue_Crisis_WarThreatens issue = new VoteIssue_Crisis_WarThreatens(society, this, society.crisisWarShort, society.crisisWarLong);

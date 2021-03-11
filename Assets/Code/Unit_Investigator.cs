@@ -21,7 +21,7 @@ namespace Assets.Code
         public int paladinDuration = 0;
         public int turnLastChangedRole;
 
-        public enum unitState { basic,investigator,paladin,knight ,medic};
+        public enum unitState { basic,investigator,paladin,knight ,medic,inquisitor};
         public unitState state = unitState.basic;
 
         public Unit_Investigator(Location loc,Society soc) : base(loc,soc)
@@ -75,6 +75,11 @@ namespace Assets.Code
             {
                 turnTickAI_Medic(map);
             }
+            if (state == unitState.inquisitor)
+            {
+                turnTickAI_Inquisitor(map);
+                //turnTickAI_Medic(map);
+            }
         }
 
         public void checkSocietyPresence()
@@ -121,6 +126,10 @@ namespace Assets.Code
                         return true;
                     }
                 }
+            }
+            else if (location.soc != null && location.soc.hostileTo(this))//Agents simply can't endure the kind of punishment dealt out by societies
+            {
+                return true;
             }
             else
             {
@@ -179,6 +188,27 @@ namespace Assets.Code
             }
 
             task.turnTick(this);
+        }
+
+        public void turnTickAI_Inquisitor(Map map)
+        {
+            if (task == null)
+            {
+                if (this.location.soc != this.society)
+                {
+                    //Operate only within your own borders
+                    this.task = new Task_GoToSocialGroup(this.society);
+                    return;
+                }
+                else
+                {
+                    task = new Task_Wander_Inquisitor();
+                }
+            }
+            else
+            {
+                task.turnTick(this);
+            }
         }
         public void turnTickAI_Knight(Map map)
         {
@@ -474,10 +504,14 @@ namespace Assets.Code
                     if (item.threat > worstMilitaryFear) { worstMilitaryFear = item.threat; }
                 }
             }
-            double[] weights = new double[] { person.threat_agents.threat, worstMilitaryFear,person.threat_plague.threat };
-            weights[0] += 50;//Try to keep at least some people watching the criminal situation
-            double[] currentAllocation = new double[3];
-            double[] futureAllocation = new double[3];
+            double[] weights = new double[] { person.threat_agents.threat, worstMilitaryFear,person.threat_plague.threat,person.threat_agents.threat };
+            double[] currentAllocation = new double[4];
+            double[] futureAllocation = new double[4];
+
+            if (weights[0] < 50)
+            {
+                weights[0] = 50;//Try to keep at least some people watching the criminal situation
+            }
 
             int specialisationWeight = 3;
             foreach (Unit u in person.map.units)
@@ -521,6 +555,14 @@ namespace Assets.Code
                             futureAllocation[2] += specialisationWeight;
                         }
                     }
+                    else if (existing.state == unitState.inquisitor)
+                    {
+                        currentAllocation[3] += specialisationWeight;
+                        if (u != swappable)
+                        {
+                            futureAllocation[3] += specialisationWeight;
+                        }
+                    }
                 }
             }
             //What would the future state look like if this agent swapped?
@@ -542,6 +584,10 @@ namespace Assets.Code
             else if (hypo == unitState.medic)
             {
                 futureAllocation[2] += specialisationWeight;
+            }
+            else if (hypo == unitState.inquisitor)
+            {
+                futureAllocation[3] += specialisationWeight;
             }
 
             double normA = 0;
@@ -625,6 +671,10 @@ namespace Assets.Code
             {
                 return world.textureStore.unit_apothecarian;
             }
+            if (state == unitState.inquisitor)
+            {
+                return world.textureStore.unit_pumpkin;
+            }
             return world.textureStore.unit_lookingGlass;
         }
 
@@ -650,6 +700,10 @@ namespace Assets.Code
             {
                 return "Apothecarian";
             }
+            if (state == unitState.inquisitor)
+            {
+                return "Inquisitor";
+            }
             return "Investigator";
         }
 
@@ -674,6 +728,10 @@ namespace Assets.Code
             if (state == unitState.medic)
             {
                 return "Apothecarian";
+            }
+            if (state == unitState.inquisitor)
+            {
+                return "Inquisitor";
             }
             return "Investigator";
         }
@@ -727,6 +785,10 @@ namespace Assets.Code
             if (state == unitState.medic)
             {
                 return "Apothecarians are excellent medical agents, specialised in treating plagues.";
+            }
+            if (state == unitState.inquisitor)
+            {
+                return "Inquisitors seek out enshadowed, enthralled, broken or corrupt nobles, and expose them to their society at large.";
             }
             return "Investigators are agents who wander near their home location searching for evidence of dark powers. They can analyse evidence and recognise both enthralled agents and enthralled nobles.";
         }
