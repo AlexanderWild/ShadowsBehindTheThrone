@@ -56,7 +56,25 @@ namespace Assets.Code
                     {
                         person.prestige *= 0.33;
                         unit.location.map.world.prefabStore.popMsgAgent(unit,unit,unit.getName() + " has investigated " + person.getFullName() + " and discovered that while they are not broken or enthralled, they "
-                            + "are politically corrupt. They have exposed this to the other nobles, causing " + person.getFullName() + " to lose prestige, and be forced to change their ways.");
+                            + "are politically corrupt. They have exposed this to the other nobles, causing " + person.getFullName() + " to lose prestige, and be forced to change their ways." +
+                            " Honorable nobles will dislike them for their former corruption.");
+
+                        foreach (Person p in person.society.people)
+                        {
+                            if (p == person) { continue; }
+                            bool isHonorable = false;
+                            foreach (Trait t in p.traits)
+                            {
+                                if (t is Trait_Political_Honorable)
+                                {
+                                    isHonorable = true;
+                                }
+                            }
+                            if (isHonorable)
+                            {
+                                p.getRelation(person).addLiking(-25, "Honorable dislikes corruption", person.map.turn);
+                            }
+                        }
 
                         for (int i = 0; i < person.traits.Count; i++)
                         {

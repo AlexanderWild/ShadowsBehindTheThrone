@@ -12,6 +12,23 @@ namespace Assets.Code
         {
             if (map.simplified) { return null; }
 
+            if (society.crisisWitchHunt)
+            {
+                VoteIssue_WitchHunt issue = new VoteIssue_WitchHunt(society, this);
+
+                VoteOption opt;
+
+                foreach (Person p in society.people)
+                {
+                    opt = new VoteOption();
+                    opt.person = p;
+                    issue.options.Add(opt);
+                }
+                GraphicalMap.panTo(this.getLocation().hex.x, this.getLocation().hex.y);
+
+                return issue;
+            }
+
             VoteIssue replyIssue = null;
             int c = 0;
 
@@ -141,7 +158,25 @@ namespace Assets.Code
                 }
             }
 
-            if (society.crisisNobles)
+
+            bool nobleCrisis = society.crisisNobles;
+            if (
+                this.awareness >= map.param.awarenessCanCallNobleCrisis 
+                && map.turn - society.lastNobleCrisis >= map.param.awarenessMinNobleCrisisPeriod 
+                && map.worldPanic >= map.param.panic_canCallNobleCrisis
+                && this.state != personState.broken
+                && this.state != personState.enthralled)
+            {
+                foreach (Person p in society.people)
+                {
+                    if (p == this) { continue; }
+                    if (this.getRelation(p.index).suspicion > 0.5)
+                    {
+                        nobleCrisis = true;
+                    }
+                }
+            }
+            if (nobleCrisis)
             {
                 List<Evidence> unprocessedEvidence = new List<Evidence>();
                 foreach (Evidence ev in society.evidenceSubmitted)
@@ -157,6 +192,10 @@ namespace Assets.Code
 
                 opt = new VoteOption();
                 opt.index = VoteIssue_Crisis_EnshadowedNobles.NO_RESPONSE;
+                issue.options.Add(opt);
+
+                opt = new VoteOption();
+                opt.index = VoteIssue_Crisis_EnshadowedNobles.WITCH_HUNT;
                 issue.options.Add(opt);
 
                 foreach (Unit unit in map.units)

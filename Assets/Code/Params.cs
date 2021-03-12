@@ -42,6 +42,7 @@ namespace Assets.Code
         public double panic_paladinSpawn_1 = 0.15;
         public double panic_paladinSpawn_2 = 0.5;
         public double panic_lightbringerRitualPermitted = 0.75;
+        public double panic_canCallNobleCrisis = 0.25;
 
         public double awareness_canProposeLightAlliance = 1;
         public double awareness_master_speed = 1;
@@ -58,6 +59,8 @@ namespace Assets.Code
         public int awareness_turnsForLightRitual = 49;
         public int awareness_minLocsForLightbringer = 3;
         public int awareness_lightbringerMaxLocs = 5;
+        public double awarenessCanCallNobleCrisis  = 0.5;
+        public int awarenessMinNobleCrisisPeriod = 32;
 
         public double action_research_expectedAwarenessPerTurn = 0.15;
         public double action_research_pSanityHit = 0.5;
@@ -132,6 +135,8 @@ namespace Assets.Code
         public double utility_lightbringerRitual = 150;
         public double utility_lightbringerRitualReluctance = -50;
         public double utility_corruptHatesInquisitor = -75;
+        public double utility_honorableHatesWitchHunt = -75;
+        public double utility_warlikeLikesWitchHunt = 50;
 
         public double person_likingFromBeingInvaded = -30;
         public double person_maxLikingGainFromVoteAccordance = 25;

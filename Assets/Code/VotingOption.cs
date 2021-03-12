@@ -129,6 +129,7 @@ namespace Assets.Code
             if (issue is VoteIssue_Crisis_EnshadowedNobles)
             {
                 if (index == VoteIssue_Crisis_EnshadowedNobles.NO_RESPONSE) { return "No Response"; }
+                if (index == VoteIssue_Crisis_EnshadowedNobles.WITCH_HUNT) { return "Execute a Suspect without Trial"; }
                 if (index == VoteIssue_Crisis_EnshadowedNobles.AGENT_TO_INQUISITOR) { return "Make " + unit.getName() + " an Inquisitor"; }
                 if (index == VoteIssue_Crisis_EnshadowedNobles.AGENT_TO_BASIC) { return "Make " + unit.getName() + " an Agent"; }
             }

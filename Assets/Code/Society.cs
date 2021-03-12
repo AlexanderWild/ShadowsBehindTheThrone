@@ -61,6 +61,8 @@ namespace Assets.Code
         public string crisisPlague = null;
         public string crisisPlagueLong = null;
         public bool crisisNobles = false;
+        public bool crisisWitchHunt = true;
+        public int lastNobleCrisis;
 
         public Society(Map map, Location location) : base(map)
         {

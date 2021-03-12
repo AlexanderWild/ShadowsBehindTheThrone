@@ -66,7 +66,7 @@ namespace Assets.Code
                 order.votedByNobles = true;
                 society.killOrders.Add(order);
                 bool isGood = (target.state != Person.personState.enthralled) && (target.state != Person.personState.broken) && (target.shadow < 0.5);
-                //society.map.turnMessages.Add(new MsgEvent(society.getName() + " has voted to execute " + target.getFullName() + ", having judged them guilty of conspiracy with dark forces",MsgEvent.LEVEL_RED,isGood));
+                society.map.turnMessages.Add(new MsgEvent(society.getName() + " has voted to execute " + target.getFullName() + ", having judged them guilty of conspiracy with dark forces",MsgEvent.LEVEL_RED,isGood));
 
                 World.log("EXECUTION ORDER GONE THROUGH FOR SUSPICION OF DARKNESS " + society.getName() + " " + target.getFullName() + " true shadow (" + target.shadow + ")");
             }

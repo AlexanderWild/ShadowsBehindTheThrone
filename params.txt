@@ -27,6 +27,7 @@ panic_fromClueFound: 0.01
 panic_paladinSpawn_1: 0.15
 panic_paladinSpawn_2: 0.5
 panic_lightbringerRitualPermitted: 0.75
+panic_canCallNobleCrisis: 0.25
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
 awarenessBaseWeighting: 1
@@ -41,6 +42,9 @@ awareness_canInvestigate: 0.1
 awareness_decay: 0.002
 awareness_turnsForLightRitual: 49
 awareness_minLocsForLightbringer: 3
+awareness_lightbringerMaxLocs: 5
+awarenessCanCallNobleCrisis: 0.5
+awarenessMinNobleCrisisPeriod: 32
 action_research_expectedAwarenessPerTurn: 0.15
 action_research_pSanityHit: 0.5
 action_letterWritingTurns: 5
@@ -107,6 +111,7 @@ utility_plagueResponseMultPerRiskItem: 0.5
 utility_singleUseCure: 0.66
 utility_lightbringerRitual: 150
 utility_lightbringerRitualReluctance: -50
+utility_corruptHatesInquisitor: -75
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -161,10 +166,11 @@ society_prestigeFromPlagueRedDeath: 0
 society_crisis_plagueCrisisCooldown: 10
 temporaryThreatDecay: 0.95
 threat_takeLocation: 56
-threat_temporaryDreadDecay: 0.97
+threat_temporaryDreadDecay: 0.98
 threat_evidencePresented: 25
 threat_agentFearDecayPerTurn: 2
 threat_smallSettlementVsDisease: 50
+threat_dreadFromNobleInvestigation: 66
 victory_targetEnshadowmentAvrg: 0.75
 dark_evilThreatMult: 2
 dark_fleshThreatMult: 2
@@ -341,7 +347,7 @@ unit_disruptCooldown: 10
 unit_targetUnitsPerLoc: 0.1
 unit_investigateTime: 3
 unit_investigateNobleTime: 3
-unit_investigateNobleEvidenceGain: 0.15
+unit_investigateNobleEvidenceGain: 0.3
 unit_investigateNobleCooldown: 16
 unit_shareSuspicionTime: 1
 unit_socialiseAtCourtTime: 3

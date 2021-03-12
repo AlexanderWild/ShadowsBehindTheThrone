@@ -11,6 +11,7 @@ namespace Assets.Code
 
         public static int NO_RESPONSE = 0;
 
+        public static int WITCH_HUNT = 5;
         public static int AGENT_TO_INQUISITOR = 6;
         public static int AGENT_TO_BASIC = 7;
 
@@ -65,23 +66,57 @@ namespace Assets.Code
                 }
             }
 
-            //if (option.index == NATIONWIDE_SECURITY)
-            //{
-            //    responseLevelMin = 10;
-            //    responseLevelMax = 40;
+            if (option.index == WITCH_HUNT)
+            {
+                responseLevelMin = 80;
+                responseLevelMax = 100;
 
-            //    double localU = World.staticMap.param.utility_evidenceResonseBaseline * (concernLevel / 100);
-            //    msgs.Add(new ReasonMsg("Base Desirability", localU));
-            //    u += localU;
+                double localU = -World.staticMap.param.utility_killSuspectRelucatance;
+                msgs.Add(new ReasonMsg("Base Reluctance to Execute Noble", localU));
+                u += localU;
 
-            //    localU = p.getSelfInterest() * p.threat_enshadowedNobles.threat * World.staticMap.param.utility_selfInterestFromThreat/2;
-            //    if (localU != 0)
-            //    {
-            //        msgs.Add(new ReasonMsg("Doesn't maximise my provinces' defences", localU));
-            //        u += localU;
-            //    }
-            //}
-            
+
+                bool isWarlike = false;
+                bool isHonorable = false;
+                bool isPacifist = false;
+                foreach (Trait t in p.traits)
+                {
+                    if (t is Trait_Political_Warlike) { isWarlike = true; break; }
+                    if (t is Trait_Political_Honorable) { isHonorable = true; break; }
+                    if (t is Trait_Political_Pacifist) { isPacifist = true; break; }
+                }
+                if (isHonorable)
+                {
+                    localU = p.map.param.utility_honorableHatesWitchHunt;
+                    msgs.Add(new ReasonMsg("Honorable Politician opposes executions without trials", localU));
+                    u += localU;
+                }
+                if (isWarlike)
+                {
+                    localU = p.map.param.utility_warlikeLikesWitchHunt;
+                    msgs.Add(new ReasonMsg("Warlike Politician supports violence", localU));
+                    u += localU;
+                }
+                if (isPacifist)
+                {
+                    localU = -p.map.param.utility_warlikeLikesWitchHunt;
+                    msgs.Add(new ReasonMsg("Pacifist Politician supports violence", localU));
+                    u += localU;
+                }
+
+                double maxSuspicion = 0;
+                foreach (Person p2 in p.society.people)
+                {
+                    maxSuspicion = Math.Max(maxSuspicion,p.getRelation(p2.index).suspicion);
+                }
+                localU = maxSuspicion;
+                if (localU != 0)
+                {
+                    msgs.Add(new ReasonMsg("Suspicion towards other nobles", localU));
+                    u += localU;
+                }
+            }
+
             if (option.index == AGENT_TO_INQUISITOR)
             {
                 responseLevelMin = 0;
@@ -139,12 +174,17 @@ namespace Assets.Code
         {
             base.implement(option);
 
+            society.lastNobleCrisis = society.map.turn;
             society.crisisNobles = false;
             foreach (Evidence ev in foundEvidence)
             {
                 society.handledEvidence.Add(ev);
             }
 
+            if (option.index == WITCH_HUNT)
+            {
+                society.crisisWitchHunt = true;
+            }
             if (option.index == AGENT_TO_INQUISITOR)
             {
                 Unit_Investigator inv = (Unit_Investigator)option.unit;
