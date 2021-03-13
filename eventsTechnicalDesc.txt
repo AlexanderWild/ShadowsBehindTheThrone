@@ -1,0 +1,47 @@
+Internal code event checking it. Needs to be referred to in event:
+	Check every turn location
+	Check every turn on unit
+	Check every turn on whole map
+		Each of these then has the hashmap of tags + event_written_values
+
+Conditionals:
+	Treelike conditional by use of AND (which takes a set), OR (which also take a set) and NOT (which presumably takes a single condition)
+	Conditions check either numeric values, bools or nebulous 'other stuff' such as "Has a unit with value X" (depending on what can be both easily implemented and easily explained to modders)
+		If unit-condition checking is allowed the unit should become a KEYWORD, as described below
+		
+Probability:
+	If the event's conditions are met, roll a [0-1] nextDouble, see if it actually triggers
+	
+	
+Keywords:
+	Example: $LOCATION_NAME
+	These use string operations to replace values in the description with their actual required values. (so you can have "At $LOCATION_NAME there is a ghost" and it'll render to "At City Of Asse there is a ghost")
+	If possible, you could have a structure such as "If there exists a unit owned by the player (automatically bind to $CONDITIONAL_UNIT (don't allow multiple, probably just to avoid this literally becoming a turing-complete language)), run event. Event text "Your agent $CONDITIONAL_UNIT" renders to "Your agent Dark Lord Dique But't sees a ghost")
+
+
+Image:
+	Loaded from disk, possibly prefixed by mod-folder name (we'll just have our core events as an automatically included and enabled mod)
+	Can be blank, use default if it fails to find a definition for this
+	
+Credit:
+	For modder
+	For image (so we can legally use old pictures)
+	
+Outcomes:
+	Multiple options, selected by players. Maximum of 4 (to avoid programmatically populated UI which'll invariably fuck up on some resolutions)
+	Each option has:
+		-Player-read info (basically flavour + option name)
+		-In depth description (further info for player (example is flavour could be "I'll take the power" and the event descriptor says "+5 power, agent is killed"))
+		-Arbitrary number of outcome-blocks with effects, defined by numeric weighting (so probabilistic outcomes are possible)
+			-Defined set of functions they can call (for example: add shadow, reduce sanity, heal unit, kill unit, add power, freeze area...)
+				-No limit on how many effects
+				-We can add more when people ask for them. We'll just add whatever's easiest and needed for our events
+				-Perhaps these define a numeric argument to pass in (add power taking a float, written in mod as, say, "Effect: ADD_POWER 5"
+			-Write to dictionary
+				Every location, unit and map itself has such a dictionary. Stores string key, string value
+					Parse string if the conditional wants a numeric
+				Arbitrary number of dictionary writes. Can write keyword values? Maybe?
+		-Event chaining to be done by setting a flag which then triggers the event next turn (probability 1.0 event which checks for $Flag = 1)
+
+If someone wants something more advanced than this, they've never hestitated to put in feature request posts on itch/steam, so we can then chat about actually allowing dll loading mods to give them real access
+Therefore there's no need for this to be highly advanced. Ease of use is probably a higher concern than writing a full programming language
