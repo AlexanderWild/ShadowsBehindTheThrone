@@ -78,6 +78,10 @@ namespace Assets.Code
             //t.Start();//Do not fuck me over here, Unity, I'm not feeling like spending a whole day debugging your shit
             musicPlayer.loadMusic(); //How did I know?
 
+            //Log(String.Join(" ", EventParser.tokenize("(shadow = false) | 27.5").ConvertAll(e => e.type.ToString()).ToArray()));
+            // var tree = EventParser.parse(EventParser.tokenize("(location.shadow = false) | 27.5"));
+            // Log(printTree(tree, 0));
+
             potentialGods.Add(new God_Easy());
             potentialGods.Add(new God_Fog());
             potentialGods.Add(new God_MerchantOfNightmares());
@@ -90,6 +94,25 @@ namespace Assets.Code
             musicPlayer.playTheme();
         }
 
+        // string printTree(EventParser.SyntaxNode n, int indent)
+        // {
+        //     string res = "";
+        //     for (int i = 0; i != indent; ++i)
+        //         res += " ";
+
+        //     res += n.token.type.ToString() + "\n";
+        //     if (n is EventParser.BinaryNode bn)
+        //     {
+        //         res += printTree(bn.lhs, indent + 2);
+        //         res += printTree(bn.rhs, indent + 2);
+        //     }
+        //     else if (n is EventParser.UnaryNode un)
+        //     {
+        //         res += printTree(un.child, indent + 2);
+        //     }
+
+        //     return res;
+        // }
 
         public void Update()
         {
