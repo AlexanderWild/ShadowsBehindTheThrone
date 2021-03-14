@@ -155,7 +155,6 @@ namespace Assets.Code
 				{
 					case Token.Type.AND:
 					case Token.Type.OR:
-					World.Log("BINARY");
 						tryMoveNext(ref ts);
 
 						SyntaxNode rhs = parseEqualityExpression(ref ts);
@@ -172,27 +171,20 @@ namespace Assets.Code
 		{
 			SyntaxNode lhs = parseUnaryExpression(ref ts);
 
-			SyntaxNode last = lhs;
-			while (true)
+			Token t = ts.Current;
+			if (t == null)
+				return lhs;
+
+			switch (t.type)
 			{
-				Token t = ts.Current;
-				if (t == null)
-					return last;
+				case Token.Type.EQUALS:
+				case Token.Type.NEQUALS:
+					tryMoveNext(ref ts);
 
-				switch (t.type)
-				{
-					case Token.Type.EQUALS:
-					case Token.Type.NEQUALS:
-						World.Log("EQUALITY");
-						tryMoveNext(ref ts);
-
-						SyntaxNode rhs = parseUnaryExpression(ref ts);
-						last = new BinaryNode(t, last, rhs);
-
-						break;
-					default:
-						return last;
-				}
+					SyntaxNode rhs = parseUnaryExpression(ref ts);
+					return new BinaryNode(t, lhs, rhs);
+				default:
+					return lhs;
 			}
 		}
 
@@ -202,7 +194,6 @@ namespace Assets.Code
 			switch (t.type)
 			{
 				case Token.Type.NOT:
-					World.Log("NOT");
 					tryMoveNext(ref ts);
 
 					SyntaxNode child = parseAtomExpression(ref ts);
@@ -222,13 +213,11 @@ namespace Assets.Code
 				case Token.Type.LOCATION_FIELD:
 				case Token.Type.UNIT_FIELD:
 				case Token.Type.WORLD_FIELD:
-					World.Log("ATOM");
 					SyntaxNode atom = new SyntaxNode(t);
 
 					ts.MoveNext();
 					return atom;
 				case Token.Type.LPAREN:
-					World.Log("LPAREN");
 					tryMoveNext(ref ts);
 					SyntaxNode expr = parseBinaryExpression(ref ts);
 
