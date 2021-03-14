@@ -30,14 +30,14 @@ namespace Assets.Code
                 Person person = unit.location.person();
 
 
-                person.evidence += unit.location.map.param.unit_investigateNobleEvidenceGain;
-                if (person.evidence > 1)
-                {
-                    person.evidence = 1;
-                }
-
                 if (person.state == Person.personState.enthralled || person.state == Person.personState.broken)
                 {
+                    person.evidence += unit.location.map.param.unit_investigateNobleEvidenceGain;
+                    if (person.evidence > 1)
+                    {
+                        person.evidence = 1;
+                    }
+
                     unit.location.map.world.prefabStore.popMsgAgent(unit,unit,unit.getName() + " has investigated " + person.getFullName() + ", as they suspected they were under the influence of dark powers." +
                         " Their investigation has caused " + person.getFullName() + " to gain " + ((int)(unit.location.map.param.unit_investigateNobleEvidenceGain * 100))
                         + "% evidence, and they are now at " + ((int)(person.evidence * 100)) + "%.");

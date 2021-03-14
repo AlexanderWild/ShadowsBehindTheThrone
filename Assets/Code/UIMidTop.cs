@@ -58,6 +58,10 @@ namespace Assets.Code
                     "% A paladin will arrive to track down and kill your agents.";
             }
 
+            desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_canCallNobleCrisis)) +
+                "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awarenessCanCallNobleCrisis)) + "% can start a crisis vote if they believe there are enshadowed nobles.";
+
+
             //desc += "\n\n*" + ((int)(100 * master.world.map.param.panic_letterWritingLevel)) +
             //    "% Nobles with awareness above " + ((int)(100 * master.world.map.param.awareness_letterWritingLevel)) + "% can perform 'Warn Friend', allowing them to warn a neighbouring friendly noble.";
 
