@@ -8,13 +8,15 @@ namespace Assets.Code
 
         public override void castInner(Map map, Unit u)
         {
+            map.overmind.availableEnthrallments -= 1;
             u.automated = true;
-            u.location.map.world.prefabStore.popImgMsg(u.getName() + " is set loose on the world, to act independently as they see if. They will attempt to infiltrate and spread shadow, but will be weak without your direct influence.",
+            u.location.map.world.prefabStore.popImgMsg(u.getName() + " is set loose on the world, to act independently as they see fit. They will attempt to infiltrate and spread shadow, but will be weak without your direct influence.",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_SET_LOOSE"));
 
         }
         public override bool castable(Map map, Unit u)
         {
+            if (map.overmind.availableEnthrallments < 1) { return false; }
             return true;
         }
 
@@ -36,8 +38,8 @@ namespace Assets.Code
 
         public override string getDesc()
         {
-            return "Sets the unit free from your direct control. It will attempt to infiltrate and spread shadow automatically, but is weakened and unreliable without your guidance."
-                + "\n[Requires a dark agent]";
+            return "Sets the unit free from your direct control at the cost of an enthrallment. It will attempt to infiltrate and spread shadow automatically, but is weakened and unreliable without your guidance. Allows you to enthrall other units instead."
+                + "\n[Requires a dark agent and an enthrallment use]";
         }
 
         public override string specialCost()

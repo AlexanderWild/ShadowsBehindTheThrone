@@ -9,6 +9,8 @@
 
 -Need to view relations for dark agents. Need to know who is suspicious.
 
+-You can't get the set-loose agents back. For some reason the power button is broken
+
 -Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message
 	state == world
 	Couldn't reproduce
