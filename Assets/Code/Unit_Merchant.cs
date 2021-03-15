@@ -28,6 +28,8 @@ namespace Assets.Code
             abilities.Add(new Abu_Base_ChangeIdentity());
             //abilities.Add(new Abu_Base_Disrupt());
             abilities.Add(new Abu_Base_SpreadShadow());
+            abilities.Add(new Abu_Base_SetLoose());
+            abilities.Add(new Abu_Base_Apoptosis());
         }
 
         public override void turnTickInner(Map map)

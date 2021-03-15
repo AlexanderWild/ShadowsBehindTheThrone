@@ -38,7 +38,7 @@ namespace Assets.Code
 
             foreach (Unit u in world.map.units)
             {
-                if (u.isEnthralled())
+                if (u.isEnthralled() && (!u.automated))
                 {
                     if (u.movesTaken == 0)
                     {
@@ -93,7 +93,7 @@ namespace Assets.Code
             int agentsAvailable = 0;
             foreach (Unit u in world.map.units)
             {
-                if (u.isEnthralled())
+                if (u.isEnthralled() && (!u.automated))
                 {
                     agents += 1;
                     if (u.movesTaken == 0)

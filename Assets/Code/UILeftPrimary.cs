@@ -501,6 +501,8 @@ namespace Assets.Code
                 {
                     canUseAbility = ((Unit)GraphicalMap.selectedSelectable).isEnthralled() && ((Unit)GraphicalMap.selectedSelectable).lastTurnActionTaken != World.staticMap.turn;
 
+                    if (((Unit)GraphicalMap.selectedSelectable).automated) { canUseAbility = false; }
+
                     if (canUseAbility)
                     {
                         foreach (Property property in ((Unit)GraphicalMap.selectedSelectable).location.properties) {

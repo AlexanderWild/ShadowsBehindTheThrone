@@ -63,7 +63,7 @@ namespace Assets.Code
             if (enthralled != null) { nEnthralled += 1; }
             foreach (Unit u in map.units)
             {
-                if (u.isEnthralled())
+                if (u.isEnthralled() && (!u.automated))
                 {
                     nEnthralled += 1;
                 }
@@ -466,7 +466,7 @@ namespace Assets.Code
             List<Unit> agents = new List<Unit>();
             foreach (Unit u in map.units)
             {
-                if (u.isEnthralled()) { agents.Add(u); }
+                if (u.isEnthralled() && (!u.automated)) { agents.Add(u); }
                 else
                 {
                     if (u.task is Task_Investigate)

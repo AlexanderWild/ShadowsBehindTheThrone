@@ -164,40 +164,6 @@ namespace Assets.Code
             }
         }
 
-        public void flee(Map map)
-        {
-            double bestDist = 0;
-            Location target = null;
-            foreach (Location l2 in map.locations)
-            {
-                bool safe = true;
-                if (l2.soc == null  || l2.soc.hostileTo(this)) {continue; }
-                foreach (Unit u in l2.units)
-                {
-                    if (u.hostileTo(this)) { safe = false;break; }
-                }
-                if (!safe) { continue; }
-                foreach (Location l3 in l2.getNeighbours())
-                {
-                    if (!safe) { break; }
-                    foreach (Unit u in l3.units)
-                    {
-                        if (u.hostileTo(this)) { safe = false;break; }
-                    }
-                }
-                if (!safe) { continue; }
-
-                //Evaluated as safe. Flee option
-                double dist = map.getDist(this.location, l2);
-                if (dist < bestDist || target == null)
-                {
-                    target = l2;
-                    bestDist = dist;
-                }
-            }
-            task = new Task_GoToLocation(target);
-        }
-
         public override bool checkForDisband(Map map)
         {
             return false;

@@ -518,7 +518,7 @@ namespace Assets.Code
             Hex clickedHex = GraphicalMap.getHexUnderMouse(Input.mousePosition).hex;
             if (clickedHex.location != null)
             {
-                if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit && ((Unit)GraphicalMap.selectedSelectable).isEnthralled())
+                if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit && ((Unit)GraphicalMap.selectedSelectable).isEnthralled() && (!((Unit)GraphicalMap.selectedSelectable).automated))
                 {
                     Unit u = (Unit)GraphicalMap.selectedSelectable;
                     if (u.location.getNeighbours().Contains(clickedHex.location)){
