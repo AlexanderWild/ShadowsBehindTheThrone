@@ -24,6 +24,8 @@ namespace Assets.Code
             ev.weight = 0.66;
             other.location.evidence.Add(ev);
 
+            other.automated = false;
+
             other.task = null;
             other.movesTaken += 1;
             map.overmind.computeEnthralled();
@@ -40,16 +42,10 @@ namespace Assets.Code
         public override bool castable(Map map, Person person)
         {
             if (person.unit == null) { return false; }
-            if (person.state == Person.personState.enthralledAgent) { return false; }
+            if (person.state == Person.personState.enthralledAgent && (person.unit.automated == false)) { return false; }
             if (map.overmind.availableEnthrallments < 1) { return false; }
             if (map.overmind.nEnthralled >= map.overmind.maxEnthralled) { return false; }
-
-            int nOwned = 0;
-            foreach (Unit u in map.units)
-            {
-                if (u.isEnthralled()) { nOwned += 1; }
-            }
-            return nOwned < map.param.overmind_maxEnthralled;
+            return true;
         }
 
         public override bool castable(Map map, Unit unit)
