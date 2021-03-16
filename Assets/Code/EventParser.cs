@@ -37,7 +37,7 @@ namespace Assets.Code
 			}
 		}
 
-		public class TokenExpression
+		class TokenExpression
 		{
 			Token.Type type;
 			Regex regex;

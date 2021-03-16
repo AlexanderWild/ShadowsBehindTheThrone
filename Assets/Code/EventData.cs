@@ -41,6 +41,7 @@ namespace Assets.Code
         public string conditional;
 		public double probability;
 
+		public string id;
 		public string modCredit;
 		public string imgCredit;
 

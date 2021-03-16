@@ -82,6 +82,10 @@ namespace Assets.Code
             // var tree = EventParser.parse(EventParser.tokenize("(location.shadow = false) | 27.5"));
             // Log(printTree(tree, 0));
 
+            // var root = EventParser.parse(EventParser.tokenize("true & true | (true & false)"));
+            // bool res = EventRuntime.evaluate(root, null);
+            // Log("got result: " + res.ToString());
+
             potentialGods.Add(new God_Easy());
             potentialGods.Add(new God_Fog());
             potentialGods.Add(new God_MerchantOfNightmares());
