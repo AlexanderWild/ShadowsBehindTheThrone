@@ -18,7 +18,8 @@ namespace Assets.Code
             {
                 if (command == "power")
                 {
-                    map.overmind.power = 100;
+                    map.overmind.power = 1024;
+                    map.overmind.availableEnthrallments = 128;
                 }
                 if (command == "testsave")
                 {

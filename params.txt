@@ -112,6 +112,8 @@ utility_singleUseCure: 0.66
 utility_lightbringerRitual: 150
 utility_lightbringerRitualReluctance: -50
 utility_corruptHatesInquisitor: -75
+utility_honorableHatesWitchHunt: -75
+utility_warlikeLikesWitchHunt: 50
 person_likingFromBeingInvaded: -30
 person_maxLikingGainFromVoteAccordance: 25
 person_maxLikingLossFromVoteDiscord: -30
@@ -354,12 +356,15 @@ unit_socialiseAtCourtTime: 3
 unit_socialiseAtCourtGain: 30
 unit_pleadCaseTime: 3
 unit_infiltrateTime: 6
+unit_infiltrateWeakTime: 8
 unit_infiltrateAmount: 1.35
 unit_divisorOffset: 2
 unit_majorEvidence: 0.35
 unit_minorEvidence: 0.15
 unit_spreadShadowTime: 5
+unit_spreadShadowWeakTime: 7
 unit_spreadShadowAmount: 0.6
+unit_spreadShadowWeakAmount: 0.25
 unit_suspicionFromProximity: 0.1
 unit_armyOfDeadMaxHP: 37
 unit_paladin_trackDuration: 6

@@ -5,6 +5,12 @@
 	
 -Some guy wants an anim speed setting
 
+-Agent gets stuck temporarily, at 0/5 disrupted? Maybe it's the never-moves-again bug due to getting kicked off the map.units list, but doesn't initially sound like that
+
+-Need to view relations for dark agents. Need to know who is suspicious.
+
+-You can't get the set-loose agents back. For some reason the power button is broken
+
 -Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message
 	state == world
 	Couldn't reproduce
@@ -13,7 +19,9 @@
 
 	Medium criticality:
 
--ABILITY_RECRUIT has no flavour text
+-Good Saviour? A hero type unit which leads the forces of good on the world map
+
+-Apoptosis for agents. Maybe flip to some weak automatic mode.
 
 -International relationships lens
 
@@ -21,8 +29,6 @@
 
 -If you have no saves to load it reads "New text" on the scroll view
 
--Units disappear when dismissing a dialog option (only in compiled?)
-	(Not seen in some time)
 
 -Traits should affect infiltration difficulty
 
@@ -48,6 +54,12 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+
+-Units disappear when dismissing a dialog option (only in compiled?)
+	(Not seen in some time)
+	
+-ABILITY_RECRUIT has no flavour text
+
 -WASD isn't WASD on all keyboards, nerd. Get a keybinding thingy
 
 -Leftover graphical properties, by the look of it

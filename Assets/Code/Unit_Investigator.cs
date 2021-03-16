@@ -42,6 +42,8 @@ namespace Assets.Code
             //    abilities.Add(new Abu_Base_EnthrallNoble());
             //}
             abilities.Add(new Abu_Base_SpreadShadow());
+            abilities.Add(new Abu_Base_SetLoose());
+            abilities.Add(new Abu_Base_Apoptosis());
 
             turnLastChangedRole = loc.map.turn;
         }

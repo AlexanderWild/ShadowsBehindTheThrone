@@ -1,0 +1,6 @@
+-Clickable event messages
+-Winter's Scythe Update
+-New agent: Saviour
+-Added ability to turn agents over to AI control
+-New agent role: Inquisitor
+-Added crisis for enshadowed nobles

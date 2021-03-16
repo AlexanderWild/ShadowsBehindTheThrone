@@ -24,7 +24,6 @@ namespace Assets.Code
                     opt.person = p;
                     issue.options.Add(opt);
                 }
-                GraphicalMap.panTo(this.getLocation().hex.x, this.getLocation().hex.y);
 
                 return issue;
             }
@@ -178,6 +177,7 @@ namespace Assets.Code
             }
             if (nobleCrisis)
             {
+                World.log("Noble crisis initiated");
                 List<Evidence> unprocessedEvidence = new List<Evidence>();
                 foreach (Evidence ev in society.evidenceSubmitted)
                 {

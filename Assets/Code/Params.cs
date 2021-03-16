@@ -396,12 +396,15 @@ namespace Assets.Code
         public int unit_socialiseAtCourtGain = 30;
         public int unit_pleadCaseTime = 3;
         public int unit_infiltrateTime = 6;
+        public int unit_infiltrateWeakTime = 8;
         public double unit_infiltrateAmount = 1.35;
         public double unit_divisorOffset = 2;
         public double unit_majorEvidence = 0.35;
         public double unit_minorEvidence = 0.15;
         public int unit_spreadShadowTime = 5;
+        public int unit_spreadShadowWeakTime = 7;
         public double unit_spreadShadowAmount = 0.6;
+        public double unit_spreadShadowWeakAmount = 0.25;
         public double unit_suspicionFromProximity = 0.1;
         public int unit_armyOfDeadMaxHP = 37;
         public int unit_paladin_trackDuration = 6;

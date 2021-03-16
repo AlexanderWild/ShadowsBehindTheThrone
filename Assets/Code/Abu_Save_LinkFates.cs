@@ -23,6 +23,8 @@ namespace Assets.Code
             if (u.location.soc == null) { return false; }
             if (u is Unit_Saviour == false) { return false; }
             if (map.overmind.enthralled == null) { return false; }
+            Unit_Saviour self = (Unit_Saviour)u;
+            if (self.linkedFates) { return false; }
             return true;
         }
 
