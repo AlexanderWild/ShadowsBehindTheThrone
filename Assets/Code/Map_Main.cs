@@ -33,7 +33,7 @@ namespace Assets.Code
         public UnitManager unitManager;
         public double worldPanic;
         public int personIndexCount = 0;
-        public EventManager eventManager;
+        //public EventManager eventManager;
         public bool simplified = false;
         public bool agentsOnly = true;
         public bool automatic = false;
@@ -60,7 +60,7 @@ namespace Assets.Code
             unitManager = new UnitManager(this);
             soc_dark = new SG_AgentDark(this);
             soc_light = new SG_AgentLight(this);
-            eventManager = new EventManager(this);
+            //eventManager = new EventManager(this);
         }
 
         public void turnTick()

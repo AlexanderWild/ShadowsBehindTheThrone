@@ -75,6 +75,7 @@ namespace Assets.Code
         public GameObject prefabAutosave;
         public GameObject prefabSaveName;
         public GameObject prefabLightbringerDiag;
+        public GameObject prefabEvent;
 
         public PopOptBar getVoteOptBar(VoteOption opt, VoteSession sess)
         {
@@ -855,6 +856,14 @@ namespace Assets.Code
             specific.populate(society);
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             specific.bDismissGoto.onClick.AddListener(delegate { specific.dismissGoto(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popEvent(EventData d)
+        {
+            GameObject obj = Instantiate(prefabEvent) as GameObject;
+            PopupEvent specific = obj.GetComponent<PopupEvent>();
+            specific.ui = ui;
+            specific.populate(d);
             ui.addBlocker(specific.gameObject);
         }
 

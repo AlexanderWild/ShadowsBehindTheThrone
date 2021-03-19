@@ -155,6 +155,7 @@ namespace Assets.Code
             world.map.turnTick();
             world.turnLock = false;
 
+            EventManager.turnTick(world.map);
             checkData();
 
             if (World.autosavePeriod != -1 && world.map.turn % World.autosavePeriod == 0)

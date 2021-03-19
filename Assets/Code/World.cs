@@ -86,6 +86,8 @@ namespace Assets.Code
             // bool res = EventRuntime.evaluate(root, null);
             // Log("got result: " + res.ToString());
 
+            EventManager.load("data/events");
+
             potentialGods.Add(new God_Easy());
             potentialGods.Add(new God_Fog());
             potentialGods.Add(new God_MerchantOfNightmares());
