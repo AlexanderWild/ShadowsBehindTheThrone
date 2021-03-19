@@ -1,0 +1,30 @@
+{
+	"id": "wquist.cool_event",
+	"modCredit": "wquist",
+	"imgCredit": "default",
+
+	"type": "WORLD",
+	"conditional": "true",
+	"probability": 0.5,
+
+	"name": "My Cool Event",
+	"description": "Lucky you, you have found the ultra-rare 'cool event' event.",
+
+	"outcomes": [
+		{
+			"name": "Rejoice",
+			"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
+
+			"effects": [
+				{ "type": "ADD_SHADOW", "value": "5.0" },
+				{ "type": "ADD_PANIC",  "value": "10.0" }
+			]
+		},
+		{
+			"name": "Remain wary",
+			"description": "Nothing good comes without a price. You step back before the pleasant warmth envelops you.",
+
+			"effects": []
+		}
+	]
+}
