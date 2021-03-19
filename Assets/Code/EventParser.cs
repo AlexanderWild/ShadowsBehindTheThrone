@@ -14,6 +14,7 @@ namespace Assets.Code
 			public enum Type
 			{
 				LOCATION_FIELD,
+				PERSON_FIELD,
 				UNIT_FIELD,
 				WORLD_FIELD,
 				NUMBER,
@@ -98,6 +99,7 @@ namespace Assets.Code
 			new TokenExpression(Token.Type.NOT,     "^!"),
 
 			new TokenExpression(Token.Type.LOCATION_FIELD, "^location\\.[a-zA-Z_]+"),
+			new TokenExpression(Token.Type.PERSON_FIELD,   "^person\\.[a-zA-Z_]+"),
 			new TokenExpression(Token.Type.UNIT_FIELD,     "^unit\\.[a-zA-Z_]+"),
 			new TokenExpression(Token.Type.WORLD_FIELD,    "^[a-zA-Z_]+")
 		};
@@ -211,6 +213,7 @@ namespace Assets.Code
 				case Token.Type.NUMBER:
 				case Token.Type.BOOLEAN:
 				case Token.Type.LOCATION_FIELD:
+				case Token.Type.PERSON_FIELD:
 				case Token.Type.UNIT_FIELD:
 				case Token.Type.WORLD_FIELD:
 					SyntaxNode atom = new SyntaxNode(t);

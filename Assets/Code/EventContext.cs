@@ -22,6 +22,18 @@ namespace Assets.Code
 			}
 		}
 
+		private Person _person;
+		public Person person
+		{
+			get
+			{
+				if (_person == null)
+					throw new Exception("event person not in current context.");
+
+				return _person;
+			}
+		}
+
 		private Unit _unit;
 		public Unit unit
 		{
@@ -34,23 +46,30 @@ namespace Assets.Code
 			}
 		}
 
-		EventContext(Map m, Location l, Unit u)
+		EventContext(Map m, Location l, Person p, Unit u)
 		{
 			map = m;
+
 			_location = l;
+			_person = p;
 			_unit = u;
 		}
 
-		public EventContext(Map m) : this(m, null, null) {}
+		public EventContext(Map m) : this(m, null, null, null) {}
 
-		static EventContext WithLocation(Map m, Location l)
+		static EventContext withLocation(Map m, Location l)
 		{
-			return new EventContext(m, l, null);
+			return new EventContext(m, l, null, null);
 		}
 
-		static EventContext WithUnit(Map m, Unit u)
+		static EventContext withPerson(Map m, Person p)
 		{
-			return new EventContext(m, null, u);
+			return new EventContext(m, null, p, null);
+		}
+
+		static EventContext withUnit(Map m, Unit u)
+		{
+			return new EventContext(m, null, null, u);
 		}
     }
 }

@@ -174,6 +174,7 @@ namespace Assets.Code
 						return new TypedValue<bool>(Convert.ToBoolean(n.token.value));
 
 					case EventParser.Token.Type.LOCATION_FIELD:
+					case EventParser.Token.Type.PERSON_FIELD:
 					case EventParser.Token.Type.UNIT_FIELD:
 					case EventParser.Token.Type.WORLD_FIELD:
 						if (!fields.ContainsKey(n.token.value))
