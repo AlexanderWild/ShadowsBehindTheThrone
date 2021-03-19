@@ -26,15 +26,17 @@ namespace Assets.Code
 			{
 				options[n].GetComponentInChildren<Text>().text = o.name;
 				options[n].gameObject.SetActive(true);
+				options[n].onClick.AddListener(delegate { dismiss(o.description); });
 
 				outcomes.Add(o);
 				n += 1;
 			}
 		}
 
-        public void dismiss()
+        public void dismiss(string choice)
         {
             ui.removeBlocker(this.gameObject);
+			ui.world.prefabStore.popMsg(choice, true);
         }
     }
 }
