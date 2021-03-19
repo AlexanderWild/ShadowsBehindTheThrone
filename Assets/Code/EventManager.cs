@@ -54,9 +54,7 @@ namespace Assets.Code
             if (!EventRuntime.evaluate(e.conditionalRoot, ctx))
                 return false;
 
-            World.Log(e.data.id + " event ocurring...");
-            ctx.map.world.prefabStore.popEvent(e.data);
-
+            ctx.map.world.prefabStore.popEvent(e.data, ctx);
             return true;
         }
     }

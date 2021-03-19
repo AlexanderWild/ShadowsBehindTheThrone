@@ -16,11 +16,11 @@ namespace Assets.Code
 			protected void deduceType<T>()
 			{
 				var t = default(T);
-				if (t is double _)
+				if (t is double)
 					type = Type.DOUBLE;
-				else if (t is int _)
+				else if (t is int)
 					type = Type.INT;
-				else if (t is bool _)
+				else if (t is bool)
 					type = Type.BOOL;
 				else
 					throw new Exception("invalid event runtime type.");
@@ -39,30 +39,40 @@ namespace Assets.Code
 			}
 		}
 
-		abstract class Field : Atom { public abstract Value getValue(EventContext _); }
+		abstract class Field : Atom { public abstract Value getValue(EventContext ctx); }
 		class TypedField<T> : Field
 		{
-			public delegate T Accessor(EventContext _);
-			public Accessor accessor;
+			public delegate T Getter(EventContext c);
+			public Getter getter;
 
-			public TypedField(Accessor a)
+			public TypedField(Getter g)
 			{
-				var t = default(T);
-				if (t is double)
-					type = Type.DOUBLE;
-				else if (t is int)
-					type = Type.INT;
-				else if (t is bool)
-					type = Type.BOOL;
-				else
-					throw new Exception("invalid EventSymbol field type.");
-
-				accessor = a;
+				deduceType<T>();
+				getter = g;
 			}
 
 			public override Value getValue(EventContext ctx)
 			{
-				return new TypedValue<T>(accessor(ctx));
+				return new TypedValue<T>(getter(ctx));
+			}
+		}
+
+		abstract class Property : Atom { public abstract void setValue(EventContext ctx, string s); }
+		class TypedProperty<T> : Property
+		{
+			public delegate void Setter(EventContext c, T v);
+			public Setter setter;
+
+			public TypedProperty(Setter s)
+			{
+				deduceType<T>();
+				setter = s;
+			}
+
+			public override void setValue(EventContext ctx, string s)
+			{
+				var value = (T)Convert.ChangeType(s, typeof(T));
+				setter(ctx, value);
 			}
 		}
 
@@ -76,6 +86,12 @@ namespace Assets.Code
 			{ "has_agents",   new TypedField<bool>  (c => { return c.map.hasEnthralledAnAgent; })  }
 		};
 
+		static Dictionary<string, Property> properties = new Dictionary<string, Property>
+		{
+			{ "ADD_POWER", new TypedProperty<int>((c, v) => { c.map.overmind.power += v; }) },
+			{ "SUB_POWER", new TypedProperty<int>((c, v) => { c.map.overmind.power -= v; }) }
+		};
+
 		public static bool evaluate(EventParser.SyntaxNode root, EventContext ctx)
 		{
 			Value res = evaluateNode(root, ctx);
@@ -83,6 +99,19 @@ namespace Assets.Code
 				return resb.data;
 			else
 				throw new Exception("event conditional does not evaluate to boolean.");
+		}
+
+		public static void evaluate(EventData.Effect e, EventContext ctx)
+		{
+			switch (e.command)
+			{
+				default:
+					if (!properties.ContainsKey(e.command))
+						throw new Exception("unknown property name.");
+					else
+						properties[e.command].setValue(ctx, e.value);
+					break;
+			}
 		}
 
 		static Value evaluateNode(EventParser.SyntaxNode n, EventContext ctx)

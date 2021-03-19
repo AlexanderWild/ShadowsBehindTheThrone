@@ -12,16 +12,8 @@ namespace Assets.Code
 		[Serializable]
 		public class Effect
 		{
-			public enum Type
-			{
-				ADD_POWER,
-				WRITE
-			}
-
-			public string type;
+			public string command;
 			public string value;
-			
-			//
 		}
 
 		[Serializable]
@@ -31,8 +23,6 @@ namespace Assets.Code
 			public string description;
 
 			public List<Effect> effects;
-
-			//
 		}
 
 		public enum Type { LOCATION, UNIT, WORLD }
@@ -49,7 +39,5 @@ namespace Assets.Code
 		public string description;
 
 		public List<Outcome> outcomes;
-
-		//
     }
 }

@@ -14,9 +14,7 @@ namespace Assets.Code
 		public Button[] options;
         public UIMaster ui;
 
-		List<EventData.Outcome> outcomes = new List<EventData.Outcome>();
-
-		public void populate(EventData data)
+		public void populate(EventData data, EventContext ctx)
 		{
 			title.text = data.name;
 			description.text = data.description;
@@ -24,19 +22,23 @@ namespace Assets.Code
 			int n = 0;
 			foreach (var o in data.outcomes)
 			{
-				options[n].GetComponentInChildren<Text>().text = o.name;
-				options[n].gameObject.SetActive(true);
-				options[n].onClick.AddListener(delegate { dismiss(o.description); });
+				if (n > 2)
+					break;
 
-				outcomes.Add(o);
-				n += 1;
+				options[n].GetComponentInChildren<Text>().text = o.name;
+				options[n].onClick.AddListener(delegate { dismiss(o, ctx); });
+
+				options[n++].gameObject.SetActive(true);
 			}
 		}
 
-        public void dismiss(string choice)
+        public void dismiss(EventData.Outcome o, EventContext ctx)
         {
+			foreach (var e in o.effects)
+				EventRuntime.evaluate(e, ctx);
+
             ui.removeBlocker(this.gameObject);
-			ui.world.prefabStore.popMsg(choice, true);
+			ui.world.prefabStore.popMsg(o.description, true);
         }
     }
 }

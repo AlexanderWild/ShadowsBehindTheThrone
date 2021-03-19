@@ -858,12 +858,12 @@ namespace Assets.Code
             specific.bDismissGoto.onClick.AddListener(delegate { specific.dismissGoto(); });
             ui.addBlocker(specific.gameObject);
         }
-        public void popEvent(EventData d)
+        public void popEvent(EventData d, EventContext ctx)
         {
             GameObject obj = Instantiate(prefabEvent) as GameObject;
             PopupEvent specific = obj.GetComponent<PopupEvent>();
             specific.ui = ui;
-            specific.populate(d);
+            specific.populate(d, ctx);
             ui.addBlocker(specific.gameObject);
         }
 
