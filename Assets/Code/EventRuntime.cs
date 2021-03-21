@@ -137,8 +137,13 @@ namespace Assets.Code
 
 						switch (bn.token.type)
 						{
+							case EventParser.Token.Type.PLUS:  return new TypedValue<double>(av + bv);
+							case EventParser.Token.Type.MINUS: return new TypedValue<double>(av - bv);
+
 							case EventParser.Token.Type.EQUALS:  return new TypedValue<bool>(av == bv);
 							case EventParser.Token.Type.NEQUALS: return new TypedValue<bool>(av != bv);
+							case EventParser.Token.Type.LESS:    return new TypedValue<bool>(av <  bv);
+							case EventParser.Token.Type.GREATER: return new TypedValue<bool>(av >  bv);
 						
 							default: throw new Exception("invalid operation on double types.");
 						}
@@ -150,8 +155,13 @@ namespace Assets.Code
 
 						switch (bn.token.type)
 						{
+							case EventParser.Token.Type.PLUS:  return new TypedValue<int>(av + bv);
+							case EventParser.Token.Type.MINUS: return new TypedValue<int>(av - bv);
+
 							case EventParser.Token.Type.EQUALS:  return new TypedValue<bool>(av == bv);
 							case EventParser.Token.Type.NEQUALS: return new TypedValue<bool>(av != bv);
+							case EventParser.Token.Type.LESS:    return new TypedValue<bool>(av <  bv);
+							case EventParser.Token.Type.GREATER: return new TypedValue<bool>(av >  bv);
 						
 							default: throw new Exception("invalid operation on int types.");
 						}
@@ -180,9 +190,27 @@ namespace Assets.Code
 				switch (e.type)
 				{
 					case Type.DOUBLE:
-						throw new Exception("invalid operation on double type.");
+					{
+						double ev = (e as TypedValue<double>).data;
+
+						switch (un.token.type)
+						{
+							case EventParser.Token.Type.MINUS: return new TypedValue<double>(-ev);
+							
+							default: throw new Exception("invalid operation on double type.");
+						}
+					}
 					case Type.INT:
-						throw new Exception("invalid operation on int type.");
+					{
+						int ev = (e as TypedValue<int>).data;
+
+						switch (un.token.type)
+						{
+							case EventParser.Token.Type.MINUS: return new TypedValue<int>(-ev);
+							
+							default: throw new Exception("invalid operation on in type.");
+						}
+					}
 					case Type.BOOL:
 					{
 						bool ev = (e as TypedValue<bool>).data;
