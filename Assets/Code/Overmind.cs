@@ -122,7 +122,7 @@ namespace Assets.Code
         {
             String msg = "Infiltration is a core element of agent gameplay, and a very good strategy is to begin building infiltration with your first few agents, before moving on to making use of this foundation with your second wave (possibly after the first have met an unfortunate end)."
                 + "It represents your cultists, embedded in human society, working their way into all levels of human society."
-                + "\n\nInfiltration can be seen on the location information, by a map view or by dark tendrils reaching into infiltrated locations' map icons. It is very hard for humans to remove your infiltration, and many agents can benefit"
+                + "\n\nInfiltration can be seen on the location information, by a map view or by dark tendrils reaching into infiltrated locations' map icons. It is very hard for humans to remove your infiltration (it almost always requires moving or removing the location's noble), and many agents can benefit"
                 + " from operating in infilrated locations."
                 + "\n\nVampires and Merchants can infiltrate at first, then a Seeker or Plague Doctor can act unnoticed, once the initial work has been set up to let them operate efficiently.";
             map.world.prefabStore.popMsgHint(msg, "Hint: Infiltration");

@@ -106,20 +106,55 @@ namespace Assets.Code
             if (GraphicalMap.selectedSelectable is Unit == false) { return; }
             Unit u = (Unit)GraphicalMap.selectedSelectable;
             if (u.person == null) { return; }
-            if (u.person.state == Person.personState.enthralledAgent) { return; }
-            if (u.person.state == Person.personState.enthralled) { return; }
-
-            List<RelObj> rels = new List<RelObj>();
-            foreach (RelObj rel in u.person.relations.Values)
+            if (u.person.state == Person.personState.enthralledAgent)
             {
-                if (Math.Abs(rel.getLiking()) > 10)
+                List<RelObj> rels = new List<RelObj>();
+                foreach (Unit u2 in u.location.map.units)
                 {
-                    rels.Add(rel);
+                    if (u2 == u) { continue; }
+                    if (u2.person != null)
+                    {
+                        RelObj rel = u2.person.getRelation(u.person);
+                        if (Math.Abs(rel.getLiking()) > 10 && rel.suspicion > 0)
+                        {
+                            rels.Add(rel);
+                        }
+                    }
                 }
-            }
-            rels.Sort(this);
+                foreach (SocialGroup sg in u.location.map.socialGroups)
+                {
+                    if (sg is Society)
+                    {
+                        Society soc = (Society)sg;
+                        foreach (Person p in soc.people)
+                        {
+                            RelObj rel = p.getRelation(u.person);
+                            if (Math.Abs(rel.getLiking()) > 10 && rel.suspicion > 0)
+                            {
+                                rels.Add(rel);
+                            }
+                        }
+                    }
+                }
+                rels.Sort(this);
 
-            world.ui.addBlocker(world.prefabStore.getScrollSetRelations(rels).gameObject);
+                world.ui.addBlocker(world.prefabStore.getScrollSetRelationsReflexive(rels).gameObject);
+                return; 
+            }
+            if (u.person.state == Person.personState.enthralled) { return; }
+            {
+                List<RelObj> rels = new List<RelObj>();
+                foreach (RelObj rel in u.person.relations.Values)
+                {
+                    if (Math.Abs(rel.getLiking()) > 10)
+                    {
+                        rels.Add(rel);
+                    }
+                }
+                rels.Sort(this);
+
+                world.ui.addBlocker(world.prefabStore.getScrollSetRelations(rels).gameObject);
+            }
         }
 
         public void bSetAsHostile()

@@ -481,6 +481,31 @@ namespace Assets.Code
 
             return specific;
         }
+        public PopupScrollSet getScrollSetRelationsReflexive(List<RelObj> rels)
+        {
+            PopupScrollSet specific = getInnerScrollSet();
+
+            foreach (RelObj rel in rels)
+            {
+                PopupBoxPerson box = getPersonBox();
+                box.gameObject.transform.SetParent(specific.gameObject.transform);
+                specific.scrollables.Add(box);
+                if (World.staticMap.persons[rel.them] == null) { continue; }
+                box.setTo(World.staticMap.persons[rel.me.index]);
+                box.body.text = "Their Liking: " + (int)rel.getLiking() + "\nTheir Suspicion: " + (int)(rel.suspicion * 100) + "%";
+                float scale = (float)rel.getLiking();
+                if (scale > 1) { scale = 1; }
+                else if (scale < -1) { scale = -1; }
+                float r = 0;
+                float g = 0;
+                float b = 0;
+                if (scale > 0) { g = scale; }
+                else { r = -scale; }
+                box.body.color = new Color(r, g, b);
+            }
+
+            return specific;
+        }
         public PopupScrollSet getScrollSet(List<int> indices)
         {
             PopupScrollSet specific = getInnerScrollSet();
