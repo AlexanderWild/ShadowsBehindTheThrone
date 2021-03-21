@@ -134,7 +134,7 @@ namespace Assets.Code
             String msg = "Enthralled Nobles are complex tools, with a range of strategies. The primary strategy is the political career."
                 + "\n\nYour enthralled noble often starts at a very low level, and must rise the ranks through careful ally building and sabotage of your rivals (using your agents or Dark Powers)."
                 + "\n\nIf they reach a high rank in society, they can enshadow themselves, and spread shadow to all the nobles of lesser prestige."
-                + "\n\nIf they reach the top of the society, they can declare a Dark Empire, which will spread shadow to all the society's nobles over time, advancing your progress to victory considerably, " +
+                + "\n\nIf they reach the top of the society, they can declare a Dark Empire using an ability, which will spread shadow to all the society's nobles over time, advancing your progress to victory considerably, " +
                 "and giving you a warlike collection of broken nobles to use to invade your weaker neighbours to spread the shadow still further.";
             map.world.prefabStore.popMsgHint(msg, "Hint: Enthralled Nobles");
         }
