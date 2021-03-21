@@ -10,10 +10,17 @@ namespace Assets.Code
     public class EventData
     {
 		[Serializable]
+		public class Variable
+		{
+			public string key;
+			public string value;
+		}
+
+		[Serializable]
 		public class Effect
 		{
 			public string command;
-			public string value;
+			public string argument;
 		}
 
 		[Serializable]
@@ -22,6 +29,7 @@ namespace Assets.Code
 			public string name;
 			public string description;
 
+			public List<Variable> environment;
 			public List<Effect> effects;
 		}
 

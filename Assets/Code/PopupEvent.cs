@@ -34,6 +34,7 @@ namespace Assets.Code
 
         public void dismiss(EventData.Outcome o, EventContext ctx)
         {
+			ctx.updateEnvironment(o.environment);
 			foreach (var e in o.effects)
 				EventRuntime.evaluate(e, ctx);
 

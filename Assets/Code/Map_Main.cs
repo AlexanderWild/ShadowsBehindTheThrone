@@ -48,6 +48,7 @@ namespace Assets.Code
         public List<Culture> cultures = new List<Culture>();
         public List<Person> persons = new List<Person>();
 
+        public EventContext.State eventState = new EventContext.State();
         public Dictionary<string, string> compressionMap = new Dictionary<string, string>();
 
         public Map(Params param)

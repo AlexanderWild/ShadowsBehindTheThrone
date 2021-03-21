@@ -4,7 +4,7 @@
 	"imgCredit": "default",
 
 	"type": "WORLD",
-	"conditional": "true",
+	"conditional": "true & 1 = 1.0",
 	"probability": 0.5,
 
 	"name": "My Cool Event",
@@ -15,9 +15,11 @@
 			"name": "Rejoice",
 			"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
 
+			"environment": [
+				{ "key": "WQUIST_COOL_EVENT_DIDACCEPT", "value": "1" }
+			],
 			"effects": [
-				{ "type": "ADD_SHADOW", "value": "5.0" },
-				{ "type": "ADD_PANIC",  "value": "10.0" }
+				{ "command": "ADD_POWER", "argument": "5" }
 			]
 		},
 		{

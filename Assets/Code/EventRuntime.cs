@@ -8,7 +8,7 @@ namespace Assets.Code
 {
     public class EventRuntime
     {
-        public enum Type { DOUBLE, INT, BOOL }
+        enum Type { DOUBLE, INT, BOOL, STRING }
 		abstract class Atom
 		{
 			public Type type;
@@ -22,12 +22,14 @@ namespace Assets.Code
 					type = Type.INT;
 				else if (t is bool)
 					type = Type.BOOL;
+				else if (t is string)
+					type = Type.STRING;
 				else
 					throw new Exception("invalid event runtime type.");
 			}
 		}
 
-		abstract class Value : Atom {}
+		abstract class Value : Atom { public abstract string ToString(); }
 		class TypedValue<T> : Value
 		{
 			public T data;
@@ -36,6 +38,11 @@ namespace Assets.Code
 			{
 				deduceType<T>();
 				data = d;
+			}
+
+			public override string ToString()
+			{
+				return data.ToString();
 			}
 		}
 
@@ -94,24 +101,23 @@ namespace Assets.Code
 
 		public static bool evaluate(EventParser.SyntaxNode root, EventContext ctx)
 		{
-			Value res = evaluateNode(root, ctx);
-			if (res is TypedValue<bool> resb)
+			if (evaluateNode(root, ctx) is TypedValue<bool> resb)
 				return resb.data;
 			else
-				throw new Exception("event conditional does not evaluate to boolean.");
+				throw new Exception("expression does not evaluate to boolean.");
 		}
 
 		public static void evaluate(EventData.Effect e, EventContext ctx)
 		{
-			switch (e.command)
-			{
-				default:
-					if (!properties.ContainsKey(e.command))
-						throw new Exception("unknown property name.");
-					else
-						properties[e.command].setValue(ctx, e.value);
-					break;
-			}
+			if (!properties.ContainsKey(e.command))
+				throw new Exception("unknown property name.");
+			else
+				properties[e.command].setValue(ctx, e.argument);
+		}
+
+		public static string evaluateAny(EventParser.SyntaxNode root, EventContext ctx)
+		{
+			return evaluateNode(root, ctx).ToString();
 		}
 
 		static Value evaluateNode(EventParser.SyntaxNode n, EventContext ctx)
@@ -223,20 +229,40 @@ namespace Assets.Code
 			if (a.type == b.type)
 				return (a, b);
 
+			if (a.type == Type.STRING)
+				a = coerceType(a as TypedValue<string>, b.type);
+			if (b.type == Type.STRING)
+				b = coerceType(b as TypedValue<string>, a.type);
+
 			switch (a.type)
 			{
 				case Type.DOUBLE:
 					if (b.type == Type.INT)
 						return (a, new TypedValue<double>((b as TypedValue<int>).data));
 					else
-						throw new Exception("cannot convert bool to double.");
+						throw new Exception("cannot convert operand to double.");
 				case Type.INT:
 					if (b.type == Type.DOUBLE)
 						return (new TypedValue<double>((a as TypedValue<int>).data), b);
 					else
-						throw new Exception("cannot convert bool to int.");
+						throw new Exception("cannot convert operand to int.");
 
 				default: throw new Exception("incompatible types in binary operands.");
+			}
+		}
+
+		static Value coerceType(TypedValue<string> v, Type hint)
+		{
+			switch (hint)
+			{
+				case Type.DOUBLE:
+					return new TypedValue<double>(Convert.ToDouble(v.data));
+				case Type.INT:
+					return new TypedValue<int>(Convert.ToInt32(v.data));
+				case Type.BOOL:
+					return new TypedValue<bool>(Convert.ToBoolean(v.data));
+				default:
+					return v;
 			}
 		}
     }

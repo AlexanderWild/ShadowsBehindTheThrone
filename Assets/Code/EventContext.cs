@@ -8,6 +8,11 @@ namespace Assets.Code
 {
     public class EventContext
     {
+		public class State
+		{
+			public Dictionary<string, string> environment = new Dictionary<string, string>();
+		}
+
         public Map map;
 
 		private Location _location;
@@ -70,6 +75,33 @@ namespace Assets.Code
 		static EventContext withUnit(Map m, Unit u)
 		{
 			return new EventContext(m, null, null, u);
+		}
+
+		public void updateEnvironment(List<EventData.Variable> vs)
+		{
+			// Just parse enviroment expressions on the fly.
+			// Only one event can occur every turn, so performance will be OK.
+			foreach (var v in vs)
+			{
+				var tokens = EventParser.tokenize(v.value);
+				var syntax = EventParser.parse(tokens);
+
+				string res = EventRuntime.evaluateAny(syntax, this);
+				writeEnvironment(v.key, res);
+			}
+		}
+
+		public string readEnvironment(string key)
+		{
+			if (!map.eventState.environment.ContainsKey(key))
+				return "";
+			else
+				return map.eventState.environment[key];
+		}
+
+		public void writeEnvironment(string key, string value)
+		{
+			map.eventState.environment[key] = value;
 		}
     }
 }
