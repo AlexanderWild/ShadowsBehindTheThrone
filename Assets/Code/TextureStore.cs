@@ -104,6 +104,7 @@ namespace Assets.Code
         public Sprite icon_heirophant;
         public Sprite icon_redDeath;
         public Sprite icon_saviour;
+        public Sprite icon_inquisitor;
 
         public Sprite icon_combat;
 
@@ -146,6 +147,7 @@ namespace Assets.Code
         public Sprite unit_redDeath;
         public Sprite unit_apothecarian;
         public Sprite unit_saviour;
+        public Sprite unit_inquisitor;
 
         public Sprite property_noDead;
         public Sprite property_forgottenSecret;

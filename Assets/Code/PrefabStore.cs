@@ -28,6 +28,7 @@ namespace Assets.Code
         public GameObject prefabMsg;
         public GameObject prefabMsgAgents;
         public GameObject prefabMsgAgentsDeath;
+        public GameObject prefabHint;
         public GameObject prefabMsgTreeBackground;
         public GameObject prefabPumpkinVictory;
         public GameObject prefabImgMsg;
@@ -699,6 +700,18 @@ namespace Assets.Code
             PopupMsg specific = obj.GetComponent<PopupMsg>();
             specific.ui = ui;
             specific.text.text = words;
+            specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            ui.addBlocker(specific.gameObject);
+        }
+        public void popMsgHint(string words, string titleWords,bool force = false)
+        {
+            if (!force && (world.displayMessages == false)) { return; }
+
+            GameObject obj = Instantiate(prefabHint) as GameObject;
+            PopupMsgHint specific = obj.GetComponent<PopupMsgHint>();
+            specific.ui = ui;
+            specific.text.text = words;
+            specific.title.text = titleWords;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
             ui.addBlocker(specific.gameObject);
         }

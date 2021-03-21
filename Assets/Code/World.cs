@@ -288,6 +288,7 @@ namespace Assets.Code
             {
                 map.overmind.autoAI.popAIModeMessage();
             }
+            map.overmind.printHintInfiltration();
         }
 
         private void printSimplifiedMessage()
