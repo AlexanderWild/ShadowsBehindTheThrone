@@ -17,6 +17,7 @@ namespace Assets.Code
 				PERSON_FIELD,
 				UNIT_FIELD,
 				WORLD_FIELD,
+				VARIABLE,
 				NUMBER,
 				BOOLEAN,
 				LPAREN,
@@ -101,7 +102,9 @@ namespace Assets.Code
 			new TokenExpression(Token.Type.LOCATION_FIELD, "^location\\.[a-zA-Z_]+"),
 			new TokenExpression(Token.Type.PERSON_FIELD,   "^person\\.[a-zA-Z_]+"),
 			new TokenExpression(Token.Type.UNIT_FIELD,     "^unit\\.[a-zA-Z_]+"),
-			new TokenExpression(Token.Type.WORLD_FIELD,    "^[a-zA-Z_]+")
+			new TokenExpression(Token.Type.WORLD_FIELD,    "^[a-zA-Z_]+"),
+
+			new TokenExpression(Token.Type.VARIABLE, "^\\$[a-zA-Z_]+")
 		};
 
 		public static List<Token> tokenize(string expr)
@@ -216,11 +219,22 @@ namespace Assets.Code
 				case Token.Type.PERSON_FIELD:
 				case Token.Type.UNIT_FIELD:
 				case Token.Type.WORLD_FIELD:
+				{
 					SyntaxNode atom = new SyntaxNode(t);
 
 					ts.MoveNext();
 					return atom;
+				}
+				case Token.Type.VARIABLE:
+				{
+					t.value = t.value.Substring(1);
+					SyntaxNode atom = new SyntaxNode(t);
+
+					ts.MoveNext();
+					return atom;
+				}
 				case Token.Type.LPAREN:
+				{
 					tryMoveNext(ref ts);
 					SyntaxNode expr = parseBinaryExpression(ref ts);
 
@@ -229,8 +243,9 @@ namespace Assets.Code
 
 					ts.MoveNext();
 					return expr;
-				default:
-					throw new Exception("unexpected token in atom.");
+				}
+
+				default: throw new Exception("unexpected token in atom.");
 			}
 		}
 

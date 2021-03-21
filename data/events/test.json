@@ -4,7 +4,7 @@
 	"imgCredit": "default",
 
 	"type": "WORLD",
-	"conditional": "true & 1 = 1.0",
+	"conditional": "$DIDACCEPT = 0",
 	"probability": 0.5,
 
 	"name": "My Cool Event",
@@ -16,7 +16,7 @@
 			"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
 
 			"environment": [
-				{ "key": "WQUIST_COOL_EVENT_DIDACCEPT", "value": "1" }
+				{ "key": "DIDACCEPT", "value": "1" }
 			],
 			"effects": [
 				{ "command": "ADD_POWER", "argument": "5" }

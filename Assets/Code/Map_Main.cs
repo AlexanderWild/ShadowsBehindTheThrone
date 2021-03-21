@@ -40,7 +40,7 @@ namespace Assets.Code
         public int automaticMode = 0;
         public bool hasEnthralledAnAgent = false;
         public bool hasBrokenSoul = false;
-        public bool eventsDisabled = true;
+        public bool eventsDisabled = false;
         public long seed;
 
         public Society soc_dark;

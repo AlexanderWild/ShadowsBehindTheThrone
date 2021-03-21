@@ -15,14 +15,14 @@ namespace Assets.Code
 
 			protected void deduceType<T>()
 			{
-				var t = default(T);
-				if (t is double)
+				var t = typeof(T);
+				if (t == typeof(double))
 					type = Type.DOUBLE;
-				else if (t is int)
+				else if (t == typeof(int))
 					type = Type.INT;
-				else if (t is bool)
+				else if (t == typeof(bool))
 					type = Type.BOOL;
-				else if (t is string)
+				else if (t == typeof(string))
 					type = Type.STRING;
 				else
 					throw new Exception("invalid event runtime type.");
@@ -217,6 +217,9 @@ namespace Assets.Code
 						else
 							return fields[n.token.value].getValue(ctx);
 
+					case EventParser.Token.Type.VARIABLE:
+						return new TypedValue<string>(ctx.readEnvironment(n.token.value));
+
 					default: throw new Exception("invalid atom type.");
 				}
 			}
@@ -226,13 +229,13 @@ namespace Assets.Code
 
 		static (Value, Value) promoteTypes(Value a, Value b)
 		{
-			if (a.type == b.type)
-				return (a, b);
-
 			if (a.type == Type.STRING)
 				a = coerceType(a as TypedValue<string>, b.type);
 			if (b.type == Type.STRING)
 				b = coerceType(b as TypedValue<string>, a.type);
+
+			if (a.type == b.type)
+				return (a, b);
 
 			switch (a.type)
 			{
@@ -256,11 +259,20 @@ namespace Assets.Code
 			switch (hint)
 			{
 				case Type.DOUBLE:
-					return new TypedValue<double>(Convert.ToDouble(v.data));
+					if (v.data == "")
+						return new TypedValue<double>(0.0);
+					else
+						return new TypedValue<double>(Convert.ToDouble(v.data));
 				case Type.INT:
-					return new TypedValue<int>(Convert.ToInt32(v.data));
+					if (v.data == "")
+						return new TypedValue<int>(0);
+					else
+						return new TypedValue<int>(Convert.ToInt32(v.data));
 				case Type.BOOL:
-					return new TypedValue<bool>(Convert.ToBoolean(v.data));
+					if (v.data == "")
+						return new TypedValue<bool>(false);
+					else
+						return new TypedValue<bool>(Convert.ToBoolean(v.data));
 				default:
 					return v;
 			}

@@ -101,7 +101,10 @@ namespace Assets.Code
 
 		public void writeEnvironment(string key, string value)
 		{
-			map.eventState.environment[key] = value;
+			if (value == "")
+				map.eventState.environment.Remove(key);
+			else
+				map.eventState.environment[key] = value;
 		}
     }
 }
