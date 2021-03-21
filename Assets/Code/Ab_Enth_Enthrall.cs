@@ -27,6 +27,8 @@ namespace Assets.Code
                 "You enthrall " + map.overmind.enthralled.getFullName() + ". They are now, until they die, your instrument in this world. Their votes are guided by your hand, and they will"
                 + " act as you command within their society."+ addMsg,
                 map.world.wordStore.lookup("ABILITY_ENTHRALL"));
+
+            map.overmind.printHintEnthrallNoble();
         }
         public override bool castable(Map map, Person person)
         {

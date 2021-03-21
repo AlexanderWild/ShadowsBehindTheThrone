@@ -675,7 +675,7 @@ namespace Assets.Code
             }
             if (state == unitState.inquisitor)
             {
-                return world.textureStore.unit_pumpkin;
+                return world.textureStore.unit_inquisitor;
             }
             return world.textureStore.unit_lookingGlass;
         }

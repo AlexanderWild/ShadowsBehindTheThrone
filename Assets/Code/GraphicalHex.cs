@@ -15,6 +15,7 @@ namespace Assets.Code
         public SpriteRenderer floraLayer;
         public SpriteRenderer evidenceLayer;
         public SpriteRenderer busyLayer;
+        public SpriteRenderer infiltrationLayer;
         public SpriteRenderer mask;
         public GameObject flag;
         public PopupNameTag nameTag;
@@ -105,6 +106,15 @@ namespace Assets.Code
             else
             {
                 busyLayer.color = Color.clear;
+            }
+            if (hex.location != null && hex.location.settlement != null)
+            {
+                float f =(float) Math.Sqrt(hex.location.settlement.infiltration);
+                infiltrationLayer.color = new Color(1, 1, 1, f);
+            }
+            else
+            {
+                infiltrationLayer.color = Color.clear;
             }
         }
 
