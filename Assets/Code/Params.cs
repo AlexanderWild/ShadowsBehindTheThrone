@@ -41,7 +41,7 @@ namespace Assets.Code
         public double panic_fromClueFound = 0.01;
         public double panic_paladinSpawn_1 = 0.15;
         public double panic_paladinSpawn_2 = 0.5;
-        public double panic_lightbringerRitualPermitted = 0.75;
+        public double panic_lightbringerRitualPermitted = 0.85;
         public double panic_canCallNobleCrisis = 0.25;
 
         public double awareness_canProposeLightAlliance = 1;
@@ -58,9 +58,10 @@ namespace Assets.Code
         public double awareness_decay = 0.002;
         public int awareness_turnsForLightRitual = 49;
         public int awareness_minLocsForLightbringer = 3;
-        public int awareness_lightbringerMaxLocs = 5;
+        public int awareness_lightbringerMaxLocs = 4;
         public double awarenessCanCallNobleCrisis  = 0.5;
         public int awarenessMinNobleCrisisPeriod = 32;
+        public int awareness_simplePaladinGracePeriod = 40;
 
         public double action_research_expectedAwarenessPerTurn = 0.15;
         public double action_research_pSanityHit = 0.5;

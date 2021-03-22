@@ -42,6 +42,7 @@ namespace Assets.Code
         public bool hasBrokenSoul = false;
         public bool eventsDisabled = false;
         public long seed;
+        public int firstPlayerTurn = 0;
 
         public Society soc_dark;
         public Society soc_light;

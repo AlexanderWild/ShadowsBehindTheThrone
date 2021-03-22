@@ -385,6 +385,7 @@ namespace Assets.Code
             foreach (God chosenGod in chosenGods){
                 chosenGod.onStart(map);
             }
+            map.firstPlayerTurn = map.turn;
             map.burnInComplete = true;
             map.overmind.addDefaultAbilities();
             chosenGods.Clear();//Just in case this fucks with something

@@ -68,6 +68,7 @@ namespace Assets.Code
         public void checkPaladins() {
 
             if (map.param.usePaladins == 0) { return; }
+            if (map.turn < map.firstPlayerTurn + map.param.awareness_simplePaladinGracePeriod) { return; }
 
             int nPaladins = 0;
 

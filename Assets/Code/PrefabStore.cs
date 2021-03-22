@@ -939,6 +939,7 @@ namespace Assets.Code
             h.back.onClick.AddListener(delegate { h.buttonBack(); });
             h.pause.onClick.AddListener(delegate { h.buttonPause(); });
             h.replay.onClick.AddListener(delegate { h.buttonReplay(); });
+            h.goToNow.onClick.AddListener(delegate { h.buttonGoToNow(); });
 
 
             h.setup(world, map);

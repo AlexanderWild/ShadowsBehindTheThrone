@@ -16,6 +16,7 @@
 	Couldn't reproduce
 	Not seen in a while
 
+-Make the relations tab able to be clicked on to cause a dismiss and pan to
 
 	Medium criticality:
 	

@@ -12,6 +12,7 @@ namespace Assets.Code
         public Button back;
         public Button replay;
         public Button pause;
+        public Button goToNow;
         public Image background;
         public PopupBaseHex[,] hexes;
         public Text title;
@@ -26,6 +27,7 @@ namespace Assets.Code
         float betweenSteps = 0.1f;
 
         int snapshotIndex;
+
         public void Update()
         {
             float time = Time.time;
@@ -131,6 +133,24 @@ namespace Assets.Code
             Destroy(midpoint);
             world.ui.removeBlocker(this.gameObject);
             world.ui.setToWorld();
+        }
+
+        public void buttonGoToNow()
+        {
+            world.audioStore.playClick();
+            //It only stores deltas, gotta play forward all of them as ASAP as possible
+            while (snapshotIndex < map.stats.snapshots.Count - 1)
+            {
+                snapshotIndex += 1;
+                StatSnapshot shot = map.stats.snapshots[snapshotIndex];
+
+                for (int i = 0; i < shot.hexColIndices.Count; i++)
+                {
+                    int[] loc = shot.hexColIndices[i];
+                    float[] col = shot.hexColValues[i];
+                    hexes[loc[0], loc[1]].sprite.color = new Color(col[0], col[1], col[2]);
+                }
+            }
         }
     }
 }

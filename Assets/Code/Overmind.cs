@@ -479,6 +479,7 @@ namespace Assets.Code
             map.world.displayMessages = true;
             startedComplete();
             endOfGameAchieved = false;
+            map.firstPlayerTurn = map.turn;
         }
 
         public List<MsgEvent> getThreats()

@@ -26,7 +26,7 @@ panic_canAlly: 0.5
 panic_fromClueFound: 0.01
 panic_paladinSpawn_1: 0.15
 panic_paladinSpawn_2: 0.5
-panic_lightbringerRitualPermitted: 0.75
+panic_lightbringerRitualPermitted: 0.85
 panic_canCallNobleCrisis: 0.25
 awareness_canProposeLightAlliance: 1
 awareness_master_speed: 1
@@ -42,7 +42,7 @@ awareness_canInvestigate: 0.1
 awareness_decay: 0.002
 awareness_turnsForLightRitual: 49
 awareness_minLocsForLightbringer: 3
-awareness_lightbringerMaxLocs: 5
+awareness_lightbringerMaxLocs: 4
 awarenessCanCallNobleCrisis: 0.5
 awarenessMinNobleCrisisPeriod: 32
 action_research_expectedAwarenessPerTurn: 0.15
@@ -166,6 +166,7 @@ society_lockdownBuffDuration: 12
 society_electoralPrestigeWeight: 2
 society_prestigeFromPlagueRedDeath: 0
 society_crisis_plagueCrisisCooldown: 10
+society_cooldownGeneralVoting: 18
 temporaryThreatDecay: 0.95
 threat_takeLocation: 56
 threat_temporaryDreadDecay: 0.98
