@@ -169,7 +169,7 @@ namespace Assets.Code
             base.implement(option);
             SocialGroup prev = society.offensiveTarget;
             society.offensiveTarget = option.group;
-            society.lastOffensiveTargetSetting = society.map.turn;
+            society.cooldownLastOffTargetSwitch = society.map.turn;
 
             if (option.group is Society && prev != option.group)
             {

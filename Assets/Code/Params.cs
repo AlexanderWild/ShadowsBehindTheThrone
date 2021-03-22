@@ -192,6 +192,7 @@ namespace Assets.Code
         public double society_electoralPrestigeWeight = 2;//Comparing prestige to liking. If we want 50 prestige to equal 100 liking, go for 2
         public int society_prestigeFromPlagueRedDeath = 0;
         public int society_crisis_plagueCrisisCooldown = 10;
+        public int society_cooldownGeneralVoting = 18;
 
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 56;

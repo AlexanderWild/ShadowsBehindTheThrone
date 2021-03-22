@@ -1,22 +1,25 @@
 	High criticality:
 
+-Major bug involving next age not generating any people
+	-Was some enshadowed empire
+	-Relatedly, the society screen crashes if you don't have people in a society
+
 -Vampire tooltip says they can travel long distances.
 	-Travel as bats as an ability, or return to crypt, or whatever works flavour-wise
-	
--Some guy wants an anim speed setting
 
 -Agent gets stuck temporarily, at 0/5 disrupted? Maybe it's the never-moves-again bug due to getting kicked off the map.units list, but doesn't initially sound like that
-
--Need to view relations for dark agents. Need to know who is suspicious.
 
 -You can't get the set-loose agents back. For some reason the power button is broken
 
 -Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message
 	state == world
 	Couldn't reproduce
+	Not seen in a while
 
 
 	Medium criticality:
+	
+-Some guy wants an anim speed setting
 
 -Good Saviour? A hero type unit which leads the forces of good on the world map
 
@@ -52,6 +55,7 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Need to view relations for dark agents. Need to know who is suspicious.
 
 -Apoptosis for agents. Maybe flip to some weak automatic mode.
 

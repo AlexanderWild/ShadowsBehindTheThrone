@@ -279,6 +279,7 @@ namespace Assets.Code
             {
                 society.posture = Society.militaryPosture.introverted;
             }
+            society.cooldownLastMilitarySwitch = society.map.turn;
         }
         public override bool stillValid(Map map)
         {

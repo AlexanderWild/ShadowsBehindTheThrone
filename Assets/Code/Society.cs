@@ -44,7 +44,6 @@ namespace Assets.Code
         public List<Unit> enemies = new List<Unit>();
 
         public double dread_agents_evidenceFound = 0;
-        public int lastOffensiveTargetSetting;
         public int electionID = 0;//Used by characters to check if they're still using valid data
 
         public SocType socType = new SocType_ElectiveMonarchy();
@@ -63,6 +62,10 @@ namespace Assets.Code
         public bool crisisNobles = false;
         public bool crisisWitchHunt = true;
         public int lastNobleCrisis;
+
+        public int cooldownLastMilitarySwitch = 0;
+        public int cooldownLastDefTargetSwitch = 0;
+        public int cooldownLastOffTargetSwitch = 0;
 
         public Society(Map map, Location location) : base(map)
         {

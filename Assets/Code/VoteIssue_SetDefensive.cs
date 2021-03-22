@@ -77,6 +77,7 @@ namespace Assets.Code
         {
             base.implement(option);
             society.defensiveTarget = option.group;
+            society.cooldownLastDefTargetSwitch = society.map.turn;
         }
         public override bool stillValid(Map map)
         {

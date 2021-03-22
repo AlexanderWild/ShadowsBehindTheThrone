@@ -262,8 +262,8 @@ namespace Assets.Code
                     }
 
                     //Check to see if you want to alter offensive military targetting
-                    if (map.turn - society.lastOffensiveTargetSetting > 8)
-                    {
+                    if (society.cooldownLastOffTargetSwitch == 0 || map.turn - society.cooldownLastOffTargetSwitch > map.param.society_cooldownGeneralVoting)
+                        {
                         issue = new VoteIssue_SetOffensiveTarget(society, this);
                         foreach (SocialGroup neighbour in map.socialGroups)
                         {
@@ -295,6 +295,7 @@ namespace Assets.Code
                         logVote(issue);
                     }
 
+                    if (society.cooldownLastDefTargetSwitch == 0 || map.turn - society.cooldownLastDefTargetSwitch > map.param.society_cooldownGeneralVoting)
                     {
                         //Check to see if you want to alter defensive military targetting
                         issue = new VoteIssue_SetDefensiveTarget(society, this);
@@ -327,6 +328,7 @@ namespace Assets.Code
                         logVote(issue);
                     }
 
+                    if (society.cooldownLastMilitarySwitch == 0 || map.turn - society.cooldownLastMilitarySwitch > map.param.society_cooldownGeneralVoting)
                     {
                         //Change military posture, to either improve defence, fix internal problems, or attack an enemy
                         issue = new VoteIssue_MilitaryStance(society, this);
