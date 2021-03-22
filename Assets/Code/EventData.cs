@@ -26,14 +26,21 @@ namespace Assets.Code
 		[Serializable]
 		public class Outcome
 		{
-			public string name;
+			public int weight;
 			public string description;
 
 			public List<Variable> environment;
 			public List<Effect> effects;
 		}
 
-		public enum Type { LOCATION, UNIT, WORLD }
+		[Serializable]
+		public class Choice
+		{
+			public string name;
+			public List<Outcome> outcomes;
+		}
+
+		public enum Type { LOCATION, PERSON, UNIT, WORLD }
 		public string type;
 
 		public string id;
@@ -46,6 +53,6 @@ namespace Assets.Code
 		public string name;
 		public string description;
 
-		public List<Outcome> outcomes;
+		public List<Choice> choices;
     }
 }

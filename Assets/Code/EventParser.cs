@@ -24,6 +24,10 @@ namespace Assets.Code
 				RPAREN,
 				EQUALS,
 				NEQUALS,
+				LESS,
+				GREATER,
+				PLUS,
+				MINUS,
 				AND,
 				OR,
 				NOT
@@ -89,12 +93,16 @@ namespace Assets.Code
 
 		static List<TokenExpression> expressions = new List<TokenExpression>
 		{
-			new TokenExpression(Token.Type.NUMBER,  "^\\-?\\d+(\\.\\d+)?"),
+			new TokenExpression(Token.Type.NUMBER,  "^\\d+(\\.\\d+)?"),
 			new TokenExpression(Token.Type.BOOLEAN, "^(true|false)"),
 			new TokenExpression(Token.Type.LPAREN,  "^\\("),
 			new TokenExpression(Token.Type.RPAREN,  "^\\)"),
+			new TokenExpression(Token.Type.PLUS,    "^\\+"),
+			new TokenExpression(Token.Type.MINUS,   "^\\-"),
 			new TokenExpression(Token.Type.EQUALS,  "^="),
 			new TokenExpression(Token.Type.NEQUALS, "^~"),
+			new TokenExpression(Token.Type.LESS,    "^<"),
+			new TokenExpression(Token.Type.GREATER, "^>"),
 			new TokenExpression(Token.Type.AND,     "^&"),
 			new TokenExpression(Token.Type.OR,      "^\\|"),
 			new TokenExpression(Token.Type.NOT,     "^!"),
@@ -174,7 +182,7 @@ namespace Assets.Code
 
 		static SyntaxNode parseEqualityExpression(ref List<Token>.Enumerator ts)
 		{
-			SyntaxNode lhs = parseUnaryExpression(ref ts);
+			SyntaxNode lhs = parseArithmeticExpression(ref ts);
 
 			Token t = ts.Current;
 			if (t == null)
@@ -184,12 +192,41 @@ namespace Assets.Code
 			{
 				case Token.Type.EQUALS:
 				case Token.Type.NEQUALS:
+				case Token.Type.LESS:
+				case Token.Type.GREATER:
 					tryMoveNext(ref ts);
 
-					SyntaxNode rhs = parseUnaryExpression(ref ts);
+					SyntaxNode rhs = parseArithmeticExpression(ref ts);
 					return new BinaryNode(t, lhs, rhs);
 				default:
 					return lhs;
+			}
+		}
+
+		static SyntaxNode parseArithmeticExpression(ref List<Token>.Enumerator ts)
+		{
+			SyntaxNode lhs = parseUnaryExpression(ref ts);
+
+			SyntaxNode last = lhs;
+			while (true)
+			{
+				Token t = ts.Current;
+				if (t == null)
+					return last;
+
+				switch (t.type)
+				{
+					case Token.Type.PLUS:
+					case Token.Type.MINUS:
+						tryMoveNext(ref ts);
+
+						SyntaxNode rhs = parseUnaryExpression(ref ts);
+						last = new BinaryNode(t, last, rhs);
+
+						break;
+					default:
+						return last;
+				}
 			}
 		}
 
@@ -198,6 +235,7 @@ namespace Assets.Code
 			Token t = ts.Current;
 			switch (t.type)
 			{
+				case Token.Type.MINUS:
 				case Token.Type.NOT:
 					tryMoveNext(ref ts);
 

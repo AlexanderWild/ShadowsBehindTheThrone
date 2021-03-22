@@ -20,23 +20,21 @@ namespace Assets.Code
 			description.text = data.description;
 
 			int n = 0;
-			foreach (var o in data.outcomes)
+			foreach (var c in data.choices)
 			{
 				if (n > 2)
 					break;
 
-				options[n].GetComponentInChildren<Text>().text = o.name;
-				options[n].onClick.AddListener(delegate { dismiss(o, ctx); });
+				options[n].GetComponentInChildren<Text>().text = c.name;
+				options[n].onClick.AddListener(delegate { dismiss(c, ctx); });
 
 				options[n++].gameObject.SetActive(true);
 			}
 		}
 
-        public void dismiss(EventData.Outcome o, EventContext ctx)
+        public void dismiss(EventData.Choice c, EventContext ctx)
         {
-			ctx.updateEnvironment(o.environment);
-			foreach (var e in o.effects)
-				EventRuntime.evaluate(e, ctx);
+			var o = EventManager.chooseOutcome(c, ctx);
 
             ui.removeBlocker(this.gameObject);
 			ui.world.prefabStore.popMsg(o.description, true);

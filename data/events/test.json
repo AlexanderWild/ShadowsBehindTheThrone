@@ -4,29 +4,41 @@
 	"imgCredit": "default",
 
 	"type": "WORLD",
-	"conditional": "$DIDACCEPT = 0",
+	"conditional": "$DIDACCEPT < 3",
 	"probability": 0.5,
 
 	"name": "My Cool Event",
 	"description": "Lucky you, you have found the ultra-rare 'cool event' event.",
 
-	"outcomes": [
+	"choices": [
 		{
 			"name": "Rejoice",
-			"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
 
-			"environment": [
-				{ "key": "DIDACCEPT", "value": "1" }
-			],
-			"effects": [
-				{ "command": "ADD_POWER", "argument": "5" }
+					"environment": [
+						{ "key": "DIDACCEPT", "value": "$DIDACCEPT + 1" }
+					],
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "5" }
+					]
+				},
+				{
+					"weight": 1,
+					"description": "You wait with your hands held outwards, but your calls are left unanswered. Perhaps another day."
+				}
 			]
 		},
 		{
 			"name": "Remain wary",
-			"description": "Nothing good comes without a price. You step back before the pleasant warmth envelops you.",
-
-			"effects": []
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "Nothing good comes without a price. You step back before the pleasant warmth envelops you."
+				}
+			]
 		}
 	]
 }
