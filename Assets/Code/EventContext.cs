@@ -51,6 +51,21 @@ namespace Assets.Code
 			}
 		}
 
+		public Society society
+		{
+			get
+			{
+				// if (_location != null && _location.soc is Society)
+				// 	return (_location.soc as Society);
+				if (_person != null)
+					return _person.society;
+				// else if (_unit != null && _unit.society is Society)
+				// 	return (_unit.society as Society);
+
+				throw new Exception("event society not in current context.");
+			}
+		}
+
 		EventContext(Map m, Location l, Person p, Unit u)
 		{
 			map = m;
