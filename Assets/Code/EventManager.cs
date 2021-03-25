@@ -25,14 +25,36 @@ namespace Assets.Code
         }
 
         static List<ActiveEvent> locationEvents = new List<ActiveEvent>();
+        static List<ActiveEvent> personEvents = new List<ActiveEvent>();
         static List<ActiveEvent> unitEvents = new List<ActiveEvent>();
         static List<ActiveEvent> worldEvents = new List<ActiveEvent>();
 
         public static void load(string modPath)
         {
-            // FIXME: temporary loading
-            string data = File.ReadAllText(modPath + "/test.json");
-            worldEvents.Add(new ActiveEvent(JsonUtility.FromJson<EventData>(data)));
+            foreach (var mod in Directory.EnumerateDirectories(modPath))
+            {
+                foreach (var path in Directory.EnumerateFiles(mod, "*.json"))
+                {
+                    try
+                    {
+                        string data = File.ReadAllText(path);
+                        EventData ev = JsonUtility.FromJson<EventData>(data);
+
+                        ActiveEvent res = new ActiveEvent(ev);
+                        switch (ev.getType())
+                        {
+                            case EventData.Type.LOCATION: locationEvents.Add(res); break;
+                            case EventData.Type.PERSON:   personEvents.Add(res);   break;
+                            case EventData.Type.UNIT:     unitEvents.Add(res);     break;
+                            case EventData.Type.WORLD:    worldEvents.Add(res);    break;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        World.Log("[" + path + "] could not load event: " + e.Message);
+                    }
+                }
+            }
         }
 
         public static void turnTick(Map m)
@@ -54,10 +76,7 @@ namespace Assets.Code
             int sum = 0;
             foreach (var o in c.outcomes)
             {
-                if (o.weight == 0)
-                    throw new Exception("found unweighted outcome in event choice.");
-                else
-                    sum += o.weight;
+                sum += o.weight;
             }
 
             int rand = Eleven.random.Next(0, sum);
