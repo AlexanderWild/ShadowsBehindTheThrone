@@ -40,8 +40,7 @@ namespace Assets.Code
 		}
 
 		public enum Type { LOCATION, PERSON, UNIT, WORLD }
-		[SerializeField]
-		private string type;
+		public string type;
 
 		public string id;
 		public string modCredit;
@@ -54,10 +53,5 @@ namespace Assets.Code
 		public string description;
 
 		public List<Choice> choices;
-
-		public Type getType()
-		{
-			return (Type)Enum.Parse(typeof(Type), type);
-		}
     }
 }

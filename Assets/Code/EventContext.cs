@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class EventContext
+    public struct EventContext
     {
 		public class State
 		{
@@ -77,17 +77,17 @@ namespace Assets.Code
 
 		public EventContext(Map m) : this(m, null, null, null) {}
 
-		static EventContext withLocation(Map m, Location l)
+		public static EventContext withLocation(Map m, Location l)
 		{
 			return new EventContext(m, l, null, null);
 		}
 
-		static EventContext withPerson(Map m, Person p)
+		public static EventContext withPerson(Map m, Person p)
 		{
 			return new EventContext(m, null, p, null);
 		}
 
-		static EventContext withUnit(Map m, Unit u)
+		public static EventContext withUnit(Map m, Unit u)
 		{
 			return new EventContext(m, null, null, u);
 		}
