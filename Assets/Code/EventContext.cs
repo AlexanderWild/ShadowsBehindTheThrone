@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-    public class EventContext
+    public struct EventContext
     {
 		public class State
 		{
@@ -51,6 +51,21 @@ namespace Assets.Code
 			}
 		}
 
+		public Society society
+		{
+			get
+			{
+				// if (_location != null && _location.soc is Society)
+				// 	return (_location.soc as Society);
+				if (_person != null)
+					return _person.society;
+				// else if (_unit != null && _unit.society is Society)
+				// 	return (_unit.society as Society);
+
+				throw new Exception("event society not in current context.");
+			}
+		}
+
 		EventContext(Map m, Location l, Person p, Unit u)
 		{
 			map = m;
@@ -62,17 +77,17 @@ namespace Assets.Code
 
 		public EventContext(Map m) : this(m, null, null, null) {}
 
-		static EventContext withLocation(Map m, Location l)
+		public static EventContext withLocation(Map m, Location l)
 		{
 			return new EventContext(m, l, null, null);
 		}
 
-		static EventContext withPerson(Map m, Person p)
+		public static EventContext withPerson(Map m, Person p)
 		{
 			return new EventContext(m, null, p, null);
 		}
 
-		static EventContext withUnit(Map m, Unit u)
+		public static EventContext withUnit(Map m, Unit u)
 		{
 			return new EventContext(m, null, null, u);
 		}

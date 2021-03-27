@@ -13,40 +13,69 @@ namespace Assets.Code
         class ActiveEvent
         {
             public EventData data;
+            public EventData.Type type;
+
             public EventParser.SyntaxNode conditionalRoot;
 
             public ActiveEvent(EventData d)
             {
                 data = d;
+                type = (EventData.Type)Enum.Parse(typeof(EventData.Type), data.type);
                 
                 var tokens = EventParser.tokenize(data.conditional);
                 conditionalRoot = EventParser.parse(tokens);
             }
+
+            public bool willTrigger(EventContext ctx)
+            {
+                if (Eleven.random.NextDouble() >= data.probability)
+                    return false;
+                if (!EventRuntime.evaluate(conditionalRoot, ctx))
+                    return false;
+
+                return true;
+            }
         }
 
-        static List<ActiveEvent> locationEvents = new List<ActiveEvent>();
-        static List<ActiveEvent> unitEvents = new List<ActiveEvent>();
-        static List<ActiveEvent> worldEvents = new List<ActiveEvent>();
+        static List<ActiveEvent> events = new List<ActiveEvent>();
 
         public static void load(string modPath)
         {
-            // FIXME: temporary loading
-            string data = File.ReadAllText(modPath + "/test.json");
-            worldEvents.Add(new ActiveEvent(JsonUtility.FromJson<EventData>(data)));
+            foreach (var mod in Directory.EnumerateDirectories(modPath))
+                loadMod(mod);
+
+            // TODO: load user mod folder.
         }
 
         public static void turnTick(Map m)
         {
             if (m.eventsDisabled) { return; }
 
-            EventContext ctx = new EventContext(m);
-            foreach (var we in worldEvents)
+            foreach (var e in events)
             {
-                if (tryEvent(we, ctx))
-                    break;
-            }
+                EventContext? nctx = null;
+                switch (e.type)
+                {
+                    case EventData.Type.LOCATION:
+                        nctx = chooseContext(e, nextLocation(m));
+                        break;
+                    case EventData.Type.PERSON:
+                        nctx = chooseContext(e, nextPerson(m));
+                        break;
+                    case EventData.Type.UNIT:
+                        nctx = chooseContext(e, nextUnit(m));
+                        break;
+                    case EventData.Type.WORLD:
+                        nctx = chooseContext(e, nextWorld(m));
+                        break;
+                }
 
-            // TODO: loop over other event types.
+                if (nctx is EventContext ctx)
+                {
+                    m.world.prefabStore.popEvent(e.data, ctx);
+                    break;
+                }
+            }
         }
 
         public static EventData.Outcome chooseOutcome(EventData.Choice c, EventContext ctx)
@@ -54,13 +83,10 @@ namespace Assets.Code
             int sum = 0;
             foreach (var o in c.outcomes)
             {
-                if (o.weight == 0)
-                    throw new Exception("found unweighted outcome in event choice.");
-                else
-                    sum += o.weight;
+                sum += o.weight;
             }
 
-            int rand = Eleven.random.Next(0, sum);
+            int rand = Eleven.random.Next(sum);
             foreach (var o in c.outcomes)
             {
                 if (rand >= o.weight)
@@ -79,15 +105,64 @@ namespace Assets.Code
             throw new Exception("unable to choose event outcome.");
         }
 
-        static bool tryEvent(ActiveEvent e, EventContext ctx)
+        static void loadMod(string mod)
         {
-            if (Eleven.random.NextDouble() >= e.data.probability)
-                return false;
-            if (!EventRuntime.evaluate(e.conditionalRoot, ctx))
-                return false;
+            foreach (var path in Directory.EnumerateFiles(mod, "*.json"))
+            {
+                try
+                {
+                    string data = File.ReadAllText(path);
+                    EventData ev = JsonUtility.FromJson<EventData>(data);
 
-            ctx.map.world.prefabStore.popEvent(e.data, ctx);
-            return true;
+                    events.Add(new ActiveEvent(ev));
+                }
+                catch (Exception e)
+                {
+                    World.Log("[" + path + "] could not load event: " + e.Message);
+                }
+            }
+        }
+
+        static EventContext? chooseContext(ActiveEvent e, IEnumerable<EventContext> next)
+        {
+            EventContext? res = null;
+            int c = 0;
+
+            foreach (var ctx in next)
+            {
+                if (!e.willTrigger(ctx))
+                    continue;
+
+                if (Eleven.random.Next(c) == 0)
+                    res = ctx;
+
+                c += 1;
+            }
+
+            return res;
+        }
+
+        static IEnumerable<EventContext> nextLocation(Map m)
+        {
+            foreach (var l in m.majorLocations)
+                yield return EventContext.withLocation(m, l);
+        }
+
+        static IEnumerable<EventContext> nextPerson(Map m)
+        {
+            foreach (var p in m.persons)
+                yield return EventContext.withPerson(m, p);
+        }
+
+        static IEnumerable<EventContext> nextUnit(Map m)
+        {
+            foreach (var u in m.units)
+                yield return EventContext.withUnit(m, u);
+        }
+
+        static IEnumerable<EventContext> nextWorld(Map m)
+        {
+            yield return new EventContext(m);
         }
     }
 }

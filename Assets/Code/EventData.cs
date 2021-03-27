@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace Assets.Code
 {
-	[Serializable]
     public class EventData
     {
 		[Serializable]
