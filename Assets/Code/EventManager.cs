@@ -49,8 +49,6 @@ namespace Assets.Code
 
         public static void turnTick(Map m)
         {
-            if (m.eventsDisabled) { return; }
-
             foreach (var e in events)
             {
                 EventContext? nctx = null;

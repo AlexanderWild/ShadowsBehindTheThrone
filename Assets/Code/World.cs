@@ -51,6 +51,7 @@ namespace Assets.Code
 
         public static bool advancedEdition = true;
         public static bool useHorseman = false;
+        public static bool useEvents = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
@@ -98,7 +99,6 @@ namespace Assets.Code
 
             AchievementManager.setup();
             musicPlayer.playTheme();
-            -
         }
 
         // string printTree(EventParser.SyntaxNode n, int indent)
