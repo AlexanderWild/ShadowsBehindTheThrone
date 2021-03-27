@@ -45,6 +45,7 @@ awareness_minLocsForLightbringer: 3
 awareness_lightbringerMaxLocs: 4
 awarenessCanCallNobleCrisis: 0.5
 awarenessMinNobleCrisisPeriod: 32
+awareness_simplePaladinGracePeriod: 40
 action_research_expectedAwarenessPerTurn: 0.15
 action_research_pSanityHit: 0.5
 action_letterWritingTurns: 5
@@ -360,8 +361,8 @@ unit_infiltrateTime: 6
 unit_infiltrateWeakTime: 8
 unit_infiltrateAmount: 1.35
 unit_divisorOffset: 2
-unit_majorEvidence: 0.35
-unit_minorEvidence: 0.15
+unit_majorEvidence: 0.25
+unit_minorEvidence: 0.1
 unit_spreadShadowTime: 5
 unit_spreadShadowWeakTime: 7
 unit_spreadShadowAmount: 0.6

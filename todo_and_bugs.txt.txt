@@ -39,6 +39,8 @@
 	Low criticality:
 
 -Location didn't have province
+	(Is this still present?)
+	
 -Allow player to vote on all econ reforms available in society
 
 -Two nations named the same thing

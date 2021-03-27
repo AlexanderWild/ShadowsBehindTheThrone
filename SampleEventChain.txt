@@ -1,0 +1,38 @@
+#Your starting event, kicks the whole thing off when the enthralled has a friend who is suspicious of another
+Event 1:
+	Triggers off a human
+		Condition:
+			-In society with enthralled noble
+			-Likes enthralled noble
+			-Suspicion of enthralled == 0
+			-Supicious of another character
+			-Requires map to have "making a friend event state = 0"
+			-Map does not have "making friend event chain ended"
+		Outcome:
+			-Map flag set "making a friend event state = 1"
+			-Person flagged as "friend event chain protagonist"
+			-Delay started
+	
+#Termination event. If the event chain's precondition (that they are actually friends) fails, this kills the process. Gives the player a "frick you, liar" message
+Event -1:
+	Maximum probability event, if it can trigger it does
+	
+	Triggers off a human
+		Condition:
+			-Has flag "Friend event chain protagonist"
+			-Map does not have "making friend event chain ended"
+			-Dislikes enthralled
+		Outcome:
+			-Map flag set "Making friend event chain ended"
+
+#Your basic continuation event. Looks to see if this is the right character and the event chain index is correct
+Event 2:
+	Triggers of human
+		Cond:
+			-In society with enthralled noble
+			-Likes enthralled noble
+			-Has flag "making friend event protagonist"
+			-Map flag is "making a friend event state == 1"
+			-Map does not have "Making friend event chain ended"
+		Outcome:
+			-Map flag set "making a friend event state = 2"

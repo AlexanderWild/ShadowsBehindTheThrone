@@ -31,7 +31,7 @@ namespace Assets.Code
             VoteIssue replyIssue = null;
             int c = 0;
 
-            if (society.lastEvidenceSubmission > society.lastEvidenceResponse)
+            if (society.lastEvidenceSubmission > society.lastEvidenceResponse && (society.isDarkEmpire == false))
             {
                 List<Evidence> unprocessedEvidence = new List<Evidence>();
                 foreach (Evidence ev in society.evidenceSubmitted)
@@ -163,6 +163,7 @@ namespace Assets.Code
                 this.awareness >= map.param.awarenessCanCallNobleCrisis 
                 && map.turn - society.lastNobleCrisis >= map.param.awarenessMinNobleCrisisPeriod 
                 && map.worldPanic >= map.param.panic_canCallNobleCrisis
+                && (this.society.isDarkEmpire == false)
                 && this.state != personState.broken
                 && this.state != personState.enthralled)
             {

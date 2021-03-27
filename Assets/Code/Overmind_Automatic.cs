@@ -208,6 +208,7 @@ namespace Assets.Code
                 foreach (Ability a in new God_WintersScythe().getUniquePowers())
                 {
                     if (a is Ab_Ice_IceBlood) { continue; }//Basically throwing away your gains if you don't know what you're doing. Which the AI doesn't
+                    if (a is Ab_Ice_Blizzard) { continue; }//Basically throwing away your gains if you don't know what you're doing. Which the AI doesn't
                     automatedAbilities.Add(a);
                 }
             }

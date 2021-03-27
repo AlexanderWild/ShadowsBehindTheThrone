@@ -401,8 +401,8 @@ namespace Assets.Code
         public int unit_infiltrateWeakTime = 8;
         public double unit_infiltrateAmount = 1.35;
         public double unit_divisorOffset = 2;
-        public double unit_majorEvidence = 0.35;
-        public double unit_minorEvidence = 0.15;
+        public double unit_majorEvidence = 0.25;
+        public double unit_minorEvidence = 0.1;
         public int unit_spreadShadowTime = 5;
         public int unit_spreadShadowWeakTime = 7;
         public double unit_spreadShadowAmount = 0.6;

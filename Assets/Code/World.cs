@@ -66,7 +66,7 @@ namespace Assets.Code
 
         public void Start()
         {
-            //Screen.SetResolution(1920, 1080, true);
+            Screen.SetResolution(1920, 1080, true);
 
             if (Directory.Exists("advdata") == false) { advancedEdition = false; World.log("Setting to standard edition as not advanced data folder was detected"); }
 
@@ -98,6 +98,7 @@ namespace Assets.Code
 
             AchievementManager.setup();
             musicPlayer.playTheme();
+            -
         }
 
         // string printTree(EventParser.SyntaxNode n, int indent)
@@ -123,6 +124,8 @@ namespace Assets.Code
         public void Update()
         {
             if (self == null) { self = this; }
+
+
 
             if (lastFrame == -1) {
                 lastFrame = Time.realtimeSinceStartup;
