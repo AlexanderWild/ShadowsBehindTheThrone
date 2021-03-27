@@ -81,6 +81,17 @@ namespace Assets.Code
         public void clicked(Map map)
         {
             //selector.selected(person,agent);
+            if (person.getLocation() != null)
+            {
+                try
+                {
+                    GraphicalMap.panTo(person.getLocation().hex.x, person.getLocation().hex.y);
+                }
+                catch
+                {
+                    //Ignore
+                }
+            }
         }
 
         public string getTitle()
@@ -107,6 +118,8 @@ namespace Assets.Code
 
         public void setTo(Person person)
         {
+            this.person = person;
+
             title.text = person.getFullName();
             layerBack.sprite = person.getImageBack();
             layerBorder.sprite = person.getImageBorder();
