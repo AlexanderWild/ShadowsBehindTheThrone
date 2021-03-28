@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Code
@@ -13,11 +14,53 @@ namespace Assets.Code
 		public Text description;
 		public Button[] options;
         public UIMaster ui;
+        public GameObject optDescBack;
+        public Text optDesc;
 
-		public void populate(EventData data, EventContext ctx)
+        public string[] optDescs = new string[]
+        {
+            "Detailed words here",
+            "and here",
+            "more here",
+            "A multiline \nnonsense\nappears"
+        };
+
+        public void Update()
+        {
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            {
+                pointerId = -1,
+            };
+
+            pointerData.position = Input.mousePosition;
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
+            optDescBack.gameObject.SetActive(false);
+            optDesc.text = "";
+            foreach (RaycastResult result in results)
+            {
+                for (int i = 0; i < options.Length; i++)
+                {
+                    if (result.gameObject.name == options[i].name)
+                    {
+                        optDescBack.gameObject.SetActive(true);
+                        optDesc.text = optDescs[i];
+                    }
+                }
+            }
+        }
+        public void populate(EventData data, EventContext ctx)
 		{
 			title.text = data.name;
 			description.text = data.description;
+
+            //Set everything past the current choices to inactive
+            for (int i = data.choices.Count; i < options.Length; i++)
+            {
+                options[i].gameObject.SetActive(false);
+            }
 
 			int n = 0;
 			foreach (var c in data.choices)
