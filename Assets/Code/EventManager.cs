@@ -120,6 +120,7 @@ namespace Assets.Code
                 catch (Exception e)
                 {
                     World.Log("[" + path + "] could not load event: " + e.Message);
+                    //World.self.prefabStore.popMsg("[" + path + "] could not load event: " + e.Message);
                 }
             }
         }

@@ -4,11 +4,12 @@
 	"imgCredit": "default",
 
 	"type": "PERSON",
-	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0)",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & ($ANW_FRIEND_CHAIN_STARTED = 0)",
 	"probability": 1,
 
-	"name": "A Friend",
-	"description": "Your enthralled has a friend",
+	"name": "A Letter Arrives",
+	"description": "Dear %ENTHRALLED_NAME,\nI am writing to you as I fear that some of our countrymen are acting in league with dark powers. I have always trusted and respected you, and hope I can count on you in the face of this danger.\nYour friend, %PERSON_NAME",
+
 
 	"choices": [
 		{
@@ -19,10 +20,7 @@
 					"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
 
 					"environment": [
-						{ "key": "DIDACCEPT", "value": "$DIDACCEPT + 1" }
-					],
-					"effects": [
-						{ "command": "ADD_POWER", "argument": "5" }
+						{ "key": "ANW_FRIEND_CHAIN_STARTED", "value": "1" }
 					]
 				},
 				{
@@ -32,11 +30,15 @@
 			]
 		},
 		{
-			"name": "Remain wary",
+			"name": "Do not respond",
 			"outcomes": [
 				{
 					"weight": 1,
-					"description": "Nothing good comes without a price. You step back before the pleasant warmth envelops you."
+					"description": "Nothing good comes without a price. You step back before the pleasant warmth envelops you.",
+					
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN_STARTED", "value": "1" }
+					]
 				}
 			]
 		}
