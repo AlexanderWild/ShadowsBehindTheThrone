@@ -85,12 +85,22 @@ namespace Assets.Code
 
 		static Dictionary<string, Field> fields = new Dictionary<string, Field>
 		{
+			//Map Fields
 			{ "turn",         new TypedField<int>   (c => { return c.map.turn; })                  },
 			{ "enshadowment", new TypedField<double>(c => { return c.map.data_avrgEnshadowment; }) },
 			{ "awareness",    new TypedField<double>(c => { return c.map.data_awarenessSum; })     },
 			{ "temperature",  new TypedField<double>(c => { return c.map.data_globalTempSum; })    },
 			{ "panic",        new TypedField<double>(c => { return c.map.worldPanic; })            },
-			{ "has_agents",   new TypedField<bool>  (c => { return c.map.hasEnthralledAnAgent; })  }
+			{ "has_agents",   new TypedField<bool>  (c => { return c.map.hasEnthralledAnAgent; })  },
+			{ "has_enthralled",   new TypedField<bool>  (c => { return c.map.overmind.enthralled != null; })  },
+
+			//Person Fields
+			{ "liking_for_enthralled",   new TypedField<double>  (c => {
+				if (c.map.overmind.enthralled == null){return 0; }
+				return c.person.getRelation(c.map.overmind.enthralled).getLiking(); })  },
+			{ "is_in_enthralled_nation",   new TypedField<bool>  (c => {
+				if (c.map.overmind.enthralled == null){return false; }
+				return c.person.society == c.map.overmind.enthralled.society; })  },
 		};
 
 		static Dictionary<string, Property> properties = new Dictionary<string, Property>

@@ -44,11 +44,14 @@ namespace Assets.Code
             foreach (var mod in Directory.EnumerateDirectories(modPath))
                 loadMod(mod);
 
+            World.log("NarrEvents loaded " + events.Count);
+
             // TODO: load user mod folder.
         }
 
         public static void turnTick(Map m)
         {
+            World.Log("narrEvents to check " + events.Count);
             foreach (var e in events)
             {
                 EventContext? nctx = null;
@@ -149,7 +152,12 @@ namespace Assets.Code
         static IEnumerable<EventContext> nextPerson(Map m)
         {
             foreach (var p in m.persons)
-                yield return EventContext.withPerson(m, p);
+            {
+                if (p != null)
+                {
+                    yield return EventContext.withPerson(m, p);
+                }
+            }
         }
 
         static IEnumerable<EventContext> nextUnit(Map m)

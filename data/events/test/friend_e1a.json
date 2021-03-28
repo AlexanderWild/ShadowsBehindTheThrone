@@ -1,0 +1,44 @@
+{
+	"id": "anw.friendE1",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "default",
+
+	"type": "PERSON",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0)",
+	"probability": 1,
+
+	"name": "A Friend",
+	"description": "Your enthralled has a friend",
+
+	"choices": [
+		{
+			"name": "Rejoice",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
+
+					"environment": [
+						{ "key": "DIDACCEPT", "value": "$DIDACCEPT + 1" }
+					],
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "5" }
+					]
+				},
+				{
+					"weight": 1,
+					"description": "You wait with your hands held outwards, but your calls are left unanswered. Perhaps another day."
+				}
+			]
+		},
+		{
+			"name": "Remain wary",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "Nothing good comes without a price. You step back before the pleasant warmth envelops you."
+				}
+			]
+		}
+	]
+}
