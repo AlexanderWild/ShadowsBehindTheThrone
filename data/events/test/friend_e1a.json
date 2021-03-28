@@ -8,12 +8,12 @@
 	"probability": 1,
 
 	"name": "A Letter Arrives",
-	"description": "Dear %ENTHRALLED_NAME,\nI am writing to you as I fear that some of our countrymen are acting in league with dark powers. I have always trusted and respected you, and hope I can count on you in the face of this danger.\nYour friend, %PERSON_NAME",
+	"description": "Dear %ENTHRALLED_NAME,\n\nI am writing to you as I fear that some of our countrymen are acting in league with dark powers. I have always trusted and respected you, and hope I can count on you in the face of this danger.\n\nYour friend, %PERSON_NAME",
 
 
 	"choices": [
 		{
-			"name": "Rejoice",
+			"name": "'Dear Friend, Thank you for bringing me your concerns...'",
 			"outcomes": [
 				{
 					"weight": 1,

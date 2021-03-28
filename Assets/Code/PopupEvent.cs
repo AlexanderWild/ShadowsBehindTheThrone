@@ -11,8 +11,9 @@ namespace Assets.Code
     public class PopupEvent : MonoBehaviour
     {
 		public Text title;
-		public Text description;
-		public Button[] options;
+		public Text descriptionH;
+        public Text descriptionP;
+        public Button[] options;
         public UIMaster ui;
         public GameObject optDescBack;
         public Text optDesc;
@@ -54,7 +55,10 @@ namespace Assets.Code
         public void populate(EventData data, EventContext ctx)
 		{
 			title.text = data.name;
-			description.text = data.description;
+			descriptionH.text = data.description;
+            descriptionP.text = data.description;
+
+            World.log("Setting nar event desc " + data.description);
 
             //Set everything past the current choices to inactive
             for (int i = data.choices.Count; i < options.Length; i++)

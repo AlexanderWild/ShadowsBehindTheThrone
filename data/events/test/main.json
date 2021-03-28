@@ -5,7 +5,7 @@
 
 	"type": "WORLD",
 	"conditional": "$DIDACCEPT < 3",
-	"probability": 0.0,
+	"probability": 0.5,
 
 	"name": "My Cool Event",
 	"description": "Lucky you, you have found the ultra-rare 'cool event' event.",
