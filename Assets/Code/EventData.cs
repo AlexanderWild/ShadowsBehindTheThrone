@@ -13,6 +13,8 @@ namespace Assets.Code
 		{
 			public string key;
 			public string value;
+
+			public bool local;
 		}
 
 		[Serializable]

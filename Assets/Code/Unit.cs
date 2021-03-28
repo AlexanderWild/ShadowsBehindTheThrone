@@ -27,6 +27,8 @@ namespace Assets.Code
         public bool flaggedAsEnthralledHostile = false;
         public List<Unit> hostility = new List<Unit>();
 
+        public EventContext.State eventState = new EventContext.State();
+
         public Unit(Location loc, SocialGroup soc)
         {
             this.location = loc;

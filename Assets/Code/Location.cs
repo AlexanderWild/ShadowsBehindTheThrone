@@ -38,6 +38,8 @@ namespace Assets.Code
         public List<Evidence> evidence = new List<Evidence>();
         public Culture culture;
 
+        public EventContext.State eventState = new EventContext.State();
+
         public Location(Map map, Hex hex,bool isMajor)
         {
             index = indexCounter;

@@ -163,7 +163,10 @@ namespace Assets.Code
         static IEnumerable<EventContext> nextUnit(Map m)
         {
             foreach (var u in m.units)
-                yield return EventContext.withUnit(m, u);
+            {
+                if (u != null && !u.isMilitary && u.society is Society)
+                    yield return EventContext.withUnit(m, u);
+            }
         }
 
         static IEnumerable<EventContext> nextWorld(Map m)

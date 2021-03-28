@@ -61,6 +61,8 @@ namespace Assets.Code
         public House house;
         public Culture culture;
 
+        public EventContext.State eventState = new EventContext.State();
+
         public Person(Society soc,House assignedHouse = null)
         {
             this.society = soc;

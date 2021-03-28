@@ -59,8 +59,8 @@ namespace Assets.Code
 				// 	return (_location.soc as Society);
 				if (_person != null)
 					return _person.society;
-				// else if (_unit != null && _unit.society is Society)
-				// 	return (_unit.society as Society);
+				else if (_unit != null && _unit.society is Society)
+					return (_unit.society as Society);
 
 				throw new Exception("event society not in current context.");
 			}
@@ -102,24 +102,48 @@ namespace Assets.Code
 				var syntax = EventParser.parse(tokens);
 
 				string res = EventRuntime.evaluateAny(syntax, this);
-				writeEnvironment(v.key, res);
+				writeEnvironment(v.key, res, v.local);
 			}
 		}
 
 		public string readEnvironment(string key)
 		{
+			State localState = getLocalState();
+			if (localState != null && localState.environment.ContainsKey(key))
+				return localState.environment[key];
+
 			if (!map.eventState.environment.ContainsKey(key))
 				return "";
 			else
 				return map.eventState.environment[key];
 		}
 
-		public void writeEnvironment(string key, string value)
+		public void writeEnvironment(string key, string value, bool local)
 		{
+			State state = map.eventState;
+			if (local)
+			{
+				state = getLocalState();
+				if (state == null)
+					throw new Exception("local event state is not available in current context.");
+			}
+
 			if (value == "")
-				map.eventState.environment.Remove(key);
+				state.environment.Remove(key);
 			else
-				map.eventState.environment[key] = value;
+				state.environment[key] = value;
+		}
+
+		State getLocalState()
+		{
+			if (_location != null)
+				return _location.eventState;
+			if (_person != null)
+				return _person.eventState;
+			if (_unit != null)
+				return _unit.eventState;
+
+			return null;
 		}
     }
 }
