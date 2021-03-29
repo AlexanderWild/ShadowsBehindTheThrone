@@ -83,6 +83,7 @@ namespace Assets.Code
         public Sprite loc_worm_nest;
         public Sprite loc_flesh;
         public Sprite loc_corpseroot;
+        public Sprite loc_old;
 
         public Sprite icon_enshadow;
         public Sprite icon_convert;

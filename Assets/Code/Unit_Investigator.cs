@@ -653,6 +653,10 @@ namespace Assets.Code
 
         public override Sprite getSprite(World world)
         {
+            if (World.staticMap.cyclopsGraphics)
+            {
+                return world.textureStore.unit_cyclops;
+            }
             if (state == unitState.basic)
             {
                 return world.textureStore.unit_basicAgent;

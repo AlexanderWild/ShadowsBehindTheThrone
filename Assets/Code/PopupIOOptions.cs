@@ -17,11 +17,13 @@ namespace Assets.Code
         public Button bEdgeScroll;
         public Button bSoundEffects;
         public Button bAdvancedGraphics;
+        public Button bCyclopsGraphical;
         public UIMaster ui;
         public Text mouseEdgeText;
         public Text soundEffectText;
         public Text autosaveText;
         public Text advancedGraphicsText;
+        public Text cyclopsGraphicalText;
         public Text musicVolumeText;
         public GameObject musicBlock;
         public Text seedString;
@@ -40,6 +42,7 @@ namespace Assets.Code
             else
             {
                 advancedGraphicsText.text = map.param.option_useAdvancedGraphics == 1 ? "On" : "Off";
+                cyclopsGraphicalText.text = map.cyclopsGraphics ? "On" : "Off";
 
             }
             seedString.text = "Game Seed: " + map.seed;
@@ -67,6 +70,10 @@ namespace Assets.Code
                 ui.world.map.param.option_useAdvancedGraphics = 0;
             }
             ui.world.audioStore.playClickInfo();
+        }
+        public void toggleCyclopsGraphics()
+        {
+            ui.world.map.cyclopsGraphics = !ui.world.map.cyclopsGraphics;
         }
 
         public static void load(Map map)

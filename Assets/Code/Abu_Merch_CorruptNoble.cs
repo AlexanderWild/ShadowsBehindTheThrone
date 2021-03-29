@@ -24,6 +24,18 @@ namespace Assets.Code
                     }
                 }
             }
+            if (person.traits.Count == 0)
+            {
+
+                foreach (Trait t in map.globalist.allTraits)
+                {
+                    if (t is Trait_Political_Corrupt)
+                    {
+                        person.traits.Add(t);
+                        break;
+                    }
+                }
+            }
 
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " invests their wealth in causing " + u.location.person().getFullName() + " to grow decadent, selfish and egotistical. Through flatteries,"
                 + " lavish parties and carefully worded arguments they convince " + u.location.person().getFullName() + " to reject all duty to their fellow human. They " +

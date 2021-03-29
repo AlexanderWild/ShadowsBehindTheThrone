@@ -46,7 +46,7 @@ namespace Assets.Code
             if (unit.location.hex == GraphicalMap.selectedHex || unit == GraphicalMap.selectedSelectable)
             {
                 radius = 0.7f * GraphicalMap.scale;
-                loc = loc + new Vector3(0, 0, -5f);
+                loc = loc + new Vector3(0, 0, -9f);
             }
             else
             {

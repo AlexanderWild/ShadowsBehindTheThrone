@@ -37,6 +37,7 @@ namespace Assets.Code
         public bool simplified = false;
         public bool agentsOnly = true;
         public bool automatic = false;
+        public bool cyclopsGraphics = false;
         public int automaticMode = 0;
         public bool hasEnthralledAnAgent = false;
         public bool hasBrokenSoul = false;
@@ -364,7 +365,7 @@ namespace Assets.Code
 
             for (int i = 0; i < persons.Count; i++)
             {
-                //    if (persons[i] == null) { continue; }
+                   if (persons[i] == null) { continue; }
                 //    if (persons[i].unit == null && (persons[i].society.people.Contains(persons[i]) == false))
                 //    {
                 //        persons[i] = null;

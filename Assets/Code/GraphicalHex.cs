@@ -201,12 +201,18 @@ namespace Assets.Code
                 locLayer.enabled = true;
                 locLayer.sprite = hex.location.getSprite();
                 evidenceLayer.enabled = hex.location.evidence.Count > 0;
+
             }
             else
             {
                 locLayer.enabled = false;
             }
 
+            if (map.cyclopsGraphics)
+            {
+                locLayer.sprite = map.world.textureStore.loc_old;
+                terrainLayer.sprite = map.world.textureStore.hex_simplified;
+            }
 
 
             if (hex.location != null)
