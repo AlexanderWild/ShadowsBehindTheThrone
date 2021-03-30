@@ -1,0 +1,44 @@
+{
+	"id": "anw.friendE1",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "Saint Paul Writing His Epistles by Valentin de Boulogne",
+	"image": "default.writing.jpg",
+	
+	"type": "PERSON",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed &($ANW_FRIEND_CHAIN = 0)",
+	"probability": 1.0,
+
+	"name": "A Letter Arrives",
+	"description": "Dear %ENTHRALLED_NAME,\n\nI am writing to you as I fear that some of our countrymen are acting in league with dark powers. I have always trusted and respected you, and hope I can count on you in the face of this danger.\n\nYour friend,\n%PERSON_NAME",
+
+
+	"choices": [
+		{
+			"name": "'Dear Friend, Thank you for bringing me your concerns...'",
+			"description": "Write back to %PERSON_NAME, perhaps beginning a series of letter exchanges which you can use to gain influence over %PERSON_NAME",
+			"outcomes": [
+				{
+					"weight": 1,
+
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "1", "local":"False"},
+						{ "key": "ANW_FRIEND", "value": "1", "local":"True" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Do not respond",
+			"description": "No response is required. Let the letter fall on deaf ears, you have more important tasks to focus on",
+			"outcomes": [
+				{
+					"weight": 1,
+					
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "-1" }
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,37 @@
+{
+	"id": "anw.friendE201",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "Saint Paul Writing His Epistles by Valentin de Boulogne",
+	"image": "default.writing.jpg",
+	
+	"type": "PERSON",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed &($ANW_FRIEND_CHAIN = 201) & ($ANW_FRIEND = 1)",
+	"probability": 1,
+
+	"name": "A Letter Arrives",
+	"description": "Your letters with %PERSON_NAME are full of promises, flattery and noble-sounding platitudes. %ENTHRALLED_NAME works to convince %PERSON_NAME that they, together, and defeat the evil which is threatening the world. Slowly you build a relationship you can leverage.",
+
+
+	"choices": [
+		{
+			"name": "Build bonds of friendship",
+			"description": "Work on gaining favour from %PERSON_NAME, boosting their liking towards your noble\n\n-80% chance to gain 25 liking\n\n-20% chance to lose 10 liking",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"description":"This seems to be working. %PERSON_NAME trusts your enthralled noble, and gains 25 liking towards them. The efforts continue..." ,
+					"effects": [
+						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "25" }
+					],
+				},
+				{
+					"weight": 0.2,
+					"description":"A misplaced word, and social-misstep. %ENTHRALLED_NAME fails to charm %PERSON_NAME this time, and loses 10 points of liking. The efforts continue...",
+					"effects": [
+						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "-10" }
+					],
+				}
+			]
+		}
+	]
+}

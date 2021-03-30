@@ -24,6 +24,8 @@ namespace Assets.Code
         public Text autosaveText;
         public Text advancedGraphicsText;
         public Text cyclopsGraphicalText;
+        public Text currentSaveLocation;
+        public InputField customSaveLocation;
         public Text musicVolumeText;
         public GameObject musicBlock;
         public Text seedString;
@@ -45,6 +47,7 @@ namespace Assets.Code
                 cyclopsGraphicalText.text = map.cyclopsGraphics ? "On" : "Off";
 
             }
+            currentSaveLocation.text = "Currently Saving To: " + World.saveFolder;
             seedString.text = "Game Seed: " + map.seed;
             musicVolumeText.text = World.musicVolume + "%";
         }
@@ -76,6 +79,26 @@ namespace Assets.Code
             ui.world.map.cyclopsGraphics = !ui.world.map.cyclopsGraphics;
         }
 
+        public static void loadEarly()
+        {
+            try
+            {
+                if (File.Exists(World.saveFolder + "settings.txt"))
+                {
+                    string[] data = File.ReadAllLines(World.saveFolder + "settings.txt");
+
+                    if (data.Length > 2 && !String.IsNullOrWhiteSpace(data[2]))
+                    {
+                        World.saveFolder = data[2];
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //
+            }
+        }
+
         public static void load(Map map)
         {
             try
@@ -102,6 +125,22 @@ namespace Assets.Code
                 //
             }
             hasLoadedOpts = true;
+        }
+
+        public void inputFieldEditEnd()
+        {
+            World.log("Trying to write " + customSaveLocation.text + " as custom save location");
+            if (Directory.Exists(customSaveLocation.text))
+            {
+                World.log("Success on previous");
+                World.saveFolder = customSaveLocation.text + World.separator;
+            }
+        }
+        public void saveToDefault()
+        {
+            
+            World.saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
+            customSaveLocation.text = World.saveFolder;
         }
 
         public void bMusicMin()
@@ -154,6 +193,7 @@ namespace Assets.Code
             string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 
                 + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.musicVolume;
             stateStr += Environment.NewLine + UIKeybinds.saveToString();
+            stateStr += Environment.NewLine + World.saveFolder;
 
             if (File.Exists(World.saveFolder + "settings.txt"))
             {

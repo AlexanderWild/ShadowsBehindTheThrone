@@ -38,6 +38,7 @@ namespace Assets.Code
 		public class Choice
 		{
 			public string name;
+			public string description;
 			public List<Outcome> outcomes;
 		}
 
@@ -47,6 +48,7 @@ namespace Assets.Code
 		public string id;
 		public string modCredit;
 		public string imgCredit;
+		public string image;
 
 		public string conditional;
 		public double probability;

@@ -4,8 +4,8 @@
 	"imgCredit": "default",
 
 	"type": "WORLD",
-	"conditional": "$DIDACCEPT < 3",
-	"probability": 0.5,
+	"conditional": "$DIDACCEPT < 1",
+	"probability": 0.0,
 
 	"name": "My Cool Event",
 	"description": "Lucky you, you have found the ultra-rare 'cool event' event.",
@@ -16,17 +16,17 @@
 			"outcomes": [
 				{
 					"weight": 1,
-					"description": "You accept the boon. Your body feels lighter and a faint sparkle surrounds you.",
 
 					"environment": [
 						{ "key": "DIDACCEPT", "value": "$DIDACCEPT + 1" }
 					],
 					"effects": [
-						{ "command": "ADD_POWER", "argument": "5" }
+						{ "command": "ADD_POWER", "argument": "5" },
+						{"command": "SHOW_EVENT", "argument": "wquist.followon"}
 					]
 				},
 				{
-					"weight": 1,
+					"weight": 0,
 					"description": "You wait with your hands held outwards, but your calls are left unanswered. Perhaps another day."
 				}
 			]

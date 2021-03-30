@@ -448,7 +448,7 @@ namespace Assets.Code
             Sprite response = null;
             if (File.Exists(filePath))
             {
-                fileData = File.ReadAllBytes(filePath);
+                fileData = File.ReadAllBytes(filePath); 
                 tex = new Texture2D(2, 2);
                 tex.LoadImage(fileData);
                 response = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));

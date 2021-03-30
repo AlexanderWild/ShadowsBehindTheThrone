@@ -60,7 +60,7 @@ namespace Assets.Code
         public string crisisPlague = null;
         public string crisisPlagueLong = null;
         public bool crisisNobles = false;
-        public bool crisisWitchHunt = true;
+        public bool crisisWitchHunt = false;
         public int lastNobleCrisis;
 
         public int cooldownLastMilitarySwitch = 0;

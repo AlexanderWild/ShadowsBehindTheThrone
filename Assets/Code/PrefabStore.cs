@@ -901,7 +901,7 @@ namespace Assets.Code
             GameObject obj = Instantiate(prefabEvent) as GameObject;
             PopupEvent specific = obj.GetComponent<PopupEvent>();
             specific.ui = ui;
-            specific.populate(d, ctx);
+            specific.populate(d, ctx,ui.world.map);
             ui.addBlocker(specific.gameObject);
         }
 

@@ -123,6 +123,8 @@ namespace Assets.Code
             double baseline = me.getRelBaseline(them);
 
             if (me.state == Person.personState.broken) { suspicion = 0; }//Broken minds hold no suspicions ever
+            if (me.state == Person.personState.enthralled) { suspicion = 0; }//Broken minds hold no suspicions ever
+            if (suspicion > 1-me.shadow) { suspicion = 1 - me.shadow; }
 
             List<RelEvent> rems = new List<RelEvent>();
             foreach (RelEvent ev in events)

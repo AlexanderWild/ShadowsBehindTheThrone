@@ -51,12 +51,12 @@ namespace Assets.Code
 
         public static bool advancedEdition = true;
         public static bool useHorseman = false;
-        public static bool useEvents = false;
+        public static bool useEvents = true;
 
         public static LogBox saveLog = new LogBox("saveLog.log");
         public static string saveFolderName = "ShadowsBehindTheThroneSavedGames";
         public static string saveHeader = "\nSAVEFILEDATAHEADER\n";
-        public static int versionNumber = 18;
+        public static int versionNumber = 19;
         public static int subversionNumber = 0;
 
         public static bool cheat_globalCooling = false;
@@ -87,7 +87,7 @@ namespace Assets.Code
             // bool res = EventRuntime.evaluate(root, null);
             // Log("got result: " + res.ToString());
 
-            EventManager.load("data/events");
+            EventManager.load("." + separator + "data" + separator  + "events");
 
             potentialGods.Add(new God_Easy());
             potentialGods.Add(new God_Fog());
@@ -99,6 +99,8 @@ namespace Assets.Code
 
             AchievementManager.setup();
             musicPlayer.playTheme();
+
+            //PopupIOOptions.loadEarly();
 
             DateTime time = DateTime.Now;
             if (time.Day == 1 && time.Month == 4)

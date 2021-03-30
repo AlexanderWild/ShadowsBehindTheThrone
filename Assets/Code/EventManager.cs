@@ -10,7 +10,10 @@ namespace Assets.Code
 {
     public class EventManager
     {
-        class ActiveEvent
+
+        public static Dictionary<string, Sprite> loadedModImages = new Dictionary<string, Sprite>();
+
+        public class ActiveEvent
         {
             public EventData data;
             public EventData.Type type;
@@ -21,7 +24,7 @@ namespace Assets.Code
             {
                 data = d;
                 type = (EventData.Type)Enum.Parse(typeof(EventData.Type), data.type);
-                
+
                 var tokens = EventParser.tokenize(data.conditional);
                 conditionalRoot = EventParser.parse(tokens);
             }
@@ -37,7 +40,7 @@ namespace Assets.Code
             }
         }
 
-        static List<ActiveEvent> events = new List<ActiveEvent>();
+        public static List<ActiveEvent> events = new List<ActiveEvent>();
 
         public static void load(string modPath)
         {
@@ -73,6 +76,7 @@ namespace Assets.Code
 
                 if (nctx is EventContext ctx)
                 {
+                    World.log("Found a narr event to trigger");
                     m.world.prefabStore.popEvent(e.data, ctx);
                     break;
                 }
@@ -123,6 +127,46 @@ namespace Assets.Code
                     //World.self.prefabStore.popMsg("[" + path + "] could not load event: " + e.Message);
                 }
             }
+            foreach (var imgpath in Directory.EnumerateFiles(mod, "*.jpg"))
+            {
+                try
+                {
+                    World.log("Narr Event img found " + imgpath);
+                    string[] split = imgpath.Split(World.separator[0]);
+                    string imgName = split[split.Length - 2] + "." + split[split.Length - 1];
+                    //Sprite loaded = TextureStore.LoadPNG(imgpath);
+                    LoadImage(imgpath, imgName);
+                    World.log("Narr Event Saving loaded image " + imgName);
+                }
+                catch (Exception e)
+                {
+                    World.Log("[" + imgpath + "] could not load img: " + e.Message);
+                    //World.self.prefabStore.popMsg("[" + path + "] could not load event: " + e.Message);
+                }
+            }
+        }
+
+        public static void LoadImage(string filePath,string imgName)
+        {
+
+            Texture2D tex = null;
+            byte[] fileData;
+
+            Sprite response = null;
+            if (File.Exists(filePath))
+            {
+                fileData = File.ReadAllBytes(filePath);
+                tex = new Texture2D(2, 2);
+                tex.LoadImage(fileData);
+                response = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+                World.log("Narr event " + response.rect.width + ", " + response.rect.height);
+            }
+            else
+            {
+                World.log("Unable to find: " + filePath);
+            }
+
+            loadedModImages.Add(imgName, response);
         }
 
         static EventContext? chooseContext(ActiveEvent e, IEnumerable<EventContext> next)

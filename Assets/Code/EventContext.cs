@@ -20,8 +20,8 @@ namespace Assets.Code
 		{
 			get
 			{
-				if (_location == null)
-					throw new Exception("event location not in current context.");
+				//if (_location == null)
+				//	throw new Exception("event location not in current context.");
 				
 				return _location;
 			}
@@ -32,8 +32,8 @@ namespace Assets.Code
 		{
 			get
 			{
-				if (_person == null)
-					throw new Exception("event person not in current context.");
+				//if (_person == null)
+				//	throw new Exception("event person not in current context.");
 
 				return _person;
 			}
@@ -44,8 +44,8 @@ namespace Assets.Code
 		{
 			get
 			{
-				if (_unit == null)
-					throw new Exception("event unit not in current context.");
+				//if (_unit == null)
+				//	throw new Exception("event unit not in current context.");
 
 				return _unit;
 			}
@@ -62,7 +62,8 @@ namespace Assets.Code
 				else if (_unit != null && _unit.society is Society)
 					return (_unit.society as Society);
 
-				throw new Exception("event society not in current context.");
+				return null;
+				//throw new Exception("event society not in current context.");
 			}
 		}
 

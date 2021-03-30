@@ -101,12 +101,45 @@ namespace Assets.Code
 			{ "is_in_enthralled_nation",   new TypedField<bool>  (c => {
 				if (c.map.overmind.enthralled == null){return false; }
 				return c.person.society == c.map.overmind.enthralled.society; })  },
+			{ "is_landed",   new TypedField<bool>  (c => {return c.person.title_land != null; })},
 		};
 
 		static Dictionary<string, Property> properties = new Dictionary<string, Property>
 		{
 			{ "ADD_POWER", new TypedProperty<int>((c, v) => { c.map.overmind.power += v; }) },
-			{ "SUB_POWER", new TypedProperty<int>((c, v) => { c.map.overmind.power -= v; }) }
+			{ "SUB_POWER", new TypedProperty<int>((c, v) => { c.map.overmind.power -= v; }) },
+
+			{ "ENTHRALLED_GAINS_EVIDENCE", new TypedProperty<int>((c, v) => {
+				if (c.map.overmind.enthralled != null)
+				{
+					c.map.overmind.enthralled.evidence += (v/100d);
+					if (c.map.overmind.enthralled.evidence > 1){c.map.overmind.enthralled.evidence = 1; }
+				} }
+			)},
+
+			//Person effects
+			{ "LOSE_SANITY", new TypedProperty<int>((c, v) => { c.person.sanity -= v;if(c.person.sanity < 0){c.person.sanity = 0; } }) },
+			{ "GAIN_LIKING_FOR_ENTHRALLED", new TypedProperty<int>((c, v) => {
+				if (c.map.overmind.enthralled != null){
+					c.person.getRelation(c.map.overmind.enthralled).addLiking(v,"From Event",c.map.turn);
+				} }) },
+			{ "GAIN_LIKING_FOR_ENTHRALLED", new TypedProperty<int>((c, v) => {
+				if (c.map.overmind.enthralled != null){
+					RelObj rel = c.person.getRelation(c.map.overmind.enthralled);
+					rel.suspicion += v/100d;
+					if (rel.suspicion > 1){rel.suspicion = 1; }
+				} }) },
+
+			{ "SHOW_EVENT", new TypedProperty<string>((c, v) => {
+				foreach (EventManager.ActiveEvent ev in EventManager.events)
+				{
+					if (ev.data.id == v)
+					{
+						World.self.prefabStore.popEvent(ev.data, c);
+						break;
+					}
+				}
+			}) }
 		};
 
 		public static bool evaluate(EventParser.SyntaxNode root, EventContext ctx)

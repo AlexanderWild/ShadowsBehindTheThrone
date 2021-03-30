@@ -1,0 +1,63 @@
+{
+	"id": "anw.friendE2",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "Saint Paul Writing His Epistles by Valentin de Boulogne",
+	"image": "default.writing.jpg",
+	
+	"type": "PERSON",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed &($ANW_FRIEND_CHAIN = 1) & ($ANW_FRIEND = 1)",
+	"probability": 1,
+
+	"name": "A Letter Arrives",
+	"description": "Dear %ENTHRALLED_NAME,\n\nThank you for taking time to respond to me. I hope we can work together to defeat this evil, which threatens us all. In these uncertain times, we don't know who to trust, so I am glad to have found an ally of repute and reliability.\n\nYour friend,\n%PERSON_NAME",
+
+
+	"choices": [
+		{
+			"name": "'Our enemies are legion, and we cannot trust anyone. You should remain vigilant at all times'",
+			"description": "Slowly begin to erode %PERSON_NAME's trust in others, beginning the task of driving them into isolation and madness over future events.\n\n-Starts the madness event sub-chain\n\n-50% chance to cause a point of sanity loss immediately",
+			"outcomes": [
+				{
+					"weight": 1,
+
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "101" ,"local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description":"%PERSON_NAME% loses a point of sanity, paranoid and fearful, checking for unseen enemies everywhere, unable to sleep." ,
+					"effects": [
+						{ "command": "LOSE_SANITY", "argument": "1" }
+					],
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "101" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "'Our bonds of trust and friendship are all that protect us from the shadow'",
+			"description": "Begins building up %PERSON_NAME's trust in your enthralled, boosting their liking and political support for you in future events.\n\n-Starts the friendship event sub-chain\n\n-50% chance to gain 10 liking immediately",
+			"outcomes": [
+				{
+					"weight":  0,
+					
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "201","local":"False" }
+					]
+				},
+				{
+					"weight": 1,
+					"description":"%PERSON_NAME trusts your enthralled noble, and gains 10 liking towards them." ,
+					"effects": [
+						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "10" }
+					],
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "201" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}
