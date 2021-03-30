@@ -96,6 +96,13 @@ namespace Assets.Code
                         p.getRelation(map.overmind.enthralled).addLiking(100, "Cheat love", map.turn);
                     }
                 }
+                if (command == "hate")
+                {
+                    foreach (Person p in map.overmind.enthralled.society.people)
+                    {
+                        p.getRelation(map.overmind.enthralled).addLiking(-100, "Cheat hate", map.turn);
+                    }
+                }
                 if (command == "resetSteamAchievements")
                 {
                     SteamManager.reset_all_achievements();

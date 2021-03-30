@@ -123,7 +123,7 @@ namespace Assets.Code
 				if (c.map.overmind.enthralled != null){
 					c.person.getRelation(c.map.overmind.enthralled).addLiking(v,"From Event",c.map.turn);
 				} }) },
-			{ "GAIN_LIKING_FOR_ENTHRALLED", new TypedProperty<int>((c, v) => {
+			{ "GAIN_SUSPICION_FOR_ENTHRALLED", new TypedProperty<int>((c, v) => {
 				if (c.map.overmind.enthralled != null){
 					RelObj rel = c.person.getRelation(c.map.overmind.enthralled);
 					rel.suspicion += v/100d;

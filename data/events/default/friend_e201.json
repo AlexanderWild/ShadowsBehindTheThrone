@@ -22,14 +22,14 @@
 					"description":"This seems to be working. %PERSON_NAME trusts your enthralled noble, and gains 25 liking towards them. The efforts continue..." ,
 					"effects": [
 						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "25" }
-					],
+					]
 				},
 				{
 					"weight": 0.2,
 					"description":"A misplaced word, and social-misstep. %ENTHRALLED_NAME fails to charm %PERSON_NAME this time, and loses 10 points of liking. The efforts continue...",
 					"effects": [
 						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "-10" }
-					],
+					]
 				}
 			]
 		}

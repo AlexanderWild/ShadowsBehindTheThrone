@@ -123,7 +123,9 @@ namespace Assets.Code
                 }
                 catch (Exception e)
                 {
-                    World.Log("[" + path + "] could not load event: " + e.Message);
+                    string msg = "[" + path + "] could not load event: " + e.Message;
+                    World.Log(msg);
+                    World.self.ui.uiMainMenu.errorMessage.text = msg;
                     //World.self.prefabStore.popMsg("[" + path + "] could not load event: " + e.Message);
                 }
             }
@@ -140,7 +142,9 @@ namespace Assets.Code
                 }
                 catch (Exception e)
                 {
-                    World.Log("[" + imgpath + "] could not load img: " + e.Message);
+                    string msg = "[" + imgpath + "] could not load img: " + e.Message;
+                    World.Log(msg);
+                    World.self.ui.uiMainMenu.errorMessage.text = msg;
                     //World.self.prefabStore.popMsg("[" + path + "] could not load event: " + e.Message);
                 }
             }

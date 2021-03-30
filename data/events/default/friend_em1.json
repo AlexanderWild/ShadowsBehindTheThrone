@@ -1,0 +1,30 @@
+{
+	"id": "anw.friendEm1",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "Saint Paul Writing His Epistles by Valentin de Boulogne",
+	"image": "default.writing.jpg",
+	
+	"type": "PERSON",
+	"conditional": "has_enthralled & (liking_for_enthralled < -10) & ($ANW_FRIEND_CHAIN > 0) & ($ANW_FRIEND = 1)",
+	"probability": 1,
+
+	"name": "A Letter Arrives",
+	"description": "%ENTHRALLED_NAME,\n\nI see you now for what you truly are. I cannot believe I had faith and trust in you.\n\nYour former friend,\n%PERSON_NAME",
+
+
+	"choices": [
+		{
+			"name": "A friendship lost",
+			"description": "%PERSON_NAME is no longer your friend. The event chain ends.",
+			"outcomes": [
+				{
+					"weight": 1,
+
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

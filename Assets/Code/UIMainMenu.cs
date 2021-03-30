@@ -16,6 +16,7 @@ namespace Assets.Code
         public Text generateText;
         public Text advancedEditionText;
         public Text versionNumberText;
+        public Text errorMessage;
         public World world;
 
         public void Update()

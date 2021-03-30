@@ -5,7 +5,7 @@
 	"image": "default.writing.jpg",
 	
 	"type": "PERSON",
-	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed &($ANW_FRIEND_CHAIN = 201) & ($ANW_FRIEND = 1)",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
 	"probability": 1,
 
 	"name": "A Letter Arrives",
@@ -22,26 +22,26 @@
 					"description":"%PERSON_NAME slowly descends into lunacy, as they howl at servants and peasants they view as spies, and go nights without sleep, haunted by the descriptions of madness you have sent them. The efforts continue..." ,
 					"effects": [
 						{ "command": "LOSE_SANITY", "argument": "5" }
-					],
+					]
 				},
 				{
 					"weight": 0.1,
 					"description":"%ENTHRALLED_NAME has grossly overstepped, and under-estimated %PERSON_NAME's tendency to share all secrets they hear with everyone they meet. Some evidence of dark deeds may need hiding (%ENTHRALLED_NAME gains evidence). The efforts continue...",
 					"effects": [
 						{ "command": "ENTHRALLED_GAINS_EVIDENCE", "argument": "10" }
-					],
+					]
 				},
 				{
 					"weight": 0.1,
 					"description":"%ENTHRALLED_NAME has gone too far, and revealed themselves too early. %PERSON_NAME gains suspicion towards them. The efforts continue...",
 					"effects": [
-						{ "command": "GAIN_SUSPICION_TOWARDS_ENTHRALLED", "argument": "10" }
-					],
+						{ "command": "GAIN_SUSPICION_FOR_ENTHRALLED", "argument": "10" }
+					]
 				},
 				{
 					"weight": 0.3,
-					"description":"Nothing seems to be taking root so far, you will need to change your approach slightly. Maybe next time you'll have better luck. The efforts continue...",
-				},
+					"description":"Nothing seems to be taking root so far, you will need to change your approach slightly. Maybe next time you'll have better luck. The efforts continue..."
+				}
 			]
 		}
 	]
