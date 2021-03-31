@@ -27,7 +27,7 @@ namespace Assets.Code
 		[Serializable]
 		public class Outcome
 		{
-			public int weight;
+			public double weight;
 			public string description;
 
 			public List<Variable> environment;

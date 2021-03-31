@@ -26,7 +26,7 @@
 				},
 				{
 					"weight": 1,
-					"description":"%PERSON_NAME% loses a point of sanity, paranoid and fearful, checking for unseen enemies everywhere, unable to sleep." ,
+					"description":"%PERSON_NAME loses a point of sanity, paranoid and fearful, checking for unseen enemies everywhere, unable to sleep." ,
 					"effects": [
 						{ "command": "LOSE_SANITY", "argument": "1" }
 					],

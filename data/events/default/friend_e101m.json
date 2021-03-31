@@ -1,0 +1,29 @@
+{
+	"id": "anw.friendE101M",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "Saint Paul Writing His Epistles by Valentin de Boulogne",
+	"image": "default.writing.jpg",
+	
+	"type": "PERSON",
+	"conditional": "has_enthralled & is_in_enthralled_nation & !(is_sane) & (liking_for_enthralled > 0) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
+	"probability": 1,
+
+	"name": "A Letter Arrives",
+	"description": "%PERSON_NAME has been driven insane by the terrors of the world, and your letters to them now drive them to dark deeds and terrible perspectives.",
+
+
+	"choices": [
+		{
+			"name": "Enough of this distraction",
+			"description":"Ends this event chain, abandoning your efforst to influence the mind of %PERSON_NAME" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

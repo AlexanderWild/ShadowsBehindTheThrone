@@ -102,6 +102,7 @@ namespace Assets.Code
 				if (c.map.overmind.enthralled == null){return false; }
 				return c.person.society == c.map.overmind.enthralled.society; })  },
 			{ "is_landed",   new TypedField<bool>  (c => {return c.person.title_land != null; })},
+			{ "is_sane",   new TypedField<bool>  (c => {return c.person.madness is Insanity_Sane; })},
 		};
 
 		static Dictionary<string, Property> properties = new Dictionary<string, Property>

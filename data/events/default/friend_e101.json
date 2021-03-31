@@ -5,7 +5,7 @@
 	"image": "default.writing.jpg",
 	
 	"type": "PERSON",
-	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
+	"conditional": "has_enthralled & is_in_enthralled_nation & is_sane & (liking_for_enthralled > 0) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
 	"probability": 1,
 
 	"name": "A Letter Arrives",
@@ -13,6 +13,23 @@
 
 
 	"choices": [
+		{
+			"name": "Continue to drive towards madness",
+			"description": "Slowly convinces %PERSON_NAME that the entire world is against them, and that all human societies are filled with agents of the shadow, poised to strike and destroy the world.\n\n-75% chance to cause %PERSON_NAME to lose 3 points of sanity",
+			"outcomes": [
+				{
+					"weight": 0.75,
+					"description":"%PERSON_NAME's fears continue to grow. %She sleeps with a dagger under %her pillow and only eats food %she's seen cooked in front of %her. The strain eats at %her sanity. The work continues..." ,
+					"effects": [
+						{ "command": "LOSE_SANITY", "argument": "3" }
+					]
+				},
+				{
+					"weight": 0.25,
+					"description":"Nothing seems to be taking root so far, you will need to change your approach slightly. Maybe next time you'll have better luck. The efforts continue..."
+				}
+			]
+		},
 		{
 			"name": "Reveal terrible secrets",
 			"description": "Start sharing some of the forbidden secrets which humanity was not meant to know with %PERSON_NAME, perhaps breaking their mind, but also risking exposing your enthralled.\n\n-50% chance to drain 5 points of sanity\n\n-10% chance to gain 10% evidence on your enthralled\n\n-10% chance to cause %PERSON_NAME to gain suspicion towards %ENTHRALLED_NAME\n\n-30% chance to accomplish nothing yet",
@@ -41,6 +58,18 @@
 				{
 					"weight": 0.3,
 					"description":"Nothing seems to be taking root so far, you will need to change your approach slightly. Maybe next time you'll have better luck. The efforts continue..."
+				}
+			]
+		},
+		{
+			"name": "Enough of this distraction",
+			"description":"Ends this event chain, abandoning your efforst to influence the mind of %PERSON_NAME" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "-1" ,"local":"False"}
+					]
 				}
 			]
 		}

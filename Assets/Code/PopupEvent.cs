@@ -125,7 +125,29 @@ namespace Assets.Code
         {
             string updated = description;
             if (map.overmind.enthralled != null){updated = updated.Replace("%ENTHRALLED_NAME", map.overmind.enthralled.getFullName()); }
-            if (ctx.person != null) { updated = updated.Replace("%PERSON_NAME", ctx.person.getFullName()); }
+            if (ctx.person != null)
+            {
+                updated = updated.Replace("%PERSON_NAME", ctx.person.getFullName());
+                if (ctx.person.isMale)
+                {
+                    updated = updated.Replace("%she", "he");
+                    updated = updated.Replace("%She", "He");
+                    updated = updated.Replace("%Her", "His");
+                    updated = updated.Replace("%her", "his");
+                    updated = updated.Replace("%Hers", "His");
+                    updated = updated.Replace("%hers", "his");
+                }
+                else
+                {
+                    updated = updated.Replace("%she", "she");
+                    updated = updated.Replace("%She", "She");
+                    updated = updated.Replace("%Her", "Her");
+                    updated = updated.Replace("%her", "her");
+                    updated = updated.Replace("%Hers", "Hers");
+                    updated = updated.Replace("%hers", "her");
+
+                }
+            }
             return updated;
         }
 

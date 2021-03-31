@@ -85,29 +85,27 @@ namespace Assets.Code
 
         public static EventData.Outcome chooseOutcome(EventData.Choice c, EventContext ctx)
         {
-            int sum = 0;
+            double sum = 0;
             foreach (var o in c.outcomes)
             {
                 sum += o.weight;
             }
 
-            int rand = Eleven.random.Next(sum);
+            double rand = Eleven.random.NextDouble()*sum;
             foreach (var o in c.outcomes)
             {
-                if (rand >= o.weight)
+                rand -= o.weight;
+                if (rand <= 0)
                 {
-                    rand -= o.weight;
-                    continue;
+                    ctx.updateEnvironment(o.environment);
+                    foreach (var e in o.effects)
+                        EventRuntime.evaluate(e, ctx);
+
+                    return o;
                 }
-
-                ctx.updateEnvironment(o.environment);
-                foreach (var e in o.effects)
-                    EventRuntime.evaluate(e, ctx);
-
-                return o;
             }
 
-            throw new Exception("unable to choose event outcome.");
+            throw new Exception("unable to choose event outcome. ");
         }
 
         static void loadMod(string mod)
