@@ -223,8 +223,11 @@ namespace Assets.Code
         public void turnTick()
         {
             hasTakenAction = false;
-            power += map.param.overmind_powerRegen;
-            power = Math.Min(power, map.param.overmind_maxPower);
+            if (power < map.param.overmind_maxPower)
+            {
+                power += map.param.overmind_powerRegen;
+            }
+            //power = Math.Min(power, map.param.overmind_maxPower);
 
 
             panicFromPowerUse -= map.param.panic_dropPerTurn;

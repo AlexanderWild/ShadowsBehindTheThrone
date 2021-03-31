@@ -31,6 +31,19 @@
 			]
 		},
 		{
+			"name": "Feed off the stream of terror",
+			"description": "%PERSON_NAME's fears are a dark vortex, a whirlpool of dark emotions from which power can be drawn. Take power from that fear, granting you +2 dark power.",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description":"You gain +2 power. The work continues..." ,
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "2" }
+					]
+				}
+			]
+		},
+		{
 			"name": "Reveal terrible secrets",
 			"description": "Start sharing some of the forbidden secrets which humanity was not meant to know with %PERSON_NAME, perhaps breaking their mind, but also risking exposing your enthralled.\n\n-50% chance to drain 5 points of sanity\n\n-10% chance to gain 10% evidence on your enthralled\n\n-10% chance to cause %PERSON_NAME to gain suspicion towards %ENTHRALLED_NAME\n\n-30% chance to accomplish nothing yet",
 			"outcomes": [

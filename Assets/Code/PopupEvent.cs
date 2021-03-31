@@ -110,9 +110,6 @@ namespace Assets.Code
 			int n = 0;
 			foreach (var c in data.choices)
 			{
-				if (n > 2)
-					break;
-
 				options[n].GetComponentInChildren<Text>().text = c.name;
 				options[n].onClick.AddListener(delegate { dismiss(c, ctx); });
                 optDescs[n] = bindReferences(c.description, ctx, map);
