@@ -29,6 +29,9 @@ namespace Assets.Code
 			if (SteamManager.hasPublishedWorkshopItem(path)) {
 				bPublish.gameObject.SetActive(false);
 				bUpdate.gameObject.SetActive(true);
+			} else {
+				bPublish.gameObject.SetActive(true);
+				bUpdate.gameObject.SetActive(false);
 			}
 		}
 
