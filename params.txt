@@ -171,7 +171,7 @@ society_cooldownGeneralVoting: 18
 temporaryThreatDecay: 0.95
 threat_takeLocation: 56
 threat_temporaryDreadDecay: 0.98
-threat_evidencePresented: 25
+threat_evidencePresentedFallingOff: 40
 threat_agentFearDecayPerTurn: 2
 threat_smallSettlementVsDisease: 50
 threat_dreadFromNobleInvestigation: 66
