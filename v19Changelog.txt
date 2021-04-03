@@ -1,0 +1,11 @@
+V19 changelog
+
+-Bugfix to prevent dark empires existing into the next age
+
+-Dark empires no longer spawn investigators
+
+-Investigators are disbanded by Dark Society, try to avoid it while wandering and will not report suspicions to nobles of dark empires
+
+-Vampires on AI now drink
+
+-Boosted visibility of hostile units on map screen, increasing hosility border graphic and making them visible above location and name tags

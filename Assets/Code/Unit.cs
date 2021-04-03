@@ -320,6 +320,22 @@ namespace Assets.Code
             if (this.movesTaken != 0) { return; }
             if (this.task is Task_GoToLocation) { return; }//Already moving or fleeing
 
+            if (this is Unit_Vampire vamp)
+            {
+                if (vamp.blood < vamp.maxBlood*0.3 && location.person() != null)
+                {
+                    //Drink
+                    vamp.blood = vamp.maxBlood;
+
+                    double amount = map.param.unit_minorEvidence;
+                    Evidence e2 = new Evidence(map.turn);
+                    e2.pointsTo = vamp;
+                    e2.weight = amount;
+                    vamp.location.evidence.Add(e2);
+                    return;
+                }
+            }
+
 
             bool shouldFlee = false;
             if (this.location.soc != null && this.location.soc.hostileTo(this))

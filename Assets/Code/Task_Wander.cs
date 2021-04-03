@@ -38,9 +38,9 @@ namespace Assets.Code
                     {
                         unsharedEvidenceToAny = true;
                     }
-                    if (unit.location.soc is Society)
+                    if (unit.location.soc is Society localSoc)
                     {
-                        Society localSoc = (Society)unit.location.soc;
+                        if (localSoc.isDarkEmpire) { break; }
                         if (localSoc.evidenceSubmitted.Contains(ev) == false)
                         {
                             unsharedEvidence = true;
@@ -66,6 +66,7 @@ namespace Assets.Code
             foreach (Location loc in neighbours)
             {
                 if (loc.soc != null && loc.soc.hostileTo(unit)) { continue; }
+                if (loc.soc is Society soc && soc.isDarkEmpire) { continue; }
                 if (loc.evidence.Count > 0)
                 {
                     chosen = loc;
@@ -103,7 +104,7 @@ namespace Assets.Code
             }
 
             //See if you want to warn this new person about anything
-            if (unit.location.person() != null)
+            if (unit.location.person() != null && (unit.location.person().society.isDarkEmpire == false))
             {
                 Person noble = unit.location.person();
                 foreach (RelObj rel in unit.person.relations.Values)

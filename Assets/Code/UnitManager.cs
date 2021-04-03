@@ -221,12 +221,15 @@ namespace Assets.Code
                     foreach (int locI in p.locations)
                     {
                         Location loc = map.locations[locI];
-                        if (loc.soc is Society && loc.settlement != null && loc.settlement.isHuman)
+                        if (loc.soc is Society soc && loc.settlement != null && loc.settlement.isHuman)
                         {
-                            c += 1;
-                            if (Eleven.random.Next(c) == 0)
+                            if (soc.isDarkEmpire == false)
                             {
-                                chosen = loc;
+                                c += 1;
+                                if (Eleven.random.Next(c) == 0)
+                                {
+                                    chosen = loc;
+                                }
                             }
                         }
                     }

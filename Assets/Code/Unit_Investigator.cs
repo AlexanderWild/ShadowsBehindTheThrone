@@ -55,6 +55,7 @@ namespace Assets.Code
         public override void turnTickAI(Map map)
         {
             checkSocietyPresence();
+            if (isDead) { return; }
             checkHostilityGain();
             if (checkRetreat()) { return; }
             if (state == unitState.basic)
@@ -87,6 +88,11 @@ namespace Assets.Code
         public void checkSocietyPresence()
         {
             if (parentLocation.soc != this.society && parentLocation.soc is Society) { this.society = parentLocation.soc; }
+
+            if (this.society.isDark() && this.person.state != Person.personState.enthralledAgent)
+            {
+                this.die(location.map, "Died when the Dark Empire was declared");
+            }
         }
 
         public bool checkRetreat()

@@ -48,6 +48,10 @@ namespace Assets.Code
                 radius = 0.7f * GraphicalMap.scale;
                 loc = loc + new Vector3(0, 0, -9f);
             }
+            else if (GraphicalMap.selectedSelectable is Unit u && this.unit.hostileTo(u))
+            {
+                loc = loc + new Vector3(0, 0, -9f);
+            }
             else
             {
                 loc = loc + new Vector3(0, 0, -0.105f);

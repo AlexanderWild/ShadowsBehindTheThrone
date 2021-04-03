@@ -379,6 +379,7 @@ namespace Assets.Code
                     {
                         lastIndexPerson = Math.Max(p.index, lastIndexPerson);
                     }
+                    soc.isDarkEmpire = false;
                 }
             }
             if (enthralled != null)
