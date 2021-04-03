@@ -40,23 +40,28 @@ namespace Assets.Code
             }
         }
 
-        public static List<ActiveEvent> events = new List<ActiveEvent>();
+        public static Dictionary<string, ActiveEvent> events = new Dictionary<string, ActiveEvent>();
 
         public static void load(string modPath)
         {
             foreach (var mod in Directory.EnumerateDirectories(modPath))
                 loadMod(mod);
+            foreach (var mod in SteamManager.getSubscribedWorkshopItems())
+            {
+                World.log("Loading workshop mod from " + mod);
+                loadMod(mod);
+            }
 
             World.log("NarrEvents loaded " + events.Count);
-
-            // TODO: load user mod folder.
         }
 
         public static void turnTick(Map m)
         {
             World.Log("narrEvents to check " + events.Count);
-            foreach (var e in events)
+            foreach (var kv in events)
             {
+                var e = kv.Value;
+
                 EventContext? nctx = null;
                 switch (e.type)
                 {
@@ -117,7 +122,14 @@ namespace Assets.Code
                     string data = File.ReadAllText(path);
                     EventData ev = JsonUtility.FromJson<EventData>(data);
 
-                    events.Add(new ActiveEvent(ev));
+                    // The above pattern will also load mod.json, stop this.
+                    if (String.IsNullOrEmpty(ev.id))
+                        continue;
+
+                    if (!events.ContainsKey(ev.id))
+                        events.Add(ev.id, new ActiveEvent(ev));
+                    else
+                        World.Log("Ignoring duplicate event " + ev.id);
                 }
                 catch (Exception e)
                 {

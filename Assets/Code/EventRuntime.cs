@@ -132,14 +132,8 @@ namespace Assets.Code
 				} }) },
 
 			{ "SHOW_EVENT", new TypedProperty<string>((c, v) => {
-				foreach (EventManager.ActiveEvent ev in EventManager.events)
-				{
-					if (ev.data.id == v)
-					{
-						World.self.prefabStore.popEvent(ev.data, c);
-						break;
-					}
-				}
+				if (EventManager.events.ContainsKey(v))
+					c.map.world.prefabStore.popEvent(EventManager.events[v].data, c);
 			}) }
 		};
 

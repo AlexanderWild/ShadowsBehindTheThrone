@@ -1,7 +1,11 @@
 ﻿
 
 using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Steamworks;
 
 
@@ -14,6 +18,25 @@ namespace Assets.Code
 	[DisallowMultipleComponent]
 	public class SteamManager : MonoBehaviour
 	{
+		[Serializable]
+		public class WorkshopItemStore
+		{
+			[Serializable]
+			public class PublishedItem
+			{
+				public string path;
+				public PublishedFileId_t fileId;
+
+				public PublishedItem(string p, PublishedFileId_t id)
+				{
+					path = p;
+					fileId = id;
+				}
+			}
+
+			public List<PublishedItem> items = new List<PublishedItem>();
+		}
+
 		public static bool apiShutdown = false;
 
 		public static bool shouldStoreStats = false;
@@ -37,6 +60,9 @@ namespace Assets.Code
 			"SAVIOUR",
 		};
 		public static bool[] hasAchieved;
+
+		static string publishedItemStoreName = "published.json";
+		static Dictionary<string, PublishedFileId_t> publishedItems = null;
 
 		public static SteamManager s_instance;
 		protected static SteamManager Instance
@@ -235,6 +261,116 @@ namespace Assets.Code
 			}
 		}
 
+		public static List<string> getPublishedWorkshopItems()
+		{
+			return initPublishedWorkshopItems().Keys.ToList();
+		}
+
+		public static bool hasPublishedWorkshopItem(string path)
+		{
+			return initPublishedWorkshopItems().ContainsKey(path);
+		}
+
+		static Dictionary<string, PublishedFileId_t> initPublishedWorkshopItems()
+		{
+			if (publishedItems != null)
+				return publishedItems;
+
+			publishedItems = new Dictionary<string, PublishedFileId_t>();
+
+			string path = World.userModFolder + World.separator + publishedItemStoreName;
+			if (!File.Exists(path))
+				return publishedItems;
+
+			string data = File.ReadAllText(path);
+			WorkshopItemStore store = JsonUtility.FromJson<WorkshopItemStore>(data);
+
+			publishedItems = new Dictionary<string, PublishedFileId_t>();
+			foreach (var item in store.items)
+				publishedItems.Add(item.path, item.fileId);
+
+			return publishedItems;
+		}
+
+		static void updatePublishedWorkshopItems()
+		{
+			WorkshopItemStore store = new WorkshopItemStore();
+			foreach (var kv in publishedItems)
+				store.items.Add(new WorkshopItemStore.PublishedItem(kv.Key, kv.Value));
+
+			string data = JsonUtility.ToJson(store);
+			string path = World.userModFolder + World.separator + publishedItemStoreName;
+
+			File.WriteAllText(path, data);
+		}
+
+		public static List<string> getSubscribedWorkshopItems()
+		{
+			var count = SteamUGC.GetNumSubscribedItems();
+
+			var subbed = new PublishedFileId_t[count];
+			SteamUGC.GetSubscribedItems(subbed, count);
+
+			var res = new List<string>();
+			foreach (var id in subbed)
+			{
+				var state = (EItemState)SteamUGC.GetItemState(id);
+				if (!state.HasFlag(EItemState.k_EItemStateInstalled))
+					continue;
+
+				ulong size;
+				string path;
+				uint time;
+
+				SteamUGC.GetItemInstallInfo(id, out size, out path, 256, out time);
+				res.Add(path);
+			}
+
+			return res;
+		}
+
+		public static void createWorkshopItem(ModData data, string path, Action<bool> callback)
+		{
+			var call = SteamUGC.CreateItem(SteamUtils.GetAppID(), EWorkshopFileType.k_EWorkshopFileTypeCommunity);
+			
+			var result = CallResult<CreateItemResult_t>.Create();
+			result.Set(call, (param, error) => {
+				if (error || param.m_eResult != EResult.k_EResultOK)
+				{
+					callback(false);
+				}
+				else
+				{
+					initPublishedWorkshopItems().Add(path, param.m_nPublishedFileId);
+					updatePublishedWorkshopItems();
+
+					updateWorkshopItem(data, path, callback);
+				}
+			});
+		}
+
+		public static void updateWorkshopItem(ModData data, string path, Action<bool> callback)
+		{
+			var items = initPublishedWorkshopItems();
+			if (!items.ContainsKey(path))
+				throw new Exception("item must be published before it is updated.");
+
+			var handle = SteamUGC.StartItemUpdate(SteamUtils.GetAppID(), items[path]);
+			SteamUGC.SetItemTitle(handle, data.title);
+			SteamUGC.SetItemDescription(handle, data.description);
+			SteamUGC.SetItemTags(handle, data.tags);
+			SteamUGC.SetItemPreview(handle, data.previewImage);
+			
+			SteamUGC.SetItemContent(handle, path);
+			SteamUGC.SetItemVisibility(handle, ERemoteStoragePublishedFileVisibility.k_ERemoteStoragePublishedFileVisibilityPublic);
+			var call = SteamUGC.SubmitItemUpdate(handle, "");
+
+			var result = CallResult<SubmitItemUpdateResult_t>.Create();
+			result.Set(call, (param, error) => {
+				callback(!error && param.m_eResult == EResult.k_EResultOK);
+			});
+		}
+
 		protected virtual void Update()
 		{
 			if (!m_bInitialized)
@@ -245,6 +381,8 @@ namespace Assets.Code
             {
 				return;
             }
+
+			SteamAPI.RunCallbacks();
 			if (shouldStoreStats)
 			{
 				shouldStoreStats = false;
