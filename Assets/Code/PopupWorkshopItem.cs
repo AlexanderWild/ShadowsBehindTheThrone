@@ -51,6 +51,8 @@ namespace Assets.Code
 
 		public void publish()
 		{
+			ui.world.audioStore.playClickSelect();
+			
 			status.gameObject.SetActive(true);
 			status.text = "Loading...";
 
@@ -65,6 +67,8 @@ namespace Assets.Code
 
 		public void update()
 		{
+			ui.world.audioStore.playClick();
+
 			status.gameObject.SetActive(true);
 			status.text = "Loading...";
 

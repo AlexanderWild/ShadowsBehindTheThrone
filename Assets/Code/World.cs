@@ -350,6 +350,7 @@ namespace Assets.Code
 
         public void bWorkshop()
         {
+            audioStore.playClick();
             prefabStore.popWorkshop();
         }
 

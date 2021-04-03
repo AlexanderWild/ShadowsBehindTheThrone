@@ -56,7 +56,7 @@ namespace Assets.Code
         }
         public void clicked(Map map)
         {
-			World.self.audioStore.playClick();
+			World.self.audioStore.playClickInfo();
 			World.self.prefabStore.popWorkshopItem(data, path, owned);
         }
 
