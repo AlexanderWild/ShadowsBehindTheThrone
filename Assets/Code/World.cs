@@ -304,7 +304,7 @@ namespace Assets.Code
             {
                 map.overmind.autoAI.popAIModeMessage();
             }
-            map.overmind.printHintInfiltration();
+            map.hintSystem.popHint(HintSystem.hintType.INFILTRATION);
         }
 
         private void printSimplifiedMessage()

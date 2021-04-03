@@ -32,7 +32,7 @@ namespace Assets.Code
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " brings " + u.location.person().getFullName() + " under your command, enthralling them to your will.",
                 u.location.map.world.wordStore.lookup("ABILITY_UNIT_ENTHRALL_NOBLE"),4);
 
-            map.overmind.printHintEnthrallNoble();
+            map.hintSystem.popHint(HintSystem.hintType.ENTHRALLED_NOBLES);
         }
         public override bool castable(Map map, Unit u)
         {

@@ -816,6 +816,7 @@ namespace Assets.Code
             specific.text.text = words;
             specific.title.text = titleWords;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
+            specific.bDismissAll.onClick.AddListener(delegate { specific.dismissDisableHints(); });
             ui.addBlocker(specific.gameObject);
         }
         public void popMsgAgent(Unit actor, Unit target, string words)

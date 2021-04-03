@@ -17,6 +17,7 @@ namespace Assets.Code
         public int turn;
         public List<SocialGroup> socialGroups = new List<SocialGroup>();
         public HashSet<string> permaDismissed = new HashSet<string>();
+        public HintSystem hintSystem;
         //public MapEventManager eventManager;
         public StatRecorder stats;
         public float lastTurnTime;
@@ -64,6 +65,8 @@ namespace Assets.Code
             soc_dark = new SG_AgentDark(this);
             soc_light = new SG_AgentLight(this);
             //eventManager = new EventManager(this);
+
+            hintSystem = new HintSystem(this);
         }
 
         public void turnTick()

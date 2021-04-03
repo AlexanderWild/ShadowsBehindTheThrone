@@ -9,3 +9,7 @@ V19 changelog
 -Vampires on AI now drink
 
 -Boosted visibility of hostile units on map screen, increasing hosility border graphic and making them visible above location and name tags
+
+-Nobles' fear of dark agents now occurs based on how close they are to the evil action, not globally. Gives highest threat estimation at the evidence location, then decreasing amounts in the nearby connected nodes
+
+-Moving towards a more unified and complete hint system

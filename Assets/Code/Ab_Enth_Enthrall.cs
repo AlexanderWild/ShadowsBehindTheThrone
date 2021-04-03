@@ -28,7 +28,7 @@ namespace Assets.Code
                 + " act as you command within their society."+ addMsg,
                 map.world.wordStore.lookup("ABILITY_ENTHRALL"));
 
-            map.overmind.printHintEnthrallNoble();
+            map.hintSystem.popHint(HintSystem.hintType.ENTHRALLED_NOBLES);
         }
         public override bool castable(Map map, Person person)
         {
