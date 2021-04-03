@@ -46,10 +46,13 @@ namespace Assets.Code
         {
             foreach (var mod in Directory.EnumerateDirectories(modPath))
                 loadMod(mod);
-            foreach (var mod in SteamManager.getSubscribedWorkshopItems())
+            if (SteamManager.Initialized)
             {
-                World.log("Loading workshop mod from " + mod);
-                loadMod(mod);
+                foreach (var mod in SteamManager.getSubscribedWorkshopItems())
+                {
+                    World.log("Loading workshop mod from " + mod);
+                    loadMod(mod);
+                }
             }
 
             World.log("NarrEvents loaded " + events.Count);
