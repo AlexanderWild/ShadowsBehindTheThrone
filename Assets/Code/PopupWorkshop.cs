@@ -15,6 +15,12 @@ namespace Assets.Code
             ui.removeBlocker(this.gameObject);
         }
 
+		public void showSubscribedMods()
+		{
+			ui.world.audioStore.playClickInfo();
+			ui.world.prefabStore.popScrollSetSubscribedMods();
+		}
+
 		public void showUserMods()
 		{
 			ui.world.audioStore.playClickInfo();

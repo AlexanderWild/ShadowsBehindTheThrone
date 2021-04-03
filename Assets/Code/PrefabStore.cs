@@ -426,6 +426,7 @@ namespace Assets.Code
 
             ui.addBlocker(specific.gameObject);
         }
+
         public void popScrollSetUserMods()
         {
             if (!Directory.Exists(World.userModFolder)) {
@@ -436,21 +437,12 @@ namespace Assets.Code
             PopupScrollSet specific = null;
             foreach (var mod in Directory.EnumerateDirectories(World.userModFolder)) {
                 try {
-                    var path = mod + World.separator + "mod.json";
-                    if (!File.Exists(path))
-                        continue;
-
-                    string data = File.ReadAllText(path);
-                    ModData info = JsonUtility.FromJson<ModData>(data);
-
-                    if (!info.validate())
+                    var modBox = getModBox(mod, true);
+                    if (modBox == null)
                         continue;
 
                     if (specific == null)
                         specific = getInnerScrollSet();
-
-                    var modBox = getModBox();
-                    modBox.setTo(info, mod);
 
                     modBox.gameObject.transform.SetParent(specific.gameObject.transform);
                     specific.scrollables.Add(modBox);
@@ -466,6 +458,27 @@ namespace Assets.Code
                 ui.addBlockerOverride(specific.gameObject);
             else
                 popMsg("No valid mods found in user mod directory.", true, true);
+        }
+        public void popScrollSetSubscribedMods()
+        {
+            PopupScrollSet specific = null;
+            foreach (var mod in SteamManager.getSubscribedWorkshopItems())
+            {
+                var modBox = getModBox(mod, false);
+                if (modBox == null)
+                    throw new Exception("Installed mod does not satisfy upload requirements.");
+
+                if (specific == null)
+                        specific = getInnerScrollSet();
+
+                    modBox.gameObject.transform.SetParent(specific.gameObject.transform);
+                    specific.scrollables.Add(modBox);
+            }
+
+            if (specific != null)
+                ui.addBlockerOverride(specific.gameObject);
+            else
+                popMsg("No installed and subscribed mods found.", true, true);
         }
 
         public PopupTutorialMsg getTutorial(int item)
@@ -665,11 +678,22 @@ namespace Assets.Code
 
             return specific;
         }
-        public PopupBoxMod getModBox()
+        public PopupBoxMod getModBox(string mod, bool owned)
         {
+            var path = mod + World.separator + "mod.json";
+            if (!File.Exists(path))
+                return null;
+
+            string data = File.ReadAllText(path);
+            ModData info = JsonUtility.FromJson<ModData>(data);
+
+            if (!info.validate())
+                return null;
+
             GameObject obj = Instantiate(modBox) as GameObject;
             PopupBoxMod specific = obj.GetComponent<PopupBoxMod>();
 
+            specific.setTo(info, mod, owned);
             return specific;
         }
         public PopupBoxAbility getAbilityBox(Ability a, Hex hex)
@@ -967,13 +991,13 @@ namespace Assets.Code
             
             ui.addBlocker(obj);
         }
-        public void popWorkshopItem(ModData data, string path)
+        public void popWorkshopItem(ModData data, string path, bool owned)
         {
             GameObject obj = Instantiate(prefabWorkshopItem);
             PopupWorkshopItem specific = obj.GetComponent<PopupWorkshopItem>();
             specific.ui = ui;
 
-            specific.populate(data, path);
+            specific.populate(data, path, owned);
             ui.addBlockerOverride(obj);
         }
 

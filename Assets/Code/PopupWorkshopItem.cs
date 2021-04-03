@@ -18,7 +18,7 @@ namespace Assets.Code
 		string path;
 		ModData data;
 
-		public void populate(ModData d, string p)
+		public void populate(ModData d, string p, bool owned)
 		{
 			data = d;
 			path = p;
@@ -26,10 +26,18 @@ namespace Assets.Code
 			title.text = data.title;
 			description.text = data.description;
 
-			if (SteamManager.hasPublishedWorkshopItem(path)) {
+			if (!owned)
+			{
+				bPublish.gameObject.SetActive(false);
+				bUpdate.gameObject.SetActive(false);
+			}
+			else if (SteamManager.hasPublishedWorkshopItem(path))
+			{
 				bPublish.gameObject.SetActive(false);
 				bUpdate.gameObject.SetActive(true);
-			} else {
+			}
+			else
+			{
 				bPublish.gameObject.SetActive(true);
 				bUpdate.gameObject.SetActive(false);
 			}

@@ -19,6 +19,7 @@ namespace Assets.Code
 
 		string path;
 		ModData data;
+		bool owned;
 
         public void Update()
         {
@@ -31,13 +32,17 @@ namespace Assets.Code
             mover.transform.Translate(delta);
         }
 
-        public void setTo(ModData d, string p)
+        public void setTo(ModData d, string p, bool mine)
 		{
 			path = p;
 			data = d;
+			owned = mine;
 
 			title.text = data.title;
-			body.text = path;
+			if (owned)
+				body.text = path;
+			else
+				body.text = "Subscribed on the Steam Workshop";
 		}
 
         public float ySize()
@@ -52,7 +57,7 @@ namespace Assets.Code
         public void clicked(Map map)
         {
 			World.self.audioStore.playClick();
-			World.self.prefabStore.popWorkshopItem(data, path);
+			World.self.prefabStore.popWorkshopItem(data, path, owned);
         }
 
         public string getTitle()
