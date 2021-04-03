@@ -43,7 +43,7 @@ namespace Assets.Code
         public int data_nProvinceRulers;
         public List<Unit> enemies = new List<Unit>();
 
-        public double dread_agents_evidenceFound = 0;
+        //public double dread_agents_evidenceFound = 0;
         public int electionID = 0;//Used by characters to check if they're still using valid data
 
         public SocType socType = new SocType_ElectiveMonarchy();
@@ -164,8 +164,8 @@ namespace Assets.Code
                 turnsNotInOffensiveStance += 1;
             }
 
-            dread_agents_evidenceFound -= map.param.threat_agentFearDecayPerTurn;
-            if (dread_agents_evidenceFound < 0) { dread_agents_evidenceFound = 0; }
+            //dread_agents_evidenceFound -= map.param.threat_agentFearDecayPerTurn;
+            //if (dread_agents_evidenceFound < 0) { dread_agents_evidenceFound = 0; }
         }
 
         public void checkAssertions()

@@ -210,10 +210,11 @@ namespace Assets.Code
                             e.turnSubmitted = map.turn;
                             e.locationFound = this;
 
-                            double deltaFear = World.staticMap.param.threat_evidencePresented;
+                            //double deltaFear = World.staticMap.param.threat_evidencePresented;
                             if (socSoc.isDarkEmpire == false)
                             {
-                                socSoc.dread_agents_evidenceFound += deltaFear;
+                                addAgentDreadAroundThisLocation();
+                                //socSoc.dread_agents_evidenceFound += deltaFear;
                             }
                         }
                         e.reportedToSociety = true;
@@ -288,6 +289,39 @@ namespace Assets.Code
             }
 
             recomputeLinkDisabling();
+        }
+
+        public void addAgentDreadAroundThisLocation()
+        {
+            double deltaFear = World.staticMap.param.threat_evidencePresentedFallingOff;
+            HashSet<Location> closed = new HashSet<Location>();
+            HashSet<Location> open = new HashSet<Location>();
+            open.Add(this);
+            closed.Add(this);
+            for (int reps = 0; reps < 4; reps++)
+            {
+                HashSet<Location> edge = new HashSet<Location>();
+                foreach (Location l in open)
+                {
+                    if (l.person() != null)
+                    {
+                        l.person().threat_agents.generatedThreat += deltaFear;
+                        if (l.person().threat_agents.generatedThreat > 200)
+                        {
+                            l.person().threat_agents.generatedThreat = 200;
+                        }
+                    }
+                    foreach (Location l2 in l.getNeighbours())
+                    {
+                        if (closed.Contains(l2)) { continue; }
+                        if (open.Contains(l2)) { continue; }
+                        edge.Add(l2);
+                        closed.Add(l2);
+                    }
+                }
+                open = edge;
+                deltaFear *= 0.75;
+            }
         }
 
         public void checkPropertiesEndOfTurn()

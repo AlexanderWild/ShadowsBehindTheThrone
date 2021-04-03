@@ -62,11 +62,12 @@ namespace Assets.Code
                             soc.lastEvidenceSubmission = unit.location.map.turn;
                             ev.turnSubmitted = unit.location.map.turn;
 
-                            double deltaFear = World.staticMap.param.threat_evidencePresented;
-                            if (soc.isDarkEmpire == false)
-                            {
-                                soc.dread_agents_evidenceFound += deltaFear;
-                            }
+                            unit.location.addAgentDreadAroundThisLocation();
+                            //double deltaFear = World.staticMap.param.threat_evidencePresented;
+                            //if (soc.isDarkEmpire == false)
+                            //{
+                            //    soc.dread_agents_evidenceFound += deltaFear;
+                            //}
                         }
                     }
                     if (submitted)

@@ -13,6 +13,7 @@ namespace Assets.Code
         public Person p;
         public double temporaryDread;
         public double threat;
+        public double generatedThreat;
         public List<ReasonMsg> reasons = new List<ReasonMsg>();
 
         public enum formTypes { NONE, HOSTILE_NATION,ENSHADOWED_NOBLES, AGENTS,PLAGUE }
@@ -42,6 +43,8 @@ namespace Assets.Code
 
         public void turnTick()
         {
+            generatedThreat -= map.param.threat_agentFearDecayPerTurn;
+            if (generatedThreat < 0) { generatedThreat = 0; }
         }
 
         public List<string> getReasons()

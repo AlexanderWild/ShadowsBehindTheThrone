@@ -657,8 +657,8 @@ namespace Assets.Code
                     {
                         if (this.state == personState.broken) { continue; }//Broken minded can't fear the darkness
                         double mult = 1 - shadow;
-                        item.threat += mult * society.dread_agents_evidenceFound;
-                        item.reasons.Add(new ReasonMsg("Evidence found (+" + (int)(mult*society.dread_agents_evidenceFound) + ")",(mult*society.dread_agents_evidenceFound)));
+                        item.threat += mult * item.generatedThreat;
+                        item.reasons.Add(new ReasonMsg("Evidence found (+" + (int)(mult* item.generatedThreat) + ")",(mult* item.generatedThreat)));
                     }
                     if (item.form == ThreatItem.formTypes.PLAGUE)
                     {

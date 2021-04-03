@@ -198,7 +198,8 @@ namespace Assets.Code
         public double temporaryThreatDecay = 0.95;
         public double threat_takeLocation = 56;
         public double threat_temporaryDreadDecay = 0.98;
-        public double threat_evidencePresented = 25;
+        //public double threat_evidencePresented = 25;
+        public double threat_evidencePresentedFallingOff = 40;
         public double threat_agentFearDecayPerTurn = 2;
         public int threat_smallSettlementVsDisease = 50;
         public double threat_dreadFromNobleInvestigation = 66;
