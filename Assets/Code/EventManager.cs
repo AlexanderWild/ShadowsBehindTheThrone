@@ -40,7 +40,7 @@ namespace Assets.Code
             }
         }
 
-        public static List<ActiveEvent> events = new List<ActiveEvent>();
+        public static Dictionary<string, ActiveEvent> events = new Dictionary<string, ActiveEvent>();
 
         public static void load(string modPath)
         {
@@ -55,8 +55,10 @@ namespace Assets.Code
         public static void turnTick(Map m)
         {
             World.Log("narrEvents to check " + events.Count);
-            foreach (var e in events)
+            foreach (var kv in events)
             {
+                var e = kv.Value;
+
                 EventContext? nctx = null;
                 switch (e.type)
                 {
@@ -117,7 +119,10 @@ namespace Assets.Code
                     string data = File.ReadAllText(path);
                     EventData ev = JsonUtility.FromJson<EventData>(data);
 
-                    events.Add(new ActiveEvent(ev));
+                    if (!events.ContainsKey(ev.id))
+                        events.Add(ev.id, new ActiveEvent(ev));
+                    else
+                        World.Log("Ignoring duplicate event " + ev.id);
                 }
                 catch (Exception e)
                 {
