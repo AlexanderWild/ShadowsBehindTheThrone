@@ -65,6 +65,9 @@ namespace Assets.Code
 
         public static string saveFolder;
 
+        public static string userModFolderName = "ShadowsBehindTheThroneUserMods";
+        public static string userModFolder;
+
         public void Start()
         {
             Screen.SetResolution(1920, 1080, true);
@@ -213,6 +216,7 @@ namespace Assets.Code
             }
 
             saveFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.saveFolderName + World.separator;
+            userModFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + World.separator + World.userModFolderName + World.separator;
         }
         public void startup(PopupGameOptions opts)
         {
@@ -343,6 +347,11 @@ namespace Assets.Code
             //bQuicksave();
         }
         */
+
+        public void bWorkshop()
+        {
+            prefabStore.popWorkshop();
+        }
 
         public void bStartGameAutomatic()
         {

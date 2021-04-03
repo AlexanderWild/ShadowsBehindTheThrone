@@ -77,6 +77,9 @@ namespace Assets.Code
         public GameObject prefabSaveName;
         public GameObject prefabLightbringerDiag;
         public GameObject prefabEvent;
+        public GameObject prefabWorkshop;
+        public GameObject prefabWorkshopItem;
+        public GameObject modBox;
 
         public PopOptBar getVoteOptBar(VoteOption opt, VoteSession sess)
         {
@@ -423,6 +426,47 @@ namespace Assets.Code
 
             ui.addBlocker(specific.gameObject);
         }
+        public void popScrollSetUserMods()
+        {
+            if (!Directory.Exists(World.userModFolder)) {
+                popMsg("Unable to locate user mod directory.", true, true);
+                return;
+            }
+
+            PopupScrollSet specific = null;
+            foreach (var mod in Directory.EnumerateDirectories(World.userModFolder)) {
+                try {
+                    var path = mod + World.separator + "mod.json";
+                    if (!File.Exists(path))
+                        continue;
+
+                    string data = File.ReadAllText(path);
+                    ModData info = JsonUtility.FromJson<ModData>(data);
+
+                    if (!info.validate())
+                        continue;
+
+                    if (specific == null)
+                        specific = getInnerScrollSet();
+
+                    var modBox = getModBox();
+                    modBox.setTo(info, mod);
+
+                    modBox.gameObject.transform.SetParent(specific.gameObject.transform);
+                    specific.scrollables.Add(modBox);
+                }
+                catch (Exception e)
+                {
+                    string msg = "[" + mod + "] could not load mod info: " + e.Message;
+                    World.Log(msg);
+                }
+            }
+
+            if (specific != null)
+                ui.addBlockerOverride(specific.gameObject);
+            else
+                popMsg("No valid mods found in user mod directory.", true, true);
+        }
 
         public PopupTutorialMsg getTutorial(int item)
         {
@@ -621,6 +665,13 @@ namespace Assets.Code
 
             return specific;
         }
+        public PopupBoxMod getModBox()
+        {
+            GameObject obj = Instantiate(modBox) as GameObject;
+            PopupBoxMod specific = obj.GetComponent<PopupBoxMod>();
+
+            return specific;
+        }
         public PopupBoxAbility getAbilityBox(Ability a, Hex hex)
         {
             GameObject obj = Instantiate(abilityBox) as GameObject;
@@ -717,7 +768,7 @@ namespace Assets.Code
             ui.uiInputs.disable = true;
             ui.addBlockerOverride(specific.gameObject);
         }
-        public void popMsg(string words,bool force=false)
+        public void popMsg(string words,bool force=false, bool top=false)
         {
             if (!force && (world.displayMessages == false)) { return; }
 
@@ -726,7 +777,10 @@ namespace Assets.Code
             specific.ui = ui;
             specific.text.text = words;
             specific.bDismiss.onClick.AddListener(delegate { specific.dismiss(); });
-            ui.addBlocker(specific.gameObject);
+            if (top)
+                ui.addBlockerOverride(specific.gameObject);
+            else
+                ui.addBlocker(specific.gameObject);
         }
         public void popMsgHint(string words, string titleWords,bool force = false)
         {
@@ -905,6 +959,23 @@ namespace Assets.Code
             ui.addBlocker(specific.gameObject);
         }
 
+        public void popWorkshop()
+        {
+            GameObject obj = Instantiate(prefabWorkshop);
+            PopupWorkshop specific = obj.GetComponent<PopupWorkshop>();
+            specific.ui = ui;
+            
+            ui.addBlocker(obj);
+        }
+        public void popWorkshopItem(ModData data, string path)
+        {
+            GameObject obj = Instantiate(prefabWorkshopItem);
+            PopupWorkshopItem specific = obj.GetComponent<PopupWorkshopItem>();
+            specific.ui = ui;
+
+            specific.populate(data, path);
+            ui.addBlockerOverride(obj);
+        }
 
         internal GraphicalUnit getGraphicalUnit(Map map, Unit p)
         {
