@@ -46,7 +46,7 @@ namespace Assets.Code
         {
             foreach (var mod in Directory.EnumerateDirectories(modPath))
                 loadMod(mod);
-            if (SteamManager.Initialized)
+            if (SteamManager.Initialized && World.useWorkshop)
             {
                 foreach (var mod in SteamManager.getSubscribedWorkshopItems())
                 {

@@ -9,6 +9,7 @@ namespace Assets.Code
 {
     public class UIMainMenu : MonoBehaviour
     {
+        public Button workshopButton;
         public Button continueButton;
         public Button saveButton;
         public Button startStreamlinedButton;
@@ -18,6 +19,12 @@ namespace Assets.Code
         public Text versionNumberText;
         public Text errorMessage;
         public World world;
+
+        public void Start()
+        {
+            if (!SteamManager.Initialized || !World.useWorkshop)
+                workshopButton.gameObject.SetActive(false);
+        }
 
         public void Update()
         {
