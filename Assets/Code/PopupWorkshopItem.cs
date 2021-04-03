@@ -54,7 +54,16 @@ namespace Assets.Code
 
 		public void update()
 		{
-			//
+			status.gameObject.SetActive(true);
+			status.text = "Loading...";
+
+			bUpdate.gameObject.SetActive(false);
+			SteamManager.updateWorkshopItem(data, path, res => {
+				if (res)
+					status.text = "Success!";
+				else
+					status.text = "Error!";
+			});
 		}
 	}
 }
