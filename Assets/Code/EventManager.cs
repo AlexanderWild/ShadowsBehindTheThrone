@@ -46,10 +46,13 @@ namespace Assets.Code
         {
             foreach (var mod in Directory.EnumerateDirectories(modPath))
                 loadMod(mod);
+            foreach (var mod in SteamManager.getSubscribedWorkshopItems())
+            {
+                World.log("Loading workshop mod from " + mod);
+                loadMod(mod);
+            }
 
             World.log("NarrEvents loaded " + events.Count);
-
-            // TODO: load user mod folder.
         }
 
         public static void turnTick(Map m)
@@ -118,6 +121,10 @@ namespace Assets.Code
                 {
                     string data = File.ReadAllText(path);
                     EventData ev = JsonUtility.FromJson<EventData>(data);
+
+                    // The above pattern will also load mod.json, stop this.
+                    if (String.IsNullOrEmpty(ev.id))
+                        continue;
 
                     if (!events.ContainsKey(ev.id))
                         events.Add(ev.id, new ActiveEvent(ev));

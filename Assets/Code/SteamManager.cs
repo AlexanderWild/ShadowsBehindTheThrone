@@ -304,6 +304,31 @@ namespace Assets.Code
 			File.WriteAllText(path, data);
 		}
 
+		public static List<string> getSubscribedWorkshopItems()
+		{
+			var count = SteamUGC.GetNumSubscribedItems();
+
+			var subbed = new PublishedFileId_t[count];
+			SteamUGC.GetSubscribedItems(subbed, count);
+
+			var res = new List<string>();
+			foreach (var id in subbed)
+			{
+				var state = (EItemState)SteamUGC.GetItemState(id);
+				if (!state.HasFlag(EItemState.k_EItemStateInstalled))
+					continue;
+
+				ulong size;
+				string path;
+				uint time;
+
+				SteamUGC.GetItemInstallInfo(id, out size, out path, 256, out time);
+				res.Add(path);
+			}
+
+			return res;
+		}
+
 		public static void createWorkshopItem(ModData data, string path, Action<bool> callback)
 		{
 			var call = SteamUGC.CreateItem(SteamUtils.GetAppID(), EWorkshopFileType.k_EWorkshopFileTypeCommunity);
