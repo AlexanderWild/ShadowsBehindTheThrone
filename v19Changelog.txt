@@ -1,5 +1,7 @@
 V19 changelog
 
+PATCH 1:
+
 -Bugfix to prevent dark empires existing into the next age
 
 -Dark empires no longer spawn investigators
@@ -27,3 +29,9 @@ V19 changelog
 -Expanded event messages a little bit
 
 -Dark Heirophants can sacrifice broken nobles to gain power and refill enthrallment uses
+
+PATCH 2:
+
+-Nerf sacrifice broken noble heirphant ability, to prevent it being spammed infinitely in a dark empire
+
+-Power gain now increases with world panic and with enthralled noble prestige (giving you a good reason to rise the ranks)

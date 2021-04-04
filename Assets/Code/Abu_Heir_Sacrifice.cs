@@ -31,6 +31,7 @@ namespace Assets.Code
             if (u.location.person() == null) { return false; }
             if (u.location.settlement == null) { return false; }
             if (u.location.person().state != Person.personState.broken) { return false; }
+            if (map.overmind.enthralled != null && u.location.person().society == map.overmind.enthralled.society) { return false; }
             return true;
         }
 
@@ -47,7 +48,7 @@ namespace Assets.Code
 
         public override int getCooldown()
         {
-            return 0;
+            return 16;
         }
         public override string specialCost()
         {
@@ -58,7 +59,7 @@ namespace Assets.Code
         public override string getDesc()
         {
             return "Sacrifices a broken noble to gain " + World.staticMap.param.unit_heir_saccPowerGain + " power and refill all enthrallment uses."
-                + "\n[Requires a broken noble]";
+                + "\n[Requires a broken noble in a society which does not contain an enthralled noble]";
         }
 
         public override string getName()

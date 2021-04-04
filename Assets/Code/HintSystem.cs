@@ -8,7 +8,7 @@ namespace Assets.Code
 {
     public class HintSystem
     {
-        public enum hintType {  INFILTRATION,ENTHRALLED_NOBLES,EVIDENCE,AWARENESS};
+        public enum hintType {  INFILTRATION,ENTHRALLED_NOBLES,EVIDENCE,AWARENESS,POWER};
         public bool[] hasShown;
         public bool disabled = false;
         public Map map;
@@ -59,6 +59,14 @@ namespace Assets.Code
                     + "This panic will become awareness, as they consult with sages, prophecies and ancient libraries. With enough awareness, nobles can begin working together to defeat you."
                     + "\n\nYou can keep track of awareness by using the associated map view (Accessible via number keys) to discover where this threat to your power is growing.";
                 map.world.prefabStore.popMsgHint(msg, "Hint: Awareness");
+            }
+            else if (hint == hintType.POWER)
+            {
+                String msg = "Dark Power is how you employ your powers, as opposed to actions taken by agents or the free abilities. It can go both negative or above the maximum, but you will not be"
+                    + " able to use powers while it is less than zero, and will not regain any while it is above maximum."
+                    + "\n\nPower gain increases as world panic grows, as you draw energy from the dying world, and if you possess an enthralled noble their prestige will add as a percentage gain" +
+                    " (so if they have 35 prestige, you will regain power 35% faster).";
+                map.world.prefabStore.popMsgHint(msg, "Hint: Power");
             }
             else
             {

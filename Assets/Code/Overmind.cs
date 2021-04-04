@@ -202,7 +202,9 @@ namespace Assets.Code
             hasTakenAction = false;
             if (power < map.param.overmind_maxPower)
             {
-                power += map.param.overmind_powerRegen;
+                double powerGainMult = calculatePowerGainMult();
+                power += map.param.overmind_powerRegen* powerGainMult;
+                map.hintSystem.popHint(HintSystem.hintType.POWER);
             }
             //power = Math.Min(power, map.param.overmind_maxPower);
 
@@ -258,6 +260,17 @@ namespace Assets.Code
             computeLightbringer();
         }
 
+        public double calculatePowerGainMult()
+        {
+            double mult = 1;
+
+            mult += map.worldPanic;
+            if (enthralled != null)
+            {
+                mult += enthralled.prestige / 100d;
+            }
+            return mult;
+        }
         public void computeLightbringer()
         {
             if (lightbringerCasters != null && lightbringerCasters.isGone())

@@ -29,7 +29,8 @@ namespace Assets.Code
             powerText.text = "POWER: " + ((int)Math.Ceiling(master.world.map.overmind.power) + "/" + master.world.map.param.overmind_maxPower);
             turnText.text = "Turn: " + master.world.map.turn;
             victoryText.text = "Enshadowment: " + (int)(100 * master.world.map.data_avrgEnshadowment) + "/" + (int)(100 * master.world.map.param.victory_targetEnshadowmentAvrg) + "%"
-                + "\nHuman Settlements: " + master.world.map.data_nSocietyLocations;
+                + "\nHuman Settlements: " + master.world.map.data_nSocietyLocations
+                + "\nPower Gain: " + (int)(master.world.map.overmind.calculatePowerGainMult() * 100) + "%";
 
             worldPanicBlock.SetActive(master.world.map.param.useAwareness == 1);
             worldPanicValue.text = ((int)(100 * master.world.map.worldPanic)) + "%";
