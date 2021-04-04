@@ -14,8 +14,6 @@ V19 changelog
 
 -Moving towards a more unified and complete hint system
 
--C:\Documents and Settings\username\Local Settings\Application Data\Unity\Editor\Editor.log
-
 -Only allow a single seeker
 
 -Investigators and agents now automatically instantly go after seekers once they discover the truth
@@ -25,3 +23,7 @@ V19 changelog
 -Plague doctors buffed, temporarily, with rework planned to allow interaction with disease mechanics
 
 -Files to load now displayed in chronological order
+
+-Expanded event messages a little bit
+
+-Dark Heirophants can sacrifice broken nobles to gain power and refill enthrallment uses

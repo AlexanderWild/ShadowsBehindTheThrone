@@ -325,7 +325,7 @@ namespace Assets.Code
         public int ability_unit_falseAccusationCharges = 5;
         public double ability_unit_falseAccusationEffect = 0.25;
         public double ability_unit_enthrallNobleReq = 0.9;
-        public double ability_unit_breakNobleReq = 0.75;
+        public double ability_unit_breakNobleReq = 0.66;
         public double ability_unit_spreadShadowInfiltrationReq = 0.5;
         public int ability_unit_spreadShadowMinLiking = 35;
         public double ability_unit_falseEvidenceInfiltration = 0.4;
@@ -438,6 +438,7 @@ namespace Assets.Code
         public double unit_knightCombatBonus = 1.5;
         public double unit_agentCombatBonus = 1.25;
         public double flesh_armyStrength = 12;
+        public int unit_heir_saccPowerGain = 17;
 
         public int unit_rd_redDeathPlagueDur = 20;
         public double unit_rd_redDeathPlaguePSpread = 0.05;

@@ -16,6 +16,7 @@ namespace Assets.Code
 
 
             abilities.Add(new Abu_Heir_EnthrallNoble());
+            abilities.Add(new Abu_Heir_Sacrifice());
             abilities.Add(new Abu_Heir_BreakNoble());
             abilities.Add(new Abu_Base_Infiltrate());
             abilities.Add(new Abu_Base_SocialiseAtCourt());

@@ -89,7 +89,7 @@ namespace Assets.Code
         {
             if (parentLocation.soc != this.society && parentLocation.soc is Society) { this.society = parentLocation.soc; }
 
-            if (this.society.isDark() && this.person.state != Person.personState.enthralledAgent)
+            if (this.society is Society soc && soc.isDarkEmpire && this.person.state != Person.personState.enthralledAgent)
             {
                 this.die(location.map, "Died when the Dark Empire was declared");
             }

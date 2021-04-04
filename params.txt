@@ -291,7 +291,7 @@ ability_fleshWithdrawBonus: 10
 ability_unit_falseAccusationCharges: 5
 ability_unit_falseAccusationEffect: 0.25
 ability_unit_enthrallNobleReq: 0.9
-ability_unit_breakNobleReq: 0.75
+ability_unit_breakNobleReq: 0.66
 ability_unit_spreadShadowInfiltrationReq: 0.5
 ability_unit_spreadShadowMinLiking: 35
 ability_unit_falseEvidenceInfiltration: 0.4
@@ -395,6 +395,7 @@ unit_headless_pumpkinDur: 9
 unit_knightCombatBonus: 1.5
 unit_agentCombatBonus: 1.25
 flesh_armyStrength: 12
+unit_heir_saccPowerGain: 17
 unit_rd_redDeathPlagueDur: 20
 unit_rd_redDeathPlaguePSpread: 0.05
 unit_rd_redDeathPlagueImmunityDur: 16
