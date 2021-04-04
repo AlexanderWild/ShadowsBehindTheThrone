@@ -186,6 +186,7 @@ namespace Assets.Code
                     if (sumGain > 0.9)
                     {
                         addMessage("Awareness of the dark grows", MsgEvent.LEVEL_ORANGE, false);
+                        hintSystem.popHint(HintSystem.hintType.AWARENESS);
                     }
                 }
             }

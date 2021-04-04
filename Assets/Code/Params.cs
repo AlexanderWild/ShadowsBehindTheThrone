@@ -400,7 +400,7 @@ namespace Assets.Code
         public int unit_pleadCaseTime = 3;
         public int unit_infiltrateTime = 6;
         public int unit_infiltrateWeakTime = 8;
-        public double unit_infiltrateAmount = 1.35;
+        public double unit_infiltrateAmount = 1.5;
         public double unit_divisorOffset = 2;
         public double unit_majorEvidence = 0.25;
         public double unit_minorEvidence = 0.1;
@@ -425,7 +425,7 @@ namespace Assets.Code
         public int unit_seeker_nReqSecrets = 12;
         public int unit_seeker_nCreatedSecrets = 7;
         public int unit_seeker_uncoverTime = 5;
-        public double unit_seeker_libraryInfiltrationReq = 0.15;
+        public double unit_seeker_libraryInfiltrationReq = 0.25;
         public double unit_vamp_infiltrateAmount = 1.6;
         public double unit_doctor_legalInfiltrationReq = 0.1;
         public int unit_doctor_lootBodiesAmount = 7;

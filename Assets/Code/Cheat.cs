@@ -108,6 +108,16 @@ namespace Assets.Code
                     SteamManager.reset_all_achievements();
                     World.staticMap.world.prefabStore.popMsg("All steam achievements reset");
                 }
+                if (command == "thetruth")
+                {
+                    foreach (Unit u in map.units)
+                    {
+                        if (u is Unit_Seeker seeker)
+                        {
+                            seeker.knowsTruth = true;
+                        }
+                    }
+                }
                 if (command == "insanity")
                 {
                     GraphicalMap.selectedHex.location.person().goInsane();

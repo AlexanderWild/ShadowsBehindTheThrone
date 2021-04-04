@@ -27,6 +27,17 @@ namespace Assets.Code
 
             if (unit.location.evidence.Count > 0)
             {
+                Evidence massiveEvidence = null;
+                foreach (Evidence ev in unit.location.evidence)
+                {
+                    if (ev.instaDiscover) { massiveEvidence = ev;break; }
+                }
+                if (massiveEvidence != null)
+                {
+                    discoverMassiveEvidence(massiveEvidence,unit);
+                    return;
+                }
+
                 dur += 1;
                 if (dur >= unit.location.map.param.unit_investigateTime)
                 {
@@ -113,5 +124,51 @@ namespace Assets.Code
                 unit.task = null;
             }
         }
+        public void discoverMassiveEvidence(Evidence ev, Unit unit)
+        {
+            if (ev.pointsTo != null)
+            {
+                if (unit.person != null && ev.pointsTo.person != null)
+                {
+                    unit.person.getRelation(ev.pointsTo.person).suspicion = 1;
+                }
+                else
+                {
+                    //Can't use suspicion system, go straight to murder
+                    //Makes sense since they're probably non-human terrors
+                    unit.hostility.Add(ev.pointsTo);
+                }
+
+                //unit.location.map.addMessage(unit.getName() + " has found evidence from " + ev.pointsTo.getName(), MsgEvent.LEVEL_ORANGE, false, unit.location.hex);
+            }
+
+
+            if (unit is Unit_Investigator inv)
+            {
+                inv.evidenceCarried.Add(ev);
+                ev.discoveredBy = inv;
+
+                //Unit_Investigator inv = (Unit_Investigator)unit;
+                //if (inv.state == Unit_Investigator.unitState.investigator)
+                //{
+                if (ev.pointsTo != null && ev.pointsTo.person != null && unit.person.getRelation(ev.pointsTo.person).suspicion >= 1)
+                {
+                    Task_HuntEnthralled_InvState task = new Task_HuntEnthralled_InvState(inv, ev.pointsTo);
+                    unit.task = task;
+                    unit.location.map.world.prefabStore.popMsgAgent(unit, ev.pointsTo,
+                        unit.getName() + " has discovered the evidence of " + ev.pointsTo.getName() + "'s presence, and will immediatelly begin to track them down due to the devastating effects of their truth." +
+                        "They know the location of " + ev.pointsTo.getName() + ", and will begin to chase them for " + task.turnsLeft + " turns.");
+                }
+                //}
+            }
+            ev.locationFound = unit.location;
+            unit.location.evidence.Remove(ev);
+
+            unit.location.map.overmind.panicFromCluesDiscovered += unit.location.map.param.panic_fromClueFound;
+            if (unit.location.map.overmind.panicFromCluesDiscovered > 1) { unit.location.map.overmind.panicFromCluesDiscovered = 1; }
+
+
+        }
     }
+
 }

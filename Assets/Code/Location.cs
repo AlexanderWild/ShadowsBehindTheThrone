@@ -187,6 +187,14 @@ namespace Assets.Code
             }
             checkPropertiesEndOfTurn();
 
+            foreach (Evidence e in evidence)
+            {
+                if (e.pointsTo != null && e.pointsTo.isEnthralled())
+                {
+                    map.hintSystem.popHint(HintSystem.hintType.EVIDENCE);
+                }
+            }
+
             if (soc != null && soc is Society) {
                 foreach (Evidence e in evidence)
                 {

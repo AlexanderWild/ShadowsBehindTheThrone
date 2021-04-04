@@ -13,3 +13,10 @@ V19 changelog
 -Nobles' fear of dark agents now occurs based on how close they are to the evil action, not globally. Gives highest threat estimation at the evidence location, then decreasing amounts in the nearby connected nodes
 
 -Moving towards a more unified and complete hint system
+
+-C:\Documents and Settings\username\Local Settings\Application Data\Unity\Editor\Editor.log
+
+-Only allow a single seeker
+
+-Investigators and agents now automatically instantly go after seekers once they discover the truth
+

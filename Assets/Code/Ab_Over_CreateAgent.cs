@@ -78,10 +78,19 @@ namespace Assets.Code
             descs.Add(DESC_DOCTOR);
             icons.Add(map.world.textureStore.icon_doctor);
 
-            indices.Add(SEEKER);
-            titles.Add("Seeker");
-            descs.Add(DESC_SEEKER);
-            icons.Add(map.world.textureStore.icon_seeker);
+
+            bool hasSeeker = false;
+            foreach (Unit u in map.units)
+            {
+                if (u is Unit_Seeker) { hasSeeker = true; break; }
+            }
+            if (!hasSeeker)
+            {
+                indices.Add(SEEKER);
+                titles.Add("Seeker");
+                descs.Add(DESC_SEEKER);
+                icons.Add(map.world.textureStore.icon_seeker);
+            }
 
             if (map.simplified == false)
             {

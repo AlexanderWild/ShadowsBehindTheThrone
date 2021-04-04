@@ -8,10 +8,11 @@ namespace Assets.Code
 
         public override void castInner(Map map, Unit u)
         {
-            double amount = map.param.unit_majorEvidence;
+            double amount = 1;
             Evidence e2 = new Evidence(map.turn);
             e2.pointsTo = u;
             e2.weight = amount;
+            e2.instaDiscover = true;
             u.location.evidence.Add(e2);
 
             u.location.person().shadow += map.param.unit_seeker_truthShadow;
@@ -55,7 +56,7 @@ namespace Assets.Code
 
         public override string specialCost()
         {
-            return "Major Evidence";
+            return "Massive Evidence";
         }
 
         public override string getDesc()

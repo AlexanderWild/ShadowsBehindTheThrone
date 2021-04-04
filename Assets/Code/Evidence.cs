@@ -14,6 +14,8 @@ namespace Assets.Code
         public Location locationFound;
         public Unit_Investigator discoveredBy;
         public bool reportedToSociety = false;
+        public bool instaDiscover;
+
         public Evidence(int turn)
         {
             turnDropped = turn;
