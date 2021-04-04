@@ -204,7 +204,10 @@ namespace Assets.Code
             {
                 double powerGainMult = calculatePowerGainMult();
                 power += map.param.overmind_powerRegen* powerGainMult;
-                map.hintSystem.popHint(HintSystem.hintType.POWER);
+                if (map.burnInComplete)
+                {
+                    map.hintSystem.popHint(HintSystem.hintType.POWER);
+                }
             }
             //power = Math.Min(power, map.param.overmind_maxPower);
 
