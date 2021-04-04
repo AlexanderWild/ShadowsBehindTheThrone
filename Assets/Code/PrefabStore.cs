@@ -399,6 +399,9 @@ namespace Assets.Code
                     files.Add(file);
                 }
             }
+
+            sortFiles(files, versionNumber);
+
             if (files.Count > 0)
             {
                 //Give 'em the loadable ones first, then the rest of the garbage
@@ -425,6 +428,25 @@ namespace Assets.Code
             }
 
             ui.addBlocker(specific.gameObject);
+        }
+
+        public void sortFiles(List<FileInfo> files,List<string> versionNumbers)
+        {
+            for (int i = 0; i < files.Count; i++)
+            {
+                for (int j = 0; j < files.Count - 1; j++)
+                {
+                    if (files[j].LastWriteTime < files[j + 1].LastWriteTime)
+                    {
+                        FileInfo heldInfo = files[j];
+                        string heldVer = versionNumbers[j];
+                        files[j] = files[j + 1];
+                        versionNumbers[j] = versionNumbers[j + 1];
+                        files[j + 1] = heldInfo;
+                        versionNumbers[j + 1] = heldVer;
+                    }
+                }
+            }
         }
 
         public void popScrollSetUserMods()

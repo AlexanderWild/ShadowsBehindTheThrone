@@ -48,7 +48,7 @@ namespace Assets.Code
         }
         public override string specialCost()
         {
-            return "Minor Evidence";
+            return "Major Evidence";
         }
 
 

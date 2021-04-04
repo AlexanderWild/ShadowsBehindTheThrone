@@ -11,9 +11,10 @@ namespace Assets.Code
         {
             Task_UncoverSecret task = new Task_UncoverSecret();
             task.leaveEvidence = false;
+            task.nSecrets = 2;
             u.task = task;
             u.location.map.world.prefabStore.popImgMsg(u.getName() + " beings uncovering the Forgotten Secret hidden at " + u.location.getName() + "," +
-                " a task which will take " + u.location.map.param.unit_seeker_uncoverTime + " turns, after which they will gain 1 secret.",
+                " a task which will take " + u.location.map.param.unit_seeker_uncoverTime + " turns, after which they will gain 2 secrets.",
                 u.location.map.world.wordStore.lookup("ABILITY_SEEKER_ACCESS_LIBRARY"),img:2);
 
         }

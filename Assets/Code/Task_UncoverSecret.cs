@@ -8,6 +8,8 @@ namespace Assets.Code
     {
         public int dur;
         public bool leaveEvidence = true;
+        public int nSecrets = 1;
+
         public override string getShort()
         {
             return "Uncovering Secret " + dur  + "/" + World.staticMap.param.unit_seeker_uncoverTime;
@@ -25,7 +27,7 @@ namespace Assets.Code
 
                 Unit_Seeker seeker = (Unit_Seeker)unit;
 
-                seeker.secrets += 1;
+                seeker.secrets += nSecrets;
 
                 List<Property> rems = new List<Property>();
                 foreach (Property pr in unit.location.properties)
@@ -56,7 +58,7 @@ namespace Assets.Code
                 {
                     Evidence e = new Evidence(unit.location.map.turn);
                     e.pointsTo = unit;
-                    e.weight = unit.location.map.param.unit_minorEvidence;
+                    e.weight = unit.location.map.param.unit_majorEvidence;
                     unit.location.evidence.Add(e);
                 }
             }

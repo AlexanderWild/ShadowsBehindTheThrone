@@ -20,3 +20,8 @@ V19 changelog
 
 -Investigators and agents now automatically instantly go after seekers once they discover the truth
 
+-Seekers can access libraries for twice the secret rewards to speed things up
+
+-Plague doctors buffed, temporarily, with rework planned to allow interaction with disease mechanics
+
+-Files to load now displayed in chronological order
