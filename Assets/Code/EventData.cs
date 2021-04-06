@@ -42,7 +42,7 @@ namespace Assets.Code
 			public List<Outcome> outcomes;
 		}
 
-		public enum Type { LOCATION, PERSON, UNIT, WORLD }
+		public enum Type { LOCATION, PERSON, UNIT, WORLD,MOVE }
 		public string type;
 
 		public string id;

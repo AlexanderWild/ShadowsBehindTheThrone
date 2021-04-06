@@ -80,6 +80,39 @@ namespace Assets.Code
                     case EventData.Type.WORLD:
                         nctx = chooseContext(e, nextWorld(m));
                         break;
+                    default:
+                        //Nothing to handle, it's just not a type we care about
+                        break;
+                }
+
+                if (nctx is EventContext ctx)
+                {
+                    World.log("Found a narr event to trigger");
+                    m.world.prefabStore.popEvent(e.data, ctx);
+                    break;
+                }
+            }
+        }
+
+        public static void onEnthralledUnitMove(Map m,Unit u)
+        {
+
+            World.Log("narrEvents to check " + events.Count);
+            foreach (var kv in events)
+            {
+                var e = kv.Value;
+
+                EventContext? nctx = null;
+                List<EventContext> contices = new List<EventContext>();
+                contices.Add(EventContext.withUnit(m, u));
+                switch (e.type)
+                {
+                    case EventData.Type.MOVE:
+                        nctx = chooseContext(e, contices);
+                        break;
+                    default:
+                        //Another type we're not involved in here
+                        break;
                 }
 
                 if (nctx is EventContext ctx)

@@ -1,0 +1,30 @@
+{
+	"id": "anw.moveCathedral1",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "Mainz Domansicht vom Marktplatz by Heinrich Franz Schalck",
+	"image": "default.235.jpg",
+	
+	"type": "UNIT",
+	"conditional": "0 = 0",
+	"probability": 1,
+
+	"name": "A movement occurs",
+	"description": "You have moved a unit.",
+
+
+	"choices": [
+		{
+			"name": "Acknowledge",
+			"description": "Movement has indeed occurred",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"description":"Good stuff" ,
+					"environment": [
+						{ "key": "ANW_MOVE_CATHEDRAL_1", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

@@ -523,6 +523,8 @@ namespace Assets.Code
                             u.movesTaken += 1;
                             u.location.map.world.audioStore.playClickSelect();
                             u.task = null;
+
+                            EventManager.onEnthralledUnitMove(u.location.map, u);
                         }
                     }
                 }
