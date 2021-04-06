@@ -1,0 +1,43 @@
+{
+	"id": "anw.twins01",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "turn < 100 & has_enthralled &($ANW_TWINS = 0)",
+	"probability": 0.0025,
+
+	"name": "The Twins",
+	"description": "%ENTHRALLED_NAME has been noticing a pair of twins around the court. They don't seem to belong to anyone, and arrive and leave without obvious passage. Malevolent spirits? Trickster aspects of some minor power? Fragments of the darkness given life? Such things are to be expected, as one Age ushers in another in this celestial alignment.",
+
+
+	"choices": [
+		{
+			"name": "Let us see how this develops...",
+			"description": "Begins 'The Twins' event chain",
+			"outcomes": [
+				{
+					"weight": 1,
+
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "1", "local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Such trivialities are irrelevant",
+			"description": "Ends the event chain",
+			"outcomes": [
+				{
+					"weight": 1,
+					
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "-1" }
+					]
+				}
+			]
+		}
+	]
+}

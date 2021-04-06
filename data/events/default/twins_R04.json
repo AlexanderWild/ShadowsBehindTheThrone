@@ -1,0 +1,43 @@
+{
+	"id": "anw.twinsR04",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "has_enthralled & ($ANW_TWINS > 2) & ($ANW_TWINS < 7)",
+	"probability": 0.08,
+
+	"name": "The Twins",
+	"description": "The twins demand you guess which is the elder of the two. There is nothing to suggest which of the two might be older, and given their nature, there is no guarantee that either is. Or, indeed, that they are distinct entities, and not some manifestation of a single dark soul in two bodies.",
+
+
+	"choices": [
+		{
+			"name": "Pick the taller of the two",
+			"description": "Only taller by a hair's breadth, but maybe that's the clue?",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description":"The twins simply laugh, and leave before you can determine if you were correct. Infuriating.",
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Pick the shorter of the two",
+			"description": "An intuition suggests this might be the one? But who can really tell?",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description":"The twins grin, but are silent, and leave. They do not reveal if you were correct, and you suspect they never will. Obnoxious",
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,29 @@
+{
+	"id": "anw.twins02",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "has_enthralled &($ANW_TWINS = 1)",
+	"probability": 0.2,
+
+	"name": "The Twins",
+	"description": "The twins seem well aware of %ENTHRALLED_NAME's nature, yet seem completely unperturbed by it. They laugh and play throughout the halls and courtyards, occasionally inviting the irritation of the lords and ladies of the place, often mysteriously passing right by without even a blink.",
+
+
+	"choices": [
+		{
+			"name": "These creatures had better not become a nuisance",
+			"outcomes": [
+				{
+					"weight": 1,
+
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "2", "local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

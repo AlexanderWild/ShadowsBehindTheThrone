@@ -1,0 +1,75 @@
+{
+	"id": "anw.twinsR01",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "has_enthralled & ($ANW_TWINS > 2) & ($ANW_TWINS < 7)",
+	"probability": 0.08,
+
+	"name": "The Twins",
+	"description": "The twins re-appear. They bring a gift, they say. This probably doesn't bode well. Giggling, they produce the shadow of a cat. It seems unconcerned, to have been amputated from the cat itself, and jumps down, stalking across the floor and then bounding to a shadow of a cupboard nearby. While this amuses the twins greatly, it leaves the certainty of there being a cat without a shadow somewhere in the court, which will alert suspicion of not discovered.",
+
+
+	"choices": [
+		{
+			"name": "Find and catch the shadowless cat",
+			"description": "Attempt to catch the shadowless beast",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "%ENTHRALLED_NAME becomes convinced, especially following the twin's laughter, that the shadow was not taken from a cat, but is rather just another dark spirit they came across. No harm is done, other than time wasted.",
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "%ENTHRALLED_NAME manages to track down the cat, and expends a degree of dark power to attach a new shadow to it, leaving the existing shadow to remain as a pet for the twins. Hopefully it will keep them busy enough to not be a nuisance in the future.\nYou lose 2 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "-2" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "%ENTHRALLED_NAME catches the creature. The twins tainted its soul when they split it from its shadow, and rejoining the two has boosted your power.\nYou gain 3 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "3" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "%ENTHRALLED_NAME fails to find the creature in time, and it becomes clear that something is amiss.\n%ENTHRALLED_NAME gains 10% evidence",
+					"effects": [
+						{ "command": "ENTHRALLED_GAINS_EVIDENCE", "argument": "10" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "We will deal with the consequences when they occur",
+			"description": "%ENTHRALLED_NAME gains 10% evidence",
+			"outcomes": [
+				{
+					"weight": 1,
+					"effects": [
+						{ "command": "ENTHRALLED_GAINS_EVIDENCE", "argument": "10" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

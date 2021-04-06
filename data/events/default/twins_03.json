@@ -1,0 +1,29 @@
+{
+	"id": "anw.twins03",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "has_enthralled &($ANW_TWINS = 2)",
+	"probability": 0.1,
+
+	"name": "The Twins",
+	"description": "The twins greet %ENTHRALLED_NAME, appearing unexpectdly around a corner. They introduce themselves, but their names are forgotten as soon as they are spoken, even to you. They remain evasive throughout the conversation, and little if anything is learnt. Even the most inquisitive and precisely worded question yields no useful information, but a litany of peculiar sayings and improbable anecdotes.",
+
+
+	"choices": [
+		{
+			"name": "They remain inexplicable",
+			"outcomes": [
+				{
+					"weight": 1,
+
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "3", "local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

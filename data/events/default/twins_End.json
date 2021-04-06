@@ -1,0 +1,30 @@
+{
+	"id": "anw.twinsEnd",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "has_enthralled & ($ANW_TWINS = 7)",
+	"probability": 0.1,
+
+	"name": "The Twins",
+	"description": "The twins seem to have disappeared. They no longer arrive in the courtyard to stir up the ravens, or to steal the light from the candles. Maybe they've travelled elsewhere? Maybe they have rejoined whatever power manifested them? Maybe they were just temporary dreams, in the mind of a still greater creature? A shame, perhaps, but you have other issues to attend to",
+
+
+	"choices": [
+		{
+			"name": "Perhaps it is for the best",
+			"description": "Ends the event chain",
+			"outcomes": [
+				{
+					"weight": 1,
+					
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "-1" }
+					]
+				}
+			]
+		}
+	]
+}

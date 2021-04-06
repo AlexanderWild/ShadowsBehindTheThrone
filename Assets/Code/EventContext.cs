@@ -24,7 +24,7 @@ namespace Assets.Code
                 {
 					return _unit.location;
 				}
-				if (_location == null && (_person.getLocation() != null))
+				if (_person != null && (_person.getLocation() != null))
 				{
 					return _person.getLocation();
 				}

@@ -1,0 +1,66 @@
+{
+	"id": "anw.twinsR03",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "has_enthralled & ($ANW_TWINS > 2) & ($ANW_TWINS < 7)",
+	"probability": 0.08,
+
+	"name": "The Twins",
+	"description": "The twins wish for you to grant them a sliver of power, some darkness to make their own, and to play their games with. Perhaps you would benefit from this trade? Perhaps you would not. Neither children nor trickster spirits make particularly good trading partners.",
+
+
+	"choices": [
+		{
+			"name": "Grant them the power",
+			"description": "Lose 5 power, perhaps to receive something in return",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "The twins, in return for the gift of power, reward you with a small flower. It is uninteresting and mundane, having been picked from the gardens recently. A predictably unhelpful exchange.",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "-5" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "In return, the twins give you what they've collected. A surprisingly large collection of trinkets, jewels and silk robes, which they must have stolen from far off places quite some time ago.\n\nYour enthralled gains 5 prestige",
+					"effects": [
+						{ "command": "ENTHRALLED_GAINS_PRESTIGE", "argument": "5" },
+						{ "command": "ADD_POWER", "argument": "-5" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "The twins lead %ENTHRALLED_NAME to a location in the gardens, and tell $him to dig. After a few minutes of manual labour, they uncover a tiny crack in the world, through which the flow of magic can be manipulated. It more than compensates for the power lost.\nYou gain 3 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "3" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Perhaps not.",
+			"description": "Do not grant the twins their request",
+			"outcomes": [
+				{
+					"weight": 1,
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

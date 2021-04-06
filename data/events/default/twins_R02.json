@@ -1,0 +1,123 @@
+{
+	"id": "anw.twinsR02",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Two Sisters by Cornelis de Vos",
+	"image": "default.301.jpg",
+	
+	"type": "WORLD",
+	"conditional": "has_enthralled & ($ANW_TWINS > 2) & ($ANW_TWINS < 7)",
+	"probability": 0.08,
+
+	"name": "The Twins",
+	"description": "The twins announce they have a gift for you. Each has a gift, neither will tell you what they offer, neither will tell you where these gifts might have been obtained, and they demand you only select one.",
+
+
+	"choices": [
+		{
+			"name": "Choose the gift of the twin on the left",
+			"description": "What is inside?",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "The gift is empty! Just a box with nothing inside. The twin smiles warmly, and informs you that the gift is the feeling of disappointment. From the tone of her voice, she seems to genuinely believe this was a worthwhile gift you would be pleased with.",
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "The twin laughs cruelly. The gift was a trick, and you feel your power sapping, absorbed by the trickster spirit. You should have known better than to accept the gift.\n\nYou lose 2 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "-2" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "The gift is a fragment of an elder shadow, a piece of darkness left over from before the sun shone upon the world. The twin has somehow found it, in a forgotten part of the continent, and brought it to you. You feel the darkness rejoin yours.\n\nYou gain 5 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "5" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "A tiny black stone sits in the box. It emanates power, but not very much. A tiny trinket, to be expected from a child's gift.\n\nYou gain 1 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "1" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "The gift contains a locket of gold, within which is an image of some long-dead monarch. Quite the jewel, and its antique nature will impress your peers.\n\nYour enthralled gains 5 prestige",
+					"effects": [
+						{ "command": "ENTHRALLED_GAINS_PRESTIGE", "argument": "5" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Choose the gift of the twin on the right",
+			"description": "What is inside?",
+			"outcomes": [
+				{
+					"weight": 1,
+					"description": "The gift is empty! Just a box with nothing inside. The twin smiles warmly, and informs you that the gift is the feeling of disappointment. From the tone of her voice, she seems to genuinely believe this was a worthwhile gift you would be pleased with.",
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "The twin laughs cruelly. The gift was a trick, and you feel your power sapping, absorbed by the trickster spirit. You should have known better than to accept the gift.\n\nYou lose 2 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "-2" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "The gift is a fragment of an elder shadow, a piece of darkness left over from before the sun shone upon the world. The twin has somehow found it, in a forgotten part of the continent, and brought it to you. You feel the darkness rejoin yours.\n\nYou gain 5 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "5" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "A tiny black stone sits in the box. It emanates power, but not very much. A tiny trinket, to be expected from a child's gift.\n\nYou gain 1 power",
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "1" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				},
+				{
+					"weight": 1,
+					"description": "The gift contains a locket of gold, within which is an image of some long-dead monarch. Quite the jewel, and its antique nature will impress your peers.\n\nYour enthralled gains 5 prestige",
+					"effects": [
+						{ "command": "ENTHRALLED_GAINS_PRESTIGE", "argument": "5" }
+					],
+					"environment": [
+						{ "key": "ANW_TWINS", "value": "$ANW_TWINS + 1", "local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

@@ -13,6 +13,7 @@ namespace Assets.Code
         {
 			//Map Fields
 			{ "turn",         new TypedField<int>   (c => { return c.map.turn; })                  },
+            { "seed",         new TypedField<int>   (c => { return (int)c.map.seed; })                  },
             { "enshadowment", new TypedField<double>(c => { return c.map.data_avrgEnshadowment; }) },
             { "awareness",    new TypedField<double>(c => { return c.map.data_awarenessSum; })     },
             { "temperature",  new TypedField<double>(c => { return c.map.data_globalTempSum; })    },
