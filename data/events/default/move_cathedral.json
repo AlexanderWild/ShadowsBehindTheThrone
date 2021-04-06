@@ -5,7 +5,7 @@
 	"image": "default.235.jpg",
 	
 	"type": "UNIT",
-	"conditional": "0 = 0",
+	"conditional": "0 = $ANW_MOVE_CATHEDRAL_1",
 	"probability": 1,
 
 	"name": "A movement occurs",
