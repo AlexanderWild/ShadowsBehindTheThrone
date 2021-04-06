@@ -112,7 +112,7 @@ namespace Assets.Code
 			new TokenExpression(Token.Type.UNIT_FIELD,     "^unit\\.[a-zA-Z_]+"),
 			new TokenExpression(Token.Type.WORLD_FIELD,    "^[a-zA-Z_]+"),
 
-			new TokenExpression(Token.Type.VARIABLE, "^\\$[a-zA-Z_]+")
+			new TokenExpression(Token.Type.VARIABLE, "^\\$[a-zA-Z0-9_]+")
 		};
 
 		public static List<Token> tokenize(string expr)
