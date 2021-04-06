@@ -139,8 +139,9 @@ namespace Assets.Code
 
 						switch (bn.token.type)
 						{
-							case EventParser.Token.Type.PLUS:  return new TypedValue<int>(av + bv);
-							case EventParser.Token.Type.MINUS: return new TypedValue<int>(av - bv);
+							case EventParser.Token.Type.PLUS:   return new TypedValue<int>(av + bv);
+							case EventParser.Token.Type.MINUS:  return new TypedValue<int>(av - bv);
+							case EventParser.Token.Type.MODULO: return new TypedValue<int>(av % bv);
 
 							case EventParser.Token.Type.EQUALS:  return new TypedValue<bool>(av == bv);
 							case EventParser.Token.Type.NEQUALS: return new TypedValue<bool>(av != bv);
