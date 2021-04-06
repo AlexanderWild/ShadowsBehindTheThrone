@@ -1,0 +1,61 @@
+{
+	"id": "anw.friendE101MD",
+	"modCredit": "bbytwhnds",
+	"imgCredit": "Saint Paul Writing His Epistles by Valentin de Boulogne",
+	"image": "default.writing.jpg",
+	
+	"type": "PERSON",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & (shadow = 100) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
+	"probability": 1,
+
+	"name": "A Letter Arrives",
+	"description": "Master %ENTHRALLED_NAME,\n\nI now see how wrong I was to fear the darkness. Its oblivion is the only escape from the burning light. Only in the release of the shadow can we ever find peace. How might this humble worshipper serve?",
+
+
+	"choices": [
+		{
+			"name": "The crown must fall",
+			"description":"%PERSON_NAME attempts to kill the leader of the nation (If there is one)\n\n-70% chance of adding 20 evidence to your enthralled noble and both %PERSON_NAME and the nation's sovereign being killed \n\n-20% chance of adding 10 evidence to both your enthralled noble and %PERSON_NAME\n\n-10% chance of adding 40 evidence to both your enthralled noble and %PERSON_NAME" ,
+			"outcomes": [
+				{
+					"weight": 70,
+					"description":"%PERSON_NAME waits until a feast, held in the capital, and without warning strikes at %SOVEREIGN with a poisoned dagger, before the guards are able to stop %him. Both are dead before the guests even realise what is happening." ,
+					"effects": [
+						{ "command": "GAIN_EVIDENCE", "argument": "20" },
+						{ "command": "ENTHRALLED_GAINS_EVIDENCE", "argument": "20" },
+						{ "command": "KILL_SOVEREIGN", "argument": "Killed by an enshadowed noble at a banquet" },
+						{ "command": "KILL_PERSON", "argument": "Killed by guards after assassinating the sovereign" }
+					]
+				},
+				{
+					"weight": 20,
+					"description":"%PERSON_NAME has not found an opportunity to strike, but your letters are slowly creating a paper trail, and people may begin to suspect... (Your enthralled noble has gained evidence)" ,
+					"effects": [
+						{ "command": "GAIN_EVIDENCE", "argument": "10" },
+						{ "command": "ENTHRALLED_GAINS_EVIDENCE", "argument": "10" }
+					]
+				},
+				{
+					"weight": 10,
+					"description":"%PERSON_NAME is clumsy, and is leaving far too much evidence. You will need to avoid your enthralled noble getting discovered by hiding the evidence produced by %PERSON_NAME's failures (Your enthralled noble has gained evidence)" ,
+					"effects": [
+						{ "command": "GAIN_EVIDENCE", "argument": "40" },
+						{ "command": "ENTHRALLED_GAINS_EVIDENCE", "argument": "40" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Spread the shadow for as long as you are able to, all must come to share in this black gift",
+			"description":"Ends this event chain, leaving %PERSON_NAME enshadowed and hopefully spreading it to others" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

@@ -51,7 +51,7 @@ namespace Assets.Code
 
         public static bool advancedEdition = true;
         public static bool useHorseman = false;
-        public static bool useEvents = false;
+        public static bool useEvents = true;
         public static bool useWorkshop = false;
 
         public static LogBox saveLog = new LogBox("saveLog.log");

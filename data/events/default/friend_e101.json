@@ -19,7 +19,7 @@
 			"outcomes": [
 				{
 					"weight": 0.75,
-					"description":"%PERSON_NAME's fears continue to grow. %She sleeps with a dagger under %her pillow and only eats food %she's seen cooked in front of %her. The strain eats at %her sanity. The work continues..." ,
+					"description":"%PERSON_NAME's fears continue to grow. %He sleeps with a dagger under %her pillow and only eats food %he's seen cooked in front of %him. The strain eats at %his sanity. The work continues..." ,
 					"effects": [
 						{ "command": "LOSE_SANITY", "argument": "3" }
 					]

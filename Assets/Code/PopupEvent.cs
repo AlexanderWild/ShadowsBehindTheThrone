@@ -125,6 +125,9 @@ namespace Assets.Code
             if (ctx.person != null)
             {
                 updated = updated.Replace("%PERSON_NAME", ctx.person.getFullName());
+                string sov = "nobody";
+                if (ctx.society.sovereign.heldBy != null) { }
+                updated = updated.Replace("%SOVEREIGN", sov);
                 if (ctx.person.isMale)
                 {
                     updated = updated.Replace("%she", "he");
@@ -133,6 +136,12 @@ namespace Assets.Code
                     updated = updated.Replace("%her", "his");
                     updated = updated.Replace("%Hers", "His");
                     updated = updated.Replace("%hers", "his");
+                    updated = updated.Replace("%he", "he");
+                    updated = updated.Replace("%He", "He");
+                    updated = updated.Replace("%His", "His");
+                    updated = updated.Replace("%his", "his");
+                    updated = updated.Replace("%Him", "Him");
+                    updated = updated.Replace("%him", "him");
                 }
                 else
                 {
@@ -141,7 +150,13 @@ namespace Assets.Code
                     updated = updated.Replace("%Her", "Her");
                     updated = updated.Replace("%her", "her");
                     updated = updated.Replace("%Hers", "Hers");
-                    updated = updated.Replace("%hers", "her");
+                    updated = updated.Replace("%hers", "hers");
+                    updated = updated.Replace("%he", "she");
+                    updated = updated.Replace("%He", "She");
+                    updated = updated.Replace("%His", "Her");
+                    updated = updated.Replace("%his", "her");
+                    updated = updated.Replace("%Him", "Her");
+                    updated = updated.Replace("%him", "her");
 
                 }
             }

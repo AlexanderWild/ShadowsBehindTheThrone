@@ -5,7 +5,7 @@
 	"image": "default.writing.jpg",
 	
 	"type": "PERSON",
-	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed &($ANW_FRIEND_CHAIN = 201) & ($ANW_FRIEND = 1)",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & (liking_for_enthralled < 75) & is_landed &($ANW_FRIEND_CHAIN = 201) & ($ANW_FRIEND = 1)",
 	"probability": 1,
 
 	"name": "A Letter Arrives",
@@ -29,6 +29,32 @@
 					"description":"A misplaced word, and social-misstep. %ENTHRALLED_NAME fails to charm %PERSON_NAME this time, and loses 10 points of liking. The efforts continue...",
 					"effects": [
 						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "-10" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Flatter them at the expense of yourself",
+			"description":"Your enthralled noble gains 45 liking from %PERSON_NAME but loses 10 prestige" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"description":"%ENTHRALLED_NAME makes great shows of their support for %PERSON_NAME, constantly pointing out their successes and virtues to anyone who will listen. It makes %ENTHRALLED_NAME seem foolish and sycophantic, but %PERSON_NAME appreciates the constant shower of praise." ,
+					"effects": [
+						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "45" },
+						{ "command": "ENTHRALLED_GAINS_PRESTIGE", "argument": "-10" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Enough of this distraction",
+			"description":"Ends this event chain, abandoning your efforst to influence the mind of %PERSON_NAME" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "-1" ,"local":"False"}
 					]
 				}
 			]

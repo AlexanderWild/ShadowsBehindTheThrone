@@ -55,7 +55,7 @@ action_cleanseSoulAmount: 0.1
 action_investigateEvidence: 0.2
 overmind_allowDirectEnthralling: 1
 overmind_maxPower: 24
-overmind_powerRegen: 1
+overmind_powerRegen: 0.85
 overmind_singleAbilityPerTurn: True
 overmind_enthrallmentUseRegainPeriod: 32
 overmind_maxEnthralled: 2

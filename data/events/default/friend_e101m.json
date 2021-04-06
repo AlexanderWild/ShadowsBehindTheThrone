@@ -5,7 +5,7 @@
 	"image": "default.writing.jpg",
 	
 	"type": "PERSON",
-	"conditional": "has_enthralled & is_in_enthralled_nation & !(is_sane) & (liking_for_enthralled > 0) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
+	"conditional": "has_enthralled & is_in_enthralled_nation & !(is_sane) & (liking_for_enthralled > 0) & (shadow < 100) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
 	"probability": 1,
 
 	"name": "A Letter Arrives",
@@ -13,6 +13,30 @@
 
 
 	"choices": [
+		{
+			"name": "There are still enemies left to discover",
+			"description":"%PERSON_NAME's suspicions grow and expand to anything or anyone, under your constant pressure and dire warnings.\n\n-%PERSON_NAME gains supicion towards a random noble (including possibly your enthralled)" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"effects": [
+						{ "command": "RANDOM_SUSPICION", "argument": "100" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Only the darkness can save you",
+			"description":"%PERSON_NAME's fear of the dark powers has driven them straight into your arms, finally falling victim to the terrors they were afraid of.\n\n-%PERSON_NAME gains 50% shadow" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"effects": [
+						{ "command": "GAIN_SHADOW", "argument": "40" }
+					]
+				}
+			]
+		},
 		{
 			"name": "Enough of this distraction",
 			"description":"Ends this event chain, abandoning your efforst to influence the mind of %PERSON_NAME" ,

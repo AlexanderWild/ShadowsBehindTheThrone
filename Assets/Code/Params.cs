@@ -73,7 +73,7 @@ namespace Assets.Code
 
         public int overmind_allowDirectEnthralling = 1;
         public int overmind_maxPower = 24;
-        public double overmind_powerRegen = 0.75;
+        public double overmind_powerRegen = 0.85;
         public bool overmind_singleAbilityPerTurn = true;
         public int overmind_enthrallmentUseRegainPeriod = 32;
         public int overmind_maxEnthralled = 2;
