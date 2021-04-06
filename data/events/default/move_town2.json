@@ -1,0 +1,56 @@
+{
+	"id": "anw.moveTown2",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Vismarkt by Cornelis Dusart",
+	"image": "default.241.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_TOWN_2 = 0 & is_village & is_coastal & (infiltration = 0)",
+	"probability": 0.25,
+
+	"name": "%LOCATION_NAME",
+	"description": "%LOCATION_NAME is a small village which thrives mostly from the bounty of the ocean. The place reeks of fish, in various stages of decay, and the sea breeze is a most welcome break from the odors. In the markets those who remain on shore sell the catch of those who venture off onto the waves to cast their nets. Perhaps this link to the ocean could be deepened?",
+
+
+	"choices": [
+		{
+			"name": "The ocean is deep and dark, and to eat its creatures is to risk becoming one",
+					"description": "Attempt to corrupt the fish markets with darker foodstuffs, turning an unfortunate few into worshippers of the Deep Ones\n\n-70% Chance to:\n-Gain 15% infiltration\n-Gain 15% shadow here\n\n30%Chance to:\n-Leave minor evidence",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"description": "The people feast on the gifts of the abyss, and their bodies twist, becoming unclean servants of the darkness",
+					"effects": [
+						{ "command": "GAIN_INFILTRATION", "argument": "15"} ,
+						{ "command": "LOCATION_GAIN_SHADOW", "argument": "15" }
+					],
+					"environment": [
+						{ "key": "ANW_MOVE_TOWN_2", "value": "-1" ,"local":"False"}
+					]
+				},
+				{
+					"weight": 0.3,
+					"description": "%UNIT_NAME is caught in the act, and must make a quick escape. Evidence has been left behind...",
+					"effects": [
+						{ "command": "LEAVE_MINOR_EVIDENCE","argument":""}
+					],
+					"environment": [
+						{ "key": "ANW_MOVE_TOWN_2", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Let the be, our nets are for greater prey than they",
+					"description": "Continue your journey without interacting",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_MOVE_TOWN_2", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

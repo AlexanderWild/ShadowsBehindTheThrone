@@ -32,11 +32,19 @@ namespace Assets.Code
             { "shadow",   new TypedField<int>  (c => {return (int)(c.person.shadow*100); })},
 
 			//Unit 
-			{ "is_church",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_Abbey; })},
-            { "is_town",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_TOWN; })},
 
 			//Location
-			{ "infiltration",   new TypedField<int>  (c => {if (c.location == null || c.location.settlement == null){return 0; } return (int)(100*c.location.settlement.infiltration); })},
+            { "is_coastal",   new TypedField<bool>  (c => {return (c.location.isCoastal); })},
+            { "infiltration",   new TypedField<int>  (c => {if (c.location == null || c.location.settlement == null){return 0; } return (int)(100*c.location.settlement.infiltration); })},
+            { "is_church",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_Abbey; })},
+            { "is_town",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_TOWN; })},
+            { "is_village",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_VILLAGE; })},
+
+            { "is_empty",   new TypedField<bool>  (c => {return (c.location.settlement == null); })},
+            { "is_desert",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.DESERT); })},
+            { "is_dry",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.DRY); })},
+            { "is_snow",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.SNOW); })},
+
 
         };
 
@@ -136,7 +144,30 @@ namespace Assets.Code
                 }
                 }
             }) },
+            { "LOCATION_GAIN_SHADOW", new TypedProperty<int>((c, v) => {
+                if (c.location.person() != null)
+                {
+                    Person p = c.location.person();
+                    p.shadow += v/100d;
+                    if (p.shadow > 1)
+                    {
+                        p.shadow = 1;
+                    }else if (p.shadow < 0)
+                    {
+                        p.shadow = 0;
+                    }
+                }
+            }) },
 
+            //Unit effects
+            
+            { "LEAVE_MINOR_EVIDENCE", new TypedProperty<string>((c, v) => {
+                double amount = c.map.param.unit_minorEvidence;
+                Evidence e2 = new Evidence(c.map.turn);
+                e2.pointsTo = c.unit;
+                e2.weight = amount;
+                c.unit.location.evidence.Add(e2);
+            }) },
 
             { "SHOW_EVENT", new TypedProperty<string>((c, v) => {
                 if (EventManager.events.ContainsKey(v))

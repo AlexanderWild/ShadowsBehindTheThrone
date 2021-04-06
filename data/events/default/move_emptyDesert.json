@@ -1,0 +1,28 @@
+{
+	"id": "anw.moveEmptyDesert",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Between the Sierras and the coast range, California by Hermann Ottomar Herzog",
+	"image": "default.167.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_DESERT = 0 & (is_desert | is_dry) & is_empty",
+	"probability": 0.1,
+
+	"name": "%LOCATION_NAME",
+	"description": "%LOCATION_NAME is an empty stretch of desert and badlands. Devoid of almost all human life, and barely populated by non-human. It stretches as far as the eye can see with nothingness. There is a peace to the still air, as if the troubles of the world do not matter here. Here, the troubles are simple. Water, shelter from the sun, perhaps food, and the endurance required to reach somewhere else.",
+
+
+	"choices": [
+		{
+			"name": "The journey continues",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_MOVE_DESERT", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

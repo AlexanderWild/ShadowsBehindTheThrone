@@ -170,6 +170,10 @@ namespace Assets.Code
                 }
             }
 
+            if (ctx.unit != null)
+            {
+                updated = updated.Replace("%UNIT_NAME", ctx.unit.getName());
+            }
             if (ctx.location != null)
             {
                 updated = updated.Replace("%LOCATION_NAME", ctx.location.getName(false));

@@ -1,0 +1,28 @@
+{
+	"id": "anw.moveEmptySnow",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Winter Landscape by by Alexei Savrasov",
+	"image": "default.123.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_SNOW = 0 & (is_snow) & is_empty",
+	"probability": 0.25,
+
+	"name": "%LOCATION_NAME",
+	"description": "%UNIT_NAME moves swiftly through the deep snow. A human would stumble, their breath would billow forth like a stormcloud as they strained to make progress through the unpathed landscape. %UNIT_NAME however is driven by unholy powers and kept from cold by %her malign nature, and can endure days worth of travel which would exhaust any mortal in hours.",
+
+
+	"choices": [
+		{
+			"name": "The journey continues",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_MOVE_SNOW", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}
