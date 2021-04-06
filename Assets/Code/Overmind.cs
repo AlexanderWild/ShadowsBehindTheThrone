@@ -200,10 +200,12 @@ namespace Assets.Code
         public void turnTick()
         {
             hasTakenAction = false;
-            if (power < map.param.overmind_maxPower)
+            double powerGainMult = calculatePowerGainMult();
+            double powerGain = map.param.overmind_powerRegen * powerGainMult;
+             
+            if (power < map.param.overmind_maxPower + powerGain)
             {
-                double powerGainMult = calculatePowerGainMult();
-                power += map.param.overmind_powerRegen* powerGainMult;
+                power += powerGain;
                 if (map.burnInComplete)
                 {
                     map.hintSystem.popHint(HintSystem.hintType.POWER);

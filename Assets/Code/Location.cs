@@ -59,9 +59,10 @@ namespace Assets.Code
         }
         
 
-        public string getName()
+        public string getName(bool incLocation=true)
         {
             string position = " (" + (map.sizeX-this.hex.x) + "," + this.hex.y + ")";
+            if (incLocation == false) { position = ""; }
             if (settlement != null) { return settlement.name + position; }
             return name + position;
         }

@@ -1,0 +1,28 @@
+{
+	"id": "anw.moveCathedral2",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Many Figures On The Market Square In Front Of The Martinikirche Braunschweig by Cornelis Springer",
+	"image": "default.236.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_CATHEDRAL_2 = 0 & is_church",
+	"probability": 0.05,
+
+	"name": "%LOCATION_NAME",
+	"description": "The sheer size of %LOCATION_NAME is hard to overstate. A towering edifice of carved stone. It took humanity centuries to build this place, the nobles who commissioned and funded it passed into the arms of whatever gods they erected it to worship before seeing it completed. Neverthereless, the workers continued, and generations later it was completed, dominating the landscape for miles around, a symbol of faith and devotion.",
+
+
+	"choices": [
+		{
+			"name": "It serves no purpose if it does not serve the darkness",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_MOVE_CATHEDRAL_2", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

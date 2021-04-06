@@ -20,6 +20,7 @@ namespace Assets.Code
         public Image imgH;
         public Image imgP;
         public Text imgCredit;
+        public Text modCredit;
 
         public string[] optDescs = new string[]
         {
@@ -60,11 +61,12 @@ namespace Assets.Code
         }
         public void populate(EventData data, EventContext ctx,Map map)
 		{
-			title.text = data.name;
+			title.text = bindReferences(data.name,ctx,map);
 			descriptionH.text = bindReferences(data.description,ctx,map);
             descriptionP.text = bindReferences(data.description,ctx,map);
 
             imgCredit.text = data.imgCredit;
+            modCredit.text = data.modCredit;
 
             Sprite image = null;
             string imgKey = "default.01.jpg";
@@ -112,7 +114,14 @@ namespace Assets.Code
 			{
 				options[n].GetComponentInChildren<Text>().text = c.name;
 				options[n].onClick.AddListener(delegate { dismiss(c, ctx); });
-                optDescs[n] = bindReferences(c.description, ctx, map);
+                if (c.description != null)
+                {
+                    optDescs[n] = bindReferences(c.description, ctx, map);
+                }
+                else
+                {
+                    optDescs[n] = null;
+                }
 
                 options[n++].gameObject.SetActive(true);
 			}
@@ -159,6 +168,11 @@ namespace Assets.Code
                     updated = updated.Replace("%him", "her");
 
                 }
+            }
+
+            if (ctx.location != null)
+            {
+                updated = updated.Replace("%LOCATION_NAME", ctx.location.getName(false));
             }
             return updated;
         }

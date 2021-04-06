@@ -1,25 +1,23 @@
 {
 	"id": "anw.moveCathedral1",
-	"modCredit": "bbytwhnds",
+	"modCredit": "BobbyTwoHands",
 	"imgCredit": "Mainz Domansicht vom Marktplatz by Heinrich Franz Schalck",
 	"image": "default.235.jpg",
 	
-	"type": "UNIT",
-	"conditional": "0 = $ANW_MOVE_CATHEDRAL_1",
-	"probability": 1,
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_CATHEDRAL_1 = 0 & is_church",
+	"probability": 0.05,
 
-	"name": "A movement occurs",
-	"description": "You have moved a unit.",
+	"name": "%LOCATION_NAME",
+	"description": "%LOCATION_NAME is a massive temple, around which a large village has been created. As %PERSON_NAME enters, they shudder, feeling the presence of hostile divine powers, a sense of blinding, burning light, shining on a soul which had long since turned its back on it.",
 
 
 	"choices": [
 		{
-			"name": "Acknowledge",
-			"description": "Movement has indeed occurred",
+			"name": "These feelings will soon pass",
 			"outcomes": [
 				{
 					"weight": 0.8,
-					"description":"Good stuff" ,
 					"environment": [
 						{ "key": "ANW_MOVE_CATHEDRAL_1", "value": "-1" ,"local":"False"}
 					]

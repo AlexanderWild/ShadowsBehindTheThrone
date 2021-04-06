@@ -20,9 +20,16 @@ namespace Assets.Code
 		{
 			get
 			{
-				//if (_location == null)
+				if (_location == null && (_unit != null))
+                {
+					return _unit.location;
+				}
+				if (_location == null && (_person.getLocation() != null))
+				{
+					return _person.getLocation();
+				}
 				//	throw new Exception("event location not in current context.");
-				
+
 				return _location;
 			}
 		}
@@ -32,7 +39,14 @@ namespace Assets.Code
 		{
 			get
 			{
-				//if (_person == null)
+				if (_person == null && _unit != null && _unit.person != null)
+                {
+					return _unit.person;
+				}
+				if (_person == null && _location != null && _location.person() != null)
+				{
+					return _location.person();
+				}
 				//	throw new Exception("event person not in current context.");
 
 				return _person;
