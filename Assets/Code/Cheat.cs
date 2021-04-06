@@ -122,6 +122,10 @@ namespace Assets.Code
                 {
                     GraphicalMap.selectedHex.location.person().goInsane();
                 }
+                if (command == "ruin")
+                {
+                    GraphicalMap.selectedHex.location.settlement.fallIntoRuin();
+                }
                 if (command == "redDeath")
                 {
                     Property.addProperty(GraphicalMap.map, GraphicalMap.selectedHex.location, "Red Death");

@@ -203,7 +203,7 @@ namespace Assets.Code
             double powerGainMult = calculatePowerGainMult();
             double powerGain = map.param.overmind_powerRegen * powerGainMult;
              
-            if (power < map.param.overmind_maxPower + powerGain)
+            if (power < map.param.overmind_maxPower - powerGain)
             {
                 power += powerGain;
                 if (map.burnInComplete)

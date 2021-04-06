@@ -1,0 +1,28 @@
+{
+	"id": "anw.moveDesertCity",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Washerwomen by Hubert Robert",
+	"image": "default.81.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_DESERT_CITY = 0 & (is_town | is_city | is_metropole) & (location_shadow = 0)",
+	"probability": 0.5,
+
+	"name": "%LOCATION_NAME",
+	"description": "%LOCATION_NAME is built across a series of hills, and the architecture reflects it. A house can have a door on street level which opens onto a room with a third-floor balcony. Aquaducts supply the place with much needed water, and communal pools and canals allow the citizenry access to the life-giving substance, albeit at the risk of various diseases and plagues due to previous citizens' usages of the water.",
+
+
+	"choices": [
+		{
+			"name": "A hive of human activity",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_MOVE_DESERT_CITY", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

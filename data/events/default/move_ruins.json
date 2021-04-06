@@ -1,0 +1,32 @@
+{
+	"id": "anw.moveRuins",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Ruins with an obelisk in the distance by Hubert Robert",
+	"image": "default.64.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_RUINS_1 = 0 & (is_ruins)",
+	"probability": 1,
+
+	"name": "%LOCATION_NAME",
+	"description": "The mighty ruins of %LOCATION_NAME tower overhead. The place was great, once, lived in and filled with humans, going about their various lives, unaware that their livelihoods were temporary, soon to be swept away as the world changes. The grand arch of the place's amphitheatre remains intact, and a few survivors mill around, perhaps to rebuild, perhaps simply to wait for an even more final end to this location.",
+
+
+	"choices": [
+		{
+			"name": "Power can be drawn from the death of this place",
+			"description": "+5 power",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "5" }
+					],
+					"environment": [
+						{ "key": "ANW_MOVE_RUINS_1", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}
