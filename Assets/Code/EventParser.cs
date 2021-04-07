@@ -28,6 +28,7 @@ namespace Assets.Code
 				GREATER,
 				PLUS,
 				MINUS,
+				MODULO,
 				AND,
 				OR,
 				NOT
@@ -99,6 +100,7 @@ namespace Assets.Code
 			new TokenExpression(Token.Type.RPAREN,  "^\\)"),
 			new TokenExpression(Token.Type.PLUS,    "^\\+"),
 			new TokenExpression(Token.Type.MINUS,   "^\\-"),
+			new TokenExpression(Token.Type.MODULO,  "^\\%"),
 			new TokenExpression(Token.Type.EQUALS,  "^="),
 			new TokenExpression(Token.Type.NEQUALS, "^~"),
 			new TokenExpression(Token.Type.LESS,    "^<"),
@@ -218,6 +220,7 @@ namespace Assets.Code
 				{
 					case Token.Type.PLUS:
 					case Token.Type.MINUS:
+					case Token.Type.MODULO:
 						tryMoveNext(ref ts);
 
 						SyntaxNode rhs = parseUnaryExpression(ref ts);
