@@ -6,7 +6,7 @@
 	
 	"type": "PERSON",
 	"conditional": "has_enthralled & is_in_enthralled_nation & is_sane & (liking_for_enthralled > 0) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
-	"probability": 1,
+	"probability": 0.1,
 
 	"name": "A Letter Arrives",
 	"description": "Your letters to %PERSON_NAME speak of dark terrors, and constant threats of betrayal and corruption. You fill their mind with fears and suspicions, working to turn them against their fellow nobles.",

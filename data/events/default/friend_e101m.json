@@ -6,7 +6,7 @@
 	
 	"type": "PERSON",
 	"conditional": "has_enthralled & is_in_enthralled_nation & !(is_sane) & (liking_for_enthralled > 0) & (shadow < 100) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
-	"probability": 1,
+	"probability": 0.1,
 
 	"name": "A Letter Arrives",
 	"description": "%PERSON_NAME has been driven insane by the terrors of the world, and your letters to them now drive them to dark deeds and terrible perspectives.",

@@ -6,7 +6,7 @@
 	
 	"type": "WORLD",
 	"conditional": "has_enthralled & ($ANW_TWINS > 2) & ($ANW_TWINS < 7)",
-	"probability": 0.08,
+	"probability": 0.15,
 
 	"name": "The Twins",
 	"description": "The twins announce they have a gift for you. Each has a gift, neither will tell you what they offer, neither will tell you where these gifts might have been obtained, and they demand you only select one.",

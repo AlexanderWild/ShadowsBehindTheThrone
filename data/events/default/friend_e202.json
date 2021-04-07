@@ -1,0 +1,75 @@
+{
+	"id": "anw.friendE202",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Saint Paul Writing His Epistles by Valentin de Boulogne",
+	"image": "default.writing.jpg",
+	
+	"type": "PERSON",
+	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & (liking_for_enthralled > 65) & is_landed &($ANW_FRIEND_CHAIN = 201) & ($ANW_FRIEND = 1)",
+	"probability": 0.1,
+
+	"name": "A Letter Arrives",
+	"description": "%PERSON_NAME and %ENTHRALLED_NAME are now close friends, and you can depend on them as a reliable political ally, as long as you don't offend them in a major fashion.",
+
+
+	"choices": [
+		{
+			"name": "Continue to reinforce the friendship",
+			"description": "Continue work on gaining favour from %PERSON_NAME, boosting their liking towards your noble\n\n-80% chance to gain 35 liking\n\n-20% chance to lose 10 liking",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"description":"%PERSON_NAME enjoys the company of your enthralled noble, and their conversations are pleasant and productive. They gain 35 liking towards your enthralled. The efforts continue..." ,
+					"effects": [
+						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "35" }
+					]
+				},
+				{
+					"weight": 0.2,
+					"description":"A misplaced word, and social-misstep. %ENTHRALLED_NAME fails to charm %PERSON_NAME this time, and loses 10 points of liking. The efforts continue...",
+					"effects": [
+						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "-10" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Abuse your friendship for your own gains",
+			"description":"Your enthralled noble gains 10 prestige, at the cost of losing 45 liking from %PERSON_NAME" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"description":"%ENTHRALLED_NAME's social persona twists, and they become contemptuous towards %PERSON_NAME, publicly mocking them and aggrandising themselves at the cost of their perhaps former friend." ,
+					"effects": [
+						{ "command": "GAIN_LIKING_FOR_ENTHRALLED", "argument": "-45" },
+						{ "command": "ENTHRALLED_GAINS_PRESTIGE", "argument": "10" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Convince them to accept `assistants'",
+			"description":"You place your cultists into %PERSON_NAME's inner circle, filling their courts with handmaids, porters and cooks, all under your command\n\n-Gain 10% infiltration" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"effects": [
+						{ "command": "GAIN_INFILTRATION", "argument": "10" }
+					]
+				}
+			]
+		},
+		{
+			"name": "Enough of this distraction",
+			"description":"Ends this event chain, abandoning your efforst to influence the mind of %PERSON_NAME" ,
+			"outcomes": [
+				{
+					"weight": 1,
+					"environment": [
+						{ "key": "ANW_FRIEND_CHAIN", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

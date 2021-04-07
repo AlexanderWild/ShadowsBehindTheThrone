@@ -43,7 +43,6 @@ namespace Assets.Code
             { "is_village",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_VILLAGE; })},
             { "is_city",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_CITY; })},
             { "is_metropole",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_METROPOLE; })},
-
             { "is_empty",   new TypedField<bool>  (c => {return (c.location.settlement == null); })},
             { "is_desert",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.DESERT); })},
             { "is_dry",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.DRY); })},

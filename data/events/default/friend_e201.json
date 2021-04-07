@@ -6,7 +6,7 @@
 	
 	"type": "PERSON",
 	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & (liking_for_enthralled < 75) & is_landed &($ANW_FRIEND_CHAIN = 201) & ($ANW_FRIEND = 1)",
-	"probability": 1,
+	"probability": 0.15,
 
 	"name": "A Letter Arrives",
 	"description": "Your letters with %PERSON_NAME are full of promises, flattery and noble-sounding platitudes. %ENTHRALLED_NAME works to convince %PERSON_NAME that they, together, and defeat the evil which is threatening the world. Slowly you build a relationship you can leverage.",

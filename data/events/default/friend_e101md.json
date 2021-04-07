@@ -6,7 +6,7 @@
 	
 	"type": "PERSON",
 	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & (shadow = 100) & is_landed & ($ANW_FRIEND_CHAIN = 101) & ($ANW_FRIEND = 1)",
-	"probability": 1,
+	"probability": 0.25,
 
 	"name": "A Letter Arrives",
 	"description": "Master %ENTHRALLED_NAME,\n\nI now see how wrong I was to fear the darkness. Its oblivion is the only escape from the burning light. Only in the release of the shadow can we ever find peace. How might this humble worshipper serve?",
