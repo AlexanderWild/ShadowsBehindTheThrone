@@ -48,7 +48,7 @@
 			]
 		},
 		{
-			"name": "Convince them to accept `assistants'",
+			"name": "Convince %her to accept `assistants'",
 			"description":"You place your cultists into %PERSON_NAME's inner circle, filling their courts with handmaids, porters and cooks, all under your command\n\n-Gain 10% infiltration" ,
 			"outcomes": [
 				{
