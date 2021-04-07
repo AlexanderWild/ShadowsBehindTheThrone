@@ -270,7 +270,7 @@ namespace Assets.Code
             double mult = 1;
 
             mult += map.worldPanic;
-            if (enthralled != null)
+            if (enthralled != null && enthralled.prestige > 0)
             {
                 mult += enthralled.prestige / 100d;
             }

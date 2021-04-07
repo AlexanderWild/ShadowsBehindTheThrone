@@ -1004,6 +1004,11 @@ namespace Assets.Code
             specific.ui = ui;
             specific.populate(d, ctx,ui.world.map);
             ui.addBlocker(specific.gameObject);
+
+            if (d.id == "anw.twinsEnd")
+            {
+                AchievementManager.unlockAchievement(SteamManager.achievement_key.THE_TWINS);
+            }
         }
 
         public void popWorkshop()

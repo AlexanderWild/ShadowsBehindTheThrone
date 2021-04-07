@@ -5,8 +5,8 @@
 	"image": "default.301.jpg",
 	
 	"type": "WORLD",
-	"conditional": "turn < 100 & has_enthralled &($ANW_TWINS = 0)",
-	"probability": 0.01,
+	"conditional": "((seed % 4) = 0) & has_enthralled &($ANW_TWINS = 0)",
+	"probability": 0.1,
 
 	"name": "The Twins",
 	"description": "%ENTHRALLED_NAME has been noticing a pair of twins around the court. They don't seem to belong to anyone, and arrive and leave without obvious passage. Malevolent spirits? Trickster aspects of some minor power? Fragments of the darkness given life? Such things are to be expected, as one Age ushers in another in this celestial alignment.",
