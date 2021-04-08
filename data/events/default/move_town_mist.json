@@ -1,0 +1,46 @@
+{
+	"id": "anw.moveTownMist",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Am Markt by Carl Massmann",
+	"image": "default.244.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_TOWN_MIST = 0 & (is_town | is_village | is_hamlet) & is_under_fog & (location_shadow < 50)",
+	"probability": 1,
+
+	"name": "%LOCATION_NAME",
+	"description": "Lost in the fog, %LOCATION_NAME slowly adapts to a world without the sun. The plants still grow, in a fashion, producing dark, twisted tendrils and bulbous masses which the people can eat. Forests haven't died, just changed, into abnormal forms. Still, the people continue on, making do as best they can. The markets still thrive, filled with more wretched wares than before, but still alive with the sound of crowds.",
+
+
+	"choices": [
+		{
+			"name": "The cult will grow well, hidden from the sun",
+					"description": "Establish a few cultists in various positions in society, recruiting from the desperate and the needy \n\n-Gain 10% infiltration\n-Gain 10% shadow here",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"description": "They turn to the shadow easily, now that they have lost the guidance of the sun",
+					"effects": [
+						{ "command": "GAIN_INFILTRATION", "argument": "10"} ,
+						{ "command": "LOCATION_GAIN_SHADOW", "argument": "10" }
+					],
+					"environment": [
+						{ "key": "ANW_MOVE_TOWN_MIST", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "This is none of our concern",
+					"description": "Continue your journey without interacting",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_MOVE_TOWN_MIST", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

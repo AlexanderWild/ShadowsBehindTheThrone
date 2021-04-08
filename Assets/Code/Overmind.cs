@@ -676,6 +676,11 @@ namespace Assets.Code
             if (enthralled == null) { return; }
 
             if (enthralled.isDead) { enthralled = null; }
+
+            if (enthralled.evidence > 0)
+            {
+                map.hintSystem.popHint(HintSystem.hintType.ENTHRALLED_EVIDENCE);
+            }
         }
         public int countAvailableAbilities(Hex hex)
         {

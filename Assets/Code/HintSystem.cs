@@ -8,7 +8,7 @@ namespace Assets.Code
 {
     public class HintSystem
     {
-        public enum hintType {  INFILTRATION,ENTHRALLED_NOBLES,EVIDENCE,AWARENESS,POWER};
+        public enum hintType {  INFILTRATION,ENTHRALLED_NOBLES,EVIDENCE,AWARENESS,POWER, ENTHRALLED_EVIDENCE };
         public bool[] hasShown;
         public bool disabled = false;
         public Map map;
@@ -67,6 +67,14 @@ namespace Assets.Code
                     + "\n\nPower gain increases as world panic grows, as you draw energy from the dying world, and if you possess an enthralled noble their prestige will add as a percentage gain" +
                     " (so if they have 35 prestige, you will regain power 35% faster).";
                 map.world.prefabStore.popMsgHint(msg, "Hint: Power");
+            }
+            else if (hint == hintType.ENTHRALLED_EVIDENCE)
+            {
+                String msg = "There is evidence against your enthralled noble. While agents drop evidence on the map, nobles have evidence percentages visible on the left-hand-side panel. While they have evidence," +
+                    " other nobles will slowly gain suspicion against them. The best way of dealing with evidence is to give it to another, using an ability while selecting that noble's location. This ability requires them" +
+                    "to like your enthralled noble sufficiently to do them this favour, and will transfer some of your evidence to them. Do so quickly, before enough nobles are sufficiently suspicious of you to" +
+                    " start hating you and take actions against you.";
+                map.world.prefabStore.popMsgHint(msg, "Hint: Enthralled Evidence");
             }
             else
             {

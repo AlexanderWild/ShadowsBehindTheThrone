@@ -5,7 +5,7 @@
 	"image": "default.81.jpg",
 	
 	"type": "MOVE",
-	"conditional": "$ANW_MOVE_DESERT_CITY = 0 & (is_town | is_city | is_metropole) & (location_shadow = 0)",
+	"conditional": "$ANW_MOVE_DESERT_CITY = 0 & (is_town | is_city | is_metropole) & (is_desert | is_dry) & (location_shadow = 0)",
 	"probability": 0.5,
 
 	"name": "%LOCATION_NAME",

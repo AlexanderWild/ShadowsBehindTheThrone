@@ -41,12 +41,14 @@ namespace Assets.Code
             { "is_ruins",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return (c.location.settlement is Set_Ruins || c.location.settlement is Set_CityRuins); })},
             { "is_town",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_TOWN; })},
             { "is_village",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_VILLAGE; })},
+            { "is_hamlet",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_HAMLET; })},
             { "is_city",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_CITY; })},
             { "is_metropole",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_METROPOLE; })},
             { "is_empty",   new TypedField<bool>  (c => {return (c.location.settlement == null); })},
             { "is_desert",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.DESERT); })},
             { "is_dry",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.DRY); })},
             { "is_snow",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.SNOW); })},
+            { "is_under_fog",   new TypedField<bool>  (c => {return (c.location.hex.cloud is Cloud_Fog); })},
 
             {"location_shadow", new TypedField<int>(c =>{if (c.location.person() == null){return (int)(100*(1-c.location.hex.purity)); } return (int)(c.location.person().shadow*100); }) }
 
