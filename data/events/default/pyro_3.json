@@ -1,0 +1,53 @@
+{
+	"id": "anw.locPyro3",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The visitor by Charles Henry Malcolm Kerr",
+	"image": "default.197.jpg",
+	
+	"type": "MOVE",
+	"conditional": "($ANW_PYRO_CITY = location_index) & $ANW_PYRO = 6",
+	"probability": 1,
+
+	"name": "Pyromania",
+	"description": "The pyromaniacal cultist greets %UNIT_NAME excitedly. Is it time? Can it begin? Is today the day?",
+
+
+	"choices": [
+		{
+			"name": "Give her the word",
+			"description": "The city burns",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"effects": [
+						{ "command": "SHOW_EVENT", "argument": "anw.locPyroE"}
+					],
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Not yet",
+			"description": "Does nothing, allows you to wait until a better moment. This event will re-appear if you re-enter this location",
+			"outcomes": [
+				{
+					"weight": 0.7
+				}
+			]
+		},
+		{
+			"name": "On second thoughts, do not go through with this lunacy",
+			"description": "Perhaps it is better to not destroy a valuable cultist group in an infernal conflagration, they have better uses as living worshippers than as crisp and ash\n\nEnds this event chain without destroying the city",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

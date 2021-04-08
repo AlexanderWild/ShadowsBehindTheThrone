@@ -1,0 +1,29 @@
+{
+	"id": "anw.locPyro2",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The visitor by Charles Henry Malcolm Kerr",
+	"image": "default.197.jpg",
+	
+	"type": "LOCATION",
+	"conditional": "(location_index = $ANW_PYRO_CITY) & ($ANW_PYRO = 5)",
+	"probability": 1,
+
+	"name": "Pyromania",
+	"description": "The cultist sends word through her dreams. The project is ready, %LOCATION_NAME can be detonated at your command. You need only bring an agent, and tell them to begin the work.",
+
+
+	"choices": [
+		{
+			"name": "We had best make good use of this",
+			"description": "Moving an agent to %LOCATION_NAME will give you the option to detonate the city. If you select it, %LOCATION_NAME will be burnt to the ground, with your agent making a quick escape. No evidence will remain, a natural disaster will be the assumed cause",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "6" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

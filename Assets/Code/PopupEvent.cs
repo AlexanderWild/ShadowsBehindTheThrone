@@ -135,8 +135,8 @@ namespace Assets.Code
             {
                 updated = updated.Replace("%PERSON_NAME", ctx.person.getFullName());
                 string sov = "nobody";
-                if (ctx.society.sovereign.heldBy != null) { }
-                updated = updated.Replace("%SOVEREIGN", sov);
+                if (ctx.society != null && ctx.society.sovereign.heldBy != null) { updated = updated.Replace("%SOVEREIGN", sov); }
+                
                 if (ctx.person.isMale)
                 {
                     updated = updated.Replace("%she", "he");

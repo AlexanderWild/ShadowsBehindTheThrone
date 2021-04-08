@@ -1,0 +1,32 @@
+{
+	"id": "anw.locPyroE",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The Fire of Rome by Hubert Robert",
+	"image": "default.137.jpg",
+	
+	"type": "WORLD",
+	"conditional": "0 = 1",
+	"probability": 0,
+
+	"name": "Pyromania",
+	"description": "The pyromaniacal cultist makes good her plan, and at the stroke of midnight the %LOCATION_NAME is rocked by a tremendous explosion, followed by fire bursting forth from every cavern, cravasse and hole in the ground. The %LOCATION_NAME burns from beneath, the entire place being razed to the ground over the course of a single night of apocalyptic hellfire. The cultist, along with all others in this location are lost in the blaze. None escape, save your agent, who quickly escaped before the ruin unfolded.",
+
+
+	"choices": [
+		{
+			"name": "The work is complete",
+			"description": "Ends the event chain",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"effects": [
+						{ "command": "DESTROY_LOCATION", "argument": "Killed in an inferno"} 
+					],
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

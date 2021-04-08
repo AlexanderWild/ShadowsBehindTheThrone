@@ -1,0 +1,43 @@
+{
+	"id": "anw.locPyro1",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The visitor by Charles Henry Malcolm Kerr",
+	"image": "default.197.jpg",
+	
+	"type": "WORLD",
+	"conditional": "0 = 1",
+	"probability": 0,
+
+	"name": "Pyromania",
+	"description": "The obviously insane woman explains that the firedamp might be released, accumulated, and built up in sufficient quantities to destroy the entire city. She is positively trembling with excitement, at the prospect. The proposal seems plausible, and it is unlikely to leave any evidence, but might require an investment of power, and would destroying the city be desirable in the first place?",
+
+
+	"choices": [
+		{
+			"name": "Contact us for assistance and we will consider it",
+			"description": "This will take some time. The cultist will inform you when it is ready, and when she requires additional power investment, and an agent will need to travel to %LOCATION_NAME to trigger the event (they will escape safely)\n\nThis event can be used to rid you of an obnoxious rival, or to weaken a rival power, depending on the geographical situation of the city. The local noble will be killed in the event",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"description": "The pyromaniacal cultist will begin her work. Wait to hear from her soon",
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "2" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "What possible benefit would this confer?",
+			"description": "Ends the event chain",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"description": "The cultist is disappointed, but her loyalty is unfaltering. She will still serve the dark powers in other capacities",
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

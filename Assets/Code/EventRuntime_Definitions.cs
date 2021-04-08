@@ -49,8 +49,9 @@ namespace Assets.Code
             { "is_dry",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.DRY); })},
             { "is_snow",   new TypedField<bool>  (c => {return (c.location.hex.terrain == Hex.terrainType.SNOW); })},
             { "is_under_fog",   new TypedField<bool>  (c => {return (c.location.hex.cloud is Cloud_Fog); })},
-
-            {"location_shadow", new TypedField<int>(c =>{if (c.location.person() == null){return (int)(100*(1-c.location.hex.purity)); } return (int)(c.location.person().shadow*100); }) }
+            { "is_enthralled_location",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement.title != null && c.location.settlement.title.heldBy != null && c.location.settlement.title.heldBy.state == Person.personState.enthralled; })},
+            { "location_shadow", new TypedField<int>(c =>{if (c.location.person() == null){return (int)(100*(1-c.location.hex.purity)); } return (int)(c.location.person().shadow*100); }) },
+            { "location_index",   new TypedField<int>  (c => {return (c.location.index); })},
 
         };
 
@@ -162,6 +163,24 @@ namespace Assets.Code
                     {
                         p.shadow = 0;
                     }
+                }
+            }) },
+            { "DESTROY_LOCATION", new TypedProperty<string>((c, v) => {
+                if (c.location.person() != null)
+                {
+                    c.location.person().die(v,true);
+                }
+                if (c.location.settlement != null)
+                {
+                    if (c.location.settlement is SettlementHuman)
+                    {
+                        c.location.settlement.fallIntoRuin();
+                    }
+                    else
+                    {
+                        c.location.settlement = null;
+                    }
+                    
                 }
             }) },
 

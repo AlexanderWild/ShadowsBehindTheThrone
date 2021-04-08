@@ -1,0 +1,32 @@
+{
+	"id": "anw.locPyro",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The visitor by Charles Henry Malcolm Kerr",
+	"image": "default.197.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_PYRO = 0 & (is_town | is_city | is_metropole) & (!(is_enthralled_location)) & (infiltration > 10) & (((1 + seed) % 4) = 0)",
+	"probability": 0.05,
+
+	"name": "Pyromania",
+	"description": "As %UNIT_NAME visits with cultists in %LOCATION_NAME, one of them, a wealthy merchants' wife, approaches %her, bidding her to talk in private. There, with a manic look in her eye, she explains her proposal. The city, it seems, is built upon a series of caverns, from which firedamp, an explosive gas feared by miners, flows. While the mines were closed following a series of explosions, she explains, with nearly unsuppressed glee, that it could be released.",
+
+
+	"choices": [
+		{
+			"name": "Her plans seem to involve maps, diagrams and yet more frantic talking",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"effects": [
+						{ "command": "SHOW_EVENT", "argument": "anw.locPyro1"} 
+					],
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "1" ,"local":"False"},
+						{ "key": "ANW_PYRO_CITY", "value": "location_index" ,"local":"True"}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,53 @@
+{
+	"id": "anw.locPyro2b",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The visitor by Charles Henry Malcolm Kerr",
+	"image": "default.197.jpg",
+	
+	"type": "WORLD",
+	"conditional": "($ANW_PYRO > 1) & ($ANW_PYRO < 5)",
+	"probability": 0.1,
+
+	"name": "Pyromania",
+	"description": "The fire obsessed cultist requires more aid. She dreams, and her dreams pass into your consciousness. She requires you to share your dark power with her, to remove obstacles in the way of her insane murderous vision.",
+
+
+	"choices": [
+		{
+			"name": "An investment for a truly awful cause",
+			"description": "Grants the cultist dark power, moving you closer to the destruction of the city\n\n-Your power is reduced by 5",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"effects": [
+						{ "command": "SUB_POWER", "argument": "5"} 
+					],
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "$ANW_PYRO + 1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "The project must wait for now",
+			"description": "Does not cancel the cultist's project, but does not advance it. She will contact you again soon",
+			"outcomes": [
+				{
+					"weight": 0.7
+				}
+			]
+		},
+		{
+			"name": "We have no need to destroy this city",
+			"description": "Cancels the project and event chain, the city will not be destroyed",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"environment": [
+						{ "key": "ANW_PYRO", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}
