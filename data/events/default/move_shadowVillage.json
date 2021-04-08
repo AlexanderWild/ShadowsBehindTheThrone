@@ -1,0 +1,32 @@
+{
+	"id": "anw.moveShadowVillage",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Winter Night by by Alexei Savrasov",
+	"image": "default.124.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_MOVE_SHADOW_VILLAGE = 0 & (is_town | is_village | is_hamlet) & (location_shadow > 50)",
+	"probability": 0.1,
+
+	"name": "%LOCATION_NAME",
+	"description": "%LOCATION_NAME has fallen under the shadow. The daylight rarely is seen, and when it is the sun shines without warmth or brightness, just a twilight glow lighting the sky. Candles are still lit, but the darkness clings to the corners of the room, and the illumination is sickly and weak.\n The townsfolk are consumed by the darkness, and their lives revolve around worship of the shadow.",
+
+
+	"choices": [
+		{
+			"name": "Their worship strengthens their curse",
+					"description": "Gain 5 power",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"effects": [
+						{ "command": "ADD_POWER", "argument": "5" }
+					],
+					"environment": [
+						{ "key": "ANW_MOVE_SHADOW_VILLAGE", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

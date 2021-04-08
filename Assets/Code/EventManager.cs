@@ -163,9 +163,14 @@ namespace Assets.Code
                         continue;
 
                     if (!events.ContainsKey(ev.id))
+                    {
                         events.Add(ev.id, new ActiveEvent(ev));
+                    }
                     else
+                    {
                         World.Log("Ignoring duplicate event " + ev.id);
+                        World.self.ui.uiMainMenu.errorMessage.text = "Duplicate event ID detected: " + ev.id;
+                    }
                 }
                 catch (Exception e)
                 {
