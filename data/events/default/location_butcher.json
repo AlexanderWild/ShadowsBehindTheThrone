@@ -1,0 +1,56 @@
+{
+	"id": "anw.locButcher",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Schlachterladen by Lovis Corinth",
+	"image": "default.butcher.jpg",
+	
+	"type": "LOCATION",
+	"conditional": "($ANW_BUTCHER = 0) & (infiltration > 29) & (location_shadow < 50)",
+	"probability": 1,
+
+	"name": "The Butcher",
+	"description": "One of the cultists in the %LOCATION_NAME is drawing too much attention to themselves. They continue their former life as a butcher, but their warped soul and broken mind has driven them to begin to feed various unfortunate citizens to his customers. While profitable, and by all accounts delicious, this has a good chance of attracting the attention of the city guard, who will take a dim view on his supply chain, and might compromise the entire cultist group.",
+
+
+	"choices": [
+		{
+			"name": "Perhaps they will not notice?",
+					"description": "Ignore the problem, and hope the city guard to not notice. If they do, your infiltration will be heavily impacted. \n\n-50% Chance for no effect \n\n50%Chance to lose 30 infiltration",
+			"outcomes": [
+				{
+					"weight": 0.5,
+					"description": "The butcher is apprehended as he exited the city morgue. His associates, your valuable worshippers, were imprisoned, questioned and never seen again. Lose 30% infiltration in %LOCATION_NAME",
+					"effects": [
+						{ "command": "GAIN_INFILTRATION", "argument": "-30"}
+					],
+					"environment": [
+						{ "key": "ANW_BUTCHER", "value": "-1" ,"local":"False"}
+					]
+				},
+				{
+					"weight": 0.5,
+					"description": "The only witness was quickly disposed of by the butcher, and no further incidents occurred. He continues to ply his profitable, if unconventional, trade, and the cult in %LOCATION_NAME continues to thrive.",
+					"environment": [
+						{ "key": "ANW_BUTCHER", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "The cult must deal with this inconvenience in this midst",
+					"description": "Occasionally a useful instrument must be cast adrift, to avoid the whole ship sinking. The butcher, and his profitable income stream, is lost to the cult, but the rest are safe. \n\n-Lose 10% infiltration in %LOCATION_NAME",
+			"outcomes": [
+				{
+					"weight": 0.5,
+					"description": "The other cultists dispose of the butcher, dumping his unfortunate body in the wilderness. The cult's congregation is reduced, but the majority remain safe.",
+					"effects": [
+						{ "command": "GAIN_INFILTRATION", "argument": "-10"}
+					],
+					"environment": [
+						{ "key": "ANW_BUTCHER", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}
