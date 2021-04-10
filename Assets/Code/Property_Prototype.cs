@@ -115,6 +115,14 @@ namespace Assets.Code
             proto = new Pr_Blizzard(map, "Blizzard");
             map.globalist.allProperties.Add(proto);
             map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_RottingSickness(map, "Rotting Sickness");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
+
+            proto = new Pr_RottingSicknessImmunity(map, "Rotting Sickness Immunity");
+            map.globalist.allProperties.Add(proto);
+            map.globalist.propertyMap.Add(proto.name, proto);
         }
 
         internal abstract string getDescription();

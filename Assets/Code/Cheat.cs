@@ -130,6 +130,10 @@ namespace Assets.Code
                 {
                     Property.addProperty(GraphicalMap.map, GraphicalMap.selectedHex.location, "Red Death");
                 }
+                if (command == "rotting" || command == "rotting sickness")
+                {
+                    Property.addProperty(GraphicalMap.map, GraphicalMap.selectedHex.location, "Rotting Sickness");
+                }
                 if (command == "fogSource")
                 {
                     Property.addProperty(GraphicalMap.map, GraphicalMap.selectedHex.location, "Well of Fog");

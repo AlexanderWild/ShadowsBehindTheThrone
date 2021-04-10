@@ -513,10 +513,20 @@ namespace Assets.Code
             Hex clickedHex = GraphicalMap.getHexUnderMouse(Input.mousePosition).hex;
             if (clickedHex.location != null)
             {
-                if (GraphicalMap.selectedSelectable != null && GraphicalMap.selectedSelectable is Unit && ((Unit)GraphicalMap.selectedSelectable).isEnthralled() && (!((Unit)GraphicalMap.selectedSelectable).automated))
+                if (GraphicalMap.selectedSelectable != null 
+                    && GraphicalMap.selectedSelectable is Unit 
+                    && ((Unit)GraphicalMap.selectedSelectable).isEnthralled() 
+                    && (!((Unit)GraphicalMap.selectedSelectable).automated))
                 {
                     Unit u = (Unit)GraphicalMap.selectedSelectable;
-                    if (u.location.getNeighbours().Contains(clickedHex.location)){
+                    if (u.location == clickedHex.location)
+                    {
+                        if (u.task is Task_GoToLocation)
+                        {
+                            u.task = null;//Cancel the move-to command
+                        }
+                    }
+                    else if (u.location.getNeighbours().Contains(clickedHex.location)){
                         if (u.movesTaken == 0)
                         {
                             u.location.map.adjacentMoveTo(u,clickedHex.location);
@@ -524,6 +534,16 @@ namespace Assets.Code
                             u.location.map.world.audioStore.playClickSelect();
                             u.task = null;
 
+                            EventManager.onEnthralledUnitMove(u.location.map, u);
+                        }
+                    }
+                    else
+                    {
+                        u.task = new Task_GoToLocation(clickedHex.location);
+                        if (u.movesTaken == 0)
+                        {
+                            u.task.turnTick(u);
+                            u.location.map.world.audioStore.playClickSelect();
                             EventManager.onEnthralledUnitMove(u.location.map, u);
                         }
                     }

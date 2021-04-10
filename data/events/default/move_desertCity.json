@@ -14,7 +14,22 @@
 
 	"choices": [
 		{
-			"name": "A hive of human activity",
+			"name": "The waterways are an obvious breeding ground for pestilence",
+			"description": "Expend 5 power to start a rotting sickenss. This disease will reduce army strengths nearby, and can cause NPC agents to spend time curing the disease rather than chasing you",
+			"outcomes": [
+				{
+					"weight": 0.8,"effects": [
+						{ "command": "ADD_POWER", "argument": "-5" },
+						{ "command": "START_ROTTING_SICKNESS", "argument": "" }
+					],
+					"environment": [
+						{ "key": "ANW_MOVE_DESERT_CITY", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "An irrelevant hive of human activity",
 			"outcomes": [
 				{
 					"weight": 0.8,

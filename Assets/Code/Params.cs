@@ -428,9 +428,14 @@ namespace Assets.Code
         public double unit_seeker_libraryInfiltrationReq = 0.25;
         public double unit_vamp_infiltrateAmount = 1.6;
         public double unit_doctor_legalInfiltrationReq = 0.1;
-        public int unit_doctor_lootBodiesAmount = 12;
-        public int unit_doctor_emptyGravesDuration = 16;
+        public int unit_doctor_lootBodiesAmount = 16;
+        public int unit_doctor_emptyGravesDuration = 12;
         public int unit_doctor_sowCorpserootCooldown = 5;
+        public int unit_doctor_rotSicknessDur = 15;
+        public int unit_doctor_rotSicknessDeathMilCapHit = -14;
+        public int unit_doctor_rottingSickness_ImmunityDur = 16;
+        public double unit_doctor_rotSicknessPSpread = 0.1;
+        public int unit_doctor_rottingDeadReq = 20;
         public int unit_vampire_maxBlood = 37;
         public int unit_vampire_drinkReqLiking = 0;
         public double unit_seeker_truthShadow = 0.35;

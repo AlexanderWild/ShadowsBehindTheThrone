@@ -183,6 +183,9 @@ namespace Assets.Code
                     
                 }
             }) },
+            { "START_ROTTING_SICKNESS", new TypedProperty<string>((c, v) => {
+                 Assets.Code.Property.addProperty(c.map,c.location,"Rotting Sickness");
+            }) },
 
             //Unit effects
             

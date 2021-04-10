@@ -23,11 +23,13 @@ namespace Assets.Code
         public override void turnTick(Unit unit)
         {
             if (unit.location == target) { unit.task = null;return; }
-            
+            if (unit.movesTaken > 0) { return; }//Already moved this turn
 
             Location[] locations = unit.location.map.getPathTo(unit.location, target,unit,true);
             if (locations == null || locations.Length < 2) { unit.task = null; return; }
             unit.location.map.adjacentMoveTo(unit, locations[1]);
+
+            unit.movesTaken += 1;
 
             if (unit.location == target) { unit.task = null; return; }
         }

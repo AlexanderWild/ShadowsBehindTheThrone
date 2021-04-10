@@ -37,3 +37,7 @@ PATCH 2:
 -Power gain now increases with world panic and with enthralled noble prestige (giving you a good reason to rise the ranks)
 
 -First few events added
+
+-Plague Doctor given a plague ability, for thematic reasons
+
+-Agents told to go to a distant location by right clicking will assign themselves a "go to location" task
