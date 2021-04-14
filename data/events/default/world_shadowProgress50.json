@@ -1,0 +1,28 @@
+{
+	"id": "anw.shadowProgress50",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Matlock Tor by Moonlight by Joseph Wright of Derby",
+	"image": "default.3.jpg",
+	
+	"type": "WORLD",
+	"conditional": "($ANW_SHADOW_50 = 0) & (enshadowment > 49)",
+	"probability": 1,
+
+	"name": "The End Approaches",
+	"description": "The shadow is slowly growing across the world, the lands falling into darkness. The sun still rises, but barely gives any light, the days as dark as nights once were. The nights themselves inky black, regardless of the moon, and filled with terrors which were once mere myth and legend.\n\nYou are now at 50% world shadow",
+
+
+	"choices": [
+		{
+			"name": "The heavens are mourning the death of the sun",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"environment": [
+						{ "key": "ANW_SHADOW_50", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

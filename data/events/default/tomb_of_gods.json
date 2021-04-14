@@ -1,0 +1,41 @@
+{
+	"id": "anw.moveTombOfGods",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Markt in Italien by Oswald Achenbach",
+	"image": "default.240.jpg",
+	
+	"type": "MOVE",
+	"conditional": "$ANW_TOMB_OF_GODS = 0 & (is_desert | is_dry)",
+	"probability": 1,
+
+	"name": "Tomb of Gods",
+	"description": "As %PERSON_NAME moves through %LOCATION_NAME they hear rumour of an excavation the locals are undertaking. All able-bodied men are being paid generously by local nobles to reveal this buried mystery. Beneath the sands, they have found something.\n\nSome vast construction, thousands of years ago. Statues, colummns, surrounding obelisks and, in the centre, a door.",
+
+	"choices": [
+		{
+			"name": "Go to the dig site",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"effects": [
+						{ "command": "SHOW_EVENT", "argument": "anw.TombOfGods1"}
+					],
+					"environment": [
+						{ "key": "ANW_TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Ignore this opportunity",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

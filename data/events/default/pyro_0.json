@@ -5,7 +5,7 @@
 	"image": "default.197.jpg",
 	
 	"type": "MOVE",
-	"conditional": "$ANW_PYRO = 0 & (is_town | is_city | is_metropole) & (!(is_enthralled_location)) & (infiltration > 10) & (((1 + seed) % 4) = 0)",
+	"conditional": "$ANW_PYRO = 0 & (is_town | is_city | is_metropole) & (!(is_enthralled_location)) & (infiltration > 10) & ((seed % 4) = 1)",
 	"probability": 0.05,
 
 	"name": "Pyromania",

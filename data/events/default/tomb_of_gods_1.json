@@ -1,0 +1,47 @@
+{
+	"id": "anw.TombOfGods1",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The Temple of Dendera by David Roberts",
+	"image": "default.106.jpg",
+	
+	"type": "INERT",
+	"conditional": "1 = 0",
+	"probability": 1,
+
+	"name": "Tomb of Gods",
+	"description": "Some vast construction, thousands of years ago. Statues, colummns, surrounding obelisks and, in the centre, a door.\n\n%PERSON_NAME feels a rush of dark power. It floods them like a warm sea. Their injuries are healed, their fatigue from the travel forgotten. You recognise this as the aura of a Dark God. This is their tomb, buried beneath the great desert.",
+
+	"choices": [
+		{
+			"name": "Investigate further",
+			"description":"Your agent is fully healed. Begins the Tomb of Gods event chain",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"effects": [
+						{ "command": "FULL_HEAL", "argument": "Healed by dark power from a dead god"},
+						{ "command": "SHOW_EVENT", "argument": "anw.TombOfGodsE"}
+					],
+					"environment": [
+						{ "key": "TOMB_OF_GODS", "value": "1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Accept the dark blessing but leave",
+			"description":"Your agent is fully healed. Ends the Tomb of Gods event chain",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"effects": [
+						{ "command": "FULL_HEAL", "argument": "Healed by dark power from a dead god"}
+					],
+					"environment": [
+						{ "key": "ANW_TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

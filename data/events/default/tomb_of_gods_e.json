@@ -1,0 +1,31 @@
+{
+	"id": "anw.TombOfGodsE",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The Temple of Dendera by David Roberts",
+	"image": "default.106.jpg",
+	
+	"type": "INERT",
+	"conditional": "1 = 0",
+	"probability": 1,
+
+	"name": "Tomb of Gods",
+	"description": "You reach the end of the tomb",
+	
+	"choices": [
+		{
+			"name": "Power gain mult",
+			"description":"Your agent is fully healed. Begins the Tomb of Gods event chain",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"effects": [
+						{ "command": "GAIN_POWER_MULT", "argument": "100"}
+					],
+					"environment": [
+						{ "key": "TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

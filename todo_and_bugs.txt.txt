@@ -1,8 +1,8 @@
 	High criticality:
 
--Major bug involving next age not generating any people
-	-Was some enshadowed empire
-	-Relatedly, the society screen crashes if you don't have people in a society
+-Better difficulty scaling
+
+-More security on larger empires
 
 -Vampire tooltip says they can travel long distances.
 	-Travel as bats as an ability, or return to crypt, or whatever works flavour-wise
@@ -16,15 +16,8 @@
 	Couldn't reproduce
 	Not seen in a while
 
--Make the relations tab able to be clicked on to cause a dismiss and pan to
 
 	Medium criticality:
-	
--Some guy wants an anim speed setting
-
--Good Saviour? A hero type unit which leads the forces of good on the world map
-
--International relationships lens
 
 -Agent power should be affected by difficulty
 
@@ -37,6 +30,12 @@
 -Add flag colours to event messages and wars
 
 	Low criticality:
+	
+-Some guy wants an anim speed setting
+
+-Good Saviour? A hero type unit which leads the forces of good on the world map
+
+-International relationships lens
 
 -Location didn't have province
 	(Is this still present?)
@@ -58,6 +57,11 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-Make the relations tab able to be clicked on to cause a dismiss and pan to
+-Major bug involving next age not generating any people
+	-Was some enshadowed empire
+	-Relatedly, the society screen crashes if you don't have people in a society
+	
 -Need to view relations for dark agents. Need to know who is suspicious.
 
 -Apoptosis for agents. Maybe flip to some weak automatic mode.

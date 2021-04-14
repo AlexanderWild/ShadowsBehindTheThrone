@@ -19,6 +19,7 @@ namespace Assets.Code
         public bool hasEnthrallAbilities = false;
         public double panicFromPowerUse;
         public double panicFromCluesDiscovered;
+        public double baselinePowerGain = 1;
         public int nStartingHumanSettlements;
         public bool isFirstEnthralledAgent = true;
         public int availableEnthrallments = 0;
@@ -267,7 +268,7 @@ namespace Assets.Code
 
         public double calculatePowerGainMult()
         {
-            double mult = 1;
+            double mult = baselinePowerGain;
 
             mult += map.worldPanic;
             if (enthralled != null && enthralled.prestige > 0)

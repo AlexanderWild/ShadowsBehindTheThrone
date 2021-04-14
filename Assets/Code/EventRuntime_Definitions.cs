@@ -14,7 +14,7 @@ namespace Assets.Code
 			//Map Fields
 			{ "turn",         new TypedField<int>   (c => { return c.map.turn; })                  },
             { "seed",         new TypedField<int>   (c => { return (int)c.map.seed; })                  },
-            { "enshadowment", new TypedField<double>(c => { return c.map.data_avrgEnshadowment; }) },
+            { "enshadowment", new TypedField<int>(c => { return (int)(100*c.map.data_avrgEnshadowment); }) },
             { "awareness",    new TypedField<double>(c => { return c.map.data_awarenessSum; })     },
             { "temperature",  new TypedField<double>(c => { return c.map.data_globalTempSum; })    },
             { "panic",        new TypedField<double>(c => { return c.map.worldPanic; })            },
@@ -59,6 +59,11 @@ namespace Assets.Code
         {
             { "ADD_POWER", new TypedProperty<int>((c, v) => { c.map.overmind.power += v; }) },
             { "SUB_POWER", new TypedProperty<int>((c, v) => { c.map.overmind.power -= v; }) },
+            { "GAIN_POWER_MULT", new TypedProperty<int>((c, v) => {
+                double mult = v + 100;
+                mult /= 100;
+                c.map.overmind.baselinePowerGain *= mult;
+                }) },
 
             { "ENTHRALLED_GAINS_EVIDENCE", new TypedProperty<int>((c, v) => {
                 if (c.map.overmind.enthralled != null)
@@ -188,13 +193,15 @@ namespace Assets.Code
             }) },
 
             //Unit effects
-            
             { "LEAVE_MINOR_EVIDENCE", new TypedProperty<string>((c, v) => {
                 double amount = c.map.param.unit_minorEvidence;
                 Evidence e2 = new Evidence(c.map.turn);
                 e2.pointsTo = c.unit;
                 e2.weight = amount;
                 c.unit.location.evidence.Add(e2);
+            }) },
+            { "FULL_HEAL", new TypedProperty<string>((c, v) => {
+                c.unit.hp = Math.Max(c.unit.hp,c.unit.maxHp);
             }) },
 
             { "SHOW_EVENT", new TypedProperty<string>((c, v) => {

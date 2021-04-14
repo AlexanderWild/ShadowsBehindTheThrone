@@ -1,0 +1,28 @@
+{
+	"id": "anw.shadowProgress20",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "Stilleben mit Kerze by Georg Flegel",
+	"image": "default.candlelight.jpg",
+	
+	"type": "WORLD",
+	"conditional": "($ANW_SHADOW_20 = 0) & (enshadowment > 19)",
+	"probability": 1,
+
+	"name": "Darkness takes hold",
+	"description": "As your shadow beings to overcome the world, darkness falls. Nights are darker than before, and candles shine weaker. As they are lit, the darkness takes time to recede, reluctantly falling back into the corners of the room, like an inky black tide. The people of the world will notice, but perhaps it is already too late.\n\nYou are now at 20% world shadow",
+
+
+	"choices": [
+		{
+			"name": "The light will be extinguished from this world",
+			"outcomes": [
+				{
+					"weight": 0.7,
+					"environment": [
+						{ "key": "ANW_SHADOW_20", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}
