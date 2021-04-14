@@ -6,7 +6,7 @@
 	
 	"type": "LOCATION",
 	"conditional": "($ANW_BUTCHER = 0) & (infiltration > 29) & (infiltration < 75) & (location_shadow < 50)",
-	"probability": 0.02,
+	"probability": 1,
 
 	"name": "The Butcher",
 	"description": "One of the cultists in the %LOCATION_NAME is drawing too much attention to themselves. They continue their former life as a butcher, but their warped soul and broken mind has driven them to begin to feed various unfortunate citizens to his customers. While profitable, and by all accounts delicious, this has a good chance of attracting the attention of the city guard, who will take a dim view on his supply chain, and might compromise the entire cultist group.",

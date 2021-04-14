@@ -270,6 +270,11 @@ namespace Assets.Code
                     GraphicalMap.selectedHex.location.settlement.infiltration = 1;
                     World.log("Infiltrate");
                 }
+                if (command == "infiltratehalf")
+                {
+                    GraphicalMap.selectedHex.location.settlement.infiltration = 0.5;
+                    World.log("Infiltrate half");
+                }
                 map.world.ui.checkData();
             }
             //catch(Exception e)
