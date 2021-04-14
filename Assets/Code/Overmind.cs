@@ -252,7 +252,7 @@ namespace Assets.Code
 
             if (map.burnInComplete && (map.turn - map.param.mapGen_burnInSteps) % map.param.overmind_enthrallmentUseRegainPeriod == 0)
             {
-                if (availableEnthrallments < map.param.overmind_maxEnthralled)
+                if (availableEnthrallments < maxEnthralled)
                 {
                     availableEnthrallments += 1;
                 }

@@ -64,6 +64,9 @@ namespace Assets.Code
                 mult /= 100;
                 c.map.overmind.baselinePowerGain *= mult;
                 }) },
+            { "GAIN_ENTHRALLMENT_SLOTS", new TypedProperty<int>((c, v) => {
+                c.map.overmind.maxEnthralled += v;
+                }) },
 
             { "ENTHRALLED_GAINS_EVIDENCE", new TypedProperty<int>((c, v) => {
                 if (c.map.overmind.enthralled != null)
@@ -207,6 +210,14 @@ namespace Assets.Code
             { "SHOW_EVENT", new TypedProperty<string>((c, v) => {
                 if (EventManager.events.ContainsKey(v))
                     c.map.world.prefabStore.popEvent(EventManager.events[v].data, c);
+            }) },
+            { "SHOW_EVENT_IF_VALID", new TypedProperty<string>((c, v) => {
+                if (EventManager.events.ContainsKey(v)){
+                    EventManager.ActiveEvent ev = EventManager.events [v];
+                    if (ev.willTrigger(c)){
+                      c.map.world.prefabStore.popEvent(ev.data, c);
+                    }
+                }
             }) }
         };
     }

@@ -9,17 +9,34 @@
 	"probability": 1,
 
 	"name": "Tomb of Gods",
-	"description": "You reach the end of the tomb",
+	"description": "%PERSON_NAME has finally reached the very heart of the tomb. Here, the air is still, and the shadows darker than any before, no light shines and no light can shine. In the darkness, a collosal presence can be felt. The spirit of a being, so powerful it lingers after its death and twists the space around it. The God is dead, and you can draw from its former splendor to increase your own.",
 	
 	"choices": [
 		{
-			"name": "Power gain mult",
-			"description":"Your agent is fully healed. Begins the Tomb of Gods event chain",
+			"name": "Consume the soul",
+			"description":"Gain +25% power regeneration for the rest of the game \n\nEnds the Tomb of Gods event chain",
 			"outcomes": [
 				{
 					"weight": 0.8,
+					"description": "%PERSON_NAME exits the tomb, initially dazzled by the evening twilight, accustomed to the pitch blackness they were previously a part of. Your power grows as you feast upon your dead kin.",
 					"effects": [
-						{ "command": "GAIN_POWER_MULT", "argument": "100"}
+						{ "command": "GAIN_POWER_MULT", "argument": "25"}
+					],
+					"environment": [
+						{ "key": "TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Enthrall the god as a part of yourself",
+			"description":"Grants +1 enthrallment slots permanently\n\nEnds the Tomb of Gods event chain",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"description": "%PERSON_NAME exits the tomb, initially dazzled by the evening twilight, accustomed to the pitch blackness they were previously a part of. You feel your powers expand, as the lesser god joins your soul, forming a hybrid of your two essences, yourself the master, it the slave.",
+					"effects": [
+						{ "command": "GAIN_ENTHRALLMENT_SLOTS", "argument": "1"}
 					],
 					"environment": [
 						{ "key": "TOMB_OF_GODS", "value": "-1" ,"local":"False"}
