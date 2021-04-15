@@ -1,5 +1,5 @@
 {
-	"id": "anw.TombOfGodsDMG1",
+	"id": "anw.TombOfGodsDMG2",
 	"modCredit": "BobbyTwoHands",
 	"imgCredit": "The Temple of Dendera by David Roberts",
 	"image": "default.106.jpg",
@@ -9,11 +9,11 @@
 	"probability": 1,
 
 	"name": "Tomb of Gods",
-	"description": "As %PERSON_NAME descends into the tomb, the wall suddenly collapses, showering %her with rocky debris. %She is injured by the falling rock.",
+	"description": "Giant scything blades suddenly fall from the ceiling, catching %PERSON_NAME with their lethal swing. These traps were installed by the tomb's builders to kill transpassers, and the god's malice has preserved them in perfect working order. \n%PERSON_NAME loses 1 HP.",
 	
 	"choices": [
 		{
-			"name": "Watch your step",
+			"name": "Cruel machinations come to life, with a singular purpose",
 			"outcomes": [
 				{
 					"weight": 0.5,

@@ -1,0 +1,41 @@
+{
+	"id": "anw.TombOfGodsLOC1",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The Temple of Dendera by David Roberts",
+	"image": "default.106.jpg",
+	
+	"type": "INERT",
+	"conditional": "($ANW_TOMB_OF_GODS < 10) & (hp > 0)",
+	"probability": 1,
+
+	"name": "Tomb of Gods",
+	"description": "%PERSON_NAME has come across a shattered fragment of soul, a small piece of the dead god's essence. They could take it back, to add to your own, but would need to return to the surface and abandon the tomb.",
+	
+	"choices": [
+		{
+			"name": "Take the reward and leave while you still can",
+			"description":"Gain 10% power regen increase permanently\nEnds the Tomb of Gods Event Chain",
+			"outcomes": [
+				{
+					"weight": 0.5,
+					"description":"%PERSON_NAME exits the tomb, and it collapses behind %him, lost once more to the endless sands",
+					"effects": [
+						{ "command": "GAIN_POWER_MULT", "argument": "10"}
+					]
+				}
+			]
+		},
+		{
+			"name": "Continue your descent",
+			"description":"Risk death, but continue to descend to the heart of the tomb",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"effects": [
+						{ "command": "SHOW_EVENT", "argument": "anw.TombOfGodsR1"}
+					]
+				}
+			]
+		}
+	]
+}

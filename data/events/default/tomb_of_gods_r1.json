@@ -9,7 +9,7 @@
 	"probability": 1,
 
 	"name": "Tomb of Gods",
-	"description": "%PERSON_NAME's HP is now %HP Depth is now $ANW_TOMB_OF_GODS",
+	"description": "%PERSON_NAME stands at the steps leading down to the next level of the tomb. The place is an unstable deathtrap, and portions could collapse at any moment. Every step is perilous, but the reward may be worth the risk. \n\n%PERSON_NAME's HP is now %HP, and they have descended to level $ANW_TOMB_OF_GODS",
 	
 	"choices": [
 		{
@@ -17,7 +17,7 @@
 			"description":"Move deeper",
 			"outcomes": [
 				{
-					"weight": 0.5,
+					"weight": 0.25,
 					"effects": [
 						{ "command": "SHOW_EVENT", "argument": "anw.TombOfGodsDMG1"}
 					],
@@ -26,13 +26,43 @@
 					]
 				},
 				{
-					"weight": 0.5,
+					"weight": 0.25,
+					"effects": [
+						{ "command": "SHOW_EVENT", "argument": "anw.TombOfGodsDMG2"}
+					],
+					"environment": [
+						{ "key": "ANW_TOMB_OF_GODS", "value": "$ANW_TOMB_OF_GODS + 1" ,"local":"False"}
+					]
+				},
+				{
+					"weight": 0.1,
+					"effects": [
+						{ "command": "SHOW_EVENT_IF_VALID", "argument": "anw.TombOfGodsLOC1"},
+						{ "command": "SHOW_EVENT_IF_VALID", "argument": "anw.TombOfGodsE"}
+					],
+					"environment": [
+						{ "key": "ANW_TOMB_OF_GODS", "value": "$ANW_TOMB_OF_GODS + 1" ,"local":"False"}
+					]
+				},
+				{
+					"weight": 0.4,
 					"effects": [
 						{ "command": "SHOW_EVENT_IF_VALID", "argument": "anw.TombOfGodsR1"},
 						{ "command": "SHOW_EVENT_IF_VALID", "argument": "anw.TombOfGodsE"}
 					],
 					"environment": [
 						{ "key": "ANW_TOMB_OF_GODS", "value": "$ANW_TOMB_OF_GODS + 1" ,"local":"False"}
+					]
+				}
+			],
+			"name": "Retreat to safety",
+			"description":"Nothing in there is worth the risk of a valuable agent",
+			"outcomes": [
+				{
+					"weight": 0.5,
+					"description":"%PERSON_NAME exits the tomb successfully, but the entrance collapses behind them, the sands swallowing up the dead god's resting place. It lost lost to the desert once more",
+					"environment": [
+						{ "key": "ANW_TOMB_OF_GODS", "value": "-1" ,"local":"False"}
 					]
 				}
 			]

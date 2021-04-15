@@ -1,8 +1,8 @@
 	High criticality:
 
 -Better difficulty scaling
-
--More security on larger empires
+	-More security on larger empires
+	-Empires need to be a bit more cohesive on harder difficulties
 
 -Vampire tooltip says they can travel long distances.
 	-Travel as bats as an ability, or return to crypt, or whatever works flavour-wise
