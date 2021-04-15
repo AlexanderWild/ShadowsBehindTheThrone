@@ -5,7 +5,7 @@
 	"image": "default.106.jpg",
 	
 	"type": "INERT",
-	"conditional": "1 = 0",
+	"conditional": "($ANW_TOMB_OF_GODS > 9) & (hp > 0)",
 	"probability": 1,
 
 	"name": "Tomb of Gods",
@@ -23,7 +23,7 @@
 						{ "command": "GAIN_POWER_MULT", "argument": "25"}
 					],
 					"environment": [
-						{ "key": "TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+						{ "key": "ANW_TOMB_OF_GODS", "value": "-1" ,"local":"False"}
 					]
 				}
 			]
@@ -39,7 +39,7 @@
 						{ "command": "GAIN_ENTHRALLMENT_SLOTS", "argument": "1"}
 					],
 					"environment": [
-						{ "key": "TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+						{ "key": "ANW_TOMB_OF_GODS", "value": "-1" ,"local":"False"}
 					]
 				}
 			]

@@ -173,10 +173,23 @@ namespace Assets.Code
             if (ctx.unit != null)
             {
                 updated = updated.Replace("%UNIT_NAME", ctx.unit.getName());
+                updated = updated.Replace("%HP", ""+ctx.unit.hp);
+                foreach (var x in ctx.unit.eventState.environment.Keys)
+                {
+                    updated = updated.Replace("$" + x, ctx.unit.eventState.environment[x]);
+                }
             }
             if (ctx.location != null)
             {
                 updated = updated.Replace("%LOCATION_NAME", ctx.location.getName(false));
+                foreach (var x in ctx.location.eventState.environment.Keys)
+                {
+                    updated = updated.Replace("$" + x, ctx.location.eventState.environment[x]);
+                }
+            }
+            foreach (var x in map.eventState.environment.Keys)
+            {
+                updated = updated.Replace("$" + x, map.eventState.environment[x]);
             }
             return updated;
         }

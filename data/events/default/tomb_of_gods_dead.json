@@ -1,0 +1,27 @@
+{
+	"id": "anw.TombOfGodsDead",
+	"modCredit": "BobbyTwoHands",
+	"imgCredit": "The Temple of Dendera by David Roberts",
+	"image": "default.106.jpg",
+	
+	"type": "INERT",
+	"conditional": "(hp < 1)",
+	"probability": 1,
+
+	"name": "Tomb of Gods",
+	"description": "%PERSON_NAME has died in the Tomb of Gods. They will never return to the surface, and the locals will collapse the doorway, leaving the unliving divinity to rest in its eternal slumber once more.",
+	
+	"choices": [
+		{
+			"name": "An unfortunate end",
+			"outcomes": [
+				{
+					"weight": 0.8,
+					"environment": [
+						{ "key": "ANW_TOMB_OF_GODS", "value": "-1" ,"local":"False"}
+					]
+				}
+			]
+		}
+	]
+}

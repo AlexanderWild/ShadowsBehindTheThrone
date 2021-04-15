@@ -33,6 +33,7 @@ namespace Assets.Code
             { "shadow",   new TypedField<int>  (c => {return (int)(c.person.shadow*100); })},
 
 			//Unit 
+            { "hp",   new TypedField<int>  (c => {return (int)(c.unit.hp); })},
 
 			//Location
             { "is_coastal",   new TypedField<bool>  (c => {return (c.location.isCoastal); })},
@@ -205,6 +206,13 @@ namespace Assets.Code
             }) },
             { "FULL_HEAL", new TypedProperty<string>((c, v) => {
                 c.unit.hp = Math.Max(c.unit.hp,c.unit.maxHp);
+            }) },
+            { "TAKE_DAMAGE", new TypedProperty<int>((c, v) => {
+                c.unit.hp -= v;
+                if (c.unit.hp <= 0)
+                {
+                    c.unit.die(c.map,"Killed by Event");
+                }
             }) },
 
             { "SHOW_EVENT", new TypedProperty<string>((c, v) => {

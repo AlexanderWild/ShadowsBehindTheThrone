@@ -20,10 +20,10 @@
 					"weight": 0.8,
 					"effects": [
 						{ "command": "FULL_HEAL", "argument": "Healed by dark power from a dead god"},
-						{ "command": "SHOW_EVENT", "argument": "anw.TombOfGodsE"}
+						{ "command": "SHOW_EVENT", "argument": "anw.TombOfGodsR1"}
 					],
 					"environment": [
-						{ "key": "TOMB_OF_GODS", "value": "1" ,"local":"False"}
+						{ "key": "ANW_TOMB_OF_GODS", "value": "1" ,"local":"False"}
 					]
 				}
 			]
