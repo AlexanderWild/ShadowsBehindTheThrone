@@ -4,7 +4,6 @@
 	-Seed Setting seed 982248806
 	
 -Better difficulty scaling
-	-More security on larger empires
 	-Empires need to be a bit more cohesive on harder difficulties
 
 -Vampire tooltip says they can travel long distances.
@@ -60,6 +59,7 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+-More security on larger empires
 -Make the relations tab able to be clicked on to cause a dismiss and pan to
 -Major bug involving next age not generating any people
 	-Was some enshadowed empire

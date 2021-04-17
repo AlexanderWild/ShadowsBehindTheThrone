@@ -497,7 +497,15 @@ namespace Assets.Code
             List<Location> primarySet = getLinkedBlock(locations[0]);
             if (primarySet.Count == locations.Count) { return; }//Already done
 
-            for (int i = 0; i < 128; i++)
+            for (int i = 0; i < locations.Count; i++)
+            {
+                if (locations[i].index != i)
+                {
+                    throw new Exception("Map gen failure: Location indices do not correspond to true list indices");
+                }
+            }
+
+                for (int i = 0; i < 128; i++)
             {
                 Location isolated = null;
                 foreach (Location l in locations)
@@ -541,6 +549,7 @@ namespace Assets.Code
                 primarySet = getLinkedBlock(locations[0]);
                 if (primarySet.Count == locations.Count) { return; }//Done
             }
+
         }
 
         public List<Location> getLinkedBlock(Location loc)
