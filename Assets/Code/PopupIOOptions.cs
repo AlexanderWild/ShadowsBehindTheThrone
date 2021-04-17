@@ -17,13 +17,13 @@ namespace Assets.Code
         public Button bEdgeScroll;
         public Button bSoundEffects;
         public Button bAdvancedGraphics;
-        public Button bCyclopsGraphical;
+        public Button bUseEvents;
         public UIMaster ui;
         public Text mouseEdgeText;
         public Text soundEffectText;
         public Text autosaveText;
         public Text advancedGraphicsText;
-        public Text cyclopsGraphicalText;
+        public Text useEventsText;
         public Text currentSaveLocation;
         public InputField customSaveLocation;
         public Text musicVolumeText;
@@ -44,7 +44,7 @@ namespace Assets.Code
             else
             {
                 advancedGraphicsText.text = map.param.option_useAdvancedGraphics == 1 ? "On" : "Off";
-                cyclopsGraphicalText.text = map.cyclopsGraphics ? "On" : "Off";
+                useEventsText.text = World.useEvents ? "On" : "Off";
 
             }
             currentSaveLocation.text = "Currently Saving To: " + World.saveFolder;
@@ -77,6 +77,10 @@ namespace Assets.Code
         public void toggleCyclopsGraphics()
         {
             ui.world.map.cyclopsGraphics = !ui.world.map.cyclopsGraphics;
+        }
+        public void toggleUseEvents()
+        {
+            World.useEvents = !World.useEvents;
         }
 
         public static void loadEarly()
@@ -114,6 +118,7 @@ namespace Assets.Code
                     World.autodismissAutosave = int.Parse(split[3]);
                     map.param.option_useAdvancedGraphics = int.Parse(split[4]);
                     World.musicVolume = int.Parse(split[5]);
+                    World.useEvents = int.Parse(split[6])==1?true:false;
 
                     if (data.Length > 1 && !String.IsNullOrWhiteSpace(data[1]))
                     {
@@ -191,7 +196,8 @@ namespace Assets.Code
             }
 
             string stateStr = World.staticMap.param.option_edgeScroll + "," + World.staticMap.world.audioStore.effectVolume + "," + World.autosavePeriod 
-                + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.musicVolume;
+                + "," + World.autodismissAutosave + "," + World.staticMap.param.option_useAdvancedGraphics + "," + World.musicVolume + ","
+                + (World.useEvents?"1":"0");
             stateStr += Environment.NewLine + UIKeybinds.saveToString();
             stateStr += Environment.NewLine + World.saveFolder;
 

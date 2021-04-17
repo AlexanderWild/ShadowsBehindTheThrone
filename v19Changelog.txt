@@ -38,6 +38,14 @@ PATCH 2:
 
 -First few events added
 
+PATCH 3:
+
 -Plague Doctor given a plague ability, for thematic reasons
 
 -Agents told to go to a distant location by right clicking will assign themselves a "go to location" task
+
+-Option to enable/disable events
+
+-Added more events. Four major chains now exist: Twins, Letter, Tomb and Pyromaniac
+
+-Bonus difficulty given to high-level rulers and dukes on harder difficulties

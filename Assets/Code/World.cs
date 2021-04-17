@@ -241,6 +241,7 @@ namespace Assets.Code
             param.overmind_maxEnthralled = opts.nAgents;
             param.overmind_allowDirectEnthralling = opts.politicalStart ? 1:0;
             param.unit_armyHPMult = opts.armyHPMult/100d;
+            param.society_bonusSecurityMult = opts.bonusSecurity / 100d;
 
             World.log("Opts use awareness " + opts.useAwareness);
 

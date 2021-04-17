@@ -1,5 +1,8 @@
 	High criticality:
 
+-Emperor said he was in charge of a place but wasn't?
+	-Seed Setting seed 982248806
+	
 -Better difficulty scaling
 	-More security on larger empires
 	-Empires need to be a bit more cohesive on harder difficulties

@@ -759,6 +759,7 @@ namespace Assets.Code
             specific.bEasy.onClick.AddListener(delegate { specific.setEasy(); });
             specific.bMedium.onClick.AddListener(delegate { specific.setMedium(); });
             specific.bHard.onClick.AddListener(delegate { specific.setHard(); });
+            specific.bHarder.onClick.AddListener(delegate { specific.setHarder(); });
 
             specific.bSeedZero.onClick.AddListener(delegate { specific.setSeed0(); });
             specific.bSeedOne.onClick.AddListener(delegate { specific.setSeed1(); });
@@ -780,6 +781,7 @@ namespace Assets.Code
             specific.bEasy.onClick.AddListener(delegate { specific.setEasy(); });
             specific.bMedium.onClick.AddListener(delegate { specific.setMedium(); });
             specific.bHard.onClick.AddListener(delegate { specific.setHard(); });
+            specific.bHarder.onClick.AddListener(delegate { specific.setHarder(); });
 
             specific.bSeedZero.onClick.AddListener(delegate { specific.setSeed0(); });
             specific.bSeedOne.onClick.AddListener(delegate { specific.setSeed1(); });

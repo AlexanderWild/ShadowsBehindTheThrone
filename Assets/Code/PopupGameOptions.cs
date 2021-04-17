@@ -19,6 +19,7 @@ namespace Assets.Code
         public InputField sizeXField;
         public InputField sizeYField;
         public InputField historicalField;
+        public InputField secField;
         public Toggle tLightbringer;
         public Button bDismiss;
         public UIMaster ui;
@@ -28,6 +29,7 @@ namespace Assets.Code
         public Button bEasy;
         public Button bMedium;
         public Button bHard;
+        public Button bHarder;
         public Button bSeedZero;
         public Button bSeedOne;
         public Button bAllOptsOn;
@@ -48,6 +50,7 @@ namespace Assets.Code
         public int burnIn = 100;
         public int nAgents = 3;
         public int armyHPMult = 100;
+        public int bonusSecurity = 0;
         public bool useSimplified = false;
         public bool allowLightbringer = false;
 
@@ -131,6 +134,20 @@ namespace Assets.Code
             awarenessGainSpeed = 150;
             investigatorCount = 150;
             armyHPMult = 150;
+            bonusSecurity = 100;
+            setTextFieldsToCurrentValues();
+        }
+        public void setHarder()
+        {
+            ui.world.audioStore.playClickInfo();
+
+            difficultySetting = 3;
+            susGainPercent = 150;
+            powerGainPercent = 50;
+            awarenessGainSpeed = 150;
+            investigatorCount = 200;
+            armyHPMult = 200;
+            bonusSecurity = 200;
             setTextFieldsToCurrentValues();
         }
         public void setTextFieldsToCurrentValues()
@@ -143,6 +160,7 @@ namespace Assets.Code
                 awarenessGain.text = "" + awarenessGainSpeed;
                 investigatorPercentField.text = "" + investigatorCount;
                 armyStrengthField.text = "" + armyHPMult;
+                secField.text = "" + bonusSecurity;
             }
             seedField.text = "" + currentSeed;
             sizeXField.text = "" + sizeX;
@@ -161,6 +179,10 @@ namespace Assets.Code
             if (difficultySetting == 2)
             {
                 tDifficulty.text = "Difficulty: Hard";
+            }
+            if (difficultySetting == 3)
+            {
+                tDifficulty.text = "Difficulty: Harder";
             }
         }
         public void onEditEnd()
@@ -238,6 +260,15 @@ namespace Assets.Code
                 if (n >= 0 && n < 100)
                 {
                     nAgents = n;
+                }
+            }
+            catch (Exception e) { }
+            try
+            {
+                int n = int.Parse(secField.text);
+                if (n >= 0 && n < 1000)
+                {
+                    bonusSecurity = n;
                 }
             }
             catch (Exception e) { }

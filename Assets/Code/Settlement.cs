@@ -205,11 +205,23 @@ namespace Assets.Code
                         {
                             security += 7;
                             reasons.Add(new ReasonMsg("Major Sovereign", 7));
+                            int difficulty = (int) (4 * location.map.param.society_bonusSecurityMult);
+                            security += difficulty;
+                            if (difficulty > 0)
+                            {
+                                reasons.Add(new ReasonMsg("From Difficulty Level", difficulty));
+                            }
                         }
                         else if (soc.people.Count >= location.map.param.society_nPeopleForKingdom)
                         {
                             security += 4;
                             reasons.Add(new ReasonMsg("Sovereign", 4));
+                            int difficulty = (int)(3 * location.map.param.society_bonusSecurityMult);
+                            security += difficulty;
+                            if (difficulty > 0)
+                            {
+                                reasons.Add(new ReasonMsg("From Difficulty Level", difficulty));
+                            }
                         }
                         else
                         {
@@ -228,11 +240,23 @@ namespace Assets.Code
                                 {
                                     security += 4;
                                     reasons.Add(new ReasonMsg("High Ranking Noble", 4));
+                                    int difficulty = (int)(3 * location.map.param.society_bonusSecurityMult);
+                                    security += difficulty;
+                                    if (difficulty > 0)
+                                    {
+                                        reasons.Add(new ReasonMsg("From Difficulty Level", difficulty));
+                                    }
                                 }
                                 else if (soc.lastTurnLocs.Count >= location.map.param.society_nPeopleForKingdom)
                                 {
                                     security += 3;
                                     reasons.Add(new ReasonMsg("High Ranking Noble", 3));
+                                    int difficulty = (int)(2 * location.map.param.society_bonusSecurityMult);
+                                    security += difficulty;
+                                    if (difficulty > 0)
+                                    {
+                                        reasons.Add(new ReasonMsg("From Difficulty Level", difficulty));
+                                    }
                                 }
                                 else
                                 {
