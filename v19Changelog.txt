@@ -55,3 +55,7 @@ PATCH 3:
 -Deep Ones are no longer hostile to surface-dwellers when not at war, reducing risk of getting killed by passing armies
 
 -Your enthralled no longer sends letters to themself to turn themself insane
+
+-Gods no longer exist between worlds, avoiding cooldowns being inherited from previous games
+
+-Fixed Spread Fear so it's actually castable

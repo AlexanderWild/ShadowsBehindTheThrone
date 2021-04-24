@@ -465,6 +465,7 @@ namespace Assets.Code
         }
         public void goInsane()
         {
+            sanity = 0;
             int q = Eleven.random.Next(map.globalist.allInsanities.Count);
             madness = map.globalist.allInsanities[q];
             map.addMessage(this.getFullName() + " has gone insane, and is now " + madness.name,MsgEvent.LEVEL_DARK_GREEN2,true,this.getLocation().hex);

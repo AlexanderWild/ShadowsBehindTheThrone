@@ -28,7 +28,7 @@ namespace Assets.Code
         {
             if (hex.location == null) { return false; }
             if (hex.location.person() == null) { return false; }
-            if (hex.location.person().sanity > 0) { return false; }
+            if (hex.location.person().madness is Insanity_Sane) { return false; }
             if (hex.location.person().state != Person.personState.normal) { return false; }
             foreach (Property p in hex.location.properties)
             {

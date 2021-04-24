@@ -65,7 +65,7 @@ namespace Assets.Code
 
         public override bool castable(Map map, Person person)
         {
-            return false;
+            return true;
         }
 
         public override bool castable(Map map, Hex hex)

@@ -94,14 +94,6 @@ namespace Assets.Code
 
             EventManager.load("." + separator + "data" + separator  + "events");
 
-            potentialGods.Add(new God_Easy());
-            potentialGods.Add(new God_Fog());
-            potentialGods.Add(new God_MerchantOfNightmares());
-            potentialGods.Add(new God_Flesh());
-            potentialGods.Add(new God_WintersScythe());
-            potentialGods.Add(new God_DeepOnes());
-            potentialGods.Add(new God_Omni());
-
             AchievementManager.setup();
             musicPlayer.playTheme();
 
@@ -358,17 +350,44 @@ namespace Assets.Code
 
         public void bStartGameAutomatic()
         {
+            potentialGods.Clear();
+            potentialGods.Add(new God_Easy());
+            potentialGods.Add(new God_Fog());
+            potentialGods.Add(new God_MerchantOfNightmares());
+            potentialGods.Add(new God_Flesh());
+            potentialGods.Add(new God_WintersScythe());
+            potentialGods.Add(new God_DeepOnes());
+            potentialGods.Add(new God_Omni());
+
             World.automatic = true;
             audioStore.playClick();
             ui.addBlocker(ui.world.prefabStore.getScrollSetGods(ui.world.potentialGods).gameObject);
         }
         public void bStartGameOptions()
         {
+            potentialGods.Clear();
+            potentialGods.Add(new God_Easy());
+            potentialGods.Add(new God_Fog());
+            potentialGods.Add(new God_MerchantOfNightmares());
+            potentialGods.Add(new God_Flesh());
+            potentialGods.Add(new God_WintersScythe());
+            potentialGods.Add(new God_DeepOnes());
+            potentialGods.Add(new God_Omni());
+
             audioStore.playClick();
             ui.addBlocker(ui.world.prefabStore.getScrollSetGods(ui.world.potentialGods).gameObject);
         }
         public void bStartGameOptionsStreamlined()
         {
+            potentialGods.Clear();
+            potentialGods.Add(new God_Easy());
+            potentialGods.Add(new God_Fog());
+            potentialGods.Add(new God_MerchantOfNightmares());
+            potentialGods.Add(new God_Flesh());
+            potentialGods.Add(new God_WintersScythe());
+            potentialGods.Add(new God_DeepOnes());
+            potentialGods.Add(new God_Omni());
+
             audioStore.playClick();
             ui.world.prefabStore.getGameOptionsPopupSimplified();
         }
