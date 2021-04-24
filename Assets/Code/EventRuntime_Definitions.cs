@@ -30,6 +30,7 @@ namespace Assets.Code
                 return c.person.society == c.map.overmind.enthralled.society; })  },
             { "is_landed",   new TypedField<bool>  (c => {return c.person.title_land != null; })},
             { "is_sane",   new TypedField<bool>  (c => {return c.person.madness is Insanity_Sane; })},
+            { "is_enthralled",   new TypedField<bool>  (c => {return c.person.state == Person.personState.enthralled; })},
             { "shadow",   new TypedField<int>  (c => {return (int)(c.person.shadow*100); })},
 
 			//Unit 

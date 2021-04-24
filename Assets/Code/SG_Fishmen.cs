@@ -44,8 +44,10 @@ namespace Assets.Code
         }
         public override bool hostileTo(Unit u)
         {
-            if (u.society.isDark()) { return false; }
-            return !u.isEnthralled();
+            if (this.getRel(u.society).state == DipRel.dipState.war) { return true; }
+            //if (u.society.isDark()) { return false; }
+            //return !u.isEnthralled();
+            return false;
         }
 
         public override void turnTick()

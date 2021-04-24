@@ -5,7 +5,7 @@
 	"image": "default.writing.jpg",
 	
 	"type": "PERSON",
-	"conditional": "has_enthralled & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed &($ANW_FRIEND_CHAIN = 0) & (seed % 4) = 3)",
+	"conditional": "has_enthralled & (!is_enthralled) & is_in_enthralled_nation & (liking_for_enthralled > 0) & is_landed &($ANW_FRIEND_CHAIN = 0) & (seed % 4) = 3)",
 	"probability": 0.02,
 
 	"name": "A Letter Arrives",

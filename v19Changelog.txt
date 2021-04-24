@@ -49,3 +49,9 @@ PATCH 3:
 -Added more events. Four major chains now exist: Twins, Letter, Tomb and Pyromaniac
 
 -Bonus difficulty given to high-level rulers and dukes on harder difficulties
+
+-Undead no longer attack Dark Empire
+
+-Deep Ones are no longer hostile to surface-dwellers when not at war, reducing risk of getting killed by passing armies
+
+-Your enthralled no longer sends letters to themself to turn themself insane

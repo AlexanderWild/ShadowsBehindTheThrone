@@ -9,8 +9,9 @@ namespace Assets.Code
         {
             SG_Undead theDead = (SG_Undead)u.location.soc;
             foreach (SocialGroup sg in map.socialGroups){
-                if (sg is Society)
+                if (sg is Society soc)
                 {
+                    if (soc.isDarkEmpire) { continue; }
                     if (theDead.getRel(sg).state != DipRel.dipState.war)
                     {
                         map.declareWar(theDead, sg);
