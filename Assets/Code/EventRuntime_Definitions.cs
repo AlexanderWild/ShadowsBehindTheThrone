@@ -38,7 +38,7 @@ namespace Assets.Code
 
 			//Location
             { "is_coastal",   new TypedField<bool>  (c => {return (c.location.isCoastal); })},
-            { "infiltration",   new TypedField<int>  (c => {if (c.location == null || c.location.settlement == null){return 0; } return (int)(100*c.location.settlement.infiltration); })},
+            { "infiltration",   new TypedField<int>  (c => {if (c.location == null || c.location.settlement == null){return 0; } World.log("Infiltration: " + (int)(100*c.location.settlement.infiltration)); return (int)(100*c.location.settlement.infiltration); })},
             { "is_church",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_Abbey; })},
             { "is_ruins",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return (c.location.settlement is Set_Ruins || c.location.settlement is Set_CityRuins); })},
             { "is_town",   new TypedField<bool>  (c => {if (c.location == null || c.location.settlement == null){return false; }return c.location.settlement is Set_City city && city.getLevel() == Set_City.LEVEL_TOWN; })},

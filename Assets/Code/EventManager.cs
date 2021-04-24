@@ -245,7 +245,7 @@ namespace Assets.Code
 
         static IEnumerable<EventContext> nextLocation(Map m)
         {
-            foreach (var l in m.majorLocations)
+            foreach (var l in m.locations)
                 yield return EventContext.withLocation(m, l);
         }
 
