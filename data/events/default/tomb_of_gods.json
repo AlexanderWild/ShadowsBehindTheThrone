@@ -5,8 +5,8 @@
 	"image": "default.240.jpg",
 	
 	"type": "MOVE",
-	"conditional": "$ANW_TOMB_OF_GODS = 0 & (is_desert | is_dry)",
-	"probability": 1,
+	"conditional": "$ANW_TOMB_OF_GODS = 0 & (is_desert | is_dry) & (seed % 4) = 2)",
+	"probability": 0.02,
 
 	"name": "Tomb of Gods",
 	"description": "As %PERSON_NAME moves through %LOCATION_NAME they hear rumour of an excavation the locals are undertaking. All able-bodied men are being paid generously by local nobles to reveal this buried mystery. Beneath the sands, they have found something.\n\nSome vast construction, thousands of years ago. Statues, colummns, surrounding obelisks and, in the centre, a door.",

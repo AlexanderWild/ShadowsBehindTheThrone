@@ -59,3 +59,5 @@ PATCH 3:
 -Gods no longer exist between worlds, avoiding cooldowns being inherited from previous games
 
 -Fixed Spread Fear so it's actually castable
+
+-Fixed bug in events where they couldn't trigger on non-city locations

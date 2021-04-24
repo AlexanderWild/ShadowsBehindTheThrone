@@ -168,6 +168,7 @@ society_electoralPrestigeWeight: 2
 society_prestigeFromPlagueRedDeath: 0
 society_crisis_plagueCrisisCooldown: 10
 society_cooldownGeneralVoting: 18
+society_bonusSecurityMult: 0
 temporaryThreatDecay: 0.95
 threat_takeLocation: 56
 threat_temporaryDreadDecay: 0.98
@@ -385,9 +386,14 @@ unit_seeker_uncoverTime: 5
 unit_seeker_libraryInfiltrationReq: 0.25
 unit_vamp_infiltrateAmount: 1.6
 unit_doctor_legalInfiltrationReq: 0.1
-unit_doctor_lootBodiesAmount: 12
-unit_doctor_emptyGravesDuration: 16
+unit_doctor_lootBodiesAmount: 16
+unit_doctor_emptyGravesDuration: 12
 unit_doctor_sowCorpserootCooldown: 5
+unit_doctor_rotSicknessDur: 15
+unit_doctor_rotSicknessDeathMilCapHit: -14
+unit_doctor_rottingSickness_ImmunityDur: 16
+unit_doctor_rotSicknessPSpread: 0.1
+unit_doctor_rottingDeadReq: 20
 unit_vampire_maxBlood: 37
 unit_vampire_drinkReqLiking: 0
 unit_seeker_truthShadow: 0.35
