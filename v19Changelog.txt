@@ -61,3 +61,7 @@ PATCH 3:
 -Fixed Spread Fear so it's actually castable
 
 -Fixed bug in events where they couldn't trigger on non-city locations
+
+PATCH 4:
+
+-Bugfix for issue where two locations could be in the same place

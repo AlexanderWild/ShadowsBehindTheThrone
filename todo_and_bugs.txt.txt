@@ -1,7 +1,9 @@
 	High criticality:
 
--Emperor said he was in charge of a place but wasn't?
-	-Seed Setting seed 982248806
+-"Actually yes, there was one metropolis that was held by the former king/emperor and he was killed every other turn"
+	-From youtube
+	
+-There are invisible links
 	
 -Better difficulty scaling
 	-Empires need to be a bit more cohesive on harder difficulties
@@ -20,6 +22,9 @@
 
 
 	Medium criticality:
+
+-Emperor said he was in charge of a place but wasn't?
+	-Seed Setting seed 982248806
 
 -Agent power should be affected by difficulty
 
