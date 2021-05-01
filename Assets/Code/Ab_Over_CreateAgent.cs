@@ -17,7 +17,7 @@ namespace Assets.Code
 
         public static string DESC_VAMPIRE = "Stealthy infiltrator and corruptor of the aristocracy." +
             "\nThe vampire is an agent able to partially conceal their actions. They must drink blood to survive, and to power their magics, but" +
-            " can travel great distances between their places of feeding and the places where they act. This makes them good infiltrators and political agents, as they can" +
+            " can escape immediate detection by travelling between their places of feeding and the places where they act. This makes them good infiltrators and political agents, as they can" +
             " escape the consequences of their crimes for a great deal of time.";
         public static string DESC_DOCTOR = "Necromantic Doctors pose as plague doctors to gain access to corpses, which they load onto their wagon for disposal. " +
             "Once sufficient are gathered, they can raise armies of the dead."

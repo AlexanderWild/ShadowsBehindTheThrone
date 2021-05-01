@@ -3,22 +3,13 @@
 -"Actually yes, there was one metropolis that was held by the former king/emperor and he was killed every other turn"
 	-From youtube
 	
--There are invisible links
-	
 -Better difficulty scaling
 	-Empires need to be a bit more cohesive on harder difficulties
-
--Vampire tooltip says they can travel long distances.
-	-Travel as bats as an ability, or return to crypt, or whatever works flavour-wise
 
 -Agent gets stuck temporarily, at 0/5 disrupted? Maybe it's the never-moves-again bug due to getting kicked off the map.units list, but doesn't initially sound like that
 
 -You can't get the set-loose agents back. For some reason the power button is broken
 
--Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message
-	state == world
-	Couldn't reproduce
-	Not seen in a while
 
 
 	Medium criticality:
@@ -64,6 +55,17 @@ Reduce prestige of other at cost of power
 -Reduce cooldowns using power
 
 -----------------------RESOLVED-----------------------
+	
+
+-Vampire tooltip says they can travel long distances.
+	-Travel as bats as an ability, or return to crypt, or whatever works flavour-wise
+-Got some kind of crash, ui threw a nullpointer after saving, turns after dimissing horseman message
+	state == world
+	Couldn't reproduce
+	Not seen in a while
+	Dumping this report for being stale
+	
+-There are invisible links
 -More security on larger empires
 -Make the relations tab able to be clicked on to cause a dismiss and pan to
 -Major bug involving next age not generating any people

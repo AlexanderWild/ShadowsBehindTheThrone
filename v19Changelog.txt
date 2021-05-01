@@ -65,3 +65,9 @@ PATCH 3:
 PATCH 4:
 
 -Bugfix for issue where two locations could be in the same place
+
+-Fixed text display issue on difficulty options
+
+-Fixed wording in vampire tooltip
+
+-Fixed bug where an army would be assigned the first ever person born as its leader, leading to them dying in battle despite being on the other side of the map

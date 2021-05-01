@@ -8,7 +8,7 @@ namespace Assets.Code
 {
     public abstract class Unit
     {
-        public int personID;
+        public int personID = -1;
         public Location parentLocation;
         public Location location;
         public GraphicalUnit outer;
@@ -37,8 +37,8 @@ namespace Assets.Code
         }
 
         public Person person {
-            get { return location.map.persons[personID]; }
-            set { personID = value.index; }
+            get { if (personID == -1) { return null; } return location.map.persons[personID]; }
+            set { personID = value.index; } 
         }
 
         public virtual void turnTick(Map map)
@@ -83,6 +83,19 @@ namespace Assets.Code
                     AI_WeakReleased(map);
                 }
                 if (task != null) { task.turnTick(this); }
+            }
+
+            if (person != null && person.title_land != null)
+            {
+                if (Application.isEditor)
+                {
+                    World.log("Err data " + this.getName() + " " + person.getFullName());
+                    throw new Exception("Editor-Only Exception: Caught a person who belonged to a unit and a nation");
+                }
+
+                //Can't remove a person from their nation, but can remove a nation from a person
+                person.title_land.heldBy = null;
+                person.title_land = null;
             }
         }
 
