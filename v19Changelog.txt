@@ -71,3 +71,11 @@ PATCH 4:
 -Fixed wording in vampire tooltip
 
 -Fixed bug where an army would be assigned the first ever person born as its leader, leading to them dying in battle despite being on the other side of the map
+
+-People forget about long-dead ancestors when moving to the next age
+
+-Merchants now no longer attack if controlled by the AI
+
+-Movement is refunded if you can't complete a move due to an army
+
+-Armies now no longer go after agents

@@ -48,7 +48,7 @@ namespace Assets.Code
                         }
                         foreach (Unit u2 in l2.units)
                         {
-                            if (unit.hostileTo(u2))
+                            if (u2.isMilitary && unit.hostileTo(u2))
                             {
                                 c += 1;
                                 if (Eleven.random.Next(c) == 0)

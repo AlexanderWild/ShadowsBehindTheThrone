@@ -339,6 +339,7 @@ namespace Assets.Code
 
         public void combatAction(Unit u, Unit u2, Location loc)
         {
+            if (u is Unit_Merchant && (u.isEnthralled() == false)) { return; }
             if (u.isMilitary == false && u2.isMilitary == false && u.isEnthralled() && u2.society == loc.soc)
             {
                 //Enthralled attacking an agent in their homeland
@@ -358,6 +359,7 @@ namespace Assets.Code
                 if (defender != null)
                 {
                     loc.map.world.prefabStore.popMsg("You agent cannot attack " + u2.getName() + " as they are defended the military unit present (" + defender.getName() + ")");
+                    u.movesTaken -= 1;
                     return;
                 }
             }

@@ -120,7 +120,7 @@ namespace Assets.Code
                         }
                         foreach (Unit u2 in l2.units)
                         {
-                            if (this.hostileTo(u2))
+                            if (u2.isMilitary && u2.society.getRel(this.society).state == DipRel.dipState.war)
                             {
                                 c += 1;
                                 if (Eleven.random.Next(c) == 0)
