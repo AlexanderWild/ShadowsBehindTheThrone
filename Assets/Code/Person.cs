@@ -203,6 +203,12 @@ namespace Assets.Code
 
             map.data_awarenessSum += this.awareness;
             map.awarenessReportings += 1;
+
+
+            if (Application.isEditor && map.persons[index] != this)
+            {
+                throw new Exception("Editor-Only Exception: Caught a person with bad index");
+            }
         }
 
         public void processActions()

@@ -475,6 +475,18 @@ namespace Assets.Code
                     }
                 }
             }
+
+            foreach (Person p in map.persons)
+            {
+                if (p == null) { continue; }
+                for (int i = 0; i < map.persons.Count; i++)
+                {
+                    if ((map.persons[i] == null || map.persons[i].isDead) && p.relations.ContainsKey(i))
+                    {
+                        p.relations.Remove(i);
+                    }
+                }
+            }
             map.burnInComplete = true;
             map.world.displayMessages = true;
             startedComplete();
