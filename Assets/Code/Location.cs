@@ -45,6 +45,11 @@ namespace Assets.Code
             index = indexCounter;
             indexCounter += 1;
 
+            if (hex.location != null)
+            {
+                throw new Exception("Placing location on hex with existing location");
+            }
+
             this.isMajor = isMajor;
             this.map = map;
             this.hex = hex;

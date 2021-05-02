@@ -213,8 +213,8 @@ namespace Assets.Code
                                 foreach (Link link in map.grid[mX][ mY].location.links)
                                 {
                                     if (
-                                        link.other(map.grid[mX][ mY].location).index >
-                                        link.other(link.other(map.grid[mX][ mY].location)).index) { continue; }
+                                        link.other(map.grid[mX][mY].location).index >
+                                        map.grid[mX][ mY].location.index) { continue; }
                                     GraphicalLink grLink = world.prefabStore.getGraphicalLink(link);
                                     grLink.transform.parent = map.grid[mX][ mY].outer.transform;
                                 }

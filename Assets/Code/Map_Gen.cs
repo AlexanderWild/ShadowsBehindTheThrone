@@ -126,7 +126,6 @@ namespace Assets.Code
             World.log("SeedSampling end: " + Eleven.random.Next());
 
             //placeMinorSettlements();
-
         }
 
 
@@ -549,7 +548,22 @@ namespace Assets.Code
                 primarySet = getLinkedBlock(locations[0]);
                 if (primarySet.Count == locations.Count) { return; }//Done
             }
+            
 
+            foreach (Location loc in locations)
+            {
+                foreach (Link link in loc.links)
+                {
+                    if (link.a.links.Contains(link) == false)
+                    {
+                        throw new Exception("Failure to form symmetric link system " + link.a.getName());
+                    }
+                    if (link.b.links.Contains(link) == false)
+                    {
+                        throw new Exception("Failure to form symmetric link system " + link.b.getName());
+                    }
+                }
+            }
         }
 
         public List<Location> getLinkedBlock(Location loc)
@@ -640,6 +654,7 @@ namespace Assets.Code
                         foreach (Hex h2 in getNeighbours(h))
                         {
                             if (h2 == location.hex) { continue; }
+                            if (h2.location != null) { continue; }
                             if (landmass[h2.x][h2.y]) { continue; }
 
                             bool isValid = true;
