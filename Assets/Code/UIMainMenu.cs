@@ -22,7 +22,7 @@ namespace Assets.Code
 
         public void Start()
         {
-            if (!SteamManager.Initialized || !World.useWorkshop)
+            if (!SteamManager.s_EverInitialized || !World.useWorkshop)
                 workshopButton.gameObject.SetActive(false);
         }
 
